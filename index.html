@@ -3,562 +3,546 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>WORKER PRO — Global Industrial Platform</title>
+
+<title>WORKER PRO</title>
 
 <style>
 *{box-sizing:border-box}
 
 html{
-    scroll-behavior:smooth;
-    scroll-padding-top:75px;
+scroll-behavior:smooth;
+scroll-padding-top:75px
 }
 
 body{
-    margin:0;
-    font-family:Arial,Helvetica,sans-serif;
-    background:#f4f8f5;
-    color:#173d2b;
+margin:0;
+font-family:Arial,Helvetica,sans-serif;
+background:#f4f8f5;
+color:#173d2b
 }
 
 header{
-    background:linear-gradient(135deg,#063d25,#0b6b3d,#063d25);
-    color:white;
-    padding:25px 15px 20px;
-    text-align:center;
-    box-shadow:0 4px 15px rgba(0,0,0,.25);
+background:linear-gradient(135deg,#063d25,#0b6b3d,#063d25);
+color:white;
+padding:25px 15px 20px;
+text-align:center;
+box-shadow:0 4px 15px rgba(0,0,0,.25)
 }
 
 .logo{
-    width:170px;
-    max-width:60vw;
-    border-radius:50%;
-    display:block;
-    margin:0 auto 12px;
-    box-shadow:0 5px 20px rgba(0,0,0,.35);
+width:170px;
+max-width:60vw;
+border-radius:50%;
+display:block;
+margin:0 auto 12px;
+box-shadow:0 5px 20px rgba(0,0,0,.35)
 }
 
 .brand{
-    font-size:38px;
-    font-weight:900;
-    letter-spacing:2px;
+font-size:38px;
+font-weight:900;
+letter-spacing:2px
 }
 
 .subtitle{
-    font-size:17px;
-    margin-top:5px;
-    opacity:.95;
+font-size:17px;
+margin-top:5px
 }
 
 .languages{
-    display:flex;
-    flex-wrap:wrap;
-    justify-content:center;
-    gap:7px;
-    margin-top:20px;
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:7px;
+margin-top:20px
 }
 
 .languages button{
-    border:2px solid rgba(255,255,255,.7);
-    background:rgba(255,255,255,.12);
-    color:white;
-    padding:9px 12px;
-    border-radius:10px;
-    cursor:pointer;
-    font-weight:bold;
-    font-size:14px;
+border:2px solid rgba(255,255,255,.7);
+background:rgba(255,255,255,.12);
+color:white;
+padding:9px 12px;
+border-radius:10px;
+cursor:pointer;
+font-weight:bold;
+font-size:14px
 }
 
-.languages button:hover,
-.languages button.active{
-    background:#b7ff35;
-    color:#063d25;
-    border-color:#b7ff35;
+.languages button.active,
+.languages button:hover{
+background:#b7ff35;
+color:#063d25;
+border-color:#b7ff35
 }
 
 nav{
-    position:sticky;
-    top:0;
-    z-index:1000;
-    background:rgba(255,255,255,.97);
-    display:flex;
-    align-items:center;
-    gap:8px;
-    padding:9px 10px;
-    box-shadow:0 3px 12px rgba(0,0,0,.14);
-    overflow-x:auto;
-    white-space:nowrap;
+position:sticky;
+top:0;
+z-index:1000;
+background:white;
+display:flex;
+gap:8px;
+padding:9px 10px;
+box-shadow:0 3px 12px rgba(0,0,0,.14);
+overflow-x:auto;
+white-space:nowrap
 }
 
 nav a{
-    flex:0 0 auto;
-    text-decoration:none;
-    color:#075b34;
-    font-weight:bold;
-    padding:11px 15px;
-    border-radius:12px;
-    background:#edf7f0;
-    font-size:14px;
+flex:0 0 auto;
+text-decoration:none;
+color:#075b34;
+font-weight:bold;
+padding:11px 15px;
+border-radius:12px;
+background:#edf7f0;
+font-size:14px
 }
 
-nav a:hover,
-nav a.active{
-    background:#075b34;
-    color:#b7ff35;
+nav a.active,
+nav a:hover{
+background:#075b34;
+color:#b7ff35
 }
 
 .hero{
-    text-align:center;
-    padding:55px 20px 45px;
-    background:
-    linear-gradient(rgba(4,55,31,.90),rgba(4,55,31,.90)),
-    url("logo.png") center/cover;
-    color:white;
+text-align:center;
+padding:55px 20px 45px;
+background:
+linear-gradient(rgba(4,55,31,.90),rgba(4,55,31,.90)),
+url("logo.png") center/cover;
+color:white
 }
 
 .hero h1{
-    font-size:40px;
-    margin:0 0 12px;
+font-size:40px;
+margin:0 0 12px
 }
 
 .hero p{
-    font-size:19px;
-    margin:0 auto 25px;
-    max-width:850px;
+font-size:19px;
+margin:0 auto 25px;
+max-width:850px
 }
 
 .global-search{
-    max-width:950px;
-    margin:auto;
-    background:rgba(255,255,255,.12);
-    padding:18px;
-    border-radius:18px;
+max-width:950px;
+margin:auto;
+background:rgba(255,255,255,.12);
+padding:18px;
+border-radius:18px
 }
 
 .search-main{
-    display:flex;
-    max-width:850px;
-    margin:auto;
+display:flex;
+max-width:850px;
+margin:auto
 }
 
 .search-main input{
-    flex:1;
-    padding:17px;
-    border:none;
-    border-radius:11px 0 0 11px;
-    font-size:17px;
-    outline:none;
+flex:1;
+padding:17px;
+border:none;
+border-radius:11px 0 0 11px;
+font-size:17px;
+outline:none
 }
 
 .search-main button{
-    padding:17px 24px;
-    border:none;
-    background:#b7ff35;
-    color:#063d25;
-    font-weight:bold;
-    border-radius:0 11px 11px 0;
-    cursor:pointer;
-    font-size:16px;
+padding:17px 24px;
+border:none;
+background:#b7ff35;
+color:#063d25;
+font-weight:bold;
+border-radius:0 11px 11px 0;
+cursor:pointer;
+font-size:16px
 }
 
 .search-options{
-    display:grid;
-    grid-template-columns:repeat(2,minmax(180px,1fr));
-    gap:12px;
-    max-width:850px;
-    margin:14px auto 0;
+display:grid;
+grid-template-columns:repeat(2,minmax(180px,1fr));
+gap:12px;
+max-width:850px;
+margin:14px auto 0
 }
 
 .search-option{
-    background:white;
-    color:#173d2b;
-    border-radius:11px;
-    padding:12px;
-    text-align:left;
+background:white;
+color:#173d2b;
+border-radius:11px;
+padding:12px;
+text-align:left
 }
 
 .search-option label{
-    display:block;
-    font-size:12px;
-    font-weight:bold;
-    margin-bottom:5px;
-    color:#075b34;
+display:block;
+font-size:12px;
+font-weight:bold;
+margin-bottom:5px;
+color:#075b34
 }
 
 .search-option select{
-    width:100%;
-    border:1px solid #c8ddd0;
-    padding:10px;
-    border-radius:8px;
-    font-size:15px;
+width:100%;
+border:1px solid #c8ddd0;
+padding:10px;
+border-radius:8px;
+font-size:15px
 }
 
 .search-scope{
-    display:flex;
-    flex-wrap:wrap;
-    justify-content:center;
-    gap:8px;
-    margin-top:14px;
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:8px;
+margin-top:14px
 }
 
 .scope-button{
-    border:2px solid rgba(255,255,255,.7);
-    background:rgba(255,255,255,.10);
-    color:white;
-    padding:9px 13px;
-    border-radius:10px;
-    cursor:pointer;
-    font-weight:bold;
+border:2px solid rgba(255,255,255,.7);
+background:rgba(255,255,255,.10);
+color:white;
+padding:9px 13px;
+border-radius:10px;
+cursor:pointer;
+font-weight:bold
 }
 
 .scope-button.active{
-    background:#b7ff35;
-    color:#063d25;
-    border-color:#b7ff35;
+background:#b7ff35;
+color:#063d25
 }
 
 .search-results{
-    display:none;
-    max-width:950px;
-    margin:20px auto 0;
-    background:white;
-    color:#173d2b;
-    padding:18px;
-    border-radius:15px;
-    text-align:left;
+display:none;
+max-width:950px;
+margin:20px auto 0;
+background:white;
+color:#173d2b;
+padding:18px;
+border-radius:15px;
+text-align:left
 }
 
 .search-result{
-    padding:15px;
-    border:1px solid #dce9df;
-    border-radius:12px;
-    margin-bottom:10px;
-    background:#fbfdfb;
+padding:15px;
+border:1px solid #dce9df;
+border-radius:12px;
+margin-bottom:10px;
+background:#fbfdfb
 }
 
 .result-title{
-    font-size:18px;
-    font-weight:bold;
-    color:#075b34;
+font-size:18px;
+font-weight:bold;
+color:#075b34
 }
 
 .result-info{
-    display:grid;
-    grid-template-columns:repeat(2,minmax(150px,1fr));
-    gap:6px 15px;
-    margin-top:10px;
-    color:#486354;
-    font-size:14px;
+display:grid;
+grid-template-columns:repeat(2,minmax(150px,1fr));
+gap:6px 15px;
+margin-top:10px;
+color:#486354;
+font-size:14px
 }
 
 .result-buttons{
-    display:flex;
-    flex-wrap:wrap;
-    gap:7px;
-    margin-top:12px;
+display:flex;
+flex-wrap:wrap;
+gap:7px;
+margin-top:12px
 }
 
 .result-button,
 .card button,
-.company-button{
-    border:none;
-    background:#075b34;
-    color:white;
-    padding:10px 15px;
-    border-radius:8px;
-    cursor:pointer;
-    font-weight:bold;
+.company-button,
+.company-add,
+.save-company{
+border:none;
+background:#075b34;
+color:white;
+padding:10px 15px;
+border-radius:8px;
+cursor:pointer;
+font-weight:bold
 }
 
 .result-button:hover,
 .card button:hover,
-.company-button:hover{
-    background:#0b8050;
+.company-button:hover,
+.company-add:hover,
+.save-company:hover{
+background:#0b8050
 }
 
 .container{
-    max-width:1200px;
-    margin:auto;
-    padding:35px 15px;
+max-width:1200px;
+margin:auto;
+padding:35px 15px
 }
 
 .section-title{
-    text-align:center;
-    color:#075b34;
-    font-size:30px;
-    margin-bottom:25px;
+text-align:center;
+color:#075b34;
+font-size:30px;
+margin-bottom:25px
 }
 
 .cards{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
-    gap:18px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+gap:18px
 }
 
 .card{
-    background:white;
-    border-radius:15px;
-    padding:22px;
-    box-shadow:0 3px 12px rgba(0,0,0,.10);
-    border-left:5px solid #0b6b3d;
+background:white;
+border-radius:15px;
+padding:22px;
+box-shadow:0 3px 12px rgba(0,0,0,.10);
+border-left:5px solid #0b6b3d
 }
 
 .card h3{
-    margin-top:0;
-    color:#075b34;
+margin-top:0;
+color:#075b34
 }
 
 .card p{
-    line-height:1.55;
-    color:#486354;
+line-height:1.55;
+color:#486354
 }
 
 .industries{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
-    gap:12px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
+gap:12px
 }
 
 .industry{
-    background:white;
-    padding:18px 12px;
-    border-radius:12px;
-    text-align:center;
-    font-weight:bold;
-    box-shadow:0 2px 9px rgba(0,0,0,.09);
+background:white;
+padding:18px 12px;
+border-radius:12px;
+text-align:center;
+font-weight:bold;
+box-shadow:0 2px 9px rgba(0,0,0,.09)
 }
 
 .company-tools{
-    text-align:center;
-    margin-bottom:25px;
+text-align:center;
+margin-bottom:25px
 }
 
 .company-add{
-    background:#075b34;
-    color:white;
-    border:none;
-    padding:14px 22px;
-    border-radius:12px;
-    font-size:16px;
-    font-weight:bold;
-    cursor:pointer;
-}
-
-.company-add:hover{
-    background:#0b8050;
+font-size:16px;
+padding:14px 22px
 }
 
 .company-list{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(270px,1fr));
-    gap:18px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(270px,1fr));
+gap:18px
 }
 
 .company-card{
-    background:white;
-    border-radius:15px;
-    padding:20px;
-    box-shadow:0 3px 12px rgba(0,0,0,.10);
-    border-top:5px solid #0b6b3d;
+background:white;
+border-radius:15px;
+padding:20px;
+box-shadow:0 3px 12px rgba(0,0,0,.10);
+border-top:5px solid #0b6b3d
 }
 
 .company-card h3{
-    margin-top:0;
-    color:#075b34;
+margin-top:0;
+color:#075b34
 }
 
 .company-card p{
-    color:#486354;
-    line-height:1.5;
+color:#486354;
+line-height:1.5
 }
 
 .company-tag{
-    display:inline-block;
-    background:#e8f5ec;
-    color:#075b34;
-    padding:5px 8px;
-    border-radius:7px;
-    margin:3px;
-    font-size:12px;
-    font-weight:bold;
+display:inline-block;
+background:#e8f5ec;
+color:#075b34;
+padding:5px 8px;
+border-radius:7px;
+margin:3px;
+font-size:12px;
+font-weight:bold
 }
 
-/* FORM */
+.future{
+background:#e8f5ec;
+border-radius:18px;
+padding:30px
+}
+
+.future li{
+line-height:2
+}
+
+footer{
+margin-top:30px;
+background:#063d25;
+color:white;
+text-align:center;
+padding:30px 15px
+}
+
+.footer-brand{
+font-size:25px;
+font-weight:bold
+}
+
+.footer-small{
+margin-top:10px;
+opacity:.8
+}
+
+/* MODAL */
 
 .modal{
-    display:none;
-    position:fixed;
-    z-index:3000;
-    left:0;
-    top:0;
-    width:100%;
-    height:100%;
-    background:rgba(0,0,0,.65);
-    overflow:auto;
-    padding:20px;
+display:none;
+position:fixed;
+z-index:3000;
+left:0;
+top:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,.65);
+overflow:auto;
+padding:20px
 }
 
 .modal-content{
-    background:#f8fbf9;
-    max-width:800px;
-    margin:20px auto;
-    border-radius:18px;
-    padding:25px;
-    box-shadow:0 10px 40px rgba(0,0,0,.35);
+background:#f8fbf9;
+max-width:800px;
+margin:20px auto;
+border-radius:18px;
+padding:25px
 }
 
 .modal-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:15px;
+display:flex;
+justify-content:space-between;
+align-items:center
 }
 
 .modal-header h2{
-    margin:0;
-    color:#075b34;
+margin:0;
+color:#075b34
 }
 
 .close{
-    font-size:30px;
-    cursor:pointer;
-    color:#075b34;
-    font-weight:bold;
+font-size:30px;
+cursor:pointer;
+color:#075b34
 }
 
 .form-grid{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:14px;
-    margin-top:20px;
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:14px;
+margin-top:20px
 }
 
 .form-group{
-    display:flex;
-    flex-direction:column;
+display:flex;
+flex-direction:column
 }
 
 .form-group.full{
-    grid-column:1/-1;
+grid-column:1/-1
 }
 
 .form-group label{
-    font-weight:bold;
-    margin-bottom:6px;
-    color:#075b34;
+font-weight:bold;
+margin-bottom:6px;
+color:#075b34
 }
 
 .form-group input,
 .form-group select,
 .form-group textarea{
-    padding:12px;
-    border:1px solid #c8ddd0;
-    border-radius:9px;
-    font-size:15px;
-    background:white;
+padding:12px;
+border:1px solid #c8ddd0;
+border-radius:9px;
+font-size:15px
 }
 
 .form-group textarea{
-    min-height:100px;
-    resize:vertical;
+min-height:100px;
+resize:vertical
 }
 
 .save-company{
-    margin-top:20px;
-    width:100%;
-    padding:15px;
-    background:#075b34;
-    color:white;
-    border:none;
-    border-radius:10px;
-    font-size:17px;
-    font-weight:bold;
-    cursor:pointer;
+width:100%;
+margin-top:20px;
+padding:15px;
+font-size:17px
 }
 
-.save-company:hover{
-    background:#0b8050;
-}
-
+.no-results,
 .empty-company{
-    text-align:center;
-    background:white;
-    padding:25px;
-    border-radius:15px;
-    color:#666;
+text-align:center;
+padding:20px;
+color:#666
 }
 
-.future{
-    background:#e8f5ec;
-    border-radius:18px;
-    padding:30px;
-    margin-top:20px;
+[dir="rtl"]{
+text-align:right
 }
 
-.future ul{
-    line-height:2;
-}
-
-footer{
-    margin-top:30px;
-    background:#063d25;
-    color:white;
-    text-align:center;
-    padding:30px 15px;
-}
-
-.footer-brand{
-    font-size:25px;
-    font-weight:bold;
-}
-
-.footer-small{
-    margin-top:10px;
-    opacity:.8;
+[dir="rtl"] nav{
+direction:rtl
 }
 
 @media(max-width:600px){
 
-    .brand{
-        font-size:30px;
-    }
+.brand{
+font-size:30px
+}
 
-    .hero h1{
-        font-size:30px;
-    }
+.hero h1{
+font-size:30px
+}
 
-    .hero p{
-        font-size:16px;
-    }
+.hero p{
+font-size:16px
+}
 
-    .search-main{
-        flex-direction:column;
-    }
+.search-main{
+flex-direction:column
+}
 
-    .search-main input,
-    .search-main button{
-        width:100%;
-        border-radius:9px;
-    }
+.search-main input,
+.search-main button{
+width:100%;
+border-radius:9px
+}
 
-    .search-main button{
-        margin-top:7px;
-    }
+.search-main button{
+margin-top:7px
+}
 
-    .search-options{
-        grid-template-columns:1fr;
-    }
+.search-options{
+grid-template-columns:1fr
+}
 
-    .result-info{
-        grid-template-columns:1fr;
-    }
+.result-info{
+grid-template-columns:1fr
+}
 
-    .form-grid{
-        grid-template-columns:1fr;
-    }
+.form-grid{
+grid-template-columns:1fr
+}
 
-    .form-group.full{
-        grid-column:auto;
-    }
+.form-group.full{
+grid-column:auto
+}
 }
 </style>
 </head>
@@ -571,44 +555,56 @@ footer{
 
 <div class="brand">WORKER PRO</div>
 
-<div class="subtitle">
-Global Manufacturing & Industrial Platform
+<div class="subtitle" data-i18n="platform">
+Глобальная промышленная платформа
 </div>
 
 <div class="languages">
-<button onclick="setLanguage('az')" data-lang="az">🇦🇿 AZ</button>
-<button onclick="setLanguage('ru')" data-lang="ru">🇷🇺 RU</button>
-<button onclick="setLanguage('en')" data-lang="en">🇬🇧 EN</button>
-<button onclick="setLanguage('tr')" data-lang="tr">🇹🇷 TR</button>
-<button onclick="setLanguage('de')" data-lang="de">🇩🇪 DE</button>
-<button onclick="setLanguage('ar')" data-lang="ar">🇸🇦 AR</button>
-<button onclick="setLanguage('es')" data-lang="es">🇪🇸 ES</button>
-<button onclick="setLanguage('fr')" data-lang="fr">🇫🇷 FR</button>
+
+<button data-lang="az">🇦🇿 AZ</button>
+<button data-lang="ru">🇷🇺 RU</button>
+<button data-lang="en">🇬🇧 EN</button>
+<button data-lang="tr">🇹🇷 TR</button>
+<button data-lang="de">🇩🇪 DE</button>
+<button data-lang="ar">🇸🇦 AR</button>
+<button data-lang="es">🇪🇸 ES</button>
+<button data-lang="fr">🇫🇷 FR</button>
+
 </div>
 
 </header>
 
-<nav id="mainNav">
 
-<a href="#production">🏭 Производство</a>
-<a href="#problems">🛠️ Проблемы</a>
-<a href="#parts">🔩 Запчасти</a>
-<a href="#companies">🏢 Компании</a>
-<a href="#community">👥 Сообщество</a>
-<a href="#jobs">💼 Работа</a>
-<a href="#training">📚 Обучение</a>
+<nav>
+
+<a href="#production" data-i18n="navProduction">🏭 Производство</a>
+
+<a href="#problems" data-i18n="navProblems">🛠️ Проблемы</a>
+
+<a href="#parts" data-i18n="navParts">🔩 Запчасти</a>
+
+<a href="#companies" data-i18n="navCompanies">🏢 Компании</a>
+
+<a href="#community" data-i18n="navCommunity">👥 Сообщество</a>
+
+<a href="#jobs" data-i18n="navJobs">💼 Работа</a>
+
+<a href="#training" data-i18n="navTraining">📚 Обучение</a>
 
 </nav>
 
+
 <section class="hero">
 
-<h1>Работа. Знания. Производство.</h1>
+<h1 data-i18n="heroTitle">
+Работа. Знания. Производство.
+</h1>
 
-<p>
-Международная промышленная платформа
-для рабочих, инженеров, мастеров,
-производителей и поставщиков.
+<p data-i18n="heroText">
+Международная промышленная платформа для рабочих,
+инженеров, мастеров, производителей и поставщиков.
 </p>
+
 
 <div class="global-search">
 
@@ -616,19 +612,24 @@ Global Manufacturing & Industrial Platform
 
 <input
 id="searchInput"
-type="text"
+data-i18n-placeholder="searchPlaceholder"
 placeholder="Поиск: насос, станок, подшипник, запчасть..."
 >
 
-<button onclick="searchSite()">🔎 Поиск</button>
+<button id="searchButton" onclick="searchSite()">
+🔎 Поиск
+</button>
 
 </div>
+
 
 <div class="search-options">
 
 <div class="search-option">
 
-<label>📍 Страна заказчика</label>
+<label data-i18n="customerCountry">
+📍 Страна заказчика
+</label>
 
 <select id="customerCountry">
 
@@ -643,9 +644,12 @@ placeholder="Поиск: насос, станок, подшипник, запч�
 
 </div>
 
+
 <div class="search-option">
 
-<label>📍 Город</label>
+<label data-i18n="customerCity">
+📍 Город
+</label>
 
 <select id="customerCity">
 
@@ -660,24 +664,29 @@ placeholder="Поиск: насос, станок, подшипник, запч�
 
 </div>
 
+
 <div class="search-scope">
 
 <button class="scope-button active"
-onclick="setSearchScope('my',this)">
+onclick="setSearchScope('my',this)"
+data-i18n="myCountry">
 🇦🇿 Моя страна
 </button>
 
 <button class="scope-button"
-onclick="setSearchScope('other',this)">
+onclick="setSearchScope('other',this)"
+data-i18n="otherCountries">
 🌎 Другие страны
 </button>
 
 <button class="scope-button"
-onclick="setSearchScope('world',this)">
+onclick="setSearchScope('world',this)"
+data-i18n="world">
 🌍 Весь мир
 </button>
 
 </div>
+
 
 <div id="searchResults" class="search-results"></div>
 
@@ -690,36 +699,64 @@ onclick="setSearchScope('world',this)">
 
 <section class="container" id="production">
 
-<h2 class="section-title">🏭 Производство</h2>
+<h2 class="section-title" data-i18n="productionTitle">
+🏭 Производство
+</h2>
 
 <div class="cards">
 
 <div class="card">
-<h3>🏗️ Оборудование</h3>
-<p>
+
+<h3 data-i18n="equipmentTitle">
+🏗️ Оборудование
+</h3>
+
+<p data-i18n="equipmentText">
 Поиск промышленного оборудования,
 станков, насосов, двигателей,
 гидравлики и автоматики.
 </p>
-<button onclick="quickSearch('equipment')">Найти оборудование</button>
+
+<button onclick="quickSearch('pump')" data-i18n="findEquipment">
+Найти оборудование
+</button>
+
 </div>
 
+
 <div class="card">
-<h3>⚙️ Производители</h3>
-<p>
+
+<h3 data-i18n="manufacturersTitle">
+⚙️ Производители
+</h3>
+
+<p data-i18n="manufacturersText">
 Каталог производителей промышленного
 оборудования и комплектующих.
 </p>
-<button onclick="goCompanies()">Компании</button>
+
+<button onclick="goCompanies()" data-i18n="companiesButton">
+Компании
+</button>
+
 </div>
 
+
 <div class="card">
-<h3>🌍 Международный поиск</h3>
-<p>
+
+<h3 data-i18n="globalTitle">
+🌍 Международный поиск
+</h3>
+
+<p data-i18n="globalText">
 Найти оборудование в своей стране
 или у поставщиков по всему миру.
 </p>
-<button onclick="focusSearch()">Начать поиск</button>
+
+<button onclick="focusSearch()" data-i18n="startSearch">
+Начать поиск
+</button>
+
 </div>
 
 </div>
@@ -731,32 +768,51 @@ onclick="setSearchScope('world',this)">
 
 <section class="container" id="problems">
 
-<h2 class="section-title">🛠️ Проблемы и решения</h2>
+<h2 class="section-title" data-i18n="problemsTitle">
+🛠️ Проблемы и решения
+</h2>
 
 <div class="cards">
 
 <div class="card">
-<h3>⚙️ Станок не работает</h3>
-<p>
+
+<h3 data-i18n="problem1">
+⚙️ Станок не работает
+</h3>
+
+<p data-i18n="problem1Text">
 Поиск возможных причин неисправности,
 решений и технических рекомендаций.
 </p>
+
 </div>
 
+
 <div class="card">
-<h3>💧 Насос не запускается</h3>
-<p>
+
+<h3 data-i18n="problem2">
+💧 Насос не запускается
+</h3>
+
+<p data-i18n="problem2Text">
 Проверка электропитания, клапанов,
 датчиков, давления и двигателя.
 </p>
+
 </div>
 
+
 <div class="card">
-<h3>🔥 Перегрев оборудования</h3>
-<p>
+
+<h3 data-i18n="problem3">
+🔥 Перегрев оборудования
+</h3>
+
+<p data-i18n="problem3Text">
 Диагностика охлаждения, масла,
 датчиков температуры и нагрузки.
 </p>
+
 </div>
 
 </div>
@@ -768,26 +824,60 @@ onclick="setSearchScope('world',this)">
 
 <section class="container" id="parts">
 
-<h2 class="section-title">🔩 Промышленные запчасти</h2>
+<h2 class="section-title" data-i18n="partsTitle">
+🔩 Промышленные запчасти
+</h2>
 
 <div class="cards">
 
 <div class="card">
-<h3>⚙️ Подшипники</h3>
-<p>Поиск подшипников разных производителей и моделей.</p>
-<button onclick="quickSearch('bearing')">Найти</button>
+
+<h3 data-i18n="bearings">
+⚙️ Подшипники
+</h3>
+
+<p data-i18n="bearingsText">
+Поиск подшипников разных производителей и моделей.
+</p>
+
+<button onclick="quickSearch('bearing')" data-i18n="find">
+Найти
+</button>
+
 </div>
 
-<div class="card">
-<h3>🔧 Гидравлика</h3>
-<p>Клапаны, цилиндры, насосы и гидравлические компоненты.</p>
-<button onclick="quickSearch('hydraulic')">Найти</button>
-</div>
 
 <div class="card">
-<h3>💨 Пневматика</h3>
-<p>Цилиндры, клапаны, фильтры и пневматические системы.</p>
-<button onclick="quickSearch('pneumatic')">Найти</button>
+
+<h3 data-i18n="hydraulic">
+🔧 Гидравлика
+</h3>
+
+<p data-i18n="hydraulicText">
+Клапаны, цилиндры, насосы и гидравлические компоненты.
+</p>
+
+<button onclick="quickSearch('hydraulic')" data-i18n="find">
+Найти
+</button>
+
+</div>
+
+
+<div class="card">
+
+<h3 data-i18n="pneumatic">
+💨 Пневматика
+</h3>
+
+<p data-i18n="pneumaticText">
+Цилиндры, клапаны, фильтры и пневматические системы.
+</p>
+
+<button onclick="quickSearch('pneumatic')" data-i18n="find">
+Найти
+</button>
+
 </div>
 
 </div>
@@ -799,17 +889,21 @@ onclick="setSearchScope('world',this)">
 
 <section class="container" id="companies">
 
-<h2 class="section-title">🏢 Компании и поставщики</h2>
+<h2 class="section-title" data-i18n="companiesTitle">
+🏢 Компании и поставщики
+</h2>
 
 <div class="company-tools">
 
-<button class="company-add" onclick="openCompanyForm()">
+<button class="company-add"
+onclick="openCompanyForm()"
+data-i18n="addCompany">
 ➕ Добавить компанию
 </button>
 
 </div>
 
-<div id="companyList" class="company-list"></div>
+<div id="companyList"></div>
 
 </section>
 
@@ -818,23 +912,48 @@ onclick="setSearchScope('world',this)">
 
 <section class="container" id="community">
 
-<h2 class="section-title">👥 Промышленное сообщество</h2>
+<h2 class="section-title" data-i18n="communityTitle">
+👥 Промышленное сообщество
+</h2>
 
 <div class="cards">
 
 <div class="card">
-<h3>👷 Рабочие</h3>
-<p>Общение специалистов производства.</p>
+
+<h3 data-i18n="workers">
+👷 Рабочие
+</h3>
+
+<p data-i18n="workersText">
+Общение специалистов производства.
+</p>
+
 </div>
 
-<div class="card">
-<h3>👨‍🔧 Мастера</h3>
-<p>Обмен опытом ремонта и обслуживания оборудования.</p>
-</div>
 
 <div class="card">
-<h3>👨‍💼 Инженеры</h3>
-<p>Технические знания, решения и проекты.</p>
+
+<h3 data-i18n="masters">
+👨‍🔧 Мастера
+</h3>
+
+<p data-i18n="mastersText">
+Обмен опытом ремонта и обслуживания оборудования.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h3 data-i18n="engineers">
+👨‍💼 Инженеры
+</h3>
+
+<p data-i18n="engineersText">
+Технические знания, решения и проекты.
+</p>
+
 </div>
 
 </div>
@@ -846,26 +965,48 @@ onclick="setSearchScope('world',this)">
 
 <section class="container" id="jobs">
 
-<h2 class="section-title">💼 Работа</h2>
+<h2 class="section-title" data-i18n="jobsTitle">
+💼 Работа
+</h2>
 
 <div class="cards">
 
 <div class="card">
-<h3>👷 CNC Operator</h3>
-<p>Баку, Азербайджан</p>
-<button>Подробнее</button>
+
+<h3>CNC Operator</h3>
+
+<p>🇦🇿 Baku, Azerbaijan</p>
+
+<button data-i18n="details">
+Подробнее
+</button>
+
 </div>
 
-<div class="card">
-<h3>🔥 Welding Specialist</h3>
-<p>Стамбул, Турция</p>
-<button>Подробнее</button>
-</div>
 
 <div class="card">
-<h3>⚙️ Maintenance Technician</h3>
-<p>Германия</p>
-<button>Подробнее</button>
+
+<h3>Welding Specialist</h3>
+
+<p>🇹🇷 Istanbul, Turkey</p>
+
+<button data-i18n="details">
+Подробнее
+</button>
+
+</div>
+
+
+<div class="card">
+
+<h3>Maintenance Technician</h3>
+
+<p>🇩🇪 Germany</p>
+
+<button data-i18n="details">
+Подробнее
+</button>
+
 </div>
 
 </div>
@@ -877,28 +1018,53 @@ onclick="setSearchScope('world',this)">
 
 <section class="container" id="training">
 
-<h2 class="section-title">📚 Обучение</h2>
+<h2 class="section-title" data-i18n="trainingTitle">
+📚 Обучение
+</h2>
 
 <div class="cards">
 
 <div class="card">
+
 <h3>🦺 Industrial Safety</h3>
-<p>Промышленная безопасность.</p>
+
+<p data-i18n="safetyText">
+Промышленная безопасность.
+</p>
+
 </div>
 
+
 <div class="card">
+
 <h3>⚙️ CNC</h3>
-<p>Обучение операторов CNC.</p>
+
+<p data-i18n="cncText">
+Обучение операторов CNC.
+</p>
+
 </div>
 
+
 <div class="card">
+
 <h3>🔥 Welding</h3>
-<p>Основы промышленной сварки.</p>
+
+<p data-i18n="weldingText">
+Основы промышленной сварки.
+</p>
+
 </div>
 
+
 <div class="card">
+
 <h3>🔧 Maintenance</h3>
-<p>Техническое обслуживание оборудования.</p>
+
+<p data-i18n="maintenanceText">
+Техническое обслуживание оборудования.
+</p>
+
 </div>
 
 </div>
@@ -910,7 +1076,9 @@ onclick="setSearchScope('world',this)">
 
 <section class="container">
 
-<h2 class="section-title">🌍 Промышленные отрасли</h2>
+<h2 class="section-title" data-i18n="industriesTitle">
+🌍 Промышленные отрасли
+</h2>
 
 <div class="industries">
 
@@ -947,18 +1115,44 @@ onclick="setSearchScope('world',this)">
 
 <div class="future">
 
-<h2>🚀 Будущее WORKER PRO</h2>
+<h2 data-i18n="futureTitle">
+🚀 Будущее WORKER PRO
+</h2>
 
 <ul>
-<li>🌍 Глобальный поиск промышленного оборудования</li>
-<li>🔩 Международная база запчастей</li>
-<li>🏢 Профили компаний и производителей</li>
-<li>🗺️ Карта поставщиков</li>
-<li>👥 Международное профессиональное сообщество</li>
-<li>💼 Работа и специалисты</li>
-<li>📚 Промышленное обучение</li>
-<li>🛠️ Ремонт и технические инструкции</li>
-<li>📄 Техническая документация</li>
+
+<li data-i18n="future1">
+🌍 Глобальный поиск промышленного оборудования
+</li>
+
+<li data-i18n="future2">
+🔩 Международная база запчастей
+</li>
+
+<li data-i18n="future3">
+🏢 Профили компаний и производителей
+</li>
+
+<li data-i18n="future4">
+🗺️ Карта поставщиков
+</li>
+
+<li data-i18n="future5">
+👥 Международное профессиональное сообщество
+</li>
+
+<li data-i18n="future6">
+💼 Работа и специалисты
+</li>
+
+<li data-i18n="future7">
+📚 Промышленное обучение
+</li>
+
+<li data-i18n="future8">
+🛠️ Ремонт и технические инструкции
+</li>
+
 </ul>
 
 </div>
@@ -972,7 +1166,7 @@ onclick="setSearchScope('world',this)">
 WORKER PRO
 </div>
 
-<div>
+<div data-i18n="footerText">
 Global Manufacturing & Industrial Platform
 </div>
 
@@ -983,7 +1177,7 @@ Developer: F.S
 </footer>
 
 
-<!-- COMPANY FORM -->
+<!-- COMPANY MODAL -->
 
 <div id="companyModal" class="modal">
 
@@ -991,33 +1185,57 @@ Developer: F.S
 
 <div class="modal-header">
 
-<h2>🏢 Регистрация компании</h2>
+<h2 data-i18n="companyRegistration">
+🏢 Регистрация компании
+</h2>
 
 <span class="close" onclick="closeCompanyForm()">×</span>
 
 </div>
+
 
 <form id="companyForm">
 
 <div class="form-grid">
 
 <div class="form-group">
-<label>Название компании *</label>
+
+<label data-i18n="companyNameLabel">
+Название компании *
+</label>
+
 <input id="companyName" required>
+
 </div>
 
-<div class="form-group">
-<label>Страна *</label>
-<input id="companyCountry" placeholder="Azerbaijan" required>
-</div>
 
 <div class="form-group">
-<label>Город *</label>
-<input id="companyCity" placeholder="Baku" required>
+
+<label data-i18n="countryLabel">
+Страна *
+</label>
+
+<input id="companyCountry" required>
+
 </div>
 
+
 <div class="form-group">
-<label>Отрасль *</label>
+
+<label data-i18n="cityLabel">
+Город *
+</label>
+
+<input id="companyCity" required>
+
+</div>
+
+
+<div class="form-group">
+
+<label data-i18n="industryLabel">
+Отрасль
+</label>
 
 <select id="companyIndustry">
 
@@ -1037,70 +1255,124 @@ Developer: F.S
 
 </div>
 
-<div class="form-group full">
-<label>Оборудование / продукция *</label>
-<textarea
-id="companyProducts"
-placeholder="Насосы, станки, двигатели..."
-required></textarea>
-</div>
 
 <div class="form-group full">
-<label>Запчасти</label>
-<textarea
-id="companyParts"
-placeholder="Подшипники, клапаны, датчики..."></textarea>
+
+<label data-i18n="productsLabel">
+Оборудование / продукция *
+</label>
+
+<textarea id="companyProducts" required></textarea>
+
 </div>
 
+
 <div class="form-group full">
-<label>Производители и модели</label>
-<textarea
-id="companyModels"
-placeholder="Например: Siemens, ABB, SKF..."></textarea>
+
+<label data-i18n="partsLabel">
+Запчасти
+</label>
+
+<textarea id="companyParts"></textarea>
+
 </div>
+
+
+<div class="form-group full">
+
+<label data-i18n="modelsLabel">
+Производители и модели
+</label>
+
+<textarea id="companyModels"></textarea>
+
+</div>
+
 
 <div class="form-group">
-<label>Наличие</label>
+
+<label data-i18n="availabilityLabel">
+Наличие
+</label>
 
 <select id="companyAvailability">
 
-<option>В наличии</option>
-<option>Под заказ</option>
-<option>Производство под заказ</option>
+<option data-i18n="inStock">
+В наличии
+</option>
+
+<option data-i18n="onOrder">
+Под заказ
+</option>
+
+<option data-i18n="custom">
+Производство под заказ
+</option>
+
 </select>
 
 </div>
 
+
 <div class="form-group">
-<label>Цена</label>
-<input id="companyPrice" placeholder="Цена / Запросить цену">
+
+<label data-i18n="priceLabel">
+Цена
+</label>
+
+<input id="companyPrice">
+
 </div>
+
 
 <div class="form-group full">
-<label>Доставка</label>
-<input
-id="companyDelivery"
-placeholder="Азербайджан, Турция, Россия, весь мир">
+
+<label data-i18n="deliveryLabel">
+Доставка
+</label>
+
+<input id="companyDelivery">
+
 </div>
 
+
 <div class="form-group">
-<label>Телефон</label>
+
+<label data-i18n="phoneLabel">
+Телефон
+</label>
+
 <input id="companyPhone">
+
 </div>
+
 
 <div class="form-group">
-<label>Email</label>
+
+<label data-i18n="emailLabel">
+Email
+</label>
+
 <input id="companyEmail" type="email">
+
 </div>
+
 
 <div class="form-group full">
-<label>Сайт</label>
-<input id="companyWebsite" placeholder="https://example.com">
-</div>
+
+<label data-i18n="websiteLabel">
+Сайт
+</label>
+
+<input id="companyWebsite">
 
 </div>
 
-<button type="submit" class="save-company">
+</div>
+
+
+<button class="save-company" type="submit"
+data-i18n="saveCompany">
 💾 Сохранить компанию
 </button>
 
@@ -1113,11 +1385,11 @@ placeholder="Азербайджан, Турция, Россия, весь мир
 
 <script>
 
-/* =========================
-   GLOBAL DATABASE
-========================= */
+/* =====================================
+   DATABASE
+===================================== */
 
-let globalDatabase = [
+let globalDatabase=[
 
 {
 title:"Industrial Water Pump",
@@ -1130,7 +1402,7 @@ availability:"In stock",
 price:"Request price",
 category:"pump",
 keywords:"pump water industrial насос вода",
-description:"Industrial water pump for manufacturing systems."
+description:"Industrial water pump."
 },
 
 {
@@ -1143,7 +1415,7 @@ supplier:"TIP Supply",
 availability:"In stock",
 price:"Request price",
 category:"pump",
-keywords:"pump centrifugal насос центробежный",
+keywords:"pump centrifugal насос",
 description:"Industrial centrifugal pump."
 },
 
@@ -1158,7 +1430,7 @@ availability:"On order",
 price:"Request price",
 category:"pump",
 keywords:"oil pump насос масло нефть",
-description:"Pump for industrial oil systems."
+description:"Industrial oil pump."
 },
 
 {
@@ -1185,8 +1457,8 @@ supplier:"TBF",
 availability:"In stock",
 price:"Request price",
 category:"bearing",
-keywords:"bearing подшипник heavy",
-description:"Heavy duty industrial bearing."
+keywords:"bearing подшипник",
+description:"Heavy duty bearing."
 },
 
 {
@@ -1213,7 +1485,7 @@ supplier:"TCS",
 availability:"In stock",
 price:"Request price",
 category:"cnc",
-keywords:"cnc фрезерный станок",
+keywords:"cnc milling фрезерный",
 description:"CNC milling machine."
 },
 
@@ -1227,7 +1499,7 @@ supplier:"AWS",
 availability:"In stock",
 price:"Request price",
 category:"welding",
-keywords:"welding сварка сварочный",
+keywords:"welding сварка",
 description:"Industrial welding machine."
 },
 
@@ -1241,7 +1513,7 @@ supplier:"ASS",
 availability:"In stock",
 price:"Request price",
 category:"sensor",
-keywords:"sensor датчик temperature температура",
+keywords:"sensor датчик temperature",
 description:"Industrial temperature sensor."
 },
 
@@ -1255,7 +1527,7 @@ supplier:"GS",
 availability:"In stock",
 price:"Request price",
 category:"sensor",
-keywords:"sensor pressure датчик давление",
+keywords:"sensor pressure датчик",
 description:"Industrial pressure sensor."
 },
 
@@ -1283,7 +1555,7 @@ supplier:"GPS",
 availability:"In stock",
 price:"Request price",
 category:"pneumatic",
-keywords:"pneumatic cylinder пневматика цилиндр",
+keywords:"pneumatic cylinder пневматика",
 description:"Industrial pneumatic cylinder."
 },
 
@@ -1299,56 +1571,14 @@ price:"Request price",
 category:"motor",
 keywords:"motor двигатель electric",
 description:"Industrial electric motor."
-},
-
-{
-title:"Stamping Press",
-country:"Azerbaijan",
-city:"Sumqayit",
-manufacturer:"Azerbaijan Metal Machinery",
-model:"AMM-500",
-supplier:"AMM",
-availability:"On order",
-price:"Request price",
-category:"stamping",
-keywords:"stamping press штамповка пресс",
-description:"Industrial stamping press."
-},
-
-{
-title:"Pump Not Starting",
-country:"Global",
-city:"Online",
-manufacturer:"WORKER PRO Knowledge Base",
-model:"WP-PUMP-001",
-supplier:"WORKER PRO",
-availability:"Online",
-price:"Free",
-category:"problem",
-keywords:"pump problem насос проблема",
-description:"Possible causes and troubleshooting."
-},
-
-{
-title:"CNC Machine Problem",
-country:"Global",
-city:"Online",
-manufacturer:"WORKER PRO Knowledge Base",
-model:"WP-CNC-001",
-supplier:"WORKER PRO",
-availability:"Online",
-price:"Free",
-category:"problem",
-keywords:"cnc problem станок проблема",
-description:"CNC troubleshooting information."
 }
 
 ];
 
 
-/* =========================
+/* =====================================
    SEARCH
-========================= */
+===================================== */
 
 let searchScope="my";
 
@@ -1356,7 +1586,8 @@ function setSearchScope(scope,button){
 
 searchScope=scope;
 
-document.querySelectorAll(".scope-button")
+document
+.querySelectorAll(".scope-button")
 .forEach(b=>b.classList.remove("active"));
 
 button.classList.add("active");
@@ -1368,32 +1599,32 @@ searchSite();
 
 function searchSite(){
 
-const input=
+let input=
 document.getElementById("searchInput")
 .value
 .trim()
 .toLowerCase();
 
-const country=
-document.getElementById("customerCountry")
-.value;
+let country=
+document.getElementById("customerCountry").value;
 
-const resultsBox=
+let box=
 document.getElementById("searchResults");
 
 if(!input){
 
-resultsBox.style.display="block";
+box.style.display="block";
 
-resultsBox.innerHTML=
-"<div class='no-results'>Введите название оборудования, запчасти или проблему.</div>";
+box.innerHTML=
+"<div class='no-results'>🔎 "+t("enterSearch")+"</div>";
 
 return;
 }
 
+
 let results=globalDatabase.filter(item=>{
 
-const text=(
+let text=(
 item.title+" "+
 item.country+" "+
 item.city+" "+
@@ -1412,15 +1643,20 @@ return text.includes(input);
 
 if(searchScope==="my"){
 
-results=results.filter(item=>item.country===country);
+results=results.filter(
+item=>item.country===country
+);
 
 }
 
-if(searchScope==="other"){
+else if(searchScope==="other"){
 
-results=results.filter(item=>item.country!==country);
+results=results.filter(
+item=>item.country!==country
+);
 
 }
+
 
 if(searchScope==="world"){
 
@@ -1437,21 +1673,25 @@ return 0;
 }
 
 
-resultsBox.style.display="block";
+box.style.display="block";
 
 
 if(!results.length){
 
-resultsBox.innerHTML=
-"<div class='no-results'>🌍 Ничего не найдено. Попробуйте другой запрос.</div>";
+box.innerHTML=
+"<div class='no-results'>🌍 "+
+t("nothingFound")+
+"</div>";
 
 return;
+
 }
 
 
 let html="";
 
-results.forEach((item,index)=>{
+
+results.forEach(item=>{
 
 html+=`
 
@@ -1464,28 +1704,30 @@ ${item.title}
 <div class="result-info">
 
 <div>🌍 ${item.country}</div>
+
 <div>📍 ${item.city}</div>
 
 <div>🏭 ${item.manufacturer}</div>
+
 <div>⚙️ ${item.model}</div>
 
 <div>🏢 ${item.supplier}</div>
+
 <div>📦 ${item.availability}</div>
 
 <div>💰 ${item.price}</div>
-<div>🔧 ${item.category}</div>
 
 </div>
 
-<p>
-${item.description}
-</p>
+<p>${item.description}</p>
 
 <div class="result-buttons">
 
 <button class="result-button"
 onclick="requestSupplier('${item.supplier}')">
-📩 Связаться
+
+📩 ${t("contact")}
+
 </button>
 
 </div>
@@ -1496,14 +1738,15 @@ onclick="requestSupplier('${item.supplier}')">
 
 });
 
-resultsBox.innerHTML=html;
+
+box.innerHTML=html;
 
 }
 
 
-/* =========================
-   COMPANY SYSTEM
-========================= */
+/* =====================================
+   COMPANY
+===================================== */
 
 function openCompanyForm(){
 
@@ -1518,29 +1761,24 @@ document.getElementById("companyModal").style.display="none";
 }
 
 
-window.onclick=function(event){
+window.addEventListener("click",function(e){
 
-const modal=
-document.getElementById("companyModal");
-
-if(event.target===modal){
+if(e.target===document.getElementById("companyModal")){
 
 closeCompanyForm();
 
 }
 
-};
+});
 
 
-/* SAVE COMPANY */
+document
+.getElementById("companyForm")
+.addEventListener("submit",function(e){
 
-document.getElementById("companyForm")
-.addEventListener("submit",function(event){
+e.preventDefault();
 
-event.preventDefault();
-
-
-const company={
+let company={
 
 id:Date.now(),
 
@@ -1574,21 +1812,20 @@ website:document.getElementById("companyWebsite").value
 
 
 let companies=
-JSON.parse(localStorage.getItem("workerProCompanies")||"[]");
-
+JSON.parse(
+localStorage.getItem("workerProCompanies")||"[]"
+);
 
 companies.push(company);
-
 
 localStorage.setItem(
 "workerProCompanies",
 JSON.stringify(companies)
 );
 
+alert("✅ "+t("companySaved"));
 
-alert("✅ Компания успешно добавлена в WORKER PRO!");
-
-document.getElementById("companyForm").reset();
+this.reset();
 
 closeCompanyForm();
 
@@ -1597,15 +1834,14 @@ loadCompanies();
 });
 
 
-/* LOAD COMPANIES */
-
 function loadCompanies(){
 
-const box=
-document.getElementById("companyList");
+let box=document.getElementById("companyList");
 
 let companies=
-JSON.parse(localStorage.getItem("workerProCompanies")||"[]");
+JSON.parse(
+localStorage.getItem("workerProCompanies")||"[]"
+);
 
 
 if(!companies.length){
@@ -1614,12 +1850,9 @@ box.innerHTML=`
 
 <div class="empty-company">
 
-<h3>🏢 Компаний пока нет</h3>
+<h3>🏢 ${t("noCompanies")}</h3>
 
-<p>
-Станьте первой компанией,
-которая добавит свой профиль в WORKER PRO.
-</p>
+<p>${t("firstCompany")}</p>
 
 </div>
 
@@ -1630,12 +1863,14 @@ return;
 }
 
 
+box.className="company-list";
+
 box.innerHTML="";
 
 
 companies.forEach(company=>{
 
-const card=document.createElement("div");
+let card=document.createElement("div");
 
 card.className="company-card";
 
@@ -1648,8 +1883,6 @@ card.innerHTML=`
 📍 ${company.city}
 </p>
 
-<div>
-
 <span class="company-tag">
 ${company.industry}
 </span>
@@ -1658,32 +1891,26 @@ ${company.industry}
 ${company.availability}
 </span>
 
-</div>
-
 <p>
-<strong>⚙️ Продукция:</strong><br>
+<strong>⚙️ ${t("products")}:</strong><br>
 ${company.products}
 </p>
 
 <p>
-<strong>🔩 Запчасти:</strong><br>
-${company.parts || "Не указано"}
+<strong>🔩 ${t("parts")}:</strong><br>
+${company.parts||"-"}
 </p>
 
 <p>
-<strong>🏭 Производители:</strong><br>
-${company.models || "Не указано"}
+<strong>🏭 ${t("models")}:</strong><br>
+${company.models||"-"}
 </p>
 
-<p>
-<strong>🚚 Доставка:</strong><br>
-${company.delivery || "Не указано"}
-</p>
-
-<button
-class="company-button"
+<button class="company-button"
 onclick="showCompany(${company.id})">
-👁️ Открыть профиль
+
+👁️ ${t("openProfile")}
+
 </button>
 
 `;
@@ -1695,56 +1922,40 @@ box.appendChild(card);
 }
 
 
-/* COMPANY PROFILE */
-
 function showCompany(id){
 
 let companies=
-JSON.parse(localStorage.getItem("workerProCompanies")||"[]");
+JSON.parse(
+localStorage.getItem("workerProCompanies")||"[]"
+);
 
-const company=
-companies.find(c=>c.id===id);
+let c=companies.find(x=>x.id===id);
 
-if(!company)return;
-
-
-let message=
-
-"🏢 "+company.name+
-"\n\n"+
-"🌍 Страна: "+company.country+
-"\n"+
-"📍 Город: "+company.city+
-"\n"+
-"🏭 Отрасль: "+company.industry+
-"\n\n"+
-"⚙️ Продукция:\n"+company.products+
-"\n\n"+
-"🔩 Запчасти:\n"+(company.parts||"Не указано")+
-"\n\n"+
-"🏭 Производители:\n"+(company.models||"Не указано")+
-"\n\n"+
-"📦 Наличие: "+company.availability+
-"\n"+
-"💰 Цена: "+(company.price||"Запросить цену")+
-"\n\n"+
-"🚚 Доставка:\n"+(company.delivery||"Не указано")+
-"\n\n"+
-"📞 "+(company.phone||"Не указано")+
-"\n"+
-"📧 "+(company.email||"Не указано")+
-"\n"+
-"🌐 "+(company.website||"Не указано");
+if(!c)return;
 
 
-alert(message);
+alert(
+
+"🏢 "+c.name+
+"\n\n🌍 "+c.country+
+"\n📍 "+c.city+
+"\n🏭 "+c.industry+
+"\n\n⚙️ "+c.products+
+"\n\n🔩 "+(c.parts||"-")+
+"\n\n🏭 "+(c.models||"-")+
+"\n\n🚚 "+(c.delivery||"-")+
+"\n\n📞 "+(c.phone||"-")+
+"\n📧 "+(c.email||"-")+
+"\n🌐 "+(c.website||"-")
+
+);
 
 }
 
 
-/* =========================
-   QUICK SEARCH
-========================= */
+/* =====================================
+   HELPERS
+===================================== */
 
 function quickSearch(word){
 
@@ -1759,7 +1970,8 @@ searchSite();
 
 function focusSearch(){
 
-document.querySelector(".hero")
+document
+.querySelector(".hero")
 .scrollIntoView({behavior:"smooth"});
 
 setTimeout(()=>{
@@ -1773,7 +1985,8 @@ document.getElementById("searchInput").focus();
 
 function goCompanies(){
 
-document.getElementById("companies")
+document
+.getElementById("companies")
 .scrollIntoView({behavior:"smooth"});
 
 }
@@ -1782,33 +1995,25 @@ document.getElementById("companies")
 function requestSupplier(name){
 
 alert(
-"📩 Запрос поставщику: "+
-name+
-"\n\nВ следующей версии здесь будет настоящая форма связи."
+"📩 "+t("supplierRequest")+": "+name+
+"\n\n"+t("comingSoon")
 );
 
 }
 
 
-/* =========================
-   ENTER SEARCH
-========================= */
+document
+.getElementById("searchInput")
+.addEventListener("keydown",function(e){
 
-document.getElementById("searchInput")
-.addEventListener("keydown",function(event){
-
-if(event.key==="Enter"){
-
-searchSite();
-
-}
+if(e.key==="Enter")searchSite();
 
 });
 
 
-/* =========================
-   LANGUAGE
-========================= */
+/* =====================================
+   TRANSLATIONS — 8 LANGUAGES
+===================================== */
 
 const translations={
 
@@ -1817,7 +2022,101 @@ platform:"Глобальная промышленная платформа",
 heroTitle:"Работа. Знания. Производство.",
 heroText:"Международная промышленная платформа для рабочих, инженеров, мастеров, производителей и поставщиков.",
 search:"Поиск",
-searchPlaceholder:"Поиск: насос, станок, подшипник, запчасть..."
+searchPlaceholder:"Поиск: насос, станок, подшипник, запчасть...",
+customerCountry:"📍 Страна заказчика",
+customerCity:"📍 Город",
+myCountry:"🇦🇿 Моя страна",
+otherCountries:"🌎 Другие страны",
+world:"🌍 Весь мир",
+navProduction:"🏭 Производство",
+navProblems:"🛠️ Проблемы",
+navParts:"🔩 Запчасти",
+navCompanies:"🏢 Компании",
+navCommunity:"👥 Сообщество",
+navJobs:"💼 Работа",
+navTraining:"📚 Обучение",
+productionTitle:"🏭 Производство",
+equipmentTitle:"🏗️ Оборудование",
+equipmentText:"Поиск промышленного оборудования, станков, насосов, двигателей, гидравлики и автоматики.",
+findEquipment:"Найти оборудование",
+manufacturersTitle:"⚙️ Производители",
+manufacturersText:"Каталог производителей промышленного оборудования и комплектующих.",
+companiesButton:"Компании",
+globalTitle:"🌍 Международный поиск",
+globalText:"Найти оборудование в своей стране или у поставщиков по всему миру.",
+startSearch:"Начать поиск",
+problemsTitle:"🛠️ Проблемы и решения",
+problem1:"⚙️ Станок не работает",
+problem1Text:"Поиск возможных причин неисправности, решений и технических рекомендаций.",
+problem2:"💧 Насос не запускается",
+problem2Text:"Проверка электропитания, клапанов, датчиков, давления и двигателя.",
+problem3:"🔥 Перегрев оборудования",
+problem3Text:"Диагностика охлаждения, масла, датчиков температуры и нагрузки.",
+partsTitle:"🔩 Промышленные запчасти",
+bearings:"⚙️ Подшипники",
+bearingsText:"Поиск подшипников разных производителей и моделей.",
+hydraulic:"🔧 Гидравлика",
+hydraulicText:"Клапаны, цилиндры, насосы и гидравлические компоненты.",
+pneumatic:"💨 Пневматика",
+pneumaticText:"Цилиндры, клапаны, фильтры и пневматические системы.",
+find:"Найти",
+companiesTitle:"🏢 Компании и поставщики",
+addCompany:"➕ Добавить компанию",
+communityTitle:"👥 Промышленное сообщество",
+workers:"👷 Рабочие",
+workersText:"Общение специалистов производства.",
+masters:"👨‍🔧 Мастера",
+mastersText:"Обмен опытом ремонта и обслуживания оборудования.",
+engineers:"👨‍💼 Инженеры",
+engineersText:"Технические знания, решения и проекты.",
+jobsTitle:"💼 Работа",
+trainingTitle:"📚 Обучение",
+details:"Подробнее",
+safetyText:"Промышленная безопасность.",
+cncText:"Обучение операторов CNC.",
+weldingText:"Основы промышленной сварки.",
+maintenanceText:"Техническое обслуживание оборудования.",
+industriesTitle:"🌍 Промышленные отрасли",
+futureTitle:"🚀 Будущее WORKER PRO",
+future1:"🌍 Глобальный поиск промышленного оборудования",
+future2:"🔩 Международная база запчастей",
+future3:"🏢 Профили компаний и производителей",
+future4:"🗺️ Карта поставщиков",
+future5:"👥 Международное профессиональное сообщество",
+future6:"💼 Работа и специалисты",
+future7:"📚 Промышленное обучение",
+future8:"🛠️ Ремонт и технические инструкции",
+footerText:"Global Manufacturing & Industrial Platform",
+companyRegistration:"🏢 Регистрация компании",
+companyNameLabel:"Название компании *",
+countryLabel:"Страна *",
+cityLabel:"Город *",
+industryLabel:"Отрасль",
+productsLabel:"Оборудование / продукция *",
+partsLabel:"Запчасти",
+modelsLabel:"Производители и модели",
+availabilityLabel:"Наличие",
+inStock:"В наличии",
+onOrder:"Под заказ",
+custom:"Производство под заказ",
+priceLabel:"Цена",
+deliveryLabel:"Доставка",
+phoneLabel:"Телефон",
+emailLabel:"Email",
+websiteLabel:"Сайт",
+saveCompany:"💾 Сохранить компанию",
+companySaved:"Компания успешно добавлена!",
+noCompanies:"Компаний пока нет",
+firstCompany:"Станьте первой компанией в WORKER PRO.",
+products:"Продукция",
+parts:"Запчасти",
+models:"Производители",
+openProfile:"Открыть профиль",
+enterSearch:"Введите запрос для поиска.",
+nothingFound:"Ничего не найдено.",
+contact:"Связаться",
+supplierRequest:"Запрос поставщику",
+comingSoon:"Настоящая связь с поставщиком будет добавлена в следующей версии."
 },
 
 en:{
@@ -1825,7 +2124,101 @@ platform:"Global Manufacturing & Industrial Platform",
 heroTitle:"Work. Knowledge. Production.",
 heroText:"International industrial platform for workers, engineers, supervisors, manufacturers and suppliers.",
 search:"Search",
-searchPlaceholder:"Search: pump, machine, bearing, spare part..."
+searchPlaceholder:"Search: pump, machine, bearing, spare part...",
+customerCountry:"📍 Customer country",
+customerCity:"📍 City",
+myCountry:"🇦🇿 My country",
+otherCountries:"🌎 Other countries",
+world:"🌍 Worldwide",
+navProduction:"🏭 Production",
+navProblems:"🛠️ Problems",
+navParts:"🔩 Spare Parts",
+navCompanies:"🏢 Companies",
+navCommunity:"👥 Community",
+navJobs:"💼 Jobs",
+navTraining:"📚 Training",
+productionTitle:"🏭 Production",
+equipmentTitle:"🏗️ Equipment",
+equipmentText:"Search industrial equipment, machines, pumps, motors, hydraulics and automation.",
+findEquipment:"Find equipment",
+manufacturersTitle:"⚙️ Manufacturers",
+manufacturersText:"Industrial equipment and component manufacturers.",
+companiesButton:"Companies",
+globalTitle:"🌍 Global Search",
+globalText:"Find equipment locally or from suppliers around the world.",
+startSearch:"Start search",
+problemsTitle:"🛠️ Problems & Solutions",
+problem1:"⚙️ Machine not working",
+problem1Text:"Find possible causes, solutions and technical recommendations.",
+problem2:"💧 Pump does not start",
+problem2Text:"Check power supply, valves, sensors, pressure and motor.",
+problem3:"🔥 Equipment overheating",
+problem3Text:"Check cooling, oil, temperature sensors and load.",
+partsTitle:"🔩 Industrial Spare Parts",
+bearings:"⚙️ Bearings",
+bearingsText:"Find bearings from different manufacturers and models.",
+hydraulic:"🔧 Hydraulics",
+hydraulicText:"Valves, cylinders, pumps and hydraulic components.",
+pneumatic:"💨 Pneumatics",
+pneumaticText:"Cylinders, valves, filters and pneumatic systems.",
+find:"Find",
+companiesTitle:"🏢 Companies & Suppliers",
+addCompany:"➕ Add Company",
+communityTitle:"👥 Industrial Community",
+workers:"👷 Workers",
+workersText:"Connect with production specialists.",
+masters:"👨‍🔧 Supervisors",
+mastersText:"Share repair and maintenance experience.",
+engineers:"👨‍💼 Engineers",
+engineersText:"Technical knowledge, solutions and projects.",
+jobsTitle:"💼 Jobs",
+trainingTitle:"📚 Training",
+details:"Details",
+safetyText:"Industrial safety.",
+cncText:"CNC operator training.",
+weldingText:"Industrial welding basics.",
+maintenanceText:"Equipment maintenance.",
+industriesTitle:"🌍 Industrial Sectors",
+futureTitle:"🚀 WORKER PRO Future",
+future1:"🌍 Global industrial equipment search",
+future2:"🔩 International spare parts database",
+future3:"🏢 Company and manufacturer profiles",
+future4:"🗺️ Supplier map",
+future5:"👥 International professional community",
+future6:"💼 Jobs and specialists",
+future7:"📚 Industrial training",
+future8:"🛠️ Repair and technical instructions",
+footerText:"Global Manufacturing & Industrial Platform",
+companyRegistration:"🏢 Company Registration",
+companyNameLabel:"Company name *",
+countryLabel:"Country *",
+cityLabel:"City *",
+industryLabel:"Industry",
+productsLabel:"Equipment / Products *",
+partsLabel:"Spare parts",
+modelsLabel:"Manufacturers and models",
+availabilityLabel:"Availability",
+inStock:"In stock",
+onOrder:"On order",
+custom:"Custom production",
+priceLabel:"Price",
+deliveryLabel:"Delivery",
+phoneLabel:"Phone",
+emailLabel:"Email",
+websiteLabel:"Website",
+saveCompany:"💾 Save Company",
+companySaved:"Company successfully added!",
+noCompanies:"No companies yet",
+firstCompany:"Be the first company in WORKER PRO.",
+products:"Products",
+parts:"Spare parts",
+models:"Manufacturers",
+openProfile:"Open profile",
+enterSearch:"Enter a search query.",
+nothingFound:"Nothing found.",
+contact:"Contact",
+supplierRequest:"Supplier request",
+comingSoon:"Real supplier communication will be added in the next version."
 },
 
 az:{
@@ -1833,7 +2226,101 @@ platform:"Qlobal İstehsalat və Sənaye Platforması",
 heroTitle:"İş. Bilik. İstehsalat.",
 heroText:"Fəhlələr, mühəndislər, ustalar, istehsalçılar və təchizatçılar üçün beynəlxalq sənaye platforması.",
 search:"Axtar",
-searchPlaceholder:"Axtarış: nasos, dəzgah, podşipnik, ehtiyat hissəsi..."
+searchPlaceholder:"Axtarış: nasos, dəzgah, podşipnik, ehtiyat hissəsi...",
+customerCountry:"📍 Sifarişçinin ölkəsi",
+customerCity:"📍 Şəhər",
+myCountry:"🇦🇿 Mənim ölkəm",
+otherCountries:"🌎 Digər ölkələr",
+world:"🌍 Bütün dünya",
+navProduction:"🏭 İstehsalat",
+navProblems:"🛠️ Problemlər",
+navParts:"🔩 Ehtiyat hissələri",
+navCompanies:"🏢 Şirkətlər",
+navCommunity:"👥 İcma",
+navJobs:"💼 İş",
+navTraining:"📚 Təlim",
+productionTitle:"🏭 İstehsalat",
+equipmentTitle:"🏗️ Avadanlıq",
+equipmentText:"Sənaye avadanlıqları, dəzgahlar, nasoslar, mühərriklər, hidravlika və avtomatlaşdırma axtarışı.",
+findEquipment:"Avadanlıq tap",
+manufacturersTitle:"⚙️ İstehsalçılar",
+manufacturersText:"Sənaye avadanlıqları və komponent istehsalçıları kataloqu.",
+companiesButton:"Şirkətlər",
+globalTitle:"🌍 Qlobal axtarış",
+globalText:"Öz ölkənizdə və ya dünyanın hər yerindən avadanlıq tapın.",
+startSearch:"Axtarışa başla",
+problemsTitle:"🛠️ Problemlər və həllər",
+problem1:"⚙️ Dəzgah işləmir",
+problem1Text:"Mümkün səbəbləri və texniki həlləri tapın.",
+problem2:"💧 Nasos işə düşmür",
+problem2Text:"Elektrik, klapanlar, sensorlar, təzyiq və mühərriki yoxlayın.",
+problem3:"🔥 Avadanlıq qızır",
+problem3Text:"Soyutma, yağ, temperatur sensorları və yükü yoxlayın.",
+partsTitle:"🔩 Sənaye ehtiyat hissələri",
+bearings:"⚙️ Podşipniklər",
+bearingsText:"Müxtəlif istehsalçıların podşipniklərini tapın.",
+hydraulic:"🔧 Hidravlika",
+hydraulicText:"Klapanlar, silindrlər, nasoslar və hidravlik komponentlər.",
+pneumatic:"💨 Pnevmatika",
+pneumaticText:"Silindrlər, klapanlar, filtrlər və pnevmatik sistemlər.",
+find:"Tap",
+companiesTitle:"🏢 Şirkətlər və təchizatçılar",
+addCompany:"➕ Şirkət əlavə et",
+communityTitle:"👥 Sənaye icması",
+workers:"👷 İşçilər",
+workersText:"İstehsalat mütəxəssisləri ilə ünsiyyət.",
+masters:"👨‍🔧 Ustalar",
+mastersText:"Təmir və texniki xidmət təcrübəsinin paylaşılması.",
+engineers:"👨‍💼 Mühəndislər",
+engineersText:"Texniki biliklər, həllər və layihələr.",
+jobsTitle:"💼 İş",
+trainingTitle:"📚 Təlim",
+details:"Ətraflı",
+safetyText:"Sənaye təhlükəsizliyi.",
+cncText:"CNC operatorlarının təlimi.",
+weldingText:"Sənaye qaynaqının əsasları.",
+maintenanceText:"Avadanlıqlara texniki xidmət.",
+industriesTitle:"🌍 Sənaye sahələri",
+futureTitle:"🚀 WORKER PRO gələcəyi",
+future1:"🌍 Qlobal sənaye avadanlığı axtarışı",
+future2:"🔩 Beynəlxalq ehtiyat hissələri bazası",
+future3:"🏢 Şirkət və istehsalçı profilləri",
+future4:"🗺️ Təchizatçı xəritəsi",
+future5:"👥 Beynəlxalq peşəkar icma",
+future6:"💼 İş və mütəxəssislər",
+future7:"📚 Sənaye təlimi",
+future8:"🛠️ Təmir və texniki təlimatlar",
+footerText:"Qlobal İstehsalat və Sənaye Platforması",
+companyRegistration:"🏢 Şirkət qeydiyyatı",
+companyNameLabel:"Şirkətin adı *",
+countryLabel:"Ölkə *",
+cityLabel:"Şəhər *",
+industryLabel:"Sahə",
+productsLabel:"Avadanlıq / məhsullar *",
+partsLabel:"Ehtiyat hissələri",
+modelsLabel:"İstehsalçılar və modellər",
+availabilityLabel:"Mövcudluq",
+inStock:"Anbarda var",
+onOrder:"Sifarişlə",
+custom:"Sifarişlə istehsal",
+priceLabel:"Qiymət",
+deliveryLabel:"Çatdırılma",
+phoneLabel:"Telefon",
+emailLabel:"Email",
+websiteLabel:"Veb sayt",
+saveCompany:"💾 Şirkəti yadda saxla",
+companySaved:"Şirkət uğurla əlavə edildi!",
+noCompanies:"Hələ şirkət yoxdur",
+firstCompany:"WORKER PRO-da ilk şirkət siz olun.",
+products:"Məhsullar",
+parts:"Ehtiyat hissələri",
+models:"İstehsalçılar",
+openProfile:"Profilə bax",
+enterSearch:"Axtarış sorğusu daxil edin.",
+nothingFound:"Heç nə tapılmadı.",
+contact:"Əlaqə",
+supplierRequest:"Təchizatçı sorğusu",
+comingSoon:"Real təchizatçı əlaqəsi növbəti versiyada əlavə olunacaq."
 },
 
 tr:{
@@ -1841,7 +2328,101 @@ platform:"Küresel Üretim ve Sanayi Platformu",
 heroTitle:"İş. Bilgi. Üretim.",
 heroText:"Çalışanlar, mühendisler, ustalar, üreticiler ve tedarikçiler için uluslararası sanayi platformu.",
 search:"Ara",
-searchPlaceholder:"Ara: pompa, makine, rulman, yedek parça..."
+searchPlaceholder:"Ara: pompa, makine, rulman, yedek parça...",
+customerCountry:"📍 Müşteri ülkesi",
+customerCity:"📍 Şehir",
+myCountry:"🇹🇷 Ülkem",
+otherCountries:"🌎 Diğer ülkeler",
+world:"🌍 Tüm dünya",
+navProduction:"🏭 Üretim",
+navProblems:"🛠️ Sorunlar",
+navParts:"🔩 Yedek Parçalar",
+navCompanies:"🏢 Şirketler",
+navCommunity:"👥 Topluluk",
+navJobs:"💼 İş",
+navTraining:"📚 Eğitim",
+productionTitle:"🏭 Üretim",
+equipmentTitle:"🏗️ Ekipman",
+equipmentText:"Endüstriyel ekipman, makineler, pompalar, motorlar, hidrolik ve otomasyon arayın.",
+findEquipment:"Ekipman bul",
+manufacturersTitle:"⚙️ Üreticiler",
+manufacturersText:"Endüstriyel ekipman ve parça üreticileri kataloğu.",
+companiesButton:"Şirketler",
+globalTitle:"🌍 Küresel Arama",
+globalText:"Ülkenizde veya dünyanın her yerindeki tedarikçilerden ekipman bulun.",
+startSearch:"Aramaya başla",
+problemsTitle:"🛠️ Sorunlar ve Çözümler",
+problem1:"⚙️ Makine çalışmıyor",
+problem1Text:"Olası nedenleri ve teknik çözümleri bulun.",
+problem2:"💧 Pompa çalışmıyor",
+problem2Text:"Elektrik, vanalar, sensörler, basınç ve motoru kontrol edin.",
+problem3:"🔥 Ekipman aşırı ısınıyor",
+problem3Text:"Soğutma, yağ, sıcaklık sensörleri ve yükü kontrol edin.",
+partsTitle:"🔩 Endüstriyel Yedek Parçalar",
+bearings:"⚙️ Rulmanlar",
+bearingsText:"Farklı üreticilerin rulmanlarını bulun.",
+hydraulic:"🔧 Hidrolik",
+hydraulicText:"Valfler, silindirler, pompalar ve hidrolik parçalar.",
+pneumatic:"💨 Pnömatik",
+pneumaticText:"Silindirler, valfler, filtreler ve pnömatik sistemler.",
+find:"Bul",
+companiesTitle:"🏢 Şirketler ve Tedarikçiler",
+addCompany:"➕ Şirket Ekle",
+communityTitle:"👥 Sanayi Topluluğu",
+workers:"👷 Çalışanlar",
+workersText:"Üretim uzmanlarıyla iletişim.",
+masters:"👨‍🔧 Ustalar",
+mastersText:"Onarım ve bakım deneyimini paylaşın.",
+engineers:"👨‍💼 Mühendisler",
+engineersText:"Teknik bilgi, çözümler ve projeler.",
+jobsTitle:"💼 İş",
+trainingTitle:"📚 Eğitim",
+details:"Detaylar",
+safetyText:"Endüstriyel güvenlik.",
+cncText:"CNC operatör eğitimi.",
+weldingText:"Endüstriyel kaynak temelleri.",
+maintenanceText:"Ekipman bakımı.",
+industriesTitle:"🌍 Sanayi Sektörleri",
+futureTitle:"🚀 WORKER PRO Geleceği",
+future1:"🌍 Küresel endüstriyel ekipman araması",
+future2:"🔩 Uluslararası yedek parça veritabanı",
+future3:"🏢 Şirket ve üretici profilleri",
+future4:"🗺️ Tedarikçi haritası",
+future5:"👥 Uluslararası profesyonel topluluk",
+future6:"💼 İş ve uzmanlar",
+future7:"📚 Endüstriyel eğitim",
+future8:"🛠️ Onarım ve teknik talimatlar",
+footerText:"Küresel Üretim ve Sanayi Platformu",
+companyRegistration:"🏢 Şirket Kaydı",
+companyNameLabel:"Şirket adı *",
+countryLabel:"Ülke *",
+cityLabel:"Şehir *",
+industryLabel:"Sektör",
+productsLabel:"Ekipman / Ürünler *",
+partsLabel:"Yedek parçalar",
+modelsLabel:"Üreticiler ve modeller",
+availabilityLabel:"Stok durumu",
+inStock:"Stokta",
+onOrder:"Sipariş üzerine",
+custom:"Özel üretim",
+priceLabel:"Fiyat",
+deliveryLabel:"Teslimat",
+phoneLabel:"Telefon",
+emailLabel:"Email",
+websiteLabel:"Web sitesi",
+saveCompany:"💾 Şirketi Kaydet",
+companySaved:"Şirket başarıyla eklendi!",
+noCompanies:"Henüz şirket yok",
+firstCompany:"WORKER PRO'ya ilk şirket siz olun.",
+products:"Ürünler",
+parts:"Yedek parçalar",
+models:"Üreticiler",
+openProfile:"Profili aç",
+enterSearch:"Arama sorgusu girin.",
+nothingFound:"Hiçbir şey bulunamadı.",
+contact:"İletişim",
+supplierRequest:"Tedarikçi talebi",
+comingSoon:"Gerçek tedarikçi iletişimi sonraki sürümde eklenecek."
 },
 
 de:{
@@ -1849,7 +2430,101 @@ platform:"Globale Produktions- und Industrieplattform",
 heroTitle:"Arbeit. Wissen. Produktion.",
 heroText:"Internationale Industrieplattform für Arbeiter, Ingenieure, Meister, Hersteller und Lieferanten.",
 search:"Suchen",
-searchPlaceholder:"Suche: Pumpe, Maschine, Lager, Ersatzteil..."
+searchPlaceholder:"Suche: Pumpe, Maschine, Lager, Ersatzteil...",
+customerCountry:"📍 Kundenland",
+customerCity:"📍 Stadt",
+myCountry:"🇩🇪 Mein Land",
+otherCountries:"🌎 Andere Länder",
+world:"🌍 Weltweit",
+navProduction:"🏭 Produktion",
+navProblems:"🛠️ Probleme",
+navParts:"🔩 Ersatzteile",
+navCompanies:"🏢 Unternehmen",
+navCommunity:"👥 Gemeinschaft",
+navJobs:"💼 Jobs",
+navTraining:"📚 Ausbildung",
+productionTitle:"🏭 Produktion",
+equipmentTitle:"🏗️ Ausrüstung",
+equipmentText:"Industrielle Ausrüstung, Maschinen, Pumpen, Motoren, Hydraulik und Automatisierung suchen.",
+findEquipment:"Ausrüstung finden",
+manufacturersTitle:"⚙️ Hersteller",
+manufacturersText:"Katalog von Herstellern industrieller Ausrüstung und Komponenten.",
+companiesButton:"Unternehmen",
+globalTitle:"🌍 Globale Suche",
+globalText:"Ausrüstung in Ihrem Land oder bei Lieferanten weltweit finden.",
+startSearch:"Suche starten",
+problemsTitle:"🛠️ Probleme und Lösungen",
+problem1:"⚙️ Maschine funktioniert nicht",
+problem1Text:"Mögliche Ursachen und technische Lösungen finden.",
+problem2:"💧 Pumpe startet nicht",
+problem2Text:"Stromversorgung, Ventile, Sensoren, Druck und Motor prüfen.",
+problem3:"🔥 Überhitzung",
+problem3Text:"Kühlung, Öl, Temperatursensoren und Belastung prüfen.",
+partsTitle:"🔩 Industrielle Ersatzteile",
+bearings:"⚙️ Lager",
+bearingsText:"Lager verschiedener Hersteller und Modelle finden.",
+hydraulic:"🔧 Hydraulik",
+hydraulicText:"Ventile, Zylinder, Pumpen und hydraulische Komponenten.",
+pneumatic:"💨 Pneumatik",
+pneumaticText:"Zylinder, Ventile, Filter und pneumatische Systeme.",
+find:"Finden",
+companiesTitle:"🏢 Unternehmen und Lieferanten",
+addCompany:"➕ Unternehmen hinzufügen",
+communityTitle:"👥 Industrie-Community",
+workers:"👷 Arbeiter",
+workersText:"Kontakt mit Produktionsfachleuten.",
+masters:"👨‍🔧 Meister",
+mastersText:"Erfahrungen in Reparatur und Wartung teilen.",
+engineers:"👨‍💼 Ingenieure",
+engineersText:"Technisches Wissen, Lösungen und Projekte.",
+jobsTitle:"💼 Jobs",
+trainingTitle:"📚 Ausbildung",
+details:"Details",
+safetyText:"Arbeitssicherheit.",
+cncText:"CNC-Bedienerschulung.",
+weldingText:"Grundlagen des industriellen Schweißens.",
+maintenanceText:"Wartung von Anlagen.",
+industriesTitle:"🌍 Industriesektoren",
+futureTitle:"🚀 Die Zukunft von WORKER PRO",
+future1:"🌍 Globale Suche nach Industrieanlagen",
+future2:"🔩 Internationale Ersatzteildatenbank",
+future3:"🏢 Unternehmens- und Herstellerprofile",
+future4:"🗺️ Lieferantenkarte",
+future5:"👥 Internationale Fachgemeinschaft",
+future6:"💼 Jobs und Fachkräfte",
+future7:"📚 Industrielle Ausbildung",
+future8:"🛠️ Reparatur und technische Anleitungen",
+footerText:"Globale Produktions- und Industrieplattform",
+companyRegistration:"🏢 Unternehmensregistrierung",
+companyNameLabel:"Firmenname *",
+countryLabel:"Land *",
+cityLabel:"Stadt *",
+industryLabel:"Branche",
+productsLabel:"Ausrüstung / Produkte *",
+partsLabel:"Ersatzteile",
+modelsLabel:"Hersteller und Modelle",
+availabilityLabel:"Verfügbarkeit",
+inStock:"Auf Lager",
+onOrder:"Auf Bestellung",
+custom:"Sonderanfertigung",
+priceLabel:"Preis",
+deliveryLabel:"Lieferung",
+phoneLabel:"Telefon",
+emailLabel:"E-Mail",
+websiteLabel:"Webseite",
+saveCompany:"💾 Unternehmen speichern",
+companySaved:"Unternehmen erfolgreich hinzugefügt!",
+noCompanies:"Noch keine Unternehmen",
+firstCompany:"Seien Sie das erste Unternehmen bei WORKER PRO.",
+products:"Produkte",
+parts:"Ersatzteile",
+models:"Hersteller",
+openProfile:"Profil öffnen",
+enterSearch:"Suchanfrage eingeben.",
+nothingFound:"Nichts gefunden.",
+contact:"Kontakt",
+supplierRequest:"Lieferantenanfrage",
+comingSoon:"Echter Lieferantenkontakt wird in der nächsten Version hinzugefügt."
 },
 
 es:{
@@ -1857,7 +2532,101 @@ platform:"Plataforma Industrial Global",
 heroTitle:"Trabajo. Conocimiento. Producción.",
 heroText:"Plataforma industrial internacional para trabajadores, ingenieros, fabricantes y proveedores.",
 search:"Buscar",
-searchPlaceholder:"Buscar: bomba, máquina, rodamiento, repuesto..."
+searchPlaceholder:"Buscar: bomba, máquina, rodamiento, repuesto...",
+customerCountry:"📍 País del cliente",
+customerCity:"📍 Ciudad",
+myCountry:"🇪🇸 Mi país",
+otherCountries:"🌎 Otros países",
+world:"🌍 Todo el mundo",
+navProduction:"🏭 Producción",
+navProblems:"🛠️ Problemas",
+navParts:"🔩 Repuestos",
+navCompanies:"🏢 Empresas",
+navCommunity:"👥 Comunidad",
+navJobs:"💼 Empleo",
+navTraining:"📚 Formación",
+productionTitle:"🏭 Producción",
+equipmentTitle:"🏗️ Equipos",
+equipmentText:"Buscar equipos industriales, máquinas, bombas, motores, hidráulica y automatización.",
+findEquipment:"Buscar equipos",
+manufacturersTitle:"⚙️ Fabricantes",
+manufacturersText:"Catálogo de fabricantes de equipos y componentes industriales.",
+companiesButton:"Empresas",
+globalTitle:"🌍 Búsqueda global",
+globalText:"Encuentre equipos en su país o de proveedores de todo el mundo.",
+startSearch:"Iniciar búsqueda",
+problemsTitle:"🛠️ Problemas y soluciones",
+problem1:"⚙️ La máquina no funciona",
+problem1Text:"Encuentre posibles causas y soluciones técnicas.",
+problem2:"💧 La bomba no arranca",
+problem2Text:"Compruebe alimentación, válvulas, sensores, presión y motor.",
+problem3:"🔥 Sobrecalentamiento",
+problem3Text:"Compruebe refrigeración, aceite, sensores de temperatura y carga.",
+partsTitle:"🔩 Repuestos industriales",
+bearings:"⚙️ Rodamientos",
+bearingsText:"Encuentre rodamientos de diferentes fabricantes y modelos.",
+hydraulic:"🔧 Hidráulica",
+hydraulicText:"Válvulas, cilindros, bombas y componentes hidráulicos.",
+pneumatic:"💨 Neumática",
+pneumaticText:"Cilindros, válvulas, filtros y sistemas neumáticos.",
+find:"Buscar",
+companiesTitle:"🏢 Empresas y proveedores",
+addCompany:"➕ Añadir empresa",
+communityTitle:"👥 Comunidad industrial",
+workers:"👷 Trabajadores",
+workersText:"Conecte con especialistas de producción.",
+masters:"👨‍🔧 Supervisores",
+mastersText:"Comparta experiencias de reparación y mantenimiento.",
+engineers:"👨‍💼 Ingenieros",
+engineersText:"Conocimientos técnicos, soluciones y proyectos.",
+jobsTitle:"💼 Empleo",
+trainingTitle:"📚 Formación",
+details:"Detalles",
+safetyText:"Seguridad industrial.",
+cncText:"Formación de operadores CNC.",
+weldingText:"Fundamentos de soldadura industrial.",
+maintenanceText:"Mantenimiento de equipos.",
+industriesTitle:"🌍 Sectores industriales",
+futureTitle:"🚀 Futuro de WORKER PRO",
+future1:"🌍 Búsqueda mundial de equipos industriales",
+future2:"🔩 Base internacional de repuestos",
+future3:"🏢 Perfiles de empresas y fabricantes",
+future4:"🗺️ Mapa de proveedores",
+future5:"👥 Comunidad profesional internacional",
+future6:"💼 Empleos y especialistas",
+future7:"📚 Formación industrial",
+future8:"🛠️ Reparación e instrucciones técnicas",
+footerText:"Plataforma Industrial Global",
+companyRegistration:"🏢 Registro de empresa",
+companyNameLabel:"Nombre de empresa *",
+countryLabel:"País *",
+cityLabel:"Ciudad *",
+industryLabel:"Industria",
+productsLabel:"Equipos / Productos *",
+partsLabel:"Repuestos",
+modelsLabel:"Fabricantes y modelos",
+availabilityLabel:"Disponibilidad",
+inStock:"En stock",
+onOrder:"Por pedido",
+custom:"Producción personalizada",
+priceLabel:"Precio",
+deliveryLabel:"Entrega",
+phoneLabel:"Teléfono",
+emailLabel:"Correo electrónico",
+websiteLabel:"Sitio web",
+saveCompany:"💾 Guardar empresa",
+companySaved:"¡Empresa añadida correctamente!",
+noCompanies:"Todavía no hay empresas",
+firstCompany:"Sea la primera empresa en WORKER PRO.",
+products:"Productos",
+parts:"Repuestos",
+models:"Fabricantes",
+openProfile:"Abrir perfil",
+enterSearch:"Introduzca una búsqueda.",
+nothingFound:"No se encontró nada.",
+contact:"Contactar",
+supplierRequest:"Solicitud al proveedor",
+comingSoon:"El contacto real con proveedores se añadirá en la próxima versión."
 },
 
 fr:{
@@ -1865,7 +2634,101 @@ platform:"Plateforme Industrielle Mondiale",
 heroTitle:"Travail. Connaissance. Production.",
 heroText:"Plateforme industrielle internationale pour travailleurs, ingénieurs, fabricants et fournisseurs.",
 search:"Rechercher",
-searchPlaceholder:"Rechercher : pompe, machine, roulement, pièce..."
+searchPlaceholder:"Rechercher : pompe, machine, roulement, pièce...",
+customerCountry:"📍 Pays du client",
+customerCity:"📍 Ville",
+myCountry:"🇫🇷 Mon pays",
+otherCountries:"🌎 Autres pays",
+world:"🌍 Monde entier",
+navProduction:"🏭 Production",
+navProblems:"🛠️ Problèmes",
+navParts:"🔩 Pièces détachées",
+navCompanies:"🏢 Entreprises",
+navCommunity:"👥 Communauté",
+navJobs:"💼 Emplois",
+navTraining:"📚 Formation",
+productionTitle:"🏭 Production",
+equipmentTitle:"🏗️ Équipements",
+equipmentText:"Rechercher des équipements industriels, machines, pompes, moteurs, hydraulique et automatisation.",
+findEquipment:"Trouver un équipement",
+manufacturersTitle:"⚙️ Fabricants",
+manufacturersText:"Catalogue de fabricants d'équipements et composants industriels.",
+companiesButton:"Entreprises",
+globalTitle:"🌍 Recherche mondiale",
+globalText:"Trouvez des équipements dans votre pays ou auprès de fournisseurs du monde entier.",
+startSearch:"Commencer la recherche",
+problemsTitle:"🛠️ Problèmes et solutions",
+problem1:"⚙️ La machine ne fonctionne pas",
+problem1Text:"Trouver les causes possibles et les solutions techniques.",
+problem2:"💧 La pompe ne démarre pas",
+problem2Text:"Vérifier l'alimentation, les vannes, les capteurs, la pression et le moteur.",
+problem3:"🔥 Surchauffe",
+problem3Text:"Vérifier le refroidissement, l'huile, les capteurs et la charge.",
+partsTitle:"🔩 Pièces industrielles",
+bearings:"⚙️ Roulements",
+bearingsText:"Trouver des roulements de différents fabricants.",
+hydraulic:"🔧 Hydraulique",
+hydraulicText:"Vannes, cylindres, pompes et composants hydrauliques.",
+pneumatic:"💨 Pneumatique",
+pneumaticText:"Cylindres, vannes, filtres et systèmes pneumatiques.",
+find:"Trouver",
+companiesTitle:"🏢 Entreprises et fournisseurs",
+addCompany:"➕ Ajouter une entreprise",
+communityTitle:"👥 Communauté industrielle",
+workers:"👷 Travailleurs",
+workersText:"Échanger avec les spécialistes de production.",
+masters:"👨‍🔧 Techniciens",
+mastersText:"Partager les expériences de réparation et maintenance.",
+engineers:"👨‍💼 Ingénieurs",
+engineersText:"Connaissances techniques, solutions et projets.",
+jobsTitle:"💼 Emplois",
+trainingTitle:"📚 Formation",
+details:"Détails",
+safetyText:"Sécurité industrielle.",
+cncText:"Formation des opérateurs CNC.",
+weldingText:"Bases du soudage industriel.",
+maintenanceText:"Maintenance des équipements.",
+industriesTitle:"🌍 Secteurs industriels",
+futureTitle:"🚀 Futur de WORKER PRO",
+future1:"🌍 Recherche mondiale d'équipements industriels",
+future2:"🔩 Base internationale de pièces détachées",
+future3:"🏢 Profils des entreprises et fabricants",
+future4:"🗺️ Carte des fournisseurs",
+future5:"👥 Communauté professionnelle internationale",
+future6:"💼 Emplois et spécialistes",
+future7:"📚 Formation industrielle",
+future8:"🛠️ Réparation et instructions techniques",
+footerText:"Plateforme Industrielle Mondiale",
+companyRegistration:"🏢 Enregistrement de l'entreprise",
+companyNameLabel:"Nom de l'entreprise *",
+countryLabel:"Pays *",
+cityLabel:"Ville *",
+industryLabel:"Secteur",
+productsLabel:"Équipements / Produits *",
+partsLabel:"Pièces détachées",
+modelsLabel:"Fabricants et modèles",
+availabilityLabel:"Disponibilité",
+inStock:"En stock",
+onOrder:"Sur commande",
+custom:"Fabrication sur commande",
+priceLabel:"Prix",
+deliveryLabel:"Livraison",
+phoneLabel:"Téléphone",
+emailLabel:"E-mail",
+websiteLabel:"Site web",
+saveCompany:"💾 Enregistrer l'entreprise",
+companySaved:"Entreprise ajoutée avec succès !",
+noCompanies:"Aucune entreprise",
+firstCompany:"Soyez la première entreprise sur WORKER PRO.",
+products:"Produits",
+parts:"Pièces",
+models:"Fabricants",
+openProfile:"Ouvrir le profil",
+enterSearch:"Entrez une recherche.",
+nothingFound:"Aucun résultat.",
+contact:"Contacter",
+supplierRequest:"Demande au fournisseur",
+comingSoon:"Le contact réel avec les fournisseurs sera ajouté dans la prochaine version."
 },
 
 ar:{
@@ -1873,59 +2736,144 @@ platform:"منصة التصنيع والصناعة العالمية",
 heroTitle:"العمل. المعرفة. الإنتاج.",
 heroText:"منصة صناعية دولية للعمال والمهندسين والمصنعين والموردين.",
 search:"بحث",
-searchPlaceholder:"بحث: مضخة، آلة، محمل، قطعة غيار..."
+searchPlaceholder:"بحث: مضخة، آلة، محمل، قطعة غيار...",
+customerCountry:"📍 بلد العميل",
+customerCity:"📍 المدينة",
+myCountry:"🇦🇪 بلدي",
+otherCountries:"🌎 دول أخرى",
+world:"🌍 العالم",
+navProduction:"🏭 الإنتاج",
+navProblems:"🛠️ المشاكل",
+navParts:"🔩 قطع الغيار",
+navCompanies:"🏢 الشركات",
+navCommunity:"👥 المجتمع",
+navJobs:"💼 الوظائف",
+navTraining:"📚 التدريب",
+productionTitle:"🏭 الإنتاج",
+equipmentTitle:"🏗️ المعدات",
+equipmentText:"البحث عن المعدات الصناعية والآلات والمضخات والمحركات والأنظمة الهيدروليكية والأتمتة.",
+findEquipment:"البحث عن المعدات",
+manufacturersTitle:"⚙️ المصنعون",
+manufacturersText:"دليل مصنعي المعدات والمكونات الصناعية.",
+companiesButton:"الشركات",
+globalTitle:"🌍 البحث العالمي",
+globalText:"ابحث عن المعدات في بلدك أو لدى الموردين في جميع أنحاء العالم.",
+startSearch:"ابدأ البحث",
+problemsTitle:"🛠️ المشاكل والحلول",
+problem1:"⚙️ الآلة لا تعمل",
+problem1Text:"ابحث عن الأسباب المحتملة والحلول الفنية.",
+problem2:"💧 المضخة لا تعمل",
+problem2Text:"افحص مصدر الطاقة والصمامات والحساسات والضغط والمحرك.",
+problem3:"🔥 ارتفاع حرارة المعدات",
+problem3Text:"افحص التبريد والزيت وحساسات الحرارة والحمل.",
+partsTitle:"🔩 قطع الغيار الصناعية",
+bearings:"⚙️ المحامل",
+bearingsText:"ابحث عن محامل من مختلف المصنعين.",
+hydraulic:"🔧 الهيدروليك",
+hydraulicText:"الصمامات والأسطوانات والمضخات والمكونات الهيدروليكية.",
+pneumatic:"💨 الهواء المضغوط",
+pneumaticText:"الأسطوانات والصمامات والفلاتر والأنظمة الهوائية.",
+find:"بحث",
+companiesTitle:"🏢 الشركات والموردون",
+addCompany:"➕ إضافة شركة",
+communityTitle:"👥 المجتمع الصناعي",
+workers:"👷 العمال",
+workersText:"التواصل مع متخصصي الإنتاج.",
+masters:"👨‍🔧 الفنيون",
+mastersText:"تبادل خبرات الإصلاح والصيانة.",
+engineers:"👨‍💼 المهندسون",
+engineersText:"المعرفة الفنية والحلول والمشاريع.",
+jobsTitle:"💼 الوظائف",
+trainingTitle:"📚 التدريب",
+details:"التفاصيل",
+safetyText:"السلامة الصناعية.",
+cncText:"تدريب مشغلي CNC.",
+weldingText:"أساسيات اللحام الصناعي.",
+maintenanceText:"صيانة المعدات.",
+industriesTitle:"🌍 القطاعات الصناعية",
+futureTitle:"🚀 مستقبل WORKER PRO",
+future1:"🌍 البحث العالمي عن المعدات الصناعية",
+future2:"🔩 قاعدة بيانات دولية لقطع الغيار",
+future3:"🏢 ملفات الشركات والمصنعين",
+future4:"🗺️ خريطة الموردين",
+future5:"👥 مجتمع مهني دولي",
+future6:"💼 الوظائف والمتخصصون",
+future7:"📚 التدريب الصناعي",
+future8:"🛠️ الإصلاح والتعليمات الفنية",
+footerText:"منصة التصنيع والصناعة العالمية",
+companyRegistration:"🏢 تسجيل الشركة",
+companyNameLabel:"اسم الشركة *",
+countryLabel:"الدولة *",
+cityLabel:"المدينة *",
+industryLabel:"القطاع",
+productsLabel:"المعدات / المنتجات *",
+partsLabel:"قطع الغيار",
+modelsLabel:"المصنعون والموديلات",
+availabilityLabel:"التوفر",
+inStock:"متوفر",
+onOrder:"حسب الطلب",
+custom:"إنتاج مخصص",
+priceLabel:"السعر",
+deliveryLabel:"التوصيل",
+phoneLabel:"الهاتف",
+emailLabel:"البريد الإلكتروني",
+websiteLabel:"الموقع",
+saveCompany:"💾 حفظ الشركة",
+companySaved:"تمت إضافة الشركة بنجاح!",
+noCompanies:"لا توجد شركات بعد",
+firstCompany:"كن أول شركة في WORKER PRO.",
+products:"المنتجات",
+parts:"قطع الغيار",
+models:"المصنعون",
+openProfile:"فتح الملف",
+enterSearch:"أدخل طلب البحث.",
+nothingFound:"لم يتم العثور على شيء.",
+contact:"اتصال",
+supplierRequest:"طلب إلى المورد",
+comingSoon:"سيتم إضافة الاتصال الحقيقي بالمورد في الإصدار القادم."
 }
 
 };
 
 
+/* =====================================
+   LANGUAGE ENGINE
+===================================== */
+
+let currentLanguage=
+localStorage.getItem("workerProLanguage")||"ru";
+
+
+function t(key){
+
+return (
+translations[currentLanguage] &&
+translations[currentLanguage][key]
+) ||
+translations.ru[key] ||
+key;
+
+}
+
+
 function setLanguage(lang){
+
+if(!translations[lang]){
+
+lang="ru";
+
+}
+
+currentLanguage=lang;
 
 localStorage.setItem(
 "workerProLanguage",
 lang
 );
 
-document.querySelectorAll(".languages button")
-.forEach(button=>{
-
-button.classList.remove("active");
-
-if(button.dataset.lang===lang){
-
-button.classList.add("active");
-
-}
-
-});
-
-
-const t=
-translations[lang] ||
-translations.ru;
-
-
-document.querySelector(".subtitle")
-.textContent=t.platform;
-
-
-document.querySelector(".hero h1")
-.textContent=t.heroTitle;
-
-
-document.querySelector(".hero p")
-.textContent=t.heroText;
-
-
-document.querySelector(".search-main button")
-.textContent="🔎 "+t.search;
-
-
-document.getElementById("searchInput")
-.placeholder=t.searchPlaceholder;
-
 
 document.documentElement.lang=lang;
+
 
 if(lang==="ar"){
 
@@ -1937,19 +2885,89 @@ document.documentElement.dir="ltr";
 
 }
 
+
+document
+.querySelectorAll("[data-i18n]")
+.forEach(element=>{
+
+let key=element.dataset.i18n;
+
+if(translations[lang][key]){
+
+element.textContent=
+translations[lang][key];
+
 }
 
+});
 
-/* =========================
-   START
-========================= */
+
+document
+.querySelectorAll("[data-i18n-placeholder]")
+.forEach(element=>{
+
+let key=
+element.dataset.i18nPlaceholder;
+
+if(translations[lang][key]){
+
+element.placeholder=
+translations[lang][key];
+
+}
+
+});
+
+
+document
+.querySelectorAll(".languages button")
+.forEach(button=>{
+
+button.classList.toggle(
+"active",
+button.dataset.lang===lang
+);
+
+});
+
+
+/* Search button */
+
+document.getElementById("searchButton")
+.textContent="🔎 "+t("search");
+
+
+/* Reload company cards */
 
 loadCompanies();
 
-const savedLanguage=
-localStorage.getItem("workerProLanguage")||"ru";
+}
 
-setLanguage(savedLanguage);
+
+/* =====================================
+   LANGUAGE BUTTONS
+===================================== */
+
+document
+.querySelectorAll(".languages button")
+.forEach(button=>{
+
+button.addEventListener("click",function(){
+
+setLanguage(this.dataset.lang);
+
+});
+
+});
+
+
+/* =====================================
+   START
+===================================== */
+
+setLanguage(currentLanguage);
+
+loadCompanies();
 
 </script>
 
