@@ -3,2706 +3,1953 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>WORKER PRO — Global Industrial Platform</title>
 
 <style>
+*{box-sizing:border-box}
 
-* {
-    box-sizing: border-box;
+html{
+    scroll-behavior:smooth;
+    scroll-padding-top:75px;
 }
 
-html {
-    scroll-behavior: smooth;
-    scroll-padding-top: 75px;
+body{
+    margin:0;
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f4f8f5;
+    color:#173d2b;
 }
 
-body {
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    background: #f4f8f5;
-    color: #173d2b;
+header{
+    background:linear-gradient(135deg,#063d25,#0b6b3d,#063d25);
+    color:white;
+    padding:25px 15px 20px;
+    text-align:center;
+    box-shadow:0 4px 15px rgba(0,0,0,.25);
 }
 
-/* ================= HEADER ================= */
-
-header {
-    background: linear-gradient(135deg, #063d25, #0b6b3d, #063d25);
-    color: white;
-    padding: 25px 15px 20px;
-    text-align: center;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+.logo{
+    width:170px;
+    max-width:60vw;
+    border-radius:50%;
+    display:block;
+    margin:0 auto 12px;
+    box-shadow:0 5px 20px rgba(0,0,0,.35);
 }
 
-.logo {
-    width: 170px;
-    max-width: 60vw;
-    border-radius: 50%;
-    display: block;
-    margin: 0 auto 12px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.35);
+.brand{
+    font-size:38px;
+    font-weight:900;
+    letter-spacing:2px;
 }
 
-.brand {
-    font-size: 38px;
-    font-weight: 900;
-    letter-spacing: 2px;
+.subtitle{
+    font-size:17px;
+    margin-top:5px;
+    opacity:.95;
 }
 
-.subtitle {
-    font-size: 17px;
-    margin-top: 5px;
-    opacity: 0.95;
+.languages{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:7px;
+    margin-top:20px;
 }
 
-/* ================= LANGUAGES ================= */
-
-.languages {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 7px;
-    margin-top: 20px;
-}
-
-.languages button {
-    border: 2px solid rgba(255,255,255,0.7);
-    background: rgba(255,255,255,0.12);
-    color: white;
-    padding: 9px 12px;
-    border-radius: 10px;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 14px;
+.languages button{
+    border:2px solid rgba(255,255,255,.7);
+    background:rgba(255,255,255,.12);
+    color:white;
+    padding:9px 12px;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:bold;
+    font-size:14px;
 }
 
 .languages button:hover,
-.languages button.active {
-    background: #b7ff35;
-    color: #063d25;
-    border-color: #b7ff35;
+.languages button.active{
+    background:#b7ff35;
+    color:#063d25;
+    border-color:#b7ff35;
 }
 
-/* ================= MENU ================= */
-
-nav {
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    background: rgba(255,255,255,0.97);
-
-    display: flex;
-    align-items: center;
-
-    gap: 8px;
-    padding: 9px 10px;
-
-    box-shadow: 0 3px 12px rgba(0,0,0,0.14);
-
-    overflow-x: auto;
-    overflow-y: hidden;
-
-    white-space: nowrap;
-
-    scrollbar-width: thin;
-
-    -webkit-overflow-scrolling: touch;
+nav{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    background:rgba(255,255,255,.97);
+    display:flex;
+    align-items:center;
+    gap:8px;
+    padding:9px 10px;
+    box-shadow:0 3px 12px rgba(0,0,0,.14);
+    overflow-x:auto;
+    white-space:nowrap;
 }
 
-nav::-webkit-scrollbar {
-    height: 4px;
+nav a{
+    flex:0 0 auto;
+    text-decoration:none;
+    color:#075b34;
+    font-weight:bold;
+    padding:11px 15px;
+    border-radius:12px;
+    background:#edf7f0;
+    font-size:14px;
 }
 
-nav::-webkit-scrollbar-thumb {
-    background: #0b6b3d;
-    border-radius: 10px;
+nav a:hover,
+nav a.active{
+    background:#075b34;
+    color:#b7ff35;
 }
 
-nav a {
-    flex: 0 0 auto;
-
-    text-decoration: none;
-
-    color: #075b34;
-
-    font-weight: bold;
-
-    padding: 11px 15px;
-
-    border-radius: 12px;
-
-    background: #edf7f0;
-
-    border: 2px solid transparent;
-
-    transition:
-        background 0.2s,
-        color 0.2s,
-        transform 0.2s,
-        box-shadow 0.2s;
-
-    font-size: 14px;
-
-    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
-}
-
-nav a:hover {
-    background: #d9f2e1;
-    transform: translateY(-1px);
-}
-
-nav a.active {
-    background: #075b34;
-    color: #b7ff35;
-    border-color: #b7ff35;
-
-    box-shadow: 0 3px 10px rgba(7,91,52,0.30);
-
-    transform: translateY(-1px);
-}
-
-/* ================= HERO ================= */
-
-.hero {
-    text-align: center;
-
-    padding: 55px 20px 45px;
-
+.hero{
+    text-align:center;
+    padding:55px 20px 45px;
     background:
-        linear-gradient(
-            rgba(4,55,31,0.90),
-            rgba(4,55,31,0.90)
-        ),
-        url("logo.png") center/cover;
-
-    color: white;
+    linear-gradient(rgba(4,55,31,.90),rgba(4,55,31,.90)),
+    url("logo.png") center/cover;
+    color:white;
 }
 
-.hero h1 {
-    font-size: 40px;
-    margin: 0 0 12px;
+.hero h1{
+    font-size:40px;
+    margin:0 0 12px;
 }
 
-.hero p {
-    font-size: 19px;
-    margin: 0 auto 25px;
-    max-width: 850px;
+.hero p{
+    font-size:19px;
+    margin:0 auto 25px;
+    max-width:850px;
 }
 
-/* ================= GLOBAL SEARCH ================= */
-
-.global-search {
-    max-width: 950px;
-    margin: auto;
-
-    background: rgba(255,255,255,0.12);
-
-    padding: 18px;
-
-    border-radius: 18px;
-
-    box-shadow: 0 5px 20px rgba(0,0,0,0.18);
+.global-search{
+    max-width:950px;
+    margin:auto;
+    background:rgba(255,255,255,.12);
+    padding:18px;
+    border-radius:18px;
 }
 
-.search-main {
-    display: flex;
-    max-width: 850px;
-    margin: auto;
+.search-main{
+    display:flex;
+    max-width:850px;
+    margin:auto;
 }
 
-.search-main input {
-    flex: 1;
-
-    padding: 17px;
-
-    border: none;
-
-    border-radius: 11px 0 0 11px;
-
-    font-size: 17px;
-
-    outline: none;
+.search-main input{
+    flex:1;
+    padding:17px;
+    border:none;
+    border-radius:11px 0 0 11px;
+    font-size:17px;
+    outline:none;
 }
 
-.search-main button {
-    padding: 17px 24px;
-
-    border: none;
-
-    background: #b7ff35;
-
-    color: #063d25;
-
-    font-weight: bold;
-
-    border-radius: 0 11px 11px 0;
-
-    cursor: pointer;
-
-    font-size: 16px;
+.search-main button{
+    padding:17px 24px;
+    border:none;
+    background:#b7ff35;
+    color:#063d25;
+    font-weight:bold;
+    border-radius:0 11px 11px 0;
+    cursor:pointer;
+    font-size:16px;
 }
 
-.search-options {
-    display: grid;
-
-    grid-template-columns:
-        repeat(2, minmax(180px, 1fr));
-
-    gap: 12px;
-
-    max-width: 850px;
-
-    margin: 14px auto 0;
+.search-options{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(180px,1fr));
+    gap:12px;
+    max-width:850px;
+    margin:14px auto 0;
 }
 
-.search-option {
-    background: white;
-
-    color: #173d2b;
-
-    border-radius: 11px;
-
-    padding: 12px;
-
-    text-align: left;
+.search-option{
+    background:white;
+    color:#173d2b;
+    border-radius:11px;
+    padding:12px;
+    text-align:left;
 }
 
-.search-option label {
-    display: block;
-
-    font-size: 12px;
-
-    font-weight: bold;
-
-    margin-bottom: 5px;
-
-    color: #075b34;
+.search-option label{
+    display:block;
+    font-size:12px;
+    font-weight:bold;
+    margin-bottom:5px;
+    color:#075b34;
 }
 
-.search-option select {
-    width: 100%;
-
-    border: 1px solid #c8ddd0;
-
-    padding: 10px;
-
-    border-radius: 8px;
-
-    font-size: 15px;
-
-    background: white;
-
-    color: #173d2b;
+.search-option select{
+    width:100%;
+    border:1px solid #c8ddd0;
+    padding:10px;
+    border-radius:8px;
+    font-size:15px;
 }
 
-.search-scope {
-    display: flex;
-
-    flex-wrap: wrap;
-
-    justify-content: center;
-
-    gap: 8px;
-
-    margin-top: 14px;
+.search-scope{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:8px;
+    margin-top:14px;
 }
 
-.scope-button {
-    border: 2px solid rgba(255,255,255,0.7);
-
-    background: rgba(255,255,255,0.10);
-
-    color: white;
-
-    padding: 9px 13px;
-
-    border-radius: 10px;
-
-    cursor: pointer;
-
-    font-weight: bold;
+.scope-button{
+    border:2px solid rgba(255,255,255,.7);
+    background:rgba(255,255,255,.10);
+    color:white;
+    padding:9px 13px;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:bold;
 }
 
-.scope-button.active {
-    background: #b7ff35;
-
-    color: #063d25;
-
-    border-color: #b7ff35;
+.scope-button.active{
+    background:#b7ff35;
+    color:#063d25;
+    border-color:#b7ff35;
 }
 
-/* ================= SEARCH RESULTS ================= */
-
-.search-results {
-    display: none;
-
-    max-width: 950px;
-
-    margin: 20px auto 0;
-
-    background: white;
-
-    color: #173d2b;
-
-    padding: 18px;
-
-    border-radius: 15px;
-
-    text-align: left;
-
-    box-shadow: 0 5px 20px rgba(0,0,0,0.16);
+.search-results{
+    display:none;
+    max-width:950px;
+    margin:20px auto 0;
+    background:white;
+    color:#173d2b;
+    padding:18px;
+    border-radius:15px;
+    text-align:left;
 }
 
-.search-results-title {
-    font-size: 20px;
-
-    font-weight: bold;
-
-    color: #075b34;
-
-    margin-bottom: 12px;
+.search-result{
+    padding:15px;
+    border:1px solid #dce9df;
+    border-radius:12px;
+    margin-bottom:10px;
+    background:#fbfdfb;
 }
 
-.search-result {
-    padding: 15px;
-
-    border: 1px solid #dce9df;
-
-    border-radius: 12px;
-
-    margin-bottom: 10px;
-
-    cursor: pointer;
-
-    transition: 0.2s;
-
-    background: #fbfdfb;
+.result-title{
+    font-size:18px;
+    font-weight:bold;
+    color:#075b34;
 }
 
-.search-result:hover {
-    background: #eef9f1;
-
-    transform: translateY(-2px);
+.result-info{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(150px,1fr));
+    gap:6px 15px;
+    margin-top:10px;
+    color:#486354;
+    font-size:14px;
 }
 
-.result-top {
-    display: flex;
-
-    justify-content: space-between;
-
-    gap: 10px;
-
-    align-items: center;
+.result-buttons{
+    display:flex;
+    flex-wrap:wrap;
+    gap:7px;
+    margin-top:12px;
 }
 
-.result-title {
-    font-size: 18px;
-
-    font-weight: bold;
-
-    color: #075b34;
+.result-button,
+.card button,
+.company-button{
+    border:none;
+    background:#075b34;
+    color:white;
+    padding:10px 15px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
 }
 
-.result-country {
-    background: #075b34;
-
-    color: white;
-
-    padding: 5px 8px;
-
-    border-radius: 7px;
-
-    font-size: 12px;
-
-    white-space: nowrap;
+.result-button:hover,
+.card button:hover,
+.company-button:hover{
+    background:#0b8050;
 }
 
-.result-info {
-    display: grid;
-
-    grid-template-columns:
-        repeat(2, minmax(150px, 1fr));
-
-    gap: 6px 15px;
-
-    margin-top: 10px;
-
-    color: #486354;
-
-    font-size: 14px;
+.container{
+    max-width:1200px;
+    margin:auto;
+    padding:35px 15px;
 }
 
-.result-description {
-    margin-top: 10px;
-
-    color: #486354;
-
-    line-height: 1.5;
+.section-title{
+    text-align:center;
+    color:#075b34;
+    font-size:30px;
+    margin-bottom:25px;
 }
 
-.result-buttons {
-    display: flex;
-
-    flex-wrap: wrap;
-
-    gap: 7px;
-
-    margin-top: 12px;
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+    gap:18px;
 }
 
-.result-button {
-    border: none;
-
-    background: #075b34;
-
-    color: white;
-
-    padding: 8px 12px;
-
-    border-radius: 8px;
-
-    cursor: pointer;
-
-    font-weight: bold;
+.card{
+    background:white;
+    border-radius:15px;
+    padding:22px;
+    box-shadow:0 3px 12px rgba(0,0,0,.10);
+    border-left:5px solid #0b6b3d;
 }
 
-.result-button:hover {
-    background: #0b8050;
+.card h3{
+    margin-top:0;
+    color:#075b34;
 }
 
-.no-results {
-    text-align: center;
-
-    padding: 20px;
-
-    color: #555;
+.card p{
+    line-height:1.55;
+    color:#486354;
 }
 
-/* ================= CONTAINER ================= */
-
-.container {
-    max-width: 1200px;
-
-    margin: auto;
-
-    padding: 35px 15px;
+.industries{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
+    gap:12px;
 }
 
-.section-title {
-    text-align: center;
-
-    color: #075b34;
-
-    font-size: 30px;
-
-    margin-bottom: 25px;
+.industry{
+    background:white;
+    padding:18px 12px;
+    border-radius:12px;
+    text-align:center;
+    font-weight:bold;
+    box-shadow:0 2px 9px rgba(0,0,0,.09);
 }
 
-/* ================= CARDS ================= */
-
-.cards {
-    display: grid;
-
-    grid-template-columns:
-        repeat(auto-fit, minmax(230px, 1fr));
-
-    gap: 18px;
+.company-tools{
+    text-align:center;
+    margin-bottom:25px;
 }
 
-.card {
-    background: white;
-
-    border-radius: 15px;
-
-    padding: 22px;
-
-    box-shadow: 0 3px 12px rgba(0,0,0,0.10);
-
-    border-left: 5px solid #0b6b3d;
-
-    transition: 0.2s;
+.company-add{
+    background:#075b34;
+    color:white;
+    border:none;
+    padding:14px 22px;
+    border-radius:12px;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
 }
 
-.card:hover {
-    transform: translateY(-4px);
-
-    box-shadow: 0 7px 20px rgba(0,0,0,0.16);
+.company-add:hover{
+    background:#0b8050;
 }
 
-.card h3 {
-    margin-top: 0;
-
-    color: #075b34;
+.company-list{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(270px,1fr));
+    gap:18px;
 }
 
-.card p {
-    line-height: 1.55;
-
-    color: #486354;
+.company-card{
+    background:white;
+    border-radius:15px;
+    padding:20px;
+    box-shadow:0 3px 12px rgba(0,0,0,.10);
+    border-top:5px solid #0b6b3d;
 }
 
-.card button {
-    border: none;
-
-    background: #075b34;
-
-    color: white;
-
-    padding: 10px 15px;
-
-    border-radius: 8px;
-
-    cursor: pointer;
-
-    font-weight: bold;
+.company-card h3{
+    margin-top:0;
+    color:#075b34;
 }
 
-.card button:hover {
-    background: #0b8050;
+.company-card p{
+    color:#486354;
+    line-height:1.5;
 }
 
-/* ================= INDUSTRIES ================= */
-
-.industries {
-    display: grid;
-
-    grid-template-columns:
-        repeat(auto-fit, minmax(170px, 1fr));
-
-    gap: 12px;
+.company-tag{
+    display:inline-block;
+    background:#e8f5ec;
+    color:#075b34;
+    padding:5px 8px;
+    border-radius:7px;
+    margin:3px;
+    font-size:12px;
+    font-weight:bold;
 }
 
-.industry {
-    background: white;
+/* FORM */
 
-    padding: 18px 12px;
-
-    border-radius: 12px;
-
-    text-align: center;
-
-    font-weight: bold;
-
-    box-shadow: 0 2px 9px rgba(0,0,0,0.09);
-
-    cursor: pointer;
-
-    transition: 0.2s;
+.modal{
+    display:none;
+    position:fixed;
+    z-index:3000;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,.65);
+    overflow:auto;
+    padding:20px;
 }
 
-.industry:hover {
-    background: #e8f8ec;
-
-    transform: scale(1.02);
+.modal-content{
+    background:#f8fbf9;
+    max-width:800px;
+    margin:20px auto;
+    border-radius:18px;
+    padding:25px;
+    box-shadow:0 10px 40px rgba(0,0,0,.35);
 }
 
-/* ================= FUTURE ================= */
-
-.future {
-    background: #e8f5ec;
-
-    border-radius: 18px;
-
-    padding: 30px;
-
-    margin-top: 20px;
+.modal-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
 }
 
-.future ul {
-    line-height: 2;
+.modal-header h2{
+    margin:0;
+    color:#075b34;
 }
 
-/* ================= FOOTER ================= */
-
-footer {
-    margin-top: 30px;
-
-    background: #063d25;
-
-    color: white;
-
-    text-align: center;
-
-    padding: 30px 15px;
+.close{
+    font-size:30px;
+    cursor:pointer;
+    color:#075b34;
+    font-weight:bold;
 }
 
-.footer-brand {
-    font-size: 25px;
-
-    font-weight: bold;
+.form-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:14px;
+    margin-top:20px;
 }
 
-.footer-small {
-    margin-top: 10px;
-
-    opacity: 0.8;
+.form-group{
+    display:flex;
+    flex-direction:column;
 }
 
-/* ================= RTL ================= */
-
-[dir="rtl"] {
-    text-align: right;
+.form-group.full{
+    grid-column:1/-1;
 }
 
-[dir="rtl"] nav,
-[dir="rtl"] .languages {
-    direction: rtl;
+.form-group label{
+    font-weight:bold;
+    margin-bottom:6px;
+    color:#075b34;
 }
 
-/* ================= MOBILE ================= */
+.form-group input,
+.form-group select,
+.form-group textarea{
+    padding:12px;
+    border:1px solid #c8ddd0;
+    border-radius:9px;
+    font-size:15px;
+    background:white;
+}
 
-@media (max-width: 600px) {
+.form-group textarea{
+    min-height:100px;
+    resize:vertical;
+}
 
-    .brand {
-        font-size: 30px;
+.save-company{
+    margin-top:20px;
+    width:100%;
+    padding:15px;
+    background:#075b34;
+    color:white;
+    border:none;
+    border-radius:10px;
+    font-size:17px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.save-company:hover{
+    background:#0b8050;
+}
+
+.empty-company{
+    text-align:center;
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    color:#666;
+}
+
+.future{
+    background:#e8f5ec;
+    border-radius:18px;
+    padding:30px;
+    margin-top:20px;
+}
+
+.future ul{
+    line-height:2;
+}
+
+footer{
+    margin-top:30px;
+    background:#063d25;
+    color:white;
+    text-align:center;
+    padding:30px 15px;
+}
+
+.footer-brand{
+    font-size:25px;
+    font-weight:bold;
+}
+
+.footer-small{
+    margin-top:10px;
+    opacity:.8;
+}
+
+@media(max-width:600px){
+
+    .brand{
+        font-size:30px;
     }
 
-    .hero h1 {
-        font-size: 30px;
+    .hero h1{
+        font-size:30px;
     }
 
-    .hero p {
-        font-size: 16px;
+    .hero p{
+        font-size:16px;
     }
 
-    nav {
-        justify-content: flex-start;
-
-        padding: 8px;
-
-        gap: 7px;
-
-        box-shadow: 0 3px 12px rgba(0,0,0,0.18);
-    }
-
-    nav a {
-        padding: 10px 13px;
-
-        font-size: 13px;
-
-        border-radius: 11px;
-    }
-
-    .search-main {
-        flex-direction: column;
+    .search-main{
+        flex-direction:column;
     }
 
     .search-main input,
-    .search-main button {
-        width: 100%;
-
-        border-radius: 9px;
+    .search-main button{
+        width:100%;
+        border-radius:9px;
     }
 
-    .search-main button {
-        margin-top: 7px;
+    .search-main button{
+        margin-top:7px;
     }
 
-    .search-options {
-        grid-template-columns: 1fr;
+    .search-options{
+        grid-template-columns:1fr;
     }
 
-    .result-info {
-        grid-template-columns: 1fr;
+    .result-info{
+        grid-template-columns:1fr;
     }
 
-    .result-top {
-        align-items: flex-start;
+    .form-grid{
+        grid-template-columns:1fr;
+    }
 
-        flex-direction: column;
+    .form-group.full{
+        grid-column:auto;
     }
 }
-
 </style>
 </head>
 
 <body>
 
-<!-- ================= HEADER ================= -->
-
 <header>
 
-    <img
-        src="logo.png"
-        class="logo"
-        alt="WORKER PRO"
-    >
+<img src="logo.png" class="logo" alt="WORKER PRO">
 
-    <div class="brand">
-        WORKER PRO
-    </div>
+<div class="brand">WORKER PRO</div>
 
-    <div
-        class="subtitle"
-        data-i18n="platform"
-    >
-        Global Manufacturing & Industrial Platform
-    </div>
+<div class="subtitle">
+Global Manufacturing & Industrial Platform
+</div>
 
-    <div class="languages">
-
-        <button data-lang="az">🇦🇿 AZ</button>
-        <button data-lang="ru">🇷🇺 RU</button>
-        <button data-lang="en">🇬🇧 EN</button>
-        <button data-lang="tr">🇹🇷 TR</button>
-        <button data-lang="de">🇩🇪 DE</button>
-        <button data-lang="ar">🇸🇦 AR</button>
-        <button data-lang="es">🇪🇸 ES</button>
-        <button data-lang="fr">🇫🇷 FR</button>
-
-    </div>
+<div class="languages">
+<button onclick="setLanguage('az')" data-lang="az">🇦🇿 AZ</button>
+<button onclick="setLanguage('ru')" data-lang="ru">🇷🇺 RU</button>
+<button onclick="setLanguage('en')" data-lang="en">🇬🇧 EN</button>
+<button onclick="setLanguage('tr')" data-lang="tr">🇹🇷 TR</button>
+<button onclick="setLanguage('de')" data-lang="de">🇩🇪 DE</button>
+<button onclick="setLanguage('ar')" data-lang="ar">🇸🇦 AR</button>
+<button onclick="setLanguage('es')" data-lang="es">🇪🇸 ES</button>
+<button onclick="setLanguage('fr')" data-lang="fr">🇫🇷 FR</button>
+</div>
 
 </header>
 
-<!-- ================= NAVIGATION ================= -->
-
 <nav id="mainNav">
 
-    <a href="#production" data-i18n="navProduction">
-        🏭 Производство
-    </a>
-
-    <a href="#problems" data-i18n="navProblems">
-        🛠️ Проблемы
-    </a>
-
-    <a href="#parts" data-i18n="navParts">
-        🔩 Запчасти
-    </a>
-
-    <a href="#companies" data-i18n="navCompanies">
-        🏢 Компании
-    </a>
-
-    <a href="#community" data-i18n="navCommunity">
-        👥 Сообщество
-    </a>
-
-    <a href="#jobs" data-i18n="navJobs">
-        💼 Работа
-    </a>
-
-    <a href="#training" data-i18n="navTraining">
-        📚 Обучение
-    </a>
+<a href="#production">🏭 Производство</a>
+<a href="#problems">🛠️ Проблемы</a>
+<a href="#parts">🔩 Запчасти</a>
+<a href="#companies">🏢 Компании</a>
+<a href="#community">👥 Сообщество</a>
+<a href="#jobs">💼 Работа</a>
+<a href="#training">📚 Обучение</a>
 
 </nav>
 
-<!-- ================= HERO / GLOBAL SEARCH ================= -->
-
 <section class="hero">
 
-    <h1 data-i18n="heroTitle">
-        Работа. Знания. Производство.
-    </h1>
+<h1>Работа. Знания. Производство.</h1>
 
-    <p data-i18n="heroText">
-        Международная промышленная платформа
-        для рабочих, инженеров, мастеров,
-        производителей и поставщиков.
-    </p>
+<p>
+Международная промышленная платформа
+для рабочих, инженеров, мастеров,
+производителей и поставщиков.
+</p>
 
-    <div class="global-search">
+<div class="global-search">
 
-        <div class="search-main">
+<div class="search-main">
 
-            <input
-                id="searchInput"
-                type="text"
-                data-i18n-placeholder="searchPlaceholder"
-                placeholder="Поиск: насос, станок, подшипник, запчасть..."
-            >
+<input
+id="searchInput"
+type="text"
+placeholder="Поиск: насос, станок, подшипник, запчасть..."
+>
 
-            <button onclick="searchSite()">
-                🔎 Поиск
-            </button>
+<button onclick="searchSite()">🔎 Поиск</button>
 
-        </div>
+</div>
 
-        <div class="search-options">
+<div class="search-options">
 
-            <div class="search-option">
+<div class="search-option">
 
-                <label>
-                    📍 Страна заказчика
-                </label>
+<label>📍 Страна заказчика</label>
 
-                <select id="customerCountry">
+<select id="customerCountry">
 
-                    <option value="Azerbaijan">
-                        🇦🇿 Азербайджан
-                    </option>
+<option value="Azerbaijan">🇦🇿 Азербайджан</option>
+<option value="Turkey">🇹🇷 Турция</option>
+<option value="Russia">🇷🇺 Россия</option>
+<option value="Germany">🇩🇪 Германия</option>
+<option value="China">🇨🇳 Китай</option>
+<option value="USA">🇺🇸 США</option>
 
-                    <option value="Turkey">
-                        🇹🇷 Турция
-                    </option>
+</select>
 
-                    <option value="Russia">
-                        🇷🇺 Россия
-                    </option>
+</div>
 
-                    <option value="Germany">
-                        🇩🇪 Германия
-                    </option>
+<div class="search-option">
 
-                    <option value="China">
-                        🇨🇳 Китай
-                    </option>
+<label>📍 Город</label>
 
-                    <option value="USA">
-                        🇺🇸 США
-                    </option>
+<select id="customerCity">
 
-                    <option value="Other">
-                        🌍 Другая страна
-                    </option>
+<option>Баку</option>
+<option>Гянджа</option>
+<option>Сумгайыт</option>
+<option>Другой город</option>
 
-                </select>
+</select>
 
-            </div>
+</div>
 
-            <div class="search-option">
+</div>
 
-                <label>
-                    📍 Город
-                </label>
+<div class="search-scope">
 
-                <select id="customerCity">
+<button class="scope-button active"
+onclick="setSearchScope('my',this)">
+🇦🇿 Моя страна
+</button>
 
-                    <option value="Baku">
-                        Баку
-                    </option>
+<button class="scope-button"
+onclick="setSearchScope('other',this)">
+🌎 Другие страны
+</button>
 
-                    <option value="Ganja">
-                        Гянджа
-                    </option>
+<button class="scope-button"
+onclick="setSearchScope('world',this)">
+🌍 Весь мир
+</button>
 
-                    <option value="Sumqayit">
-                        Сумгайыт
-                    </option>
+</div>
 
-                    <option value="Other">
-                        Другой город
-                    </option>
+<div id="searchResults" class="search-results"></div>
 
-                </select>
-
-            </div>
-
-        </div>
-
-        <div class="search-scope">
-
-            <button
-                class="scope-button active"
-                data-scope="my"
-                onclick="setSearchScope('my', this)"
-            >
-                🇦🇿 Моя страна
-            </button>
-
-            <button
-                class="scope-button"
-                data-scope="other"
-                onclick="setSearchScope('other', this)"
-            >
-                🌎 Другие страны
-            </button>
-
-            <button
-                class="scope-button"
-                data-scope="world"
-                onclick="setSearchScope('world', this)"
-            >
-                🌍 Весь мир
-            </button>
-
-        </div>
-
-        <div
-            id="searchResults"
-            class="search-results"
-        ></div>
-
-    </div>
+</div>
 
 </section>
 
-<!-- ================= MAIN SECTIONS ================= -->
 
-<div class="container">
+<!-- PRODUCTION -->
 
-    <h2
-        class="section-title"
-        data-i18n="mainSections"
-    >
-        Основные разделы
-    </h2>
+<section class="container" id="production">
 
-    <div class="cards">
+<h2 class="section-title">🏭 Производство</h2>
 
-        <div class="card" id="production">
+<div class="cards">
 
-            <h3 data-i18n="productionTitle">
-                🏭 Производство
-            </h3>
+<div class="card">
+<h3>🏗️ Оборудование</h3>
+<p>
+Поиск промышленного оборудования,
+станков, насосов, двигателей,
+гидравлики и автоматики.
+</p>
+<button onclick="quickSearch('equipment')">Найти оборудование</button>
+</div>
 
-            <p data-i18n="productionText">
-                Отрасли промышленности,
-                технологии, оборудование
-                и производственные процессы.
-            </p>
+<div class="card">
+<h3>⚙️ Производители</h3>
+<p>
+Каталог производителей промышленного
+оборудования и комплектующих.
+</p>
+<button onclick="goCompanies()">Компании</button>
+</div>
 
-            <button data-i18n="open">
-                Открыть
-            </button>
-
-        </div>
-
-        <div class="card" id="problems">
-
-            <h3 data-i18n="problemsTitle">
-                🛠️ Проблемы и решения
-            </h3>
-
-            <p data-i18n="problemsText">
-                Проблема → причины →
-                что проверить → решение →
-                фото/схема → безопасность.
-            </p>
-
-            <button data-i18n="open">
-                Открыть
-            </button>
-
-        </div>
-
-        <div class="card" id="parts">
-
-            <h3 data-i18n="partsTitle">
-                🔩 Промышленные запчасти
-            </h3>
-
-            <p data-i18n="partsText">
-                Подшипники, валы, шестерни,
-                гидравлика, пневматика,
-                датчики, двигатели и другие детали.
-            </p>
-
-            <button data-i18n="open">
-                Открыть
-            </button>
-
-        </div>
-
-        <div class="card" id="companies">
-
-            <h3 data-i18n="companiesTitle">
-                🏢 Производители и поставщики
-            </h3>
-
-            <p data-i18n="companiesText">
-                Компании, заводы, поставщики
-                оборудования и промышленных материалов.
-            </p>
-
-            <button data-i18n="open">
-                Открыть
-            </button>
-
-        </div>
-
-        <div class="card">
-
-            <h3 data-i18n="mapTitle">
-                🗺️ Магазины и поставщики
-            </h3>
-
-            <p data-i18n="mapText">
-                Поиск поставщиков по странам
-                и городам. В будущем —
-                карта и поиск рядом.
-            </p>
-
-            <button data-i18n="open">
-                Открыть
-            </button>
-
-        </div>
-
-        <div class="card" id="community">
-
-            <h3 data-i18n="communityTitle">
-                👥 Сообщество
-            </h3>
-
-            <p data-i18n="communityText">
-                Вопросы, ответы, фотографии,
-                обсуждения и опыт специалистов.
-            </p>
-
-            <button data-i18n="open">
-                Открыть
-            </button>
-
-        </div>
-
-        <div class="card" id="jobs">
-
-            <h3 data-i18n="jobsTitle">
-                💼 Работа
-            </h3>
-
-            <p data-i18n="jobsText">
-                Вакансии, специалисты,
-                инженеры, операторы станков
-                и мастера.
-            </p>
-
-            <button data-i18n="open">
-                Открыть
-            </button>
-
-        </div>
-
-        <div class="card" id="training">
-
-            <h3 data-i18n="trainingTitle">
-                📚 Обучение
-            </h3>
-
-            <p data-i18n="trainingText">
-                Промышленная безопасность,
-                производство, оборудование
-                и English for Workers.
-            </p>
-
-            <button data-i18n="open">
-                Открыть
-            </button>
-
-        </div>
-
-    </div>
+<div class="card">
+<h3>🌍 Международный поиск</h3>
+<p>
+Найти оборудование в своей стране
+или у поставщиков по всему миру.
+</p>
+<button onclick="focusSearch()">Начать поиск</button>
+</div>
 
 </div>
 
-<!-- ================= INDUSTRIES ================= -->
+</section>
 
-<div class="container">
 
-    <h2
-        class="section-title"
-        data-i18n="industriesTitle"
-    >
-        Промышленные отрасли
-    </h2>
+<!-- PROBLEMS -->
 
-    <div class="industries">
+<section class="container" id="problems">
 
-        <div class="industry">⚙️ CNC</div>
-        <div class="industry">🔨 Stamping</div>
-        <div class="industry">🔥 Heat Treatment</div>
-        <div class="industry">⚡ Welding</div>
-        <div class="industry">🤖 Robotics</div>
-        <div class="industry">🎛️ Automation</div>
-        <div class="industry">🛢️ Oil & Gas</div>
-        <div class="industry">🚢 Shipbuilding</div>
-        <div class="industry">🚗 Automotive</div>
-        <div class="industry">📱 Smartphones</div>
-        <div class="industry">💻 Computers & Laptops</div>
-        <div class="industry">🔋 Batteries</div>
-        <div class="industry">✈️ Aerospace</div>
-        <div class="industry">🏗️ Construction Materials</div>
-        <div class="industry">🍔 Food Industry</div>
-        <div class="industry">💊 Pharma</div>
-        <div class="industry">🧪 Chemical</div>
-        <div class="industry">⚡ Energy</div>
-        <div class="industry">🔌 Electrical & Electronics</div>
-        <div class="industry">🎨 Painting & Coatings</div>
-        <div class="industry">📏 Quality Control</div>
-        <div class="industry">🔧 Maintenance & Repair</div>
-        <div class="industry">🦺 Occupational Safety</div>
-        <div class="industry">📦 Warehouse & Logistics</div>
-        <div class="industry">🚆 Railways</div>
-        <div class="industry">🚢 Marine Industry</div>
-        <div class="industry">🪑 Furniture</div>
-        <div class="industry">👟 Textile & Shoes</div>
-        <div class="industry">☀️ Solar Panels</div>
+<h2 class="section-title">🛠️ Проблемы и решения</h2>
 
-    </div>
+<div class="cards">
+
+<div class="card">
+<h3>⚙️ Станок не работает</h3>
+<p>
+Поиск возможных причин неисправности,
+решений и технических рекомендаций.
+</p>
+</div>
+
+<div class="card">
+<h3>💧 Насос не запускается</h3>
+<p>
+Проверка электропитания, клапанов,
+датчиков, давления и двигателя.
+</p>
+</div>
+
+<div class="card">
+<h3>🔥 Перегрев оборудования</h3>
+<p>
+Диагностика охлаждения, масла,
+датчиков температуры и нагрузки.
+</p>
+</div>
 
 </div>
 
-<!-- ================= FUTURE ================= -->
+</section>
 
-<div class="container">
 
-    <div class="future">
+<!-- PARTS -->
 
-        <h2 class="section-title" data-i18n="futureTitle">
-            🚀 Что появится дальше
-        </h2>
+<section class="container" id="parts">
 
-        <ul>
+<h2 class="section-title">🔩 Промышленные запчасти</h2>
 
-            <li data-i18n="future1">
-                Глобальный поиск промышленного оборудования
-            </li>
+<div class="cards">
 
-            <li data-i18n="future2">
-                База промышленных запчастей
-            </li>
+<div class="card">
+<h3>⚙️ Подшипники</h3>
+<p>Поиск подшипников разных производителей и моделей.</p>
+<button onclick="quickSearch('bearing')">Найти</button>
+</div>
 
-            <li data-i18n="future3">
-                Карта производителей и поставщиков
-            </li>
+<div class="card">
+<h3>🔧 Гидравлика</h3>
+<p>Клапаны, цилиндры, насосы и гидравлические компоненты.</p>
+<button onclick="quickSearch('hydraulic')">Найти</button>
+</div>
 
-            <li data-i18n="future4">
-                Форум и профессиональное сообщество
-            </li>
-
-            <li data-i18n="future5">
-                Вакансии и поиск специалистов
-            </li>
-
-            <li data-i18n="future6">
-                Курсы и промышленное обучение
-            </li>
-
-            <li data-i18n="future7">
-                Фото, схемы и инструкции по ремонту
-            </li>
-
-            <li data-i18n="future8">
-                Профили компаний и специалистов
-            </li>
-
-        </ul>
-
-    </div>
+<div class="card">
+<h3>💨 Пневматика</h3>
+<p>Цилиндры, клапаны, фильтры и пневматические системы.</p>
+<button onclick="quickSearch('pneumatic')">Найти</button>
+</div>
 
 </div>
 
-<!-- ================= FOOTER ================= -->
+</section>
+
+
+<!-- COMPANIES -->
+
+<section class="container" id="companies">
+
+<h2 class="section-title">🏢 Компании и поставщики</h2>
+
+<div class="company-tools">
+
+<button class="company-add" onclick="openCompanyForm()">
+➕ Добавить компанию
+</button>
+
+</div>
+
+<div id="companyList" class="company-list"></div>
+
+</section>
+
+
+<!-- COMMUNITY -->
+
+<section class="container" id="community">
+
+<h2 class="section-title">👥 Промышленное сообщество</h2>
+
+<div class="cards">
+
+<div class="card">
+<h3>👷 Рабочие</h3>
+<p>Общение специалистов производства.</p>
+</div>
+
+<div class="card">
+<h3>👨‍🔧 Мастера</h3>
+<p>Обмен опытом ремонта и обслуживания оборудования.</p>
+</div>
+
+<div class="card">
+<h3>👨‍💼 Инженеры</h3>
+<p>Технические знания, решения и проекты.</p>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- JOBS -->
+
+<section class="container" id="jobs">
+
+<h2 class="section-title">💼 Работа</h2>
+
+<div class="cards">
+
+<div class="card">
+<h3>👷 CNC Operator</h3>
+<p>Баку, Азербайджан</p>
+<button>Подробнее</button>
+</div>
+
+<div class="card">
+<h3>🔥 Welding Specialist</h3>
+<p>Стамбул, Турция</p>
+<button>Подробнее</button>
+</div>
+
+<div class="card">
+<h3>⚙️ Maintenance Technician</h3>
+<p>Германия</p>
+<button>Подробнее</button>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- TRAINING -->
+
+<section class="container" id="training">
+
+<h2 class="section-title">📚 Обучение</h2>
+
+<div class="cards">
+
+<div class="card">
+<h3>🦺 Industrial Safety</h3>
+<p>Промышленная безопасность.</p>
+</div>
+
+<div class="card">
+<h3>⚙️ CNC</h3>
+<p>Обучение операторов CNC.</p>
+</div>
+
+<div class="card">
+<h3>🔥 Welding</h3>
+<p>Основы промышленной сварки.</p>
+</div>
+
+<div class="card">
+<h3>🔧 Maintenance</h3>
+<p>Техническое обслуживание оборудования.</p>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- INDUSTRIES -->
+
+<section class="container">
+
+<h2 class="section-title">🌍 Промышленные отрасли</h2>
+
+<div class="industries">
+
+<div class="industry">CNC</div>
+<div class="industry">Stamping</div>
+<div class="industry">Welding</div>
+<div class="industry">Robotics</div>
+<div class="industry">Automation</div>
+<div class="industry">Oil & Gas</div>
+<div class="industry">Shipbuilding</div>
+<div class="industry">Automotive</div>
+<div class="industry">Aerospace</div>
+<div class="industry">Construction</div>
+<div class="industry">Food Industry</div>
+<div class="industry">Pharma</div>
+<div class="industry">Chemical</div>
+<div class="industry">Energy</div>
+<div class="industry">Electronics</div>
+<div class="industry">Quality Control</div>
+<div class="industry">Maintenance</div>
+<div class="industry">Safety</div>
+<div class="industry">Warehouse</div>
+<div class="industry">Railways</div>
+<div class="industry">Marine</div>
+<div class="industry">Textile</div>
+<div class="industry">Solar Panels</div>
+
+</div>
+
+</section>
+
+
+<section class="container">
+
+<div class="future">
+
+<h2>🚀 Будущее WORKER PRO</h2>
+
+<ul>
+<li>🌍 Глобальный поиск промышленного оборудования</li>
+<li>🔩 Международная база запчастей</li>
+<li>🏢 Профили компаний и производителей</li>
+<li>🗺️ Карта поставщиков</li>
+<li>👥 Международное профессиональное сообщество</li>
+<li>💼 Работа и специалисты</li>
+<li>📚 Промышленное обучение</li>
+<li>🛠️ Ремонт и технические инструкции</li>
+<li>📄 Техническая документация</li>
+</ul>
+
+</div>
+
+</section>
+
 
 <footer>
 
-    <div class="footer-brand">
-        WORKER PRO
-    </div>
+<div class="footer-brand">
+WORKER PRO
+</div>
 
-    <div data-i18n="footerText">
-        Global Manufacturing & Industrial Platform
-    </div>
+<div>
+Global Manufacturing & Industrial Platform
+</div>
 
-    <div class="footer-small">
-        Developer: F.S
-    </div>
+<div class="footer-small">
+Developer: F.S
+</div>
 
 </footer>
 
+
+<!-- COMPANY FORM -->
+
+<div id="companyModal" class="modal">
+
+<div class="modal-content">
+
+<div class="modal-header">
+
+<h2>🏢 Регистрация компании</h2>
+
+<span class="close" onclick="closeCompanyForm()">×</span>
+
+</div>
+
+<form id="companyForm">
+
+<div class="form-grid">
+
+<div class="form-group">
+<label>Название компании *</label>
+<input id="companyName" required>
+</div>
+
+<div class="form-group">
+<label>Страна *</label>
+<input id="companyCountry" placeholder="Azerbaijan" required>
+</div>
+
+<div class="form-group">
+<label>Город *</label>
+<input id="companyCity" placeholder="Baku" required>
+</div>
+
+<div class="form-group">
+<label>Отрасль *</label>
+
+<select id="companyIndustry">
+
+<option>CNC</option>
+<option>Oil & Gas</option>
+<option>Welding</option>
+<option>Automation</option>
+<option>Robotics</option>
+<option>Construction</option>
+<option>Automotive</option>
+<option>Shipbuilding</option>
+<option>Energy</option>
+<option>Electronics</option>
+<option>Other</option>
+
+</select>
+
+</div>
+
+<div class="form-group full">
+<label>Оборудование / продукция *</label>
+<textarea
+id="companyProducts"
+placeholder="Насосы, станки, двигатели..."
+required></textarea>
+</div>
+
+<div class="form-group full">
+<label>Запчасти</label>
+<textarea
+id="companyParts"
+placeholder="Подшипники, клапаны, датчики..."></textarea>
+</div>
+
+<div class="form-group full">
+<label>Производители и модели</label>
+<textarea
+id="companyModels"
+placeholder="Например: Siemens, ABB, SKF..."></textarea>
+</div>
+
+<div class="form-group">
+<label>Наличие</label>
+
+<select id="companyAvailability">
+
+<option>В наличии</option>
+<option>Под заказ</option>
+<option>Производство под заказ</option>
+</select>
+
+</div>
+
+<div class="form-group">
+<label>Цена</label>
+<input id="companyPrice" placeholder="Цена / Запросить цену">
+</div>
+
+<div class="form-group full">
+<label>Доставка</label>
+<input
+id="companyDelivery"
+placeholder="Азербайджан, Турция, Россия, весь мир">
+</div>
+
+<div class="form-group">
+<label>Телефон</label>
+<input id="companyPhone">
+</div>
+
+<div class="form-group">
+<label>Email</label>
+<input id="companyEmail" type="email">
+</div>
+
+<div class="form-group full">
+<label>Сайт</label>
+<input id="companyWebsite" placeholder="https://example.com">
+</div>
+
+</div>
+
+<button type="submit" class="save-company">
+💾 Сохранить компанию
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+
 <script>
 
-/* =========================================================
-   GLOBAL SEARCH DATABASE
-========================================================= */
+/* =========================
+   GLOBAL DATABASE
+========================= */
 
-const globalDatabase = [
+let globalDatabase = [
 
-    /* ================= PUMPS ================= */
+{
+title:"Industrial Water Pump",
+country:"Azerbaijan",
+city:"Baku",
+manufacturer:"Azerbaijan Pump Systems",
+model:"APS-250",
+supplier:"Industrial Supply Baku",
+availability:"In stock",
+price:"Request price",
+category:"pump",
+keywords:"pump water industrial насос вода",
+description:"Industrial water pump for manufacturing systems."
+},
 
-    {
-        title: "🔧 Industrial Water Pump",
-        keywords: "насос насосы pump pumps water water pump водяной насос",
-        category: "Pumps",
-        manufacturer: "Azerbaijan Pump Systems",
-        model: "APS-250",
-        country: "Azerbaijan",
-        city: "Baku",
-        supplier: "Industrial Supply Baku",
-        availability: "In stock",
-        price: "Request price",
-        delivery: "Azerbaijan",
-        description: "Промышленный насос для воды и производственных систем.",
-        link: "#parts"
-    },
+{
+title:"Centrifugal Pump",
+country:"Turkey",
+city:"Istanbul",
+manufacturer:"Turkish Industrial Pumps",
+model:"TIP-400",
+supplier:"TIP Supply",
+availability:"In stock",
+price:"Request price",
+category:"pump",
+keywords:"pump centrifugal насос центробежный",
+description:"Industrial centrifugal pump."
+},
 
-    {
-        title: "🔧 Centrifugal Pump",
-        keywords: "насос centrifugal pump центробежный насос",
-        category: "Pumps",
-        manufacturer: "Turkish Industrial Pumps",
-        model: "TIP-400",
-        country: "Turkey",
-        city: "Istanbul",
-        supplier: "Turkey Industrial Supply",
-        availability: "In stock",
-        price: "Request price",
-        delivery: "International",
-        description: "Центробежный промышленный насос для производственных систем.",
-        link: "#parts"
-    },
+{
+title:"Oil Pump",
+country:"Russia",
+city:"Moscow",
+manufacturer:"Russian Industrial Machinery",
+model:"RIM-500",
+supplier:"RIM Supply",
+availability:"On order",
+price:"Request price",
+category:"pump",
+keywords:"oil pump насос масло нефть",
+description:"Pump for industrial oil systems."
+},
 
-    {
-        title: "🔧 Oil Pump",
-        keywords: "насос oil pump нефтяной насос масло oil",
-        category: "Pumps",
-        manufacturer: "Russian Industrial Machinery",
-        model: "RIM-500",
-        country: "Russia",
-        city: "Moscow",
-        supplier: "Russia Industrial Parts",
-        availability: "Available",
-        price: "Request price",
-        delivery: "International",
-        description: "Насос для масла и нефтепромышленного оборудования.",
-        link: "#parts"
-    },
+{
+title:"Industrial Bearing",
+country:"Azerbaijan",
+city:"Baku",
+manufacturer:"Azerbaijan Bearing Supply",
+model:"AB-6205",
+supplier:"ABS",
+availability:"In stock",
+price:"Request price",
+category:"bearing",
+keywords:"bearing подшипник",
+description:"Industrial bearing."
+},
 
-    {
-        title: "🔧 High Pressure Pump",
-        keywords: "насос pressure pump high pressure гидравлический насос",
-        category: "Pumps",
-        manufacturer: "German Industrial Systems",
-        model: "GIS-800",
-        country: "Germany",
-        city: "Berlin",
-        supplier: "German Machinery Supply",
-        availability: "Available",
-        price: "Request price",
-        delivery: "International",
-        description: "Насос высокого давления для промышленного оборудования.",
-        link: "#parts"
-    },
+{
+title:"Heavy Duty Bearing",
+country:"Turkey",
+city:"Istanbul",
+manufacturer:"Turkish Bearing Factory",
+model:"TBF-6308",
+supplier:"TBF",
+availability:"In stock",
+price:"Request price",
+category:"bearing",
+keywords:"bearing подшипник heavy",
+description:"Heavy duty industrial bearing."
+},
 
-    {
-        title: "🔧 Industrial Pump",
-        keywords: "насос pump industrial китай china",
-        category: "Pumps",
-        manufacturer: "China Industrial Equipment",
-        model: "CIE-900",
-        country: "China",
-        city: "Shanghai",
-        supplier: "China Industrial Supplier",
-        availability: "In stock",
-        price: "Request price",
-        delivery: "International",
-        description: "Промышленный насос для различных производственных задач.",
-        link: "#parts"
-    },
+{
+title:"CNC Turning Machine",
+country:"Azerbaijan",
+city:"Baku",
+manufacturer:"Azerbaijan Machine Works",
+model:"AMW-CNC500",
+supplier:"AMW",
+availability:"On order",
+price:"Request price",
+category:"cnc",
+keywords:"cnc станок токарный",
+description:"Industrial CNC turning machine."
+},
 
-    /* ================= BEARINGS ================= */
+{
+title:"CNC Milling Machine",
+country:"Turkey",
+city:"Ankara",
+manufacturer:"Turkish CNC Systems",
+model:"TCS-700",
+supplier:"TCS",
+availability:"In stock",
+price:"Request price",
+category:"cnc",
+keywords:"cnc фрезерный станок",
+description:"CNC milling machine."
+},
 
-    {
-        title: "🔩 Industrial Bearing",
-        keywords: "подшипник подшипники bearing bearings rulman lager",
-        category: "Bearings",
-        manufacturer: "Azerbaijan Bearing Supply",
-        model: "AB-6205",
-        country: "Azerbaijan",
-        city: "Baku",
-        supplier: "Baku Bearing Store",
-        availability: "In stock",
-        price: "Request price",
-        delivery: "Azerbaijan",
-        description: "Промышленный подшипник для оборудования и электродвигателей.",
-        link: "#parts"
-    },
+{
+title:"Welding Machine",
+country:"Azerbaijan",
+city:"Baku",
+manufacturer:"Azerbaijan Welding Systems",
+model:"AWS-300",
+supplier:"AWS",
+availability:"In stock",
+price:"Request price",
+category:"welding",
+keywords:"welding сварка сварочный",
+description:"Industrial welding machine."
+},
 
-    {
-        title: "🔩 Heavy Duty Bearing",
-        keywords: "подшипник bearing heavy duty",
-        category: "Bearings",
-        manufacturer: "Turkish Bearing Factory",
-        model: "TBF-6308",
-        country: "Turkey",
-        city: "Istanbul",
-        supplier: "Turkey Bearing Supply",
-        availability: "In stock",
-        price: "Request price",
-        delivery: "International",
-        description: "Усиленный промышленный подшипник.",
-        link: "#parts"
-    },
+{
+title:"Temperature Sensor",
+country:"Azerbaijan",
+city:"Baku",
+manufacturer:"Azerbaijan Sensor Systems",
+model:"ASS-T100",
+supplier:"ASS",
+availability:"In stock",
+price:"Request price",
+category:"sensor",
+keywords:"sensor датчик temperature температура",
+description:"Industrial temperature sensor."
+},
 
-    {
-        title: "🔩 Industrial Bearing",
-        keywords: "подшипник bearing russian russia",
-        category: "Bearings",
-        manufacturer: "Russian Bearing Factory",
-        model: "RBF-6310",
-        country: "Russia",
-        city: "Moscow",
-        supplier: "Russian Parts Supplier",
-        availability: "Available",
-        price: "Request price",
-        delivery: "International",
-        description: "Промышленный подшипник для машин и механизмов.",
-        link: "#parts"
-    },
+{
+title:"Pressure Sensor",
+country:"Germany",
+city:"Frankfurt",
+manufacturer:"German Sensors",
+model:"GS-P500",
+supplier:"GS",
+availability:"In stock",
+price:"Request price",
+category:"sensor",
+keywords:"sensor pressure датчик давление",
+description:"Industrial pressure sensor."
+},
 
-    /* ================= CNC ================= */
+{
+title:"Hydraulic Valve",
+country:"Turkey",
+city:"Istanbul",
+manufacturer:"Turkish Hydraulic Systems",
+model:"THS-300",
+supplier:"THS",
+availability:"In stock",
+price:"Request price",
+category:"hydraulic",
+keywords:"hydraulic valve гидравлика клапан",
+description:"Industrial hydraulic valve."
+},
 
-    {
-        title: "⚙️ CNC Turning Machine",
-        keywords: "cnc станок токарный чпу cnc machine lathe",
-        category: "CNC",
-        manufacturer: "Azerbaijan Machine Works",
-        model: "AMW-CNC500",
-        country: "Azerbaijan",
-        city: "Baku",
-        supplier: "Azerbaijan Industrial Machines",
-        availability: "Available",
-        price: "Request price",
-        delivery: "Azerbaijan",
-        description: "Токарный CNC станок для обработки металлических деталей.",
-        link: "#production"
-    },
+{
+title:"Pneumatic Cylinder",
+country:"Germany",
+city:"Hamburg",
+manufacturer:"German Pneumatic Systems",
+model:"GPS-200",
+supplier:"GPS",
+availability:"In stock",
+price:"Request price",
+category:"pneumatic",
+keywords:"pneumatic cylinder пневматика цилиндр",
+description:"Industrial pneumatic cylinder."
+},
 
-    {
-        title: "⚙️ CNC Milling Machine",
-        keywords: "cnc фрезерный станок milling machine",
-        category: "CNC",
-        manufacturer: "Turkish CNC Systems",
-        model: "TCS-700",
-        country: "Turkey",
-        city: "Ankara",
-        supplier: "Turkey CNC Supplier",
-        availability: "Available",
-        price: "Request price",
-        delivery: "International",
-        description: "Фрезерный CNC станок для промышленного производства.",
-        link: "#production"
-    },
+{
+title:"Electric Motor",
+country:"China",
+city:"Shanghai",
+manufacturer:"China Electric Motors",
+model:"CEM-750",
+supplier:"CEM",
+availability:"In stock",
+price:"Request price",
+category:"motor",
+keywords:"motor двигатель electric",
+description:"Industrial electric motor."
+},
 
-    {
-        title: "⚙️ CNC Machine",
-        keywords: "cnc станок machine cnc china",
-        category: "CNC",
-        manufacturer: "China CNC Technology",
-        model: "CNC-1000",
-        country: "China",
-        city: "Shanghai",
-        supplier: "China CNC Supplier",
-        availability: "In stock",
-        price: "Request price",
-        delivery: "International",
-        description: "Современный CNC станок для промышленной обработки.",
-        link: "#production"
-    },
+{
+title:"Stamping Press",
+country:"Azerbaijan",
+city:"Sumqayit",
+manufacturer:"Azerbaijan Metal Machinery",
+model:"AMM-500",
+supplier:"AMM",
+availability:"On order",
+price:"Request price",
+category:"stamping",
+keywords:"stamping press штамповка пресс",
+description:"Industrial stamping press."
+},
 
-    /* ================= WELDING ================= */
+{
+title:"Pump Not Starting",
+country:"Global",
+city:"Online",
+manufacturer:"WORKER PRO Knowledge Base",
+model:"WP-PUMP-001",
+supplier:"WORKER PRO",
+availability:"Online",
+price:"Free",
+category:"problem",
+keywords:"pump problem насос проблема",
+description:"Possible causes and troubleshooting."
+},
 
-    {
-        title: "⚡ Welding Machine",
-        keywords: "сварка сварочный аппарат welding welder",
-        category: "Welding",
-        manufacturer: "Azerbaijan Welding Systems",
-        model: "AWS-300",
-        country: "Azerbaijan",
-        city: "Baku",
-        supplier: "Baku Welding Supply",
-        availability: "In stock",
-        price: "Request price",
-        delivery: "Azerbaijan",
-        description: "Промышленный сварочный аппарат.",
-        link: "#production"
-    },
-
-    {
-        title: "⚡ Industrial Welding System",
-        keywords: "сварка welding industrial weld",
-        category: "Welding",
-        manufacturer: "German Welding Technology",
-        model: "GWT-500",
-        country: "Germany",
-        city: "Munich",
-        supplier: "German Welding Supplier",
-        availability: "Available",
-        price: "Request price",
-        delivery: "International",
-        description: "Промышленная сварочная система.",
-        link: "#production"
-    },
-
-    /* ================= SENSORS ================= */
-
-    {
-        title: "📡 Temperature Sensor",
-        keywords: "датчик датчики sensor temperature temperature sensor",
-        category: "Sensors",
-        manufacturer: "Azerbaijan Sensor Systems",
-        model: "ASS-T100",
-        country: "Azerbaijan",
-        city: "Baku",
-        supplier: "Industrial Sensors Baku",
-        availability: "In stock",
-        price: "Request price",
-        delivery: "Azerbaijan",
-        description: "Промышленный датчик температуры.",
-        link: "#parts"
-    },
-
-    {
-        title: "📡 Pressure Sensor",
-        keywords: "датчик давления pressure sensor sensor",
-        category: "Sensors",
-        manufacturer: "German Sensors",
-        model: "GS-P500",
-        country: "Germany",
-        city: "Frankfurt",
-        supplier: "German Sensor Supplier",
-        availability: "Available",
-        price: "Request price",
-        delivery: "International",
-        description: "Промышленный датчик давления.",
-        link: "#parts"
-    },
-
-    /* ================= GEARS ================= */
-
-    {
-        title: "⚙️ Industrial Gear",
-        keywords: "шестерня шестерни gear gears зубчатое колесо",
-        category: "Gears",
-        manufacturer: "Russian Gear Works",
-        model: "RGW-500",
-        country: "Russia",
-        city: "Moscow",
-        supplier: "Russian Gear Supplier",
-        availability: "Available",
-        price: "Request price",
-        delivery: "International",
-        description: "Промышленная шестерня для механизмов и редукторов.",
-        link: "#parts"
-    },
-
-    /* ================= HYDRAULICS ================= */
-
-    {
-        title: "🔧 Hydraulic Valve",
-        keywords: "гидравлика hydraulic valve клапан насос",
-        category: "Hydraulics",
-        manufacturer: "Turkish Hydraulic Systems",
-        model: "THS-300",
-        country: "Turkey",
-        city: "Istanbul",
-        supplier: "Turkey Hydraulic Supplier",
-        availability: "In stock",
-        price: "Request price",
-        delivery: "International",
-        description: "Гидравлический клапан для промышленного оборудования.",
-        link: "#parts"
-    },
-
-    /* ================= PNEUMATICS ================= */
-
-    {
-        title: "💨 Pneumatic Cylinder",
-        keywords: "пневматика pneumatic cylinder цилиндр",
-        category: "Pneumatics",
-        manufacturer: "German Pneumatic Systems",
-        model: "GPS-200",
-        country: "Germany",
-        city: "Hamburg",
-        supplier: "German Pneumatic Supplier",
-        availability: "Available",
-        price: "Request price",
-        delivery: "International",
-        description: "Пневматический цилиндр для автоматизированного оборудования.",
-        link: "#parts"
-    },
-
-    /* ================= MOTORS ================= */
-
-    {
-        title: "⚡ Electric Motor",
-        keywords: "двигатель электродвигатель motor electric motor мотор",
-        category: "Electric Motors",
-        manufacturer: "China Electric Motors",
-        model: "CEM-750",
-        country: "China",
-        city: "Shanghai",
-        supplier: "China Motor Supplier",
-        availability: "In stock",
-        price: "Request price",
-        delivery: "International",
-        description: "Промышленный электродвигатель.",
-        link: "#parts"
-    },
-
-    /* ================= STAMPING ================= */
-
-    {
-        title: "🔨 Stamping Press",
-        keywords: "штамповка штамп пресс stamping press",
-        category: "Stamping",
-        manufacturer: "Azerbaijan Metal Machinery",
-        model: "AMM-500",
-        country: "Azerbaijan",
-        city: "Sumqayit",
-        supplier: "Azerbaijan Machinery Supplier",
-        availability: "Available",
-        price: "Request price",
-        delivery: "Azerbaijan",
-        description: "Промышленный пресс для штамповочного производства.",
-        link: "#production"
-    },
-
-    /* ================= PROBLEMS ================= */
-
-    {
-        title: "🛠️ Pump Not Starting",
-        keywords: "насос не работает насос не запускается проблема ремонт pump failure",
-        category: "Problems",
-        manufacturer: "WORKER PRO",
-        model: "Troubleshooting",
-        country: "Global",
-        city: "Online",
-        supplier: "WORKER PRO Knowledge Base",
-        availability: "Information",
-        price: "Free",
-        delivery: "Online",
-        description: "Диагностика: питание, двигатель, клапаны, давление и датчики.",
-        link: "#problems"
-    },
-
-    {
-        title: "🛠️ CNC Machine Problem",
-        keywords: "cnc проблема станок ошибка machine fault cnc error",
-        category: "Problems",
-        manufacturer: "WORKER PRO",
-        model: "CNC Troubleshooting",
-        country: "Global",
-        city: "Online",
-        supplier: "WORKER PRO Knowledge Base",
-        availability: "Information",
-        price: "Free",
-        delivery: "Online",
-        description: "Диагностика типичных неисправностей CNC оборудования.",
-        link: "#problems"
-    },
-
-    /* ================= JOBS ================= */
-
-    {
-        title: "💼 CNC Operator",
-        keywords: "работа вакансия cnc оператор станка job vacancy operator",
-        category: "Jobs",
-        manufacturer: "Industrial Company",
-        model: "CNC Operator",
-        country: "Azerbaijan",
-        city: "Baku",
-        supplier: "Industrial Employer",
-        availability: "Vacancy",
-        price: "Salary depends",
-        delivery: "Baku",
-        description: "Вакансия оператора CNC станка.",
-        link: "#jobs"
-    },
-
-    {
-        title: "💼 Welding Specialist",
-        keywords: "работа сварщик welding welder job vacancy",
-        category: "Jobs",
-        manufacturer: "Industrial Company",
-        model: "Welder",
-        country: "Turkey",
-        city: "Istanbul",
-        supplier: "Industrial Employer",
-        availability: "Vacancy",
-        price: "Salary depends",
-        delivery: "Istanbul",
-        description: "Вакансия промышленного сварщика.",
-        link: "#jobs"
-    },
-
-    /* ================= TRAINING ================= */
-
-    {
-        title: "📚 Industrial Safety",
-        keywords: "обучение безопасность safety industrial safety training",
-        category: "Training",
-        manufacturer: "WORKER PRO",
-        model: "Safety Training",
-        country: "Global",
-        city: "Online",
-        supplier: "WORKER PRO",
-        availability: "Online",
-        price: "Free",
-        delivery: "Online",
-        description: "Обучение промышленной безопасности.",
-        link: "#training"
-    }
+{
+title:"CNC Machine Problem",
+country:"Global",
+city:"Online",
+manufacturer:"WORKER PRO Knowledge Base",
+model:"WP-CNC-001",
+supplier:"WORKER PRO",
+availability:"Online",
+price:"Free",
+category:"problem",
+keywords:"cnc problem станок проблема",
+description:"CNC troubleshooting information."
+}
 
 ];
 
 
-/* =========================================================
-   SEARCH SCOPE
-========================================================= */
-
-let currentSearchScope = "my";
-
-
-function setSearchScope(scope, button) {
-
-    currentSearchScope = scope;
-
-    const buttons =
-        document.querySelectorAll(".scope-button");
-
-    buttons.forEach(function(item) {
-
-        item.classList.remove("active");
-
-    });
-
-    button.classList.add("active");
-
-}
-
-
-/* =========================================================
-   NORMALIZE SEARCH
-========================================================= */
-
-function normalizeText(text) {
-
-    return String(text || "")
-        .toLowerCase()
-        .trim()
-        .replace(/ё/g, "е");
-
-}
-
-
-/* =========================================================
+/* =========================
    SEARCH
-========================================================= */
+========================= */
 
-function searchSite() {
+let searchScope="my";
 
-    const input =
-        document.getElementById("searchInput");
+function setSearchScope(scope,button){
 
-    const results =
-        document.getElementById("searchResults");
+searchScope=scope;
 
-    const customerCountry =
-        document.getElementById("customerCountry").value;
+document.querySelectorAll(".scope-button")
+.forEach(b=>b.classList.remove("active"));
 
-    const query =
-        normalizeText(input.value);
+button.classList.add("active");
 
-    results.style.display = "block";
-
-    if (!query) {
-
-        results.innerHTML = `
-            <div class="no-results">
-
-                🔎 Введите оборудование,
-                запчасть или проблему.
-
-                <br><br>
-
-                Например:
-
-                <br><br>
-
-                <b>насос</b> ·
-                <b>подшипник</b> ·
-                <b>CNC</b> ·
-                <b>сварка</b> ·
-                <b>датчик</b>
-
-            </div>
-        `;
-
-        return;
-
-    }
-
-
-    /* ================= FIND ================= */
-
-    let found =
-        globalDatabase.filter(function(item) {
-
-            const text = normalizeText(
-
-                item.title + " " +
-                item.keywords + " " +
-                item.category + " " +
-                item.description + " " +
-                item.manufacturer + " " +
-                item.model
-
-            );
-
-            return text.includes(query);
-
-        });
-
-
-    /* ================= SCOPE ================= */
-
-    if (currentSearchScope === "my") {
-
-        found.sort(function(a, b) {
-
-            if (a.country === customerCountry) {
-                return -1;
-            }
-
-            if (b.country === customerCountry) {
-                return 1;
-            }
-
-            return 0;
-
-        });
-
-    }
-
-
-    if (currentSearchScope === "other") {
-
-        found =
-            found.filter(function(item) {
-
-                return item.country !== customerCountry;
-
-            });
-
-    }
-
-
-    if (currentSearchScope === "world") {
-
-        found.sort(function(a, b) {
-
-            if (a.country === customerCountry) {
-                return -1;
-            }
-
-            return 0;
-
-        });
-
-    }
-
-
-    /* ================= NO RESULTS ================= */
-
-    if (found.length === 0) {
-
-        results.innerHTML = `
-
-            <div class="no-results">
-
-                ❌ Ничего не найдено.
-
-                <br><br>
-
-                Попробуйте:
-
-                <br><br>
-
-                <b>насос</b> ·
-                <b>подшипник</b> ·
-                <b>CNC</b> ·
-                <b>сварка</b> ·
-                <b>станок</b> ·
-                <b>датчик</b>
-
-            </div>
-
-        `;
-
-        return;
-
-    }
-
-
-    /* ================= RESULTS ================= */
-
-    results.innerHTML = `
-
-        <div class="search-results-title">
-
-            🔎 Найдено:
-            ${found.length}
-
-        </div>
-
-        ${found.map(function(item) {
-
-            return `
-
-                <div
-                    class="search-result"
-                    onclick="openSearchResult('${item.link}')"
-                >
-
-                    <div class="result-top">
-
-                        <div class="result-title">
-
-                            ${item.title}
-
-                        </div>
-
-                        <div class="result-country">
-
-                            ${getFlag(item.country)}
-                            ${item.country}
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="result-info">
-
-                        <div>
-                            🏭 Производитель:
-                            <b>${item.manufacturer}</b>
-                        </div>
-
-                        <div>
-                            📦 Модель:
-                            <b>${item.model}</b>
-                        </div>
-
-                        <div>
-                            📍 Город:
-                            <b>${item.city}</b>
-                        </div>
-
-                        <div>
-                            🏢 Поставщик:
-                            <b>${item.supplier}</b>
-                        </div>
-
-                        <div>
-                            📊 Наличие:
-                            <b>${item.availability}</b>
-                        </div>
-
-                        <div>
-                            💰 Цена:
-                            <b>${item.price}</b>
-                        </div>
-
-                    </div>
-
-
-                    <div class="result-description">
-
-                        ${item.description}
-
-                    </div>
-
-
-                    <div class="result-buttons">
-
-                        <button
-                            class="result-button"
-                            onclick="event.stopPropagation(); openSearchResult('${item.link}')"
-                        >
-                            Открыть
-                        </button>
-
-                        <button
-                            class="result-button"
-                            onclick="event.stopPropagation(); requestSupplier('${item.title}', '${item.country}', '${item.supplier}')"
-                        >
-                            📩 Связаться
-                        </button>
-
-                    </div>
-
-                </div>
-
-            `;
-
-        }).join("")}
-
-    `;
+searchSite();
 
 }
 
 
-/* =========================================================
-   FLAGS
-========================================================= */
+function searchSite(){
 
-function getFlag(country) {
+const input=
+document.getElementById("searchInput")
+.value
+.trim()
+.toLowerCase();
 
-    const flags = {
+const country=
+document.getElementById("customerCountry")
+.value;
 
-        "Azerbaijan": "🇦🇿",
+const resultsBox=
+document.getElementById("searchResults");
 
-        "Turkey": "🇹🇷",
+if(!input){
 
-        "Russia": "🇷🇺",
+resultsBox.style.display="block";
 
-        "Germany": "🇩🇪",
+resultsBox.innerHTML=
+"<div class='no-results'>Введите название оборудования, запчасти или проблему.</div>";
 
-        "China": "🇨🇳",
-
-        "USA": "🇺🇸",
-
-        "Global": "🌍"
-
-    };
-
-    return flags[country] || "🌍";
-
+return;
 }
 
+let results=globalDatabase.filter(item=>{
 
-/* =========================================================
-   OPEN RESULT
-========================================================= */
+const text=(
+item.title+" "+
+item.country+" "+
+item.city+" "+
+item.manufacturer+" "+
+item.model+" "+
+item.supplier+" "+
+item.category+" "+
+item.keywords+" "+
+item.description
+).toLowerCase();
 
-function openSearchResult(link) {
-
-    if (!link) return;
-
-    const target =
-        document.querySelector(link);
-
-    if (target) {
-
-        target.scrollIntoView({
-            behavior: "smooth",
-            block: "start"
-        });
-
-    }
-
-}
-
-
-/* =========================================================
-   CONTACT SUPPLIER
-========================================================= */
-
-function requestSupplier(product, country, supplier) {
-
-    alert(
-
-        "📩 Запрос поставщику\n\n" +
-
-        "Товар: " + product + "\n" +
-
-        "Страна: " + country + "\n" +
-
-        "Поставщик: " + supplier + "\n\n" +
-
-        "В следующей версии здесь будет настоящая форма связи."
-
-    );
-
-}
-
-
-/* =========================================================
-   ENTER KEY SEARCH
-========================================================= */
-
-document
-    .getElementById("searchInput")
-    .addEventListener("keydown", function(event) {
-
-        if (event.key === "Enter") {
-
-            searchSite();
-
-        }
-
-    });
-
-
-/* =========================================================
-   MENU ACTIVE
-========================================================= */
-
-const menuLinks =
-    document.querySelectorAll("#mainNav a");
-
-
-function setActiveMenu(link) {
-
-    menuLinks.forEach(function(item) {
-
-        item.classList.remove("active");
-
-    });
-
-    if (link) {
-
-        link.classList.add("active");
-
-        link.scrollIntoView({
-
-            behavior: "smooth",
-
-            block: "nearest",
-
-            inline: "center"
-
-        });
-
-    }
-
-}
-
-
-menuLinks.forEach(function(link) {
-
-    link.addEventListener("click", function() {
-
-        setActiveMenu(this);
-
-    });
+return text.includes(input);
 
 });
 
 
-const menuSections =
-    Array.from(menuLinks)
+if(searchScope==="my"){
 
-        .map(function(link) {
-
-            const id =
-                link.getAttribute("href");
-
-            if (!id || id === "#") {
-                return null;
-            }
-
-            return document.querySelector(id);
-
-        })
-
-        .filter(function(section) {
-
-            return section !== null;
-
-        });
-
-
-function updateActiveMenuOnScroll() {
-
-    const nav =
-        document.getElementById("mainNav");
-
-    if (!nav) return;
-
-    const navHeight =
-        nav.offsetHeight;
-
-    let currentSection = null;
-
-
-    menuSections.forEach(function(section) {
-
-        const rect =
-            section.getBoundingClientRect();
-
-        if (rect.top <= navHeight + 120) {
-
-            currentSection = section;
-
-        }
-
-    });
-
-
-    if (!currentSection) return;
-
-
-    const currentId =
-        "#" + currentSection.id;
-
-
-    const activeLink =
-        document.querySelector(
-            '#mainNav a[href="' +
-            currentId +
-            '"]'
-        );
-
-
-    if (
-        activeLink &&
-        !activeLink.classList.contains("active")
-    ) {
-
-        menuLinks.forEach(function(link) {
-
-            link.classList.remove("active");
-
-        });
-
-        activeLink.classList.add("active");
-
-    }
+results=results.filter(item=>item.country===country);
 
 }
 
+if(searchScope==="other"){
 
-let scrollTimer = null;
+results=results.filter(item=>item.country!==country);
 
+}
 
-window.addEventListener("scroll", function() {
+if(searchScope==="world"){
 
-    if (scrollTimer) return;
+results.sort((a,b)=>{
 
-    scrollTimer =
-        setTimeout(function() {
+if(a.country===country && b.country!==country)return -1;
 
-            updateActiveMenuOnScroll();
+if(a.country!==country && b.country===country)return 1;
 
-            scrollTimer = null;
-
-        }, 50);
+return 0;
 
 });
 
+}
 
-if (menuLinks.length > 0) {
 
-    setActiveMenu(menuLinks[0]);
+resultsBox.style.display="block";
+
+
+if(!results.length){
+
+resultsBox.innerHTML=
+"<div class='no-results'>🌍 Ничего не найдено. Попробуйте другой запрос.</div>";
+
+return;
+}
+
+
+let html="";
+
+results.forEach((item,index)=>{
+
+html+=`
+
+<div class="search-result">
+
+<div class="result-title">
+${item.title}
+</div>
+
+<div class="result-info">
+
+<div>🌍 ${item.country}</div>
+<div>📍 ${item.city}</div>
+
+<div>🏭 ${item.manufacturer}</div>
+<div>⚙️ ${item.model}</div>
+
+<div>🏢 ${item.supplier}</div>
+<div>📦 ${item.availability}</div>
+
+<div>💰 ${item.price}</div>
+<div>🔧 ${item.category}</div>
+
+</div>
+
+<p>
+${item.description}
+</p>
+
+<div class="result-buttons">
+
+<button class="result-button"
+onclick="requestSupplier('${item.supplier}')">
+📩 Связаться
+</button>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+resultsBox.innerHTML=html;
 
 }
 
 
-/* =========================================================
-   LANGUAGES
-========================================================= */
+/* =========================
+   COMPANY SYSTEM
+========================= */
 
-const translations = {
+function openCompanyForm(){
 
-    ru: {
+document.getElementById("companyModal").style.display="block";
 
-        platform:
-            "Global Manufacturing & Industrial Platform",
+}
 
-        navProduction:
-            "🏭 Производство",
+function closeCompanyForm(){
 
-        navProblems:
-            "🛠️ Проблемы",
+document.getElementById("companyModal").style.display="none";
 
-        navParts:
-            "🔩 Запчасти",
+}
 
-        navCompanies:
-            "🏢 Компании",
 
-        navCommunity:
-            "👥 Сообщество",
+window.onclick=function(event){
 
-        navJobs:
-            "💼 Работа",
+const modal=
+document.getElementById("companyModal");
 
-        navTraining:
-            "📚 Обучение",
+if(event.target===modal){
 
-        heroTitle:
-            "Работа. Знания. Производство.",
+closeCompanyForm();
 
-        heroText:
-            "Международная промышленная платформа для рабочих, инженеров, мастеров, производителей и поставщиков.",
-
-        searchPlaceholder:
-            "Поиск: насос, станок, подшипник, запчасть...",
-
-        searchButton:
-            "🔎 Поиск",
-
-        mainSections:
-            "Основные разделы",
-
-        productionTitle:
-            "🏭 Производство",
-
-        productionText:
-            "Отрасли промышленности, технологии, оборудование и производственные процессы.",
-
-        problemsTitle:
-            "🛠️ Проблемы и решения",
-
-        problemsText:
-            "Проблема → причины → что проверить → решение → фото/схема → безопасность.",
-
-        partsTitle:
-            "🔩 Промышленные запчасти",
-
-        partsText:
-            "Подшипники, валы, шестерни, гидравлика, пневматика, датчики, двигатели и другие детали.",
-
-        companiesTitle:
-            "🏢 Производители и поставщики",
-
-        companiesText:
-            "Компании, заводы, поставщики оборудования и промышленных материалов.",
-
-        mapTitle:
-            "🗺️ Магазины и поставщики",
-
-        mapText:
-            "Поиск поставщиков по странам и городам. В будущем — карта и поиск рядом.",
-
-        communityTitle:
-            "👥 Сообщество",
-
-        communityText:
-            "Вопросы, ответы, фотографии, обсуждения и опыт специалистов.",
-
-        jobsTitle:
-            "💼 Работа",
-
-        jobsText:
-            "Вакансии, специалисты, инженеры, операторы станков и мастера.",
-
-        trainingTitle:
-            "📚 Обучение",
-
-        trainingText:
-            "Промышленная безопасность, производство, оборудование и English for Workers.",
-
-        industriesTitle:
-            "Промышленные отрасли",
-
-        open:
-            "Открыть",
-
-        futureTitle:
-            "🚀 Что появится дальше",
-
-        future1:
-            "Глобальный поиск промышленного оборудования",
-
-        future2:
-            "База промышленных запчастей",
-
-        future3:
-            "Карта производителей и поставщиков",
-
-        future4:
-            "Форум и профессиональное сообщество",
-
-        future5:
-            "Вакансии и поиск специалистов",
-
-        future6:
-            "Курсы и промышленное обучение",
-
-        future7:
-            "Фото, схемы и инструкции по ремонту",
-
-        future8:
-            "Профили компаний и специалистов",
-
-        footerText:
-            "Global Manufacturing & Industrial Platform"
-
-    },
-
-
-    en: {
-
-        platform:
-            "Global Manufacturing & Industrial Platform",
-
-        navProduction:
-            "🏭 Production",
-
-        navProblems:
-            "🛠️ Problems",
-
-        navParts:
-            "🔩 Spare Parts",
-
-        navCompanies:
-            "🏢 Companies",
-
-        navCommunity:
-            "👥 Community",
-
-        navJobs:
-            "💼 Jobs",
-
-        navTraining:
-            "📚 Training",
-
-        heroTitle:
-            "Work. Knowledge. Production.",
-
-        heroText:
-            "Global industrial platform for workers, engineers, manufacturers and suppliers.",
-
-        searchPlaceholder:
-            "Search: pump, machine, bearing, spare part...",
-
-        searchButton:
-            "🔎 Search",
-
-        mainSections:
-            "Main Sections",
-
-        productionTitle:
-            "🏭 Production",
-
-        productionText:
-            "Industrial sectors, technologies, equipment and production processes.",
-
-        problemsTitle:
-            "🛠️ Problems & Solutions",
-
-        problemsText:
-            "Problem → causes → checks → solution → safety.",
-
-        partsTitle:
-            "🔩 Industrial Spare Parts",
-
-        partsText:
-            "Bearings, shafts, gears, hydraulics, pneumatics, sensors and motors.",
-
-        companiesTitle:
-            "🏢 Manufacturers & Suppliers",
-
-        companiesText:
-            "Manufacturers, factories, equipment suppliers and industrial companies.",
-
-        mapTitle:
-            "🗺️ Stores & Suppliers",
-
-        mapText:
-            "Find suppliers by country and city.",
-
-        communityTitle:
-            "👥 Community",
-
-        communityText:
-            "Questions, answers, photos and professional experience.",
-
-        jobsTitle:
-            "💼 Jobs",
-
-        jobsText:
-            "Industrial jobs, engineers, operators, technicians and specialists.",
-
-        trainingTitle:
-            "📚 Training",
-
-        trainingText:
-            "Industrial safety, production, equipment and English for Workers.",
-
-        industriesTitle:
-            "Industrial Sectors",
-
-        open:
-            "Open",
-
-        futureTitle:
-            "🚀 Coming Next",
-
-        future1:
-            "Global industrial equipment search",
-
-        future2:
-            "Industrial spare parts database",
-
-        future3:
-            "Manufacturers and suppliers map",
-
-        future4:
-            "Professional community",
-
-        future5:
-            "Jobs and specialists",
-
-        future6:
-            "Industrial training",
-
-        future7:
-            "Repair photos, diagrams and instructions",
-
-        future8:
-            "Company and specialist profiles",
-
-        footerText:
-            "Global Manufacturing & Industrial Platform"
-
-    },
-
-
-    az: {
-
-        platform:
-            "Qlobal İstehsalat və Sənaye Platforması",
-
-        navProduction:
-            "🏭 İstehsalat",
-
-        navProblems:
-            "🛠️ Problemlər",
-
-        navParts:
-            "🔩 Ehtiyat hissələri",
-
-        navCompanies:
-            "🏢 Şirkətlər",
-
-        navCommunity:
-            "👥 İcma",
-
-        navJobs:
-            "💼 İş",
-
-        navTraining:
-            "📚 Təlim",
-
-        heroTitle:
-            "İş. Bilik. İstehsalat.",
-
-        heroText:
-            "Fəhlələr, mühəndislər, istehsalçılar və təchizatçılar üçün qlobal sənaye platforması.",
-
-        searchPlaceholder:
-            "Axtarış: nasos, dəzgah, podşipnik, ehtiyat hissəsi...",
-
-        searchButton:
-            "🔎 Axtar",
-
-        mainSections:
-            "Əsas bölmələr",
-
-        productionTitle:
-            "🏭 İstehsalat",
-
-        productionText:
-            "Sənaye sahələri, texnologiyalar, avadanlıqlar və istehsal prosesləri.",
-
-        problemsTitle:
-            "🛠️ Problemlər və həllər",
-
-        problemsText:
-            "Problem → səbəb → yoxlama → həll → təhlükəsizlik.",
-
-        partsTitle:
-            "🔩 Sənaye ehtiyat hissələri",
-
-        partsText:
-            "Podşipniklər, vallər, dişli çarxlar, hidravlika, pnevmatika və sensorlar.",
-
-        companiesTitle:
-            "🏢 İstehsalçılar və təchizatçılar",
-
-        companiesText:
-            "Zavodlar, istehsalçılar və sənaye təchizatçıları.",
-
-        mapTitle:
-            "🗺️ Mağazalar və təchizatçılar",
-
-        mapText:
-            "Ölkə və şəhərlərə görə təchizatçı axtarışı.",
-
-        communityTitle:
-            "👥 İcma",
-
-        communityText:
-            "Suallar, cavablar, şəkillər və mütəxəssis təcrübəsi.",
-
-        jobsTitle:
-            "💼 İş",
-
-        jobsText:
-            "Sənaye işləri, mühəndislər, operatorlar və ustalar.",
-
-        trainingTitle:
-            "📚 Təlim",
-
-        trainingText:
-            "Sənaye təhlükəsizliyi, istehsalat və avadanlıq.",
-
-        industriesTitle:
-            "Sənaye sahələri",
-
-        open:
-            "Aç",
-
-        futureTitle:
-            "🚀 Gələcəkdə",
-
-        future1:
-            "Qlobal sənaye avadanlığı axtarışı",
-
-        future2:
-            "Sənaye ehtiyat hissələri bazası",
-
-        future3:
-            "İstehsalçı və təchizatçı xəritəsi",
-
-        future4:
-            "Peşəkar icma",
-
-        future5:
-            "İş və mütəxəssislər",
-
-        future6:
-            "Sənaye təlimləri",
-
-        future7:
-            "Təmir şəkilləri və sxemləri",
-
-        future8:
-            "Şirkət və mütəxəssis profilləri",
-
-        footerText:
-            "Qlobal İstehsalat və Sənaye Platforması"
-
-    }
+}
 
 };
 
 
-/* =========================================================
-   LANGUAGE FUNCTION
-========================================================= */
+/* SAVE COMPANY */
 
-function setLanguage(lang) {
+document.getElementById("companyForm")
+.addEventListener("submit",function(event){
 
-    const dictionary =
-        translations[lang] ||
-        translations.ru;
+event.preventDefault();
 
 
-    document.documentElement.lang =
-        lang;
+const company={
+
+id:Date.now(),
+
+name:document.getElementById("companyName").value,
+
+country:document.getElementById("companyCountry").value,
+
+city:document.getElementById("companyCity").value,
+
+industry:document.getElementById("companyIndustry").value,
+
+products:document.getElementById("companyProducts").value,
+
+parts:document.getElementById("companyParts").value,
+
+models:document.getElementById("companyModels").value,
+
+availability:document.getElementById("companyAvailability").value,
+
+price:document.getElementById("companyPrice").value,
+
+delivery:document.getElementById("companyDelivery").value,
+
+phone:document.getElementById("companyPhone").value,
+
+email:document.getElementById("companyEmail").value,
+
+website:document.getElementById("companyWebsite").value
+
+};
 
 
-    if (lang === "ar") {
-
-        document.documentElement.dir =
-            "rtl";
-
-    } else {
-
-        document.documentElement.dir =
-            "ltr";
-
-    }
+let companies=
+JSON.parse(localStorage.getItem("workerProCompanies")||"[]");
 
 
-    document
-        .querySelectorAll("[data-i18n]")
-        .forEach(function(element) {
-
-            const key =
-                element.getAttribute("data-i18n");
-
-            if (dictionary[key]) {
-
-                element.textContent =
-                    dictionary[key];
-
-            }
-
-        });
+companies.push(company);
 
 
-    document
-        .querySelectorAll("[data-i18n-placeholder]")
-        .forEach(function(element) {
-
-            const key =
-                element.getAttribute(
-                    "data-i18n-placeholder"
-                );
-
-            if (dictionary[key]) {
-
-                element.placeholder =
-                    dictionary[key];
-
-            }
-
-        });
+localStorage.setItem(
+"workerProCompanies",
+JSON.stringify(companies)
+);
 
 
-    document
-        .querySelectorAll("[data-lang]")
-        .forEach(function(button) {
+alert("✅ Компания успешно добавлена в WORKER PRO!");
 
-            button.classList.remove("active");
+document.getElementById("companyForm").reset();
 
-            if (
-                button.getAttribute("data-lang")
-                === lang
-            ) {
+closeCompanyForm();
 
-                button.classList.add("active");
+loadCompanies();
 
-            }
-
-        });
+});
 
 
-    localStorage.setItem(
-        "workerProLanguage",
-        lang
-    );
+/* LOAD COMPANIES */
+
+function loadCompanies(){
+
+const box=
+document.getElementById("companyList");
+
+let companies=
+JSON.parse(localStorage.getItem("workerProCompanies")||"[]");
+
+
+if(!companies.length){
+
+box.innerHTML=`
+
+<div class="empty-company">
+
+<h3>🏢 Компаний пока нет</h3>
+
+<p>
+Станьте первой компанией,
+которая добавит свой профиль в WORKER PRO.
+</p>
+
+</div>
+
+`;
+
+return;
 
 }
 
 
-/* =========================================================
-   LANGUAGE BUTTONS
-========================================================= */
-
-document
-    .querySelectorAll("[data-lang]")
-    .forEach(function(button) {
-
-        button.addEventListener(
-            "click",
-            function() {
-
-                const lang =
-                    this.getAttribute(
-                        "data-lang"
-                    );
-
-                setLanguage(lang);
-
-            }
-        );
-
-    });
+box.innerHTML="";
 
 
-/* =========================================================
-   LOAD SAVED LANGUAGE
-========================================================= */
+companies.forEach(company=>{
 
-const savedLanguage =
-    localStorage.getItem(
-        "workerProLanguage"
-    );
+const card=document.createElement("div");
+
+card.className="company-card";
+
+card.innerHTML=`
+
+<h3>🏢 ${company.name}</h3>
+
+<p>
+🌍 <b>${company.country}</b><br>
+📍 ${company.city}
+</p>
+
+<div>
+
+<span class="company-tag">
+${company.industry}
+</span>
+
+<span class="company-tag">
+${company.availability}
+</span>
+
+</div>
+
+<p>
+<strong>⚙️ Продукция:</strong><br>
+${company.products}
+</p>
+
+<p>
+<strong>🔩 Запчасти:</strong><br>
+${company.parts || "Не указано"}
+</p>
+
+<p>
+<strong>🏭 Производители:</strong><br>
+${company.models || "Не указано"}
+</p>
+
+<p>
+<strong>🚚 Доставка:</strong><br>
+${company.delivery || "Не указано"}
+</p>
+
+<button
+class="company-button"
+onclick="showCompany(${company.id})">
+👁️ Открыть профиль
+</button>
+
+`;
+
+box.appendChild(card);
+
+});
+
+}
 
 
-setLanguage(
-    savedLanguage || "ru"
+/* COMPANY PROFILE */
+
+function showCompany(id){
+
+let companies=
+JSON.parse(localStorage.getItem("workerProCompanies")||"[]");
+
+const company=
+companies.find(c=>c.id===id);
+
+if(!company)return;
+
+
+let message=
+
+"🏢 "+company.name+
+"\n\n"+
+"🌍 Страна: "+company.country+
+"\n"+
+"📍 Город: "+company.city+
+"\n"+
+"🏭 Отрасль: "+company.industry+
+"\n\n"+
+"⚙️ Продукция:\n"+company.products+
+"\n\n"+
+"🔩 Запчасти:\n"+(company.parts||"Не указано")+
+"\n\n"+
+"🏭 Производители:\n"+(company.models||"Не указано")+
+"\n\n"+
+"📦 Наличие: "+company.availability+
+"\n"+
+"💰 Цена: "+(company.price||"Запросить цену")+
+"\n\n"+
+"🚚 Доставка:\n"+(company.delivery||"Не указано")+
+"\n\n"+
+"📞 "+(company.phone||"Не указано")+
+"\n"+
+"📧 "+(company.email||"Не указано")+
+"\n"+
+"🌐 "+(company.website||"Не указано");
+
+
+alert(message);
+
+}
+
+
+/* =========================
+   QUICK SEARCH
+========================= */
+
+function quickSearch(word){
+
+document.getElementById("searchInput").value=word;
+
+focusSearch();
+
+searchSite();
+
+}
+
+
+function focusSearch(){
+
+document.querySelector(".hero")
+.scrollIntoView({behavior:"smooth"});
+
+setTimeout(()=>{
+
+document.getElementById("searchInput").focus();
+
+},500);
+
+}
+
+
+function goCompanies(){
+
+document.getElementById("companies")
+.scrollIntoView({behavior:"smooth"});
+
+}
+
+
+function requestSupplier(name){
+
+alert(
+"📩 Запрос поставщику: "+
+name+
+"\n\nВ следующей версии здесь будет настоящая форма связи."
 );
+
+}
+
+
+/* =========================
+   ENTER SEARCH
+========================= */
+
+document.getElementById("searchInput")
+.addEventListener("keydown",function(event){
+
+if(event.key==="Enter"){
+
+searchSite();
+
+}
+
+});
+
+
+/* =========================
+   LANGUAGE
+========================= */
+
+const translations={
+
+ru:{
+platform:"Глобальная промышленная платформа",
+heroTitle:"Работа. Знания. Производство.",
+heroText:"Международная промышленная платформа для рабочих, инженеров, мастеров, производителей и поставщиков.",
+search:"Поиск",
+searchPlaceholder:"Поиск: насос, станок, подшипник, запчасть..."
+},
+
+en:{
+platform:"Global Manufacturing & Industrial Platform",
+heroTitle:"Work. Knowledge. Production.",
+heroText:"International industrial platform for workers, engineers, supervisors, manufacturers and suppliers.",
+search:"Search",
+searchPlaceholder:"Search: pump, machine, bearing, spare part..."
+},
+
+az:{
+platform:"Qlobal İstehsalat və Sənaye Platforması",
+heroTitle:"İş. Bilik. İstehsalat.",
+heroText:"Fəhlələr, mühəndislər, ustalar, istehsalçılar və təchizatçılar üçün beynəlxalq sənaye platforması.",
+search:"Axtar",
+searchPlaceholder:"Axtarış: nasos, dəzgah, podşipnik, ehtiyat hissəsi..."
+},
+
+tr:{
+platform:"Küresel Üretim ve Sanayi Platformu",
+heroTitle:"İş. Bilgi. Üretim.",
+heroText:"Çalışanlar, mühendisler, ustalar, üreticiler ve tedarikçiler için uluslararası sanayi platformu.",
+search:"Ara",
+searchPlaceholder:"Ara: pompa, makine, rulman, yedek parça..."
+},
+
+de:{
+platform:"Globale Produktions- und Industrieplattform",
+heroTitle:"Arbeit. Wissen. Produktion.",
+heroText:"Internationale Industrieplattform für Arbeiter, Ingenieure, Meister, Hersteller und Lieferanten.",
+search:"Suchen",
+searchPlaceholder:"Suche: Pumpe, Maschine, Lager, Ersatzteil..."
+},
+
+es:{
+platform:"Plataforma Industrial Global",
+heroTitle:"Trabajo. Conocimiento. Producción.",
+heroText:"Plataforma industrial internacional para trabajadores, ingenieros, fabricantes y proveedores.",
+search:"Buscar",
+searchPlaceholder:"Buscar: bomba, máquina, rodamiento, repuesto..."
+},
+
+fr:{
+platform:"Plateforme Industrielle Mondiale",
+heroTitle:"Travail. Connaissance. Production.",
+heroText:"Plateforme industrielle internationale pour travailleurs, ingénieurs, fabricants et fournisseurs.",
+search:"Rechercher",
+searchPlaceholder:"Rechercher : pompe, machine, roulement, pièce..."
+},
+
+ar:{
+platform:"منصة التصنيع والصناعة العالمية",
+heroTitle:"العمل. المعرفة. الإنتاج.",
+heroText:"منصة صناعية دولية للعمال والمهندسين والمصنعين والموردين.",
+search:"بحث",
+searchPlaceholder:"بحث: مضخة، آلة، محمل، قطعة غيار..."
+}
+
+};
+
+
+function setLanguage(lang){
+
+localStorage.setItem(
+"workerProLanguage",
+lang
+);
+
+document.querySelectorAll(".languages button")
+.forEach(button=>{
+
+button.classList.remove("active");
+
+if(button.dataset.lang===lang){
+
+button.classList.add("active");
+
+}
+
+});
+
+
+const t=
+translations[lang] ||
+translations.ru;
+
+
+document.querySelector(".subtitle")
+.textContent=t.platform;
+
+
+document.querySelector(".hero h1")
+.textContent=t.heroTitle;
+
+
+document.querySelector(".hero p")
+.textContent=t.heroText;
+
+
+document.querySelector(".search-main button")
+.textContent="🔎 "+t.search;
+
+
+document.getElementById("searchInput")
+.placeholder=t.searchPlaceholder;
+
+
+document.documentElement.lang=lang;
+
+if(lang==="ar"){
+
+document.documentElement.dir="rtl";
+
+}else{
+
+document.documentElement.dir="ltr";
+
+}
+
+}
+
+
+/* =========================
+   START
+========================= */
+
+loadCompanies();
+
+const savedLanguage=
+localStorage.getItem("workerProLanguage")||"ru";
+
+setLanguage(savedLanguage);
 
 </script>
 
