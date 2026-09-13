@@ -13,6 +13,7 @@
 
 html {
     scroll-behavior: smooth;
+    scroll-padding-top: 75px;
 }
 
 body {
@@ -21,6 +22,10 @@ body {
     background: #f4f8f5;
     color: #173d2b;
 }
+
+/* =========================
+   HEADER
+========================= */
 
 header {
     background: linear-gradient(135deg, #063d25, #0b6b3d, #063d25);
@@ -51,6 +56,10 @@ header {
     opacity: 0.95;
 }
 
+/* =========================
+   LANGUAGES
+========================= */
+
 .languages {
     display: flex;
     flex-wrap: wrap;
@@ -68,6 +77,7 @@ header {
     cursor: pointer;
     font-weight: bold;
     font-size: 14px;
+    transition: 0.2s;
 }
 
 .languages button:hover,
@@ -75,33 +85,99 @@ header {
     background: #b7ff35;
     color: #063d25;
     border-color: #b7ff35;
+    transform: translateY(-1px);
 }
+
+/* =========================
+   NEW TOP MENU
+========================= */
 
 nav {
     position: sticky;
     top: 0;
-    z-index: 100;
-    background: #ffffff;
+    z-index: 1000;
+
+    background: rgba(255,255,255,0.97);
+
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    align-items: center;
+
     gap: 8px;
-    padding: 10px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.12);
+
+    padding: 9px 10px;
+
+    box-shadow:
+        0 3px 12px rgba(0,0,0,0.14);
+
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    white-space: nowrap;
+
+    scrollbar-width: thin;
+
+    -webkit-overflow-scrolling: touch;
+}
+
+nav::-webkit-scrollbar {
+    height: 4px;
+}
+
+nav::-webkit-scrollbar-thumb {
+    background: #0b6b3d;
+    border-radius: 10px;
 }
 
 nav a {
+    flex: 0 0 auto;
+
     text-decoration: none;
+
     color: #075b34;
+
     font-weight: bold;
-    padding: 10px 13px;
-    border-radius: 9px;
+
+    padding: 11px 15px;
+
+    border-radius: 12px;
+
     background: #edf7f0;
+
+    border: 2px solid transparent;
+
+    transition:
+        background 0.2s,
+        color 0.2s,
+        transform 0.2s,
+        box-shadow 0.2s;
+
+    font-size: 14px;
+
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
 }
 
 nav a:hover {
-    background: #cdeed7;
+    background: #d9f2e1;
+    transform: translateY(-1px);
 }
+
+/* ACTIVE MENU */
+
+nav a.active {
+    background: #075b34;
+    color: #b7ff35;
+
+    border-color: #b7ff35;
+
+    box-shadow:
+        0 3px 10px rgba(7,91,52,0.30);
+
+    transform: translateY(-1px);
+}
+
+/* =========================
+   HERO
+========================= */
 
 .hero {
     text-align: center;
@@ -122,6 +198,10 @@ nav a:hover {
     margin: 0 auto 25px;
     max-width: 800px;
 }
+
+/* =========================
+   SEARCH
+========================= */
 
 .search-box {
     display: flex;
@@ -272,6 +352,10 @@ footer {
     opacity: 0.8;
 }
 
+/* =========================
+   RTL
+========================= */
+
 [dir="rtl"] {
     text-align: right;
 }
@@ -281,10 +365,64 @@ footer {
     direction: rtl;
 }
 
+/* =========================
+   MOBILE
+========================= */
+
 @media (max-width: 600px) {
+
+    header {
+        padding: 18px 10px 15px;
+    }
+
+    .logo {
+        width: 130px;
+    }
 
     .brand {
         font-size: 30px;
+    }
+
+    .subtitle {
+        font-size: 14px;
+    }
+
+    .languages {
+        gap: 5px;
+        margin-top: 15px;
+    }
+
+    .languages button {
+        padding: 8px 10px;
+        font-size: 13px;
+    }
+
+    /* MOBILE TOP MENU */
+
+    nav {
+        justify-content: flex-start;
+
+        padding: 8px;
+
+        gap: 7px;
+
+        box-shadow:
+            0 3px 12px rgba(0,0,0,0.18);
+    }
+
+    nav a {
+        padding: 10px 13px;
+        font-size: 13px;
+        border-radius: 11px;
+    }
+
+    nav a.active {
+        box-shadow:
+            0 3px 9px rgba(7,91,52,0.35);
+    }
+
+    .hero {
+        padding: 40px 15px 35px;
     }
 
     .hero h1 {
@@ -307,6 +445,14 @@ footer {
 
     .search-box button {
         margin-top: 7px;
+    }
+
+    .section-title {
+        font-size: 26px;
+    }
+
+    .future {
+        padding: 20px;
     }
 }
 </style>
@@ -339,15 +485,39 @@ footer {
 
 </header>
 
-<nav>
+<!-- =========================
+     TOP MENU
+========================= -->
 
-    <a href="#production" data-i18n="navProduction">🏭 Производство</a>
-    <a href="#problems" data-i18n="navProblems">🛠️ Проблемы</a>
-    <a href="#parts" data-i18n="navParts">🔩 Запчасти</a>
-    <a href="#companies" data-i18n="navCompanies">🏢 Компании</a>
-    <a href="#community" data-i18n="navCommunity">👥 Сообщество</a>
-    <a href="#jobs" data-i18n="navJobs">💼 Работа</a>
-    <a href="#training" data-i18n="navTraining">📚 Обучение</a>
+<nav id="mainNav">
+
+    <a href="#production" data-i18n="navProduction">
+        🏭 Производство
+    </a>
+
+    <a href="#problems" data-i18n="navProblems">
+        🛠️ Проблемы
+    </a>
+
+    <a href="#parts" data-i18n="navParts">
+        🔩 Запчасти
+    </a>
+
+    <a href="#companies" data-i18n="navCompanies">
+        🏢 Компании
+    </a>
+
+    <a href="#community" data-i18n="navCommunity">
+        👥 Сообщество
+    </a>
+
+    <a href="#jobs" data-i18n="navJobs">
+        💼 Работа
+    </a>
+
+    <a href="#training" data-i18n="navTraining">
+        📚 Обучение
+    </a>
 
 </nav>
 
@@ -481,10 +651,8 @@ footer {
         <div class="industry">⚡ Welding</div>
         <div class="industry">🤖 Robotics</div>
         <div class="industry">🎛️ Automation</div>
-
         <div class="industry">🛢️ Oil & Gas</div>
         <div class="industry">🚢 Shipbuilding</div>
-
         <div class="industry">🚗 Automotive</div>
         <div class="industry">📱 Smartphones</div>
         <div class="industry">💻 Computers & Laptops</div>
@@ -579,6 +747,10 @@ footer {
 
 
 <script>
+
+/* =====================================================
+   TRANSLATIONS
+===================================================== */
 
 const translations = {
 
@@ -1185,6 +1357,10 @@ footerText: "Plateforme Mondiale de Production et d'Industrie"
 };
 
 
+/* =====================================================
+   LANGUAGE
+===================================================== */
+
 function setLanguage(lang) {
 
     const data = translations[lang];
@@ -1234,6 +1410,10 @@ function setLanguage(lang) {
 }
 
 
+/* =====================================================
+   LANGUAGE BUTTONS
+===================================================== */
+
 document.querySelectorAll(".languages button").forEach(button => {
 
     button.addEventListener("click", function() {
@@ -1244,6 +1424,138 @@ document.querySelectorAll(".languages button").forEach(button => {
 
 });
 
+
+/* =====================================================
+   ACTIVE TOP MENU
+===================================================== */
+
+const menuLinks = document.querySelectorAll("#mainNav a");
+
+function setActiveMenu(link) {
+
+    menuLinks.forEach(item => {
+        item.classList.remove("active");
+    });
+
+    if (link) {
+        link.classList.add("active");
+
+        /*
+         * На телефоне автоматически прокручиваем
+         * выбранную кнопку в центр меню.
+         */
+        link.scrollIntoView({
+            behavior: "smooth",
+            block: "nearest",
+            inline: "center"
+        });
+    }
+}
+
+
+/*
+ * Нажатие на пункт меню
+ */
+
+menuLinks.forEach(link => {
+
+    link.addEventListener("click", function() {
+
+        setActiveMenu(this);
+
+    });
+
+});
+
+
+/*
+ * Автоматическая подсветка раздела
+ * во время прокрутки страницы.
+ */
+
+const menuSections = Array.from(menuLinks)
+    .map(link => {
+
+        const id = link.getAttribute("href");
+
+        if (!id || id === "#") {
+            return null;
+        }
+
+        return document.querySelector(id);
+
+    })
+    .filter(section => section !== null);
+
+
+function updateActiveMenuOnScroll() {
+
+    const nav = document.getElementById("mainNav");
+
+    if (!nav) return;
+
+    const navHeight = nav.offsetHeight;
+
+    let currentSection = null;
+
+    menuSections.forEach(section => {
+
+        const rect = section.getBoundingClientRect();
+
+        if (rect.top <= navHeight + 120) {
+            currentSection = section;
+        }
+
+    });
+
+    if (!currentSection) {
+        return;
+    }
+
+    const currentId = "#" + currentSection.id;
+
+    const activeLink =
+        document.querySelector(
+            '#mainNav a[href="' + currentId + '"]'
+        );
+
+    if (activeLink &&
+        !activeLink.classList.contains("active")) {
+
+        menuLinks.forEach(link => {
+            link.classList.remove("active");
+        });
+
+        activeLink.classList.add("active");
+    }
+
+}
+
+
+/*
+ * Не запускаем слишком часто.
+ */
+
+let scrollTimer = null;
+
+window.addEventListener("scroll", function() {
+
+    if (scrollTimer) return;
+
+    scrollTimer = setTimeout(function() {
+
+        updateActiveMenuOnScroll();
+
+        scrollTimer = null;
+
+    }, 50);
+
+});
+
+
+/* =====================================================
+   SEARCH
+===================================================== */
 
 function searchSite() {
 
@@ -1313,19 +1625,39 @@ function searchSite() {
 }
 
 
-document.getElementById("searchInput").addEventListener("keydown", function(event) {
+/* =====================================================
+   ENTER = SEARCH
+===================================================== */
 
-    if (event.key === "Enter") {
-        searchSite();
+document.getElementById("searchInput").addEventListener(
+    "keydown",
+    function(event) {
+
+        if (event.key === "Enter") {
+            searchSite();
+        }
+
     }
+);
 
-});
 
+/* =====================================================
+   START
+===================================================== */
 
 const savedLanguage =
 localStorage.getItem("workerProLanguage") || "ru";
 
 setLanguage(savedLanguage);
+
+
+/*
+ * По умолчанию активным является первый раздел.
+ */
+
+if (menuLinks.length > 0) {
+    setActiveMenu(menuLinks[0]);
+}
 
 </script>
 
