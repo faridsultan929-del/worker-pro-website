@@ -1,1 +1,519 @@
- 
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WORKER PRO — Global Industrial Platform</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f7f5;
+    color: #123524;
+}
+
+/* ===== TOP LANGUAGE BAR ===== */
+
+.top-bar {
+    background: #063d25;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.logo-text {
+    color: #b7ff35;
+    font-size: 21px;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.lang {
+    color: white;
+    border: 1px solid #4c8065;
+    border-radius: 7px;
+    padding: 7px 10px;
+    font-size: 13px;
+    cursor: pointer;
+    background: #0b6b3d;
+}
+
+.lang:hover {
+    background: #b7ff35;
+    color: #063d25;
+}
+
+/* ===== HEADER ===== */
+
+header {
+    background: white;
+    padding: 18px 15px;
+    text-align: center;
+    border-bottom: 1px solid #dce6df;
+}
+
+header h1 {
+    color: #063d25;
+    font-size: 32px;
+}
+
+header p {
+    margin-top: 7px;
+    color: #557064;
+    font-size: 15px;
+}
+
+/* ===== NAVIGATION ===== */
+
+nav {
+    background: #0b6b3d;
+    display: flex;
+    overflow-x: auto;
+    padding: 10px;
+    gap: 8px;
+    white-space: nowrap;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    padding: 9px 13px;
+    border-radius: 7px;
+    background: #075b34;
+    font-size: 14px;
+}
+
+nav a:hover {
+    background: #b7ff35;
+    color: #063d25;
+}
+
+/* ===== HERO ===== */
+
+.hero {
+    background: linear-gradient(135deg, #063d25, #0b6b3d);
+    color: white;
+    padding: 45px 18px;
+    text-align: center;
+}
+
+.hero h2 {
+    font-size: 34px;
+    margin-bottom: 12px;
+}
+
+.hero p {
+    max-width: 700px;
+    margin: auto;
+    line-height: 1.6;
+    color: #e9f5ed;
+}
+
+/* ===== SEARCH ===== */
+
+.search-box {
+    max-width: 900px;
+    margin: 25px auto 0;
+    display: flex;
+    gap: 8px;
+}
+
+.search-box input {
+    flex: 1;
+    padding: 15px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.search-box button {
+    padding: 15px 22px;
+    border: none;
+    border-radius: 8px;
+    background: #b7ff35;
+    color: #063d25;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* ===== FILTERS ===== */
+
+.filters {
+    max-width: 900px;
+    margin: 15px auto 0;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.filters select {
+    padding: 11px;
+    border-radius: 7px;
+    border: none;
+    min-width: 150px;
+}
+
+/* ===== MAIN ===== */
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 35px 15px;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.section-title h2 {
+    color: #063d25;
+    font-size: 27px;
+}
+
+.section-title p {
+    margin-top: 7px;
+    color: #65776c;
+}
+
+/* ===== CARDS ===== */
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 15px;
+}
+
+.card {
+    background: white;
+    border-radius: 12px;
+    padding: 23px 15px;
+    text-align: center;
+    text-decoration: none;
+    color: #123524;
+    border: 1px solid #dce6df;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+    transition: 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    border-color: #0b6b3d;
+}
+
+.card .icon {
+    font-size: 35px;
+    margin-bottom: 10px;
+}
+
+.card h3 {
+    color: #063d25;
+    margin-bottom: 7px;
+}
+
+.card p {
+    font-size: 13px;
+    color: #65776c;
+    line-height: 1.4;
+}
+
+/* ===== GLOBAL SECTION ===== */
+
+.global {
+    background: #063d25;
+    color: white;
+    text-align: center;
+    padding: 45px 20px;
+}
+
+.global h2 {
+    color: #b7ff35;
+    margin-bottom: 12px;
+}
+
+.global p {
+    max-width: 750px;
+    margin: auto;
+    line-height: 1.6;
+}
+
+/* ===== FOOTER ===== */
+
+footer {
+    background: #032b1a;
+    color: #b9c9c0;
+    text-align: center;
+    padding: 25px 15px;
+    font-size: 13px;
+}
+
+footer strong {
+    color: #b7ff35;
+}
+
+/* ===== MOBILE ===== */
+
+@media (max-width: 600px) {
+
+    header h1 {
+        font-size: 26px;
+    }
+
+    .hero h2 {
+        font-size: 27px;
+    }
+
+    .search-box {
+        flex-direction: column;
+    }
+
+    .search-box button {
+        width: 100%;
+    }
+
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .card {
+        padding: 18px 8px;
+    }
+
+    .card .icon {
+        font-size: 29px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ===== LANGUAGE BAR ===== -->
+
+<div class="top-bar">
+
+    <div class="logo-text">WORKER PRO</div>
+
+    <button class="lang">🇦🇿 AZ</button>
+    <button class="lang">🇷🇺 RU</button>
+    <button class="lang">🇬🇧 EN</button>
+    <button class="lang">🇹🇷 TR</button>
+    <button class="lang">🇩🇪 DE</button>
+    <button class="lang">🇸🇦 AR</button>
+    <button class="lang">🇪🇸 ES</button>
+    <button class="lang">🇫🇷 FR</button>
+    <button class="lang">🇮🇹 IT</button>
+
+</div>
+
+<!-- ===== HEADER ===== -->
+
+<header>
+    <h1>WORKER PRO</h1>
+    <p>Глобальная промышленная платформа</p>
+</header>
+
+<!-- ===== NAV ===== -->
+
+<nav>
+
+    <a href="production/index.html">🏭 Производство</a>
+    <a href="problems/index.html">⚠️ Проблемы</a>
+    <a href="spare-parts/index.html">⚙️ Запчасти</a>
+    <a href="companies/index.html">🏢 Компании</a>
+    <a href="suppliers/index.html">📦 Поставщики</a>
+    <a href="products/index.html">🔧 Товары</a>
+    <a href="orders/index.html">📋 Заказы</a>
+    <a href="community/index.html">👥 Сообщество</a>
+    <a href="jobs/index.html">💼 Работа</a>
+    <a href="training/index.html">🎓 Обучение</a>
+
+</nav>
+
+<!-- ===== HERO ===== -->
+
+<section class="hero">
+
+    <h2>Работа. Знания. Производство.</h2>
+
+    <p>
+        Международная промышленная платформа
+        для рабочих, инженеров, мастеров,
+        производителей, поставщиков и компаний.
+    </p>
+
+    <div class="search-box">
+
+        <input
+            type="text"
+            placeholder="🔎 Поиск: насос, станок, подшипник, запчасть..."
+        >
+
+        <button>Поиск</button>
+
+    </div>
+
+    <div class="filters">
+
+        <select>
+            <option>🌍 Все страны</option>
+            <option>🇦🇿 Azerbaijan</option>
+            <option>🇹🇷 Turkey</option>
+            <option>🇷🇺 Russia</option>
+            <option>🇩🇪 Germany</option>
+            <option>🇨🇳 China</option>
+            <option>🇺🇸 USA</option>
+            <option>🌎 Other</option>
+        </select>
+
+        <select>
+            <option>📍 Все города</option>
+            <option>Baku</option>
+            <option>Ganja</option>
+            <option>Sumqayit</option>
+            <option>Other</option>
+        </select>
+
+    </div>
+
+</section>
+
+<!-- ===== MAIN SECTIONS ===== -->
+
+<main class="container">
+
+    <div class="section-title">
+
+        <h2>Основные разделы</h2>
+
+        <p>
+            Найдите производство, оборудование,
+            специалистов, компании и обучение.
+        </p>
+
+    </div>
+
+    <div class="grid">
+
+        <a class="card" href="production/index.html">
+            <div class="icon">🏭</div>
+            <h3>Производство</h3>
+            <p>Производственные технологии и отрасли</p>
+        </a>
+
+        <a class="card" href="problems/index.html">
+            <div class="icon">⚠️</div>
+            <h3>Проблемы</h3>
+            <p>Поиск решений производственных проблем</p>
+        </a>
+
+        <a class="card" href="spare-parts/index.html">
+            <div class="icon">⚙️</div>
+            <h3>Запчасти</h3>
+            <p>Промышленные запчасти и комплектующие</p>
+        </a>
+
+        <a class="card" href="companies/index.html">
+            <div class="icon">🏢</div>
+            <h3>Компании</h3>
+            <p>Производители и промышленные компании</p>
+        </a>
+
+        <a class="card" href="suppliers/index.html">
+            <div class="icon">📦</div>
+            <h3>Поставщики</h3>
+            <p>Поставщики продукции из разных стран</p>
+        </a>
+
+        <a class="card" href="products/index.html">
+            <div class="icon">🔧</div>
+            <h3>Товары</h3>
+            <p>Промышленное оборудование и товары</p>
+        </a>
+
+        <a class="card" href="orders/index.html">
+            <div class="icon">📋</div>
+            <h3>Заказы</h3>
+            <p>Запросы и заказы промышленной продукции</p>
+        </a>
+
+        <a class="card" href="community/index.html">
+            <div class="icon">👥</div>
+            <h3>Сообщество</h3>
+            <p>Рабочие, инженеры и специалисты</p>
+        </a>
+
+        <a class="card" href="specialists/index.html">
+            <div class="icon">👷</div>
+            <h3>Специалисты</h3>
+            <p>Поиск специалистов разных отраслей</p>
+        </a>
+
+        <a class="card" href="jobs/index.html">
+            <div class="icon">💼</div>
+            <h3>Работа</h3>
+            <p>Вакансии и возможности для специалистов</p>
+        </a>
+
+        <a class="card" href="training/index.html">
+            <div class="icon">🎓</div>
+            <h3>Обучение</h3>
+            <p>Промышленное обучение и технологии</p>
+        </a>
+
+        <a class="card" href="transport/index.html">
+            <div class="icon">🚚</div>
+            <h3>Транспорт</h3>
+            <p>Местная и международная доставка</p>
+        </a>
+
+    </div>
+
+</main>
+
+<!-- ===== GLOBAL NETWORK ===== -->
+
+<section class="global">
+
+    <h2>🌍 WORKER PRO — промышленный мир в одном месте</h2>
+
+    <p>
+        Компании, производители, поставщики,
+        специалисты, оборудование, запчасти,
+        обучение и международная торговля —
+        всё объединено на одной платформе.
+    </p>
+
+</section>
+
+<!-- ===== FOOTER ===== -->
+
+<footer>
+
+    <p>
+        <strong>WORKER PRO</strong>
+    </p>
+
+    <p>
+        Global Industrial Platform
+    </p>
+
+    <p>
+        © 2026 WORKER PRO · F.S
+    </p>
+
+</footer>
+
+</body>
+</html>
