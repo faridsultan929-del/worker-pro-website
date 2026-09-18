@@ -19,14 +19,14 @@ body {
     color: #123524;
 }
 
-/* ===== TOP LANGUAGE BAR ===== */
+/* ===== LANGUAGE BAR ===== */
 
 .top-bar {
     background: #063d25;
     padding: 10px 15px;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 7px;
     overflow-x: auto;
     white-space: nowrap;
 }
@@ -35,7 +35,8 @@ body {
     color: #b7ff35;
     font-size: 21px;
     font-weight: bold;
-    margin-right: 10px;
+    margin-right: 8px;
+    flex-shrink: 0;
 }
 
 .lang {
@@ -46,6 +47,7 @@ body {
     font-size: 13px;
     cursor: pointer;
     background: #0b6b3d;
+    flex-shrink: 0;
 }
 
 .lang:hover {
@@ -73,7 +75,7 @@ header p {
     font-size: 15px;
 }
 
-/* ===== NAVIGATION ===== */
+/* ===== NAV ===== */
 
 nav {
     background: #0b6b3d;
@@ -91,6 +93,7 @@ nav a {
     border-radius: 7px;
     background: #075b34;
     font-size: 14px;
+    flex-shrink: 0;
 }
 
 nav a:hover {
@@ -113,7 +116,7 @@ nav a:hover {
 }
 
 .hero p {
-    max-width: 700px;
+    max-width: 760px;
     margin: auto;
     line-height: 1.6;
     color: #e9f5ed;
@@ -228,7 +231,7 @@ nav a:hover {
     line-height: 1.4;
 }
 
-/* ===== GLOBAL SECTION ===== */
+/* ===== GLOBAL ===== */
 
 .global {
     background: #063d25;
@@ -262,12 +265,29 @@ footer strong {
     color: #b7ff35;
 }
 
+footer p {
+    margin: 5px 0;
+}
+
+/* ===== RTL ===== */
+
+body[dir="rtl"] {
+    text-align: right;
+}
+
+body[dir="rtl"] .hero,
+body[dir="rtl"] .section-title,
+body[dir="rtl"] .global,
+body[dir="rtl"] footer {
+    text-align: center;
+}
+
 /* ===== MOBILE ===== */
 
 @media (max-width: 600px) {
 
     header h1 {
-        font-size: 26px;
+        font-size: 27px;
     }
 
     .hero h2 {
@@ -293,6 +313,14 @@ footer strong {
     .card .icon {
         font-size: 29px;
     }
+
+    .card h3 {
+        font-size: 16px;
+    }
+
+    .card p {
+        font-size: 12px;
+    }
 }
 </style>
 </head>
@@ -305,39 +333,53 @@ footer strong {
 
     <div class="logo-text">WORKER PRO</div>
 
-    <button class="lang">🇦🇿 AZ</button>
-    <button class="lang">🇷🇺 RU</button>
-    <button class="lang">🇬🇧 EN</button>
-    <button class="lang">🇹🇷 TR</button>
-    <button class="lang">🇩🇪 DE</button>
-    <button class="lang">🇸🇦 AR</button>
-    <button class="lang">🇪🇸 ES</button>
-    <button class="lang">🇫🇷 FR</button>
-    <button class="lang">🇮🇹 IT</button>
+    <button class="lang" onclick="setLanguage('AZ')">🇦🇿 AZ</button>
+    <button class="lang" onclick="setLanguage('RU')">🇷🇺 RU</button>
+    <button class="lang" onclick="setLanguage('EN')">🇬🇧 EN</button>
+    <button class="lang" onclick="setLanguage('TR')">🇹🇷 TR</button>
+    <button class="lang" onclick="setLanguage('DE')">🇩🇪 DE</button>
+    <button class="lang" onclick="setLanguage('AR')">🇸🇦 AR</button>
+    <button class="lang" onclick="setLanguage('ES')">🇪🇸 ES</button>
+    <button class="lang" onclick="setLanguage('FR')">🇫🇷 FR</button>
+    <button class="lang" onclick="setLanguage('IT')">🇮🇹 IT</button>
 
 </div>
 
 <!-- ===== HEADER ===== -->
 
 <header>
+
     <h1>WORKER PRO</h1>
-    <p>Глобальная промышленная платформа</p>
+
+    <p data-lang="platform">
+        Глобальная промышленная платформа
+    </p>
+
 </header>
 
-<!-- ===== NAV ===== -->
+<!-- ===== NAVIGATION ===== -->
 
 <nav>
 
-    <a href="production/index.html">🏭 Производство</a>
-    <a href="problems/index.html">⚠️ Проблемы</a>
-    <a href="spare-parts/index.html">⚙️ Запчасти</a>
-    <a href="companies/index.html">🏢 Компании</a>
-    <a href="suppliers/index.html">📦 Поставщики</a>
-    <a href="products/index.html">🔧 Товары</a>
-    <a href="orders/index.html">📋 Заказы</a>
-    <a href="community/index.html">👥 Сообщество</a>
-    <a href="jobs/index.html">💼 Работа</a>
-    <a href="training/index.html">🎓 Обучение</a>
+    <a href="production/index.html" data-lang="production">🏭 Производство</a>
+
+    <a href="problems/index.html" data-lang="problems">⚠️ Проблемы</a>
+
+    <a href="spare-parts/index.html" data-lang="spareParts">⚙️ Запчасти</a>
+
+    <a href="companies/index.html" data-lang="companies">🏢 Компании</a>
+
+    <a href="suppliers/index.html" data-lang="suppliers">📦 Поставщики</a>
+
+    <a href="products/index.html" data-lang="products">🔧 Товары</a>
+
+    <a href="orders/index.html" data-lang="orders">📋 Заказы</a>
+
+    <a href="community/index.html" data-lang="community">👥 Сообщество</a>
+
+    <a href="jobs/index.html" data-lang="jobs">💼 Работа</a>
+
+    <a href="training/index.html" data-lang="training">🎓 Обучение</a>
 
 </nav>
 
@@ -345,29 +387,37 @@ footer strong {
 
 <section class="hero">
 
-    <h2>Работа. Знания. Производство.</h2>
+    <h2 data-lang="hero">
+        Работа. Знания. Производство.
+    </h2>
 
-    <p>
-        Международная промышленная платформа
-        для рабочих, инженеров, мастеров,
-        производителей, поставщиков и компаний.
+    <p data-lang="description">
+        Международная промышленная платформа для рабочих,
+        инженеров, мастеров, производителей,
+        поставщиков и компаний.
     </p>
 
     <div class="search-box">
 
         <input
             type="text"
-            placeholder="🔎 Поиск: насос, станок, подшипник, запчасть..."
+            data-placeholder="search"
+            placeholder="Поиск: насос, станок, подшипник, запчасть..."
         >
 
-        <button>Поиск</button>
+        <button data-lang="searchButton">
+            Поиск
+        </button>
 
     </div>
 
     <div class="filters">
 
         <select>
-            <option>🌍 Все страны</option>
+            <option data-lang="allCountries">
+                🌍 Все страны
+            </option>
+
             <option>🇦🇿 Azerbaijan</option>
             <option>🇹🇷 Turkey</option>
             <option>🇷🇺 Russia</option>
@@ -378,11 +428,16 @@ footer strong {
         </select>
 
         <select>
-            <option>📍 Все города</option>
+
+            <option data-lang="allCities">
+                📍 Все города
+            </option>
+
             <option>Baku</option>
             <option>Ganja</option>
             <option>Sumqayit</option>
             <option>Other</option>
+
         </select>
 
     </div>
@@ -395,9 +450,11 @@ footer strong {
 
     <div class="section-title">
 
-        <h2>Основные разделы</h2>
+        <h2 data-lang="sections">
+            Основные разделы
+        </h2>
 
-        <p>
+        <p data-lang="sectionsText">
             Найдите производство, оборудование,
             специалистов, компании и обучение.
         </p>
@@ -408,73 +465,73 @@ footer strong {
 
         <a class="card" href="production/index.html">
             <div class="icon">🏭</div>
-            <h3>Производство</h3>
+            <h3 data-lang="production">Производство</h3>
             <p>Производственные технологии и отрасли</p>
         </a>
 
         <a class="card" href="problems/index.html">
             <div class="icon">⚠️</div>
-            <h3>Проблемы</h3>
+            <h3 data-lang="problems">Проблемы</h3>
             <p>Поиск решений производственных проблем</p>
         </a>
 
         <a class="card" href="spare-parts/index.html">
             <div class="icon">⚙️</div>
-            <h3>Запчасти</h3>
+            <h3 data-lang="spareParts">Запчасти</h3>
             <p>Промышленные запчасти и комплектующие</p>
         </a>
 
         <a class="card" href="companies/index.html">
             <div class="icon">🏢</div>
-            <h3>Компании</h3>
+            <h3 data-lang="companies">Компании</h3>
             <p>Производители и промышленные компании</p>
         </a>
 
         <a class="card" href="suppliers/index.html">
             <div class="icon">📦</div>
-            <h3>Поставщики</h3>
+            <h3 data-lang="suppliers">Поставщики</h3>
             <p>Поставщики продукции из разных стран</p>
         </a>
 
         <a class="card" href="products/index.html">
             <div class="icon">🔧</div>
-            <h3>Товары</h3>
+            <h3 data-lang="products">Товары</h3>
             <p>Промышленное оборудование и товары</p>
         </a>
 
         <a class="card" href="orders/index.html">
             <div class="icon">📋</div>
-            <h3>Заказы</h3>
+            <h3 data-lang="orders">Заказы</h3>
             <p>Запросы и заказы промышленной продукции</p>
         </a>
 
         <a class="card" href="community/index.html">
             <div class="icon">👥</div>
-            <h3>Сообщество</h3>
+            <h3 data-lang="community">Сообщество</h3>
             <p>Рабочие, инженеры и специалисты</p>
         </a>
 
         <a class="card" href="specialists/index.html">
             <div class="icon">👷</div>
-            <h3>Специалисты</h3>
+            <h3 data-lang="specialists">Специалисты</h3>
             <p>Поиск специалистов разных отраслей</p>
         </a>
 
         <a class="card" href="jobs/index.html">
             <div class="icon">💼</div>
-            <h3>Работа</h3>
+            <h3 data-lang="jobs">Работа</h3>
             <p>Вакансии и возможности для специалистов</p>
         </a>
 
         <a class="card" href="training/index.html">
             <div class="icon">🎓</div>
-            <h3>Обучение</h3>
+            <h3 data-lang="training">Обучение</h3>
             <p>Промышленное обучение и технологии</p>
         </a>
 
         <a class="card" href="transport/index.html">
             <div class="icon">🚚</div>
-            <h3>Транспорт</h3>
+            <h3 data-lang="transport">Транспорт</h3>
             <p>Местная и международная доставка</p>
         </a>
 
@@ -482,13 +539,15 @@ footer strong {
 
 </main>
 
-<!-- ===== GLOBAL NETWORK ===== -->
+<!-- ===== GLOBAL ===== -->
 
 <section class="global">
 
-    <h2>🌍 WORKER PRO — промышленный мир в одном месте</h2>
+    <h2 data-lang="globalTitle">
+        🌍 WORKER PRO — промышленный мир в одном месте
+    </h2>
 
-    <p>
+    <p data-lang="globalText">
         Компании, производители, поставщики,
         специалисты, оборудование, запчасти,
         обучение и международная торговля —
@@ -514,6 +573,10 @@ footer strong {
     </p>
 
 </footer>
+
+<!-- ===== LANGUAGE SYSTEM ===== -->
+
+<script src="language.js"></script>
 
 </body>
 </html>
