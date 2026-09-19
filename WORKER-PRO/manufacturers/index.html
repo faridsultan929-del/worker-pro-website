@@ -1,1 +1,657 @@
- 
+ <!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WORKER PRO — Manufacturers</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f7f5;
+    color: #123;
+}
+
+.top-languages {
+    background: #063d25;
+    padding: 10px;
+    text-align: center;
+}
+
+.top-languages a {
+    display: inline-block;
+    background: #0b6b3d;
+    color: white;
+    text-decoration: none;
+    padding: 8px 12px;
+    margin: 3px;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+.top-languages a:hover {
+    background: #b7ff35;
+    color: #063d25;
+}
+
+header {
+    background: linear-gradient(135deg, #063d25, #0b6b3d);
+    color: white;
+    text-align: center;
+    padding: 35px 20px;
+}
+
+header h1 {
+    margin: 5px 0;
+    font-size: 38px;
+}
+
+header p {
+    max-width: 900px;
+    margin: 10px auto;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+nav {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: #075b34;
+    padding: 12px;
+    text-align: center;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 5px 8px;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: #b7ff35;
+}
+
+.container {
+    max-width: 1150px;
+    margin: auto;
+    padding: 25px 15px;
+}
+
+.hero {
+    background: white;
+    padding: 30px;
+    border-radius: 18px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.hero h2 {
+    color: #075b34;
+    font-size: 30px;
+}
+
+.search {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #0b6b3d;
+    border-radius: 10px;
+    font-size: 16px;
+    margin-top: 15px;
+}
+
+.filters {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 12px;
+    margin-top: 15px;
+}
+
+.filters select {
+    padding: 13px;
+    border: 1px solid #b7cfc1;
+    border-radius: 10px;
+    background: white;
+    font-size: 15px;
+}
+
+.section-title {
+    text-align: center;
+    color: #075b34;
+    font-size: 28px;
+    margin: 35px 0 20px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 18px;
+}
+
+.card {
+    background: white;
+    padding: 22px;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    border-left: 5px solid #0b6b3d;
+}
+
+.card h3 {
+    color: #075b34;
+    margin-top: 0;
+}
+
+.card p {
+    line-height: 1.6;
+}
+
+.badge {
+    display: inline-block;
+    background: #e9f4ed;
+    color: #075b34;
+    padding: 7px 10px;
+    border-radius: 15px;
+    margin: 4px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.profile {
+    background: white;
+    padding: 25px;
+    border-radius: 16px;
+    margin: 15px 0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    border-left: 6px solid #0b6b3d;
+}
+
+.profile h3 {
+    color: #075b34;
+    margin-top: 0;
+}
+
+.step {
+    background: white;
+    padding: 20px;
+    margin: 12px 0;
+    border-radius: 14px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.07);
+    border-left: 6px solid #0b6b3d;
+}
+
+.step strong {
+    color: #075b34;
+    font-size: 18px;
+}
+
+.info {
+    background: #063d25;
+    color: white;
+    padding: 28px;
+    border-radius: 18px;
+    margin-top: 30px;
+}
+
+.info h2 {
+    color: #b7ff35;
+}
+
+.countries {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.country {
+    background: #0b6b3d;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 20px;
+}
+
+footer {
+    background: #063d25;
+    color: white;
+    text-align: center;
+    padding: 25px;
+    margin-top: 40px;
+}
+
+@media (max-width: 600px) {
+    header h1 {
+        font-size: 30px;
+    }
+
+    nav a {
+        display: inline-block;
+        margin: 5px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="top-languages">
+    <a href="#">AZ</a>
+    <a href="#">RU</a>
+    <a href="#">EN</a>
+    <a href="#">TR</a>
+    <a href="#">DE</a>
+    <a href="#">AR</a>
+    <a href="#">ES</a>
+    <a href="#">FR</a>
+    <a href="#">IT</a>
+</div>
+
+<header>
+
+    <h1>🏭 WORKER PRO</h1>
+
+    <p>
+        Международный каталог производителей
+        промышленного оборудования, запчастей,
+        технологий и материалов.
+    </p>
+
+</header>
+
+<nav>
+    <a href="../production/index.html">Производство</a>
+    <a href="../problems/index.html">Проблемы</a>
+    <a href="../spare-parts/index.html">Запчасти</a>
+    <a href="../products/index.html">Товары</a>
+    <a href="../equipment/index.html">Оборудование</a>
+    <a href="../companies/index.html">Компании</a>
+    <a href="../suppliers/index.html">Поставщики</a>
+    <a href="../orders/index.html">Заказы</a>
+    <a href="../community/index.html">Сообщество</a>
+    <a href="../specialists/index.html">Специалисты</a>
+    <a href="../jobs/index.html">Работа</a>
+    <a href="../training/index.html">Обучение</a>
+    <a href="../transport/index.html">Транспорт</a>
+    <a href="../services/index.html">Услуги</a>
+    <a href="../maintenance/index.html">Обслуживание</a>
+</nav>
+
+<main class="container">
+
+<section class="hero">
+
+    <h2>🏭 Найти производителя</h2>
+
+    <p>
+        Поиск компаний, которые производят
+        оборудование, станки, запчасти,
+        промышленные системы и материалы.
+    </p>
+
+    <input
+        class="search"
+        type="text"
+        placeholder="Поиск производителя: CNC, насосы, клапаны..."
+    >
+
+    <div class="filters">
+
+        <select>
+            <option>Страна</option>
+            <option>Азербайджан</option>
+            <option>Турция</option>
+            <option>Германия</option>
+            <option>Италия</option>
+            <option>Китай</option>
+            <option>Япония</option>
+            <option>США</option>
+            <option>Россия</option>
+        </select>
+
+        <select>
+            <option>Отрасль</option>
+            <option>Машиностроение</option>
+            <option>Нефть и газ</option>
+            <option>Металлургия</option>
+            <option>Энергетика</option>
+            <option>Автоматизация</option>
+            <option>Химическая промышленность</option>
+        </select>
+
+        <select>
+            <option>Продукция</option>
+            <option>Станки</option>
+            <option>Насосы</option>
+            <option>Клапаны</option>
+            <option>Датчики</option>
+            <option>Гидравлика</option>
+            <option>Электрооборудование</option>
+        </select>
+
+    </div>
+
+</section>
+
+<h2 class="section-title">🏭 Категории производителей</h2>
+
+<div class="grid">
+
+    <div class="card">
+        <h3>⚙️ Станки</h3>
+        <p>
+            Производители CNC, токарных,
+            фрезерных и других станков.
+        </p>
+        <span class="badge">CNC</span>
+        <span class="badge">Machines</span>
+    </div>
+
+    <div class="card">
+        <h3>💧 Насосы</h3>
+        <p>
+            Производители промышленных насосов
+            для различных производственных систем.
+        </p>
+        <span class="badge">Pumps</span>
+    </div>
+
+    <div class="card">
+        <h3>🔩 Клапаны</h3>
+        <p>
+            Промышленные клапаны, арматура
+            и системы управления потоком.
+        </p>
+        <span class="badge">Valves</span>
+    </div>
+
+    <div class="card">
+        <h3>📡 Датчики</h3>
+        <p>
+            Датчики давления, температуры,
+            положения, уровня и другие.
+        </p>
+        <span class="badge">Sensors</span>
+    </div>
+
+    <div class="card">
+        <h3>💧 Гидравлика</h3>
+        <p>
+            Гидронасосы, цилиндры, клапаны,
+            гидростанции и комплектующие.
+        </p>
+        <span class="badge">Hydraulic</span>
+    </div>
+
+    <div class="card">
+        <h3>🤖 Автоматизация</h3>
+        <p>
+            PLC, контроллеры, роботы,
+            датчики и системы управления.
+        </p>
+        <span class="badge">Automation</span>
+    </div>
+
+    <div class="card">
+        <h3>🔥 Печи</h3>
+        <p>
+            Промышленные печи для нагрева,
+            термообработки и производства.
+        </p>
+        <span class="badge">Furnace</span>
+    </div>
+
+    <div class="card">
+        <h3>⚡ Электрооборудование</h3>
+        <p>
+            Электродвигатели, шкафы управления,
+            преобразователи и электрические системы.
+        </p>
+        <span class="badge">Electrical</span>
+    </div>
+
+</div>
+
+<h2 class="section-title">🌐 Примеры производителей</h2>
+
+<div class="profile">
+
+    <h3>🏭 Производитель промышленного оборудования</h3>
+
+    <p>
+        <strong>Страна:</strong> 🇩🇪 Германия
+    </p>
+
+    <p>
+        <strong>Направление:</strong>
+        CNC оборудование, автоматизация,
+        производственные линии.
+    </p>
+
+    <span class="badge">Manufacturer</span>
+    <span class="badge">CNC</span>
+    <span class="badge">Automation</span>
+
+</div>
+
+<div class="profile">
+
+    <h3>🏭 Производитель насосного оборудования</h3>
+
+    <p>
+        <strong>Страна:</strong> 🇹🇷 Турция
+    </p>
+
+    <p>
+        <strong>Направление:</strong>
+        промышленные насосы,
+        гидравлика и комплектующие.
+    </p>
+
+    <span class="badge">Manufacturer</span>
+    <span class="badge">Pumps</span>
+    <span class="badge">Hydraulic</span>
+
+</div>
+
+<div class="profile">
+
+    <h3>🏭 Производитель промышленной автоматики</h3>
+
+    <p>
+        <strong>Страна:</strong> 🇮🇹 Италия
+    </p>
+
+    <p>
+        <strong>Направление:</strong>
+        датчики, контроллеры,
+        автоматизация производства.
+    </p>
+
+    <span class="badge">Automation</span>
+    <span class="badge">Sensors</span>
+
+</div>
+
+<p style="text-align:center;">
+    <strong>
+        Примеры выше являются демонстрационными.
+        Реальные компании будут добавляться в каталог.
+    </strong>
+</p>
+
+<h2 class="section-title">📋 Профиль производителя</h2>
+
+<div class="grid">
+
+    <div class="card">
+        <h3>🏭 Компания</h3>
+        <p>
+            Название производителя,
+            страна и город.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>⚙️ Продукция</h3>
+        <p>
+            Категории оборудования,
+            запчастей и материалов.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>📋 Сертификаты</h3>
+        <p>
+            Информация о сертификатах
+            и стандартах продукции.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>🌍 Экспорт</h3>
+        <p>
+            Страны и регионы,
+            куда компания поставляет продукцию.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>🚚 Доставка</h3>
+        <p>
+            Возможности местной
+            и международной поставки.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>📞 Контакты</h3>
+        <p>
+            Официальные контакты
+            и связь с отделом продаж.
+        </p>
+    </div>
+
+</div>
+
+<h2 class="section-title">🔄 Как работает каталог</h2>
+
+<div class="step">
+    <strong>1. Производитель регистрируется</strong>
+    <p>
+        Компания создаёт профиль
+        и добавляет информацию о производстве.
+    </p>
+</div>
+
+<div class="step">
+    <strong>2. Добавляет продукцию</strong>
+    <p>
+        В каталог добавляются оборудование,
+        запчасти, материалы и технические решения.
+    </p>
+</div>
+
+<div class="step">
+    <strong>3. Покупатель выполняет поиск</strong>
+    <p>
+        Можно искать производителя
+        по стране, отрасли или продукции.
+    </p>
+</div>
+
+<div class="step">
+    <strong>4. Запрос цены</strong>
+    <p>
+        Покупатель отправляет запрос
+        производителю и указывает необходимое количество.
+    </p>
+</div>
+
+<div class="step">
+    <strong>5. Получение предложения</strong>
+    <p>
+        Производитель предоставляет цену,
+        сроки изготовления и условия поставки.
+    </p>
+</div>
+
+<div class="step">
+    <strong>6. Заказ и доставка</strong>
+    <p>
+        После согласования заказ передаётся
+        в раздел заказов и транспортировки.
+    </p>
+</div>
+
+<section class="info">
+
+    <h2>🌍 Международное производство</h2>
+
+    <p>
+        WORKER PRO предназначен для соединения
+        производителей и промышленных покупателей
+        из разных стран.
+    </p>
+
+    <p>
+        Производитель → Продукт → Покупатель →
+        Запрос → Цена → Заказ → Транспорт.
+    </p>
+
+</section>
+
+<h2 class="section-title">🌎 Страны</h2>
+
+<div class="countries">
+
+    <div class="country">🇦🇿 Азербайджан</div>
+    <div class="country">🇹🇷 Турция</div>
+    <div class="country">🇩🇪 Германия</div>
+    <div class="country">🇮🇹 Италия</div>
+    <div class="country">🇨🇳 Китай</div>
+    <div class="country">🇯🇵 Япония</div>
+    <div class="country">🇰🇷 Южная Корея</div>
+    <div class="country">🇺🇸 США</div>
+    <div class="country">🇫🇷 Франция</div>
+    <div class="country">🇪🇸 Испания</div>
+    <div class="country">🇷🇺 Россия</div>
+
+</div>
+
+<section class="info">
+
+    <h2>🚀 Будущее WORKER PRO Manufacturers</h2>
+
+    <p>
+        Каждый производитель сможет иметь
+        собственную страницу компании с каталогом,
+        технической информацией, контактами
+        и предложениями для покупателей.
+    </p>
+
+    <p>
+        Покупатель сможет находить производителей
+        не только в своей стране, но и на
+        международном рынке.
+    </p>
+
+</section>
+
+</main>
+
+<footer>
+
+    <p>WORKER PRO — Global Industrial Platform</p>
+    <p>🏭 Manufacturers • Production • Industry • Technology</p>
+    <p>F.S</p>
+
+</footer>
+
+</body>
+</html>
