@@ -1,1 +1,679 @@
- 
+ <!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WORKER PRO — Help & Support</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f7f5;
+    color: #123;
+}
+
+.top-languages {
+    background: #063d25;
+    padding: 10px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.top-languages button {
+    background: transparent;
+    color: white;
+    border: 1px solid #b7ff35;
+    border-radius: 20px;
+    padding: 7px 12px;
+    margin: 3px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.top-languages button:hover {
+    background: #b7ff35;
+    color: #063d25;
+}
+
+header {
+    background: linear-gradient(135deg, #063d25, #0b6b3d);
+    color: white;
+    text-align: center;
+    padding: 35px 15px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 34px;
+}
+
+header p {
+    margin: 10px 0 0;
+    font-size: 17px;
+}
+
+nav {
+    background: #075b34;
+    padding: 12px;
+    text-align: center;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 0 8px;
+    display: inline-block;
+}
+
+nav a:hover {
+    color: #b7ff35;
+}
+
+.container {
+    max-width: 1150px;
+    margin: auto;
+    padding: 25px 15px;
+}
+
+.search-box {
+    background: white;
+    padding: 20px;
+    border-radius: 14px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+    margin-bottom: 25px;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 16px;
+}
+
+h2 {
+    color: #063d25;
+    margin-top: 30px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 18px;
+}
+
+.card {
+    background: white;
+    padding: 22px;
+    border-radius: 14px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+}
+
+.card h3 {
+    margin-top: 0;
+    color: #075b34;
+}
+
+.card p {
+    line-height: 1.6;
+}
+
+.card button,
+.action-button {
+    background: #0b6b3d;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.card button:hover,
+.action-button:hover {
+    background: #063d25;
+}
+
+.faq {
+    background: white;
+    border-radius: 12px;
+    margin-bottom: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    overflow: hidden;
+}
+
+.faq-question {
+    padding: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #063d25;
+}
+
+.faq-answer {
+    display: none;
+    padding: 0 17px 17px;
+    line-height: 1.6;
+}
+
+.faq.open .faq-answer {
+    display: block;
+}
+
+.contact-box {
+    background: #063d25;
+    color: white;
+    padding: 25px;
+    border-radius: 14px;
+    margin-top: 25px;
+}
+
+.contact-box h2 {
+    color: #b7ff35;
+    margin-top: 0;
+}
+
+.contact-form {
+    background: white;
+    padding: 22px;
+    border-radius: 14px;
+    margin-top: 20px;
+}
+
+.contact-form input,
+.contact-form select,
+.contact-form textarea {
+    width: 100%;
+    padding: 13px;
+    margin-bottom: 12px;
+    border: 1px solid #ccc;
+    border-radius: 9px;
+    font-size: 15px;
+}
+
+.contact-form textarea {
+    min-height: 130px;
+    resize: vertical;
+}
+
+.steps {
+    counter-reset: step;
+}
+
+.step {
+    background: white;
+    padding: 20px;
+    margin-bottom: 12px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    position: relative;
+    padding-left: 65px;
+}
+
+.step::before {
+    counter-increment: step;
+    content: counter(step);
+    position: absolute;
+    left: 18px;
+    top: 18px;
+    width: 32px;
+    height: 32px;
+    background: #0b6b3d;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.demo {
+    margin-top: 25px;
+    background: #fff8d6;
+    border-left: 5px solid #d5a900;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+footer {
+    background: #063d25;
+    color: white;
+    text-align: center;
+    padding: 25px 15px;
+    margin-top: 40px;
+}
+
+@media (max-width: 600px) {
+    header h1 {
+        font-size: 27px;
+    }
+
+    header p {
+        font-size: 15px;
+    }
+
+    nav a {
+        margin: 0 5px;
+        font-size: 14px;
+    }
+
+    .card {
+        padding: 18px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="top-languages">
+    <button onclick="setLanguage('AZ')">AZ</button>
+    <button onclick="setLanguage('RU')">RU</button>
+    <button onclick="setLanguage('EN')">EN</button>
+    <button onclick="setLanguage('TR')">TR</button>
+    <button onclick="setLanguage('DE')">DE</button>
+    <button onclick="setLanguage('AR')">AR</button>
+    <button onclick="setLanguage('ES')">ES</button>
+    <button onclick="setLanguage('FR')">FR</button>
+    <button onclick="setLanguage('IT')">IT</button>
+</div>
+
+<header>
+    <h1>❓ HELP & SUPPORT</h1>
+    <p>Помощь пользователям WORKER PRO</p>
+</header>
+
+<nav>
+    <a href="../index.html">Главная</a>
+    <a href="../companies/index.html">Компании</a>
+    <a href="../manufacturers/index.html">Производители</a>
+    <a href="../suppliers/index.html">Поставщики</a>
+    <a href="../products/index.html">Товары</a>
+    <a href="../requests/index.html">Заявки</a>
+    <a href="../offers/index.html">Предложения</a>
+    <a href="../orders/index.html">Заказы</a>
+    <a href="../transport/index.html">Доставка</a>
+    <a href="../messages/index.html">Сообщения</a>
+    <a href="../notifications/index.html">Уведомления</a>
+    <a href="../dashboard/index.html">Кабинет</a>
+</nav>
+
+<div class="container">
+
+    <div class="search-box">
+        <h2>🔎 Поиск помощи</h2>
+        <input
+            type="text"
+            id="helpSearch"
+            placeholder="Например: заказ, поставщик, доставка, регистрация..."
+            onkeyup="searchHelp()"
+        >
+    </div>
+
+    <h2>🛠️ Разделы помощи</h2>
+
+    <div class="grid" id="helpCards">
+
+        <div class="card help-card">
+            <h3>👤 Аккаунт</h3>
+            <p>
+                Регистрация, вход, профиль, пароль, язык,
+                настройки пользователя.
+            </p>
+            <button onclick="showInfo('Аккаунт')">Подробнее</button>
+        </div>
+
+        <div class="card help-card">
+            <h3>🏢 Компании</h3>
+            <p>
+                Создание профиля компании, производители,
+                поставщики и специалисты.
+            </p>
+            <button onclick="showInfo('Компании')">Подробнее</button>
+        </div>
+
+        <div class="card help-card">
+            <h3>📦 Товары и запчасти</h3>
+            <p>
+                Поиск промышленных товаров, оборудования,
+                деталей и материалов.
+            </p>
+            <button onclick="showInfo('Товары и запчасти')">Подробнее</button>
+        </div>
+
+        <div class="card help-card">
+            <h3>📋 Заявки</h3>
+            <p>
+                Создание заявки на товар, оборудование,
+                услугу или специалиста.
+            </p>
+            <button onclick="showInfo('Заявки')">Подробнее</button>
+        </div>
+
+        <div class="card help-card">
+            <h3>💰 Предложения</h3>
+            <p>
+                Получение предложений от поставщиков,
+                сравнение цен и условий.
+            </p>
+            <button onclick="showInfo('Предложения')">Подробнее</button>
+        </div>
+
+        <div class="card help-card">
+            <h3>🛒 Заказы</h3>
+            <p>
+                Оформление заказа, документы,
+                статус заказа и получение товара.
+            </p>
+            <button onclick="showInfo('Заказы')">Подробнее</button>
+        </div>
+
+        <div class="card help-card">
+            <h3>🚚 Доставка</h3>
+            <p>
+                Международная и местная доставка,
+                транспорт, документы и отслеживание.
+            </p>
+            <button onclick="showInfo('Доставка')">Подробнее</button>
+        </div>
+
+        <div class="card help-card">
+            <h3>💬 Сообщения</h3>
+            <p>
+                Связь с компаниями, поставщиками,
+                специалистами и покупателями.
+            </p>
+            <button onclick="showInfo('Сообщения')">Подробнее</button>
+        </div>
+
+    </div>
+
+    <h2>❓ Часто задаваемые вопросы</h2>
+
+    <div id="faqList">
+
+        <div class="faq">
+            <div class="faq-question">
+                Как зарегистрироваться на WORKER PRO?
+            </div>
+            <div class="faq-answer">
+                Откройте раздел регистрации и выберите тип аккаунта:
+                специалист, компания, поставщик или производитель.
+            </div>
+        </div>
+
+        <div class="faq">
+            <div class="faq-question">
+                Как найти промышленную запчасть?
+            </div>
+            <div class="faq-answer">
+                Используйте раздел Spare Parts или Marketplace.
+                Можно искать подшипники, насосы, клапаны, датчики,
+                гидравлику, электрику и другие промышленные товары.
+            </div>
+        </div>
+
+        <div class="faq">
+            <div class="faq-question">
+                Как отправить заявку поставщикам?
+            </div>
+            <div class="faq-answer">
+                Откройте раздел Requests, создайте заявку,
+                укажите товар, количество, страну и необходимые условия.
+            </div>
+        </div>
+
+        <div class="faq">
+            <div class="faq-question">
+                Как получить коммерческое предложение?
+            </div>
+            <div class="faq-answer">
+                После отправки заявки поставщики смогут предоставить
+                цену, условия поставки и другую информацию.
+            </div>
+        </div>
+
+        <div class="faq">
+            <div class="faq-question">
+                Можно ли сравнивать предложения?
+            </div>
+            <div class="faq-answer">
+                Да. Предложения можно будет сравнивать по цене,
+                срокам, условиям поставки и другим параметрам.
+            </div>
+        </div>
+
+        <div class="faq">
+            <div class="faq-question">
+                Есть ли международная доставка?
+            </div>
+            <div class="faq-answer">
+                Платформа рассчитана на международные и местные перевозки:
+                автомобильные, морские, авиационные и железнодорожные.
+            </div>
+        </div>
+
+        <div class="faq">
+            <div class="faq-question">
+                Можно ли связаться напрямую с компанией?
+            </div>
+            <div class="faq-answer">
+                Да. Для этого предусмотрен раздел Messages,
+                где пользователи смогут общаться с компаниями,
+                поставщиками и специалистами.
+            </div>
+        </div>
+
+        <div class="faq">
+            <div class="faq-question">
+                WORKER PRO уже работает как полноценный маркетплейс?
+            </div>
+            <div class="faq-answer">
+                Сейчас многие страницы являются демонстрационной версией.
+                Следующий этап — подключение реальной регистрации,
+                базы данных, поиска, сообщений, заказов и оплаты.
+            </div>
+        </div>
+
+    </div>
+
+    <h2>📞 Техническая поддержка</h2>
+
+    <div class="contact-box">
+        <h2>Нужна помощь?</h2>
+
+        <p>
+            Если у вас возникла проблема с аккаунтом, заказом,
+            товаром, поставщиком или доставкой, отправьте обращение
+            в службу поддержки.
+        </p>
+
+        <p>
+            WORKER PRO в будущем сможет использовать систему
+            обращений и тикетов для поддержки пользователей.
+        </p>
+    </div>
+
+    <div class="contact-form">
+
+        <h2>✉️ Создать обращение</h2>
+
+        <input
+            type="text"
+            id="supportName"
+            placeholder="Ваше имя"
+        >
+
+        <input
+            type="email"
+            id="supportEmail"
+            placeholder="Ваш Email"
+        >
+
+        <select id="supportCategory">
+            <option>Выберите категорию</option>
+            <option>Аккаунт</option>
+            <option>Компания</option>
+            <option>Товар</option>
+            <option>Запчасть</option>
+            <option>Заявка</option>
+            <option>Предложение</option>
+            <option>Заказ</option>
+            <option>Доставка</option>
+            <option>Сообщения</option>
+            <option>Техническая проблема</option>
+            <option>Другое</option>
+        </select>
+
+        <textarea
+            id="supportMessage"
+            placeholder="Опишите вашу проблему или вопрос..."
+        ></textarea>
+
+        <button class="action-button" onclick="sendSupport()">
+            Отправить обращение
+        </button>
+
+    </div>
+
+    <h2>🔄 Как работает поддержка</h2>
+
+    <div class="steps">
+
+        <div class="step">
+            <h3>Создайте обращение</h3>
+            <p>
+                Укажите категорию и подробно опишите проблему.
+            </p>
+        </div>
+
+        <div class="step">
+            <h3>Получите ответ</h3>
+            <p>
+                Специалист поддержки проверит обращение
+                и предоставит ответ.
+            </p>
+        </div>
+
+        <div class="step">
+            <h3>Решение проблемы</h3>
+            <p>
+                После решения пользователь получает информацию
+                о результате обращения.
+            </p>
+        </div>
+
+        <div class="step">
+            <h3>История обращений</h3>
+            <p>
+                В будущем пользователь сможет видеть историю
+                всех своих обращений в личном кабинете.
+            </p>
+        </div>
+
+    </div>
+
+    <div class="demo">
+        <strong>⚠️ DEMO VERSION</strong><br><br>
+        Эта страница является демонстрационной версией.
+        Форма поддержки пока не подключена к серверу.
+        В будущем она будет связана с реальной системой
+        пользователей, сообщений и обращений.
+    </div>
+
+</div>
+
+<footer>
+    <h3>WORKER PRO</h3>
+    <p>Global Industrial Platform</p>
+    <p>Production • Companies • Products • Specialists • Jobs • Training</p>
+    <p>F.S</p>
+</footer>
+
+<script src="../language.js"></script>
+
+<script>
+
+function searchHelp() {
+
+    const input = document
+        .getElementById("helpSearch")
+        .value
+        .toLowerCase();
+
+    const cards = document.querySelectorAll(".help-card");
+
+    cards.forEach(function(card) {
+
+        const text = card.innerText.toLowerCase();
+
+        if (text.includes(input)) {
+            card.style.display = "";
+        } else {
+            card.style.display = "none";
+        }
+
+    });
+}
+
+document.querySelectorAll(".faq-question").forEach(function(question) {
+
+    question.addEventListener("click", function() {
+
+        const faq = this.parentElement;
+
+        faq.classList.toggle("open");
+
+    });
+
+});
+
+function showInfo(section) {
+
+    alert(
+        "WORKER PRO\n\n" +
+        "Раздел: " + section +
+        "\n\n" +
+        "Этот раздел будет подключён к полноценной системе платформы."
+    );
+
+}
+
+function sendSupport() {
+
+    const name = document.getElementById("supportName").value;
+    const email = document.getElementById("supportEmail").value;
+    const category = document.getElementById("supportCategory").value;
+    const message = document.getElementById("supportMessage").value;
+
+    if (!name || !email || category === "Выберите категорию" || !message) {
+
+        alert("Пожалуйста, заполните все поля.");
+
+        return;
+    }
+
+    alert(
+        "Обращение создано!\n\n" +
+        "Спасибо, " + name + ".\n" +
+        "Категория: " + category +
+        "\n\n" +
+        "Сейчас это демонстрационная форма."
+    );
+
+}
+
+</script>
+
+</body>
+</html>
