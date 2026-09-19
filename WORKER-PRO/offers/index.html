@@ -1,1 +1,810 @@
- 
+ <!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WORKER PRO — Offers</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f3f7f5;
+    color: #123;
+}
+
+.top-languages {
+    background: #063d25;
+    padding: 10px;
+    text-align: center;
+}
+
+.top-languages a {
+    display: inline-block;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 7px 10px;
+    margin: 3px;
+    border-radius: 7px;
+    background: #0b6b3d;
+}
+
+.top-languages a:hover {
+    background: #b7ff35;
+    color: #063d25;
+}
+
+header {
+    background: linear-gradient(135deg, #063d25, #0b6b3d);
+    color: white;
+    text-align: center;
+    padding: 35px 15px;
+}
+
+header h1 {
+    margin: 0 0 10px;
+    font-size: 36px;
+}
+
+header p {
+    max-width: 850px;
+    margin: 8px auto;
+    font-size: 17px;
+}
+
+nav {
+    background: #075b34;
+    padding: 10px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+    padding: 7px 9px;
+    font-size: 14px;
+}
+
+nav a:hover {
+    color: #b7ff35;
+}
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 25px 15px;
+}
+
+.section-title {
+    text-align: center;
+    color: #063d25;
+    margin: 30px 0 20px;
+    font-size: 28px;
+}
+
+.intro {
+    background: white;
+    padding: 22px;
+    border-radius: 15px;
+    box-shadow: 0 3px 12px rgba(0,0,0,.08);
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+.search-box {
+    background: #063d25;
+    padding: 22px;
+    border-radius: 15px;
+    margin-bottom: 30px;
+}
+
+.search-box input,
+.search-box select {
+    width: 100%;
+    padding: 14px;
+    margin: 6px 0;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+}
+
+.offers {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.offer {
+    background: white;
+    padding: 22px;
+    border-radius: 15px;
+    box-shadow: 0 3px 12px rgba(0,0,0,.08);
+    border-top: 5px solid #0b6b3d;
+}
+
+.offer h3 {
+    color: #075b34;
+    margin-top: 8px;
+}
+
+.badge {
+    display: inline-block;
+    background: #b7ff35;
+    color: #063d25;
+    padding: 5px 9px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    margin: 3px;
+}
+
+.status {
+    display: inline-block;
+    background: #e8f4ed;
+    color: #075b34;
+    padding: 6px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.price {
+    font-size: 22px;
+    font-weight: bold;
+    color: #075b34;
+    margin: 12px 0;
+}
+
+.button {
+    display: inline-block;
+    background: #0b6b3d;
+    color: white;
+    text-decoration: none;
+    padding: 11px 16px;
+    border-radius: 8px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.button:hover {
+    background: #075b34;
+}
+
+.steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 18px;
+}
+
+.step {
+    background: white;
+    padding: 20px;
+    border-radius: 14px;
+    box-shadow: 0 3px 10px rgba(0,0,0,.07);
+}
+
+.step strong {
+    color: #075b34;
+}
+
+.compare {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    overflow-x: auto;
+    box-shadow: 0 3px 12px rgba(0,0,0,.08);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 650px;
+}
+
+th {
+    background: #063d25;
+    color: white;
+    padding: 13px;
+    text-align: left;
+}
+
+td {
+    padding: 13px;
+    border-bottom: 1px solid #ddd;
+}
+
+.future {
+    background: #e8f5ed;
+    padding: 22px;
+    border-radius: 15px;
+    line-height: 1.7;
+}
+
+.warning {
+    background: #fff4d6;
+    border-left: 5px solid #e0a000;
+    padding: 18px;
+    border-radius: 10px;
+    margin-top: 25px;
+}
+
+footer {
+    background: #063d25;
+    color: white;
+    text-align: center;
+    padding: 25px 15px;
+    margin-top: 35px;
+}
+
+footer a {
+    color: #b7ff35;
+    text-decoration: none;
+}
+
+@media (max-width: 600px) {
+
+    header h1 {
+        font-size: 28px;
+    }
+
+    nav a {
+        font-size: 12px;
+        padding: 6px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- LANGUAGES -->
+
+<div class="top-languages">
+    <a href="#">AZ</a>
+    <a href="#">RU</a>
+    <a href="#">EN</a>
+    <a href="#">TR</a>
+    <a href="#">DE</a>
+    <a href="#">AR</a>
+    <a href="#">ES</a>
+    <a href="#">FR</a>
+    <a href="#">IT</a>
+</div>
+
+<!-- HEADER -->
+
+<header>
+
+    <h1>💰 WORKER PRO — Offers</h1>
+
+    <p>
+        Коммерческие предложения от производителей и поставщиков
+    </p>
+
+    <p>
+        Цена • Наличие • Срок поставки • Условия • Доставка
+    </p>
+
+</header>
+
+<!-- NAVIGATION -->
+
+<nav>
+
+    <a href="../production/">🏭 Production</a>
+    <a href="../problems/">🛠 Problems</a>
+    <a href="../spare-parts/">⚙️ Spare Parts</a>
+    <a href="../products/">📦 Products</a>
+    <a href="../equipment/">🔧 Equipment</a>
+    <a href="../manufacturers/">🏭 Manufacturers</a>
+    <a href="../companies/">🏢 Companies</a>
+    <a href="../suppliers/">🚚 Suppliers</a>
+    <a href="../marketplace/">🌍 Marketplace</a>
+    <a href="../requests/">📋 Requests</a>
+    <a href="../requests-board/">📢 Requests Board</a>
+    <a href="../orders/">🛒 Orders</a>
+    <a href="../warehouse/">📦 Warehouse</a>
+    <a href="../materials/">🧱 Materials</a>
+    <a href="../transport/">🚛 Transport</a>
+    <a href="../services/">🔧 Services</a>
+    <a href="../maintenance/">🛠 Maintenance</a>
+    <a href="../training/">🎓 Training</a>
+    <a href="../community/">👥 Community</a>
+    <a href="../specialists/">👨‍🔧 Specialists</a>
+    <a href="../jobs/">💼 Jobs</a>
+    <a href="../Quotes/">🏆 Quality</a>
+
+</nav>
+
+<section class="container">
+
+<!-- INTRO -->
+
+<h2 class="section-title">
+    📋 Коммерческие предложения
+</h2>
+
+<div class="intro">
+
+    <p>
+        <strong>Offers</strong> — раздел WORKER PRO,
+        где покупатель сможет получать и сравнивать
+        предложения от разных производителей и поставщиков.
+    </p>
+
+    <p>
+        Поставщик указывает цену, количество,
+        наличие, срок поставки, условия оплаты
+        и варианты доставки.
+    </p>
+
+    <p>
+        Покупатель сможет сравнить предложения
+        и перейти к оформлению заказа.
+    </p>
+
+</div>
+
+<!-- SEARCH -->
+
+<div class="search-box">
+
+    <input
+        type="text"
+        placeholder="🔎 Поиск предложения..."
+    >
+
+    <select>
+        <option>Все категории</option>
+        <option>Запчасти</option>
+        <option>Оборудование</option>
+        <option>Насосы</option>
+        <option>Подшипники</option>
+        <option>Клапаны</option>
+        <option>Гидравлика</option>
+        <option>Электрика</option>
+        <option>Автоматизация</option>
+        <option>Материалы</option>
+        <option>Сервис</option>
+    </select>
+
+    <select>
+        <option>Все страны</option>
+        <option>Азербайджан</option>
+        <option>Турция</option>
+        <option>Германия</option>
+        <option>Италия</option>
+        <option>Китай</option>
+        <option>Россия</option>
+        <option>США</option>
+        <option>Другие страны</option>
+    </select>
+
+    <select>
+        <option>Все статусы</option>
+        <option>Новое</option>
+        <option>На рассмотрении</option>
+        <option>Выбрано</option>
+        <option>Отклонено</option>
+        <option>Закрыто</option>
+    </select>
+
+</div>
+
+<!-- DEMO OFFERS -->
+
+<h2 class="section-title">
+    💰 Примеры предложений
+</h2>
+
+<div class="offers">
+
+    <div class="offer">
+
+        <span class="badge">DEMO</span>
+
+        <span class="status">
+            Новое
+        </span>
+
+        <h3>
+            🔩 Подшипник промышленный
+        </h3>
+
+        <p>
+            <strong>Заявка:</strong> RP-1001
+        </p>
+
+        <p>
+            <strong>Поставщик:</strong>
+            Demo Manufacturer
+        </p>
+
+        <p>
+            <strong>Страна:</strong> 🇩🇪 Германия
+        </p>
+
+        <p>
+            <strong>Количество:</strong> 20 шт.
+        </p>
+
+        <div class="price">
+            € 850
+        </div>
+
+        <p>
+            Срок поставки: 7–14 дней
+        </p>
+
+        <a class="button" href="#">
+            Подробнее
+        </a>
+
+    </div>
+
+    <div class="offer">
+
+        <span class="badge">DEMO</span>
+
+        <span class="status">
+            На рассмотрении
+        </span>
+
+        <h3>
+            💧 Промышленный насос
+        </h3>
+
+        <p>
+            <strong>Заявка:</strong> RP-1002
+        </p>
+
+        <p>
+            <strong>Поставщик:</strong>
+            Demo Supplier
+        </p>
+
+        <p>
+            <strong>Страна:</strong> 🇹🇷 Турция
+        </p>
+
+        <p>
+            <strong>Количество:</strong> 2 шт.
+        </p>
+
+        <div class="price">
+            € 2,400
+        </div>
+
+        <p>
+            Срок поставки: 10 дней
+        </p>
+
+        <a class="button" href="#">
+            Подробнее
+        </a>
+
+    </div>
+
+    <div class="offer">
+
+        <span class="badge">DEMO</span>
+
+        <span class="status">
+            Новое
+        </span>
+
+        <h3>
+            🏭 CNC станок
+        </h3>
+
+        <p>
+            <strong>Заявка:</strong> RP-1003
+        </p>
+
+        <p>
+            <strong>Поставщик:</strong>
+            Demo CNC Manufacturer
+        </p>
+
+        <p>
+            <strong>Страна:</strong> 🇮🇹 Италия
+        </p>
+
+        <p>
+            <strong>Количество:</strong> 1 шт.
+        </p>
+
+        <div class="price">
+            € 38,000
+        </div>
+
+        <p>
+            Срок поставки: 45 дней
+        </p>
+
+        <a class="button" href="#">
+            Подробнее
+        </a>
+
+    </div>
+
+    <div class="offer">
+
+        <span class="badge">DEMO</span>
+
+        <span class="status">
+            Выбрано
+        </span>
+
+        <h3>
+            🤖 Датчики давления
+        </h3>
+
+        <p>
+            <strong>Заявка:</strong> RP-1004
+        </p>
+
+        <p>
+            <strong>Поставщик:</strong>
+            Demo Sensors
+        </p>
+
+        <p>
+            <strong>Страна:</strong> 🇨🇳 Китай
+        </p>
+
+        <p>
+            <strong>Количество:</strong> 15 шт.
+        </p>
+
+        <div class="price">
+            € 1,050
+        </div>
+
+        <p>
+            Срок поставки: 12 дней
+        </p>
+
+        <a class="button" href="#">
+            Подробнее
+        </a>
+
+    </div>
+
+</div>
+
+<!-- COMPARISON -->
+
+<h2 class="section-title">
+    📊 Сравнение предложений
+</h2>
+
+<div class="compare">
+
+<table>
+
+<tr>
+    <th>Поставщик</th>
+    <th>Страна</th>
+    <th>Цена</th>
+    <th>Количество</th>
+    <th>Срок</th>
+    <th>Статус</th>
+</tr>
+
+<tr>
+    <td>Demo Supplier A</td>
+    <td>🇩🇪 Германия</td>
+    <td>€850</td>
+    <td>20</td>
+    <td>7–14 дней</td>
+    <td>Новое</td>
+</tr>
+
+<tr>
+    <td>Demo Supplier B</td>
+    <td>🇹🇷 Турция</td>
+    <td>€900</td>
+    <td>20</td>
+    <td>10 дней</td>
+    <td>Новое</td>
+</tr>
+
+<tr>
+    <td>Demo Supplier C</td>
+    <td>🇮🇹 Италия</td>
+    <td>€930</td>
+    <td>20</td>
+    <td>14 дней</td>
+    <td>Новое</td>
+</tr>
+
+</table>
+
+</div>
+
+<!-- INFORMATION -->
+
+<h2 class="section-title">
+    📑 Что содержит предложение
+</h2>
+
+<div class="steps">
+
+    <div class="step">
+        <strong>💰 Цена</strong>
+        <p>
+            Цена за единицу и общая стоимость.
+        </p>
+    </div>
+
+    <div class="step">
+        <strong>📦 Наличие</strong>
+        <p>
+            Сколько товара есть на складе.
+        </p>
+    </div>
+
+    <div class="step">
+        <strong>⏱ Срок</strong>
+        <p>
+            Срок изготовления или поставки.
+        </p>
+    </div>
+
+    <div class="step">
+        <strong>💳 Оплата</strong>
+        <p>
+            Условия и способы оплаты.
+        </p>
+    </div>
+
+    <div class="step">
+        <strong>🚛 Доставка</strong>
+        <p>
+            Условия доставки и место отправки.
+        </p>
+    </div>
+
+    <div class="step">
+        <strong>📄 Документы</strong>
+        <p>
+            Сертификаты, спецификации и документы.
+        </p>
+    </div>
+
+</div>
+
+<!-- WORKFLOW -->
+
+<h2 class="section-title">
+    🔄 От заявки до заказа
+</h2>
+
+<div class="steps">
+
+    <div class="step">
+        <strong>1. Request</strong>
+        <p>
+            Покупатель создаёт заявку.
+        </p>
+    </div>
+
+    <div class="step">
+        <strong>2. Supplier</strong>
+        <p>
+            Поставщик находит заявку.
+        </p>
+    </div>
+
+    <div class="step">
+        <strong>3. Offer</strong>
+        <p>
+            Поставщик отправляет предложение.
+        </p>
+    </div>
+
+    <div class="step">
+        <strong>4. Compare</strong>
+        <p>
+            Покупатель сравнивает условия.
+        </p>
+    </div>
+
+    <div class="step">
+        <strong>5. Order</strong>
+        <p>
+            Выбранное предложение превращается
+            в заказ.
+        </p>
+    </div>
+
+    <div class="step">
+        <strong>6. Transport</strong>
+        <p>
+            Организуется доставка товара.
+        </p>
+    </div>
+
+</div>
+
+<!-- FUTURE -->
+
+<h2 class="section-title">
+    🚀 Будущие возможности
+</h2>
+
+<div class="future">
+
+    <p>🔔 Уведомления о новых предложениях</p>
+
+    <p>💬 Чат покупателя и поставщика</p>
+
+    <p>📊 Сравнение нескольких предложений</p>
+
+    <p>⭐ Проверенные поставщики</p>
+
+    <p>📋 История предложений</p>
+
+    <p>📄 Загрузка коммерческих документов</p>
+
+    <p>💳 Онлайн-оплата</p>
+
+    <p>🔐 Безопасная регистрация компаний</p>
+
+    <p>🚛 Автоматический расчёт доставки</p>
+
+    <p>🌍 Международные предложения</p>
+
+</div>
+
+<div class="warning">
+
+    <strong>⚠️ Важно:</strong>
+
+    предложения на этой странице являются
+    демонстрационными примерами.
+    Реальные цены, поставщики, переговоры,
+    заказы и платежи будут подключены позже
+    через серверную часть WORKER PRO.
+
+</div>
+
+</section>
+
+<!-- FOOTER -->
+
+<footer>
+
+    <h3>WORKER PRO</h3>
+
+    <p>
+        Работа • Знания • Производство • Торговля
+    </p>
+
+    <p>
+        Международная промышленная платформа
+    </p>
+
+    <p>
+        <a href="../marketplace/">← Marketplace</a>
+    </p>
+
+    <p>
+        © 2026 WORKER PRO — F.S
+    </p>
+
+</footer>
+
+</body>
+</html>
