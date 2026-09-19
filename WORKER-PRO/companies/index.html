@@ -125,7 +125,7 @@ nav a:hover {
 /* ===== SEARCH ===== */
 
 .search-area {
-    max-width: 1000px;
+    max-width: 1100px;
     margin: 25px auto 0;
     background: white;
     padding: 15px;
@@ -182,7 +182,7 @@ nav a:hover {
 
 .company-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 18px;
 }
 
@@ -192,6 +192,12 @@ nav a:hover {
     border-radius: 13px;
     padding: 20px;
     box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+    transition: 0.2s;
+}
+
+.company-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.10);
 }
 
 .company-icon {
@@ -216,6 +222,17 @@ nav a:hover {
     line-height: 1.8;
 }
 
+.company-type {
+    display: inline-block;
+    margin-top: 10px;
+    background: #e9f4ed;
+    color: #075b34;
+    padding: 5px 8px;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
 .company-button {
     display: inline-block;
     margin-top: 14px;
@@ -229,6 +246,28 @@ nav a:hover {
 
 .company-button:hover {
     background: #063d25;
+}
+
+/* ===== COUNTRIES ===== */
+
+.countries {
+    margin-top: 40px;
+}
+
+.country-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 12px;
+}
+
+.country-card {
+    background: white;
+    border: 1px solid #dce6df;
+    border-radius: 10px;
+    padding: 16px;
+    text-align: center;
+    font-weight: bold;
+    color: #063d25;
 }
 
 /* ===== ADD COMPANY ===== */
@@ -250,6 +289,7 @@ nav a:hover {
 .add-company p {
     color: #65776c;
     margin-bottom: 18px;
+    line-height: 1.6;
 }
 
 .add-button {
@@ -260,6 +300,50 @@ nav a:hover {
     border-radius: 8px;
     text-decoration: none;
     font-weight: bold;
+}
+
+.add-button:hover {
+    background: #0b6b3d;
+}
+
+/* ===== INFO ===== */
+
+.info-section {
+    margin-top: 40px;
+    background: white;
+    border-radius: 13px;
+    padding: 25px;
+    border: 1px solid #dce6df;
+}
+
+.info-section h2 {
+    color: #063d25;
+    margin-bottom: 15px;
+}
+
+.info-section p {
+    color: #65776c;
+    line-height: 1.7;
+}
+
+.steps {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+}
+
+.step {
+    background: #f4f7f5;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+}
+
+.step strong {
+    display: block;
+    color: #063d25;
+    margin-bottom: 6px;
 }
 
 /* ===== FOOTER ===== */
@@ -359,6 +443,14 @@ footer strong {
 🔧 Товары
 </a>
 
+<a href="../equipment/index.html">
+🏗️ Оборудование
+</a>
+
+<a href="../manufacturers/index.html">
+🏭 Производители
+</a>
+
 <a href="../specialists/index.html" data-lang="specialists">
 👷 Специалисты
 </a>
@@ -402,8 +494,11 @@ placeholder="Поиск компании..."
 <option>🇹🇷 Turkey</option>
 <option>🇷🇺 Russia</option>
 <option>🇩🇪 Germany</option>
+<option>🇮🇹 Italy</option>
 <option>🇨🇳 China</option>
 <option>🇺🇸 USA</option>
+<option>🇫🇷 France</option>
+<option>🇪🇸 Spain</option>
 
 </select>
 
@@ -417,7 +512,10 @@ placeholder="Поиск компании..."
 <option>Automotive</option>
 <option>Automation</option>
 <option>Welding</option>
+<option>Hydraulics</option>
+<option>Electrical</option>
 <option>Energy</option>
+<option>Industrial Equipment</option>
 
 </select>
 
@@ -438,7 +536,7 @@ placeholder="Поиск компании..."
 <h2>🌍 Промышленные компании</h2>
 
 <p>
-Компании и производители из разных стран
+Компании, производители и поставщики из разных стран
 </p>
 
 </div>
@@ -465,8 +563,14 @@ placeholder="Поиск компании..."
 
 </div>
 
-<a href="#" class="company-button">
-Подробнее
+<div class="company-type">
+Производитель
+</div>
+
+<br>
+
+<a href="../company-profile/index.html" class="company-button">
+Открыть профиль
 </a>
 
 </div>
@@ -491,8 +595,14 @@ placeholder="Поиск компании..."
 
 </div>
 
-<a href="#" class="company-button">
-Подробнее
+<div class="company-type">
+Производитель
+</div>
+
+<br>
+
+<a href="../company-profile/index.html" class="company-button">
+Открыть профиль
 </a>
 
 </div>
@@ -517,8 +627,14 @@ placeholder="Поиск компании..."
 
 </div>
 
-<a href="#" class="company-button">
-Подробнее
+<div class="company-type">
+Производитель
+</div>
+
+<br>
+
+<a href="../company-profile/index.html" class="company-button">
+Открыть профиль
 </a>
 
 </div>
@@ -543,13 +659,224 @@ placeholder="Поиск компании..."
 
 </div>
 
-<a href="#" class="company-button">
-Подробнее
+<div class="company-type">
+Промышленная компания
+</div>
+
+<br>
+
+<a href="../company-profile/index.html" class="company-button">
+Открыть профиль
+</a>
+
+</div>
+
+<!-- COMPANY 5 -->
+
+<div class="company-card">
+
+<div class="company-icon">🤖</div>
+
+<h3>Automation Systems</h3>
+
+<p>
+Промышленная автоматизация, PLC и системы управления.
+</p>
+
+<div class="company-info">
+
+🌍 Germany<br>
+🏭 Automation<br>
+⚙️ PLC / Control Systems
+
+</div>
+
+<div class="company-type">
+Поставщик
+</div>
+
+<br>
+
+<a href="../company-profile/index.html" class="company-button">
+Открыть профиль
+</a>
+
+</div>
+
+<!-- COMPANY 6 -->
+
+<div class="company-card">
+
+<div class="company-icon">🔧</div>
+
+<h3>Hydraulic Solutions</h3>
+
+<p>
+Гидравлические насосы, клапаны и компоненты.
+</p>
+
+<div class="company-info">
+
+🌍 Italy<br>
+🏭 Hydraulics<br>
+⚙️ Pumps / Valves
+
+</div>
+
+<div class="company-type">
+Производитель
+</div>
+
+<br>
+
+<a href="../company-profile/index.html" class="company-button">
+Открыть профиль
+</a>
+
+</div>
+
+<!-- COMPANY 7 -->
+
+<div class="company-card">
+
+<div class="company-icon">🔥</div>
+
+<h3>Industrial Furnace</h3>
+
+<p>
+Промышленные печи и оборудование для термообработки.
+</p>
+
+<div class="company-info">
+
+🌍 China<br>
+🏭 Heat Treatment<br>
+⚙️ Industrial Furnaces
+
+</div>
+
+<div class="company-type">
+Производитель
+</div>
+
+<br>
+
+<a href="../company-profile/index.html" class="company-button">
+Открыть профиль
+</a>
+
+</div>
+
+<!-- COMPANY 8 -->
+
+<div class="company-card">
+
+<div class="company-icon">🔌</div>
+
+<h3>Electrical Industry</h3>
+
+<p>
+Электрическое оборудование и промышленные компоненты.
+</p>
+
+<div class="company-info">
+
+🌍 USA<br>
+🏭 Electrical<br>
+⚙️ Industrial Components
+
+</div>
+
+<div class="company-type">
+Поставщик
+</div>
+
+<br>
+
+<a href="../company-profile/index.html" class="company-button">
+Открыть профиль
 </a>
 
 </div>
 
 </div>
+
+<!-- ===== COUNTRIES ===== -->
+
+<section class="countries">
+
+<div class="title">
+
+<h2>🌍 Страны компаний</h2>
+
+<p>
+WORKER PRO ориентирован на международный промышленный рынок.
+</p>
+
+</div>
+
+<div class="country-grid">
+
+<div class="country-card">🇦🇿 Azerbaijan</div>
+<div class="country-card">🇹🇷 Turkey</div>
+<div class="country-card">🇩🇪 Germany</div>
+<div class="country-card">🇮🇹 Italy</div>
+<div class="country-card">🇨🇳 China</div>
+<div class="country-card">🇺🇸 USA</div>
+<div class="country-card">🇷🇺 Russia</div>
+<div class="country-card">🇫🇷 France</div>
+<div class="country-card">🇪🇸 Spain</div>
+
+</div>
+
+</section>
+
+<!-- ===== HOW IT WORKS ===== -->
+
+<section class="info-section">
+
+<h2>🔄 Как работает раздел «Компании»</h2>
+
+<p>
+WORKER PRO объединяет производителей, поставщиков,
+промышленные компании и специалистов на одной платформе.
+</p>
+
+<div class="steps">
+
+<div class="step">
+<strong>1. Поиск</strong>
+Найдите нужную компанию.
+</div>
+
+<div class="step">
+<strong>2. Профиль</strong>
+Посмотрите информацию о компании.
+</div>
+
+<div class="step">
+<strong>3. Товары</strong>
+Изучите оборудование и продукцию.
+</div>
+
+<div class="step">
+<strong>4. Заявка</strong>
+Отправьте запрос компании.
+</div>
+
+<div class="step">
+<strong>5. Предложение</strong>
+Получите цену и условия.
+</div>
+
+<div class="step">
+<strong>6. Заказ</strong>
+Организуйте покупку и доставку.
+</div>
+
+</div>
+
+</section>
 
 <!-- ===== ADD COMPANY ===== -->
 
@@ -580,6 +907,10 @@ placeholder="Поиск компании..."
 
 <p>
 Global Industrial Platform
+</p>
+
+<p>
+Компании • Производители • Поставщики • Покупатели
 </p>
 
 <p>
