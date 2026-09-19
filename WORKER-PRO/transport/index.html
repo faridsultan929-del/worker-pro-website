@@ -1,1 +1,666 @@
- 
+ <!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WORKER PRO — Transport</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f7f5;
+    color: #123;
+}
+
+.top-languages {
+    background: #063d25;
+    padding: 10px;
+    text-align: center;
+}
+
+.top-languages a {
+    display: inline-block;
+    background: #0b6b3d;
+    color: white;
+    text-decoration: none;
+    padding: 8px 12px;
+    margin: 3px;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+.top-languages a:hover {
+    background: #b7ff35;
+    color: #063d25;
+}
+
+header {
+    background: linear-gradient(135deg, #063d25, #0b6b3d);
+    color: white;
+    text-align: center;
+    padding: 35px 20px;
+}
+
+header h1 {
+    margin: 5px 0;
+    font-size: 38px;
+}
+
+header p {
+    margin: 10px auto;
+    max-width: 850px;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+nav {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: #075b34;
+    padding: 12px;
+    text-align: center;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 5px 8px;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: #b7ff35;
+}
+
+.container {
+    max-width: 1150px;
+    margin: auto;
+    padding: 25px 15px;
+}
+
+.hero {
+    background: white;
+    border-radius: 18px;
+    padding: 30px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    text-align: center;
+}
+
+.hero h2 {
+    color: #075b34;
+    font-size: 30px;
+}
+
+.search-box {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #0b6b3d;
+    border-radius: 10px;
+    font-size: 16px;
+    margin-top: 15px;
+}
+
+.filter-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+    margin-top: 15px;
+}
+
+.filter {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #b7cfc1;
+    border-radius: 10px;
+    background: white;
+    font-size: 15px;
+}
+
+.section-title {
+    color: #075b34;
+    text-align: center;
+    font-size: 28px;
+    margin: 35px 0 20px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 18px;
+}
+
+.card {
+    background: white;
+    padding: 22px;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    border-left: 5px solid #0b6b3d;
+}
+
+.card h3 {
+    margin-top: 0;
+    color: #075b34;
+}
+
+.card p {
+    line-height: 1.6;
+}
+
+.route {
+    background: white;
+    padding: 22px;
+    border-radius: 16px;
+    margin: 15px 0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    border-left: 6px solid #0b6b3d;
+}
+
+.route h3 {
+    color: #075b34;
+    margin-top: 0;
+}
+
+.badge {
+    display: inline-block;
+    background: #e9f4ed;
+    color: #075b34;
+    padding: 7px 10px;
+    border-radius: 15px;
+    margin: 4px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.step {
+    background: #e9f4ed;
+    padding: 20px;
+    border-radius: 14px;
+    margin: 12px 0;
+}
+
+.step strong {
+    color: #075b34;
+}
+
+.countries {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.country {
+    background: #0b6b3d;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 20px;
+}
+
+.info {
+    background: #063d25;
+    color: white;
+    padding: 28px;
+    border-radius: 18px;
+    margin-top: 30px;
+}
+
+.info h2 {
+    color: #b7ff35;
+}
+
+.status {
+    display: inline-block;
+    background: #b7ff35;
+    color: #063d25;
+    padding: 7px 12px;
+    border-radius: 15px;
+    font-weight: bold;
+    margin-top: 8px;
+}
+
+footer {
+    background: #063d25;
+    color: white;
+    text-align: center;
+    padding: 25px;
+    margin-top: 40px;
+}
+
+@media (max-width: 600px) {
+    header h1 {
+        font-size: 30px;
+    }
+
+    header p {
+        font-size: 16px;
+    }
+
+    nav a {
+        display: inline-block;
+        margin: 5px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="top-languages">
+    <a href="#">AZ</a>
+    <a href="#">RU</a>
+    <a href="#">EN</a>
+    <a href="#">TR</a>
+    <a href="#">DE</a>
+    <a href="#">AR</a>
+    <a href="#">ES</a>
+    <a href="#">FR</a>
+    <a href="#">IT</a>
+</div>
+
+<header>
+
+    <h1>🚚 WORKER PRO</h1>
+
+    <p>
+        Международная промышленная логистика —
+        доставка оборудования, запчастей и товаров
+        из разных стран.
+    </p>
+
+</header>
+
+<nav>
+    <a href="../production/index.html">Производство</a>
+    <a href="../problems/index.html">Проблемы</a>
+    <a href="../spare-parts/index.html">Запчасти</a>
+    <a href="../products/index.html">Товары</a>
+    <a href="../companies/index.html">Компании</a>
+    <a href="../suppliers/index.html">Поставщики</a>
+    <a href="../orders/index.html">Заказы</a>
+    <a href="../community/index.html">Сообщество</a>
+    <a href="../specialists/index.html">Специалисты</a>
+    <a href="../jobs/index.html">Работа</a>
+    <a href="../training/index.html">Обучение</a>
+    <a href="../transport/index.html">Транспорт</a>
+</nav>
+
+<main class="container">
+
+<section class="hero">
+
+    <h2>🌍 Международная доставка</h2>
+
+    <p>
+        Организация перевозки промышленного оборудования,
+        запчастей, материалов и других товаров.
+    </p>
+
+    <input
+        class="search-box"
+        type="text"
+        placeholder="Поиск маршрута: Баку — Стамбул, Китай — Баку..."
+    >
+
+    <div class="filter-row">
+
+        <select class="filter">
+            <option>Тип транспорта</option>
+            <option>🚛 Автомобильный</option>
+            <option>🚢 Морской</option>
+            <option>✈️ Авиационный</option>
+            <option>🚆 Железнодорожный</option>
+            <option>🚚 Смешанная доставка</option>
+        </select>
+
+        <select class="filter">
+            <option>Направление</option>
+            <option>Местная доставка</option>
+            <option>Международная доставка</option>
+        </select>
+
+        <select class="filter">
+            <option>Тип груза</option>
+            <option>Запчасти</option>
+            <option>Оборудование</option>
+            <option>Станки</option>
+            <option>Материалы</option>
+            <option>Другое</option>
+        </select>
+
+    </div>
+
+</section>
+
+<h2 class="section-title">🚛 Виды транспорта</h2>
+
+<div class="grid">
+
+    <div class="card">
+        <h3>🚚 Автомобильный</h3>
+        <p>
+            Подходит для региональных и международных
+            перевозок оборудования, запчастей и материалов.
+        </p>
+        <span class="badge">Truck</span>
+        <span class="badge">Road</span>
+    </div>
+
+    <div class="card">
+        <h3>🚢 Морской</h3>
+        <p>
+            Перевозка крупных и тяжёлых грузов
+            между странами и портами.
+        </p>
+        <span class="badge">Sea</span>
+        <span class="badge">Container</span>
+    </div>
+
+    <div class="card">
+        <h3>✈️ Авиационный</h3>
+        <p>
+            Быстрая доставка срочных и относительно
+            компактных промышленных грузов.
+        </p>
+        <span class="badge">Air</span>
+        <span class="badge">Express</span>
+    </div>
+
+    <div class="card">
+        <h3>🚆 Железнодорожный</h3>
+        <p>
+            Перевозка крупных партий оборудования
+            и промышленных грузов.
+        </p>
+        <span class="badge">Rail</span>
+        <span class="badge">Cargo</span>
+    </div>
+
+</div>
+
+<h2 class="section-title">📦 Какие грузы можно перевозить</h2>
+
+<div class="grid">
+
+    <div class="card">
+        <h3>⚙️ Станки</h3>
+        <p>
+            CNC станки, прессы, производственное оборудование
+            и комплектные линии.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>🔧 Запчасти</h3>
+        <p>
+            Подшипники, насосы, клапаны,
+            датчики и другие комплектующие.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>💧 Гидравлика</h3>
+        <p>
+            Насосы, цилиндры, клапаны,
+            гидростанции и комплектующие.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>⚡ Электрооборудование</h3>
+        <p>
+            Двигатели, контроллеры, датчики,
+            кабели и электрические компоненты.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>🔥 Печи</h3>
+        <p>
+            Промышленные печи, нагреватели,
+            термопары и оборудование для термообработки.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>🧰 Инструменты</h3>
+        <p>
+            Производственный, измерительный
+            и режущий инструмент.
+        </p>
+    </div>
+
+</div>
+
+<h2 class="section-title">🌍 Примеры маршрутов</h2>
+
+<div class="route">
+
+    <h3>🇨🇳 Китай → 🇦🇿 Азербайджан</h3>
+
+    <p>
+        Промышленное оборудование, запчасти,
+        электроника и производственные материалы.
+    </p>
+
+    <span class="badge">Sea</span>
+    <span class="badge">Rail</span>
+    <span class="badge">Truck</span>
+
+</div>
+
+<div class="route">
+
+    <h3>🇹🇷 Турция → 🇦🇿 Азербайджан</h3>
+
+    <p>
+        Запчасти, оборудование, инструменты
+        и другие промышленные товары.
+    </p>
+
+    <span class="badge">Truck</span>
+    <span class="badge">Road</span>
+
+</div>
+
+<div class="route">
+
+    <h3>🇩🇪 Германия → 🇦🇿 Азербайджан</h3>
+
+    <p>
+        Станки, промышленная автоматика,
+        датчики и техническое оборудование.
+    </p>
+
+    <span class="badge">Road</span>
+    <span class="badge">Air</span>
+    <span class="badge">Rail</span>
+
+</div>
+
+<div class="route">
+
+    <h3>🇮🇹 Италия → 🇦🇿 Азербайджан</h3>
+
+    <p>
+        Производственное оборудование,
+        комплектующие и инструменты.
+    </p>
+
+    <span class="badge">Sea</span>
+    <span class="badge">Truck</span>
+
+</div>
+
+<h2 class="section-title">🔄 Как работает доставка</h2>
+
+<div class="step">
+    <strong>1. Создание заявки</strong>
+    <p>
+        Укажите товар, количество, размеры,
+        вес, место отправления и место доставки.
+    </p>
+</div>
+
+<div class="step">
+    <strong>2. Поиск транспортной компании</strong>
+    <p>
+        Выберите подходящий вариант перевозки
+        для вашего груза.
+    </p>
+</div>
+
+<div class="step">
+    <strong>3. Расчёт доставки</strong>
+    <p>
+        Определяются маршрут, тип транспорта,
+        стоимость и ориентировочный срок.
+    </p>
+</div>
+
+<div class="step">
+    <strong>4. Подготовка документов</strong>
+    <p>
+        Подготавливаются необходимые транспортные,
+        коммерческие и таможенные документы.
+    </p>
+</div>
+
+<div class="step">
+    <strong>5. Отправка груза</strong>
+    <p>
+        Груз забирается у поставщика
+        и отправляется по согласованному маршруту.
+    </p>
+</div>
+
+<div class="step">
+    <strong>6. Отслеживание</strong>
+    <p>
+        Информация о движении груза
+        и статусе доставки.
+    </p>
+</div>
+
+<div class="step">
+    <strong>7. Получение</strong>
+    <p>
+        Груз доставляется покупателю
+        или на согласованный склад.
+    </p>
+</div>
+
+<h2 class="section-title">📄 Документы</h2>
+
+<div class="grid">
+
+    <div class="card">
+        <h3>📋 Инвойс</h3>
+        <p>
+            Коммерческий документ с информацией
+            о товаре и стоимости.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>📦 Packing List</h3>
+        <p>
+            Информация об упаковке,
+            количестве мест, весе и размерах.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>🚚 Транспортные документы</h3>
+        <p>
+            Документы, связанные с перевозкой
+            и передачей груза.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>🛃 Таможенные документы</h3>
+        <p>
+            Документы, необходимые для прохождения
+            таможенных процедур.
+        </p>
+    </div>
+
+</div>
+
+<section class="info">
+
+    <h2>📍 Отслеживание груза</h2>
+
+    <p>
+        В будущем WORKER PRO сможет объединять информацию
+        о заказе, поставщике и транспортировке в одном месте.
+    </p>
+
+    <p>
+        Пользователь сможет видеть статус:
+    </p>
+
+    <p>
+        📦 Заказ создан → 🏭 Товар готов →
+        🚚 Забран → 🌍 В пути → 🛃 Таможня →
+        🚛 Доставка → ✅ Получен
+    </p>
+
+    <span class="status">Система отслеживания — в разработке</span>
+
+</section>
+
+<h2 class="section-title">🌎 Страны</h2>
+
+<div class="countries">
+
+    <div class="country">🇦🇿 Азербайджан</div>
+    <div class="country">🇹🇷 Турция</div>
+    <div class="country">🇩🇪 Германия</div>
+    <div class="country">🇨🇳 Китай</div>
+    <div class="country">🇷🇺 Россия</div>
+    <div class="country">🇺🇸 США</div>
+    <div class="country">🇮🇹 Италия</div>
+    <div class="country">🇫🇷 Франция</div>
+    <div class="country">🇪🇸 Испания</div>
+
+</div>
+
+<section class="info">
+
+    <h2>🌐 Логистика WORKER PRO</h2>
+
+    <p>
+        Цель платформы — связать покупателя,
+        поставщика и транспортную компанию
+        в одном промышленном процессе.
+    </p>
+
+    <p>
+        Товар → Поставщик → Заказ → Транспорт →
+        Таможня → Доставка → Получение.
+    </p>
+
+</section>
+
+</main>
+
+<footer>
+
+    <p>WORKER PRO — Global Industrial Platform</p>
+    <p>🚚 Транспорт • Логистика • Заказы • Поставщики</p>
+    <p>F.S</p>
+
+</footer>
+
+</body>
+</html>
