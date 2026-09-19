@@ -1,1 +1,800 @@
- 
+ <!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WORKER PRO — Messages</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f7f5;
+    color: #123;
+}
+
+.top-languages {
+    background: #063d25;
+    padding: 10px;
+    text-align: center;
+}
+
+.top-languages button {
+    background: #0b6b3d;
+    color: white;
+    border: 1px solid #b7ff35;
+    border-radius: 6px;
+    padding: 7px 10px;
+    margin: 3px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.top-languages button:hover {
+    background: #b7ff35;
+    color: #063d25;
+}
+
+header {
+    background: #075b34;
+    color: white;
+    text-align: center;
+    padding: 25px 15px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 30px;
+}
+
+header p {
+    margin: 8px 0 0;
+}
+
+nav {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: #063d25;
+    padding: 10px;
+    text-align: center;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 5px 8px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: #b7ff35;
+}
+
+.container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 20px;
+}
+
+.intro {
+    background: white;
+    padding: 25px;
+    border-radius: 14px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+    border-left: 6px solid #0b6b3d;
+    margin-bottom: 20px;
+}
+
+.intro h2 {
+    margin-top: 0;
+    color: #063d25;
+}
+
+.search-box {
+    background: white;
+    padding: 18px;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.07);
+    margin-bottom: 20px;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #ccd8d2;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.layout {
+    display: grid;
+    grid-template-columns: 330px 1fr;
+    gap: 20px;
+}
+
+.contacts {
+    background: white;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+}
+
+.contacts-title {
+    padding: 18px;
+    background: #063d25;
+    color: white;
+    font-weight: bold;
+}
+
+.contact {
+    display: flex;
+    gap: 12px;
+    padding: 16px;
+    border-bottom: 1px solid #e2e9e5;
+    cursor: pointer;
+}
+
+.contact:hover {
+    background: #eef5f1;
+}
+
+.contact.active {
+    background: #e5f3eb;
+    border-left: 5px solid #0b6b3d;
+}
+
+.avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #0b6b3d;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.contact-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.contact-name {
+    font-weight: bold;
+    color: #063d25;
+}
+
+.contact-preview {
+    color: #68766f;
+    font-size: 13px;
+    margin-top: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.contact-time {
+    font-size: 11px;
+    color: #777;
+}
+
+.chat {
+    background: white;
+    border-radius: 14px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 600px;
+}
+
+.chat-header {
+    background: #075b34;
+    color: white;
+    padding: 18px;
+}
+
+.chat-header strong {
+    font-size: 18px;
+}
+
+.chat-header small {
+    display: block;
+    margin-top: 5px;
+}
+
+.messages {
+    padding: 20px;
+    flex: 1;
+    background: #f7faf8;
+}
+
+.message {
+    max-width: 75%;
+    padding: 12px 15px;
+    border-radius: 12px;
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+.message.incoming {
+    background: white;
+    border: 1px solid #dfe8e2;
+    margin-right: auto;
+}
+
+.message.outgoing {
+    background: #dff1e7;
+    margin-left: auto;
+}
+
+.message-time {
+    display: block;
+    font-size: 11px;
+    color: #777;
+    margin-top: 6px;
+}
+
+.message strong {
+    color: #063d25;
+}
+
+.chat-input {
+    display: flex;
+    gap: 8px;
+    padding: 15px;
+    border-top: 1px solid #dfe7e2;
+    background: white;
+}
+
+.chat-input input {
+    flex: 1;
+    padding: 13px;
+    border: 1px solid #ccd8d2;
+    border-radius: 8px;
+    font-size: 15px;
+}
+
+.chat-input button {
+    background: #0b6b3d;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 0 18px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.chat-input button:hover {
+    background: #063d25;
+}
+
+.features {
+    margin-top: 25px;
+}
+
+.features h2 {
+    text-align: center;
+    color: #063d25;
+}
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.feature {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.07);
+}
+
+.feature-icon {
+    font-size: 32px;
+}
+
+.feature h3 {
+    color: #063d25;
+    margin-bottom: 8px;
+}
+
+.demo {
+    background: #fff8dc;
+    border-left: 5px solid #e0a800;
+    padding: 18px;
+    border-radius: 10px;
+    margin-top: 25px;
+    line-height: 1.6;
+}
+
+footer {
+    background: #063d25;
+    color: white;
+    text-align: center;
+    padding: 25px 15px;
+    margin-top: 35px;
+}
+
+footer strong {
+    color: #b7ff35;
+}
+
+@media (max-width: 800px) {
+    .layout {
+        grid-template-columns: 1fr;
+    }
+
+    .chat {
+        min-height: 500px;
+    }
+}
+
+@media (max-width: 600px) {
+    header h1 {
+        font-size: 24px;
+    }
+
+    .container {
+        padding: 12px;
+    }
+
+    .message {
+        max-width: 90%;
+    }
+
+    .chat-input button {
+        padding: 0 12px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- LANGUAGES -->
+<div class="top-languages">
+    <button onclick="setLanguage('AZ')">AZ</button>
+    <button onclick="setLanguage('RU')">RU</button>
+    <button onclick="setLanguage('EN')">EN</button>
+    <button onclick="setLanguage('TR')">TR</button>
+    <button onclick="setLanguage('DE')">DE</button>
+    <button onclick="setLanguage('AR')">AR</button>
+    <button onclick="setLanguage('ES')">ES</button>
+    <button onclick="setLanguage('FR')">FR</button>
+    <button onclick="setLanguage('IT')">IT</button>
+</div>
+
+<header>
+    <h1>💬 WORKER PRO</h1>
+    <p>Сообщения и связь</p>
+</header>
+
+<!-- NAVIGATION -->
+<nav>
+    <a href="../index.html">Главная</a>
+    <a href="../companies/index.html">Компании</a>
+    <a href="../manufacturers/index.html">Производители</a>
+    <a href="../suppliers/index.html">Поставщики</a>
+    <a href="../products/index.html">Товары</a>
+    <a href="../requests/index.html">Заявки</a>
+    <a href="../offers/index.html">Предложения</a>
+    <a href="../orders/index.html">Заказы</a>
+    <a href="../transport/index.html">Доставка</a>
+    <a href="../dashboard/index.html">Кабинет</a>
+</nav>
+
+<div class="container">
+
+    <!-- INTRO -->
+    <section class="intro">
+        <h2>💬 Центр сообщений WORKER PRO</h2>
+
+        <p>
+            Здесь пользователь сможет общаться с компаниями,
+            производителями, поставщиками, специалистами и
+            покупателями со всего мира.
+        </p>
+
+        <p>
+            Переписка может использоваться для обсуждения
+            товара, технических характеристик, цены, условий
+            поставки, заказа и доставки.
+        </p>
+    </section>
+
+    <!-- SEARCH -->
+    <section class="search-box">
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="🔎 Поиск компании, поставщика или сообщения..."
+            onkeyup="searchContacts()"
+        >
+    </section>
+
+    <!-- CHAT -->
+    <section class="layout">
+
+        <!-- CONTACTS -->
+        <div class="contacts">
+
+            <div class="contacts-title">
+                💬 Мои контакты
+            </div>
+
+            <div class="contact active">
+                <div class="avatar">IM</div>
+
+                <div class="contact-info">
+                    <div class="contact-name">
+                        Industrial Manufacturer
+                    </div>
+
+                    <div class="contact-preview">
+                        Мы подготовили предложение...
+                    </div>
+                </div>
+
+                <div class="contact-time">
+                    14:25
+                </div>
+            </div>
+
+            <div class="contact">
+                <div class="avatar">MT</div>
+
+                <div class="contact-info">
+                    <div class="contact-name">
+                        Machine Technology
+                    </div>
+
+                    <div class="contact-preview">
+                        CNC machine available
+                    </div>
+                </div>
+
+                <div class="contact-time">
+                    12:10
+                </div>
+            </div>
+
+            <div class="contact">
+                <div class="avatar">HS</div>
+
+                <div class="contact-info">
+                    <div class="contact-name">
+                        Hydraulic Solutions
+                    </div>
+
+                    <div class="contact-preview">
+                        Pump specifications sent
+                    </div>
+                </div>
+
+                <div class="contact-time">
+                    Вчера
+                </div>
+            </div>
+
+            <div class="contact">
+                <div class="avatar">AS</div>
+
+                <div class="contact-info">
+                    <div class="contact-name">
+                        Automation Systems
+                    </div>
+
+                    <div class="contact-preview">
+                        PLC system quotation
+                    </div>
+                </div>
+
+                <div class="contact-time">
+                    Вчера
+                </div>
+            </div>
+
+            <div class="contact">
+                <div class="avatar">MP</div>
+
+                <div class="contact-info">
+                    <div class="contact-name">
+                        Metal Production
+                    </div>
+
+                    <div class="contact-preview">
+                        Delivery to Azerbaijan
+                    </div>
+                </div>
+
+                <div class="contact-time">
+                    18 сен
+                </div>
+            </div>
+
+            <div class="contact">
+                <div class="avatar">IS</div>
+
+                <div class="contact-info">
+                    <div class="contact-name">
+                        Industrial Furnace
+                    </div>
+
+                    <div class="contact-preview">
+                        Furnace technical data
+                    </div>
+                </div>
+
+                <div class="contact-time">
+                    17 сен
+                </div>
+            </div>
+
+        </div>
+
+        <!-- CHAT -->
+        <div class="chat">
+
+            <div class="chat-header">
+                <strong>Industrial Manufacturer</strong>
+                <small>🏭 Azerbaijan • Manufacturer</small>
+            </div>
+
+            <div class="messages">
+
+                <div class="message incoming">
+                    <strong>Industrial Manufacturer</strong><br><br>
+
+                    Здравствуйте. Мы получили вашу заявку
+                    на промышленное оборудование.
+
+                    <span class="message-time">
+                        Сегодня, 14:18
+                    </span>
+                </div>
+
+                <div class="message outgoing">
+
+                    Здравствуйте. Мне интересен станок CNC
+                    и условия доставки в Баку.
+
+                    <span class="message-time">
+                        Сегодня, 14:21
+                    </span>
+                </div>
+
+                <div class="message incoming">
+
+                    Да, оборудование доступно.
+                    Мы можем подготовить коммерческое
+                    предложение и указать стоимость доставки.
+
+                    <span class="message-time">
+                        Сегодня, 14:23
+                    </span>
+                </div>
+
+                <div class="message outgoing">
+
+                    Хорошо. Пожалуйста, отправьте цену,
+                    технические характеристики и срок доставки.
+
+                    <span class="message-time">
+                        Сегодня, 14:25
+                    </span>
+                </div>
+
+                <div class="message incoming">
+
+                    Мы подготовим предложение и отправим
+                    его через раздел Offers.
+
+                    <span class="message-time">
+                        Сегодня, 14:27
+                    </span>
+                </div>
+
+            </div>
+
+            <div class="chat-input">
+
+                <input
+                    type="text"
+                    id="messageInput"
+                    placeholder="Напишите сообщение..."
+                >
+
+                <button onclick="sendMessage()">
+                    Отправить
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- FEATURES -->
+    <section class="features">
+
+        <h2>🌍 Возможности сообщений</h2>
+
+        <div class="feature-grid">
+
+            <div class="feature">
+                <div class="feature-icon">🏭</div>
+                <h3>Компании</h3>
+                <p>
+                    Связь с промышленными компаниями
+                    разных стран.
+                </p>
+            </div>
+
+            <div class="feature">
+                <div class="feature-icon">🔧</div>
+                <h3>Поставщики</h3>
+                <p>
+                    Обсуждение товара, цены,
+                    количества и условий поставки.
+                </p>
+            </div>
+
+            <div class="feature">
+                <div class="feature-icon">👷</div>
+                <h3>Специалисты</h3>
+                <p>
+                    Связь с инженерами, мастерами
+                    и техническими специалистами.
+                </p>
+            </div>
+
+            <div class="feature">
+                <div class="feature-icon">💰</div>
+                <h3>Цена</h3>
+                <p>
+                    Обсуждение коммерческого предложения
+                    и условий сделки.
+                </p>
+            </div>
+
+            <div class="feature">
+                <div class="feature-icon">📦</div>
+                <h3>Заказы</h3>
+                <p>
+                    Обсуждение заказа, документов
+                    и статуса выполнения.
+                </p>
+            </div>
+
+            <div class="feature">
+                <div class="feature-icon">🚚</div>
+                <h3>Доставка</h3>
+                <p>
+                    Обсуждение транспорта, сроков
+                    и получения товара.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- WORKFLOW -->
+    <section class="intro" style="margin-top:25px;">
+
+        <h2>🔄 Как будет работать система</h2>
+
+        <p>
+            <strong>Заявка → Поставщик → Сообщение →
+            Коммерческое предложение → Заказ → Доставка</strong>
+        </p>
+
+        <p>
+            Пользователь сможет начать переписку прямо
+            из карточки компании, товара, заявки или
+            коммерческого предложения.
+        </p>
+
+    </section>
+
+    <!-- DEMO -->
+    <div class="demo">
+
+        <strong>⚠️ Демо-версия WORKER PRO</strong><br><br>
+
+        Сейчас сообщения являются демонстрационной
+        частью сайта. Реальная переписка будет подключена
+        после создания серверной части платформы.
+
+        В будущем здесь могут появиться реальные аккаунты,
+        база данных, личные сообщения, вложения,
+        фотографии, документы, уведомления и история
+        переписки.
+
+    </div>
+
+</div>
+
+<footer>
+
+    <strong>WORKER PRO</strong><br>
+
+    Глобальная промышленная платформа
+
+    <br><br>
+
+    Производство • Запчасти • Компании • Специалисты •
+    Обучение • Работа • Торговля
+
+    <br><br>
+
+    © 2026 WORKER PRO • F.S
+
+</footer>
+
+<script>
+
+function searchContacts() {
+
+    const input =
+        document.getElementById("searchInput")
+        .value
+        .toLowerCase();
+
+    const contacts =
+        document.querySelectorAll(".contact");
+
+    contacts.forEach(function(contact) {
+
+        const text =
+            contact.innerText.toLowerCase();
+
+        if (text.includes(input)) {
+            contact.style.display = "flex";
+        } else {
+            contact.style.display = "none";
+        }
+
+    });
+}
+
+
+function sendMessage() {
+
+    const input =
+        document.getElementById("messageInput");
+
+    const text =
+        input.value.trim();
+
+    if (text === "") {
+        alert("Введите сообщение.");
+        return;
+    }
+
+    alert(
+        "Демо: сообщение будет отправлено после подключения системы сообщений."
+    );
+
+    input.value = "";
+}
+
+</script>
+
+<script src="../language.js"></script>
+
+</body>
+</html>
