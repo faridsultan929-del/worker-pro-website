@@ -1,1 +1,906 @@
- 
+ <!DOCTYPE html>
+<html lang="ru">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WORKER PRO — Registration</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f7f5;
+    color: #123524;
+}
+
+/* ===== LANGUAGE BAR ===== */
+
+.top-bar {
+    background: #063d25;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.logo {
+    color: #b7ff35;
+    font-size: 21px;
+    font-weight: bold;
+    margin-right: 8px;
+    flex-shrink: 0;
+}
+
+.lang {
+    color: white;
+    border: 1px solid #4c8065;
+    border-radius: 7px;
+    padding: 7px 10px;
+    background: #0b6b3d;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.lang:hover {
+    background: #b7ff35;
+    color: #063d25;
+}
+
+/* ===== HEADER ===== */
+
+header {
+    background: white;
+    padding: 18px 15px;
+    text-align: center;
+    border-bottom: 1px solid #dce6df;
+}
+
+header h1 {
+    color: #063d25;
+    font-size: 30px;
+}
+
+header p {
+    color: #65776c;
+    margin-top: 7px;
+}
+
+/* ===== NAV ===== */
+
+nav {
+    background: #0b6b3d;
+    padding: 10px;
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+nav a {
+    background: #075b34;
+    color: white;
+    text-decoration: none;
+    padding: 9px 13px;
+    border-radius: 7px;
+    font-size: 14px;
+    flex-shrink: 0;
+}
+
+nav a:hover {
+    background: #b7ff35;
+    color: #063d25;
+}
+
+/* ===== HERO ===== */
+
+.hero {
+    background: linear-gradient(135deg, #063d25, #0b6b3d);
+    color: white;
+    text-align: center;
+    padding: 40px 15px;
+}
+
+.hero h2 {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    max-width: 750px;
+    margin: auto;
+    line-height: 1.6;
+    color: #e9f5ed;
+}
+
+/* ===== CONTAINER ===== */
+
+.container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 35px 15px;
+}
+
+/* ===== ACCOUNT TYPES ===== */
+
+.type-title {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.type-title h2 {
+    color: #063d25;
+}
+
+.type-title p {
+    margin-top: 7px;
+    color: #65776c;
+}
+
+.type-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 15px;
+}
+
+.type-card {
+    background: white;
+    border: 2px solid #dce6df;
+    border-radius: 13px;
+    padding: 22px;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.type-card:hover {
+    border-color: #0b6b3d;
+    transform: translateY(-3px);
+}
+
+.type-icon {
+    font-size: 45px;
+    margin-bottom: 10px;
+}
+
+.type-card h3 {
+    color: #063d25;
+    margin-bottom: 8px;
+}
+
+.type-card p {
+    color: #65776c;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.type-card.active {
+    border-color: #0b6b3d;
+    background: #e9f4ed;
+}
+
+/* ===== FORM ===== */
+
+.form-section {
+    margin-top: 30px;
+    background: white;
+    border: 1px solid #dce6df;
+    border-radius: 15px;
+    padding: 25px;
+}
+
+.form-section h2 {
+    color: #063d25;
+    margin-bottom: 8px;
+}
+
+.form-description {
+    color: #65776c;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group.full {
+    grid-column: 1 / -1;
+}
+
+.form-group label {
+    color: #063d25;
+    font-weight: bold;
+    font-size: 13px;
+    margin-bottom: 6px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #d4dfd8;
+    border-radius: 8px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    background: white;
+}
+
+.form-group textarea {
+    min-height: 110px;
+    resize: vertical;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #0b6b3d;
+}
+
+/* ===== CHECKBOX ===== */
+
+.checkbox {
+    margin-top: 18px;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    color: #65776c;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.checkbox input {
+    margin-top: 3px;
+}
+
+/* ===== BUTTON ===== */
+
+.register-button {
+    margin-top: 20px;
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    background: #b7ff35;
+    color: #063d25;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.register-button:hover {
+    background: #9fe52b;
+}
+
+/* ===== INFO ===== */
+
+.info-section {
+    margin-top: 30px;
+    background: #e9f4ed;
+    border: 1px solid #c8ddcf;
+    border-radius: 13px;
+    padding: 25px;
+}
+
+.info-section h2 {
+    color: #063d25;
+    margin-bottom: 15px;
+}
+
+.info-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+}
+
+.info-item {
+    background: white;
+    border-radius: 9px;
+    padding: 15px;
+}
+
+.info-item strong {
+    display: block;
+    color: #063d25;
+    margin-bottom: 6px;
+}
+
+.info-item span {
+    color: #65776c;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+/* ===== DEMO ===== */
+
+.demo {
+    margin-top: 25px;
+    background: #fff8df;
+    border: 1px solid #eadb9a;
+    border-radius: 12px;
+    padding: 20px;
+}
+
+.demo h3 {
+    color: #725d00;
+    margin-bottom: 8px;
+}
+
+.demo p {
+    color: #6b6338;
+    line-height: 1.6;
+    font-size: 14px;
+}
+
+/* ===== FOOTER ===== */
+
+footer {
+    margin-top: 20px;
+    background: #032b1a;
+    color: #b9c9c0;
+    text-align: center;
+    padding: 25px 15px;
+    font-size: 13px;
+}
+
+footer strong {
+    color: #b7ff35;
+}
+
+/* ===== MOBILE ===== */
+
+@media (max-width: 650px) {
+
+    .hero h2 {
+        font-size: 26px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-group.full {
+        grid-column: auto;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- ===== LANGUAGE BAR ===== -->
+
+<div class="top-bar">
+
+<div class="logo">WORKER PRO</div>
+
+<button class="lang" onclick="setLanguage('AZ')">🇦🇿 AZ</button>
+<button class="lang" onclick="setLanguage('RU')">🇷🇺 RU</button>
+<button class="lang" onclick="setLanguage('EN')">🇬🇧 EN</button>
+<button class="lang" onclick="setLanguage('TR')">🇹🇷 TR</button>
+<button class="lang" onclick="setLanguage('DE')">🇩🇪 DE</button>
+<button class="lang" onclick="setLanguage('AR')">🇸🇦 AR</button>
+<button class="lang" onclick="setLanguage('ES')">🇪🇸 ES</button>
+<button class="lang" onclick="setLanguage('FR')">🇫🇷 FR</button>
+<button class="lang" onclick="setLanguage('IT')">🇮🇹 IT</button>
+
+</div>
+
+<!-- ===== HEADER ===== -->
+
+<header>
+
+<h1>📝 Регистрация</h1>
+
+<p>
+WORKER PRO — Global Industrial Platform
+</p>
+
+</header>
+
+<!-- ===== NAV ===== -->
+
+<nav>
+
+<a href="../index.html">🏠 WORKER PRO</a>
+
+<a href="../companies/index.html">
+🏢 Компании
+</a>
+
+<a href="../manufacturers/index.html">
+🏭 Производители
+</a>
+
+<a href="../suppliers/index.html">
+📦 Поставщики
+</a>
+
+<a href="../specialists/index.html">
+👷 Специалисты
+</a>
+
+<a href="../jobs/index.html">
+💼 Работа
+</a>
+
+<a href="../training/index.html">
+🎓 Обучение
+</a>
+
+</nav>
+
+<!-- ===== HERO ===== -->
+
+<section class="hero">
+
+<h2>Создайте аккаунт WORKER PRO</h2>
+
+<p>
+Выберите тип аккаунта и присоединитесь
+к международной промышленной платформе.
+</p>
+
+</section>
+
+<!-- ===== MAIN ===== -->
+
+<main class="container">
+
+<!-- ===== ACCOUNT TYPE ===== -->
+
+<section>
+
+<div class="type-title">
+
+<h2>👤 Кто вы?</h2>
+
+<p>
+Выберите тип профиля
+</p>
+
+</div>
+
+<div class="type-grid">
+
+<div class="type-card active" onclick="selectType(this, 'specialist')">
+
+<div class="type-icon">👷</div>
+
+<h3>Специалист</h3>
+
+<p>
+Рабочий, оператор, инженер, мастер,
+техник или другой промышленный специалист.
+</p>
+
+</div>
+
+<div class="type-card" onclick="selectType(this, 'company')">
+
+<div class="type-icon">🏢</div>
+
+<h3>Компания</h3>
+
+<p>
+Промышленная компания, производитель
+или организация.
+</p>
+
+</div>
+
+<div class="type-card" onclick="selectType(this, 'supplier')">
+
+<div class="type-icon">📦</div>
+
+<h3>Поставщик</h3>
+
+<p>
+Поставщик оборудования, запчастей,
+материалов или услуг.
+</p>
+
+</div>
+
+<div class="type-card" onclick="selectType(this, 'manufacturer')">
+
+<div class="type-icon">🏭</div>
+
+<h3>Производитель</h3>
+
+<p>
+Производитель промышленного оборудования,
+деталей или материалов.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ===== FORM ===== -->
+
+<section class="form-section">
+
+<h2>📋 Информация для регистрации</h2>
+
+<p class="form-description">
+Заполните основные данные. Сейчас форма является
+демонстрационной — реальные аккаунты и база данных
+будут подключены позже.
+</p>
+
+<form onsubmit="registerDemo(event)">
+
+<div class="form-grid">
+
+<div class="form-group">
+
+<label>Имя / Название компании</label>
+
+<input
+type="text"
+placeholder="Введите имя или название"
+required
+>
+
+</div>
+
+<div class="form-group">
+
+<label>Страна</label>
+
+<select required>
+
+<option value="">Выберите страну</option>
+
+<option>Azerbaijan</option>
+<option>Turkey</option>
+<option>Germany</option>
+<option>Italy</option>
+<option>Russia</option>
+<option>China</option>
+<option>USA</option>
+<option>France</option>
+<option>Spain</option>
+<option>Other</option>
+
+</select>
+
+</div>
+
+<div class="form-group">
+
+<label>Город</label>
+
+<input
+type="text"
+placeholder="Например: Baku"
+>
+
+</div>
+
+<div class="form-group">
+
+<label>Телефон</label>
+
+<input
+type="tel"
+placeholder="+994 ..."
+>
+
+</div>
+
+<div class="form-group">
+
+<label>Email</label>
+
+<input
+type="email"
+placeholder="example@email.com"
+required
+>
+
+</div>
+
+<div class="form-group">
+
+<label>Отрасль</label>
+
+<select>
+
+<option>Выберите отрасль</option>
+
+<option>CNC</option>
+<option>Metalworking</option>
+<option>Oil & Gas</option>
+<option>Automotive</option>
+<option>Automation</option>
+<option>Welding</option>
+<option>Hydraulics</option>
+<option>Electrical</option>
+<option>Energy</option>
+<option>Industrial Equipment</option>
+<option>Other</option>
+
+</select>
+
+</div>
+
+<div class="form-group full">
+
+<label>Навыки / Продукция / Услуги</label>
+
+<textarea
+placeholder="Например: CNC, гидравлика, сварка, насосы, оборудование..."
+></textarea>
+
+</div>
+
+<div class="form-group full">
+
+<label>О себе / О компании</label>
+
+<textarea
+placeholder="Краткая информация о специалисте или компании..."
+></textarea>
+
+</div>
+
+</div>
+
+<div class="checkbox">
+
+<input type="checkbox" required>
+
+<span>
+Я подтверждаю, что предоставленная информация является
+достоверной и принимаю условия использования WORKER PRO.
+</span>
+
+</div>
+
+<button type="submit" class="register-button">
+🚀 Создать профиль WORKER PRO
+</button>
+
+</form>
+
+</section>
+
+<!-- ===== BENEFITS ===== -->
+
+<section class="info-section">
+
+<h2>🌍 Что можно делать после регистрации?</h2>
+
+<div class="info-list">
+
+<div class="info-item">
+
+<strong>🏢 Компания</strong>
+
+<span>
+Создать профиль компании и представить свою деятельность.
+</span>
+
+</div>
+
+<div class="info-item">
+
+<strong>🏭 Производитель</strong>
+
+<span>
+Добавлять оборудование, товары и промышленную продукцию.
+</span>
+
+</div>
+
+<div class="info-item">
+
+<strong>📦 Поставщик</strong>
+
+<span>
+Получать заявки и отправлять коммерческие предложения.
+</span>
+
+</div>
+
+<div class="info-item">
+
+<strong>👷 Специалист</strong>
+
+<span>
+Создать профессиональный профиль и показывать навыки.
+</span>
+
+</div>
+
+<div class="info-item">
+
+<strong>📋 Заявки</strong>
+
+<span>
+Получать и отправлять промышленные заявки.
+</span>
+
+</div>
+
+<div class="info-item">
+
+<strong>💰 Предложения</strong>
+
+<span>
+Получать цены и условия от компаний.
+</span>
+
+</div>
+
+<div class="info-item">
+
+<strong>📦 Заказы</strong>
+
+<span>
+Работать с промышленными заказами.
+</span>
+
+</div>
+
+<div class="info-item">
+
+<strong>🚚 Транспорт</strong>
+
+<span>
+Организовывать местную и международную доставку.
+</span>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ===== WORKFLOW ===== -->
+
+<section class="info-section">
+
+<h2>🔄 Как будет работать система</h2>
+
+<div class="info-list">
+
+<div class="info-item">
+<strong>1. Регистрация</strong>
+<span>Создание аккаунта.</span>
+</div>
+
+<div class="info-item">
+<strong>2. Профиль</strong>
+<span>Заполнение информации.</span>
+</div>
+
+<div class="info-item">
+<strong>3. Товары</strong>
+<span>Добавление продукции и услуг.</span>
+</div>
+
+<div class="info-item">
+<strong>4. Заявки</strong>
+<span>Получение запросов.</span>
+</div>
+
+<div class="info-item">
+<strong>5. Цена</strong>
+<span>Отправка коммерческого предложения.</span>
+</div>
+
+<div class="info-item">
+<strong>6. Заказ</strong>
+<span>Подтверждение сделки.</span>
+</div>
+
+<div class="info-item">
+<strong>7. Транспорт</strong>
+<span>Организация доставки.</span>
+</div>
+
+</div>
+
+</section>
+
+<!-- ===== DEMO ===== -->
+
+<section class="demo">
+
+<h3>ℹ️ Важно</h3>
+
+<p>
+На данном этапе WORKER PRO является демонстрационной
+версией сайта. Форма регистрации работает как интерфейс,
+но реальные аккаунты, авторизация, база данных,
+сообщения и платежи будут подключены на следующем этапе.
+</p>
+
+</section>
+
+</main>
+
+<!-- ===== FOOTER ===== -->
+
+<footer>
+
+<p>
+<strong>WORKER PRO</strong>
+</p>
+
+<p>
+Global Industrial Platform
+</p>
+
+<p>
+Регистрация • Компании • Производители • Поставщики • Специалисты
+</p>
+
+<p>
+© 2026 WORKER PRO · F.S
+</p>
+
+</footer>
+
+<!-- ===== JAVASCRIPT ===== -->
+
+<script>
+
+let selectedType = "specialist";
+
+function selectType(card, type) {
+
+    document.querySelectorAll(".type-card").forEach(function(item) {
+        item.classList.remove("active");
+    });
+
+    card.classList.add("active");
+
+    selectedType = type;
+}
+
+function registerDemo(event) {
+
+    event.preventDefault();
+
+    alert(
+        "Профиль выбранного типа: " +
+        selectedType +
+        "\n\nДемонстрационная регистрация WORKER PRO.\n\n" +
+        "Реальная регистрация будет подключена позже."
+    );
+
+}
+
+</script>
+
+<script src="../language.js"></script>
+
+</body>
+</html>
