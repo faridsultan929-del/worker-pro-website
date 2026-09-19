@@ -1,1 +1,874 @@
- 
+ <!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WORKER PRO — Requests</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f3f7f5;
+    color: #123;
+}
+
+.top-languages {
+    background: #063d25;
+    padding: 10px;
+    text-align: center;
+}
+
+.top-languages a {
+    display: inline-block;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 7px 10px;
+    margin: 3px;
+    border-radius: 7px;
+    background: #0b6b3d;
+}
+
+.top-languages a:hover {
+    background: #b7ff35;
+    color: #063d25;
+}
+
+header {
+    background: linear-gradient(135deg, #063d25, #0b6b3d);
+    color: white;
+    text-align: center;
+    padding: 30px 15px;
+}
+
+header h1 {
+    margin: 0 0 10px;
+    font-size: 34px;
+}
+
+header p {
+    margin: 6px auto;
+    max-width: 850px;
+    font-size: 17px;
+}
+
+nav {
+    background: #075b34;
+    padding: 10px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+    padding: 7px 9px;
+    font-size: 14px;
+}
+
+nav a:hover {
+    color: #b7ff35;
+}
+
+.container {
+    max-width: 1150px;
+    margin: auto;
+    padding: 25px 15px;
+}
+
+.section-title {
+    text-align: center;
+    color: #063d25;
+    margin: 25px 0;
+    font-size: 28px;
+}
+
+.intro {
+    background: white;
+    padding: 20px;
+    border-radius: 14px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+    margin-bottom: 25px;
+    line-height: 1.6;
+}
+
+.search-box {
+    background: #063d25;
+    padding: 20px;
+    border-radius: 14px;
+    margin-bottom: 30px;
+}
+
+.search-box input,
+.search-box select {
+    width: 100%;
+    padding: 13px;
+    margin: 7px 0;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 18px;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 14px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+}
+
+.card h3 {
+    color: #075b34;
+    margin-top: 0;
+}
+
+.card p {
+    line-height: 1.5;
+}
+
+.badge {
+    display: inline-block;
+    background: #b7ff35;
+    color: #063d25;
+    padding: 5px 9px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.step {
+    background: white;
+    margin: 12px 0;
+    padding: 18px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+}
+
+.step strong {
+    color: #075b34;
+}
+
+.request-box {
+    background: white;
+    padding: 22px;
+    border-radius: 14px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+    margin-top: 20px;
+}
+
+.request-box input,
+.request-box select,
+.request-box textarea {
+    width: 100%;
+    padding: 13px;
+    margin: 7px 0 12px;
+    border: 1px solid #ccd8d2;
+    border-radius: 8px;
+    font-size: 15px;
+}
+
+.request-box textarea {
+    min-height: 130px;
+    resize: vertical;
+}
+
+.button {
+    display: inline-block;
+    background: #0b6b3d;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+}
+
+.button:hover {
+    background: #075b34;
+}
+
+.status {
+    display: inline-block;
+    padding: 5px 9px;
+    border-radius: 20px;
+    background: #e6f5ea;
+    color: #075b34;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.warning {
+    background: #fff4d6;
+    border-left: 5px solid #e2a400;
+    padding: 18px;
+    border-radius: 10px;
+    margin-top: 25px;
+}
+
+footer {
+    background: #063d25;
+    color: white;
+    text-align: center;
+    padding: 25px 15px;
+    margin-top: 30px;
+}
+
+footer a {
+    color: #b7ff35;
+    text-decoration: none;
+}
+
+@media (max-width: 600px) {
+
+    header h1 {
+        font-size: 27px;
+    }
+
+    nav a {
+        font-size: 12px;
+        padding: 6px;
+    }
+
+}
+</style>
+</head>
+
+<body>
+
+<!-- LANGUAGES -->
+
+<div class="top-languages">
+    <a href="#">AZ</a>
+    <a href="#">RU</a>
+    <a href="#">EN</a>
+    <a href="#">TR</a>
+    <a href="#">DE</a>
+    <a href="#">AR</a>
+    <a href="#">ES</a>
+    <a href="#">FR</a>
+    <a href="#">IT</a>
+</div>
+
+<!-- HEADER -->
+
+<header>
+
+    <h1>📋 WORKER PRO — Requests</h1>
+
+    <p>
+        Заявки на промышленные товары,
+        запчасти, оборудование и услуги
+    </p>
+
+    <p>
+        Создать заявку • Найти поставщика • Получить предложение
+    </p>
+
+</header>
+
+<!-- NAVIGATION -->
+
+<nav>
+
+    <a href="../production/">🏭 Production</a>
+    <a href="../problems/">🛠 Problems</a>
+    <a href="../spare-parts/">⚙️ Spare Parts</a>
+    <a href="../products/">📦 Products</a>
+    <a href="../equipment/">🔧 Equipment</a>
+    <a href="../manufacturers/">🏭 Manufacturers</a>
+    <a href="../materials/">🧱 Materials</a>
+    <a href="../warehouse/">📦 Warehouse</a>
+    <a href="../companies/">🏢 Companies</a>
+    <a href="../suppliers/">🚚 Suppliers</a>
+    <a href="../orders/">📋 Orders</a>
+    <a href="../community/">👥 Community</a>
+    <a href="../specialists/">👨‍🔧 Specialists</a>
+    <a href="../jobs/">💼 Jobs</a>
+    <a href="../training/">🎓 Training</a>
+    <a href="../transport/">🚛 Transport</a>
+    <a href="../services/">🔧 Services</a>
+    <a href="../maintenance/">🛠 Maintenance</a>
+    <a href="../Quotes/">🏆 Quality</a>
+    <a href="../requests-board/">📢 Requests Board</a>
+
+</nav>
+
+<section class="container">
+
+    <!-- INTRO -->
+
+    <h2 class="section-title">
+        📋 Заявки WORKER PRO
+    </h2>
+
+    <div class="intro">
+
+        <p>
+            Раздел <strong>Requests</strong> предназначен
+            для покупателей и компаний, которым необходимо
+            найти промышленный товар, запчасть, оборудование,
+            материал или услугу.
+        </p>
+
+        <p>
+            Пользователь создаёт заявку, а поставщики
+            и производители могут предложить товар,
+            цену, условия и сроки поставки.
+        </p>
+
+    </div>
+
+    <!-- SEARCH -->
+
+    <div class="search-box">
+
+        <input
+            type="text"
+            placeholder="Поиск заявки: насос, CNC, подшипник, клапан..."
+        >
+
+        <select>
+
+            <option>Все категории</option>
+
+            <option>Запчасти</option>
+
+            <option>Оборудование</option>
+
+            <option>Материалы</option>
+
+            <option>Насосы</option>
+
+            <option>Клапаны</option>
+
+            <option>Подшипники</option>
+
+            <option>Датчики</option>
+
+            <option>Гидравлика</option>
+
+            <option>Электрика</option>
+
+            <option>Автоматизация</option>
+
+            <option>Сервис</option>
+
+        </select>
+
+        <select>
+
+            <option>Все страны</option>
+
+            <option>Азербайджан</option>
+
+            <option>Турция</option>
+
+            <option>Германия</option>
+
+            <option>Италия</option>
+
+            <option>Китай</option>
+
+            <option>Россия</option>
+
+            <option>США</option>
+
+            <option>Другие страны</option>
+
+        </select>
+
+    </div>
+
+    <!-- REQUEST TYPES -->
+
+    <h2 class="section-title">
+        🔎 Какие заявки можно создавать
+    </h2>
+
+    <div class="grid">
+
+        <div class="card">
+
+            <h3>⚙️ Запчасть</h3>
+
+            <span class="badge">Spare Part</span>
+
+            <p>
+                Поиск подшипников, клапанов,
+                датчиков, шестерён, ремней и других деталей.
+            </p>
+
+        </div>
+
+        <div class="card">
+
+            <h3>🏭 Оборудование</h3>
+
+            <span class="badge">Equipment</span>
+
+            <p>
+                Заявка на станок, пресс, печь,
+                насос, компрессор или производственную линию.
+            </p>
+
+        </div>
+
+        <div class="card">
+
+            <h3>🧱 Материал</h3>
+
+            <span class="badge">Materials</span>
+
+            <p>
+                Сталь, алюминий, медь,
+                пластик, резина и другие материалы.
+            </p>
+
+        </div>
+
+        <div class="card">
+
+            <h3>🔧 Услуга</h3>
+
+            <span class="badge">Service</span>
+
+            <p>
+                Ремонт, техническое обслуживание,
+                диагностика, монтаж и настройка.
+            </p>
+
+        </div>
+
+        <div class="card">
+
+            <h3>👨‍🔧 Специалист</h3>
+
+            <span class="badge">Specialist</span>
+
+            <p>
+                Поиск специалиста для производства,
+                ремонта, контроля качества или обслуживания.
+            </p>
+
+        </div>
+
+        <div class="card">
+
+            <h3>🚛 Транспорт</h3>
+
+            <span class="badge">Transport</span>
+
+            <p>
+                Заявка на местную или международную
+                перевозку промышленного груза.
+            </p>
+
+        </div>
+
+    </div>
+
+    <!-- EXAMPLE REQUESTS -->
+
+    <h2 class="section-title">
+        📢 Примеры заявок
+    </h2>
+
+    <div class="grid">
+
+        <div class="card">
+
+            <h3>
+                🔩 Подшипник для промышленного станка
+            </h3>
+
+            <p>
+                Требуется промышленный подшипник
+                для производственного оборудования.
+            </p>
+
+            <p>
+                Количество: 20 шт.
+            </p>
+
+            <p>
+                Страна: 🇦🇿 Азербайджан
+            </p>
+
+            <span class="status">
+                Пример заявки
+            </span>
+
+        </div>
+
+        <div class="card">
+
+            <h3>
+                💧 Промышленный насос
+            </h3>
+
+            <p>
+                Требуется насос для промышленной
+                гидравлической системы.
+            </p>
+
+            <p>
+                Количество: 2 шт.
+            </p>
+
+            <p>
+                Страна: 🇹🇷 Турция
+            </p>
+
+            <span class="status">
+                Пример заявки
+            </span>
+
+        </div>
+
+        <div class="card">
+
+            <h3>
+                🤖 CNC оборудование
+            </h3>
+
+            <p>
+                Требуется CNC оборудование
+                для производственного предприятия.
+            </p>
+
+            <p>
+                Страна: 🇩🇪 Германия
+            </p>
+
+            <span class="status">
+                Пример заявки
+            </span>
+
+        </div>
+
+    </div>
+
+    <!-- CREATE REQUEST -->
+
+    <h2 class="section-title">
+        ➕ Создать заявку
+    </h2>
+
+    <div class="request-box">
+
+        <label>
+            Название товара или услуги
+        </label>
+
+        <input
+            type="text"
+            placeholder="Например: промышленный насос"
+        >
+
+        <label>
+            Категория
+        </label>
+
+        <select>
+
+            <option>Выберите категорию</option>
+
+            <option>Запчасть</option>
+
+            <option>Оборудование</option>
+
+            <option>Материал</option>
+
+            <option>Услуга</option>
+
+            <option>Специалист</option>
+
+            <option>Транспорт</option>
+
+        </select>
+
+        <label>
+            Количество
+        </label>
+
+        <input
+            type="text"
+            placeholder="Например: 10 шт."
+        >
+
+        <label>
+            Страна поставки
+        </label>
+
+        <select>
+
+            <option>Выберите страну</option>
+
+            <option>Азербайджан</option>
+
+            <option>Турция</option>
+
+            <option>Германия</option>
+
+            <option>Италия</option>
+
+            <option>Китай</option>
+
+            <option>Россия</option>
+
+            <option>США</option>
+
+            <option>Другая страна</option>
+
+        </select>
+
+        <label>
+            Подробное описание
+        </label>
+
+        <textarea
+            placeholder="Укажите модель, размеры, технические характеристики, требования и другую важную информацию..."
+        ></textarea>
+
+        <button class="button" type="button">
+            📤 Отправить заявку
+        </button>
+
+    </div>
+
+    <!-- HOW IT WORKS -->
+
+    <h2 class="section-title">
+        🔄 Как работает заявка
+    </h2>
+
+    <div class="step">
+
+        <strong>1. Покупатель создаёт заявку</strong>
+
+        <p>
+            Указывает необходимый товар,
+            количество, характеристики и страну.
+        </p>
+
+    </div>
+
+    <div class="step">
+
+        <strong>2. Заявка появляется в системе</strong>
+
+        <p>
+            Заявка может быть доступна
+            подходящим производителям и поставщикам.
+        </p>
+
+    </div>
+
+    <div class="step">
+
+        <strong>3. Поставщики отвечают</strong>
+
+        <p>
+            Поставщики отправляют цену,
+            наличие, сроки и условия.
+        </p>
+
+    </div>
+
+    <div class="step">
+
+        <strong>4. Покупатель сравнивает предложения</strong>
+
+        <p>
+            Можно сравнить несколько предложений
+            и выбрать подходящее.
+        </p>
+
+    </div>
+
+    <div class="step">
+
+        <strong>5. Заказ</strong>
+
+        <p>
+            После согласования условий
+            создаётся заказ.
+        </p>
+
+    </div>
+
+    <div class="step">
+
+        <strong>6. Доставка</strong>
+
+        <p>
+            Товар передаётся на местную
+            или международную доставку.
+        </p>
+
+    </div>
+
+    <!-- REQUEST BOARD -->
+
+    <h2 class="section-title">
+        📢 Requests Board
+    </h2>
+
+    <div class="intro">
+
+        <p>
+            Для публичного просмотра заявок
+            предусмотрен отдельный раздел
+            <strong>Requests Board</strong>.
+        </p>
+
+        <p>
+            Там поставщики смогут находить
+            подходящие заявки и отправлять
+            свои предложения.
+        </p>
+
+        <p>
+            <a class="button" href="../requests-board/">
+                📢 Открыть Requests Board
+            </a>
+        </p>
+
+    </div>
+
+    <!-- INTERNATIONAL -->
+
+    <h2 class="section-title">
+        🌍 Международные заявки
+    </h2>
+
+    <div class="intro">
+
+        <p>
+            WORKER PRO может объединять покупателя
+            и поставщика из разных стран.
+        </p>
+
+        <p>
+            Например:
+            покупатель в 🇦🇿 Азербайджане создаёт заявку,
+            производитель в 🇮🇹 Италии предлагает товар,
+            а доставка организуется через раздел Transport.
+        </p>
+
+        <p>
+            Заявки могут относиться к производству,
+            ремонту, оборудованию, материалам,
+            запчастям и промышленным услугам.
+        </p>
+
+    </div>
+
+    <!-- FUTURE -->
+
+    <h2 class="section-title">
+        🚀 Будущее WORKER PRO Requests
+    </h2>
+
+    <div class="grid">
+
+        <div class="card">
+
+            <h3>🔔 Уведомления</h3>
+
+            <p>
+                Пользователь получает уведомление
+                о новых предложениях поставщиков.
+            </p>
+
+        </div>
+
+        <div class="card">
+
+            <h3>💰 Предложения цен</h3>
+
+            <p>
+                Поставщики смогут отправлять
+                цены и коммерческие условия.
+            </p>
+
+        </div>
+
+        <div class="card">
+
+            <h3>📊 Сравнение</h3>
+
+            <p>
+                Сравнение цены, сроков,
+                условий и доставки.
+            </p>
+
+        </div>
+
+        <div class="card">
+
+            <h3>🌍 Международный поиск</h3>
+
+            <p>
+                Поиск поставщиков и производителей
+                в разных странах.
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="warning">
+
+        <strong>⚠️ Важно:</strong>
+
+        данные заявки и технические требования
+        должны быть указаны максимально точно.
+        Перед заказом необходимо подтвердить
+        цену, наличие, характеристики и условия поставки.
+
+    </div>
+
+</section>
+
+<!-- FOOTER -->
+
+<footer>
+
+    <h3>WORKER PRO</h3>
+
+    <p>
+        Работа • Знания • Производство • Заявки
+    </p>
+
+    <p>
+        Международная промышленная платформа
+    </p>
+
+    <p>
+        <a href="../">← Вернуться в WORKER PRO</a>
+    </p>
+
+    <p>
+        © 2026 WORKER PRO — F.S
+    </p>
+
+</footer>
+
+</body>
+</html>
