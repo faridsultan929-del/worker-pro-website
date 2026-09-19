@@ -1,1 +1,1100 @@
- 
+ <!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WORKER PRO — Reviews</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f7f5;
+    color: #123;
+}
+
+.top-languages {
+    background: #063d25;
+    padding: 10px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.top-languages button {
+    background: transparent;
+    color: white;
+    border: 1px solid #b7ff35;
+    border-radius: 20px;
+    padding: 7px 12px;
+    margin: 3px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.top-languages button:hover {
+    background: #b7ff35;
+    color: #063d25;
+}
+
+header {
+    background: linear-gradient(135deg, #063d25, #0b6b3d);
+    color: white;
+    text-align: center;
+    padding: 42px 15px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 36px;
+}
+
+header p {
+    margin: 10px 0 0;
+    font-size: 17px;
+}
+
+nav {
+    background: #075b34;
+    padding: 12px;
+    text-align: center;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 0 7px;
+    display: inline-block;
+}
+
+nav a:hover {
+    color: #b7ff35;
+}
+
+.container {
+    max-width: 1150px;
+    margin: auto;
+    padding: 25px 15px;
+}
+
+.hero {
+    background: white;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+    text-align: center;
+}
+
+.hero h2 {
+    color: #063d25;
+    margin-top: 0;
+    font-size: 29px;
+}
+
+.hero p {
+    font-size: 17px;
+    line-height: 1.7;
+}
+
+h2 {
+    color: #063d25;
+    margin-top: 38px;
+}
+
+.filters {
+    background: white;
+    padding: 20px;
+    border-radius: 14px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.07);
+    margin-top: 20px;
+}
+
+.filters select,
+.filters input {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 9px;
+    margin: 5px;
+    font-size: 15px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    gap: 18px;
+}
+
+.card {
+    background: white;
+    padding: 22px;
+    border-radius: 14px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.07);
+}
+
+.card h3 {
+    margin-top: 0;
+    color: #075b34;
+}
+
+.card p {
+    line-height: 1.6;
+}
+
+.stars {
+    color: #e0a800;
+    font-size: 23px;
+    letter-spacing: 2px;
+    margin: 8px 0;
+}
+
+.rating-number {
+    font-size: 14px;
+    color: #555;
+}
+
+.badge {
+    display: inline-block;
+    background: #e7f5e9;
+    color: #075b34;
+    padding: 6px 10px;
+    border-radius: 15px;
+    font-size: 13px;
+    margin-top: 5px;
+}
+
+.review {
+    border-left: 4px solid #0b6b3d;
+}
+
+.review-author {
+    font-weight: bold;
+    color: #063d25;
+}
+
+.review-date {
+    color: #777;
+    font-size: 13px;
+}
+
+.review-text {
+    line-height: 1.6;
+}
+
+.summary {
+    background: #063d25;
+    color: white;
+    padding: 28px;
+    border-radius: 16px;
+}
+
+.summary h2 {
+    color: #b7ff35;
+    margin-top: 0;
+}
+
+.rating-big {
+    font-size: 42px;
+    font-weight: bold;
+    color: #b7ff35;
+}
+
+.rating-stars {
+    font-size: 28px;
+    color: #e0a800;
+}
+
+.rating-row {
+    margin: 12px 0;
+}
+
+.rating-bar {
+    width: 100%;
+    height: 12px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 5px;
+}
+
+.rating-fill {
+    height: 100%;
+    background: #b7ff35;
+    border-radius: 10px;
+}
+
+.steps {
+    counter-reset: step;
+}
+
+.step {
+    position: relative;
+    background: white;
+    padding: 20px 20px 20px 68px;
+    margin-bottom: 13px;
+    border-radius: 13px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+}
+
+.step::before {
+    counter-increment: step;
+    content: counter(step);
+    position: absolute;
+    left: 18px;
+    top: 18px;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: #0b6b3d;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.step h3 {
+    margin-top: 0;
+    color: #063d25;
+}
+
+.review-form {
+    background: white;
+    padding: 25px;
+    border-radius: 14px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.07);
+}
+
+.review-form input,
+.review-form select,
+.review-form textarea {
+    width: 100%;
+    padding: 13px;
+    margin-bottom: 12px;
+    border: 1px solid #ccc;
+    border-radius: 9px;
+    font-size: 15px;
+}
+
+.review-form textarea {
+    min-height: 130px;
+    resize: vertical;
+}
+
+.star-select {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 15px;
+}
+
+.star-select button {
+    border: none;
+    background: transparent;
+    font-size: 30px;
+    cursor: pointer;
+    color: #bbb;
+}
+
+.star-select button.active {
+    color: #e0a800;
+}
+
+.submit-button {
+    background: #0b6b3d;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 9px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.submit-button:hover {
+    background: #063d25;
+}
+
+.demo {
+    margin-top: 28px;
+    background: #fff8d6;
+    border-left: 5px solid #d5a900;
+    padding: 16px;
+    border-radius: 8px;
+}
+
+footer {
+    background: #063d25;
+    color: white;
+    text-align: center;
+    padding: 28px 15px;
+    margin-top: 40px;
+}
+
+@media (max-width: 600px) {
+
+    header h1 {
+        font-size: 29px;
+    }
+
+    header p {
+        font-size: 15px;
+    }
+
+    .hero {
+        padding: 22px;
+    }
+
+    .hero h2 {
+        font-size: 24px;
+    }
+
+    .filters select,
+    .filters input {
+        width: 100%;
+        margin: 5px 0;
+    }
+
+    .card {
+        padding: 18px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="top-languages">
+    <button onclick="setLanguage('AZ')">AZ</button>
+    <button onclick="setLanguage('RU')">RU</button>
+    <button onclick="setLanguage('EN')">EN</button>
+    <button onclick="setLanguage('TR')">TR</button>
+    <button onclick="setLanguage('DE')">DE</button>
+    <button onclick="setLanguage('AR')">AR</button>
+    <button onclick="setLanguage('ES')">ES</button>
+    <button onclick="setLanguage('FR')">FR</button>
+    <button onclick="setLanguage('IT')">IT</button>
+</div>
+
+<header>
+
+    <h1>⭐ REVIEWS & RATINGS</h1>
+
+    <p>
+        Отзывы и рейтинги компаний, поставщиков и специалистов
+    </p>
+
+</header>
+
+<nav>
+
+    <a href="../index.html">Главная</a>
+    <a href="../production/index.html">Производство</a>
+    <a href="../companies/index.html">Компании</a>
+    <a href="../manufacturers/index.html">Производители</a>
+    <a href="../suppliers/index.html">Поставщики</a>
+    <a href="../products/index.html">Товары</a>
+    <a href="../specialists/index.html">Специалисты</a>
+    <a href="../jobs/index.html">Работа</a>
+    <a href="../training/index.html">Обучение</a>
+    <a href="../marketplace/index.html">Marketplace</a>
+    <a href="../partners/index.html">Партнёры</a>
+    <a href="../help/index.html">Помощь</a>
+    <a href="../dashboard/index.html">Кабинет</a>
+
+</nav>
+
+<div class="container">
+
+    <div class="hero">
+
+        <h2>
+            Доверие через реальные отзывы
+        </h2>
+
+        <p>
+            Система отзывов WORKER PRO в будущем позволит
+            пользователям оценивать компании, поставщиков,
+            специалистов, качество товаров, сервис и доставку.
+        </p>
+
+        <p>
+            Отзывы должны помогать пользователям получать
+            дополнительную информацию перед сотрудничеством.
+        </p>
+
+    </div>
+
+
+    <h2>📊 Общий рейтинг</h2>
+
+    <div class="summary">
+
+        <div class="rating-big">4.8</div>
+
+        <div class="rating-stars">
+            ★★★★★
+        </div>
+
+        <p>
+            Демонстрационный общий рейтинг
+        </p>
+
+        <div class="rating-row">
+            5 ★
+            <div class="rating-bar">
+                <div class="rating-fill" style="width: 88%;"></div>
+            </div>
+        </div>
+
+        <div class="rating-row">
+            4 ★
+            <div class="rating-bar">
+                <div class="rating-fill" style="width: 72%;"></div>
+            </div>
+        </div>
+
+        <div class="rating-row">
+            3 ★
+            <div class="rating-bar">
+                <div class="rating-fill" style="width: 35%;"></div>
+            </div>
+        </div>
+
+        <div class="rating-row">
+            2 ★
+            <div class="rating-bar">
+                <div class="rating-fill" style="width: 15%;"></div>
+            </div>
+        </div>
+
+        <div class="rating-row">
+            1 ★
+            <div class="rating-bar">
+                <div class="rating-fill" style="width: 7%;"></div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <h2>🔎 Поиск отзывов</h2>
+
+    <div class="filters">
+
+        <input
+            type="text"
+            id="reviewSearch"
+            placeholder="Поиск компании, поставщика или специалиста..."
+            onkeyup="filterReviews()"
+        >
+
+        <select id="reviewType" onchange="filterReviews()">
+
+            <option value="all">Все</option>
+
+            <option value="company">Компании</option>
+
+            <option value="supplier">Поставщики</option>
+
+            <option value="specialist">Специалисты</option>
+
+            <option value="product">Товары</option>
+
+            <option value="delivery">Доставка</option>
+
+            <option value="service">Сервис</option>
+
+        </select>
+
+        <select id="reviewRating" onchange="filterReviews()">
+
+            <option value="all">Любой рейтинг</option>
+
+            <option value="5">5 звёзд</option>
+
+            <option value="4">4 звезды</option>
+
+            <option value="3">3 звезды</option>
+
+            <option value="2">2 звезды</option>
+
+            <option value="1">1 звезда</option>
+
+        </select>
+
+    </div>
+
+
+    <h2>⭐ Отзывы пользователей</h2>
+
+    <div class="grid" id="reviewsList">
+
+        <div class="card review"
+             data-type="company"
+             data-rating="5">
+
+            <div class="review-author">
+                Industrial Customer
+            </div>
+
+            <div class="review-date">
+                Demo Review
+            </div>
+
+            <div class="stars">
+                ★★★★★
+            </div>
+
+            <div class="review-text">
+                Демонстрационный отзыв о промышленной компании,
+                качестве общения и выполнении заказа.
+            </div>
+
+            <span class="badge">
+                Company
+            </span>
+
+        </div>
+
+
+        <div class="card review"
+             data-type="supplier"
+             data-rating="5">
+
+            <div class="review-author">
+                Manufacturing Buyer
+            </div>
+
+            <div class="review-date">
+                Demo Review
+            </div>
+
+            <div class="stars">
+                ★★★★★
+            </div>
+
+            <div class="review-text">
+                Демонстрационный отзыв о поставщике,
+                наличии товара и коммерческом предложении.
+            </div>
+
+            <span class="badge">
+                Supplier
+            </span>
+
+        </div>
+
+
+        <div class="card review"
+             data-type="specialist"
+             data-rating="4">
+
+            <div class="review-author">
+                Production Manager
+            </div>
+
+            <div class="review-date">
+                Demo Review
+            </div>
+
+            <div class="stars">
+                ★★★★☆
+            </div>
+
+            <div class="review-text">
+                Демонстрационный отзыв о профессиональном
+                специалисте и качестве выполненной работы.
+            </div>
+
+            <span class="badge">
+                Specialist
+            </span>
+
+        </div>
+
+
+        <div class="card review"
+             data-type="product"
+             data-rating="5">
+
+            <div class="review-author">
+                Industrial Buyer
+            </div>
+
+            <div class="review-date">
+                Demo Review
+            </div>
+
+            <div class="stars">
+                ★★★★★
+            </div>
+
+            <div class="review-text">
+                Демонстрационный отзыв о промышленной
+                запчасти и её соответствии заказу.
+            </div>
+
+            <span class="badge">
+                Product
+            </span>
+
+        </div>
+
+
+        <div class="card review"
+             data-type="delivery"
+             data-rating="4">
+
+            <div class="review-author">
+                Company Customer
+            </div>
+
+            <div class="review-date">
+                Demo Review
+            </div>
+
+            <div class="stars">
+                ★★★★☆
+            </div>
+
+            <div class="review-text">
+                Демонстрационный отзыв о сроках
+                и организации доставки.
+            </div>
+
+            <span class="badge">
+                Delivery
+            </span>
+
+        </div>
+
+
+        <div class="card review"
+             data-type="service"
+             data-rating="5">
+
+            <div class="review-author">
+                Factory Manager
+            </div>
+
+            <div class="review-date">
+                Demo Review
+            </div>
+
+            <div class="stars">
+                ★★★★★
+            </div>
+
+            <div class="review-text">
+                Демонстрационный отзыв о техническом
+                обслуживании и сервисной работе.
+            </div>
+
+            <span class="badge">
+                Service
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <h2>📝 Оставить отзыв</h2>
+
+    <div class="review-form">
+
+        <input
+            type="text"
+            id="reviewName"
+            placeholder="Ваше имя"
+        >
+
+        <input
+            type="text"
+            id="reviewCompany"
+            placeholder="Компания / специалист / товар"
+        >
+
+        <select id="reviewCategory">
+
+            <option value="">
+                Выберите категорию
+            </option>
+
+            <option value="Компания">
+                Компания
+            </option>
+
+            <option value="Поставщик">
+                Поставщик
+            </option>
+
+            <option value="Специалист">
+                Специалист
+            </option>
+
+            <option value="Товар">
+                Товар
+            </option>
+
+            <option value="Доставка">
+                Доставка
+            </option>
+
+            <option value="Сервис">
+                Сервис
+            </option>
+
+        </select>
+
+
+        <p>
+            Ваша оценка:
+        </p>
+
+        <div class="star-select">
+
+            <button onclick="selectRating(1); return false;"
+                    id="star1">★</button>
+
+            <button onclick="selectRating(2); return false;"
+                    id="star2">★</button>
+
+            <button onclick="selectRating(3); return false;"
+                    id="star3">★</button>
+
+            <button onclick="selectRating(4); return false;"
+                    id="star4">★</button>
+
+            <button onclick="selectRating(5); return false;"
+                    id="star5">★</button>
+
+        </div>
+
+
+        <textarea
+            id="reviewText"
+            placeholder="Напишите ваш отзыв..."
+        ></textarea>
+
+
+        <button
+            class="submit-button"
+            onclick="sendReview()"
+        >
+            Опубликовать отзыв
+        </button>
+
+    </div>
+
+
+    <h2>🔄 Как работает система отзывов</h2>
+
+    <div class="steps">
+
+        <div class="step">
+
+            <h3>
+                Сделка или услуга
+            </h3>
+
+            <p>
+                Пользователь взаимодействует с компанией,
+                поставщиком, специалистом или получает товар.
+            </p>
+
+        </div>
+
+
+        <div class="step">
+
+            <h3>
+                Оценка
+            </h3>
+
+            <p>
+                После завершения сделки пользователь сможет
+                поставить оценку от 1 до 5 звёзд.
+            </p>
+
+        </div>
+
+
+        <div class="step">
+
+            <h3>
+                Отзыв
+            </h3>
+
+            <p>
+                Пользователь может написать дополнительный
+                комментарий о своём опыте.
+            </p>
+
+        </div>
+
+
+        <div class="step">
+
+            <h3>
+                Проверка
+            </h3>
+
+            <p>
+                В будущем система сможет проверять связь
+                отзыва с реальным заказом или услугой.
+            </p>
+
+        </div>
+
+
+        <div class="step">
+
+            <h3>
+                Рейтинг
+            </h3>
+
+            <p>
+                На основании подтверждённых оценок может
+                формироваться рейтинг профиля.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <h2>🛡️ Принципы отзывов</h2>
+
+    <div class="grid">
+
+        <div class="card">
+
+            <h3>✅ Реальные сделки</h3>
+
+            <p>
+                В будущем отзывы можно будет связывать
+                с реальными заказами.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>🔍 Прозрачность</h3>
+
+            <p>
+                Пользователь должен понимать,
+                за что была выставлена оценка.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>🚫 Защита от спама</h3>
+
+            <p>
+                Система сможет ограничивать повторные
+                и подозрительные отзывы.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>⚖️ Правила платформы</h3>
+
+            <p>
+                Отзывы должны соответствовать правилам
+                сообщества WORKER PRO.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="demo">
+
+        <strong>⚠️ DEMO VERSION</strong>
+
+        <p>
+            Все рейтинги и отзывы на этой странице являются
+            демонстрационными примерами. Реальная система
+            отзывов будет подключена после создания базы
+            пользователей, заказов и профилей.
+        </p>
+
+    </div>
+
+</div>
+
+
+<footer>
+
+    <h3>WORKER PRO</h3>
+
+    <p>
+        Global Industrial Platform
+    </p>
+
+    <p>
+        Companies • Suppliers • Products • Specialists • Reviews
+    </p>
+
+    <p>
+        F.S
+    </p>
+
+</footer>
+
+
+<script src="../language.js"></script>
+
+<script>
+
+let selectedRating = 0;
+
+
+function selectRating(rating) {
+
+    selectedRating = rating;
+
+    for (let i = 1; i <= 5; i++) {
+
+        const star =
+            document.getElementById("star" + i);
+
+        if (i <= rating) {
+            star.classList.add("active");
+        } else {
+            star.classList.remove("active");
+        }
+
+    }
+
+}
+
+
+function filterReviews() {
+
+    const search =
+        document
+        .getElementById("reviewSearch")
+        .value
+        .toLowerCase();
+
+    const type =
+        document
+        .getElementById("reviewType")
+        .value;
+
+    const rating =
+        document
+        .getElementById("reviewRating")
+        .value;
+
+    const reviews =
+        document.querySelectorAll(".review");
+
+
+    reviews.forEach(function(review) {
+
+        const text =
+            review.innerText.toLowerCase();
+
+        const reviewType =
+            review.getAttribute("data-type");
+
+        const reviewRating =
+            review.getAttribute("data-rating");
+
+        const searchMatch =
+            text.includes(search);
+
+        const typeMatch =
+            type === "all" ||
+            reviewType === type;
+
+        const ratingMatch =
+            rating === "all" ||
+            reviewRating === rating;
+
+
+        if (
+            searchMatch &&
+            typeMatch &&
+            ratingMatch
+        ) {
+
+            review.style.display = "";
+
+        } else {
+
+            review.style.display = "none";
+
+        }
+
+    });
+
+}
+
+
+function sendReview() {
+
+    const name =
+        document.getElementById("reviewName").value;
+
+    const company =
+        document.getElementById("reviewCompany").value;
+
+    const category =
+        document.getElementById("reviewCategory").value;
+
+    const text =
+        document.getElementById("reviewText").value;
+
+
+    if (
+        !name ||
+        !company ||
+        !category ||
+        !selectedRating ||
+        !text
+    ) {
+
+        alert(
+            "Пожалуйста, заполните все поля и выберите рейтинг."
+        );
+
+        return;
+
+    }
+
+
+    alert(
+        "Спасибо за ваш отзыв!\n\n" +
+        "Объект: " + company +
+        "\nКатегория: " + category +
+        "\nОценка: " + selectedRating +
+        " / 5\n\n" +
+        "Сейчас это демонстрационная форма."
+    );
+
+}
+
+</script>
+
+</body>
+</html>
