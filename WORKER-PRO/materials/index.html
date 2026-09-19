@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WORKER PRO — Materials</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f3f7f5;
+    color: #123;
+}
+
+.top-languages {
+    background: #063d25;
+    padding: 10px;
+    text-align: center;
+}
+
+.top-languages a {
+    display: inline-block;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 7px 10px;
+    margin: 3px;
+    border-radius: 7px;
+    background: #0b6b3d;
+}
+
+.top-languages a:hover {
+    background: #b7ff35;
+    color: #063d25;
+}
+
+header {
+    background: linear-gradient(135deg, #063d25, #0b6b3d);
+    color: white;
+    text-align: center;
+    padding: 30px 15px;
+}
+
+header h1 {
+    margin: 0 0 10px;
+    font-size: 34px;
+}
+
+header p {
+    margin: 6px auto;
+    max-width: 850px;
+    font-size: 17px;
+}
+
+nav {
+    background: #075b34;
+    padding: 10px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+    padding: 7px 9px;
+    font-size: 14px;
+}
+
+nav a:hover {
+    color: #b7ff35;
+}
+
+.container {
+    max-width: 1150px;
+    margin: auto;
+    padding: 25px 15px;
+}
+
+.section-title {
+    text-align: center;
+    color: #063d25;
+    margin: 25px 0;
+    font-size: 28px;
+}
+
+.intro {
+    background: white;
+    padding: 20px;
+    border-radius: 14px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+    margin-bottom: 25px;
+    line-height: 1.6;
+}
+
+.search-box {
+    background: #063d25;
+    padding: 20px;
+    border-radius: 14px;
+    margin-bottom: 30px;
+}
+
+.search-box input,
+.search-box select {
+    width: 100%;
+    padding: 13px;
+    margin: 7px 0;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 18px;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 14px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+    transition: 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+}
+
+.card h3 {
+    color: #075b34;
+    margin-top: 0;
+}
+
+.card p {
+    line-height: 1.5;
+}
+
+.badge {
+    display: inline-block;
+    background: #b7ff35;
+    color: #063d25;
+    padding: 5px 9px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.step {
+    background: white;
+    margin: 12px 0;
+    padding: 18px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+}
+
+.step strong {
+    color: #075b34;
+}
+
+.warning {
+    background: #fff4d6;
+    border-left: 5px solid #e2a400;
+    padding: 18px;
+    border-radius: 10px;
+    margin-top: 25px;
+}
+
+footer {
+    background: #063d25;
+    color: white;
+    text-align: center;
+    padding: 25px 15px;
+    margin-top: 30px;
+}
+
+footer a {
+    color: #b7ff35;
+    text-decoration: none;
+}
+
+@media (max-width: 600px) {
+
+    header h1 {
+        font-size: 27px;
+    }
+
+    nav a {
+        font-size: 12px;
+        padding: 6px;
+    }
+
+}
+</style>
+</head>
+
+<body>
+
+<!-- LANGUAGES -->
+
+<div class="top-languages">
+    <a href="#">AZ</a>
+    <a href="#">RU</a>
+    <a href="#">EN</a>
+    <a href="#">TR</a>
+    <a href="#">DE</a>
+    <a href="#">AR</a>
+    <a href="#">ES</a>
+    <a href="#">FR</a>
+    <a href="#">IT</a>
+</div>
+
+<!-- HEADER -->
+
+<header>
+
+    <h1>🧱 WORKER PRO — Materials</h1>
+
+    <p>
+        Промышленные материалы для производства,
+        ремонта и строительства оборудования
+    </p>
+
+    <p>
+        Металлы • Пластики • Резина • Композиты • Технические материалы
+    </p>
+
+</header>
+
+<!-- NAVIGATION -->
+
+<nav>
+
+    <a href="../production/">🏭 Production</a>
+    <a href="../problems/">🛠 Problems</a>
+    <a href="../spare-parts/">⚙️ Spare Parts</a>
+    <a href="../products/">📦 Products</a>
+    <a href="../equipment/">🔧 Equipment</a>
+    <a href="../manufacturers/">🏭 Manufacturers</a>
+    <a href="../companies/">🏢 Companies</a>
+    <a href="../suppliers/">🚚 Suppliers</a>
+    <a href="../orders/">📋 Orders</a>
+    <a href="../community/">👥 Community</a>
+    <a href="../specialists/">👨‍🔧 Specialists</a>
+    <a href="../jobs/">💼 Jobs</a>
+    <a href="../training/">🎓 Training</a>
+    <a href="../transport/">🚛 Transport</a>
+    <a href="../services/">🔧 Services</a>
+    <a href="../maintenance/">🛠 Maintenance</a>
+    <a href="../Quotes/">🏆 Quality</a>
+
+</nav>
+
+<!-- MAIN -->
+
+<section class="container">
+
+    <h2 class="section-title">
+        🔎 Поиск промышленных материалов
+    </h2>
+
+    <div class="search-box">
+
+        <input
+            type="text"
+            placeholder="Поиск: сталь, алюминий, медь, резина, пластик..."
+        >
+
+        <select>
+
+            <option>Все материалы</option>
+
+            <option>Сталь</option>
+
+            <option>Нержавеющая сталь</option>
+
+            <option>Алюминий</option>
+
+            <option>Медь</option>
+
+            <option>Латунь</option>
+
+            <option>Бронза</option>
+
+            <option>Пластики</option>
+
+            <option>Резина</option>
+
+            <option>Композиты</option>
+
+            <option>Изоляционные материалы</option>
+
+        </select>
+
+        <select>
+
+            <option>Все страны</option>
+
+            <option>Азербайджан</option>
+
+            <option>Турция</option>
+
+            <option>Германия</option>
+
+            <option>Италия</option>
+
+            <option>Китай</option>
+
+            <option>Россия</option>
+
+            <option>США</option>
+
+            <option>Другие страны</option>
+
+        </select>
+
+    </div>
+
+    <!-- MATERIAL CATEGORIES -->
+
+    <h2 class="section-title">
+        🧱 Категории материалов
+    </h2>
+
+    <div class="grid">
+
+        <div class="card">
+
+            <h3>🔩 Конструкционная сталь</h3>
+
+            <span class="badge">Steel</span>
+
+            <p>
+                Сталь для изготовления рам, конструкций,
+                деталей машин и промышленного оборудования.
+            </p>
+
+        </div>
+
+        <div class="card">
+
+            <h3>🛡 Нержавеющая сталь</h3>
+
+            <span class="badge">Stainless Steel</span>
+
+            <p>
+                Материалы для оборудования,
+                трубопроводов, резервуаров и деталей,
+                работающих в агрессивной среде.
+            </p>
+
+        </div>
+
+        <div class="card">
+
+            <h3>✈️ Алюминий</h3>
+
+            <span class="badge">Aluminium</span>
+
+            <p>
+                Лёгкий металл для корпусов,
+                конструкций, деталей и оборудования.
+            </p>
+
+        </div>
+
+        <div class="card">
+
+            <h3>⚡ Медь</h3>
+
+            <span class="badge">Copper</span>
+
+            <p>
+                Используется в электротехнике,
+                кабелях, контактах и теплообменниках.
+            </p>
+
+        </div>
+
+        <div class="card">
+
+            <h3>🟡 Латунь</h3>
+
+            <span class="badge">Brass</span>
+
+            <p>
+                Материал для клапанов, фитингов,
+                втулок и других промышленных деталей.
+            </p>
+
+        </div>
+
+        <div class="card">
+
+            <h3>🟤 Бронза</h3>
+
+            <span class="badge">Bronze</span>
+
+            <p>
+                Применяется для втулок, подшипников,
+                шестерён и деталей машин.
+            </p>
+
+        </div>
+
+        <div class="card">
+
+            <h3>⚙️ Инструментальная сталь</h3>
+
+            <span class="badge">Tool Steel</span>
+
+            <p>
+                Материал для режущего инструмента,
+                штампов, пресс-форм и оснастки.
+            </p>
+
+        </div>
+
+        <div class="card">
+
+            <h3>🧪 Технический пластик</h3>
+
+            <span class="badge">Engineering Plastic</span>
+
+            <p>
+                Пластики для втулок, направляющих,
+                корпусов и изоляционных деталей.
+            </p>
+
+        </div>
+
+        <div class="card">
+
+            <h3>⭕ Промышленная резина</h3>
+
+            <span class="badge">Rubber</span>
+
+            <p>
+                Уплотнения, прокладки, шланги,
+                виброизоляция и технические изделия.
+            </p>
+
+        </div>
+
+        <div class="card">
+
+            <h3>🧬 Композитные материалы</h3>
+
+            <span class="badge">Composite</span>
+
+            <p>
+                Современные материалы для промышленного
+                оборудования и специальных конструкций.
+            </p>
+
+        </div>
+
+    </div>
+
+    <!-- MATERIAL INFORMATION -->
+
+    <h2 class="section-title">
+        📋 Информация о материале
+    </h2>
+
+    <div class="grid">
+
+        <div class="card">
+
+            <h3>📐 Размер</h3>
+
+            <p>
+                Толщина, ширина, длина, диаметр
+                и другие размеры материала.
+            </p>
+
+        </div>
+
+        <div class="card">
+
+            <h3>⚖️ Вес</h3>
+
+            <p>
+                Масса материала и единица измерения:
+                кг, тонна, метр и другие.
+            </p>
+
+        </div>
+
+        <div class="card">
+
+            <h3>🔥 Температура</h3>
+
+            <p>
+                Рабочий диапазон температур
+                и температурная стойкость.
+            </p>
+
+        </div>
+
+        <div class="card">
+
+            <h3>💪 Прочность</h3>
+
+            <p>
+                Механические свойства и характеристики
+                материала.
+            </p>
+
+        </div>
+
+        <div class="card">
+
+            <h3>🧪 Химический состав</h3>
+
+            <p>
+                Основные элементы и характеристики
+                материала.
+            </p>
+
+        </div>
+
+        <div class="card">
+
+            <h3>📜 Сертификат</h3>
+
+            <p>
+                Сертификаты качества и документы
+                производителя.
+            </p>
+
+        </div>
+
+    </div>
+
+    <!-- PRODUCTION USE -->
+
+    <h2 class="section-title">
+        🏭 Где используются материалы
+    </h2>
+
+    <div class="grid">
+
+        <div class="card">
+
+            <h3>🏭 Машиностроение</h3>
+
+            <p>
+                Изготовление станков, деталей,
+                механизмов и производственных линий.
+            </p>
+
+        </div>
+
+        <div class="card">
+
+            <h3>🛢 Нефть и газ</h3>
+
+            <p>
+                Трубопроводы, насосы, клапаны,
+                резервуары и промышленное оборудование.
+            </p>
+
+        </div>
+
+        <div class="card">
+
+            <h3>⚡ Энергетика</h3>
+
+            <p>
+                Электростанции, генераторы,
+                трансформаторы и энергетические системы.
+            </p>
+
+        </div>
+
+        <div class="card">
+
+            <h3>🚢 Судостроение</h3>
+
+            <p>
+                Корпуса, механизмы, трубопроводы
+                и судовое оборудование.
+            </p>
+
+        </div>
+
+        <div class="card">
+
+            <h3>🚗 Автомобильная промышленность</h3>
+
+            <p>
+                Кузовные детали, двигатели,
+                подвеска и другие компоненты.
+            </p>
+
+        </div>
+
+        <div class="card">
+
+            <h3>🏗 Строительство</h3>
+
+            <p>
+                Металлоконструкции, крепёж,
+                трубы и строительные элементы.
+            </p>
+
+        </div>
+
+    </div>
+
+    <!-- ORDER PROCESS -->
+
+    <h2 class="section-title">
+        📦 Как найти материал
+    </h2>
+
+    <div class="step">
+
+        <strong>1. Найдите материал</strong>
+
+        <p>
+            Выберите необходимый материал,
+            тип и характеристики.
+        </p>
+
+    </div>
+
+    <div class="step">
+
+        <strong>2. Укажите количество</strong>
+
+        <p>
+            Укажите необходимый объём,
+            размер или вес.
+        </p>
+
+    </div>
+
+    <div class="step">
+
+        <strong>3. Найдите поставщика</strong>
+
+        <p>
+            WORKER PRO помогает искать производителей
+            и поставщиков в разных странах.
+        </p>
+
+    </div>
+
+    <div class="step">
+
+        <strong>4. Получите предложение</strong>
+
+        <p>
+            Поставщик предоставляет цену,
+            наличие и условия поставки.
+        </p>
+
+    </div>
+
+    <div class="step">
+
+        <strong>5. Организуйте доставку</strong>
+
+        <p>
+            После заказа можно организовать
+            местную или международную перевозку.
+        </p>
+
+    </div>
+
+    <!-- INTERNATIONAL -->
+
+    <h2 class="section-title">
+        🌍 Международный рынок материалов
+    </h2>
+
+    <div class="intro">
+
+        <p>
+            WORKER PRO в будущем сможет объединять
+            покупателей, производителей и поставщиков
+            промышленных материалов из разных стран.
+        </p>
+
+        <p>
+            Например:
+            материал производится в Турции,
+            покупатель находится в Азербайджане,
+            а доставка организуется через международную
+            транспортную компанию.
+        </p>
+
+        <p>
+            Возможные направления:
+            🇦🇿 Азербайджан • 🇹🇷 Турция • 🇩🇪 Германия •
+            🇮🇹 Италия • 🇨🇳 Китай • 🇷🇺 Россия • 🇺🇸 США
+        </p>
+
+    </div>
+
+    <!-- FUTURE -->
+
+    <h2 class="section-title">
+        🚀 Будущее WORKER PRO Materials
+    </h2>
+
+    <div class="grid">
+
+        <div class="card">
+
+            <h3>🏭 Каталог материалов</h3>
+
+            <p>
+                Большой международный каталог
+                промышленных материалов.
+            </p>
+
+        </div>
+
+        <div class="card">
+
+            <h3>💰 Сравнение цен</h3>
+
+            <p>
+                Возможность сравнивать предложения
+                разных поставщиков.
+            </p>
+
+        </div>
+
+        <div class="card">
+
+            <h3>📜 Сертификаты</h3>
+
+            <p>
+                Хранение технических документов
+                и сертификатов материалов.
+            </p>
+
+        </div>
+
+        <div class="card">
+
+            <h3>🌍 Международная поставка</h3>
+
+            <p>
+                Поиск материала в другой стране
+                и организация доставки.
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="warning">
+
+        <strong>⚠️ Важно:</strong>
+
+        характеристики материала должны проверяться
+        по технической документации и требованиям
+        конкретного производства.
+
+    </div>
+
+</section>
+
+<!-- FOOTER -->
+
+<footer>
+
+    <h3>WORKER PRO</h3>
+
+    <p>
+        Работа • Знания • Производство • Материалы
+    </p>
+
+    <p>
+        Международная промышленная платформа
+    </p>
+
+    <p>
+        <a href="../">← Вернуться в WORKER PRO</a>
+    </p>
+
+    <p>
+        © 2026 WORKER PRO — F.S
+    </p>
+
+</footer>
+
+</body>
+</html>
