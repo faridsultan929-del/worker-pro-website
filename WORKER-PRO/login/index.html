@@ -1,1 +1,749 @@
- 
+ <!DOCTYPE html>
+<html lang="ru">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WORKER PRO — Login</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f7f5;
+    color: #123524;
+}
+
+/* ===== LANGUAGE BAR ===== */
+
+.top-bar {
+    background: #063d25;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.logo {
+    color: #b7ff35;
+    font-size: 21px;
+    font-weight: bold;
+    margin-right: 8px;
+    flex-shrink: 0;
+}
+
+.lang {
+    color: white;
+    border: 1px solid #4c8065;
+    border-radius: 7px;
+    padding: 7px 10px;
+    background: #0b6b3d;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.lang:hover {
+    background: #b7ff35;
+    color: #063d25;
+}
+
+/* ===== HEADER ===== */
+
+header {
+    background: white;
+    padding: 18px 15px;
+    text-align: center;
+    border-bottom: 1px solid #dce6df;
+}
+
+header h1 {
+    color: #063d25;
+    font-size: 30px;
+}
+
+header p {
+    color: #65776c;
+    margin-top: 7px;
+}
+
+/* ===== NAV ===== */
+
+nav {
+    background: #0b6b3d;
+    padding: 10px;
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+nav a {
+    background: #075b34;
+    color: white;
+    text-decoration: none;
+    padding: 9px 13px;
+    border-radius: 7px;
+    font-size: 14px;
+    flex-shrink: 0;
+}
+
+nav a:hover {
+    background: #b7ff35;
+    color: #063d25;
+}
+
+/* ===== HERO ===== */
+
+.hero {
+    background: linear-gradient(135deg, #063d25, #0b6b3d);
+    color: white;
+    text-align: center;
+    padding: 45px 15px;
+}
+
+.hero-icon {
+    font-size: 55px;
+    margin-bottom: 10px;
+}
+
+.hero h2 {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    max-width: 650px;
+    margin: auto;
+    line-height: 1.6;
+    color: #e9f5ed;
+}
+
+/* ===== CONTAINER ===== */
+
+.container {
+    max-width: 900px;
+    margin: auto;
+    padding: 35px 15px;
+}
+
+/* ===== LOGIN CARD ===== */
+
+.login-card {
+    max-width: 500px;
+    margin: auto;
+    background: white;
+    border: 1px solid #dce6df;
+    border-radius: 15px;
+    padding: 28px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.07);
+}
+
+.login-card h2 {
+    text-align: center;
+    color: #063d25;
+    margin-bottom: 8px;
+}
+
+.login-description {
+    text-align: center;
+    color: #65776c;
+    line-height: 1.5;
+    margin-bottom: 25px;
+}
+
+/* ===== FORM ===== */
+
+.form-group {
+    margin-bottom: 17px;
+}
+
+.form-group label {
+    display: block;
+    color: #063d25;
+    font-weight: bold;
+    font-size: 13px;
+    margin-bottom: 7px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #d4dfd8;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #0b6b3d;
+}
+
+/* ===== PASSWORD ===== */
+
+.password-box {
+    position: relative;
+}
+
+.password-box input {
+    padding-right: 55px;
+}
+
+.show-password {
+    position: absolute;
+    right: 8px;
+    top: 7px;
+    height: 35px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+/* ===== OPTIONS ===== */
+
+.login-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin: 8px 0 20px;
+    font-size: 13px;
+}
+
+.remember {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #65776c;
+}
+
+.forgot {
+    color: #0b6b3d;
+    text-decoration: none;
+}
+
+.forgot:hover {
+    text-decoration: underline;
+}
+
+/* ===== LOGIN BUTTON ===== */
+
+.login-button {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    background: #b7ff35;
+    color: #063d25;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.login-button:hover {
+    background: #9fe52b;
+}
+
+/* ===== DIVIDER ===== */
+
+.divider {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 25px 0;
+    color: #8a9990;
+    font-size: 13px;
+}
+
+.divider::before,
+.divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #dce6df;
+}
+
+/* ===== REGISTER ===== */
+
+.register-box {
+    text-align: center;
+}
+
+.register-box p {
+    color: #65776c;
+    font-size: 14px;
+    margin-bottom: 12px;
+}
+
+.register-button {
+    display: inline-block;
+    padding: 11px 20px;
+    border-radius: 8px;
+    background: #0b6b3d;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.register-button:hover {
+    background: #063d25;
+}
+
+/* ===== QUICK ACCESS ===== */
+
+.quick-section {
+    margin-top: 30px;
+    background: white;
+    border: 1px solid #dce6df;
+    border-radius: 15px;
+    padding: 25px;
+}
+
+.quick-section h2 {
+    text-align: center;
+    color: #063d25;
+    margin-bottom: 18px;
+}
+
+.quick-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 12px;
+}
+
+.quick-card {
+    background: #f4f7f5;
+    border-radius: 10px;
+    padding: 16px;
+    text-align: center;
+}
+
+.quick-card .icon {
+    font-size: 30px;
+    margin-bottom: 7px;
+}
+
+.quick-card strong {
+    display: block;
+    color: #063d25;
+    margin-bottom: 5px;
+}
+
+.quick-card span {
+    color: #65776c;
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+/* ===== DEMO ===== */
+
+.demo {
+    margin-top: 25px;
+    background: #fff8df;
+    border: 1px solid #eadb9a;
+    border-radius: 12px;
+    padding: 20px;
+}
+
+.demo h3 {
+    color: #725d00;
+    margin-bottom: 8px;
+}
+
+.demo p {
+    color: #6b6338;
+    line-height: 1.6;
+    font-size: 14px;
+}
+
+/* ===== FOOTER ===== */
+
+footer {
+    margin-top: 20px;
+    background: #032b1a;
+    color: #b9c9c0;
+    text-align: center;
+    padding: 25px 15px;
+    font-size: 13px;
+}
+
+footer strong {
+    color: #b7ff35;
+}
+
+/* ===== MOBILE ===== */
+
+@media (max-width: 600px) {
+
+    .hero h2 {
+        font-size: 26px;
+    }
+
+    .login-card {
+        padding: 22px 18px;
+    }
+
+    .login-options {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- ===== LANGUAGE BAR ===== -->
+
+<div class="top-bar">
+
+<div class="logo">WORKER PRO</div>
+
+<button class="lang" onclick="setLanguage('AZ')">🇦🇿 AZ</button>
+<button class="lang" onclick="setLanguage('RU')">🇷🇺 RU</button>
+<button class="lang" onclick="setLanguage('EN')">🇬🇧 EN</button>
+<button class="lang" onclick="setLanguage('TR')">🇹🇷 TR</button>
+<button class="lang" onclick="setLanguage('DE')">🇩🇪 DE</button>
+<button class="lang" onclick="setLanguage('AR')">🇸🇦 AR</button>
+<button class="lang" onclick="setLanguage('ES')">🇪🇸 ES</button>
+<button class="lang" onclick="setLanguage('FR')">🇫🇷 FR</button>
+<button class="lang" onclick="setLanguage('IT')">🇮🇹 IT</button>
+
+</div>
+
+<!-- ===== HEADER ===== -->
+
+<header>
+
+<h1>🔐 Вход в WORKER PRO</h1>
+
+<p>
+Global Industrial Platform
+</p>
+
+</header>
+
+<!-- ===== NAV ===== -->
+
+<nav>
+
+<a href="../index.html">🏠 WORKER PRO</a>
+
+<a href="../companies/index.html">
+🏢 Компании
+</a>
+
+<a href="../manufacturers/index.html">
+🏭 Производители
+</a>
+
+<a href="../suppliers/index.html">
+📦 Поставщики
+</a>
+
+<a href="../specialists/index.html">
+👷 Специалисты
+</a>
+
+<a href="../jobs/index.html">
+💼 Работа
+</a>
+
+<a href="../training/index.html">
+🎓 Обучение
+</a>
+
+</nav>
+
+<!-- ===== HERO ===== -->
+
+<section class="hero">
+
+<div class="hero-icon">🔐</div>
+
+<h2>Добро пожаловать</h2>
+
+<p>
+Войдите в свой аккаунт WORKER PRO,
+чтобы работать с профилем, товарами,
+заявками и заказами.
+</p>
+
+</section>
+
+<!-- ===== MAIN ===== -->
+
+<main class="container">
+
+<!-- ===== LOGIN ===== -->
+
+<section class="login-card">
+
+<h2>Вход в аккаунт</h2>
+
+<p class="login-description">
+Введите email и пароль для входа.
+</p>
+
+<form onsubmit="loginDemo(event)">
+
+<div class="form-group">
+
+<label>📧 Email</label>
+
+<input
+type="email"
+id="email"
+placeholder="example@email.com"
+required
+>
+
+</div>
+
+<div class="form-group">
+
+<label>🔑 Пароль</label>
+
+<div class="password-box">
+
+<input
+type="password"
+id="password"
+placeholder="Введите пароль"
+required
+>
+
+<button
+type="button"
+class="show-password"
+onclick="togglePassword()"
+>
+👁️
+</button>
+
+</div>
+
+</div>
+
+<div class="login-options">
+
+<label class="remember">
+
+<input type="checkbox">
+
+Запомнить меня
+
+</label>
+
+<a href="#" class="forgot" onclick="forgotPassword(event)">
+Забыли пароль?
+</a>
+
+</div>
+
+<button type="submit" class="login-button">
+🔐 Войти
+</button>
+
+</form>
+
+<div class="divider">
+или
+</div>
+
+<div class="register-box">
+
+<p>
+Нет аккаунта WORKER PRO?
+</p>
+
+<a href="../register/index.html" class="register-button">
+📝 Создать аккаунт
+</a>
+
+</div>
+
+</section>
+
+<!-- ===== QUICK ACCESS ===== -->
+
+<section class="quick-section">
+
+<h2>🚀 После входа</h2>
+
+<div class="quick-grid">
+
+<div class="quick-card">
+
+<div class="icon">👤</div>
+
+<strong>Мой профиль</strong>
+
+<span>
+Управление личной или корпоративной информацией.
+</span>
+
+</div>
+
+<div class="quick-card">
+
+<div class="icon">📦</div>
+
+<strong>Мои товары</strong>
+
+<span>
+Добавление продукции и оборудования.
+</span>
+
+</div>
+
+<div class="quick-card">
+
+<div class="icon">📋</div>
+
+<strong>Мои заявки</strong>
+
+<span>
+Создание и просмотр промышленных заявок.
+</span>
+
+</div>
+
+<div class="quick-card">
+
+<div class="icon">💰</div>
+
+<strong>Предложения</strong>
+
+<span>
+Получение и отправка коммерческих предложений.
+</span>
+
+</div>
+
+<div class="quick-card">
+
+<div class="icon">📦</div>
+
+<strong>Заказы</strong>
+
+<span>
+Работа с заказами и покупками.
+</span>
+
+</div>
+
+<div class="quick-card">
+
+<div class="icon">🚚</div>
+
+<strong>Доставка</strong>
+
+<span>
+Контроль местной и международной перевозки.
+</span>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ===== DEMO ===== -->
+
+<section class="demo">
+
+<h3>ℹ️ Демонстрационная версия</h3>
+
+<p>
+Сейчас страница входа является интерфейсом будущей системы.
+Реальная авторизация, база пользователей, восстановление
+пароля и защищённые аккаунты будут подключены позже.
+</p>
+
+</section>
+
+</main>
+
+<!-- ===== FOOTER ===== -->
+
+<footer>
+
+<p>
+<strong>WORKER PRO</strong>
+</p>
+
+<p>
+Global Industrial Platform
+</p>
+
+<p>
+Вход • Регистрация • Компании • Специалисты • Заказы
+</p>
+
+<p>
+© 2026 WORKER PRO · F.S
+</p>
+
+</footer>
+
+<!-- ===== JAVASCRIPT ===== -->
+
+<script>
+
+function togglePassword() {
+
+    const password = document.getElementById("password");
+
+    if (password.type === "password") {
+        password.type = "text";
+    } else {
+        password.type = "password";
+    }
+
+}
+
+function loginDemo(event) {
+
+    event.preventDefault();
+
+    const email = document.getElementById("email").value;
+
+    alert(
+        "Демонстрационный вход WORKER PRO\n\n" +
+        "Email: " + email +
+        "\n\nРеальная авторизация будет подключена позже."
+    );
+
+}
+
+function forgotPassword(event) {
+
+    event.preventDefault();
+
+    alert(
+        "Восстановление пароля WORKER PRO\n\n" +
+        "Эта функция будет подключена вместе с реальной системой аккаунтов."
+    );
+
+}
+
+</script>
+
+<script src="../language.js"></script>
+
+</body>
+</html>
