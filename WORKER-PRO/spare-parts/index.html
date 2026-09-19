@@ -1,1 +1,457 @@
- 
+ <!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WORKER PRO — Spare Parts</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f7f5;
+    color: #123;
+}
+
+.top-languages {
+    background: #063d25;
+    padding: 10px;
+    text-align: center;
+}
+
+.top-languages button {
+    border: none;
+    background: #0b6b3d;
+    color: white;
+    font-weight: bold;
+    padding: 9px 12px;
+    margin: 3px;
+    border-radius: 8px;
+}
+
+header {
+    background: #075b34;
+    color: white;
+    text-align: center;
+    padding: 25px 15px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 34px;
+}
+
+header p {
+    margin: 10px 0 0;
+    font-size: 18px;
+}
+
+nav {
+    background: white;
+    padding: 12px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+nav a {
+    display: inline-block;
+    color: #075b34;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 5px 8px;
+}
+
+nav a:hover {
+    color: #0b9b57;
+}
+
+.container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 25px 15px;
+}
+
+.hero {
+    background: linear-gradient(135deg, #063d25, #0b6b3d);
+    color: white;
+    border-radius: 18px;
+    padding: 35px 25px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.hero h2 {
+    margin-top: 0;
+    font-size: 30px;
+}
+
+.hero p {
+    font-size: 17px;
+    line-height: 1.6;
+}
+
+.search-box {
+    max-width: 700px;
+    margin: 25px auto 35px;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 16px;
+    border: 2px solid #0b6b3d;
+    border-radius: 12px;
+    font-size: 16px;
+    outline: none;
+}
+
+.section-title {
+    color: #063d25;
+    font-size: 28px;
+    text-align: center;
+    margin: 35px 0 20px;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 18px;
+}
+
+.card {
+    background: white;
+    border-radius: 16px;
+    padding: 22px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+    border-left: 5px solid #0b6b3d;
+    transition: 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+}
+
+.card h3 {
+    color: #075b34;
+    margin-top: 0;
+    font-size: 21px;
+}
+
+.card p {
+    line-height: 1.6;
+    color: #456;
+}
+
+.tag {
+    display: inline-block;
+    background: #e8f7ed;
+    color: #075b34;
+    padding: 6px 10px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.info {
+    background: white;
+    border-radius: 18px;
+    padding: 25px;
+    margin-top: 35px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.07);
+}
+
+.info-item {
+    background: #f1f7f3;
+    border-radius: 12px;
+    padding: 15px;
+    margin: 10px 0;
+}
+
+.info-item strong {
+    color: #075b34;
+}
+
+.buttons {
+    text-align: center;
+    margin: 35px 0;
+}
+
+.btn {
+    display: inline-block;
+    background: #0b6b3d;
+    color: white;
+    text-decoration: none;
+    padding: 13px 20px;
+    margin: 6px;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+.btn:hover {
+    background: #063d25;
+}
+
+footer {
+    background: #063d25;
+    color: white;
+    text-align: center;
+    padding: 25px 15px;
+    margin-top: 40px;
+}
+
+footer p {
+    margin: 6px;
+}
+
+@media (max-width: 600px) {
+
+    header h1 {
+        font-size: 28px;
+    }
+
+    .hero h2 {
+        font-size: 25px;
+    }
+
+    .section-title {
+        font-size: 24px;
+    }
+
+    nav a {
+        font-size: 14px;
+        margin: 4px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="top-languages">
+    <button>AZ</button>
+    <button>RU</button>
+    <button>EN</button>
+    <button>TR</button>
+    <button>DE</button>
+    <button>AR</button>
+    <button>ES</button>
+    <button>FR</button>
+    <button>IT</button>
+</div>
+
+<header>
+    <h1>⚙️ WORKER PRO</h1>
+    <p>Промышленные запчасти и комплектующие</p>
+</header>
+
+<nav>
+    <a href="../index.html">Главная</a>
+    <a href="../production/index.html">Производство</a>
+    <a href="../problems/index.html">Проблемы</a>
+    <a href="../spare-parts/index.html">Запчасти</a>
+    <a href="../companies/index.html">Компании</a>
+    <a href="../suppliers/index.html">Поставщики</a>
+    <a href="../training/index.html">Обучение</a>
+</nav>
+
+<div class="container">
+
+<section class="hero">
+
+    <h2>⚙️ Промышленные запчасти</h2>
+
+    <p>
+        Поиск промышленных деталей, комплектующих и оборудования
+        для ремонта и обслуживания производства.
+    </p>
+
+    <p>
+        Подшипники • Насосы • Клапаны • Датчики •
+        Гидравлика • Электрика • CNC
+    </p>
+
+</section>
+
+<div class="search-box">
+
+    <input
+        type="text"
+        placeholder="🔍 Поиск запчасти: подшипник, насос, клапан, датчик..."
+    >
+
+</div>
+
+<h2 class="section-title">
+    🔧 Категории запчастей
+</h2>
+
+<div class="cards">
+
+    <div class="card">
+        <span class="tag">MECHANICAL</span>
+        <h3>⚙️ Подшипники</h3>
+        <p>
+            Шариковые, роликовые, цилиндрические,
+            конические и специальные промышленные подшипники.
+        </p>
+    </div>
+
+    <div class="card">
+        <span class="tag">PUMPS</span>
+        <h3>💧 Насосы</h3>
+        <p>
+            Центробежные, шестерёнчатые, гидравлические
+            и промышленные насосы.
+        </p>
+    </div>
+
+    <div class="card">
+        <span class="tag">VALVES</span>
+        <h3>🔩 Клапаны</h3>
+        <p>
+            Запорные, регулирующие, обратные,
+            предохранительные и промышленные клапаны.
+        </p>
+    </div>
+
+    <div class="card">
+        <span class="tag">SENSORS</span>
+        <h3>📡 Датчики</h3>
+        <p>
+            Датчики температуры, давления, положения,
+            уровня, скорости и приближения.
+        </p>
+    </div>
+
+    <div class="card">
+        <span class="tag">HYDRAULICS</span>
+        <h3>🛢️ Гидравлика</h3>
+        <p>
+            Гидроцилиндры, гидронасосы, фильтры,
+            шланги, фитинги и гидравлические клапаны.
+        </p>
+    </div>
+
+    <div class="card">
+        <span class="tag">ELECTRICAL</span>
+        <h3>⚡ Электрика</h3>
+        <p>
+            Электродвигатели, контакторы, реле,
+            автоматические выключатели, кабели и блоки питания.
+        </p>
+    </div>
+
+    <div class="card">
+        <span class="tag">CNC</span>
+        <h3>🖥️ CNC запчасти</h3>
+        <p>
+            Приводы, шпиндели, направляющие,
+            энкодеры, двигатели и комплектующие CNC станков.
+        </p>
+    </div>
+
+    <div class="card">
+        <span class="tag">FURNACES</span>
+        <h3>🔥 Детали для печей</h3>
+        <p>
+            Нагревательные элементы, термопары,
+            датчики температуры, вентиляторы и контроллеры.
+        </p>
+    </div>
+
+    <div class="card">
+        <span class="tag">WELDING</span>
+        <h3>🔥 Сварочное оборудование</h3>
+        <p>
+            Сварочные аппараты, кабели, горелки,
+            держатели, электроды и комплектующие.
+        </p>
+    </div>
+
+    <div class="card">
+        <span class="tag">TOOLS</span>
+        <h3>🔧 Инструменты</h3>
+        <p>
+            Режущий инструмент, сверла, фрезы,
+            измерительный и слесарный инструмент.
+        </p>
+    </div>
+
+</div>
+
+<div class="info">
+
+    <h2 class="section-title">
+        🌍 Как будет работать поиск
+    </h2>
+
+    <div class="info-item">
+        <strong>1. Найдите деталь</strong><br>
+        Введите название, модель или номер детали.
+    </div>
+
+    <div class="info-item">
+        <strong>2. Выберите страну</strong><br>
+        Найдите производителей и поставщиков
+        в своей стране или за рубежом.
+    </div>
+
+    <div class="info-item">
+        <strong>3. Свяжитесь с поставщиком</strong><br>
+        Запросите цену, наличие, характеристики
+        и условия поставки.
+    </div>
+
+    <div class="info-item">
+        <strong>4. Организуйте доставку</strong><br>
+        После заказа можно организовать местную
+        или международную перевозку.
+    </div>
+
+</div>
+
+<div class="buttons">
+
+    <a class="btn" href="../production/index.html">
+        🏭 Производство
+    </a>
+
+    <a class="btn" href="../problems/index.html">
+        🛠️ Проблемы
+    </a>
+
+    <a class="btn" href="../companies/index.html">
+        🏢 Компании
+    </a>
+
+    <a class="btn" href="../suppliers/index.html">
+        🚚 Поставщики
+    </a>
+
+</div>
+
+</div>
+
+<footer>
+
+    <p><strong>WORKER PRO</strong></p>
+    <p>🌍 Международная промышленная платформа</p>
+    <p>Производство • Запчасти • Компании • Поставщики</p>
+    <p>F.S</p>
+
+</footer>
+
+</body>
+</html>
+
+После сохранения не проверяем через старый главный файл. Сначала просто сохраняем эту папку.
+
+Следующей после "spare-parts" можем заполнить существующую папку "companies".
