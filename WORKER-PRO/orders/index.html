@@ -1,1 +1,469 @@
- 
+ <!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WORKER PRO — Orders</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f7f5;
+    color: #123;
+}
+
+.top-languages {
+    background: #063d25;
+    padding: 10px;
+    text-align: center;
+}
+
+.top-languages a {
+    display: inline-block;
+    background: #0b6b3d;
+    color: white;
+    text-decoration: none;
+    padding: 8px 12px;
+    margin: 3px;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+.top-languages a:hover {
+    background: #b7ff35;
+    color: #063d25;
+}
+
+header {
+    background: linear-gradient(135deg, #063d25, #0b6b3d);
+    color: white;
+    text-align: center;
+    padding: 35px 20px;
+}
+
+.logo {
+    width: 90px;
+    max-width: 30%;
+    margin-bottom: 10px;
+}
+
+header h1 {
+    margin: 5px 0;
+    font-size: 38px;
+}
+
+header p {
+    margin: 10px auto;
+    max-width: 800px;
+    font-size: 18px;
+}
+
+nav {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: #075b34;
+    padding: 12px;
+    text-align: center;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 5px 10px;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: #b7ff35;
+}
+
+.container {
+    max-width: 1150px;
+    margin: auto;
+    padding: 25px 15px;
+}
+
+.hero {
+    background: white;
+    border-radius: 18px;
+    padding: 30px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    text-align: center;
+}
+
+.hero h2 {
+    color: #075b34;
+    font-size: 30px;
+}
+
+.search-box {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #0b6b3d;
+    border-radius: 10px;
+    font-size: 16px;
+    margin-top: 15px;
+}
+
+.section-title {
+    color: #075b34;
+    text-align: center;
+    font-size: 28px;
+    margin: 35px 0 20px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 18px;
+}
+
+.card {
+    background: white;
+    padding: 22px;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    border-left: 5px solid #0b6b3d;
+}
+
+.card h3 {
+    margin-top: 0;
+    color: #075b34;
+}
+
+.card p {
+    line-height: 1.6;
+}
+
+.step {
+    background: #e9f4ed;
+    padding: 20px;
+    border-radius: 14px;
+    margin: 12px 0;
+}
+
+.step strong {
+    color: #075b34;
+}
+
+.countries {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.country {
+    background: #0b6b3d;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 20px;
+}
+
+.info {
+    background: #063d25;
+    color: white;
+    padding: 28px;
+    border-radius: 18px;
+    margin-top: 30px;
+}
+
+.info h2 {
+    color: #b7ff35;
+}
+
+footer {
+    background: #063d25;
+    color: white;
+    text-align: center;
+    padding: 25px;
+    margin-top: 40px;
+}
+
+@media (max-width: 600px) {
+    header h1 {
+        font-size: 30px;
+    }
+
+    header p {
+        font-size: 16px;
+    }
+
+    nav a {
+        display: inline-block;
+        margin: 5px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="top-languages">
+    <a href="#">AZ</a>
+    <a href="#">RU</a>
+    <a href="#">EN</a>
+    <a href="#">TR</a>
+    <a href="#">DE</a>
+    <a href="#">AR</a>
+    <a href="#">ES</a>
+    <a href="#">FR</a>
+    <a href="#">IT</a>
+</div>
+
+<header>
+
+    <h1>📦 WORKER PRO</h1>
+
+    <p>
+        Заказы и международные поставки промышленного оборудования,
+        запчастей и материалов
+    </p>
+
+</header>
+
+<nav>
+    <a href="../production/index.html">Производство</a>
+    <a href="../problems/index.html">Проблемы</a>
+    <a href="../spare-parts/index.html">Запчасти</a>
+    <a href="../products/index.html">Товары</a>
+    <a href="../companies/index.html">Компании</a>
+    <a href="../suppliers/index.html">Поставщики</a>
+    <a href="../orders/index.html">Заказы</a>
+</nav>
+
+<main class="container">
+
+<section class="hero">
+
+    <h2>📦 Заказы WORKER PRO</h2>
+
+    <p>
+        Создавайте запросы на промышленное оборудование,
+        запчасти и материалы и получайте предложения от поставщиков
+        из разных стран.
+    </p>
+
+    <input
+        class="search-box"
+        type="text"
+        placeholder="Поиск заказа: насос, подшипник, клапан, CNC..."
+    >
+
+</section>
+
+<h2 class="section-title">🛒 Что можно заказать</h2>
+
+<div class="grid">
+
+    <div class="card">
+        <h3>⚙️ Запчасти</h3>
+        <p>
+            Подшипники, валы, шестерни, ремни, фильтры
+            и другие промышленные детали.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>💧 Насосы</h3>
+        <p>
+            Промышленные насосы, гидравлические насосы,
+            комплектующие и запасные части.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>🔧 Оборудование</h3>
+        <p>
+            CNC станки, прессы, печи, сварочное оборудование
+            и производственные линии.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>⚡ Электрооборудование</h3>
+        <p>
+            Двигатели, датчики, контроллеры, кабели,
+            автоматы и электрические компоненты.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>💨 Пневматика</h3>
+        <p>
+            Цилиндры, клапаны, фитинги, пневмораспределители
+            и комплектующие.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>🛢️ Гидравлика</h3>
+        <p>
+            Гидроцилиндры, клапаны, насосы, фильтры
+            и гидравлические компоненты.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>🔥 Печи и нагрев</h3>
+        <p>
+            Промышленные печи, нагреватели, термопары,
+            контроллеры температуры.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>🧰 Инструменты</h3>
+        <p>
+            Режущий инструмент, измерительные приборы,
+            ключи и производственный инструмент.
+        </p>
+    </div>
+
+</div>
+
+<h2 class="section-title">🔄 Как работает заказ</h2>
+
+<div class="step">
+    <strong>1. Создание запроса</strong>
+    <p>
+        Покупатель указывает необходимый товар,
+        количество, технические характеристики и страну доставки.
+    </p>
+</div>
+
+<div class="step">
+    <strong>2. Поиск поставщиков</strong>
+    <p>
+        WORKER PRO помогает найти производителей,
+        поставщиков и компании из разных стран.
+    </p>
+</div>
+
+<div class="step">
+    <strong>3. Получение предложения</strong>
+    <p>
+        Поставщик отправляет цену, срок поставки,
+        условия оплаты и техническую информацию.
+    </p>
+</div>
+
+<div class="step">
+    <strong>4. Сравнение предложений</strong>
+    <p>
+        Покупатель может сравнить стоимость,
+        сроки, условия и варианты доставки.
+    </p>
+</div>
+
+<div class="step">
+    <strong>5. Оформление заказа</strong>
+    <p>
+        После выбора поставщика стороны согласовывают
+        условия сделки и доставки.
+    </p>
+</div>
+
+<div class="step">
+    <strong>6. Доставка</strong>
+    <p>
+        Товар отправляется покупателю местным
+        или международным транспортом.
+    </p>
+</div>
+
+<h2 class="section-title">🌍 Международные заказы</h2>
+
+<div class="countries">
+
+    <div class="country">🇦🇿 Азербайджан</div>
+    <div class="country">🇹🇷 Турция</div>
+    <div class="country">🇩🇪 Германия</div>
+    <div class="country">🇨🇳 Китай</div>
+    <div class="country">🇷🇺 Россия</div>
+    <div class="country">🇺🇸 США</div>
+    <div class="country">🇮🇹 Италия</div>
+    <div class="country">🇫🇷 Франция</div>
+    <div class="country">🇪🇸 Испания</div>
+
+</div>
+
+<section class="info">
+
+    <h2>📋 Информация о заказе</h2>
+
+    <p>
+        Каждый заказ может содержать:
+    </p>
+
+    <p>
+        • название товара<br>
+        • технические характеристики<br>
+        • количество<br>
+        • страна производителя<br>
+        • страна доставки<br>
+        • цена<br>
+        • срок поставки<br>
+        • условия оплаты<br>
+        • условия доставки
+    </p>
+
+</section>
+
+<h2 class="section-title">🚚 После заказа</h2>
+
+<div class="grid">
+
+    <div class="card">
+        <h3>📄 Документы</h3>
+        <p>
+            Счёт, спецификация, упаковочный лист
+            и другие необходимые документы.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>🚛 Транспорт</h3>
+        <p>
+            Организация местной или международной доставки.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>📍 Отслеживание</h3>
+        <p>
+            Информация о статусе отправки и движении товара.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>📦 Получение</h3>
+        <p>
+            Получение промышленного товара или запчасти
+            покупателем.
+        </p>
+    </div>
+
+</div>
+
+</main>
+
+<footer>
+
+    <p>WORKER PRO — Global Industrial Platform</p>
+    <p>🏭 Производство • Запчасти • Компании • Поставщики • Заказы</p>
+    <p>F.S</p>
+
+</footer>
+
+</body>
+</html>
