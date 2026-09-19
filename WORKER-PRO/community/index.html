@@ -1,1 +1,499 @@
- 
+ <!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WORKER PRO — Community</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f7f5;
+    color: #123;
+}
+
+.top-languages {
+    background: #063d25;
+    padding: 10px;
+    text-align: center;
+}
+
+.top-languages a {
+    display: inline-block;
+    background: #0b6b3d;
+    color: white;
+    text-decoration: none;
+    padding: 8px 12px;
+    margin: 3px;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+.top-languages a:hover {
+    background: #b7ff35;
+    color: #063d25;
+}
+
+header {
+    background: linear-gradient(135deg, #063d25, #0b6b3d);
+    color: white;
+    text-align: center;
+    padding: 35px 20px;
+}
+
+header h1 {
+    margin: 5px 0;
+    font-size: 38px;
+}
+
+header p {
+    margin: 10px auto;
+    max-width: 850px;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+nav {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: #075b34;
+    padding: 12px;
+    text-align: center;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 5px 9px;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: #b7ff35;
+}
+
+.container {
+    max-width: 1150px;
+    margin: auto;
+    padding: 25px 15px;
+}
+
+.hero {
+    background: white;
+    border-radius: 18px;
+    padding: 30px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    text-align: center;
+}
+
+.hero h2 {
+    color: #075b34;
+    font-size: 30px;
+}
+
+.search-box {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #0b6b3d;
+    border-radius: 10px;
+    font-size: 16px;
+    margin-top: 15px;
+}
+
+.section-title {
+    color: #075b34;
+    text-align: center;
+    font-size: 28px;
+    margin: 35px 0 20px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 18px;
+}
+
+.card {
+    background: white;
+    padding: 22px;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    border-left: 5px solid #0b6b3d;
+}
+
+.card h3 {
+    margin-top: 0;
+    color: #075b34;
+}
+
+.card p {
+    line-height: 1.6;
+}
+
+.topic {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    margin: 12px 0;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.07);
+}
+
+.topic strong {
+    color: #075b34;
+}
+
+.step {
+    background: #e9f4ed;
+    padding: 20px;
+    border-radius: 14px;
+    margin: 12px 0;
+}
+
+.step strong {
+    color: #075b34;
+}
+
+.members {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.member {
+    background: #0b6b3d;
+    color: white;
+    padding: 12px 18px;
+    border-radius: 22px;
+}
+
+.info {
+    background: #063d25;
+    color: white;
+    padding: 28px;
+    border-radius: 18px;
+    margin-top: 30px;
+}
+
+.info h2 {
+    color: #b7ff35;
+}
+
+footer {
+    background: #063d25;
+    color: white;
+    text-align: center;
+    padding: 25px;
+    margin-top: 40px;
+}
+
+@media (max-width: 600px) {
+    header h1 {
+        font-size: 30px;
+    }
+
+    header p {
+        font-size: 16px;
+    }
+
+    nav a {
+        display: inline-block;
+        margin: 5px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="top-languages">
+    <a href="#">AZ</a>
+    <a href="#">RU</a>
+    <a href="#">EN</a>
+    <a href="#">TR</a>
+    <a href="#">DE</a>
+    <a href="#">AR</a>
+    <a href="#">ES</a>
+    <a href="#">FR</a>
+    <a href="#">IT</a>
+</div>
+
+<header>
+
+    <h1>👷 WORKER PRO</h1>
+
+    <p>
+        Международное промышленное сообщество
+        для рабочих, инженеров, мастеров, специалистов
+        и производителей.
+    </p>
+
+</header>
+
+<nav>
+    <a href="../production/index.html">Производство</a>
+    <a href="../problems/index.html">Проблемы</a>
+    <a href="../spare-parts/index.html">Запчасти</a>
+    <a href="../products/index.html">Товары</a>
+    <a href="../companies/index.html">Компании</a>
+    <a href="../suppliers/index.html">Поставщики</a>
+    <a href="../orders/index.html">Заказы</a>
+    <a href="../community/index.html">Сообщество</a>
+</nav>
+
+<main class="container">
+
+<section class="hero">
+
+    <h2>🌍 Сообщество WORKER PRO</h2>
+
+    <p>
+        Общайтесь с промышленными специалистами,
+        задавайте вопросы, делитесь опытом и находите
+        решения производственных задач.
+    </p>
+
+    <input
+        class="search-box"
+        type="text"
+        placeholder="Поиск: CNC, сварка, насос, гидравлика, безопасность..."
+    >
+
+</section>
+
+<h2 class="section-title">👥 Кто участвует</h2>
+
+<div class="grid">
+
+    <div class="card">
+        <h3>👷 Рабочие</h3>
+        <p>
+            Операторы станков, прессов, печей,
+            сварщики, слесари и другие производственные специалисты.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>👨‍🔧 Мастера</h3>
+        <p>
+            Мастера участков и специалисты,
+            которые помогают решать производственные задачи.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>👨‍💼 Инженеры</h3>
+        <p>
+            Инженеры по механике, автоматике,
+            электрооборудованию, гидравлике и производству.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>🏭 Производители</h3>
+        <p>
+            Компании могут представлять оборудование,
+            продукцию, технологии и производственные решения.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>🔧 Сервисные специалисты</h3>
+        <p>
+            Специалисты по ремонту, диагностике,
+            техническому обслуживанию и наладке.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>🎓 Обучающиеся</h3>
+        <p>
+            Новые специалисты могут изучать производство
+            и получать знания от опытных работников.
+        </p>
+    </div>
+
+</div>
+
+<h2 class="section-title">💬 Темы сообщества</h2>
+
+<div class="topic">
+    <strong>⚙️ CNC и станки</strong>
+    <p>
+        Настройка станков, инструменты, программы,
+        ошибки и техническое обслуживание.
+    </p>
+</div>
+
+<div class="topic">
+    <strong>🔥 Термообработка и печи</strong>
+    <p>
+        Нагрев, охлаждение, температура, печи,
+        безопасность и контроль процесса.
+    </p>
+</div>
+
+<div class="topic">
+    <strong>🔩 Штамповка</strong>
+    <p>
+        Прессы, штампы, настройка оборудования,
+        качество деталей и безопасность.
+    </p>
+</div>
+
+<div class="topic">
+    <strong>💧 Гидравлика и пневматика</strong>
+    <p>
+        Насосы, клапаны, давление, цилиндры,
+        утечки и диагностика неисправностей.
+    </p>
+</div>
+
+<div class="topic">
+    <strong>⚡ Электрика и автоматика</strong>
+    <p>
+        Датчики, контроллеры, двигатели,
+        электросхемы и автоматизация.
+    </p>
+</div>
+
+<div class="topic">
+    <strong>🦺 Охрана труда</strong>
+    <p>
+        PPE, безопасность оборудования,
+        производственные риски и безопасные процедуры.
+    </p>
+</div>
+
+<div class="topic">
+    <strong>🔧 Ремонт и обслуживание</strong>
+    <p>
+        Поиск неисправностей, техническое обслуживание
+        и ремонт промышленного оборудования.
+    </p>
+</div>
+
+<h2 class="section-title">🗣️ Как работает сообщество</h2>
+
+<div class="step">
+    <strong>1. Задайте вопрос</strong>
+    <p>
+        Опишите проблему с оборудованием или производственным процессом.
+    </p>
+</div>
+
+<div class="step">
+    <strong>2. Получите ответы</strong>
+    <p>
+        Другие специалисты могут поделиться своим опытом
+        и предложить варианты решения.
+    </p>
+</div>
+
+<div class="step">
+    <strong>3. Обсудите решение</strong>
+    <p>
+        Участники могут задавать дополнительные вопросы
+        и обмениваться технической информацией.
+    </p>
+</div>
+
+<div class="step">
+    <strong>4. Сохраните знания</strong>
+    <p>
+        Полезные решения могут стать частью общей
+        базы знаний WORKER PRO.
+    </p>
+</div>
+
+<h2 class="section-title">🌍 Международное сообщество</h2>
+
+<div class="members">
+
+    <div class="member">🇦🇿 Азербайджан</div>
+    <div class="member">🇹🇷 Турция</div>
+    <div class="member">🇩🇪 Германия</div>
+    <div class="member">🇨🇳 Китай</div>
+    <div class="member">🇷🇺 Россия</div>
+    <div class="member">🇺🇸 США</div>
+    <div class="member">🇮🇹 Италия</div>
+    <div class="member">🇫🇷 Франция</div>
+    <div class="member">🇪🇸 Испания</div>
+
+</div>
+
+<section class="info">
+
+    <h2>🤝 Главная идея WORKER PRO</h2>
+
+    <p>
+        Рабочий может задать вопрос инженеру.
+        Инженер может найти специалиста.
+        Производитель может получить обратную связь
+        от работников.
+    </p>
+
+    <p>
+        Знания и практический опыт специалистов
+        помогают создавать сильное международное
+        промышленное сообщество.
+    </p>
+
+</section>
+
+<h2 class="section-title">🚀 Возможности сообщества</h2>
+
+<div class="grid">
+
+    <div class="card">
+        <h3>❓ Вопросы</h3>
+        <p>
+            Задавайте технические вопросы
+            специалистам разных отраслей.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>💡 Решения</h3>
+        <p>
+            Делитесь опытом решения производственных проблем.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>📚 Знания</h3>
+        <p>
+            Создавайте и изучайте технические материалы.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>🤝 Контакты</h3>
+        <p>
+            Находите специалистов, компании и производителей.
+        </p>
+    </div>
+
+</div>
+
+</main>
+
+<footer>
+
+    <p>WORKER PRO — Global Industrial Platform</p>
+    <p>👷 Специалисты • Знания • Производство • Сообщество</p>
+    <p>F.S</p>
+
+</footer>
+
+</body>
+</html>
