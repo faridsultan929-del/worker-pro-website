@@ -1,1 +1,656 @@
- 
+ <!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WORKER PRO — Quality</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f3f7f5;
+    color: #123;
+}
+
+.top-languages {
+    background: #063d25;
+    padding: 10px;
+    text-align: center;
+}
+
+.top-languages a {
+    display: inline-block;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 7px 10px;
+    margin: 3px;
+    border-radius: 7px;
+    background: #0b6b3d;
+}
+
+.top-languages a:hover {
+    background: #b7ff35;
+    color: #063d25;
+}
+
+header {
+    background: linear-gradient(135deg, #063d25, #0b6b3d);
+    color: white;
+    text-align: center;
+    padding: 30px 15px;
+}
+
+header h1 {
+    margin: 0 0 10px;
+    font-size: 34px;
+}
+
+header p {
+    margin: 5px auto;
+    max-width: 850px;
+    font-size: 17px;
+}
+
+nav {
+    background: #075b34;
+    padding: 10px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+    padding: 7px 9px;
+    font-size: 14px;
+}
+
+nav a:hover {
+    color: #b7ff35;
+}
+
+.container {
+    max-width: 1150px;
+    margin: auto;
+    padding: 25px 15px;
+}
+
+.section-title {
+    text-align: center;
+    color: #063d25;
+    margin-bottom: 25px;
+    font-size: 28px;
+}
+
+.intro {
+    background: white;
+    padding: 20px;
+    border-radius: 14px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+    margin-bottom: 25px;
+    line-height: 1.6;
+}
+
+.search-box {
+    background: #063d25;
+    padding: 20px;
+    border-radius: 14px;
+    margin-bottom: 30px;
+}
+
+.search-box input,
+.search-box select {
+    width: 100%;
+    padding: 13px;
+    margin: 7px 0;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 18px;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 14px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+    transition: 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+}
+
+.card h3 {
+    color: #075b34;
+    margin-top: 0;
+}
+
+.card p {
+    line-height: 1.5;
+}
+
+.badge {
+    display: inline-block;
+    background: #b7ff35;
+    color: #063d25;
+    padding: 5px 9px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.steps {
+    counter-reset: step;
+}
+
+.step {
+    background: white;
+    margin: 12px 0;
+    padding: 18px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+}
+
+.step strong {
+    color: #075b34;
+}
+
+.warning {
+    background: #fff4d6;
+    border-left: 5px solid #e2a400;
+    padding: 18px;
+    border-radius: 10px;
+    margin-top: 25px;
+}
+
+footer {
+    background: #063d25;
+    color: white;
+    text-align: center;
+    padding: 25px 15px;
+    margin-top: 30px;
+}
+
+footer a {
+    color: #b7ff35;
+    text-decoration: none;
+}
+
+@media (max-width: 600px) {
+    header h1 {
+        font-size: 27px;
+    }
+
+    nav a {
+        font-size: 12px;
+        padding: 6px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- LANGUAGES -->
+
+<div class="top-languages">
+    <a href="#">AZ</a>
+    <a href="#">RU</a>
+    <a href="#">EN</a>
+    <a href="#">TR</a>
+    <a href="#">DE</a>
+    <a href="#">AR</a>
+    <a href="#">ES</a>
+    <a href="#">FR</a>
+    <a href="#">IT</a>
+</div>
+
+<!-- HEADER -->
+
+<header>
+    <h1>🏆 WORKER PRO — Quality</h1>
+    <p>Контроль качества промышленного производства</p>
+    <p>Проверка деталей, оборудования, материалов и готовой продукции</p>
+</header>
+
+<!-- NAVIGATION -->
+
+<nav>
+    <a href="../production/">🏭 Production</a>
+    <a href="../problems/">🛠 Problems</a>
+    <a href="../spare-parts/">⚙️ Spare Parts</a>
+    <a href="../products/">📦 Products</a>
+    <a href="../equipment/">🔧 Equipment</a>
+    <a href="../companies/">🏢 Companies</a>
+    <a href="../suppliers/">🚚 Suppliers</a>
+    <a href="../orders/">📋 Orders</a>
+    <a href="../community/">👥 Community</a>
+    <a href="../specialists/">👨‍🔧 Specialists</a>
+    <a href="../jobs/">💼 Jobs</a>
+    <a href="../training/">🎓 Training</a>
+    <a href="../transport/">🚛 Transport</a>
+    <a href="../services/">🔧 Services</a>
+    <a href="../maintenance/">🛠 Maintenance</a>
+</nav>
+
+<!-- MAIN -->
+
+<section class="container">
+
+    <h2 class="section-title">🔍 Контроль качества</h2>
+
+    <div class="intro">
+        <p>
+            Раздел <strong>Quality</strong> помогает специалистам,
+            производителям и компаниям контролировать качество
+            промышленной продукции и производственных процессов.
+        </p>
+
+        <p>
+            Здесь можно искать специалистов по качеству,
+            изучать методы контроля, проверять продукцию
+            и обмениваться промышленным опытом.
+        </p>
+    </div>
+
+    <!-- SEARCH -->
+
+    <div class="search-box">
+
+        <input
+            type="text"
+            placeholder="Поиск: контроль качества, измерения, дефект, инспектор..."
+        >
+
+        <select>
+            <option>Все направления</option>
+            <option>CNC</option>
+            <option>Штамповка</option>
+            <option>Термообработка</option>
+            <option>Сварка</option>
+            <option>Гидравлика</option>
+            <option>Электрика</option>
+            <option>Автоматизация</option>
+            <option>Материалы</option>
+        </select>
+
+        <select>
+            <option>Все страны</option>
+            <option>Азербайджан</option>
+            <option>Турция</option>
+            <option>Германия</option>
+            <option>Италия</option>
+            <option>Китай</option>
+            <option>Другие страны</option>
+        </select>
+
+    </div>
+
+    <!-- QUALITY DIRECTIONS -->
+
+    <h2 class="section-title">📋 Направления контроля</h2>
+
+    <div class="grid">
+
+        <div class="card">
+            <h3>📏 Размерный контроль</h3>
+            <span class="badge">Measurement</span>
+            <p>
+                Проверка размеров, допусков, диаметра,
+                длины, толщины и геометрии деталей.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>🔩 Контроль деталей</h3>
+            <span class="badge">Parts</span>
+            <p>
+                Проверка промышленных деталей перед установкой
+                и передачей заказчику.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>🔥 Контроль термообработки</h3>
+            <span class="badge">Heat Treatment</span>
+            <p>
+                Проверка параметров нагрева, охлаждения,
+                твердости и состояния материала.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>⚡ Электрический контроль</h3>
+            <span class="badge">Electrical</span>
+            <p>
+                Проверка электрических компонентов,
+                соединений, датчиков и оборудования.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>🤖 Контроль автоматики</h3>
+            <span class="badge">Automation</span>
+            <p>
+                Проверка датчиков, PLC, сигналов,
+                приводов и автоматических систем.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>💧 Контроль гидравлики</h3>
+            <span class="badge">Hydraulics</span>
+            <p>
+                Проверка давления, утечек, клапанов,
+                насосов и гидравлических систем.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>🔥 Контроль сварки</h3>
+            <span class="badge">Welding</span>
+            <p>
+                Проверка сварных соединений, дефектов,
+                трещин и качества шва.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>📦 Контроль готовой продукции</h3>
+            <span class="badge">Final Inspection</span>
+            <p>
+                Финальная проверка продукции перед отправкой
+                заказчику или передачей на склад.
+            </p>
+        </div>
+
+    </div>
+
+    <!-- DEFECTS -->
+
+    <h2 class="section-title">⚠️ Основные виды дефектов</h2>
+
+    <div class="grid">
+
+        <div class="card">
+            <h3>❌ Неправильный размер</h3>
+            <p>
+                Размер детали выходит за установленные допуски.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>❌ Трещина</h3>
+            <p>
+                Обнаружение трещин на металлических деталях
+                и сварных соединениях.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>❌ Деформация</h3>
+            <p>
+                Изменение формы детали после обработки,
+                нагрева или штамповки.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>❌ Утечка</h3>
+            <p>
+                Потеря масла, воды, воздуха или другого
+                рабочего вещества.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>❌ Поверхностный дефект</h3>
+            <p>
+                Царапины, раковины, коррозия и другие
+                повреждения поверхности.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>❌ Электрическая неисправность</h3>
+            <p>
+                Обрыв, короткое замыкание или неправильный
+                электрический сигнал.
+            </p>
+        </div>
+
+    </div>
+
+    <!-- CONTROL PROCESS -->
+
+    <h2 class="section-title">🔎 Процесс контроля качества</h2>
+
+    <div class="steps">
+
+        <div class="step">
+            <strong>1. Получение продукции</strong>
+            <p>
+                Деталь, оборудование или материал поступает
+                на контроль.
+            </p>
+        </div>
+
+        <div class="step">
+            <strong>2. Проверка документации</strong>
+            <p>
+                Проверяются чертежи, технические требования,
+                сертификаты и допуски.
+            </p>
+        </div>
+
+        <div class="step">
+            <strong>3. Измерение</strong>
+            <p>
+                Выполняются необходимые измерения
+                и технические проверки.
+            </p>
+        </div>
+
+        <div class="step">
+            <strong>4. Обнаружение дефектов</strong>
+            <p>
+                Все обнаруженные отклонения фиксируются
+                специалистом по качеству.
+            </p>
+        </div>
+
+        <div class="step">
+            <strong>5. Решение</strong>
+            <p>
+                Продукция принимается, отправляется
+                на исправление или бракуется.
+            </p>
+        </div>
+
+        <div class="step">
+            <strong>6. Финальный контроль</strong>
+            <p>
+                После исправления выполняется повторная проверка.
+            </p>
+        </div>
+
+    </div>
+
+    <!-- DOCUMENTS -->
+
+    <h2 class="section-title">📄 Документы качества</h2>
+
+    <div class="grid">
+
+        <div class="card">
+            <h3>📋 Inspection Report</h3>
+            <p>
+                Отчёт о проведённой проверке продукции.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>📜 Certificate</h3>
+            <p>
+                Сертификаты материала, продукции или оборудования.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>📐 Technical Drawing</h3>
+            <p>
+                Чертежи и технические требования.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>✅ Quality Check</h3>
+            <p>
+                Результаты контроля качества.
+            </p>
+        </div>
+
+    </div>
+
+    <!-- SPECIALISTS -->
+
+    <h2 class="section-title">👨‍🔧 Специалисты по качеству</h2>
+
+    <div class="grid">
+
+        <div class="card">
+            <h3>Quality Inspector</h3>
+            <p>Инспектор по контролю качества.</p>
+        </div>
+
+        <div class="card">
+            <h3>QC Engineer</h3>
+            <p>Инженер по контролю качества.</p>
+        </div>
+
+        <div class="card">
+            <h3>QA Specialist</h3>
+            <p>Специалист по обеспечению качества.</p>
+        </div>
+
+        <div class="card">
+            <h3>Metrology Specialist</h3>
+            <p>Специалист по измерениям и метрологии.</p>
+        </div>
+
+    </div>
+
+    <div class="warning">
+        <strong>⚠️ Важно:</strong>
+        контроль качества должен выполняться
+        в соответствии с технической документацией,
+        требованиями безопасности и установленными стандартами.
+    </div>
+
+    <!-- COUNTRIES -->
+
+    <h2 class="section-title">🌍 Международный контроль качества</h2>
+
+    <div class="intro">
+
+        <p>
+            WORKER PRO в будущем сможет объединять специалистов
+            по качеству, производителей и покупателей из разных стран.
+        </p>
+
+        <p>
+            Например: продукция производится в одной стране,
+            проходит контроль качества, после чего отправляется
+            заказчику в другую страну.
+        </p>
+
+        <p>
+            Возможные направления:
+            🇦🇿 Азербайджан • 🇹🇷 Турция • 🇩🇪 Германия •
+            🇮🇹 Италия • 🇨🇳 Китай • 🌍 другие страны
+        </p>
+
+    </div>
+
+    <!-- FUTURE -->
+
+    <h2 class="section-title">🚀 Будущее WORKER PRO Quality</h2>
+
+    <div class="grid">
+
+        <div class="card">
+            <h3>👨‍🔧 Поиск инспектора</h3>
+            <p>
+                Поиск специалистов по качеству
+                в разных странах.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>🏭 Проверка производителя</h3>
+            <p>
+                Возможность заказать независимую
+                проверку продукции.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>📊 Quality Reports</h3>
+            <p>
+                Создание и хранение отчётов
+                о качестве продукции.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>🌍 International Inspection</h3>
+            <p>
+                Международная проверка товара
+                перед отправкой покупателю.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- FOOTER -->
+
+<footer>
+
+    <h3>WORKER PRO</h3>
+
+    <p>
+        Работа • Знания • Производство • Качество
+    </p>
+
+    <p>
+        Международная промышленная платформа
+    </p>
+
+    <p>
+        <a href="../">← Вернуться в WORKER PRO</a>
+    </p>
+
+    <p>© 2026 WORKER PRO — F.S</p>
+
+</footer>
+
+</body>
+</html>
