@@ -1,1 +1,579 @@
- 
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WORKER PRO — Products</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f7f5;
+    color: #123;
+}
+
+.top-languages {
+    background: #063d25;
+    padding: 10px;
+    text-align: center;
+}
+
+.top-languages button {
+    border: none;
+    background: #0b6b3d;
+    color: white;
+    font-weight: bold;
+    padding: 9px 12px;
+    margin: 3px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.top-languages button:hover {
+    background: #b7ff35;
+    color: #063d25;
+}
+
+header {
+    background: #075b34;
+    color: white;
+    text-align: center;
+    padding: 28px 15px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 34px;
+}
+
+header p {
+    margin: 10px 0 0;
+    font-size: 18px;
+}
+
+nav {
+    background: white;
+    padding: 12px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+nav a {
+    display: inline-block;
+    color: #075b34;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 5px 8px;
+}
+
+nav a:hover {
+    color: #0b9b57;
+}
+
+.container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 25px 15px;
+}
+
+.hero {
+    background: linear-gradient(135deg, #063d25, #0b6b3d);
+    color: white;
+    border-radius: 18px;
+    padding: 35px 25px;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.hero h2 {
+    margin-top: 0;
+    font-size: 30px;
+}
+
+.hero p {
+    font-size: 17px;
+    line-height: 1.6;
+}
+
+.search-box {
+    max-width: 700px;
+    margin: 25px auto 35px;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 16px;
+    border: 2px solid #0b6b3d;
+    border-radius: 12px;
+    font-size: 16px;
+    outline: none;
+}
+
+.section-title {
+    color: #063d25;
+    font-size: 28px;
+    text-align: center;
+    margin: 35px 0 20px;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 18px;
+}
+
+.card {
+    background: white;
+    border-radius: 16px;
+    padding: 22px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+    border-left: 5px solid #0b6b3d;
+    transition: 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+}
+
+.card h3 {
+    color: #075b34;
+    margin-top: 0;
+    font-size: 21px;
+}
+
+.card p {
+    line-height: 1.6;
+    color: #456;
+}
+
+.tag {
+    display: inline-block;
+    background: #e8f7ed;
+    color: #075b34;
+    padding: 6px 10px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.specs {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid #ddd;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.info {
+    background: white;
+    border-radius: 18px;
+    padding: 25px;
+    margin-top: 35px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.07);
+}
+
+.info-item {
+    background: #f1f7f3;
+    border-radius: 12px;
+    padding: 15px;
+    margin: 10px 0;
+}
+
+.info-item strong {
+    color: #075b34;
+}
+
+.buttons {
+    text-align: center;
+    margin: 35px 0;
+}
+
+.btn {
+    display: inline-block;
+    background: #0b6b3d;
+    color: white;
+    text-decoration: none;
+    padding: 13px 20px;
+    margin: 6px;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+.btn:hover {
+    background: #063d25;
+}
+
+footer {
+    background: #063d25;
+    color: white;
+    text-align: center;
+    padding: 25px 15px;
+    margin-top: 40px;
+}
+
+footer p {
+    margin: 6px;
+}
+
+@media (max-width: 600px) {
+    header h1 {
+        font-size: 28px;
+    }
+
+    .hero h2 {
+        font-size: 25px;
+    }
+
+    .section-title {
+        font-size: 24px;
+    }
+
+    nav a {
+        font-size: 14px;
+        margin: 4px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- LANGUAGES -->
+
+<div class="top-languages">
+    <button>AZ</button>
+    <button>RU</button>
+    <button>EN</button>
+    <button>TR</button>
+    <button>DE</button>
+    <button>AR</button>
+    <button>ES</button>
+    <button>FR</button>
+    <button>IT</button>
+</div>
+
+<!-- HEADER -->
+
+<header>
+    <h1>🏭 WORKER PRO</h1>
+    <p>Промышленные товары и оборудование</p>
+</header>
+
+<!-- NAVIGATION -->
+
+<nav>
+    <a href="../index.html">Главная</a>
+    <a href="../production/index.html">Производство</a>
+    <a href="../problems/index.html">Проблемы</a>
+    <a href="../spare-parts/index.html">Запчасти</a>
+    <a href="../companies/index.html">Компании</a>
+    <a href="../suppliers/index.html">Поставщики</a>
+    <a href="../products/index.html">Товары</a>
+    <a href="../training/index.html">Обучение</a>
+</nav>
+
+<div class="container">
+
+<!-- HERO -->
+
+<section class="hero">
+
+    <h2>🛒 Промышленные товары</h2>
+
+    <p>
+        Каталог промышленного оборудования,
+        материалов, инструментов и комплектующих.
+    </p>
+
+    <p>
+        Найти товар • Найти производителя • Получить цену • Заказать
+    </p>
+
+</section>
+
+<!-- SEARCH -->
+
+<div class="search-box">
+
+    <input
+        type="text"
+        placeholder="🔍 Поиск товара: станок, насос, подшипник, клапан..."
+    >
+
+</div>
+
+<!-- CATEGORIES -->
+
+<h2 class="section-title">
+    🏭 Категории товаров
+</h2>
+
+<div class="cards">
+
+    <div class="card">
+        <span class="tag">MACHINERY</span>
+        <h3>⚙️ Станки</h3>
+        <p>
+            CNC, токарные, фрезерные, сверлильные,
+            шлифовальные и другие промышленные станки.
+        </p>
+        <div class="specs">
+            Тип • Модель • Производитель • Страна
+        </div>
+    </div>
+
+    <div class="card">
+        <span class="tag">PUMPS</span>
+        <h3>💧 Насосы</h3>
+        <p>
+            Промышленные насосы для воды, масла,
+            химических жидкостей и других сред.
+        </p>
+        <div class="specs">
+            Производительность • Давление • Мощность
+        </div>
+    </div>
+
+    <div class="card">
+        <span class="tag">HYDRAULICS</span>
+        <h3>🛢️ Гидравлика</h3>
+        <p>
+            Насосы, цилиндры, клапаны, фильтры,
+            шланги и гидравлические комплектующие.
+        </p>
+        <div class="specs">
+            Давление • Размер • Тип • Производитель
+        </div>
+    </div>
+
+    <div class="card">
+        <span class="tag">ELECTRICAL</span>
+        <h3>⚡ Электрооборудование</h3>
+        <p>
+            Электродвигатели, генераторы, контакторы,
+            реле, кабели и электрические компоненты.
+        </p>
+        <div class="specs">
+            Напряжение • Мощность • Частота
+        </div>
+    </div>
+
+    <div class="card">
+        <span class="tag">AUTOMATION</span>
+        <h3>🤖 Автоматизация</h3>
+        <p>
+            PLC, промышленные роботы, приводы,
+            контроллеры и системы управления.
+        </p>
+        <div class="specs">
+            Модель • Интерфейс • Производитель
+        </div>
+    </div>
+
+    <div class="card">
+        <span class="tag">SENSORS</span>
+        <h3>📡 Датчики</h3>
+        <p>
+            Датчики температуры, давления,
+            уровня, положения и приближения.
+        </p>
+        <div class="specs">
+            Диапазон • Точность • Сигнал
+        </div>
+    </div>
+
+    <div class="card">
+        <span class="tag">FURNACES</span>
+        <h3>🔥 Промышленные печи</h3>
+        <p>
+            Печи нагрева, термообработки,
+            закалки и производственные нагревательные системы.
+        </p>
+        <div class="specs">
+            Температура • Объём • Мощность
+        </div>
+    </div>
+
+    <div class="card">
+        <span class="tag">WELDING</span>
+        <h3>🔥 Сварочное оборудование</h3>
+        <p>
+            Сварочные аппараты, источники питания,
+            горелки и сварочные комплектующие.
+        </p>
+        <div class="specs">
+            Тип • Ток • Мощность • Производитель
+        </div>
+    </div>
+
+    <div class="card">
+        <span class="tag">TOOLS</span>
+        <h3>🔧 Инструменты</h3>
+        <p>
+            Режущий, измерительный, слесарный
+            и промышленный инструмент.
+        </p>
+        <div class="specs">
+            Тип • Размер • Материал • Бренд
+        </div>
+    </div>
+
+    <div class="card">
+        <span class="tag">MATERIALS</span>
+        <h3>🔩 Материалы</h3>
+        <p>
+            Металл, листовой материал, трубы,
+            профили и промышленные материалы.
+        </p>
+        <div class="specs">
+            Марка • Размер • Толщина • Количество
+        </div>
+    </div>
+
+</div>
+
+<!-- PRODUCT SEARCH SYSTEM -->
+
+<div class="info">
+
+    <h2 class="section-title">
+        🔎 Как будет работать каталог
+    </h2>
+
+    <div class="info-item">
+        <strong>1. Поиск товара</strong><br>
+        Пользователь вводит название, модель,
+        артикул или техническую характеристику.
+    </div>
+
+    <div class="info-item">
+        <strong>2. Выбор страны</strong><br>
+        Можно искать товар в своей стране
+        или у производителей других стран.
+    </div>
+
+    <div class="info-item">
+        <strong>3. Сравнение предложений</strong><br>
+        Пользователь сможет сравнивать поставщиков,
+        цены, характеристики и условия поставки.
+    </div>
+
+    <div class="info-item">
+        <strong>4. Запрос цены</strong><br>
+        Можно отправить запрос производителю
+        или поставщику.
+    </div>
+
+    <div class="info-item">
+        <strong>5. Доставка</strong><br>
+        После согласования заказа можно организовать
+        местную или международную перевозку.
+    </div>
+
+</div>
+
+<!-- COUNTRIES -->
+
+<h2 class="section-title">
+    🌍 Поиск товаров по странам
+</h2>
+
+<div class="cards">
+
+    <div class="card">
+        <h3>🇦🇿 Azerbaijan</h3>
+        <p>
+            Промышленные товары и оборудование
+            от компаний Азербайджана.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>🇹🇷 Turkey</h3>
+        <p>
+            Оборудование, запчасти и материалы
+            от турецких производителей.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>🇩🇪 Germany</h3>
+        <p>
+            Промышленное оборудование,
+            автоматизация и машиностроение.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>🇨🇳 China</h3>
+        <p>
+            Широкий выбор оборудования,
+            деталей и промышленных товаров.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>🇷🇺 Russia</h3>
+        <p>
+            Оборудование, материалы,
+            запчасти и промышленная продукция.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>🌍 Весь мир</h3>
+        <p>
+            Международный поиск производителей
+            и поставщиков.
+        </p>
+    </div>
+
+</div>
+
+<!-- BUTTONS -->
+
+<div class="buttons">
+
+    <a class="btn" href="../spare-parts/index.html">
+        ⚙️ Запчасти
+    </a>
+
+    <a class="btn" href="../companies/index.html">
+        🏢 Компании
+    </a>
+
+    <a class="btn" href="../suppliers/index.html">
+        🚚 Поставщики
+    </a>
+
+    <a class="btn" href="../production/index.html">
+        🏭 Производство
+    </a>
+
+</div>
+
+</div>
+
+<!-- FOOTER -->
+
+<footer>
+
+    <p><strong>WORKER PRO</strong></p>
+    <p>🌍 Международная промышленная платформа</p>
+    <p>Товары • Производители • Поставщики • Доставка</p>
+    <p>F.S</p>
+
+</footer>
+
+</body>
+</html>
