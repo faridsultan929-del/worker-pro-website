@@ -1,1 +1,514 @@
- 
+ <!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WORKER PRO — Problems</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f7f5;
+    color: #123;
+}
+
+/* LANGUAGES */
+
+.top-languages {
+    background: #063d25;
+    padding: 10px;
+    text-align: center;
+}
+
+.top-languages button {
+    border: none;
+    background: #0b6b3d;
+    color: white;
+    font-weight: bold;
+    padding: 9px 12px;
+    margin: 3px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.top-languages button:hover {
+    background: #b7ff35;
+    color: #063d25;
+}
+
+/* HEADER */
+
+header {
+    background: #075b34;
+    color: white;
+    text-align: center;
+    padding: 25px 15px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 34px;
+}
+
+header p {
+    margin: 10px 0 0;
+    font-size: 18px;
+}
+
+/* NAVIGATION */
+
+nav {
+    background: white;
+    padding: 12px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+nav a {
+    display: inline-block;
+    color: #075b34;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 5px 8px;
+}
+
+nav a:hover {
+    color: #0b9b57;
+}
+
+/* CONTAINER */
+
+.container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 25px 15px;
+}
+
+/* HERO */
+
+.hero {
+    background: linear-gradient(135deg, #063d25, #0b6b3d);
+    color: white;
+    border-radius: 18px;
+    padding: 35px 25px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.hero h2 {
+    margin-top: 0;
+    font-size: 30px;
+}
+
+.hero p {
+    font-size: 17px;
+    line-height: 1.6;
+}
+
+/* SEARCH */
+
+.search-box {
+    margin: 25px auto;
+    max-width: 700px;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 16px;
+    border: 2px solid #0b6b3d;
+    border-radius: 12px;
+    font-size: 16px;
+    outline: none;
+}
+
+/* SECTION TITLE */
+
+.section-title {
+    color: #063d25;
+    font-size: 28px;
+    text-align: center;
+    margin: 35px 0 20px;
+}
+
+/* CARDS */
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 18px;
+}
+
+.card {
+    background: white;
+    border-radius: 16px;
+    padding: 22px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+    border-left: 5px solid #0b6b3d;
+    transition: 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+}
+
+.card h3 {
+    color: #075b34;
+    margin-top: 0;
+    font-size: 21px;
+}
+
+.card p {
+    line-height: 1.6;
+    color: #456;
+}
+
+.card .tag {
+    display: inline-block;
+    background: #e8f7ed;
+    color: #075b34;
+    padding: 6px 10px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* PROCESS */
+
+.process {
+    background: white;
+    border-radius: 18px;
+    padding: 25px;
+    margin-top: 35px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.07);
+}
+
+.process-step {
+    padding: 15px;
+    margin: 10px 0;
+    background: #f1f7f3;
+    border-radius: 12px;
+}
+
+.process-step strong {
+    color: #075b34;
+}
+
+/* BUTTONS */
+
+.buttons {
+    text-align: center;
+    margin: 35px 0;
+}
+
+.btn {
+    display: inline-block;
+    background: #0b6b3d;
+    color: white;
+    text-decoration: none;
+    padding: 13px 20px;
+    margin: 6px;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+.btn:hover {
+    background: #063d25;
+}
+
+/* FOOTER */
+
+footer {
+    background: #063d25;
+    color: white;
+    text-align: center;
+    padding: 25px 15px;
+    margin-top: 40px;
+}
+
+footer p {
+    margin: 6px;
+}
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+
+    header h1 {
+        font-size: 28px;
+    }
+
+    header p {
+        font-size: 16px;
+    }
+
+    .hero h2 {
+        font-size: 25px;
+    }
+
+    .section-title {
+        font-size: 24px;
+    }
+
+    nav a {
+        font-size: 14px;
+        margin: 4px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- LANGUAGES -->
+
+<div class="top-languages">
+    <button>AZ</button>
+    <button>RU</button>
+    <button>EN</button>
+    <button>TR</button>
+    <button>DE</button>
+    <button>AR</button>
+    <button>ES</button>
+    <button>FR</button>
+    <button>IT</button>
+</div>
+
+<!-- HEADER -->
+
+<header>
+    <h1>🛠️ WORKER PRO</h1>
+    <p>Промышленные проблемы и поиск решений</p>
+</header>
+
+<!-- NAVIGATION -->
+
+<nav>
+    <a href="../index.html">Главная</a>
+    <a href="../production/index.html">Производство</a>
+    <a href="../problems/index.html">Проблемы</a>
+    <a href="../spare-parts/index.html">Запчасти</a>
+    <a href="../companies/index.html">Компании</a>
+    <a href="../suppliers/index.html">Поставщики</a>
+    <a href="../training/index.html">Обучение</a>
+</nav>
+
+<!-- MAIN -->
+
+<div class="container">
+
+    <section class="hero">
+        <h2>🔧 Проблемы производства</h2>
+
+        <p>
+            Найдите промышленную проблему, изучите возможные причины
+            и подготовьте решение вместе с WORKER PRO.
+        </p>
+
+        <p>
+            CNC • Гидравлика • Электрика • Печи • Автоматизация •
+            Сварка • Насосы • Безопасность
+        </p>
+    </section>
+
+    <!-- SEARCH -->
+
+    <div class="search-box">
+        <input
+            type="text"
+            placeholder="🔍 Поиск проблемы: CNC, насос, печь, гидравлика..."
+        >
+    </div>
+
+    <h2 class="section-title">
+        🔴 Основные проблемы
+    </h2>
+
+    <div class="cards">
+
+        <div class="card">
+            <span class="tag">CNC</span>
+            <h3>⚙️ CNC станок не работает</h3>
+            <p>
+                Проверка питания, аварийной остановки, ошибок контроллера,
+                датчиков, приводов и системы управления.
+            </p>
+        </div>
+
+        <div class="card">
+            <span class="tag">Насосы</span>
+            <h3>💧 Насос не запускается</h3>
+            <p>
+                Возможные причины: питание, двигатель, контактор,
+                клапан, давление, датчик или механическая блокировка.
+            </p>
+        </div>
+
+        <div class="card">
+            <span class="tag">Гидравлика</span>
+            <h3>🛢️ Падение давления</h3>
+            <p>
+                Проверка уровня масла, утечек, фильтра, насоса,
+                клапанов, гидролиний и гидроцилиндров.
+            </p>
+        </div>
+
+        <div class="card">
+            <span class="tag">Электрика</span>
+            <h3>⚡ Электрическая неисправность</h3>
+            <p>
+                Проверка автоматов, предохранителей, кабелей,
+                контакторов, реле, датчиков и электродвигателя.
+            </p>
+        </div>
+
+        <div class="card">
+            <span class="tag">Печи</span>
+            <h3>🔥 Проблема с печью</h3>
+            <p>
+                Проверка нагревательных элементов, температуры,
+                датчиков, охлаждения, питания и системы управления.
+            </p>
+        </div>
+
+        <div class="card">
+            <span class="tag">Автоматизация</span>
+            <h3>🤖 Ошибка автоматики</h3>
+            <p>
+                Проверка PLC, датчиков, сигналов, приводов,
+                программных ошибок и соединений.
+            </p>
+        </div>
+
+        <div class="card">
+            <span class="tag">Пневматика</span>
+            <h3>💨 Пневматика не работает</h3>
+            <p>
+                Проверка давления воздуха, компрессора,
+                фильтра, клапанов, шлангов и пневмоцилиндров.
+            </p>
+        </div>
+
+        <div class="card">
+            <span class="tag">Сварка</span>
+            <h3>🔥 Проблема при сварке</h3>
+            <p>
+                Проверка сварочного аппарата, кабелей, электрода,
+                газа, контакта и параметров сварки.
+            </p>
+        </div>
+
+        <div class="card">
+            <span class="tag">Качество</span>
+            <h3>📏 Проблема качества</h3>
+            <p>
+                Проверка размеров, инструмента, материала,
+                параметров станка и технологического процесса.
+            </p>
+        </div>
+
+        <div class="card">
+            <span class="tag">Безопасность</span>
+            <h3>🦺 Проблема безопасности</h3>
+            <p>
+                Опасная зона, неисправная защита, отсутствие PPE,
+                утечка масла или другие опасные условия работы.
+            </p>
+        </div>
+
+    </div>
+
+    <!-- TROUBLESHOOTING PROCESS -->
+
+    <div class="process">
+
+        <h2 class="section-title">
+            🔎 Как искать причину
+        </h2>
+
+        <div class="process-step">
+            <strong>1. Остановите оборудование</strong>
+            <br>
+            Безопасность работника всегда должна быть первым шагом.
+        </div>
+
+        <div class="process-step">
+            <strong>2. Определите симптом</strong>
+            <br>
+            Что именно произошло: станок не запускается,
+            давление падает, температура не достигается и т.д.
+        </div>
+
+        <div class="process-step">
+            <strong>3. Проверьте основные причины</strong>
+            <br>
+            Питание, давление, температуру, датчики,
+            соединения и состояние оборудования.
+        </div>
+
+        <div class="process-step">
+            <strong>4. Найдите неисправный элемент</strong>
+            <br>
+            Используйте документацию, измерительные приборы
+            и опыт специалиста.
+        </div>
+
+        <div class="process-step">
+            <strong>5. Устраните проблему</strong>
+            <br>
+            Ремонт, регулировка или замена неисправной детали.
+        </div>
+
+        <div class="process-step">
+            <strong>6. Проверьте оборудование</strong>
+            <br>
+            После ремонта выполнить контрольный запуск
+            и проверить безопасную работу оборудования.
+        </div>
+
+    </div>
+
+    <!-- BUTTONS -->
+
+    <div class="buttons">
+
+        <a class="btn" href="../production/index.html">
+            🏭 Производство
+        </a>
+
+        <a class="btn" href="../spare-parts/index.html">
+            ⚙️ Запчасти
+        </a>
+
+        <a class="btn" href="../training/index.html">
+            📚 Обучение
+        </a>
+
+        <a class="btn" href="../index.html">
+            🏠 Главная
+        </a>
+
+    </div>
+
+</div>
+
+<!-- FOOTER -->
+
+<footer>
+    <p><strong>WORKER PRO</strong></p>
+    <p>🌍 Международная промышленная платформа</p>
+    <p>Работа • Знания • Производство</p>
+    <p>F.S</p>
+</footer>
+
+</body>
+</html>
