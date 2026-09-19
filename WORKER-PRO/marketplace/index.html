@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WORKER PRO — Marketplace</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f3f7f5;
+    color: #123;
+}
+
+.top-languages {
+    background: #063d25;
+    padding: 10px;
+    text-align: center;
+}
+
+.top-languages a {
+    display: inline-block;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 7px 10px;
+    margin: 3px;
+    border-radius: 7px;
+    background: #0b6b3d;
+}
+
+.top-languages a:hover {
+    background: #b7ff35;
+    color: #063d25;
+}
+
+header {
+    background: linear-gradient(135deg, #063d25, #0b6b3d);
+    color: white;
+    text-align: center;
+    padding: 35px 15px;
+}
+
+header h1 {
+    margin: 0 0 10px;
+    font-size: 36px;
+}
+
+header p {
+    max-width: 850px;
+    margin: 8px auto;
+    font-size: 17px;
+}
+
+nav {
+    background: #075b34;
+    padding: 10px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+    padding: 7px 9px;
+    font-size: 14px;
+}
+
+nav a:hover {
+    color: #b7ff35;
+}
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 25px 15px;
+}
+
+.section-title {
+    text-align: center;
+    color: #063d25;
+    margin: 30px 0 20px;
+    font-size: 28px;
+}
+
+.intro {
+    background: white;
+    padding: 22px;
+    border-radius: 15px;
+    box-shadow: 0 3px 12px rgba(0,0,0,.08);
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+.search-box {
+    background: #063d25;
+    padding: 22px;
+    border-radius: 15px;
+    margin-bottom: 30px;
+}
+
+.search-box input,
+.search-box select {
+    width: 100%;
+    padding: 14px;
+    margin: 6px 0;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+}
+
+.categories {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 18px;
+}
+
+.category {
+    background: white;
+    padding: 22px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 3px 12px rgba(0,0,0,.08);
+    border-top: 5px solid #0b6b3d;
+}
+
+.category h3 {
+    color: #075b34;
+}
+
+.products {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    gap: 20px;
+}
+
+.product {
+    background: white;
+    padding: 22px;
+    border-radius: 15px;
+    box-shadow: 0 3px 12px rgba(0,0,0,.08);
+}
+
+.product h3 {
+    color: #075b34;
+    margin-top: 0;
+}
+
+.badge {
+    display: inline-block;
+    background: #b7ff35;
+    color: #063d25;
+    padding: 5px 9px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.button {
+    display: inline-block;
+    background: #0b6b3d;
+    color: white;
+    text-decoration: none;
+    padding: 11px 16px;
+    border-radius: 8px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.button:hover {
+    background: #075b34;
+}
+
+.steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 18px;
+}
+
+.step {
+    background: white;
+    padding: 20px;
+    border-radius: 14px;
+    box-shadow: 0 3px 10px rgba(0,0,0,.07);
+}
+
+.step strong {
+    color: #075b34;
+}
+
+.future {
+    background: #e8f5ed;
+    padding: 22px;
+    border-radius: 15px;
+    margin-top: 25px;
+    line-height: 1.7;
+}
+
+.warning {
+    background: #fff4d6;
+    border-left: 5px solid #e0a000;
+    padding: 18px;
+    border-radius: 10px;
+    margin-top: 25px;
+}
+
+footer {
+    background: #063d25;
+    color: white;
+    text-align: center;
+    padding: 25px 15px;
+    margin-top: 35px;
+}
+
+footer a {
+    color: #b7ff35;
+    text-decoration: none;
+}
+
+@media (max-width: 600px) {
+    header h1 {
+        font-size: 28px;
+    }
+
+    nav a {
+        font-size: 12px;
+        padding: 6px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- LANGUAGES -->
+
+<div class="top-languages">
+    <a href="#">AZ</a>
+    <a href="#">RU</a>
+    <a href="#">EN</a>
+    <a href="#">TR</a>
+    <a href="#">DE</a>
+    <a href="#">AR</a>
+    <a href="#">ES</a>
+    <a href="#">FR</a>
+    <a href="#">IT</a>
+</div>
+
+<!-- HEADER -->
+
+<header>
+
+    <h1>🌍 WORKER PRO Marketplace</h1>
+
+    <p>
+        Международный промышленный рынок
+    </p>
+
+    <p>
+        Оборудование • Запчасти • Материалы • Технологии • Услуги
+    </p>
+
+</header>
+
+<!-- NAVIGATION -->
+
+<nav>
+
+    <a href="../production/">🏭 Production</a>
+    <a href="../problems/">🛠 Problems</a>
+    <a href="../spare-parts/">⚙️ Spare Parts</a>
+    <a href="../products/">📦 Products</a>
+    <a href="../equipment/">🔧 Equipment</a>
+    <a href="../manufacturers/">🏭 Manufacturers</a>
+    <a href="../companies/">🏢 Companies</a>
+    <a href="../suppliers/">🚚 Suppliers</a>
+    <a href="../materials/">🧱 Materials</a>
+    <a href="../warehouse/">📦 Warehouse</a>
+    <a href="../requests/">📋 Requests</a>
+    <a href="../requests-board/">📢 Requests Board</a>
+    <a href="../orders/">🛒 Orders</a>
+    <a href="../transport/">🚛 Transport</a>
+    <a href="../services/">🔧 Services</a>
+    <a href="../maintenance/">🛠 Maintenance</a>
+    <a href="../training/">🎓 Training</a>
+    <a href="../community/">👥 Community</a>
+    <a href="../specialists/">👨‍🔧 Specialists</a>
+    <a href="../jobs/">💼 Jobs</a>
+    <a href="../Quotes/">🏆 Quality</a>
+
+</nav>
+
+<section class="container">
+
+<!-- INTRO -->
+
+<h2 class="section-title">
+    🏭 Промышленный Marketplace
+</h2>
+
+<div class="intro">
+
+    <p>
+        <strong>WORKER PRO Marketplace</strong> —
+        будущая международная площадка для поиска
+        промышленной продукции, оборудования,
+        запчастей, материалов и услуг.
+    </p>
+
+    <p>
+        Пользователь сможет найти товар,
+        сравнить предложения разных компаний,
+        связаться с поставщиком и организовать заказ
+        и доставку.
+    </p>
+
+</div>
+
+<!-- SEARCH -->
+
+<div class="search-box">
+
+    <input
+        type="text"
+        placeholder="🔎 Что вы ищете? Например: насос, CNC, подшипник..."
+    >
+
+    <select>
+        <option>Все категории</option>
+        <option>Оборудование</option>
+        <option>Запчасти</option>
+        <option>Насосы</option>
+        <option>Клапаны</option>
+        <option>Подшипники</option>
+        <option>Гидравлика</option>
+        <option>Электрика</option>
+        <option>Автоматизация</option>
+        <option>Датчики</option>
+        <option>Материалы</option>
+        <option>Сварочное оборудование</option>
+        <option>Инструменты</option>
+        <option>Услуги</option>
+    </select>
+
+    <select>
+        <option>Все страны</option>
+        <option>🇦🇿 Азербайджан</option>
+        <option>🇹🇷 Турция</option>
+        <option>🇩🇪 Германия</option>
+        <option>🇮🇹 Италия</option>
+        <option>🇨🇳 Китай</option>
+        <option>🇷🇺 Россия</option>
+        <option>🇺🇸 США</option>
+        <option>Другие страны</option>
+    </select>
+
+</div>
+
+<!-- CATEGORIES -->
+
+<h2 class="section-title">
+    📦 Категории Marketplace
+</h2>
+
+<div class="categories">
+
+    <div class="category">
+        <h3>⚙️ Запчасти</h3>
+        <p>
+            Подшипники, валы, шестерни,
+            ремни и промышленные комплектующие.
+        </p>
+    </div>
+
+    <div class="category">
+        <h3>🏭 Оборудование</h3>
+        <p>
+            CNC станки, прессы, печи,
+            производственные линии.
+        </p>
+    </div>
+
+    <div class="category">
+        <h3>💧 Насосы</h3>
+        <p>
+            Промышленные насосы,
+            гидравлические системы и комплектующие.
+        </p>
+    </div>
+
+    <div class="category">
+        <h3>🔌 Электрика</h3>
+        <p>
+            Кабели, двигатели, шкафы,
+            автоматы и электрические компоненты.
+        </p>
+    </div>
+
+    <div class="category">
+        <h3>🤖 Автоматизация</h3>
+        <p>
+            PLC, датчики, контроллеры,
+            приводы и системы управления.
+        </p>
+    </div>
+
+    <div class="category">
+        <h3>🧱 Материалы</h3>
+        <p>
+            Сталь, нержавейка, алюминий,
+            медь и промышленные материалы.
+        </p>
+    </div>
+
+    <div class="category">
+        <h3>🔥 Печи и нагрев</h3>
+        <p>
+            Промышленные печи,
+            нагреватели и комплектующие.
+        </p>
+    </div>
+
+    <div class="category">
+        <h3>🔧 Инструменты</h3>
+        <p>
+            Производственный инструмент,
+            измерительные приборы и оснастка.
+        </p>
+    </div>
+
+</div>
+
+<!-- DEMO PRODUCTS -->
+
+<h2 class="section-title">
+    🛒 Примеры товаров
+</h2>
+
+<div class="products">
+
+    <div class="product">
+
+        <span class="badge">DEMO</span>
+
+        <h3>
+            🔩 Промышленный подшипник
+        </h3>
+
+        <p>
+            Категория: Запчасти
+        </p>
+
+        <p>
+            Производитель: Demo Manufacturer
+        </p>
+
+        <p>
+            Страна: 🇩🇪 Германия
+        </p>
+
+        <p>
+            Цена: По запросу
+        </p>
+
+        <a class="button" href="#">
+            Подробнее
+        </a>
+
+    </div>
+
+    <div class="product">
+
+        <span class="badge">DEMO</span>
+
+        <h3>
+            💧 Промышленный насос
+        </h3>
+
+        <p>
+            Категория: Насосы
+        </p>
+
+        <p>
+            Производитель: Demo Supplier
+        </p>
+
+        <p>
+            Страна: 🇹🇷 Турция
+        </p>
+
+        <p>
+            Цена: По запросу
+        </p>
+
+        <a class="button" href="#">
+            Подробнее
+        </a>
+
+    </div>
+
+    <div class="product">
+
+        <span class="badge">DEMO</span>
+
+        <h3>
+            🏭 CNC станок
+        </h3>
+
+        <p>
+            Категория: Оборудование
+        </p>
+
+        <p>
+            Производитель: Demo CNC
+        </p>
+
+        <p>
+            Страна: 🇮🇹 Италия
+        </p>
+
+        <p>
+            Цена: По запросу
+        </p>
+
+        <a class="button" href="#">
+            Подробнее
+        </a>
+
+    </div>
+
+    <div class="product">
+
+        <span class="badge">DEMO</span>
+
+        <h3>
+            🤖 Датчик давления
+        </h3>
+
+        <p>
+            Категория: Автоматизация
+        </p>
+
+        <p>
+            Производитель: Demo Sensors
+        </p>
+
+        <p>
+            Страна: 🇨🇳 Китай
+        </p>
+
+        <p>
+            Цена: По запросу
+        </p>
+
+        <a class="button" href="#">
+            Подробнее
+        </a>
+
+    </div>
+
+</div>
+
+<!-- HOW IT WORKS -->
+
+<h2 class="section-title">
+    🔄 Как работает Marketplace
+</h2>
+
+<div class="steps">
+
+    <div class="step">
+        <strong>1. Поиск</strong>
+        <p>
+            Пользователь ищет нужный товар,
+            оборудование или услугу.
+        </p>
+    </div>
+
+    <div class="step">
+        <strong>2. Сравнение</strong>
+        <p>
+            Сравнивает производителей,
+            поставщиков, цены и условия.
+        </p>
+    </div>
+
+    <div class="step">
+        <strong>3. Запрос цены</strong>
+        <p>
+            Пользователь отправляет запрос
+            поставщику.
+        </p>
+    </div>
+
+    <div class="step">
+        <strong>4. Предложение</strong>
+        <p>
+            Поставщик отправляет цену,
+            наличие и условия.
+        </p>
+    </div>
+
+    <div class="step">
+        <strong>5. Заказ</strong>
+        <p>
+            Покупатель согласовывает
+            условия и оформляет заказ.
+        </p>
+    </div>
+
+    <div class="step">
+        <strong>6. Доставка</strong>
+        <p>
+            Организуется местная
+            или международная доставка.
+        </p>
+    </div>
+
+</div>
+
+<!-- INTERNATIONAL -->
+
+<h2 class="section-title">
+    🌍 Международный рынок
+</h2>
+
+<div class="intro">
+
+    <p>
+        WORKER PRO Marketplace должен объединить
+        производителей, поставщиков и покупателей
+        из разных стран.
+    </p>
+
+    <p>
+        🇦🇿 Азербайджан →
+        🇹🇷 Турция →
+        🇩🇪 Германия →
+        🇮🇹 Италия →
+        🇨🇳 Китай →
+        🇺🇸 США →
+        🌍 Другие страны
+    </p>
+
+    <p>
+        Основная идея — сделать промышленный поиск
+        удобнее и связать покупателя напрямую
+        с производителем или поставщиком.
+    </p>
+
+</div>
+
+<!-- CONNECTION -->
+
+<h2 class="section-title">
+    🔗 Связь с WORKER PRO
+</h2>
+
+<div class="intro">
+
+    <p>
+        Marketplace будет связан с другими разделами платформы:
+    </p>
+
+    <p>
+        <strong>
+            Marketplace → Requests → Suppliers → Offers
+            → Orders → Warehouse → Transport → Delivery
+        </strong>
+    </p>
+
+    <p>
+        Также пользователь сможет перейти
+        к производителям, специалистам,
+        обучению и сервисным услугам.
+    </p>
+
+</div>
+
+<!-- FUTURE -->
+
+<h2 class="section-title">
+    🚀 Будущие возможности
+</h2>
+
+<div class="future">
+
+    <p>🔐 Регистрация покупателей и поставщиков</p>
+
+    <p>🏢 Проверенные компании</p>
+
+    <p>💰 Реальные цены и коммерческие предложения</p>
+
+    <p>💬 Чат покупателя и поставщика</p>
+
+    <p>⭐ Отзывы и рейтинги компаний</p>
+
+    <p>📋 История заказов</p>
+
+    <p>🔔 Уведомления о новых предложениях</p>
+
+    <p>💳 Онлайн-оплата</p>
+
+    <p>🚛 Расчёт доставки</p>
+
+    <p>🌍 Международная торговля</p>
+
+</div>
+
+<div class="warning">
+
+    <strong>⚠️ Важно:</strong>
+
+    текущая страница является демонстрационной.
+    Поиск, цены, регистрация, реальные товары,
+    заказы и платежи будут подключаться позже
+    через базу данных и серверную часть платформы.
+
+</div>
+
+</section>
+
+<!-- FOOTER -->
+
+<footer>
+
+    <h3>WORKER PRO</h3>
+
+    <p>
+        Работа • Знания • Производство • Торговля
+    </p>
+
+    <p>
+        Международная промышленная платформа
+    </p>
+
+    <p>
+        <a href="../">← WORKER PRO</a>
+    </p>
+
+    <p>
+        © 2026 WORKER PRO — F.S
+    </p>
+
+</footer>
+
+</body>
+</html>
