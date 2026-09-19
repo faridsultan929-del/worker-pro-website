@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WORKER PRO — Maintenance</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f7f5;
+    color: #123;
+}
+
+.top-languages {
+    background: #063d25;
+    padding: 10px;
+    text-align: center;
+}
+
+.top-languages a {
+    display: inline-block;
+    background: #0b6b3d;
+    color: white;
+    text-decoration: none;
+    padding: 8px 12px;
+    margin: 3px;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+.top-languages a:hover {
+    background: #b7ff35;
+    color: #063d25;
+}
+
+header {
+    background: linear-gradient(135deg, #063d25, #0b6b3d);
+    color: white;
+    text-align: center;
+    padding: 35px 20px;
+}
+
+header h1 {
+    margin: 5px 0;
+    font-size: 38px;
+}
+
+header p {
+    max-width: 850px;
+    margin: 10px auto;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+nav {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: #075b34;
+    padding: 12px;
+    text-align: center;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 5px 8px;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: #b7ff35;
+}
+
+.container {
+    max-width: 1150px;
+    margin: auto;
+    padding: 25px 15px;
+}
+
+.hero {
+    background: white;
+    padding: 30px;
+    border-radius: 18px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.hero h2 {
+    color: #075b34;
+    font-size: 30px;
+}
+
+.search {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #0b6b3d;
+    border-radius: 10px;
+    font-size: 16px;
+    margin-top: 15px;
+}
+
+.section-title {
+    text-align: center;
+    color: #075b34;
+    font-size: 28px;
+    margin: 35px 0 20px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 18px;
+}
+
+.card {
+    background: white;
+    padding: 22px;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    border-left: 5px solid #0b6b3d;
+}
+
+.card h3 {
+    color: #075b34;
+    margin-top: 0;
+}
+
+.card p {
+    line-height: 1.6;
+}
+
+.badge {
+    display: inline-block;
+    background: #e9f4ed;
+    color: #075b34;
+    padding: 7px 10px;
+    border-radius: 15px;
+    margin: 4px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.step {
+    background: white;
+    padding: 20px;
+    margin: 12px 0;
+    border-radius: 14px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.07);
+    border-left: 6px solid #0b6b3d;
+}
+
+.step strong {
+    color: #075b34;
+    font-size: 18px;
+}
+
+.warning {
+    background: #fff8dc;
+    border-left: 6px solid #d9a400;
+    padding: 20px;
+    border-radius: 14px;
+    margin-top: 20px;
+}
+
+.info {
+    background: #063d25;
+    color: white;
+    padding: 28px;
+    border-radius: 18px;
+    margin-top: 30px;
+}
+
+.info h2 {
+    color: #b7ff35;
+}
+
+.countries {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.country {
+    background: #0b6b3d;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 20px;
+}
+
+footer {
+    background: #063d25;
+    color: white;
+    text-align: center;
+    padding: 25px;
+    margin-top: 40px;
+}
+
+@media (max-width: 600px) {
+    header h1 {
+        font-size: 30px;
+    }
+
+    nav a {
+        display: inline-block;
+        margin: 5px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="top-languages">
+    <a href="#">AZ</a>
+    <a href="#">RU</a>
+    <a href="#">EN</a>
+    <a href="#">TR</a>
+    <a href="#">DE</a>
+    <a href="#">AR</a>
+    <a href="#">ES</a>
+    <a href="#">FR</a>
+    <a href="#">IT</a>
+</div>
+
+<header>
+
+    <h1>🔧 WORKER PRO</h1>
+
+    <p>
+        Техническое обслуживание промышленного
+        оборудования, станков и производственных линий.
+    </p>
+
+</header>
+
+<nav>
+    <a href="../production/index.html">Производство</a>
+    <a href="../problems/index.html">Проблемы</a>
+    <a href="../spare-parts/index.html">Запчасти</a>
+    <a href="../products/index.html">Товары</a>
+    <a href="../companies/index.html">Компании</a>
+    <a href="../suppliers/index.html">Поставщики</a>
+    <a href="../orders/index.html">Заказы</a>
+    <a href="../community/index.html">Сообщество</a>
+    <a href="../specialists/index.html">Специалисты</a>
+    <a href="../jobs/index.html">Работа</a>
+    <a href="../training/index.html">Обучение</a>
+    <a href="../transport/index.html">Транспорт</a>
+    <a href="../services/index.html">Услуги</a>
+</nav>
+
+<main class="container">
+
+<section class="hero">
+
+    <h2>🛠️ Техническое обслуживание</h2>
+
+    <p>
+        Плановое и техническое обслуживание помогает
+        поддерживать оборудование в рабочем состоянии,
+        уменьшать простои и своевременно обнаруживать
+        неисправности.
+    </p>
+
+    <input
+        class="search"
+        type="text"
+        placeholder="Поиск: CNC, насос, гидравлика, двигатель..."
+    >
+
+</section>
+
+<h2 class="section-title">⚙️ Основные направления</h2>
+
+<div class="grid">
+
+    <div class="card">
+        <h3>⚙️ CNC станки</h3>
+        <p>
+            Проверка станка, шпинделя, приводов,
+            системы охлаждения и смазки.
+        </p>
+        <span class="badge">CNC</span>
+        <span class="badge">Machine</span>
+    </div>
+
+    <div class="card">
+        <h3>💧 Гидравлика</h3>
+        <p>
+            Проверка давления, масла, насосов,
+            клапанов, цилиндров и гидролиний.
+        </p>
+        <span class="badge">Hydraulic</span>
+    </div>
+
+    <div class="card">
+        <h3>💨 Пневматика</h3>
+        <p>
+            Проверка компрессора, фильтров,
+            клапанов, цилиндров и утечек воздуха.
+        </p>
+        <span class="badge">Pneumatic</span>
+    </div>
+
+    <div class="card">
+        <h3>⚡ Электрика</h3>
+        <p>
+            Проверка двигателей, кабелей,
+            автоматов, контакторов и питания.
+        </p>
+        <span class="badge">Electrical</span>
+    </div>
+
+    <div class="card">
+        <h3>🤖 Автоматика</h3>
+        <p>
+            Проверка PLC, датчиков, контроллеров
+            и систем управления.
+        </p>
+        <span class="badge">PLC</span>
+        <span class="badge">Automation</span>
+    </div>
+
+    <div class="card">
+        <h3>🔥 Промышленные печи</h3>
+        <p>
+            Проверка нагревателей, термопар,
+            охлаждения и температурного контроля.
+        </p>
+        <span class="badge">Furnace</span>
+    </div>
+
+    <div class="card">
+        <h3>🔩 Механика</h3>
+        <p>
+            Проверка подшипников, валов,
+            муфт, передач и механических соединений.
+        </p>
+        <span class="badge">Mechanical</span>
+    </div>
+
+    <div class="card">
+        <h3>🛢️ Смазка</h3>
+        <p>
+            Контроль уровня и состояния масел,
+            смазочных материалов и систем подачи.
+        </p>
+        <span class="badge">Lubrication</span>
+    </div>
+
+</div>
+
+<h2 class="section-title">📋 Плановое обслуживание</h2>
+
+<div class="step">
+
+    <strong>1. Визуальная проверка</strong>
+
+    <p>
+        Осмотр оборудования, соединений,
+        кабелей, трубопроводов и защитных устройств.
+    </p>
+
+</div>
+
+<div class="step">
+
+    <strong>2. Проверка рабочих параметров</strong>
+
+    <p>
+        Контроль давления, температуры,
+        вибрации, уровня масла и других параметров.
+    </p>
+
+</div>
+
+<div class="step">
+
+    <strong>3. Очистка</strong>
+
+    <p>
+        Очистка оборудования, фильтров,
+        вентиляции и рабочих зон.
+    </p>
+
+</div>
+
+<div class="step">
+
+    <strong>4. Смазка</strong>
+
+    <p>
+        Проверка и пополнение необходимых
+        смазочных материалов.
+    </p>
+
+</div>
+
+<div class="step">
+
+    <strong>5. Проверка креплений</strong>
+
+    <p>
+        Проверка болтов, гаек, соединений
+        и других механических элементов.
+    </p>
+
+</div>
+
+<div class="step">
+
+    <strong>6. Замена изношенных деталей</strong>
+
+    <p>
+        При необходимости заменяются
+        подшипники, ремни, фильтры,
+        уплотнения и другие детали.
+    </p>
+
+</div>
+
+<h2 class="section-title">🔍 Диагностика</h2>
+
+<div class="grid">
+
+    <div class="card">
+        <h3>🌡️ Температура</h3>
+        <p>
+            Контроль перегрева двигателей,
+            подшипников, печей и оборудования.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>📊 Давление</h3>
+        <p>
+            Проверка давления в гидравлических
+            и пневматических системах.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>〰️ Вибрация</h3>
+        <p>
+            Контроль вибрации двигателей,
+            насосов, вентиляторов и механизмов.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>🔊 Шум</h3>
+        <p>
+            Необычный шум может указывать
+            на механическую неисправность.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>⚡ Электрические параметры</h3>
+        <p>
+            Контроль напряжения, тока,
+            соединений и состояния электродвигателей.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>🛢️ Утечки</h3>
+        <p>
+            Проверка утечек масла,
+            воды, воздуха и других рабочих сред.
+        </p>
+    </div>
+
+</div>
+
+<div class="warning">
+
+    <h3>⚠️ Важно</h3>
+
+    <p>
+        Работы по обслуживанию промышленного оборудования
+        должны выполняться квалифицированным персоналом
+        с соблюдением требований безопасности.
+    </p>
+
+    <p>
+        Перед техническими работами оборудование должно
+        быть остановлено и безопасно отключено
+        в соответствии с установленными процедурами.
+    </p>
+
+</div>
+
+<h2 class="section-title">👨‍🔧 Специалисты по обслуживанию</h2>
+
+<div class="grid">
+
+    <div class="card">
+        <h3>🔧 Механик</h3>
+        <p>
+            Обслуживание механических частей
+            оборудования и производственных машин.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>💧 Гидравлик</h3>
+        <p>
+            Обслуживание гидравлических систем,
+            насосов и гидроцилиндров.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>⚡ Электрик</h3>
+        <p>
+            Обслуживание электродвигателей,
+            электрооборудования и систем питания.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>🤖 Automation Specialist</h3>
+        <p>
+            Обслуживание PLC, датчиков,
+            контроллеров и систем автоматизации.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>⚙️ CNC Technician</h3>
+        <p>
+            Техническое обслуживание
+            и диагностика CNC оборудования.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>🏭 Service Engineer</h3>
+        <p>
+            Комплексное обслуживание
+            промышленного оборудования.
+        </p>
+    </div>
+
+</div>
+
+<h2 class="section-title">🔄 Как работает раздел</h2>
+
+<div class="step">
+    <strong>1. Компания добавляет оборудование</strong>
+    <p>
+        Указывается тип оборудования,
+        модель и основные характеристики.
+    </p>
+</div>
+
+<div class="step">
+    <strong>2. Создаётся заявка на обслуживание</strong>
+    <p>
+        Пользователь описывает проблему
+        или плановое техническое обслуживание.
+    </p>
+</div>
+
+<div class="step">
+    <strong>3. Поиск специалиста</strong>
+    <p>
+        Система помогает найти подходящего
+        специалиста или сервисную компанию.
+    </p>
+</div>
+
+<div class="step">
+    <strong>4. Согласование</strong>
+    <p>
+        Согласовываются стоимость,
+        сроки и необходимые запчасти.
+    </p>
+</div>
+
+<div class="step">
+    <strong>5. Выполнение работ</strong>
+    <p>
+        Специалист выполняет обслуживание
+        и фиксирует выполненные работы.
+    </p>
+</div>
+
+<div class="step">
+    <strong>6. История обслуживания</strong>
+    <p>
+        В будущем WORKER PRO сможет хранить
+        историю технического обслуживания оборудования.
+    </p>
+</div>
+
+<section class="info">
+
+    <h2>📊 Будущая система обслуживания</h2>
+
+    <p>
+        Для каждого оборудования можно будет хранить:
+    </p>
+
+    <p>
+        ⚙️ Модель оборудования<br>
+        📅 Дата обслуживания<br>
+        🔧 Выполненные работы<br>
+        🔩 Заменённые детали<br>
+        🛢️ Использованные материалы<br>
+        👨‍🔧 Специалист<br>
+        📋 Следующее обслуживание
+    </p>
+
+</section>
+
+<h2 class="section-title">🌎 Страны</h2>
+
+<div class="countries">
+
+    <div class="country">🇦🇿 Азербайджан</div>
+    <div class="country">🇹🇷 Турция</div>
+    <div class="country">🇩🇪 Германия</div>
+    <div class="country">🇮🇹 Италия</div>
+    <div class="country">🇨🇳 Китай</div>
+    <div class="country">🇷🇺 Россия</div>
+    <div class="country">🇺🇸 США</div>
+    <div class="country">🇫🇷 Франция</div>
+    <div class="country">🇪🇸 Испания</div>
+
+</div>
+
+<section class="info">
+
+    <h2>🚀 WORKER PRO Maintenance</h2>
+
+    <p>
+        Производство → Оборудование →
+        Обслуживание → Специалист →
+        Запчасти → Ремонт → Контроль.
+    </p>
+
+    <p>
+        Цель — объединить техническое обслуживание,
+        специалистов, сервисные компании и поставщиков
+        промышленного оборудования на одной платформе.
+    </p>
+
+</section>
+
+</main>
+
+<footer>
+
+    <p>WORKER PRO — Global Industrial Platform</p>
+    <p>🔧 Maintenance • Service • Repair • Engineering</p>
+    <p>F.S</p>
+
+</footer>
+
+</body>
+</html>
