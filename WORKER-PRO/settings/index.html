@@ -1,1 +1,880 @@
- 
+ <!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WORKER PRO — Settings</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f7f5;
+    color: #123;
+}
+
+.top-languages {
+    background: #063d25;
+    padding: 10px;
+    text-align: center;
+}
+
+.top-languages button {
+    background: #0b6b3d;
+    color: white;
+    border: 1px solid #b7ff35;
+    border-radius: 6px;
+    padding: 7px 10px;
+    margin: 3px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.top-languages button:hover {
+    background: #b7ff35;
+    color: #063d25;
+}
+
+header {
+    background: #075b34;
+    color: white;
+    text-align: center;
+    padding: 25px 15px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 30px;
+}
+
+header p {
+    margin: 8px 0 0;
+}
+
+nav {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: #063d25;
+    padding: 10px;
+    text-align: center;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 5px 8px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: #b7ff35;
+}
+
+.container {
+    max-width: 1050px;
+    margin: auto;
+    padding: 20px;
+}
+
+.intro {
+    background: white;
+    padding: 25px;
+    border-radius: 14px;
+    border-left: 6px solid #0b6b3d;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+    margin-bottom: 20px;
+}
+
+.intro h2 {
+    margin-top: 0;
+    color: #063d25;
+}
+
+.settings-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 18px;
+}
+
+.setting-card {
+    background: white;
+    padding: 22px;
+    border-radius: 14px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+}
+
+.setting-card h3 {
+    margin-top: 0;
+    color: #063d25;
+}
+
+.setting-icon {
+    font-size: 35px;
+    margin-bottom: 10px;
+}
+
+.setting-card p {
+    color: #56665e;
+    line-height: 1.5;
+}
+
+.field {
+    margin-top: 15px;
+}
+
+.field label {
+    display: block;
+    font-weight: bold;
+    color: #063d25;
+    margin-bottom: 7px;
+}
+
+.field input,
+.field select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccd8d2;
+    border-radius: 8px;
+    font-size: 15px;
+    background: white;
+}
+
+.save-button {
+    margin-top: 15px;
+    background: #0b6b3d;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 11px 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.save-button:hover {
+    background: #063d25;
+}
+
+.switch-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    padding: 13px 0;
+    border-bottom: 1px solid #e4ebe7;
+}
+
+.switch-row:last-child {
+    border-bottom: none;
+}
+
+.switch-text strong {
+    display: block;
+    color: #063d25;
+    margin-bottom: 4px;
+}
+
+.switch-text small {
+    color: #6b776f;
+}
+
+.switch {
+    position: relative;
+    width: 48px;
+    height: 26px;
+    flex-shrink: 0;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    inset: 0;
+    background: #bcc7c1;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+.slider:before {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    left: 3px;
+    top: 3px;
+    background: white;
+    border-radius: 50%;
+    transition: 0.2s;
+}
+
+.switch input:checked + .slider {
+    background: #0b6b3d;
+}
+
+.switch input:checked + .slider:before {
+    transform: translateX(22px);
+}
+
+.danger {
+    border-left: 5px solid #c62828;
+}
+
+.danger h3 {
+    color: #a51f1f;
+}
+
+.danger-button {
+    background: #c62828;
+    color: white;
+    border: none;
+    padding: 11px 16px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.danger-button:hover {
+    background: #981d1d;
+}
+
+.quick-links {
+    margin-top: 25px;
+}
+
+.quick-links h2 {
+    text-align: center;
+    color: #063d25;
+}
+
+.link-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 12px;
+}
+
+.link-grid a {
+    background: #063d25;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    padding: 13px;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+.link-grid a:hover {
+    background: #0b6b3d;
+}
+
+.demo {
+    background: #fff8dc;
+    border-left: 5px solid #e0a800;
+    padding: 18px;
+    border-radius: 10px;
+    margin-top: 25px;
+    line-height: 1.6;
+}
+
+footer {
+    background: #063d25;
+    color: white;
+    text-align: center;
+    padding: 25px 15px;
+    margin-top: 35px;
+}
+
+footer strong {
+    color: #b7ff35;
+}
+
+@media (max-width: 600px) {
+    header h1 {
+        font-size: 24px;
+    }
+
+    .container {
+        padding: 12px;
+    }
+
+    .settings-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- LANGUAGES -->
+<div class="top-languages">
+
+    <button onclick="setLanguage('AZ')">AZ</button>
+    <button onclick="setLanguage('RU')">RU</button>
+    <button onclick="setLanguage('EN')">EN</button>
+    <button onclick="setLanguage('TR')">TR</button>
+    <button onclick="setLanguage('DE')">DE</button>
+    <button onclick="setLanguage('AR')">AR</button>
+    <button onclick="setLanguage('ES')">ES</button>
+    <button onclick="setLanguage('FR')">FR</button>
+    <button onclick="setLanguage('IT')">IT</button>
+
+</div>
+
+<header>
+
+    <h1>⚙️ WORKER PRO</h1>
+
+    <p>Настройки аккаунта</p>
+
+</header>
+
+<!-- NAVIGATION -->
+<nav>
+
+    <a href="../index.html">Главная</a>
+    <a href="../companies/index.html">Компании</a>
+    <a href="../manufacturers/index.html">Производители</a>
+    <a href="../suppliers/index.html">Поставщики</a>
+    <a href="../products/index.html">Товары</a>
+    <a href="../requests/index.html">Заявки</a>
+    <a href="../offers/index.html">Предложения</a>
+    <a href="../orders/index.html">Заказы</a>
+    <a href="../transport/index.html">Доставка</a>
+    <a href="../messages/index.html">Сообщения</a>
+    <a href="../notifications/index.html">Уведомления</a>
+    <a href="../favorites/index.html">Избранное</a>
+    <a href="../dashboard/index.html">Кабинет</a>
+
+</nav>
+
+<div class="container">
+
+    <!-- INTRO -->
+    <section class="intro">
+
+        <h2>⚙️ Настройки WORKER PRO</h2>
+
+        <p>
+            Здесь пользователь сможет управлять своим
+            профилем, языком, уведомлениями, безопасностью
+            и настройками платформы.
+        </p>
+
+    </section>
+
+    <!-- SETTINGS -->
+    <section class="settings-grid">
+
+        <!-- PROFILE -->
+        <div class="setting-card">
+
+            <div class="setting-icon">👤</div>
+
+            <h3>Профиль</h3>
+
+            <p>
+                Основная информация пользователя.
+            </p>
+
+            <div class="field">
+
+                <label>Имя</label>
+
+                <input
+                    type="text"
+                    id="name"
+                    value="Demo User"
+                >
+
+            </div>
+
+            <div class="field">
+
+                <label>Город</label>
+
+                <input
+                    type="text"
+                    id="city"
+                    value="Baku"
+                >
+
+            </div>
+
+            <div class="field">
+
+                <label>Страна</label>
+
+                <select id="country">
+
+                    <option>Azerbaijan</option>
+                    <option>Turkey</option>
+                    <option>Germany</option>
+                    <option>Italy</option>
+                    <option>China</option>
+                    <option>USA</option>
+                    <option>Other</option>
+
+                </select>
+
+            </div>
+
+            <button
+                class="save-button"
+                onclick="saveProfile()">
+
+                Сохранить профиль
+
+            </button>
+
+        </div>
+
+        <!-- LANGUAGE -->
+        <div class="setting-card">
+
+            <div class="setting-icon">🌍</div>
+
+            <h3>Язык и регион</h3>
+
+            <p>
+                Выберите основной язык платформы.
+            </p>
+
+            <div class="field">
+
+                <label>Язык</label>
+
+                <select id="language">
+
+                    <option value="RU">Русский</option>
+                    <option value="AZ">Azərbaycan</option>
+                    <option value="EN">English</option>
+                    <option value="TR">Türkçe</option>
+                    <option value="DE">Deutsch</option>
+                    <option value="AR">العربية</option>
+                    <option value="ES">Español</option>
+                    <option value="FR">Français</option>
+                    <option value="IT">Italiano</option>
+
+                </select>
+
+            </div>
+
+            <div class="field">
+
+                <label>Часовой пояс</label>
+
+                <select>
+
+                    <option>UTC+04:00 — Baku</option>
+                    <option>UTC+03:00 — Istanbul</option>
+                    <option>UTC+01:00 — Berlin</option>
+                    <option>UTC+00:00 — London</option>
+
+                </select>
+
+            </div>
+
+            <button
+                class="save-button"
+                onclick="saveLanguage()">
+
+                Сохранить
+
+            </button>
+
+        </div>
+
+        <!-- NOTIFICATIONS -->
+        <div class="setting-card">
+
+            <div class="setting-icon">🔔</div>
+
+            <h3>Уведомления</h3>
+
+            <p>
+                Управление уведомлениями аккаунта.
+            </p>
+
+            <div class="switch-row">
+
+                <div class="switch-text">
+
+                    <strong>Новые сообщения</strong>
+
+                    <small>
+                        Уведомлять о новых сообщениях
+                    </small>
+
+                </div>
+
+                <label class="switch">
+
+                    <input type="checkbox" checked>
+
+                    <span class="slider"></span>
+
+                </label>
+
+            </div>
+
+            <div class="switch-row">
+
+                <div class="switch-text">
+
+                    <strong>Новые предложения</strong>
+
+                    <small>
+                        Уведомлять о ценах и предложениях
+                    </small>
+
+                </div>
+
+                <label class="switch">
+
+                    <input type="checkbox" checked>
+
+                    <span class="slider"></span>
+
+                </label>
+
+            </div>
+
+            <div class="switch-row">
+
+                <div class="switch-text">
+
+                    <strong>Заказы</strong>
+
+                    <small>
+                        Изменения статуса заказа
+                    </small>
+
+                </div>
+
+                <label class="switch">
+
+                    <input type="checkbox" checked>
+
+                    <span class="slider"></span>
+
+                </label>
+
+            </div>
+
+        </div>
+
+        <!-- PRIVACY -->
+        <div class="setting-card">
+
+            <div class="setting-icon">🔒</div>
+
+            <h3>Конфиденциальность</h3>
+
+            <p>
+                Настройки видимости информации.
+            </p>
+
+            <div class="switch-row">
+
+                <div class="switch-text">
+
+                    <strong>Публичный профиль</strong>
+
+                    <small>
+                        Профиль виден другим пользователям
+                    </small>
+
+                </div>
+
+                <label class="switch">
+
+                    <input type="checkbox" checked>
+
+                    <span class="slider"></span>
+
+                </label>
+
+            </div>
+
+            <div class="switch-row">
+
+                <div class="switch-text">
+
+                    <strong>Показывать контакты</strong>
+
+                    <small>
+                        Разрешить просмотр контактов
+                    </small>
+
+                </div>
+
+                <label class="switch">
+
+                    <input type="checkbox">
+
+                    <span class="slider"></span>
+
+                </label>
+
+            </div>
+
+        </div>
+
+        <!-- SECURITY -->
+        <div class="setting-card">
+
+            <div class="setting-icon">🛡️</div>
+
+            <h3>Безопасность</h3>
+
+            <p>
+                Управление безопасностью аккаунта.
+            </p>
+
+            <div class="field">
+
+                <label>Текущий пароль</label>
+
+                <input
+                    type="password"
+                    placeholder="Введите пароль"
+                >
+
+            </div>
+
+            <div class="field">
+
+                <label>Новый пароль</label>
+
+                <input
+                    type="password"
+                    placeholder="Новый пароль"
+                >
+
+            </div>
+
+            <button
+                class="save-button"
+                onclick="changePassword()">
+
+                Изменить пароль
+
+            </button>
+
+        </div>
+
+        <!-- EMAIL -->
+        <div class="setting-card">
+
+            <div class="setting-icon">📧</div>
+
+            <h3>Контактные данные</h3>
+
+            <p>
+                Электронная почта и телефон.
+            </p>
+
+            <div class="field">
+
+                <label>Email</label>
+
+                <input
+                    type="email"
+                    value="demo@workerpro.com"
+                >
+
+            </div>
+
+            <div class="field">
+
+                <label>Телефон</label>
+
+                <input
+                    type="tel"
+                    value="+994 XX XXX XX XX"
+                >
+
+            </div>
+
+            <button
+                class="save-button"
+                onclick="saveContacts()">
+
+                Сохранить
+
+            </button>
+
+        </div>
+
+    </section>
+
+    <!-- QUICK LINKS -->
+    <section class="quick-links">
+
+        <h2>⚡ Быстрый доступ</h2>
+
+        <div class="link-grid">
+
+            <a href="../dashboard/index.html">
+                👤 Кабинет
+            </a>
+
+            <a href="../messages/index.html">
+                💬 Сообщения
+            </a>
+
+            <a href="../notifications/index.html">
+                🔔 Уведомления
+            </a>
+
+            <a href="../favorites/index.html">
+                ⭐ Избранное
+            </a>
+
+            <a href="../orders/index.html">
+                📦 Заказы
+            </a>
+
+            <a href="../transport/index.html">
+                🚚 Доставка
+            </a>
+
+        </div>
+
+    </section>
+
+    <!-- DANGER -->
+    <section
+        class="setting-card danger"
+        style="margin-top:25px;">
+
+        <div class="setting-icon">⚠️</div>
+
+        <h3>Опасная зона</h3>
+
+        <p>
+            Удаление аккаунта является необратимым
+            действием. В реальной версии потребуется
+            подтверждение пользователя.
+        </p>
+
+        <button
+            class="danger-button"
+            onclick="deleteAccount()">
+
+            Удалить аккаунт
+
+        </button>
+
+    </section>
+
+    <!-- DEMO -->
+    <div class="demo">
+
+        <strong>⚠️ Демо-версия WORKER PRO</strong>
+
+        <br><br>
+
+        Сейчас настройки работают только
+        демонстрационно. Реальное сохранение данных,
+        авторизация, изменение пароля, база данных,
+        настройки уведомлений и удаление аккаунта
+        будут подключены после создания серверной части.
+
+    </div>
+
+</div>
+
+<footer>
+
+    <strong>WORKER PRO</strong>
+
+    <br>
+
+    Глобальная промышленная платформа
+
+    <br><br>
+
+    Производство • Запчасти • Компании •
+    Специалисты • Обучение • Работа • Торговля
+
+    <br><br>
+
+    © 2026 WORKER PRO • F.S
+
+</footer>
+
+<script>
+
+function saveProfile() {
+
+    alert(
+        "Демо: данные профиля будут сохранены после подключения базы данных."
+    );
+
+}
+
+function saveLanguage() {
+
+    const language =
+        document.getElementById("language").value;
+
+    alert(
+        "Демо: выбран язык " +
+        language +
+        ". Реальное сохранение будет подключено позже."
+    );
+
+}
+
+function changePassword() {
+
+    alert(
+        "Демо: изменение пароля будет доступно после подключения авторизации."
+    );
+
+}
+
+function saveContacts() {
+
+    alert(
+        "Демо: контактные данные будут сохранены после подключения базы данных."
+    );
+
+}
+
+function deleteAccount() {
+
+    const confirmDelete =
+        confirm(
+            "Вы действительно хотите удалить аккаунт?"
+        );
+
+    if (confirmDelete) {
+
+        alert(
+            "Демо: удаление аккаунта будет подключено в реальной системе."
+        );
+
+    }
+
+}
+
+</script>
+
+<script src="../language.js"></script>
+
+</body>
+</html>
