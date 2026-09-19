@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WORKER PRO — Company Profile</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f7f5;
+    color: #123524;
+}
+
+/* ===== LANGUAGE BAR ===== */
+
+.top-bar {
+    background: #063d25;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.logo {
+    color: #b7ff35;
+    font-size: 21px;
+    font-weight: bold;
+    margin-right: 8px;
+    flex-shrink: 0;
+}
+
+.lang {
+    color: white;
+    border: 1px solid #4c8065;
+    border-radius: 7px;
+    padding: 7px 10px;
+    background: #0b6b3d;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.lang:hover {
+    background: #b7ff35;
+    color: #063d25;
+}
+
+/* ===== HEADER ===== */
+
+header {
+    background: white;
+    padding: 18px 15px;
+    text-align: center;
+    border-bottom: 1px solid #dce6df;
+}
+
+header h1 {
+    color: #063d25;
+    font-size: 30px;
+}
+
+header p {
+    color: #65776c;
+    margin-top: 7px;
+}
+
+/* ===== NAV ===== */
+
+nav {
+    background: #0b6b3d;
+    padding: 10px;
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+nav a {
+    background: #075b34;
+    color: white;
+    text-decoration: none;
+    padding: 9px 13px;
+    border-radius: 7px;
+    font-size: 14px;
+    flex-shrink: 0;
+}
+
+nav a:hover {
+    background: #b7ff35;
+    color: #063d25;
+}
+
+/* ===== HERO ===== */
+
+.hero {
+    background: linear-gradient(135deg, #063d25, #0b6b3d);
+    color: white;
+    text-align: center;
+    padding: 40px 15px;
+}
+
+.hero-icon {
+    font-size: 55px;
+    margin-bottom: 10px;
+}
+
+.hero h2 {
+    font-size: 32px;
+    margin-bottom: 8px;
+}
+
+.hero p {
+    max-width: 750px;
+    margin: auto;
+    line-height: 1.6;
+    color: #e9f5ed;
+}
+
+.demo-label {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 7px 12px;
+    border-radius: 6px;
+    background: #b7ff35;
+    color: #063d25;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+/* ===== CONTAINER ===== */
+
+.container {
+    max-width: 1150px;
+    margin: auto;
+    padding: 35px 15px;
+}
+
+/* ===== PROFILE CARD ===== */
+
+.profile-card {
+    background: white;
+    border: 1px solid #dce6df;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+}
+
+.profile-top {
+    display: flex;
+    gap: 22px;
+    align-items: center;
+}
+
+.profile-logo {
+    width: 95px;
+    height: 95px;
+    border-radius: 15px;
+    background: #063d25;
+    color: #b7ff35;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+    flex-shrink: 0;
+}
+
+.profile-name h2 {
+    color: #063d25;
+    margin-bottom: 8px;
+}
+
+.profile-name p {
+    color: #65776c;
+    line-height: 1.5;
+}
+
+.status {
+    display: inline-block;
+    margin-top: 10px;
+    background: #e9f4ed;
+    color: #075b34;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+/* ===== COMPANY DATA ===== */
+
+.data-grid {
+    margin-top: 25px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+}
+
+.data-box {
+    background: #f4f7f5;
+    border-radius: 10px;
+    padding: 15px;
+}
+
+.data-box strong {
+    display: block;
+    color: #063d25;
+    margin-bottom: 6px;
+    font-size: 13px;
+}
+
+.data-box span {
+    color: #65776c;
+    font-size: 14px;
+}
+
+/* ===== BUTTONS ===== */
+
+.action-buttons {
+    margin-top: 25px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.action-button {
+    display: inline-block;
+    padding: 12px 18px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+    background: #0b6b3d;
+    color: white;
+}
+
+.action-button:hover {
+    background: #063d25;
+}
+
+.action-button.main {
+    background: #b7ff35;
+    color: #063d25;
+}
+
+/* ===== SECTION ===== */
+
+.section {
+    margin-top: 30px;
+    background: white;
+    border: 1px solid #dce6df;
+    border-radius: 15px;
+    padding: 25px;
+}
+
+.section h2 {
+    color: #063d25;
+    margin-bottom: 15px;
+    font-size: 24px;
+}
+
+.section p {
+    color: #65776c;
+    line-height: 1.7;
+}
+
+/* ===== PRODUCT GRID ===== */
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 15px;
+}
+
+.product-card {
+    background: #f4f7f5;
+    border-radius: 11px;
+    padding: 18px;
+    border: 1px solid #dce6df;
+}
+
+.product-card .icon {
+    font-size: 32px;
+    margin-bottom: 8px;
+}
+
+.product-card h3 {
+    color: #063d25;
+    margin-bottom: 6px;
+}
+
+.product-card p {
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+/* ===== SERVICES ===== */
+
+.service-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 12px;
+}
+
+.service {
+    background: #e9f4ed;
+    border-radius: 10px;
+    padding: 15px;
+    color: #063d25;
+    font-weight: bold;
+}
+
+/* ===== CERTIFICATES ===== */
+
+.certificate-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 12px;
+}
+
+.certificate {
+    background: #f4f7f5;
+    border: 1px solid #dce6df;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+}
+
+.certificate-icon {
+    font-size: 30px;
+    margin-bottom: 7px;
+}
+
+.certificate strong {
+    color: #063d25;
+}
+
+/* ===== COUNTRIES ===== */
+
+.country-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px;
+}
+
+.country {
+    background: #f4f7f5;
+    border-radius: 9px;
+    padding: 13px;
+    text-align: center;
+    font-weight: bold;
+    color: #063d25;
+}
+
+/* ===== WORKFLOW ===== */
+
+.workflow {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
+}
+
+.workflow-step {
+    background: #f4f7f5;
+    border-radius: 10px;
+    padding: 17px;
+    text-align: center;
+}
+
+.workflow-step strong {
+    display: block;
+    color: #063d25;
+    margin-bottom: 6px;
+}
+
+.workflow-step span {
+    color: #65776c;
+    font-size: 13px;
+}
+
+/* ===== DEMO WARNING ===== */
+
+.warning {
+    margin-top: 30px;
+    background: #fff8df;
+    border: 1px solid #eadb9a;
+    border-radius: 12px;
+    padding: 20px;
+}
+
+.warning h3 {
+    color: #725d00;
+    margin-bottom: 8px;
+}
+
+.warning p {
+    color: #6b6338;
+    line-height: 1.6;
+}
+
+/* ===== FOOTER ===== */
+
+footer {
+    margin-top: 20px;
+    background: #032b1a;
+    color: #b9c9c0;
+    text-align: center;
+    padding: 25px 15px;
+    font-size: 13px;
+}
+
+footer strong {
+    color: #b7ff35;
+}
+
+/* ===== MOBILE ===== */
+
+@media (max-width: 600px) {
+
+    .hero h2 {
+        font-size: 26px;
+    }
+
+    .profile-top {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .profile-name {
+        text-align: center;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+    }
+
+    .action-button {
+        width: 100%;
+        text-align: center;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- ===== LANGUAGE BAR ===== -->
+
+<div class="top-bar">
+
+<div class="logo">WORKER PRO</div>
+
+<button class="lang" onclick="setLanguage('AZ')">🇦🇿 AZ</button>
+<button class="lang" onclick="setLanguage('RU')">🇷🇺 RU</button>
+<button class="lang" onclick="setLanguage('EN')">🇬🇧 EN</button>
+<button class="lang" onclick="setLanguage('TR')">🇹🇷 TR</button>
+<button class="lang" onclick="setLanguage('DE')">🇩🇪 DE</button>
+<button class="lang" onclick="setLanguage('AR')">🇸🇦 AR</button>
+<button class="lang" onclick="setLanguage('ES')">🇪🇸 ES</button>
+<button class="lang" onclick="setLanguage('FR')">🇫🇷 FR</button>
+<button class="lang" onclick="setLanguage('IT')">🇮🇹 IT</button>
+
+</div>
+
+<!-- ===== HEADER ===== -->
+
+<header>
+
+<h1>🏢 <span data-lang="companyProfile">Профиль компании</span></h1>
+
+<p data-lang="platform">
+Глобальная промышленная платформа
+</p>
+
+</header>
+
+<!-- ===== NAVIGATION ===== -->
+
+<nav>
+
+<a href="../index.html">🏠 WORKER PRO</a>
+
+<a href="../companies/index.html">
+🏢 Компании
+</a>
+
+<a href="../manufacturers/index.html">
+🏭 Производители
+</a>
+
+<a href="../suppliers/index.html">
+📦 Поставщики
+</a>
+
+<a href="../products/index.html">
+🔧 Товары
+</a>
+
+<a href="../equipment/index.html">
+🏗️ Оборудование
+</a>
+
+<a href="../requests/index.html">
+📋 Заявки
+</a>
+
+<a href="../offers/index.html">
+💰 Предложения
+</a>
+
+<a href="../orders/index.html">
+📦 Заказы
+</a>
+
+<a href="../transport/index.html">
+🚚 Транспорт
+</a>
+
+</nav>
+
+<!-- ===== HERO ===== -->
+
+<section class="hero">
+
+<div class="hero-icon">🏢</div>
+
+<h2>Industrial Manufacturer</h2>
+
+<p>
+Промышленная компания, производитель оборудования
+и поставщик решений для международного рынка.
+</p>
+
+<div class="demo-label">
+DEMO COMPANY PROFILE
+</div>
+
+</section>
+
+<!-- ===== MAIN ===== -->
+
+<main class="container">
+
+<!-- ===== BASIC PROFILE ===== -->
+
+<section class="profile-card">
+
+<div class="profile-top">
+
+<div class="profile-logo">
+🏭
+</div>
+
+<div class="profile-name">
+
+<h2>Industrial Manufacturer</h2>
+
+<p>
+Производитель промышленного оборудования
+и компонентов
+</p>
+
+<div class="status">
+✓ Компания на WORKER PRO
+</div>
+
+</div>
+
+</div>
+
+<div class="data-grid">
+
+<div class="data-box">
+<strong>🌍 Страна</strong>
+<span>Azerbaijan</span>
+</div>
+
+<div class="data-box">
+<strong>📍 Город</strong>
+<span>Baku</span>
+</div>
+
+<div class="data-box">
+<strong>🏭 Тип компании</strong>
+<span>Производитель</span>
+</div>
+
+<div class="data-box">
+<strong>⚙️ Отрасль</strong>
+<span>Industrial Manufacturing</span>
+</div>
+
+<div class="data-box">
+<strong>📅 Год основания</strong>
+<span>Example</span>
+</div>
+
+<div class="data-box">
+<strong>🌐 Рынок</strong>
+<span>International</span>
+</div>
+
+</div>
+
+<div class="action-buttons">
+
+<a href="../requests/index.html" class="action-button main">
+📋 Отправить заявку
+</a>
+
+<a href="../offers/index.html" class="action-button">
+💰 Запросить цену
+</a>
+
+<a href="../products/index.html" class="action-button">
+🔧 Товары
+</a>
+
+<a href="../transport/index.html" class="action-button">
+🚚 Доставка
+</a>
+
+</div>
+
+</section>
+
+<!-- ===== ABOUT ===== -->
+
+<section class="section">
+
+<h2>🏢 О компании</h2>
+
+<p>
+Компания специализируется на производстве промышленного
+оборудования, комплектующих и технических решений.
+Профиль является демонстрационным примером будущего
+формата страницы компании на платформе WORKER PRO.
+</p>
+
+</section>
+
+<!-- ===== PRODUCTS ===== -->
+
+<section class="section">
+
+<h2>🔧 Продукция</h2>
+
+<div class="product-grid">
+
+<div class="product-card">
+
+<div class="icon">⚙️</div>
+
+<h3>CNC Equipment</h3>
+
+<p>
+Станки, CNC оборудование и комплектующие.
+</p>
+
+</div>
+
+<div class="product-card">
+
+<div class="icon">🔩</div>
+
+<h3>Industrial Parts</h3>
+
+<p>
+Промышленные детали и запасные части.
+</p>
+
+</div>
+
+<div class="product-card">
+
+<div class="icon">💧</div>
+
+<h3>Hydraulic Systems</h3>
+
+<p>
+Насосы, клапаны и гидравлические компоненты.
+</p>
+
+</div>
+
+<div class="product-card">
+
+<div class="icon">🤖</div>
+
+<h3>Automation</h3>
+
+<p>
+Системы управления и промышленная автоматизация.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ===== SERVICES ===== -->
+
+<section class="section">
+
+<h2>🔧 Услуги</h2>
+
+<div class="service-list">
+
+<div class="service">🛠️ Ремонт оборудования</div>
+<div class="service">⚙️ Техническое обслуживание</div>
+<div class="service">🏭 CNC Service</div>
+<div class="service">💧 Hydraulic Service</div>
+<div class="service">🤖 Automation Service</div>
+<div class="service">📐 Engineering</div>
+<div class="service">🔩 Manufacturing</div>
+<div class="service">🚚 Industrial Delivery</div>
+
+</div>
+
+</section>
+
+<!-- ===== CERTIFICATES ===== -->
+
+<section class="section">
+
+<h2>📜 Сертификаты и качество</h2>
+
+<div class="certificate-grid">
+
+<div class="certificate">
+
+<div class="certificate-icon">📜</div>
+
+<strong>ISO</strong>
+
+<p>
+Система менеджмента качества
+</p>
+
+</div>
+
+<div class="certificate">
+
+<div class="certificate-icon">🛡️</div>
+
+<strong>Safety</strong>
+
+<p>
+Промышленная безопасность
+</p>
+
+</div>
+
+<div class="certificate">
+
+<div class="certificate-icon">✓</div>
+
+<strong>Quality Control</strong>
+
+<p>
+Контроль качества продукции
+</p>
+
+</div>
+
+<div class="certificate">
+
+<div class="certificate-icon">🌍</div>
+
+<strong>International</strong>
+
+<p>
+Международные поставки
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ===== COUNTRIES ===== -->
+
+<section class="section">
+
+<h2>🌍 Страны поставок</h2>
+
+<div class="country-grid">
+
+<div class="country">🇦🇿 Azerbaijan</div>
+<div class="country">🇹🇷 Turkey</div>
+<div class="country">🇩🇪 Germany</div>
+<div class="country">🇮🇹 Italy</div>
+<div class="country">🇨🇳 China</div>
+<div class="country">🇷🇺 Russia</div>
+<div class="country">🇫🇷 France</div>
+<div class="country">🇪🇸 Spain</div>
+
+</div>
+
+</section>
+
+<!-- ===== WORKFLOW ===== -->
+
+<section class="section">
+
+<h2>🔄 Работа с компанией</h2>
+
+<div class="workflow">
+
+<div class="workflow-step">
+<strong>1. Поиск</strong>
+<span>Найти компанию</span>
+</div>
+
+<div class="workflow-step">
+<strong>2. Профиль</strong>
+<span>Изучить информацию</span>
+</div>
+
+<div class="workflow-step">
+<strong>3. Товар</strong>
+<span>Выбрать продукцию</span>
+</div>
+
+<div class="workflow-step">
+<strong>4. Заявка</strong>
+<span>Отправить запрос</span>
+</div>
+
+<div class="workflow-step">
+<strong>5. Цена</strong>
+<span>Получить предложение</span>
+</div>
+
+<div class="workflow-step">
+<strong>6. Заказ</strong>
+<span>Оформить заказ</span>
+</div>
+
+<div class="workflow-step">
+<strong>7. Доставка</strong>
+<span>Организовать транспорт</span>
+</div>
+
+</div>
+
+</section>
+
+<!-- ===== DEMO WARNING ===== -->
+
+<section class="warning">
+
+<h3>ℹ️ Демонстрационный профиль</h3>
+
+<p>
+Эта компания является примером интерфейса WORKER PRO.
+В будущем зарегистрированные компании смогут самостоятельно
+создавать профиль, добавлять товары и оборудование,
+получать заявки, отправлять коммерческие предложения
+и работать с международными заказами.
+</p>
+
+</section>
+
+<!-- ===== BACK ===== -->
+
+<div class="action-buttons" style="margin-top:25px;">
+
+<a href="../companies/index.html" class="action-button">
+← Вернуться к компаниям
+</a>
+
+</div>
+
+</main>
+
+<!-- ===== FOOTER ===== -->
+
+<footer>
+
+<p>
+<strong>WORKER PRO</strong>
+</p>
+
+<p>
+Global Industrial Platform
+</p>
+
+<p>
+Компании • Производители • Поставщики • Покупатели
+</p>
+
+<p>
+© 2026 WORKER PRO · F.S
+</p>
+
+</footer>
+
+<!-- ===== LANGUAGE SYSTEM ===== -->
+
+<script src="../language.js"></script>
+
+</body>
+</html>
