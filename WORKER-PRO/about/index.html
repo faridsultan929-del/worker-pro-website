@@ -1,1 +1,736 @@
- 
+ <!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WORKER PRO — О платформе</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f7f5;
+    color: #123;
+}
+
+.top-languages {
+    background: #063d25;
+    padding: 10px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.top-languages button {
+    background: transparent;
+    color: white;
+    border: 1px solid #b7ff35;
+    border-radius: 20px;
+    padding: 7px 12px;
+    margin: 3px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.top-languages button:hover {
+    background: #b7ff35;
+    color: #063d25;
+}
+
+header {
+    background: linear-gradient(135deg, #063d25, #0b6b3d);
+    color: white;
+    text-align: center;
+    padding: 45px 15px;
+}
+
+.logo {
+    width: 90px;
+    height: 90px;
+    object-fit: contain;
+    margin-bottom: 10px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 38px;
+}
+
+header p {
+    font-size: 18px;
+    margin: 12px 0 0;
+}
+
+nav {
+    background: #075b34;
+    padding: 12px;
+    text-align: center;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 0 8px;
+    display: inline-block;
+}
+
+nav a:hover {
+    color: #b7ff35;
+}
+
+.container {
+    max-width: 1150px;
+    margin: auto;
+    padding: 25px 15px;
+}
+
+.hero-box {
+    background: white;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+    text-align: center;
+}
+
+.hero-box h2 {
+    color: #063d25;
+    font-size: 30px;
+    margin-top: 0;
+}
+
+.hero-box p {
+    font-size: 17px;
+    line-height: 1.7;
+}
+
+.highlight {
+    color: #0b6b3d;
+    font-weight: bold;
+}
+
+h2 {
+    color: #063d25;
+    margin-top: 40px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 18px;
+}
+
+.card {
+    background: white;
+    padding: 22px;
+    border-radius: 14px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.07);
+}
+
+.card h3 {
+    color: #075b34;
+    margin-top: 0;
+}
+
+.card p {
+    line-height: 1.6;
+}
+
+.process {
+    counter-reset: step;
+}
+
+.step {
+    position: relative;
+    background: white;
+    padding: 22px 22px 22px 70px;
+    margin-bottom: 14px;
+    border-radius: 14px;
+    box-shadow: 0 2px 9px rgba(0,0,0,0.07);
+}
+
+.step::before {
+    counter-increment: step;
+    content: counter(step);
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    width: 36px;
+    height: 36px;
+    background: #0b6b3d;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 17px;
+}
+
+.step h3 {
+    margin-top: 0;
+    color: #063d25;
+}
+
+.stat {
+    text-align: center;
+    background: #063d25;
+    color: white;
+    padding: 25px 15px;
+    border-radius: 14px;
+}
+
+.stat .number {
+    font-size: 30px;
+    font-weight: bold;
+    color: #b7ff35;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.future {
+    background: #063d25;
+    color: white;
+    padding: 28px;
+    border-radius: 16px;
+}
+
+.future h2 {
+    color: #b7ff35;
+    margin-top: 0;
+}
+
+.future li {
+    margin-bottom: 10px;
+    line-height: 1.5;
+}
+
+.demo {
+    margin-top: 30px;
+    background: #fff8d6;
+    border-left: 5px solid #d5a900;
+    padding: 16px;
+    border-radius: 8px;
+}
+
+footer {
+    background: #063d25;
+    color: white;
+    text-align: center;
+    padding: 28px 15px;
+    margin-top: 40px;
+}
+
+@media (max-width: 600px) {
+
+    header h1 {
+        font-size: 30px;
+    }
+
+    header p {
+        font-size: 15px;
+    }
+
+    .hero-box {
+        padding: 22px;
+    }
+
+    .hero-box h2 {
+        font-size: 25px;
+    }
+
+    .step {
+        padding-left: 60px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="top-languages">
+    <button onclick="setLanguage('AZ')">AZ</button>
+    <button onclick="setLanguage('RU')">RU</button>
+    <button onclick="setLanguage('EN')">EN</button>
+    <button onclick="setLanguage('TR')">TR</button>
+    <button onclick="setLanguage('DE')">DE</button>
+    <button onclick="setLanguage('AR')">AR</button>
+    <button onclick="setLanguage('ES')">ES</button>
+    <button onclick="setLanguage('FR')">FR</button>
+    <button onclick="setLanguage('IT')">IT</button>
+</div>
+
+<header>
+
+    <h1>WORKER PRO</h1>
+
+    <p>
+        Международная промышленная платформа
+    </p>
+
+    <p>
+        Производство • Технологии • Компании • Специалисты • Торговля
+    </p>
+
+</header>
+
+<nav>
+
+    <a href="../index.html">Главная</a>
+    <a href="../production/index.html">Производство</a>
+    <a href="../companies/index.html">Компании</a>
+    <a href="../manufacturers/index.html">Производители</a>
+    <a href="../suppliers/index.html">Поставщики</a>
+    <a href="../products/index.html">Товары</a>
+    <a href="../specialists/index.html">Специалисты</a>
+    <a href="../jobs/index.html">Работа</a>
+    <a href="../training/index.html">Обучение</a>
+    <a href="../marketplace/index.html">Marketplace</a>
+    <a href="../help/index.html">Помощь</a>
+    <a href="../dashboard/index.html">Кабинет</a>
+
+</nav>
+
+<div class="container">
+
+    <div class="hero-box">
+
+        <h2>
+            Работа. Знания. Производство.
+        </h2>
+
+        <p>
+            <span class="highlight">WORKER PRO</span> —
+            концепция международной промышленной платформы,
+            которая объединяет работников, инженеров, специалистов,
+            производителей, поставщиков и покупателей.
+        </p>
+
+        <p>
+            Главная идея платформы — создать единое пространство,
+            где человек может получить знания, найти специалиста,
+            найти оборудование или запчасть, связаться с компанией,
+            получить предложение и организовать доставку.
+        </p>
+
+    </div>
+
+
+    <h2>🌍 Что такое WORKER PRO?</h2>
+
+    <div class="grid">
+
+        <div class="card">
+            <h3>🏭 Производство</h3>
+            <p>
+                Информация о промышленных технологиях,
+                оборудовании, производственных процессах
+                и технических направлениях.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>👷 Специалисты</h3>
+            <p>
+                Возможность находить рабочих, операторов,
+                инженеров, мастеров, сварщиков, электриков
+                и других специалистов.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>🏢 Компании</h3>
+            <p>
+                Каталог производителей, поставщиков,
+                сервисных компаний и промышленных предприятий.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>📦 Промышленные товары</h3>
+            <p>
+                Поиск оборудования, запчастей, материалов,
+                инструментов, насосов, клапанов, датчиков
+                и других товаров.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>🎓 Обучение</h3>
+            <p>
+                Производственное обучение, безопасность,
+                технологии и профессиональный английский
+                для работников.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>🌐 Международный рынок</h3>
+            <p>
+                Возможность искать продукцию и компании
+                в разных странах и взаимодействовать
+                с международными партнёрами.
+            </p>
+        </div>
+
+    </div>
+
+
+    <h2>🔄 Как должна работать платформа</h2>
+
+    <div class="process">
+
+        <div class="step">
+            <h3>Выбор языка и страны</h3>
+
+            <p>
+                Пользователь выбирает удобный язык
+                и страну для работы с платформой.
+            </p>
+        </div>
+
+        <div class="step">
+            <h3>Изучение производства</h3>
+
+            <p>
+                Пользователь получает доступ к информации
+                о производстве, технологиях, оборудовании
+                и профессиональном обучении.
+            </p>
+        </div>
+
+        <div class="step">
+            <h3>Регистрация</h3>
+
+            <p>
+                Можно зарегистрироваться как специалист,
+                компания, производитель или поставщик.
+            </p>
+        </div>
+
+        <div class="step">
+            <h3>Поиск</h3>
+
+            <p>
+                Пользователь ищет товары, оборудование,
+                запчасти, специалистов или компании.
+            </p>
+        </div>
+
+        <div class="step">
+            <h3>Связь с поставщиком</h3>
+
+            <p>
+                Покупатель отправляет запрос и связывается
+                с выбранной компанией или поставщиком.
+            </p>
+        </div>
+
+        <div class="step">
+            <h3>Получение предложения</h3>
+
+            <p>
+                Поставщик предоставляет цену, наличие,
+                сроки и условия поставки.
+            </p>
+        </div>
+
+        <div class="step">
+            <h3>Сравнение и заказ</h3>
+
+            <p>
+                Пользователь сможет сравнить предложения
+                и перейти к оформлению заказа.
+            </p>
+        </div>
+
+        <div class="step">
+            <h3>Доставка</h3>
+
+            <p>
+                После заказа организуется местная
+                или международная перевозка товара.
+            </p>
+        </div>
+
+        <div class="step">
+            <h3>Получение товара</h3>
+
+            <p>
+                Пользователь получает заказ,
+                а информация о процессе сохраняется
+                в его личном кабинете.
+            </p>
+        </div>
+
+    </div>
+
+
+    <h2>👥 Для кого создан WORKER PRO?</h2>
+
+    <div class="grid">
+
+        <div class="card">
+            <h3>👷 Рабочие</h3>
+            <p>
+                Поиск работы, обучение, профессиональные знания
+                и развитие навыков.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>🔧 Мастера</h3>
+            <p>
+                Поиск клиентов, специалистов, оборудования
+                и технических решений.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>👨‍🔧 Инженеры</h3>
+            <p>
+                Профессиональное взаимодействие,
+                проекты, производство и технологии.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>🏭 Производители</h3>
+            <p>
+                Представление своей продукции
+                и поиск международных клиентов.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>📦 Поставщики</h3>
+            <p>
+                Получение заявок, отправка предложений
+                и поиск новых покупателей.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>🏢 Компании</h3>
+            <p>
+                Поиск специалистов, оборудования,
+                материалов, услуг и партнёров.
+            </p>
+        </div>
+
+    </div>
+
+
+    <h2>📊 Основные направления</h2>
+
+    <div class="grid">
+
+        <div class="stat">
+            <span class="number">🏭</span>
+            Производство
+        </div>
+
+        <div class="stat">
+            <span class="number">📦</span>
+            Запчасти
+        </div>
+
+        <div class="stat">
+            <span class="number">🏢</span>
+            Компании
+        </div>
+
+        <div class="stat">
+            <span class="number">👷</span>
+            Специалисты
+        </div>
+
+        <div class="stat">
+            <span class="number">🎓</span>
+            Обучение
+        </div>
+
+        <div class="stat">
+            <span class="number">🚚</span>
+            Доставка
+        </div>
+
+    </div>
+
+
+    <h2>🔗 Единая промышленная система</h2>
+
+    <div class="grid">
+
+        <div class="card">
+            <h3>📚 Knowledge</h3>
+
+            <p>
+                Производственные знания, технологии,
+                безопасность и обучение.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>👥 People</h3>
+
+            <p>
+                Рабочие, специалисты, инженеры,
+                мастера и работодатели.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>🏭 Industry</h3>
+
+            <p>
+                Производители, оборудование,
+                предприятия и технологии.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>🛒 Marketplace</h3>
+
+            <p>
+                Промышленные товары, запчасти,
+                материалы и оборудование.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>💬 Communication</h3>
+
+            <p>
+                Сообщения, заявки, предложения
+                и деловое взаимодействие.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>🚚 Logistics</h3>
+
+            <p>
+                Международная и местная доставка
+                товаров и оборудования.
+            </p>
+        </div>
+
+    </div>
+
+
+    <div class="future">
+
+        <h2>🚀 Будущее WORKER PRO</h2>
+
+        <ul>
+
+            <li>
+                Реальная регистрация пользователей
+            </li>
+
+            <li>
+                Реальные профили компаний и специалистов
+            </li>
+
+            <li>
+                Международный промышленный каталог
+            </li>
+
+            <li>
+                Поиск товаров и запчастей
+            </li>
+
+            <li>
+                Реальные заявки покупателей
+            </li>
+
+            <li>
+                Коммерческие предложения поставщиков
+            </li>
+
+            <li>
+                Сравнение предложений
+            </li>
+
+            <li>
+                Заказы и история покупок
+            </li>
+
+            <li>
+                Онлайн-сообщения
+            </li>
+
+            <li>
+                Уведомления
+            </li>
+
+            <li>
+                Система доставки и отслеживания
+            </li>
+
+            <li>
+                Международные платежи
+            </li>
+
+            <li>
+                Многоязычная система
+            </li>
+
+            <li>
+                Мобильное приложение WORKER PRO
+            </li>
+
+        </ul>
+
+    </div>
+
+
+    <div class="demo">
+
+        <strong>⚠️ DEMO VERSION</strong>
+
+        <p>
+            Эта страница описывает концепцию WORKER PRO.
+            Текущая версия сайта является демонстрационной.
+            Реальные пользователи, компании, товары,
+            заказы, платежи и логистика будут подключаться
+            поэтапно.
+        </p>
+
+    </div>
+
+</div>
+
+
+<footer>
+
+    <h3>WORKER PRO</h3>
+
+    <p>
+        Global Industrial Platform
+    </p>
+
+    <p>
+        Production • Knowledge • People • Industry • Marketplace
+    </p>
+
+    <p>
+        F.S
+    </p>
+
+</footer>
+
+
+<script src="../language.js"></script>
+
+</body>
+</html>
