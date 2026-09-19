@@ -1,1 +1,543 @@
- 
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WORKER PRO — Production</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f7f5;
+    color: #123;
+}
+
+.top-languages {
+    background: #063d25;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.top-languages button {
+    border: 1px solid #b7ff35;
+    background: transparent;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.top-languages button:hover {
+    background: #b7ff35;
+    color: #063d25;
+}
+
+header {
+    background: linear-gradient(135deg, #0b6b3d, #063d25);
+    color: white;
+    text-align: center;
+    padding: 35px 15px;
+}
+
+.logo {
+    font-size: 34px;
+    font-weight: bold;
+    color: #b7ff35;
+}
+
+header h1 {
+    margin: 12px 0 8px;
+    font-size: 32px;
+}
+
+header p {
+    margin: 0;
+    font-size: 17px;
+}
+
+nav {
+    background: #075b34;
+    padding: 12px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    padding: 9px 13px;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+nav a:hover {
+    background: #b7ff35;
+    color: #063d25;
+}
+
+.container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 25px 15px;
+}
+
+.intro {
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 4px 15px rgba(0,0,0,.08);
+    margin-bottom: 25px;
+}
+
+.intro h2 {
+    color: #075b34;
+    margin-top: 0;
+}
+
+.search-box {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.search-box input {
+    flex: 1;
+    padding: 14px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 16px;
+}
+
+.search-box button {
+    background: #0b6b3d;
+    color: white;
+    border: none;
+    padding: 14px 20px;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+.section-title {
+    text-align: center;
+    color: #063d25;
+    margin: 30px 0 20px;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 18px;
+}
+
+.card {
+    background: white;
+    padding: 22px;
+    border-radius: 15px;
+    box-shadow: 0 4px 14px rgba(0,0,0,.08);
+    border-top: 5px solid #0b6b3d;
+    transition: .2s;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 7px 20px rgba(0,0,0,.13);
+}
+
+.card-icon {
+    font-size: 38px;
+}
+
+.card h3 {
+    color: #075b34;
+    margin-bottom: 8px;
+}
+
+.card p {
+    color: #555;
+    line-height: 1.5;
+}
+
+.card a {
+    display: inline-block;
+    margin-top: 10px;
+    color: #075b34;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.process {
+    margin-top: 30px;
+    background: #063d25;
+    color: white;
+    padding: 25px;
+    border-radius: 15px;
+}
+
+.process h2 {
+    color: #b7ff35;
+    text-align: center;
+}
+
+.steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.step {
+    background: rgba(255,255,255,.1);
+    padding: 18px;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.step-number {
+    width: 38px;
+    height: 38px;
+    line-height: 38px;
+    margin: auto auto 10px;
+    border-radius: 50%;
+    background: #b7ff35;
+    color: #063d25;
+    font-weight: bold;
+}
+
+footer {
+    margin-top: 35px;
+    background: #063d25;
+    color: white;
+    text-align: center;
+    padding: 25px 15px;
+}
+
+footer a {
+    color: #b7ff35;
+    text-decoration: none;
+}
+
+@media (max-width: 600px) {
+
+    header h1 {
+        font-size: 26px;
+    }
+
+    .logo {
+        font-size: 28px;
+    }
+
+    .search-box {
+        flex-direction: column;
+    }
+
+    .top-languages {
+        justify-content: flex-start;
+        overflow-x: auto;
+        flex-wrap: nowrap;
+    }
+
+    .top-languages button {
+        flex-shrink: 0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ЯЗЫКИ -->
+<div class="top-languages">
+    <button onclick="setLanguage('AZ')">🇦🇿 AZ</button>
+    <button onclick="setLanguage('RU')">🇷🇺 RU</button>
+    <button onclick="setLanguage('EN')">🇬🇧 EN</button>
+    <button onclick="setLanguage('TR')">🇹🇷 TR</button>
+    <button onclick="setLanguage('DE')">🇩🇪 DE</button>
+    <button onclick="setLanguage('AR')">🇸🇦 AR</button>
+    <button onclick="setLanguage('ES')">🇪🇸 ES</button>
+    <button onclick="setLanguage('FR')">🇫🇷 FR</button>
+    <button onclick="setLanguage('IT')">🇮🇹 IT</button>
+</div>
+
+<header>
+
+    <div class="logo">⚙️ WORKER PRO</div>
+
+    <h1 data-lang="production">Производство</h1>
+
+    <p>
+        Промышленность • Технологии • Оборудование • Знания
+    </p>
+
+</header>
+
+<nav>
+    <a href="../index.html">🏠 Главная</a>
+    <a href="../problems/index.html">🛠 Проблемы</a>
+    <a href="../spare-parts/index.html">🔩 Запчасти</a>
+    <a href="../companies/index.html">🏢 Компании</a>
+    <a href="../suppliers/index.html">📦 Поставщики</a>
+    <a href="../training/index.html">🎓 Обучение</a>
+</nav>
+
+<main class="container">
+
+    <section class="intro">
+
+        <h2>🏭 Производство</h2>
+
+        <p>
+            WORKER PRO объединяет рабочих, мастеров, инженеров,
+            производителей и поставщиков промышленного оборудования.
+        </p>
+
+        <p>
+            Здесь можно изучать технологии производства,
+            находить оборудование, запчасти и специалистов.
+        </p>
+
+        <div class="search-box">
+
+            <input
+                type="text"
+                placeholder="Поиск: CNC, станок, насос, сварка..."
+            >
+
+            <button>🔍 Поиск</button>
+
+        </div>
+
+    </section>
+
+
+    <h2 class="section-title">
+        Основные направления производства
+    </h2>
+
+
+    <section class="cards">
+
+        <div class="card">
+
+            <div class="card-icon">⚙️</div>
+
+            <h3>CNC</h3>
+
+            <p>
+                CNC-станки, токарная и фрезерная обработка,
+                программирование и обслуживание оборудования.
+            </p>
+
+            <a href="../technologies/index.html">
+                Подробнее →
+            </a>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">🔨</div>
+
+            <h3>Штамповка</h3>
+
+            <p>
+                Прессовое оборудование, штампы,
+                листовой металл и технологии обработки.
+            </p>
+
+            <a href="../technologies/index.html">
+                Подробнее →
+            </a>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">🔥</div>
+
+            <h3>Термообработка</h3>
+
+            <p>
+                Печи, нагрев, закалка, отпуск
+                и контроль температуры.
+            </p>
+
+            <a href="../technologies/index.html">
+                Подробнее →
+            </a>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">🤖</div>
+
+            <h3>Автоматизация</h3>
+
+            <p>
+                Датчики, PLC, роботы, системы управления
+                и промышленная автоматизация.
+            </p>
+
+            <a href="../technologies/index.html">
+                Подробнее →
+            </a>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">💧</div>
+
+            <h3>Гидравлика</h3>
+
+            <p>
+                Насосы, клапаны, гидростанции,
+                цилиндры и гидравлические системы.
+            </p>
+
+            <a href="../equipment/index.html">
+                Подробнее →
+            </a>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">⚡</div>
+
+            <h3>Электрика</h3>
+
+            <p>
+                Электродвигатели, кабели, панели,
+                датчики и промышленное оборудование.
+            </p>
+
+            <a href="../equipment/index.html">
+                Подробнее →
+            </a>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">🔥</div>
+
+            <h3>Сварка</h3>
+
+            <p>
+                MIG, MAG, TIG, ручная сварка,
+                оборудование и безопасность.
+            </p>
+
+            <a href="../training/index.html">
+                Подробнее →
+            </a>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">🔬</div>
+
+            <h3>Контроль качества</h3>
+
+            <p>
+                Измерения, контроль размеров,
+                дефекты и проверка продукции.
+            </p>
+
+            <a href="../quality-control/index.html">
+                Подробнее →
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <section class="process">
+
+        <h2>🌍 Как работает WORKER PRO</h2>
+
+        <div class="steps">
+
+            <div class="step">
+                <div class="step-number">1</div>
+                Выберите язык и страну
+            </div>
+
+            <div class="step">
+                <div class="step-number">2</div>
+                Изучайте технологии
+            </div>
+
+            <div class="step">
+                <div class="step-number">3</div>
+                Найдите компанию
+            </div>
+
+            <div class="step">
+                <div class="step-number">4</div>
+                Найдите оборудование или запчасть
+            </div>
+
+            <div class="step">
+                <div class="step-number">5</div>
+                Свяжитесь с поставщиком
+            </div>
+
+            <div class="step">
+                <div class="step-number">6</div>
+                Организуйте доставку
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<footer>
+
+    <strong>WORKER PRO</strong>
+
+    <p>
+        Глобальная промышленная платформа
+    </p>
+
+    <p>
+        <a href="../index.html">Вернуться на главную</a>
+    </p>
+
+    <p>© 2026 WORKER PRO • F.S</p>
+
+</footer>
+
+
+<script src="../language.js"></script>
+
+</body>
+</html>
