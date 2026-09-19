@@ -1,1 +1,608 @@
- 
+ <!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WORKER PRO — Dashboard</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f7f5;
+    color: #123;
+}
+
+.top-languages {
+    background: #063d25;
+    padding: 10px;
+    text-align: center;
+}
+
+.top-languages button {
+    background: #0b6b3d;
+    color: white;
+    border: 1px solid #b7ff35;
+    border-radius: 6px;
+    padding: 7px 10px;
+    margin: 3px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.top-languages button:hover {
+    background: #b7ff35;
+    color: #063d25;
+}
+
+header {
+    background: #075b34;
+    color: white;
+    text-align: center;
+    padding: 25px 15px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 30px;
+}
+
+header p {
+    margin: 8px 0 0;
+    font-size: 16px;
+}
+
+nav {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: #063d25;
+    padding: 10px;
+    text-align: center;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 5px 8px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: #b7ff35;
+}
+
+.container {
+    max-width: 1150px;
+    margin: auto;
+    padding: 20px;
+}
+
+.welcome {
+    background: white;
+    border-radius: 14px;
+    padding: 25px;
+    margin-bottom: 20px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+    border-left: 6px solid #0b6b3d;
+}
+
+.welcome h2 {
+    margin-top: 0;
+    color: #063d25;
+}
+
+.welcome p {
+    line-height: 1.6;
+}
+
+.profile-mini {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.profile-item {
+    background: #eef5f1;
+    border-radius: 10px;
+    padding: 12px 16px;
+    flex: 1;
+    min-width: 180px;
+}
+
+.profile-item strong {
+    display: block;
+    color: #063d25;
+    margin-bottom: 5px;
+}
+
+.section-title {
+    text-align: center;
+    color: #063d25;
+    margin: 30px 0 15px;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+}
+
+.stat {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.07);
+}
+
+.stat .number {
+    font-size: 30px;
+    font-weight: bold;
+    color: #0b6b3d;
+}
+
+.stat p {
+    margin: 8px 0 0;
+    font-weight: bold;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 18px;
+}
+
+.card {
+    background: white;
+    padding: 22px;
+    border-radius: 14px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+    transition: 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+}
+
+.card .icon {
+    font-size: 35px;
+    margin-bottom: 10px;
+}
+
+.card h3 {
+    margin: 5px 0 10px;
+    color: #063d25;
+}
+
+.card p {
+    line-height: 1.5;
+    color: #456;
+}
+
+.card a {
+    display: inline-block;
+    margin-top: 8px;
+    background: #0b6b3d;
+    color: white;
+    text-decoration: none;
+    padding: 9px 14px;
+    border-radius: 7px;
+    font-weight: bold;
+}
+
+.card a:hover {
+    background: #063d25;
+}
+
+.quick-actions {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+}
+
+.quick-actions a {
+    text-align: center;
+    text-decoration: none;
+    background: #063d25;
+    color: white;
+    padding: 14px;
+    border-radius: 9px;
+    font-weight: bold;
+}
+
+.quick-actions a:hover {
+    background: #0b6b3d;
+}
+
+.workflow {
+    background: white;
+    padding: 25px;
+    border-radius: 14px;
+    margin-top: 25px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+}
+
+.steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 12px;
+    margin-top: 15px;
+}
+
+.step {
+    background: #eef5f1;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.step strong {
+    color: #0b6b3d;
+    display: block;
+    margin-bottom: 7px;
+}
+
+.demo {
+    background: #fff8dc;
+    border-left: 5px solid #e0a800;
+    padding: 18px;
+    border-radius: 10px;
+    margin-top: 25px;
+    line-height: 1.6;
+}
+
+footer {
+    background: #063d25;
+    color: white;
+    text-align: center;
+    padding: 25px 15px;
+    margin-top: 35px;
+}
+
+footer strong {
+    color: #b7ff35;
+}
+
+@media (max-width: 600px) {
+    header h1 {
+        font-size: 24px;
+    }
+
+    nav a {
+        font-size: 13px;
+        margin: 4px;
+    }
+
+    .container {
+        padding: 12px;
+    }
+
+    .welcome {
+        padding: 18px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- LANGUAGES -->
+<div class="top-languages">
+    <button onclick="setLanguage('AZ')">AZ</button>
+    <button onclick="setLanguage('RU')">RU</button>
+    <button onclick="setLanguage('EN')">EN</button>
+    <button onclick="setLanguage('TR')">TR</button>
+    <button onclick="setLanguage('DE')">DE</button>
+    <button onclick="setLanguage('AR')">AR</button>
+    <button onclick="setLanguage('ES')">ES</button>
+    <button onclick="setLanguage('FR')">FR</button>
+    <button onclick="setLanguage('IT')">IT</button>
+</div>
+
+<header>
+    <h1>WORKER PRO</h1>
+    <p>Личный кабинет</p>
+</header>
+
+<!-- NAVIGATION -->
+<nav>
+    <a href="../index.html">Главная</a>
+    <a href="../companies/index.html">Компании</a>
+    <a href="../manufacturers/index.html">Производители</a>
+    <a href="../suppliers/index.html">Поставщики</a>
+    <a href="../products/index.html">Товары</a>
+    <a href="../requests/index.html">Заявки</a>
+    <a href="../offers/index.html">Предложения</a>
+    <a href="../orders/index.html">Заказы</a>
+    <a href="../transport/index.html">Доставка</a>
+</nav>
+
+<div class="container">
+
+    <!-- WELCOME -->
+    <section class="welcome">
+        <h2>👋 Добро пожаловать в WORKER PRO</h2>
+
+        <p>
+            Это ваш личный рабочий кабинет. Здесь пользователь сможет
+            управлять профилем, товарами, услугами, заявками,
+            предложениями, заказами и международной доставкой.
+        </p>
+
+        <div class="profile-mini">
+
+            <div class="profile-item">
+                <strong>👤 Профиль</strong>
+                Demo User
+            </div>
+
+            <div class="profile-item">
+                <strong>🏭 Тип аккаунта</strong>
+                Компания / Специалист
+            </div>
+
+            <div class="profile-item">
+                <strong>🌍 Страна</strong>
+                Azerbaijan
+            </div>
+
+            <div class="profile-item">
+                <strong>📍 Город</strong>
+                Baku
+            </div>
+
+        </div>
+    </section>
+
+    <!-- STATISTICS -->
+    <h2 class="section-title">📊 Моя статистика</h2>
+
+    <section class="stats">
+
+        <div class="stat">
+            <div class="number">12</div>
+            <p>Заявки</p>
+        </div>
+
+        <div class="stat">
+            <div class="number">7</div>
+            <p>Предложения</p>
+        </div>
+
+        <div class="stat">
+            <div class="number">3</div>
+            <p>Заказы</p>
+        </div>
+
+        <div class="stat">
+            <div class="number">18</div>
+            <p>Товары</p>
+        </div>
+
+        <div class="stat">
+            <div class="number">5</div>
+            <p>Сообщения</p>
+        </div>
+
+        <div class="stat">
+            <div class="number">4</div>
+            <p>Доставки</p>
+        </div>
+
+    </section>
+
+    <!-- MAIN DASHBOARD -->
+    <h2 class="section-title">⚙️ Мой WORKER PRO</h2>
+
+    <section class="dashboard-grid">
+
+        <div class="card">
+            <div class="icon">👤</div>
+            <h3>Мой профиль</h3>
+            <p>
+                Личные данные, страна, город, профессия,
+                навыки, опыт и контактная информация.
+            </p>
+            <a href="../register/index.html">Открыть</a>
+        </div>
+
+        <div class="card">
+            <div class="icon">🏭</div>
+            <h3>Мои товары</h3>
+            <p>
+                Управление промышленными товарами,
+                оборудованием, запчастями и материалами.
+            </p>
+            <a href="../products/index.html">Товары</a>
+        </div>
+
+        <div class="card">
+            <div class="icon">🔧</div>
+            <h3>Мои услуги</h3>
+            <p>
+                Ремонт, обслуживание, CNC, гидравлика,
+                электрика, сварка и другие услуги.
+            </p>
+            <a href="../services/index.html">Услуги</a>
+        </div>
+
+        <div class="card">
+            <div class="icon">📋</div>
+            <h3>Мои заявки</h3>
+            <p>
+                Создавайте и контролируйте заявки
+                на товары, оборудование и услуги.
+            </p>
+            <a href="../requests/index.html">Заявки</a>
+        </div>
+
+        <div class="card">
+            <div class="icon">💰</div>
+            <h3>Предложения</h3>
+            <p>
+                Получайте коммерческие предложения
+                от поставщиков и производителей.
+            </p>
+            <a href="../offers/index.html">Предложения</a>
+        </div>
+
+        <div class="card">
+            <div class="icon">📦</div>
+            <h3>Мои заказы</h3>
+            <p>
+                Просмотр заказов, статусов,
+                поставщиков и получения товара.
+            </p>
+            <a href="../orders/index.html">Заказы</a>
+        </div>
+
+        <div class="card">
+            <div class="icon">🏪</div>
+            <h3>Мой склад</h3>
+            <p>
+                Управление остатками запчастей,
+                оборудования, материалов и товаров.
+            </p>
+            <a href="../warehouse/index.html">Склад</a>
+        </div>
+
+        <div class="card">
+            <div class="icon">🚚</div>
+            <h3>Моя доставка</h3>
+            <p>
+                Международная и местная доставка,
+                транспорт, документы и отслеживание.
+            </p>
+            <a href="../transport/index.html">Доставка</a>
+        </div>
+
+        <div class="card">
+            <div class="icon">💬</div>
+            <h3>Сообщения</h3>
+            <p>
+                Связь с компаниями, специалистами,
+                производителями и поставщиками.
+            </p>
+            <a href="../community/index.html">Сообщество</a>
+        </div>
+
+        <div class="card">
+            <div class="icon">🔔</div>
+            <h3>Уведомления</h3>
+            <p>
+                Новые заявки, предложения,
+                сообщения, заказы и изменения статуса.
+            </p>
+            <a href="../requests/index.html">Проверить</a>
+        </div>
+
+    </section>
+
+    <!-- QUICK ACTIONS -->
+    <h2 class="section-title">⚡ Быстрые действия</h2>
+
+    <section class="quick-actions">
+
+        <a href="../register/index.html">
+            👤 Редактировать профиль
+        </a>
+
+        <a href="../products/index.html">
+            ➕ Добавить товар
+        </a>
+
+        <a href="../requests/index.html">
+            📋 Создать заявку
+        </a>
+
+        <a href="../offers/index.html">
+            💰 Посмотреть предложения
+        </a>
+
+        <a href="../orders/index.html">
+            📦 Мои заказы
+        </a>
+
+        <a href="../transport/index.html">
+            🚚 Моя доставка
+        </a>
+
+    </section>
+
+    <!-- WORKFLOW -->
+    <section class="workflow">
+
+        <h2>🌍 Как работает личный кабинет</h2>
+
+        <div class="steps">
+
+            <div class="step">
+                <strong>1. Профиль</strong>
+                Создайте аккаунт
+            </div>
+
+            <div class="step">
+                <strong>2. Товары</strong>
+                Добавьте товары
+            </div>
+
+            <div class="step">
+                <strong>3. Заявка</strong>
+                Создайте запрос
+            </div>
+
+            <div class="step">
+                <strong>4. Предложения</strong>
+                Получите цены
+            </div>
+
+            <div class="step">
+                <strong>5. Заказ</strong>
+                Выберите условия
+            </div>
+
+            <div class="step">
+                <strong>6. Доставка</strong>
+                Получите товар
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- DEMO WARNING -->
+    <div class="demo">
+        <strong>⚠️ Демо-версия WORKER PRO</strong><br><br>
+
+        Сейчас личный кабинет является демонстрационной
+        частью платформы. Реальные аккаунты, база данных,
+        авторизация, сообщения, сохранение товаров,
+        коммерческие предложения, онлайн-заказы,
+        платежи и отслеживание доставки будут подключены
+        на следующем этапе разработки.
+    </div>
+
+</div>
+
+<footer>
+    <strong>WORKER PRO</strong><br>
+    Глобальная промышленная платформа<br><br>
+    Производство • Запчасти • Компании • Специалисты • Обучение • Работа
+    <br><br>
+    © 2026 WORKER PRO • F.S
+</footer>
+
+<script src="../language.js"></script>
+
+</body>
+</html>
