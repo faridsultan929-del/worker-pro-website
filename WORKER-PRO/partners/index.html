@@ -1,1 +1,837 @@
- 
+ <!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WORKER PRO — Partners</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f7f5;
+    color: #123;
+}
+
+.top-languages {
+    background: #063d25;
+    padding: 10px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.top-languages button {
+    background: transparent;
+    color: white;
+    border: 1px solid #b7ff35;
+    border-radius: 20px;
+    padding: 7px 12px;
+    margin: 3px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.top-languages button:hover {
+    background: #b7ff35;
+    color: #063d25;
+}
+
+header {
+    background: linear-gradient(135deg, #063d25, #0b6b3d);
+    color: white;
+    text-align: center;
+    padding: 42px 15px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 36px;
+}
+
+header p {
+    margin: 10px 0 0;
+    font-size: 17px;
+}
+
+nav {
+    background: #075b34;
+    padding: 12px;
+    text-align: center;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 0 7px;
+    display: inline-block;
+}
+
+nav a:hover {
+    color: #b7ff35;
+}
+
+.container {
+    max-width: 1150px;
+    margin: auto;
+    padding: 25px 15px;
+}
+
+.hero {
+    background: white;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+    text-align: center;
+}
+
+.hero h2 {
+    color: #063d25;
+    margin-top: 0;
+    font-size: 29px;
+}
+
+.hero p {
+    line-height: 1.7;
+    font-size: 17px;
+}
+
+h2 {
+    color: #063d25;
+    margin-top: 38px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(245px, 1fr));
+    gap: 18px;
+}
+
+.card {
+    background: white;
+    padding: 22px;
+    border-radius: 14px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.07);
+}
+
+.card h3 {
+    margin-top: 0;
+    color: #075b34;
+}
+
+.card p {
+    line-height: 1.6;
+}
+
+.partner-type {
+    border-top: 5px solid #0b6b3d;
+}
+
+.country {
+    background: #063d25;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 20px;
+    display: inline-block;
+    font-size: 13px;
+    margin-bottom: 10px;
+}
+
+.status {
+    display: inline-block;
+    background: #e7f5e9;
+    color: #075b34;
+    padding: 6px 10px;
+    border-radius: 15px;
+    font-size: 13px;
+    margin-top: 8px;
+}
+
+.action {
+    display: inline-block;
+    margin-top: 12px;
+    background: #0b6b3d;
+    color: white;
+    text-decoration: none;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+.action:hover {
+    background: #063d25;
+}
+
+.steps {
+    counter-reset: step;
+}
+
+.step {
+    position: relative;
+    background: white;
+    padding: 20px 20px 20px 68px;
+    margin-bottom: 13px;
+    border-radius: 13px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+}
+
+.step::before {
+    counter-increment: step;
+    content: counter(step);
+    position: absolute;
+    left: 18px;
+    top: 18px;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: #0b6b3d;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.step h3 {
+    margin-top: 0;
+    color: #063d25;
+}
+
+.benefits {
+    background: #063d25;
+    color: white;
+    padding: 28px;
+    border-radius: 16px;
+}
+
+.benefits h2 {
+    color: #b7ff35;
+    margin-top: 0;
+}
+
+.benefits li {
+    margin-bottom: 10px;
+    line-height: 1.5;
+}
+
+.contact {
+    background: white;
+    padding: 25px;
+    border-radius: 14px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.07);
+}
+
+.contact input,
+.contact select,
+.contact textarea {
+    width: 100%;
+    padding: 13px;
+    margin-bottom: 12px;
+    border: 1px solid #ccc;
+    border-radius: 9px;
+    font-size: 15px;
+}
+
+.contact textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.contact button {
+    background: #0b6b3d;
+    color: white;
+    border: none;
+    padding: 12px 18px;
+    border-radius: 9px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.contact button:hover {
+    background: #063d25;
+}
+
+.demo {
+    margin-top: 28px;
+    background: #fff8d6;
+    border-left: 5px solid #d5a900;
+    padding: 16px;
+    border-radius: 8px;
+}
+
+footer {
+    background: #063d25;
+    color: white;
+    text-align: center;
+    padding: 28px 15px;
+    margin-top: 40px;
+}
+
+@media (max-width: 600px) {
+
+    header h1 {
+        font-size: 29px;
+    }
+
+    header p {
+        font-size: 15px;
+    }
+
+    .hero {
+        padding: 22px;
+    }
+
+    .hero h2 {
+        font-size: 24px;
+    }
+
+    .card {
+        padding: 18px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="top-languages">
+    <button onclick="setLanguage('AZ')">AZ</button>
+    <button onclick="setLanguage('RU')">RU</button>
+    <button onclick="setLanguage('EN')">EN</button>
+    <button onclick="setLanguage('TR')">TR</button>
+    <button onclick="setLanguage('DE')">DE</button>
+    <button onclick="setLanguage('AR')">AR</button>
+    <button onclick="setLanguage('ES')">ES</button>
+    <button onclick="setLanguage('FR')">FR</button>
+    <button onclick="setLanguage('IT')">IT</button>
+</div>
+
+<header>
+
+    <h1>🤝 WORKER PRO PARTNERS</h1>
+
+    <p>
+        Международная сеть промышленных партнёров
+    </p>
+
+</header>
+
+<nav>
+
+    <a href="../index.html">Главная</a>
+    <a href="../production/index.html">Производство</a>
+    <a href="../companies/index.html">Компании</a>
+    <a href="../manufacturers/index.html">Производители</a>
+    <a href="../suppliers/index.html">Поставщики</a>
+    <a href="../products/index.html">Товары</a>
+    <a href="../specialists/index.html">Специалисты</a>
+    <a href="../jobs/index.html">Работа</a>
+    <a href="../training/index.html">Обучение</a>
+    <a href="../marketplace/index.html">Marketplace</a>
+    <a href="../transport/index.html">Доставка</a>
+    <a href="../help/index.html">Помощь</a>
+    <a href="../dashboard/index.html">Кабинет</a>
+
+</nav>
+
+<div class="container">
+
+    <div class="hero">
+
+        <h2>
+            Вместе создаём промышленную сеть
+        </h2>
+
+        <p>
+            WORKER PRO рассчитан на сотрудничество между
+            производителями, поставщиками, сервисными компаниями,
+            логистическими операторами, специалистами
+            и образовательными организациями.
+        </p>
+
+        <p>
+            Партнёрская сеть должна помогать компаниям
+            находить новые рынки, специалистов, клиентов,
+            оборудование, материалы и промышленные решения.
+        </p>
+
+    </div>
+
+
+    <h2>🏢 Типы партнёров</h2>
+
+    <div class="grid">
+
+        <div class="card partner-type">
+
+            <h3>🏭 Производители</h3>
+
+            <p>
+                Производители промышленного оборудования,
+                запчастей, материалов и технологических систем.
+            </p>
+
+            <span class="status">Manufacturer</span>
+
+        </div>
+
+
+        <div class="card partner-type">
+
+            <h3>📦 Поставщики</h3>
+
+            <p>
+                Компании, которые поставляют оборудование,
+                комплектующие, инструменты и материалы.
+            </p>
+
+            <span class="status">Supplier</span>
+
+        </div>
+
+
+        <div class="card partner-type">
+
+            <h3>🚚 Логистика</h3>
+
+            <p>
+                Транспортные и логистические компании,
+                работающие с местными и международными грузами.
+            </p>
+
+            <span class="status">Logistics</span>
+
+        </div>
+
+
+        <div class="card partner-type">
+
+            <h3>🔧 Сервис</h3>
+
+            <p>
+                Сервисные центры, ремонтные организации,
+                монтажные и технические специалисты.
+            </p>
+
+            <span class="status">Service</span>
+
+        </div>
+
+
+        <div class="card partner-type">
+
+            <h3>🎓 Образование</h3>
+
+            <p>
+                Учебные центры, профессиональные школы
+                и организации технического обучения.
+            </p>
+
+            <span class="status">Education</span>
+
+        </div>
+
+
+        <div class="card partner-type">
+
+            <h3>💻 Technology</h3>
+
+            <p>
+                IT-компании и технологические партнёры,
+                которые могут помогать развивать цифровую
+                промышленную платформу.
+            </p>
+
+            <span class="status">Technology</span>
+
+        </div>
+
+    </div>
+
+
+    <h2>🌍 Международные партнёры</h2>
+
+    <div class="grid">
+
+        <div class="card">
+
+            <span class="country">🇦🇿 Azerbaijan</span>
+
+            <h3>Industrial Partner</h3>
+
+            <p>
+                Производство и поставка промышленного
+                оборудования и комплектующих.
+            </p>
+
+            <span class="status">Demo Partner</span>
+
+        </div>
+
+
+        <div class="card">
+
+            <span class="country">🇹🇷 Turkey</span>
+
+            <h3>Machine Partner</h3>
+
+            <p>
+                Станки, CNC-оборудование, насосы,
+                гидравлика и промышленные комплектующие.
+            </p>
+
+            <span class="status">Demo Partner</span>
+
+        </div>
+
+
+        <div class="card">
+
+            <span class="country">🇩🇪 Germany</span>
+
+            <h3>Technology Partner</h3>
+
+            <p>
+                Автоматизация, оборудование,
+                электрические системы и промышленные технологии.
+            </p>
+
+            <span class="status">Demo Partner</span>
+
+        </div>
+
+
+        <div class="card">
+
+            <span class="country">🇮🇹 Italy</span>
+
+            <h3>Industrial Solutions</h3>
+
+            <p>
+                Автоматизация, датчики, производство
+                и технические решения.
+            </p>
+
+            <span class="status">Demo Partner</span>
+
+        </div>
+
+
+        <div class="card">
+
+            <span class="country">🇨🇳 China</span>
+
+            <h3>Equipment Partner</h3>
+
+            <p>
+                Промышленное оборудование, комплектующие,
+                инструменты и производственные системы.
+            </p>
+
+            <span class="status">Demo Partner</span>
+
+        </div>
+
+
+        <div class="card">
+
+            <span class="country">🇺🇸 USA</span>
+
+            <h3>Industrial Technology</h3>
+
+            <p>
+                Электрические системы, автоматизация,
+                технологии и промышленные компоненты.
+            </p>
+
+            <span class="status">Demo Partner</span>
+
+        </div>
+
+    </div>
+
+
+    <h2>🔄 Как работает партнёрство</h2>
+
+    <div class="steps">
+
+        <div class="step">
+
+            <h3>Регистрация партнёра</h3>
+
+            <p>
+                Компания создаёт профиль и указывает
+                направление своей деятельности.
+            </p>
+
+        </div>
+
+
+        <div class="step">
+
+            <h3>Проверка информации</h3>
+
+            <p>
+                В будущем WORKER PRO сможет проверять
+                основные данные компании и её документы.
+            </p>
+
+        </div>
+
+
+        <div class="step">
+
+            <h3>Публикация профиля</h3>
+
+            <p>
+                Компания представляет свои товары,
+                услуги, оборудование и производственные возможности.
+            </p>
+
+        </div>
+
+
+        <div class="step">
+
+            <h3>Поиск клиентов и партнёров</h3>
+
+            <p>
+                Другие пользователи смогут находить компанию
+                через поиск и каталог.
+            </p>
+
+        </div>
+
+
+        <div class="step">
+
+            <h3>Запрос и предложение</h3>
+
+            <p>
+                Покупатель отправляет заявку,
+                а партнёр предоставляет коммерческое предложение.
+            </p>
+
+        </div>
+
+
+        <div class="step">
+
+            <h3>Заказ и доставка</h3>
+
+            <p>
+                После согласования условий можно перейти
+                к заказу и организации доставки.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <h2>💎 Что получает партнёр?</h2>
+
+    <div class="benefits">
+
+        <h2>Преимущества партнёрской сети</h2>
+
+        <ul>
+
+            <li>
+                Представление компании на международной платформе
+            </li>
+
+            <li>
+                Возможность находить новых клиентов
+            </li>
+
+            <li>
+                Возможность находить поставщиков
+            </li>
+
+            <li>
+                Международный поиск промышленных товаров
+            </li>
+
+            <li>
+                Получение заявок от покупателей
+            </li>
+
+            <li>
+                Возможность отправлять коммерческие предложения
+            </li>
+
+            <li>
+                Связь с промышленными специалистами
+            </li>
+
+            <li>
+                Возможность развития международных деловых связей
+            </li>
+
+        </ul>
+
+    </div>
+
+
+    <h2>📨 Стать партнёром</h2>
+
+    <div class="contact">
+
+        <h3>Заявка на партнёрство</h3>
+
+        <input
+            type="text"
+            id="partnerName"
+            placeholder="Название компании"
+        >
+
+        <input
+            type="email"
+            id="partnerEmail"
+            placeholder="Email"
+        >
+
+        <select id="partnerType">
+
+            <option>Выберите тип партнёра</option>
+
+            <option>Производитель</option>
+
+            <option>Поставщик</option>
+
+            <option>Логистическая компания</option>
+
+            <option>Сервисная компания</option>
+
+            <option>Образовательная организация</option>
+
+            <option>Technology Partner</option>
+
+            <option>Другое</option>
+
+        </select>
+
+
+        <input
+            type="text"
+            id="partnerCountry"
+            placeholder="Страна"
+        >
+
+
+        <textarea
+            id="partnerMessage"
+            placeholder="Расскажите о вашей компании и возможностях сотрудничества..."
+        ></textarea>
+
+
+        <button onclick="sendPartnerRequest()">
+            Отправить заявку
+        </button>
+
+    </div>
+
+
+    <div class="demo">
+
+        <strong>⚠️ DEMO VERSION</strong>
+
+        <p>
+            Представленные компании и партнёры являются
+            демонстрационными примерами. Партнёрская система
+            пока не подключена к реальной базе данных.
+        </p>
+
+        <p>
+            В будущем здесь появятся реальные компании,
+            проверенные партнёры, поиск, фильтры,
+            сообщения, заявки и система сотрудничества.
+        </p>
+
+    </div>
+
+</div>
+
+
+<footer>
+
+    <h3>WORKER PRO</h3>
+
+    <p>
+        Global Industrial Platform
+    </p>
+
+    <p>
+        Production • Industry • Marketplace • Logistics • Partners
+    </p>
+
+    <p>
+        F.S
+    </p>
+
+</footer>
+
+
+<script src="../language.js"></script>
+
+<script>
+
+function sendPartnerRequest() {
+
+    const name =
+        document.getElementById("partnerName").value;
+
+    const email =
+        document.getElementById("partnerEmail").value;
+
+    const type =
+        document.getElementById("partnerType").value;
+
+    const country =
+        document.getElementById("partnerCountry").value;
+
+    const message =
+        document.getElementById("partnerMessage").value;
+
+
+    if (
+        !name ||
+        !email ||
+        type === "Выберите тип партнёра" ||
+        !country ||
+        !message
+    ) {
+
+        alert(
+            "Пожалуйста, заполните все поля."
+        );
+
+        return;
+    }
+
+
+    alert(
+        "Заявка на партнёрство создана!\n\n" +
+        "Компания: " + name +
+        "\nСтрана: " + country +
+        "\nТип: " + type +
+        "\n\n" +
+        "Сейчас это демонстрационная форма."
+    );
+
+}
+
+</script>
+
+</body>
+</html>
