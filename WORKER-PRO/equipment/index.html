@@ -1,1 +1,565 @@
- 
+ <!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WORKER PRO — Equipment</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f7f5;
+    color: #123;
+}
+
+.top-languages {
+    background: #063d25;
+    padding: 10px;
+    text-align: center;
+}
+
+.top-languages a {
+    display: inline-block;
+    background: #0b6b3d;
+    color: white;
+    text-decoration: none;
+    padding: 8px 12px;
+    margin: 3px;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+.top-languages a:hover {
+    background: #b7ff35;
+    color: #063d25;
+}
+
+header {
+    background: linear-gradient(135deg, #063d25, #0b6b3d);
+    color: white;
+    text-align: center;
+    padding: 35px 20px;
+}
+
+header h1 {
+    margin: 5px 0;
+    font-size: 38px;
+}
+
+header p {
+    max-width: 900px;
+    margin: 10px auto;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+nav {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: #075b34;
+    padding: 12px;
+    text-align: center;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 5px 8px;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: #b7ff35;
+}
+
+.container {
+    max-width: 1150px;
+    margin: auto;
+    padding: 25px 15px;
+}
+
+.hero {
+    background: white;
+    padding: 30px;
+    border-radius: 18px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.hero h2 {
+    color: #075b34;
+    font-size: 30px;
+}
+
+.search {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #0b6b3d;
+    border-radius: 10px;
+    font-size: 16px;
+    margin-top: 15px;
+}
+
+.section-title {
+    text-align: center;
+    color: #075b34;
+    font-size: 28px;
+    margin: 35px 0 20px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 18px;
+}
+
+.card {
+    background: white;
+    padding: 22px;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    border-left: 5px solid #0b6b3d;
+}
+
+.card h3 {
+    color: #075b34;
+    margin-top: 0;
+}
+
+.card p {
+    line-height: 1.6;
+}
+
+.badge {
+    display: inline-block;
+    background: #e9f4ed;
+    color: #075b34;
+    padding: 7px 10px;
+    border-radius: 15px;
+    margin: 4px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.info {
+    background: #063d25;
+    color: white;
+    padding: 28px;
+    border-radius: 18px;
+    margin-top: 30px;
+}
+
+.info h2 {
+    color: #b7ff35;
+}
+
+.step {
+    background: white;
+    padding: 20px;
+    margin: 12px 0;
+    border-radius: 14px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.07);
+    border-left: 6px solid #0b6b3d;
+}
+
+.step strong {
+    color: #075b34;
+    font-size: 18px;
+}
+
+.countries {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.country {
+    background: #0b6b3d;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 20px;
+}
+
+footer {
+    background: #063d25;
+    color: white;
+    text-align: center;
+    padding: 25px;
+    margin-top: 40px;
+}
+
+@media (max-width: 600px) {
+    header h1 {
+        font-size: 30px;
+    }
+
+    nav a {
+        display: inline-block;
+        margin: 5px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="top-languages">
+    <a href="#">AZ</a>
+    <a href="#">RU</a>
+    <a href="#">EN</a>
+    <a href="#">TR</a>
+    <a href="#">DE</a>
+    <a href="#">AR</a>
+    <a href="#">ES</a>
+    <a href="#">FR</a>
+    <a href="#">IT</a>
+</div>
+
+<header>
+
+    <h1>🏭 WORKER PRO</h1>
+
+    <p>
+        Промышленное оборудование для производства,
+        обработки, ремонта, автоматизации и технического обслуживания.
+    </p>
+
+</header>
+
+<nav>
+    <a href="../production/index.html">Производство</a>
+    <a href="../problems/index.html">Проблемы</a>
+    <a href="../spare-parts/index.html">Запчасти</a>
+    <a href="../products/index.html">Товары</a>
+    <a href="../companies/index.html">Компании</a>
+    <a href="../suppliers/index.html">Поставщики</a>
+    <a href="../orders/index.html">Заказы</a>
+    <a href="../community/index.html">Сообщество</a>
+    <a href="../specialists/index.html">Специалисты</a>
+    <a href="../jobs/index.html">Работа</a>
+    <a href="../training/index.html">Обучение</a>
+    <a href="../transport/index.html">Транспорт</a>
+    <a href="../services/index.html">Услуги</a>
+    <a href="../maintenance/index.html">Обслуживание</a>
+</nav>
+
+<main class="container">
+
+<section class="hero">
+
+    <h2>⚙️ Промышленное оборудование</h2>
+
+    <p>
+        Поиск станков, производственных машин,
+        насосов, печей, оборудования для автоматизации
+        и других промышленных систем.
+    </p>
+
+    <input
+        class="search"
+        type="text"
+        placeholder="Поиск оборудования: CNC, пресс, насос, печь..."
+    >
+
+</section>
+
+<h2 class="section-title">🏭 Категории оборудования</h2>
+
+<div class="grid">
+
+    <div class="card">
+        <h3>⚙️ CNC станки</h3>
+        <p>
+            Токарные, фрезерные и другие
+            CNC станки для промышленного производства.
+        </p>
+        <span class="badge">CNC</span>
+        <span class="badge">Machine</span>
+    </div>
+
+    <div class="card">
+        <h3>🔨 Прессы</h3>
+        <p>
+            Гидравлические и механические прессы
+            для штамповки и обработки металла.
+        </p>
+        <span class="badge">Press</span>
+        <span class="badge">Stamping</span>
+    </div>
+
+    <div class="card">
+        <h3>🔥 Промышленные печи</h3>
+        <p>
+            Печи для нагрева, термообработки,
+            закалки и других производственных процессов.
+        </p>
+        <span class="badge">Furnace</span>
+        <span class="badge">Heat Treatment</span>
+    </div>
+
+    <div class="card">
+        <h3>💧 Насосы</h3>
+        <p>
+            Промышленные насосы для воды,
+            масла, химических и других рабочих сред.
+        </p>
+        <span class="badge">Pump</span>
+    </div>
+
+    <div class="card">
+        <h3>💨 Компрессоры</h3>
+        <p>
+            Воздушные компрессоры и оборудование
+            для промышленных пневматических систем.
+        </p>
+        <span class="badge">Compressor</span>
+    </div>
+
+    <div class="card">
+        <h3>🤖 Автоматизация</h3>
+        <p>
+            PLC, контроллеры, роботы,
+            промышленные датчики и системы управления.
+        </p>
+        <span class="badge">PLC</span>
+        <span class="badge">Automation</span>
+    </div>
+
+    <div class="card">
+        <h3>⚡ Электрооборудование</h3>
+        <p>
+            Электродвигатели, преобразователи,
+            шкафы управления и другое оборудование.
+        </p>
+        <span class="badge">Electrical</span>
+    </div>
+
+    <div class="card">
+        <h3>🔥 Сварочное оборудование</h3>
+        <p>
+            Сварочные аппараты, установки,
+            источники питания и оборудование.
+        </p>
+        <span class="badge">Welding</span>
+    </div>
+
+    <div class="card">
+        <h3>💧 Гидравлическое оборудование</h3>
+        <p>
+            Гидростанции, насосы, клапаны,
+            цилиндры и гидравлические системы.
+        </p>
+        <span class="badge">Hydraulic</span>
+    </div>
+
+    <div class="card">
+        <h3>💨 Пневматическое оборудование</h3>
+        <p>
+            Цилиндры, клапаны, фильтры,
+            подготовка воздуха и пневмосистемы.
+        </p>
+        <span class="badge">Pneumatic</span>
+    </div>
+
+    <div class="card">
+        <h3>📏 Измерительное оборудование</h3>
+        <p>
+            Измерительные приборы,
+            датчики и оборудование контроля качества.
+        </p>
+        <span class="badge">Measurement</span>
+    </div>
+
+    <div class="card">
+        <h3>🏗️ Производственные линии</h3>
+        <p>
+            Комплексные автоматизированные линии
+            для промышленного производства.
+        </p>
+        <span class="badge">Production Line</span>
+    </div>
+
+</div>
+
+<h2 class="section-title">🔍 Информация об оборудовании</h2>
+
+<div class="grid">
+
+    <div class="card">
+        <h3>📋 Характеристики</h3>
+        <p>
+            Модель, производитель, год выпуска,
+            мощность, размеры и технические параметры.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>💰 Цена</h3>
+        <p>
+            Стоимость нового или бывшего
+            в эксплуатации оборудования.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>📍 Местонахождение</h3>
+        <p>
+            Страна, город, склад или предприятие,
+            где находится оборудование.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>🚚 Доставка</h3>
+        <p>
+            Возможность местной или международной
+            транспортировки оборудования.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>🔧 Сервис</h3>
+        <p>
+            Информация о техническом обслуживании,
+            ремонте и доступных запчастях.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>📚 Документация</h3>
+        <p>
+            Инструкции, технические паспорта,
+            схемы и документация производителя.
+        </p>
+    </div>
+
+</div>
+
+<h2 class="section-title">🔄 Как работает раздел</h2>
+
+<div class="step">
+    <strong>1. Производитель добавляет оборудование</strong>
+    <p>
+        Компания размещает информацию о станке,
+        машине или производственной линии.
+    </p>
+</div>
+
+<div class="step">
+    <strong>2. Покупатель выполняет поиск</strong>
+    <p>
+        Можно искать оборудование по названию,
+        категории, стране или характеристикам.
+    </p>
+</div>
+
+<div class="step">
+    <strong>3. Сравнение оборудования</strong>
+    <p>
+        Пользователь сможет сравнивать
+        характеристики и условия поставки.
+    </p>
+</div>
+
+<div class="step">
+    <strong>4. Связь с поставщиком</strong>
+    <p>
+        Покупатель отправляет запрос
+        производителю или поставщику.
+    </p>
+</div>
+
+<div class="step">
+    <strong>5. Цена и условия</strong>
+    <p>
+        Поставщик предоставляет цену,
+        сроки производства и условия поставки.
+    </p>
+</div>
+
+<div class="step">
+    <strong>6. Заказ и доставка</strong>
+    <p>
+        После согласования оборудование
+        можно заказать и организовать транспортировку.
+    </p>
+</div>
+
+<section class="info">
+
+    <h2>🌐 Международный рынок оборудования</h2>
+
+    <p>
+        WORKER PRO сможет объединять производителей,
+        поставщиков и покупателей промышленного
+        оборудования из разных стран.
+    </p>
+
+    <p>
+        Покупатель → Поиск → Производитель →
+        Цена → Заказ → Транспорт → Получение.
+    </p>
+
+</section>
+
+<h2 class="section-title">🌎 Страны производителей</h2>
+
+<div class="countries">
+
+    <div class="country">🇦🇿 Азербайджан</div>
+    <div class="country">🇹🇷 Турция</div>
+    <div class="country">🇩🇪 Германия</div>
+    <div class="country">🇮🇹 Италия</div>
+    <div class="country">🇨🇳 Китай</div>
+    <div class="country">🇯🇵 Япония</div>
+    <div class="country">🇰🇷 Южная Корея</div>
+    <div class="country">🇺🇸 США</div>
+    <div class="country">🇫🇷 Франция</div>
+    <div class="country">🇪🇸 Испания</div>
+    <div class="country">🇷🇺 Россия</div>
+
+</div>
+
+<section class="info">
+
+    <h2>🚀 Будущее WORKER PRO Equipment</h2>
+
+    <p>
+        В дальнейшем каждая единица оборудования
+        сможет иметь собственную страницу:
+    </p>
+
+    <p>
+        🏭 Производитель<br>
+        ⚙️ Модель<br>
+        📋 Характеристики<br>
+        💰 Цена<br>
+        📍 Страна<br>
+        🔧 Сервис<br>
+        🔩 Запчасти<br>
+        🚚 Доставка<br>
+        📞 Контакты поставщика
+    </p>
+
+</section>
+
+</main>
+
+<footer>
+
+    <p>WORKER PRO — Global Industrial Platform</p>
+    <p>🏭 Equipment • Machines • Technology • Industry</p>
+    <p>F.S</p>
+
+</footer>
+
+</body>
+</html>
