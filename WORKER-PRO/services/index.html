@@ -1,1 +1,543 @@
- 
+ <!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WORKER PRO — Services</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f7f5;
+    color: #123;
+}
+
+.top-languages {
+    background: #063d25;
+    padding: 10px;
+    text-align: center;
+}
+
+.top-languages a {
+    display: inline-block;
+    background: #0b6b3d;
+    color: white;
+    text-decoration: none;
+    padding: 8px 12px;
+    margin: 3px;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+.top-languages a:hover {
+    background: #b7ff35;
+    color: #063d25;
+}
+
+header {
+    background: linear-gradient(135deg, #063d25, #0b6b3d);
+    color: white;
+    text-align: center;
+    padding: 35px 20px;
+}
+
+header h1 {
+    margin: 5px 0;
+    font-size: 38px;
+}
+
+header p {
+    max-width: 850px;
+    margin: 10px auto;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+nav {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: #075b34;
+    padding: 12px;
+    text-align: center;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 5px 8px;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: #b7ff35;
+}
+
+.container {
+    max-width: 1150px;
+    margin: auto;
+    padding: 25px 15px;
+}
+
+.hero {
+    background: white;
+    padding: 30px;
+    border-radius: 18px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.hero h2 {
+    color: #075b34;
+    font-size: 30px;
+}
+
+.search {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #0b6b3d;
+    border-radius: 10px;
+    font-size: 16px;
+    margin-top: 15px;
+}
+
+.section-title {
+    text-align: center;
+    color: #075b34;
+    font-size: 28px;
+    margin: 35px 0 20px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 18px;
+}
+
+.card {
+    background: white;
+    padding: 22px;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    border-left: 5px solid #0b6b3d;
+}
+
+.card h3 {
+    color: #075b34;
+    margin-top: 0;
+}
+
+.card p {
+    line-height: 1.6;
+}
+
+.badge {
+    display: inline-block;
+    background: #e9f4ed;
+    color: #075b34;
+    padding: 7px 10px;
+    border-radius: 15px;
+    margin: 4px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.step {
+    background: white;
+    padding: 20px;
+    margin: 12px 0;
+    border-radius: 14px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.07);
+    border-left: 6px solid #0b6b3d;
+}
+
+.step strong {
+    color: #075b34;
+    font-size: 18px;
+}
+
+.info {
+    background: #063d25;
+    color: white;
+    padding: 28px;
+    border-radius: 18px;
+    margin-top: 30px;
+}
+
+.info h2 {
+    color: #b7ff35;
+}
+
+.countries {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.country {
+    background: #0b6b3d;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 20px;
+}
+
+footer {
+    background: #063d25;
+    color: white;
+    text-align: center;
+    padding: 25px;
+    margin-top: 40px;
+}
+
+@media (max-width: 600px) {
+    header h1 {
+        font-size: 30px;
+    }
+
+    nav a {
+        display: inline-block;
+        margin: 5px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="top-languages">
+    <a href="#">AZ</a>
+    <a href="#">RU</a>
+    <a href="#">EN</a>
+    <a href="#">TR</a>
+    <a href="#">DE</a>
+    <a href="#">AR</a>
+    <a href="#">ES</a>
+    <a href="#">FR</a>
+    <a href="#">IT</a>
+</div>
+
+<header>
+
+    <h1>🛠️ WORKER PRO</h1>
+
+    <p>
+        Промышленные услуги для производства,
+        ремонта, обслуживания, диагностики
+        и технической поддержки.
+    </p>
+
+</header>
+
+<nav>
+    <a href="../production/index.html">Производство</a>
+    <a href="../problems/index.html">Проблемы</a>
+    <a href="../spare-parts/index.html">Запчасти</a>
+    <a href="../products/index.html">Товары</a>
+    <a href="../companies/index.html">Компании</a>
+    <a href="../suppliers/index.html">Поставщики</a>
+    <a href="../orders/index.html">Заказы</a>
+    <a href="../community/index.html">Сообщество</a>
+    <a href="../specialists/index.html">Специалисты</a>
+    <a href="../jobs/index.html">Работа</a>
+    <a href="../training/index.html">Обучение</a>
+    <a href="../transport/index.html">Транспорт</a>
+</nav>
+
+<main class="container">
+
+<section class="hero">
+
+    <h2>🔧 Промышленные услуги</h2>
+
+    <p>
+        Найдите специалиста или сервисную компанию
+        для ремонта, обслуживания, монтажа,
+        диагностики и настройки оборудования.
+    </p>
+
+    <input
+        class="search"
+        type="text"
+        placeholder="Поиск услуги: ремонт CNC, сварка, гидравлика..."
+    >
+
+</section>
+
+<h2 class="section-title">🔧 Основные услуги</h2>
+
+<div class="grid">
+
+    <div class="card">
+        <h3>⚙️ Ремонт оборудования</h3>
+        <p>
+            Диагностика и ремонт промышленного
+            оборудования и производственных линий.
+        </p>
+        <span class="badge">Repair</span>
+        <span class="badge">Service</span>
+    </div>
+
+    <div class="card">
+        <h3>🛠️ Техническое обслуживание</h3>
+        <p>
+            Плановое обслуживание станков,
+            механизмов и производственного оборудования.
+        </p>
+        <span class="badge">Maintenance</span>
+    </div>
+
+    <div class="card">
+        <h3>💻 CNC сервис</h3>
+        <p>
+            Диагностика CNC станков,
+            настройка, обслуживание и поиск неисправностей.
+        </p>
+        <span class="badge">CNC</span>
+    </div>
+
+    <div class="card">
+        <h3>💧 Гидравлика</h3>
+        <p>
+            Ремонт гидравлических систем,
+            насосов, клапанов и цилиндров.
+        </p>
+        <span class="badge">Hydraulics</span>
+    </div>
+
+    <div class="card">
+        <h3>⚡ Электрика</h3>
+        <p>
+            Диагностика электрических систем,
+            двигателей, кабелей и оборудования.
+        </p>
+        <span class="badge">Electrical</span>
+    </div>
+
+    <div class="card">
+        <h3>🤖 Автоматизация</h3>
+        <p>
+            PLC, датчики, контроллеры,
+            промышленная автоматика и настройка систем.
+        </p>
+        <span class="badge">Automation</span>
+    </div>
+
+    <div class="card">
+        <h3>🔥 Печи и нагрев</h3>
+        <p>
+            Обслуживание промышленных печей,
+            нагревателей, термопар и систем контроля температуры.
+        </p>
+        <span class="badge">Furnace</span>
+    </div>
+
+    <div class="card">
+        <h3>🔥 Сварка</h3>
+        <p>
+            Сварочные работы, ремонт металлических
+            конструкций и производственных деталей.
+        </p>
+        <span class="badge">Welding</span>
+    </div>
+
+    <div class="card">
+        <h3>📐 Контроль качества</h3>
+        <p>
+            Измерения, проверка деталей,
+            контроль размеров и качества продукции.
+        </p>
+        <span class="badge">Quality</span>
+    </div>
+
+    <div class="card">
+        <h3>🏭 Монтаж оборудования</h3>
+        <p>
+            Установка, сборка, подключение
+            и ввод промышленного оборудования в работу.
+        </p>
+        <span class="badge">Installation</span>
+    </div>
+
+</div>
+
+<h2 class="section-title">👨‍🔧 Специалисты</h2>
+
+<div class="grid">
+
+    <div class="card">
+        <h3>👷 Механик</h3>
+        <p>
+            Ремонт и обслуживание машин,
+            механизмов и производственного оборудования.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>⚙️ CNC специалист</h3>
+        <p>
+            Работа с CNC станками,
+            настройка и диагностика.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>💧 Гидравлик</h3>
+        <p>
+            Диагностика и ремонт
+            гидравлических систем.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>⚡ Электрик</h3>
+        <p>
+            Электромонтаж, диагностика
+            и обслуживание оборудования.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>🤖 Automation Engineer</h3>
+        <p>
+            Промышленная автоматизация,
+            PLC и системы управления.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>🔥 Сварщик</h3>
+        <p>
+            Сварка, ремонт и изготовление
+            металлических конструкций.
+        </p>
+    </div>
+
+</div>
+
+<h2 class="section-title">🔄 Как работает сервис</h2>
+
+<div class="step">
+    <strong>1. Клиент создаёт заявку</strong>
+    <p>
+        Указывает оборудование, проблему,
+        необходимую услугу и место проведения работы.
+    </p>
+</div>
+
+<div class="step">
+    <strong>2. Поиск специалиста</strong>
+    <p>
+        WORKER PRO помогает найти подходящего
+        специалиста или сервисную компанию.
+    </p>
+</div>
+
+<div class="step">
+    <strong>3. Обсуждение работы</strong>
+    <p>
+        Клиент и специалист согласовывают
+        объём работы, сроки и условия.
+    </p>
+</div>
+
+<div class="step">
+    <strong>4. Цена</strong>
+    <p>
+        Специалист предоставляет стоимость
+        услуги и необходимые материалы.
+    </p>
+</div>
+
+<div class="step">
+    <strong>5. Выполнение работы</strong>
+    <p>
+        Специалист выполняет диагностику,
+        ремонт, монтаж или обслуживание.
+    </p>
+</div>
+
+<div class="step">
+    <strong>6. Завершение</strong>
+    <p>
+        Клиент получает результат работы
+        и информацию о выполненных действиях.
+    </p>
+</div>
+
+<section class="info">
+
+    <h2>🌐 Международные услуги</h2>
+
+    <p>
+        WORKER PRO в будущем сможет соединять
+        промышленные компании и специалистов
+        из разных стран.
+    </p>
+
+    <p>
+        Например:
+        компания в Азербайджане может найти
+        специалиста или сервисную компанию
+        в Турции, Германии, Италии или другой стране.
+    </p>
+
+</section>
+
+<h2 class="section-title">🌎 Страны</h2>
+
+<div class="countries">
+
+    <div class="country">🇦🇿 Азербайджан</div>
+    <div class="country">🇹🇷 Турция</div>
+    <div class="country">🇩🇪 Германия</div>
+    <div class="country">🇮🇹 Италия</div>
+    <div class="country">🇨🇳 Китай</div>
+    <div class="country">🇷🇺 Россия</div>
+    <div class="country">🇺🇸 США</div>
+    <div class="country">🇫🇷 Франция</div>
+    <div class="country">🇪🇸 Испания</div>
+
+</div>
+
+<section class="info">
+
+    <h2>🚀 Будущее WORKER PRO</h2>
+
+    <p>
+        Специалист сможет создать профиль,
+        указать профессию, навыки, опыт,
+        сертификаты и страны работы.
+    </p>
+
+    <p>
+        Компания сможет найти специалиста,
+        отправить заявку, обсудить работу
+        и получить предложение.
+    </p>
+
+    <p>
+        Производство → Проблема → Специалист →
+        Услуга → Ремонт → Результат.
+    </p>
+
+</section>
+
+</main>
+
+<footer>
+
+    <p>WORKER PRO — Global Industrial Platform</p>
+    <p>🛠️ Services • Repair • Maintenance • Engineering</p>
+    <p>F.S</p>
+
+</footer>
+
+</body>
+</html>
