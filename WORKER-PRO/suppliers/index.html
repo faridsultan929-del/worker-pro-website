@@ -1,1 +1,577 @@
- 
+ <!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WORKER PRO — Suppliers</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f7f5;
+    color: #123;
+}
+
+.top-languages {
+    background: #063d25;
+    padding: 10px;
+    text-align: center;
+}
+
+.top-languages button {
+    border: none;
+    background: #0b6b3d;
+    color: white;
+    font-weight: bold;
+    padding: 9px 12px;
+    margin: 3px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.top-languages button:hover {
+    background: #b7ff35;
+    color: #063d25;
+}
+
+header {
+    background: #075b34;
+    color: white;
+    text-align: center;
+    padding: 28px 15px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 34px;
+}
+
+header p {
+    margin: 10px 0 0;
+    font-size: 18px;
+}
+
+nav {
+    background: white;
+    padding: 12px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+nav a {
+    display: inline-block;
+    color: #075b34;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 5px 8px;
+}
+
+nav a:hover {
+    color: #0b9b57;
+}
+
+.container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 25px 15px;
+}
+
+.hero {
+    background: linear-gradient(135deg, #063d25, #0b6b3d);
+    color: white;
+    border-radius: 18px;
+    padding: 35px 25px;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.hero h2 {
+    margin-top: 0;
+    font-size: 30px;
+}
+
+.hero p {
+    font-size: 17px;
+    line-height: 1.6;
+}
+
+.search-box {
+    max-width: 700px;
+    margin: 25px auto 35px;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 16px;
+    border: 2px solid #0b6b3d;
+    border-radius: 12px;
+    font-size: 16px;
+    outline: none;
+}
+
+.section-title {
+    color: #063d25;
+    font-size: 28px;
+    text-align: center;
+    margin: 35px 0 20px;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 18px;
+}
+
+.card {
+    background: white;
+    border-radius: 16px;
+    padding: 22px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+    border-left: 5px solid #0b6b3d;
+    transition: 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+}
+
+.card h3 {
+    color: #075b34;
+    margin-top: 0;
+    font-size: 21px;
+}
+
+.card p {
+    line-height: 1.6;
+    color: #456;
+}
+
+.tag {
+    display: inline-block;
+    background: #e8f7ed;
+    color: #075b34;
+    padding: 6px 10px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.info {
+    background: white;
+    border-radius: 18px;
+    padding: 25px;
+    margin-top: 35px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.07);
+}
+
+.info-item {
+    background: #f1f7f3;
+    border-radius: 12px;
+    padding: 15px;
+    margin: 10px 0;
+}
+
+.info-item strong {
+    color: #075b34;
+}
+
+.request-box {
+    background: #e8f7ed;
+    border-radius: 18px;
+    padding: 25px;
+    margin-top: 35px;
+    text-align: center;
+}
+
+.request-box h2 {
+    color: #063d25;
+}
+
+.request-box p {
+    line-height: 1.6;
+}
+
+.btn {
+    display: inline-block;
+    background: #0b6b3d;
+    color: white;
+    text-decoration: none;
+    padding: 13px 20px;
+    margin: 6px;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+.btn:hover {
+    background: #063d25;
+}
+
+.buttons {
+    text-align: center;
+    margin: 35px 0;
+}
+
+footer {
+    background: #063d25;
+    color: white;
+    text-align: center;
+    padding: 25px 15px;
+    margin-top: 40px;
+}
+
+footer p {
+    margin: 6px;
+}
+
+@media (max-width: 600px) {
+
+    header h1 {
+        font-size: 28px;
+    }
+
+    .hero h2 {
+        font-size: 25px;
+    }
+
+    .section-title {
+        font-size: 24px;
+    }
+
+    nav a {
+        font-size: 14px;
+        margin: 4px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- LANGUAGES -->
+
+<div class="top-languages">
+    <button>AZ</button>
+    <button>RU</button>
+    <button>EN</button>
+    <button>TR</button>
+    <button>DE</button>
+    <button>AR</button>
+    <button>ES</button>
+    <button>FR</button>
+    <button>IT</button>
+</div>
+
+<!-- HEADER -->
+
+<header>
+    <h1>🚚 WORKER PRO</h1>
+    <p>Промышленные поставщики со всего мира</p>
+</header>
+
+<!-- NAVIGATION -->
+
+<nav>
+    <a href="../index.html">Главная</a>
+    <a href="../production/index.html">Производство</a>
+    <a href="../problems/index.html">Проблемы</a>
+    <a href="../spare-parts/index.html">Запчасти</a>
+    <a href="../companies/index.html">Компании</a>
+    <a href="../suppliers/index.html">Поставщики</a>
+    <a href="../training/index.html">Обучение</a>
+</nav>
+
+<div class="container">
+
+<!-- HERO -->
+
+<section class="hero">
+
+    <h2>🌍 Международные поставщики</h2>
+
+    <p>
+        Найдите поставщиков промышленного оборудования,
+        запчастей, материалов и комплектующих.
+    </p>
+
+    <p>
+        Поиск • Запрос цены • Условия поставки • Доставка
+    </p>
+
+</section>
+
+<!-- SEARCH -->
+
+<div class="search-box">
+
+    <input
+        type="text"
+        placeholder="🔍 Поиск поставщика: название, товар, страна, город..."
+    >
+
+</div>
+
+<!-- SUPPLIER TYPES -->
+
+<h2 class="section-title">
+    🚚 Типы поставщиков
+</h2>
+
+<div class="cards">
+
+    <div class="card">
+        <span class="tag">MANUFACTURER</span>
+        <h3>🏭 Производитель</h3>
+        <p>
+            Компания напрямую производит оборудование,
+            детали, материалы или промышленную продукцию.
+        </p>
+    </div>
+
+    <div class="card">
+        <span class="tag">DISTRIBUTOR</span>
+        <h3>📦 Дистрибьютор</h3>
+        <p>
+            Поставляет продукцию нескольких производителей
+            и работает с промышленными клиентами.
+        </p>
+    </div>
+
+    <div class="card">
+        <span class="tag">DEALER</span>
+        <h3>🤝 Дилер</h3>
+        <p>
+            Представляет производителя или бренд
+            на определённом рынке или территории.
+        </p>
+    </div>
+
+    <div class="card">
+        <span class="tag">SERVICE</span>
+        <h3>🔧 Сервисный поставщик</h3>
+        <p>
+            Предоставляет ремонт, техническое обслуживание,
+            диагностику и установку оборудования.
+        </p>
+    </div>
+
+</div>
+
+<!-- PRODUCTS -->
+
+<h2 class="section-title">
+    ⚙️ Что можно найти
+</h2>
+
+<div class="cards">
+
+    <div class="card">
+        <h3>⚙️ Запчасти</h3>
+        <p>
+            Подшипники, валы, шестерни, ремни,
+            уплотнения и другие промышленные детали.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>💧 Насосы</h3>
+        <p>
+            Центробежные, гидравлические,
+            шестерёнчатые и специальные насосы.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>🔩 Клапаны</h3>
+        <p>
+            Промышленные клапаны, арматура,
+            регулирующие и предохранительные системы.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>📡 Датчики</h3>
+        <p>
+            Датчики давления, температуры,
+            уровня, положения и приближения.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>🖥️ CNC оборудование</h3>
+        <p>
+            CNC станки, контроллеры, приводы,
+            шпиндели и комплектующие.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>🔥 Печи</h3>
+        <p>
+            Промышленные печи, нагревательные элементы,
+            термопары и системы управления температурой.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>🤖 Автоматизация</h3>
+        <p>
+            PLC, роботы, приводы, датчики
+            и системы промышленной автоматизации.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>⚡ Электрооборудование</h3>
+        <p>
+            Двигатели, контакторы, реле,
+            кабели и электрические компоненты.
+        </p>
+    </div>
+
+</div>
+
+<!-- HOW IT WORKS -->
+
+<div class="info">
+
+    <h2 class="section-title">
+        🔎 Как работает поиск поставщика
+    </h2>
+
+    <div class="info-item">
+        <strong>1. Найдите нужный товар</strong><br>
+        Введите название детали, оборудования
+        или промышленного материала.
+    </div>
+
+    <div class="info-item">
+        <strong>2. Выберите страну</strong><br>
+        Можно искать поставщиков в своей стране
+        или на международном рынке.
+    </div>
+
+    <div class="info-item">
+        <strong>3. Запросите предложение</strong><br>
+        Свяжитесь с поставщиком и получите
+        цену, наличие и условия поставки.
+    </div>
+
+    <div class="info-item">
+        <strong>4. Сравните условия</strong><br>
+        Сравнивайте цену, количество, сроки
+        производства и доставки.
+    </div>
+
+    <div class="info-item">
+        <strong>5. Организуйте доставку</strong><br>
+        После согласования заказа можно организовать
+        местную или международную перевозку.
+    </div>
+
+</div>
+
+<!-- REQUEST -->
+
+<div class="request-box">
+
+    <h2>📋 Запрос на промышленный товар</h2>
+
+    <p>
+        В будущем пользователь сможет создать один запрос,
+        а WORKER PRO сможет связать его с подходящими
+        производителями и поставщиками.
+    </p>
+
+    <a class="btn" href="../spare-parts/index.html">
+        ⚙️ Найти запчасть
+    </a>
+
+</div>
+
+<!-- COUNTRIES -->
+
+<h2 class="section-title">
+    🌐 Поиск по странам
+</h2>
+
+<div class="cards">
+
+    <div class="card">
+        <h3>🇦🇿 Azerbaijan</h3>
+        <p>Поставщики и производители Азербайджана.</p>
+    </div>
+
+    <div class="card">
+        <h3>🇹🇷 Turkey</h3>
+        <p>Промышленные поставщики Турции.</p>
+    </div>
+
+    <div class="card">
+        <h3>🇩🇪 Germany</h3>
+        <p>Промышленное оборудование и технологии Германии.</p>
+    </div>
+
+    <div class="card">
+        <h3>🇨🇳 China</h3>
+        <p>Производители и поставщики промышленной продукции Китая.</p>
+    </div>
+
+    <div class="card">
+        <h3>🇷🇺 Russia</h3>
+        <p>Промышленные поставщики и производители России.</p>
+    </div>
+
+    <div class="card">
+        <h3>🌍 Другие страны</h3>
+        <p>Международный поиск поставщиков по всему миру.</p>
+    </div>
+
+</div>
+
+<!-- BUTTONS -->
+
+<div class="buttons">
+
+    <a class="btn" href="../companies/index.html">
+        🏢 Компании
+    </a>
+
+    <a class="btn" href="../spare-parts/index.html">
+        ⚙️ Запчасти
+    </a>
+
+    <a class="btn" href="../production/index.html">
+        🏭 Производство
+    </a>
+
+    <a class="btn" href="../index.html">
+        🏠 Главная
+    </a>
+
+</div>
+
+</div>
+
+<!-- FOOTER -->
+
+<footer>
+
+    <p><strong>WORKER PRO</strong></p>
+    <p>🌍 Международная промышленная платформа</p>
+    <p>Производители • Поставщики • Запчасти • Доставка</p>
+    <p>F.S</p>
+
+</footer>
+
+</body>
+</html>
