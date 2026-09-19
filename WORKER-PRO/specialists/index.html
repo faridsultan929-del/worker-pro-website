@@ -1,1 +1,565 @@
- 
+ <!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WORKER PRO — Specialists</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f7f5;
+    color: #123;
+}
+
+.top-languages {
+    background: #063d25;
+    padding: 10px;
+    text-align: center;
+}
+
+.top-languages a {
+    display: inline-block;
+    background: #0b6b3d;
+    color: white;
+    text-decoration: none;
+    padding: 8px 12px;
+    margin: 3px;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+.top-languages a:hover {
+    background: #b7ff35;
+    color: #063d25;
+}
+
+header {
+    background: linear-gradient(135deg, #063d25, #0b6b3d);
+    color: white;
+    text-align: center;
+    padding: 35px 20px;
+}
+
+header h1 {
+    margin: 5px 0;
+    font-size: 38px;
+}
+
+header p {
+    margin: 10px auto;
+    max-width: 850px;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+nav {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: #075b34;
+    padding: 12px;
+    text-align: center;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 5px 9px;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: #b7ff35;
+}
+
+.container {
+    max-width: 1150px;
+    margin: auto;
+    padding: 25px 15px;
+}
+
+.hero {
+    background: white;
+    border-radius: 18px;
+    padding: 30px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    text-align: center;
+}
+
+.hero h2 {
+    color: #075b34;
+    font-size: 30px;
+}
+
+.search-box {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #0b6b3d;
+    border-radius: 10px;
+    font-size: 16px;
+    margin-top: 15px;
+}
+
+.section-title {
+    color: #075b34;
+    text-align: center;
+    font-size: 28px;
+    margin: 35px 0 20px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 18px;
+}
+
+.card {
+    background: white;
+    padding: 22px;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    border-left: 5px solid #0b6b3d;
+}
+
+.card h3 {
+    margin-top: 0;
+    color: #075b34;
+}
+
+.card p {
+    line-height: 1.6;
+}
+
+.profile {
+    background: white;
+    padding: 22px;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    border-top: 5px solid #0b6b3d;
+}
+
+.profile h3 {
+    color: #075b34;
+    margin-top: 0;
+}
+
+.badge {
+    display: inline-block;
+    background: #e9f4ed;
+    color: #075b34;
+    padding: 7px 10px;
+    border-radius: 15px;
+    margin: 4px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.step {
+    background: #e9f4ed;
+    padding: 20px;
+    border-radius: 14px;
+    margin: 12px 0;
+}
+
+.step strong {
+    color: #075b34;
+}
+
+.countries {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.country {
+    background: #0b6b3d;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 20px;
+}
+
+.info {
+    background: #063d25;
+    color: white;
+    padding: 28px;
+    border-radius: 18px;
+    margin-top: 30px;
+}
+
+.info h2 {
+    color: #b7ff35;
+}
+
+footer {
+    background: #063d25;
+    color: white;
+    text-align: center;
+    padding: 25px;
+    margin-top: 40px;
+}
+
+@media (max-width: 600px) {
+    header h1 {
+        font-size: 30px;
+    }
+
+    header p {
+        font-size: 16px;
+    }
+
+    nav a {
+        display: inline-block;
+        margin: 5px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="top-languages">
+    <a href="#">AZ</a>
+    <a href="#">RU</a>
+    <a href="#">EN</a>
+    <a href="#">TR</a>
+    <a href="#">DE</a>
+    <a href="#">AR</a>
+    <a href="#">ES</a>
+    <a href="#">FR</a>
+    <a href="#">IT</a>
+</div>
+
+<header>
+
+    <h1>👷 WORKER PRO</h1>
+
+    <p>
+        Международная сеть промышленных специалистов,
+        рабочих, инженеров и мастеров.
+    </p>
+
+</header>
+
+<nav>
+    <a href="../production/index.html">Производство</a>
+    <a href="../problems/index.html">Проблемы</a>
+    <a href="../spare-parts/index.html">Запчасти</a>
+    <a href="../products/index.html">Товары</a>
+    <a href="../companies/index.html">Компании</a>
+    <a href="../suppliers/index.html">Поставщики</a>
+    <a href="../orders/index.html">Заказы</a>
+    <a href="../community/index.html">Сообщество</a>
+    <a href="../specialists/index.html">Специалисты</a>
+</nav>
+
+<main class="container">
+
+<section class="hero">
+
+    <h2>👨‍🔧 Специалисты WORKER PRO</h2>
+
+    <p>
+        Находите специалистов по промышленным профессиям,
+        технологиям, ремонту, производству и техническому обслуживанию.
+    </p>
+
+    <input
+        class="search-box"
+        type="text"
+        placeholder="Поиск специалиста: CNC, сварщик, электрик, инженер..."
+    >
+
+</section>
+
+<h2 class="section-title">🔧 Специальности</h2>
+
+<div class="grid">
+
+    <div class="card">
+        <h3>⚙️ CNC оператор</h3>
+        <p>
+            Работа на токарных и фрезерных CNC станках,
+            настройка оборудования и контроль деталей.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>🔩 Оператор штамповки</h3>
+        <p>
+            Работа на прессах, настройка штампов
+            и контроль качества продукции.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>🔥 Специалист по печам</h3>
+        <p>
+            Термообработка, нагрев, охлаждение
+            и контроль температурных процессов.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>🔧 Механик</h3>
+        <p>
+            Ремонт и техническое обслуживание
+            промышленного оборудования.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>⚡ Электрик</h3>
+        <p>
+            Электрические системы, двигатели,
+            кабели, панели и диагностика.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>🤖 Автоматчик</h3>
+        <p>
+            PLC, датчики, системы управления
+            и промышленная автоматизация.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>🔥 Сварщик</h3>
+        <p>
+            MIG/MAG, TIG, ручная дуговая сварка
+            и промышленная сварка.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>💧 Гидравлик</h3>
+        <p>
+            Насосы, клапаны, гидроцилиндры,
+            давление и поиск утечек.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>👨‍💼 Инженер</h3>
+        <p>
+            Производственные, механические,
+            электрические и автоматические системы.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>🦺 Специалист по безопасности</h3>
+        <p>
+            Охрана труда, PPE, производственные риски
+            и безопасные рабочие процедуры.
+        </p>
+    </div>
+
+</div>
+
+<h2 class="section-title">👤 Пример профиля специалиста</h2>
+
+<div class="grid">
+
+    <div class="profile">
+
+        <h3>👷 CNC Operator</h3>
+
+        <p><strong>Специальность:</strong> CNC оператор</p>
+
+        <p><strong>Опыт:</strong> 6+ лет</p>
+
+        <p><strong>Навыки:</strong></p>
+
+        <span class="badge">CNC</span>
+        <span class="badge">Fanuc</span>
+        <span class="badge">Настройка</span>
+        <span class="badge">Измерение</span>
+        <span class="badge">Контроль качества</span>
+
+        <p><strong>Языки:</strong> AZ • RU • EN</p>
+
+        <p><strong>Статус:</strong> Открыт к предложениям</p>
+
+    </div>
+
+    <div class="profile">
+
+        <h3>🔧 Maintenance Technician</h3>
+
+        <p><strong>Специальность:</strong> Техническое обслуживание</p>
+
+        <p><strong>Опыт:</strong> 8+ лет</p>
+
+        <p><strong>Навыки:</strong></p>
+
+        <span class="badge">Механика</span>
+        <span class="badge">Гидравлика</span>
+        <span class="badge">Пневматика</span>
+        <span class="badge">Диагностика</span>
+        <span class="badge">Ремонт</span>
+
+        <p><strong>Языки:</strong> RU • EN • TR</p>
+
+        <p><strong>Статус:</strong> Доступен для проектов</p>
+
+    </div>
+
+    <div class="profile">
+
+        <h3>⚡ Automation Engineer</h3>
+
+        <p><strong>Специальность:</strong> Автоматизация</p>
+
+        <p><strong>Опыт:</strong> 10+ лет</p>
+
+        <p><strong>Навыки:</strong></p>
+
+        <span class="badge">PLC</span>
+        <span class="badge">Sensors</span>
+        <span class="badge">Automation</span>
+        <span class="badge">Electrical</span>
+        <span class="badge">SCADA</span>
+
+        <p><strong>Языки:</strong> EN • DE • TR</p>
+
+        <p><strong>Статус:</strong> Работает с проектами</p>
+
+    </div>
+
+</div>
+
+<h2 class="section-title">📋 Что содержит профиль</h2>
+
+<div class="step">
+    <strong>1. Основная информация</strong>
+    <p>
+        Имя, профессия, страна, город и направление работы.
+    </p>
+</div>
+
+<div class="step">
+    <strong>2. Опыт работы</strong>
+    <p>
+        Производственный опыт, предприятия,
+        должности и продолжительность работы.
+    </p>
+</div>
+
+<div class="step">
+    <strong>3. Навыки</strong>
+    <p>
+        Оборудование, технологии, инструменты,
+        программы и технические компетенции.
+    </p>
+</div>
+
+<div class="step">
+    <strong>4. Сертификаты</strong>
+    <p>
+        Профессиональные сертификаты,
+        обучение и подтверждение квалификации.
+    </p>
+</div>
+
+<div class="step">
+    <strong>5. Контакты</strong>
+    <p>
+        Возможность связаться со специалистом
+        через платформу WORKER PRO.
+    </p>
+</div>
+
+<h2 class="section-title">🌍 Специалисты по странам</h2>
+
+<div class="countries">
+
+    <div class="country">🇦🇿 Азербайджан</div>
+    <div class="country">🇹🇷 Турция</div>
+    <div class="country">🇩🇪 Германия</div>
+    <div class="country">🇨🇳 Китай</div>
+    <div class="country">🇷🇺 Россия</div>
+    <div class="country">🇺🇸 США</div>
+    <div class="country">🇮🇹 Италия</div>
+    <div class="country">🇫🇷 Франция</div>
+    <div class="country">🇪🇸 Испания</div>
+
+</div>
+
+<section class="info">
+
+    <h2>🌐 Международная сеть специалистов</h2>
+
+    <p>
+        WORKER PRO объединяет специалистов разных
+        промышленных отраслей и стран.
+    </p>
+
+    <p>
+        Компании смогут находить специалистов,
+        а специалисты — профессиональные возможности,
+        проекты и новые контакты.
+    </p>
+
+</section>
+
+<h2 class="section-title">🚀 Возможности для специалистов</h2>
+
+<div class="grid">
+
+    <div class="card">
+        <h3>👤 Профиль</h3>
+        <p>
+            Создание профессионального профиля
+            с опытом и навыками.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>💼 Работа</h3>
+        <p>
+            Поиск промышленных вакансий
+            и рабочих проектов.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>🤝 Контакты</h3>
+        <p>
+            Общение с компаниями,
+            инженерами и другими специалистами.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>📚 Обучение</h3>
+        <p>
+            Изучение новых технологий,
+            безопасности и профессионального английского.
+        </p>
+    </div>
+
+</div>
+
+</main>
+
+<footer>
+
+    <p>WORKER PRO — Global Industrial Platform</p>
+    <p>👷 Специалисты • Работа • Знания • Производство</p>
+    <p>F.S</p>
+
+</footer>
+
+</body>
+</html>
