@@ -1,1 +1,633 @@
- 
+ <!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WORKER PRO — Training</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f7f5;
+    color: #123;
+}
+
+.top-languages {
+    background: #063d25;
+    padding: 10px;
+    text-align: center;
+}
+
+.top-languages a {
+    display: inline-block;
+    background: #0b6b3d;
+    color: white;
+    text-decoration: none;
+    padding: 8px 12px;
+    margin: 3px;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+.top-languages a:hover {
+    background: #b7ff35;
+    color: #063d25;
+}
+
+header {
+    background: linear-gradient(135deg, #063d25, #0b6b3d);
+    color: white;
+    text-align: center;
+    padding: 35px 20px;
+}
+
+header h1 {
+    margin: 5px 0;
+    font-size: 38px;
+}
+
+header p {
+    margin: 10px auto;
+    max-width: 850px;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+nav {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: #075b34;
+    padding: 12px;
+    text-align: center;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 5px 8px;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: #b7ff35;
+}
+
+.container {
+    max-width: 1150px;
+    margin: auto;
+    padding: 25px 15px;
+}
+
+.hero {
+    background: white;
+    border-radius: 18px;
+    padding: 30px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    text-align: center;
+}
+
+.hero h2 {
+    color: #075b34;
+    font-size: 30px;
+}
+
+.search-box {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #0b6b3d;
+    border-radius: 10px;
+    font-size: 16px;
+    margin-top: 15px;
+}
+
+.section-title {
+    color: #075b34;
+    text-align: center;
+    font-size: 28px;
+    margin: 35px 0 20px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 18px;
+}
+
+.card {
+    background: white;
+    padding: 22px;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    border-left: 5px solid #0b6b3d;
+}
+
+.card h3 {
+    margin-top: 0;
+    color: #075b34;
+}
+
+.card p {
+    line-height: 1.6;
+}
+
+.level {
+    display: inline-block;
+    background: #e9f4ed;
+    color: #075b34;
+    padding: 7px 10px;
+    border-radius: 15px;
+    margin: 4px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.lesson {
+    background: white;
+    padding: 22px;
+    border-radius: 16px;
+    margin: 15px 0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    border-left: 6px solid #0b6b3d;
+}
+
+.lesson h3 {
+    color: #075b34;
+    margin-top: 0;
+}
+
+.step {
+    background: #e9f4ed;
+    padding: 20px;
+    border-radius: 14px;
+    margin: 12px 0;
+}
+
+.step strong {
+    color: #075b34;
+}
+
+.progress-box {
+    background: #063d25;
+    color: white;
+    padding: 28px;
+    border-radius: 18px;
+    margin-top: 30px;
+}
+
+.progress-box h2 {
+    color: #b7ff35;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 18px;
+    background: #d7e4dc;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-top: 15px;
+}
+
+.progress-fill {
+    width: 45%;
+    height: 100%;
+    background: #b7ff35;
+}
+
+.countries {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.country {
+    background: #0b6b3d;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 20px;
+}
+
+.info {
+    background: #063d25;
+    color: white;
+    padding: 28px;
+    border-radius: 18px;
+    margin-top: 30px;
+}
+
+.info h2 {
+    color: #b7ff35;
+}
+
+footer {
+    background: #063d25;
+    color: white;
+    text-align: center;
+    padding: 25px;
+    margin-top: 40px;
+}
+
+@media (max-width: 600px) {
+    header h1 {
+        font-size: 30px;
+    }
+
+    header p {
+        font-size: 16px;
+    }
+
+    nav a {
+        display: inline-block;
+        margin: 5px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="top-languages">
+    <a href="#">AZ</a>
+    <a href="#">RU</a>
+    <a href="#">EN</a>
+    <a href="#">TR</a>
+    <a href="#">DE</a>
+    <a href="#">AR</a>
+    <a href="#">ES</a>
+    <a href="#">FR</a>
+    <a href="#">IT</a>
+</div>
+
+<header>
+
+    <h1>🎓 WORKER PRO</h1>
+
+    <p>
+        Международное промышленное обучение
+        для рабочих, инженеров, мастеров и специалистов.
+    </p>
+
+</header>
+
+<nav>
+    <a href="../production/index.html">Производство</a>
+    <a href="../problems/index.html">Проблемы</a>
+    <a href="../spare-parts/index.html">Запчасти</a>
+    <a href="../products/index.html">Товары</a>
+    <a href="../companies/index.html">Компании</a>
+    <a href="../suppliers/index.html">Поставщики</a>
+    <a href="../orders/index.html">Заказы</a>
+    <a href="../community/index.html">Сообщество</a>
+    <a href="../specialists/index.html">Специалисты</a>
+    <a href="../jobs/index.html">Работа</a>
+    <a href="../training/index.html">Обучение</a>
+</nav>
+
+<main class="container">
+
+<section class="hero">
+
+    <h2>📚 Обучение WORKER PRO</h2>
+
+    <p>
+        Изучайте промышленные технологии, безопасность,
+        оборудование и профессиональный английский язык.
+    </p>
+
+    <input
+        class="search-box"
+        type="text"
+        placeholder="Поиск урока: CNC, сварка, безопасность, гидравлика..."
+    >
+
+</section>
+
+<h2 class="section-title">🎓 Направления обучения</h2>
+
+<div class="grid">
+
+    <div class="card">
+        <h3>🦺 Безопасность</h3>
+        <p>
+            PPE, безопасная работа с оборудованием,
+            производственные риски и аварийные ситуации.
+        </p>
+        <span class="level">Beginner → Advanced</span>
+    </div>
+
+    <div class="card">
+        <h3>⚙️ CNC</h3>
+        <p>
+            Основы CNC, настройка станка,
+            инструменты, измерения и контроль деталей.
+        </p>
+        <span class="level">Beginner → Advanced</span>
+    </div>
+
+    <div class="card">
+        <h3>🔩 Штамповка</h3>
+        <p>
+            Прессы, штампы, настройка оборудования,
+            производство деталей и безопасность.
+        </p>
+        <span class="level">Beginner → Advanced</span>
+    </div>
+
+    <div class="card">
+        <h3>🔥 Термообработка</h3>
+        <p>
+            Нагрев, охлаждение, температура,
+            печи и контроль технологического процесса.
+        </p>
+        <span class="level">Beginner → Advanced</span>
+    </div>
+
+    <div class="card">
+        <h3>🔥 Сварка</h3>
+        <p>
+            MIG/MAG, TIG, ручная дуговая сварка,
+            оборудование и безопасность.
+        </p>
+        <span class="level">Beginner → Advanced</span>
+    </div>
+
+    <div class="card">
+        <h3>💧 Гидравлика</h3>
+        <p>
+            Насосы, клапаны, цилиндры,
+            давление, фильтры и диагностика.
+        </p>
+        <span class="level">Beginner → Advanced</span>
+    </div>
+
+    <div class="card">
+        <h3>⚡ Электрика</h3>
+        <p>
+            Электрические схемы, двигатели,
+            кабели, панели и безопасность.
+        </p>
+        <span class="level">Beginner → Advanced</span>
+    </div>
+
+    <div class="card">
+        <h3>🤖 Автоматизация</h3>
+        <p>
+            PLC, датчики, контроллеры,
+            роботизация и системы управления.
+        </p>
+        <span class="level">Beginner → Advanced</span>
+    </div>
+
+    <div class="card">
+        <h3>📏 Контроль качества</h3>
+        <p>
+            Измерения, допуски, дефекты,
+            документация и контроль продукции.
+        </p>
+        <span class="level">Beginner → Advanced</span>
+    </div>
+
+    <div class="card">
+        <h3>🗣️ English for Workers</h3>
+        <p>
+            Промышленный английский для рабочих,
+            инженеров и технических специалистов.
+        </p>
+        <span class="level">A1 → B2</span>
+    </div>
+
+</div>
+
+<h2 class="section-title">📖 Примеры уроков</h2>
+
+<div class="lesson">
+
+    <h3>🦺 Урок 1 — Personal Protective Equipment</h3>
+
+    <p>
+        Изучение основных средств индивидуальной защиты:
+        каска, защитные очки, перчатки, обувь и спецодежда.
+    </p>
+
+    <span class="level">Safety</span>
+    <span class="level">Beginner</span>
+
+</div>
+
+<div class="lesson">
+
+    <h3>⚙️ Урок 2 — CNC Machine Basics</h3>
+
+    <p>
+        Основные части CNC станка, запуск оборудования,
+        проверка инструмента и базовые правила безопасности.
+    </p>
+
+    <span class="level">CNC</span>
+    <span class="level">Beginner</span>
+
+</div>
+
+<div class="lesson">
+
+    <h3>💧 Урок 3 — Hydraulic System</h3>
+
+    <p>
+        Основы гидравлической системы:
+        насос, клапан, цилиндр, давление и масло.
+    </p>
+
+    <span class="level">Hydraulics</span>
+    <span class="level">Intermediate</span>
+
+</div>
+
+<div class="lesson">
+
+    <h3>🔥 Урок 4 — Welding Safety</h3>
+
+    <p>
+        Безопасность при сварке, защитная маска,
+        вентиляция, электрические риски и пожарная безопасность.
+    </p>
+
+    <span class="level">Welding</span>
+    <span class="level">Beginner</span>
+
+</div>
+
+<div class="lesson">
+
+    <h3>⚡ Урок 5 — Industrial Sensors</h3>
+
+    <p>
+        Датчики температуры, давления, положения,
+        приближения и другие промышленные сенсоры.
+    </p>
+
+    <span class="level">Automation</span>
+    <span class="level">Intermediate</span>
+
+</div>
+
+<h2 class="section-title">🔄 Как проходит обучение</h2>
+
+<div class="step">
+    <strong>1. Выберите направление</strong>
+    <p>
+        Выберите производство, безопасность,
+        оборудование или профессиональный английский.
+    </p>
+</div>
+
+<div class="step">
+    <strong>2. Изучайте урок</strong>
+    <p>
+        Получайте техническую информацию,
+        примеры и практические знания.
+    </p>
+</div>
+
+<div class="step">
+    <strong>3. Проверяйте знания</strong>
+    <p>
+        Отвечайте на вопросы и проверяйте,
+        насколько хорошо вы усвоили материал.
+    </p>
+</div>
+
+<div class="step">
+    <strong>4. Повышайте уровень</strong>
+    <p>
+        Переходите от базовых знаний
+        к более сложным техническим темам.
+    </p>
+</div>
+
+<div class="step">
+    <strong>5. Получайте профессиональные знания</strong>
+    <p>
+        Формируйте знания, которые можно применять
+        в реальной производственной работе.
+    </p>
+</div>
+
+<section class="progress-box">
+
+    <h2>📊 Прогресс обучения</h2>
+
+    <p>
+        Пример личного прогресса пользователя:
+    </p>
+
+    <p>
+        Пройдено уроков: <strong>45</strong>
+    </p>
+
+    <p>
+        Изучено тем: <strong>8</strong>
+    </p>
+
+    <div class="progress-bar">
+        <div class="progress-fill"></div>
+    </div>
+
+    <p>
+        Прогресс: 45%
+    </p>
+
+</section>
+
+<h2 class="section-title">🌍 Обучение на разных языках</h2>
+
+<div class="countries">
+
+    <div class="country">🇦🇿 Azərbaycan</div>
+    <div class="country">🇷🇺 Русский</div>
+    <div class="country">🇬🇧 English</div>
+    <div class="country">🇹🇷 Türkçe</div>
+    <div class="country">🇩🇪 Deutsch</div>
+    <div class="country">🇸🇦 العربية</div>
+    <div class="country">🇪🇸 Español</div>
+    <div class="country">🇫🇷 Français</div>
+    <div class="country">🇮🇹 Italiano</div>
+
+</div>
+
+<section class="info">
+
+    <h2>🚀 Цель WORKER PRO Training</h2>
+
+    <p>
+        Помочь промышленным специалистам постоянно
+        развивать свои знания и профессиональные навыки.
+    </p>
+
+    <p>
+        Обучение объединяет практическое производство,
+        безопасность, технологии и профессиональный английский.
+    </p>
+
+    <p>
+        В будущем раздел может включать курсы,
+        тестирование, сертификаты и профессиональные программы.
+    </p>
+
+</section>
+
+<h2 class="section-title">🏭 Для кого предназначено</h2>
+
+<div class="grid">
+
+    <div class="card">
+        <h3>👷 Рабочие</h3>
+        <p>
+            Повышение квалификации и изучение новых технологий.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>👨‍🔧 Мастера</h3>
+        <p>
+            Развитие технических и управленческих навыков.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>👨‍💼 Инженеры</h3>
+        <p>
+            Технические знания, автоматизация и современные технологии.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>🎓 Новые специалисты</h3>
+        <p>
+            Получение базовых знаний для начала работы
+            в промышленности.
+        </p>
+    </div>
+
+</div>
+
+</main>
+
+<footer>
+
+    <p>WORKER PRO — Global Industrial Platform</p>
+    <p>🎓 Обучение • Безопасность • Технологии • Профессия</p>
+    <p>F.S</p>
+
+</footer>
+
+</body>
+</html>
