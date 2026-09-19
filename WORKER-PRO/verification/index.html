@@ -1,1 +1,875 @@
- 
+ <!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WORKER PRO — Verification</title>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f4f7f5;
+    color:#123;
+}
+
+.top-languages{
+    background:#063d25;
+    padding:10px;
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:7px;
+}
+
+.top-languages button{
+    border:0;
+    padding:8px 12px;
+    border-radius:8px;
+    background:#0b6b3d;
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.top-languages button:hover{
+    background:#b7ff35;
+    color:#063d25;
+}
+
+header{
+    background:#075b34;
+    color:white;
+    text-align:center;
+    padding:25px 15px;
+}
+
+.logo{
+    max-width:90px;
+    border-radius:15px;
+    margin-bottom:10px;
+}
+
+header h1{
+    margin:5px 0;
+    font-size:30px;
+}
+
+header p{
+    margin:8px 0 0;
+    font-size:17px;
+}
+
+nav{
+    position:sticky;
+    top:0;
+    z-index:10;
+    background:#063d25;
+    padding:10px;
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:7px;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    background:#0b6b3d;
+    padding:9px 12px;
+    border-radius:8px;
+    font-size:14px;
+    font-weight:bold;
+}
+
+nav a:hover{
+    background:#b7ff35;
+    color:#063d25;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+    padding:20px;
+}
+
+.hero{
+    background:white;
+    border-radius:16px;
+    padding:25px;
+    margin-bottom:20px;
+    box-shadow:0 3px 12px rgba(0,0,0,.08);
+    text-align:center;
+}
+
+.hero h2{
+    color:#075b34;
+    margin-top:0;
+    font-size:28px;
+}
+
+.hero p{
+    font-size:17px;
+    line-height:1.6;
+}
+
+.search-box{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:20px;
+}
+
+.search-box input,
+.search-box select{
+    flex:1;
+    min-width:200px;
+    padding:13px;
+    border:1px solid #ccc;
+    border-radius:9px;
+    font-size:15px;
+}
+
+.search-box button{
+    background:#0b6b3d;
+    color:white;
+    border:0;
+    padding:13px 20px;
+    border-radius:9px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.section-title{
+    color:#075b34;
+    margin:30px 0 15px;
+    font-size:25px;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:18px;
+}
+
+.card{
+    background:white;
+    border-radius:15px;
+    padding:20px;
+    box-shadow:0 3px 12px rgba(0,0,0,.07);
+}
+
+.card h3{
+    color:#075b34;
+    margin-top:0;
+}
+
+.card p{
+    line-height:1.5;
+}
+
+.icon{
+    font-size:35px;
+    margin-bottom:8px;
+}
+
+.status{
+    display:inline-block;
+    padding:7px 12px;
+    border-radius:20px;
+    font-weight:bold;
+    font-size:13px;
+    margin-top:8px;
+}
+
+.verified{
+    background:#d9f7df;
+    color:#08752e;
+}
+
+.pending{
+    background:#fff0c7;
+    color:#8a6100;
+}
+
+.notverified{
+    background:#ffe0e0;
+    color:#a00000;
+}
+
+.demo-list{
+    display:grid;
+    gap:12px;
+}
+
+.company{
+    background:white;
+    border-radius:13px;
+    padding:18px;
+    box-shadow:0 2px 8px rgba(0,0,0,.06);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    flex-wrap:wrap;
+}
+
+.company-info h3{
+    margin:0 0 6px;
+    color:#075b34;
+}
+
+.company-info p{
+    margin:4px 0;
+}
+
+.badge{
+    background:#b7ff35;
+    color:#063d25;
+    padding:7px 11px;
+    border-radius:20px;
+    font-weight:bold;
+    font-size:13px;
+}
+
+.workflow{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:15px;
+}
+
+.step{
+    background:white;
+    border-radius:14px;
+    padding:18px;
+    text-align:center;
+    box-shadow:0 2px 8px rgba(0,0,0,.06);
+}
+
+.step-number{
+    width:40px;
+    height:40px;
+    line-height:40px;
+    margin:0 auto 10px;
+    background:#0b6b3d;
+    color:white;
+    border-radius:50%;
+    font-weight:bold;
+    font-size:18px;
+}
+
+.checklist{
+    list-style:none;
+    padding:0;
+}
+
+.checklist li{
+    background:#f4f7f5;
+    margin:8px 0;
+    padding:12px;
+    border-radius:8px;
+}
+
+.checklist li::before{
+    content:"✓";
+    color:#0b6b3d;
+    font-weight:bold;
+    margin-right:9px;
+}
+
+.form-box{
+    background:white;
+    padding:25px;
+    border-radius:16px;
+    box-shadow:0 3px 12px rgba(0,0,0,.08);
+}
+
+.form-box input,
+.form-box select,
+.form-box textarea{
+    width:100%;
+    padding:13px;
+    margin:7px 0 12px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    font-size:15px;
+}
+
+.form-box textarea{
+    min-height:110px;
+    resize:vertical;
+}
+
+.form-box button{
+    width:100%;
+    background:#0b6b3d;
+    color:white;
+    border:0;
+    padding:14px;
+    border-radius:9px;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.form-box button:hover{
+    background:#075b34;
+}
+
+.info{
+    background:#eaf8ee;
+    border-left:5px solid #0b6b3d;
+    padding:17px;
+    border-radius:8px;
+    margin-top:20px;
+    line-height:1.6;
+}
+
+.warning{
+    background:#fff4d6;
+    border-left:5px solid #d99b00;
+    padding:17px;
+    border-radius:8px;
+    margin-top:25px;
+    line-height:1.6;
+}
+
+footer{
+    background:#063d25;
+    color:white;
+    text-align:center;
+    padding:25px;
+    margin-top:35px;
+}
+
+@media(max-width:600px){
+    header h1{
+        font-size:25px;
+    }
+
+    .hero h2{
+        font-size:23px;
+    }
+
+    .container{
+        padding:13px;
+    }
+
+    nav a{
+        font-size:12px;
+        padding:8px 9px;
+    }
+
+    .company{
+        align-items:flex-start;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="top-languages">
+    <button onclick="setLanguage('az')">AZ</button>
+    <button onclick="setLanguage('ru')">RU</button>
+    <button onclick="setLanguage('en')">EN</button>
+    <button onclick="setLanguage('tr')">TR</button>
+    <button onclick="setLanguage('de')">DE</button>
+    <button onclick="setLanguage('ar')">AR</button>
+    <button onclick="setLanguage('es')">ES</button>
+    <button onclick="setLanguage('fr')">FR</button>
+    <button onclick="setLanguage('it')">IT</button>
+</div>
+
+<header>
+    <div class="logo">🛡️</div>
+    <h1>WORKER PRO</h1>
+    <p>Verification / Проверка участников платформы</p>
+</header>
+
+<nav>
+    <a href="../">Home</a>
+    <a href="../companies/">Companies</a>
+    <a href="../manufacturers/">Manufacturers</a>
+    <a href="../suppliers/">Suppliers</a>
+    <a href="../specialists/">Specialists</a>
+    <a href="../products/">Products</a>
+    <a href="../requests/">Requests</a>
+    <a href="../offers/">Offers</a>
+    <a href="../orders/">Orders</a>
+    <a href="../partners/">Partners</a>
+    <a href="../reviews/">Reviews</a>
+    <a href="../help/">Help</a>
+    <a href="../dashboard/">Dashboard</a>
+</nav>
+
+<div class="container">
+
+    <section class="hero">
+        <h2>Проверка и подтверждение</h2>
+
+        <p>
+            WORKER PRO создаёт систему проверки компаний,
+            производителей, поставщиков и специалистов.
+            Проверка помогает пользователям видеть информацию
+            о статусе участника платформы и его документах.
+        </p>
+
+        <div class="search-box">
+            <input type="text" id="searchInput"
+                   placeholder="Поиск компании, поставщика или специалиста...">
+
+            <select id="typeFilter">
+                <option value="all">Все типы</option>
+                <option value="company">Компания</option>
+                <option value="manufacturer">Производитель</option>
+                <option value="supplier">Поставщик</option>
+                <option value="specialist">Специалист</option>
+            </select>
+
+            <select id="statusFilter">
+                <option value="all">Все статусы</option>
+                <option value="verified">Проверено</option>
+                <option value="pending">На проверке</option>
+                <option value="notverified">Не проверено</option>
+            </select>
+
+            <button onclick="searchVerification()">Поиск</button>
+        </div>
+    </section>
+
+    <h2 class="section-title">Что проверяется</h2>
+
+    <div class="grid">
+
+        <div class="card">
+            <div class="icon">🏢</div>
+            <h3>Компании</h3>
+            <p>
+                Название компании, страна, город,
+                направление деятельности и контактная информация.
+            </p>
+            <span class="status verified">Проверено</span>
+        </div>
+
+        <div class="card">
+            <div class="icon">🏭</div>
+            <h3>Производители</h3>
+            <p>
+                Производственные возможности, продукция,
+                оборудование, документы и сертификаты.
+            </p>
+            <span class="status verified">Проверено</span>
+        </div>
+
+        <div class="card">
+            <div class="icon">📦</div>
+            <h3>Поставщики</h3>
+            <p>
+                Каталог товаров, запчасти, условия поставки,
+                страны работы и контактные данные.
+            </p>
+            <span class="status pending">На проверке</span>
+        </div>
+
+        <div class="card">
+            <div class="icon">👷</div>
+            <h3>Специалисты</h3>
+            <p>
+                Профессия, навыки, опыт работы,
+                сертификаты и профессиональная информация.
+            </p>
+            <span class="status pending">На проверке</span>
+        </div>
+
+    </div>
+
+    <h2 class="section-title">Примеры проверенных участников</h2>
+
+    <div class="demo-list" id="verificationList">
+
+        <div class="company"
+             data-name="Industrial Manufacturer"
+             data-type="company manufacturer"
+             data-status="verified">
+
+            <div class="company-info">
+                <h3>Industrial Manufacturer</h3>
+                <p>🇦🇿 Azerbaijan · Baku</p>
+                <p>Производитель промышленного оборудования</p>
+            </div>
+
+            <div>
+                <span class="badge">✓ VERIFIED</span>
+            </div>
+        </div>
+
+        <div class="company"
+             data-name="Machine Technology"
+             data-type="manufacturer"
+             data-status="verified">
+
+            <div class="company-info">
+                <h3>Machine Technology</h3>
+                <p>🇹🇷 Turkey · Istanbul</p>
+                <p>CNC и станочное оборудование</p>
+            </div>
+
+            <div>
+                <span class="badge">✓ VERIFIED</span>
+            </div>
+        </div>
+
+        <div class="company"
+             data-name="Hydraulic Solutions"
+             data-type="supplier"
+             data-status="pending">
+
+            <div class="company-info">
+                <h3>Hydraulic Solutions</h3>
+                <p>🇮🇹 Italy · Milan</p>
+                <p>Гидравлика, насосы и клапаны</p>
+            </div>
+
+            <div>
+                <span class="status pending">На проверке</span>
+            </div>
+        </div>
+
+        <div class="company"
+             data-name="Automation Systems"
+             data-type="supplier company"
+             data-status="verified">
+
+            <div class="company-info">
+                <h3>Automation Systems</h3>
+                <p>🇩🇪 Germany · Munich</p>
+                <p>PLC, автоматизация и промышленное управление</p>
+            </div>
+
+            <div>
+                <span class="badge">✓ VERIFIED</span>
+            </div>
+        </div>
+
+        <div class="company"
+             data-name="Industrial Specialist"
+             data-type="specialist"
+             data-status="pending">
+
+            <div class="company-info">
+                <h3>Industrial Specialist</h3>
+                <p>🇦🇿 Azerbaijan · Baku</p>
+                <p>CNC operator · 10 years experience</p>
+            </div>
+
+            <div>
+                <span class="status pending">На проверке</span>
+            </div>
+        </div>
+
+    </div>
+
+    <h2 class="section-title">Какие документы могут подтверждаться</h2>
+
+    <div class="grid">
+
+        <div class="card">
+            <h3>📄 Компания</h3>
+
+            <ul class="checklist">
+                <li>Регистрационные данные</li>
+                <li>Название и адрес</li>
+                <li>Контактные данные</li>
+                <li>Направление деятельности</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h3>🏭 Производство</h3>
+
+            <ul class="checklist">
+                <li>Производственные возможности</li>
+                <li>Каталог продукции</li>
+                <li>Сертификаты</li>
+                <li>Документы качества</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h3>📦 Поставщик</h3>
+
+            <ul class="checklist">
+                <li>Каталог товаров</li>
+                <li>Страны поставки</li>
+                <li>Условия поставки</li>
+                <li>Контактная информация</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h3>👷 Специалист</h3>
+
+            <ul class="checklist">
+                <li>Профессия</li>
+                <li>Опыт работы</li>
+                <li>Навыки</li>
+                <li>Сертификаты</li>
+            </ul>
+        </div>
+
+    </div>
+
+    <h2 class="section-title">Как работает проверка</h2>
+
+    <div class="workflow">
+
+        <div class="step">
+            <div class="step-number">1</div>
+            <h3>Регистрация</h3>
+            <p>Участник создаёт профиль WORKER PRO.</p>
+        </div>
+
+        <div class="step">
+            <div class="step-number">2</div>
+            <h3>Заявка</h3>
+            <p>Участник отправляет запрос на проверку.</p>
+        </div>
+
+        <div class="step">
+            <div class="step-number">3</div>
+            <h3>Документы</h3>
+            <p>Предоставляется необходимая информация.</p>
+        </div>
+
+        <div class="step">
+            <div class="step-number">4</div>
+            <h3>Проверка</h3>
+            <p>Информация проходит проверку.</p>
+        </div>
+
+        <div class="step">
+            <div class="step-number">5</div>
+            <h3>Verified</h3>
+            <p>После подтверждения появляется статус.</p>
+        </div>
+
+    </div>
+
+    <div class="info">
+        <strong>✓ Verified статус</strong><br>
+        В будущем возле профиля участника будет отображаться
+        специальный знак подтверждения. Пользователь сможет
+        открыть профиль и посмотреть доступную информацию
+        о проверке.
+    </div>
+
+    <h2 class="section-title">Связь с отзывами и рейтингом</h2>
+
+    <div class="grid">
+
+        <div class="card">
+            <h3>⭐ Reviews</h3>
+            <p>
+                Пользователи смогут оставлять отзывы
+                о компаниях, поставщиках и специалистах.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>🛡️ Verification</h3>
+            <p>
+                Статус проверки будет отображаться
+                отдельно от пользовательских отзывов.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>📊 Profile</h3>
+            <p>
+                В профиле можно будет видеть сведения
+                о компании, товарах, услугах и проверке.
+            </p>
+        </div>
+
+    </div>
+
+    <h2 class="section-title">Запросить проверку</h2>
+
+    <div class="form-box">
+
+        <input type="text"
+               id="name"
+               placeholder="Название компании или имя специалиста">
+
+        <select id="requestType">
+            <option value="">Выберите тип</option>
+            <option>Компания</option>
+            <option>Производитель</option>
+            <option>Поставщик</option>
+            <option>Специалист</option>
+        </select>
+
+        <input type="text"
+               id="country"
+               placeholder="Страна">
+
+        <input type="text"
+               id="email"
+               placeholder="Email">
+
+        <textarea id="message"
+                  placeholder="Дополнительная информация"></textarea>
+
+        <button onclick="requestVerification()">
+            Отправить запрос на проверку
+        </button>
+
+    </div>
+
+    <h2 class="section-title">Будущие возможности</h2>
+
+    <div class="grid">
+
+        <div class="card">
+            <h3>🔐 Проверка документов</h3>
+            <p>
+                Загрузка и проверка документов через
+                личный кабинет пользователя.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>🏅 Verified Badge</h3>
+            <p>
+                Специальный знак подтверждённого
+                профиля компании или специалиста.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>🌍 Международная проверка</h3>
+            <p>
+                Поддержка участников из разных стран
+                и международных компаний.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>📋 История проверки</h3>
+            <p>
+                В будущем можно будет видеть дату
+                проверки и актуальность статуса.
+            </p>
+        </div>
+
+    </div>
+
+    <div class="warning">
+        <strong>⚠ Демо-версия</strong><br>
+        Сейчас Verification является демонстрационной
+        частью WORKER PRO. Реальная проверка документов,
+        базы компаний, статусы Verified и автоматическая
+        верификация будут подключены после создания
+        серверной части платформы.
+    </div>
+
+</div>
+
+<footer>
+    <strong>WORKER PRO</strong><br>
+    Global Industrial Platform<br><br>
+    Production · Companies · Suppliers · Specialists ·
+    Marketplace · Verification · Training
+    <br><br>
+    F.S
+</footer>
+
+<script src="../language.js"></script>
+
+<script>
+
+function searchVerification(){
+
+    const search =
+        document.getElementById("searchInput")
+        .value
+        .toLowerCase();
+
+    const type =
+        document.getElementById("typeFilter").value;
+
+    const status =
+        document.getElementById("statusFilter").value;
+
+    const items =
+        document.querySelectorAll(".company");
+
+    items.forEach(item => {
+
+        const name =
+            item.dataset.name.toLowerCase();
+
+        const itemTypes =
+            item.dataset.type;
+
+        const itemStatus =
+            item.dataset.status;
+
+        const searchMatch =
+            name.includes(search);
+
+        const typeMatch =
+            type === "all" ||
+            itemTypes.includes(type);
+
+        const statusMatch =
+            status === "all" ||
+            itemStatus === status;
+
+        if(searchMatch && typeMatch && statusMatch){
+            item.style.display = "flex";
+        }else{
+            item.style.display = "none";
+        }
+
+    });
+}
+
+function requestVerification(){
+
+    const name =
+        document.getElementById("name").value.trim();
+
+    const type =
+        document.getElementById("requestType").value;
+
+    const country =
+        document.getElementById("country").value.trim();
+
+    const email =
+        document.getElementById("email").value.trim();
+
+    if(!name || !type || !country || !email){
+
+        alert("Пожалуйста, заполните основные поля.");
+
+        return;
+    }
+
+    alert(
+        "Запрос на проверку принят в демо-режиме. " +
+        "Реальная отправка будет подключена после создания серверной части."
+    );
+
+}
+
+</script>
+
+</body>
+</html>
