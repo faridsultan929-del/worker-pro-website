@@ -1,1 +1,951 @@
- 
+ <!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WORKER PRO — Notifications</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f7f5;
+    color: #123;
+}
+
+.top-languages {
+    background: #063d25;
+    padding: 10px;
+    text-align: center;
+}
+
+.top-languages button {
+    background: #0b6b3d;
+    color: white;
+    border: 1px solid #b7ff35;
+    border-radius: 6px;
+    padding: 7px 10px;
+    margin: 3px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.top-languages button:hover {
+    background: #b7ff35;
+    color: #063d25;
+}
+
+header {
+    background: #075b34;
+    color: white;
+    text-align: center;
+    padding: 25px 15px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 30px;
+}
+
+header p {
+    margin: 8px 0 0;
+}
+
+nav {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: #063d25;
+    padding: 10px;
+    text-align: center;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 5px 8px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: #b7ff35;
+}
+
+.container {
+    max-width: 1050px;
+    margin: auto;
+    padding: 20px;
+}
+
+.intro {
+    background: white;
+    padding: 25px;
+    border-radius: 14px;
+    border-left: 6px solid #0b6b3d;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+    margin-bottom: 20px;
+}
+
+.intro h2 {
+    margin-top: 0;
+    color: #063d25;
+}
+
+.toolbar {
+    background: white;
+    padding: 18px;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.07);
+    margin-bottom: 20px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.toolbar button {
+    border: 1px solid #0b6b3d;
+    background: white;
+    color: #063d25;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.toolbar button:hover,
+.toolbar button.active {
+    background: #0b6b3d;
+    color: white;
+}
+
+.notifications {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.notification {
+    background: white;
+    border-radius: 13px;
+    padding: 18px;
+    display: flex;
+    gap: 15px;
+    align-items: flex-start;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.07);
+    border-left: 5px solid #0b6b3d;
+    transition: 0.2s;
+}
+
+.notification:hover {
+    transform: translateY(-2px);
+}
+
+.notification.unread {
+    background: #eef8f2;
+}
+
+.notification.read {
+    opacity: 0.78;
+}
+
+.notification-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #0b6b3d;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 23px;
+    flex-shrink: 0;
+}
+
+.notification-content {
+    flex: 1;
+}
+
+.notification-content h3 {
+    margin: 0 0 7px;
+    color: #063d25;
+    font-size: 17px;
+}
+
+.notification-content p {
+    margin: 0;
+    line-height: 1.5;
+}
+
+.notification-time {
+    margin-top: 8px;
+    color: #777;
+    font-size: 12px;
+}
+
+.notification-action {
+    margin-top: 10px;
+}
+
+.notification-action button {
+    background: #0b6b3d;
+    color: white;
+    border: none;
+    border-radius: 7px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.notification-action button:hover {
+    background: #063d25;
+}
+
+.badge {
+    display: inline-block;
+    background: #b7ff35;
+    color: #063d25;
+    border-radius: 20px;
+    padding: 4px 9px;
+    font-size: 11px;
+    font-weight: bold;
+    margin-left: 5px;
+}
+
+.empty {
+    display: none;
+    background: white;
+    padding: 30px;
+    text-align: center;
+    border-radius: 12px;
+    color: #667;
+}
+
+.features {
+    margin-top: 30px;
+}
+
+.features h2 {
+    text-align: center;
+    color: #063d25;
+}
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.feature {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.07);
+}
+
+.feature-icon {
+    font-size: 32px;
+}
+
+.feature h3 {
+    color: #063d25;
+    margin-bottom: 8px;
+}
+
+.demo {
+    background: #fff8dc;
+    border-left: 5px solid #e0a800;
+    padding: 18px;
+    border-radius: 10px;
+    margin-top: 25px;
+    line-height: 1.6;
+}
+
+footer {
+    background: #063d25;
+    color: white;
+    text-align: center;
+    padding: 25px 15px;
+    margin-top: 35px;
+}
+
+footer strong {
+    color: #b7ff35;
+}
+
+@media (max-width: 600px) {
+
+    header h1 {
+        font-size: 24px;
+    }
+
+    .container {
+        padding: 12px;
+    }
+
+    .notification {
+        padding: 14px;
+    }
+
+    .notification-icon {
+        width: 42px;
+        height: 42px;
+        font-size: 20px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- LANGUAGES -->
+<div class="top-languages">
+
+    <button onclick="setLanguage('AZ')">AZ</button>
+    <button onclick="setLanguage('RU')">RU</button>
+    <button onclick="setLanguage('EN')">EN</button>
+    <button onclick="setLanguage('TR')">TR</button>
+    <button onclick="setLanguage('DE')">DE</button>
+    <button onclick="setLanguage('AR')">AR</button>
+    <button onclick="setLanguage('ES')">ES</button>
+    <button onclick="setLanguage('FR')">FR</button>
+    <button onclick="setLanguage('IT')">IT</button>
+
+</div>
+
+<header>
+
+    <h1>🔔 WORKER PRO</h1>
+
+    <p>Уведомления</p>
+
+</header>
+
+<!-- NAVIGATION -->
+<nav>
+
+    <a href="../index.html">Главная</a>
+
+    <a href="../companies/index.html">Компании</a>
+
+    <a href="../manufacturers/index.html">Производители</a>
+
+    <a href="../suppliers/index.html">Поставщики</a>
+
+    <a href="../products/index.html">Товары</a>
+
+    <a href="../requests/index.html">Заявки</a>
+
+    <a href="../offers/index.html">Предложения</a>
+
+    <a href="../orders/index.html">Заказы</a>
+
+    <a href="../transport/index.html">Доставка</a>
+
+    <a href="../messages/index.html">Сообщения</a>
+
+    <a href="../dashboard/index.html">Кабинет</a>
+
+</nav>
+
+<div class="container">
+
+    <!-- INTRO -->
+    <section class="intro">
+
+        <h2>
+            🔔 Центр уведомлений
+            <span class="badge">5 новых</span>
+        </h2>
+
+        <p>
+            Здесь пользователь будет получать информацию
+            о новых заявках, предложениях, заказах,
+            сообщениях, доставке и других событиях
+            на платформе WORKER PRO.
+        </p>
+
+    </section>
+
+    <!-- TOOLBAR -->
+    <section class="toolbar">
+
+        <button
+            class="active"
+            onclick="filterNotifications('all', this)">
+            Все
+        </button>
+
+        <button
+            onclick="filterNotifications('unread', this)">
+            Новые
+        </button>
+
+        <button
+            onclick="filterNotifications('orders', this)">
+            Заказы
+        </button>
+
+        <button
+            onclick="filterNotifications('offers', this)">
+            Предложения
+        </button>
+
+        <button
+            onclick="filterNotifications('messages', this)">
+            Сообщения
+        </button>
+
+        <button
+            onclick="markAllRead()">
+            ✓ Прочитать все
+        </button>
+
+    </section>
+
+    <!-- NOTIFICATIONS -->
+    <section class="notifications" id="notifications">
+
+        <!-- 1 -->
+        <div class="notification unread" data-type="offers">
+
+            <div class="notification-icon">
+                💰
+            </div>
+
+            <div class="notification-content">
+
+                <h3>
+                    Новое коммерческое предложение
+                    <span class="badge">NEW</span>
+                </h3>
+
+                <p>
+                    Industrial Manufacturer отправила
+                    новое предложение на промышленное
+                    оборудование.
+                </p>
+
+                <div class="notification-time">
+                    Сегодня, 14:30
+                </div>
+
+                <div class="notification-action">
+
+                    <button onclick="openPage('../offers/index.html')">
+                        Посмотреть предложение
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- 2 -->
+        <div class="notification unread" data-type="messages">
+
+            <div class="notification-icon">
+                💬
+            </div>
+
+            <div class="notification-content">
+
+                <h3>
+                    Новое сообщение
+                    <span class="badge">NEW</span>
+                </h3>
+
+                <p>
+                    Вы получили сообщение от
+                    Hydraulic Solutions.
+                </p>
+
+                <div class="notification-time">
+                    Сегодня, 14:25
+                </div>
+
+                <div class="notification-action">
+
+                    <button onclick="openPage('../messages/index.html')">
+                        Открыть сообщение
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- 3 -->
+        <div class="notification unread" data-type="orders">
+
+            <div class="notification-icon">
+                📦
+            </div>
+
+            <div class="notification-content">
+
+                <h3>
+                    Изменён статус заказа
+                    <span class="badge">NEW</span>
+                </h3>
+
+                <p>
+                    Заказ на гидравлический насос
+                    перешёл в статус «Подготовка к отправке».
+                </p>
+
+                <div class="notification-time">
+                    Сегодня, 13:10
+                </div>
+
+                <div class="notification-action">
+
+                    <button onclick="openPage('../orders/index.html')">
+                        Открыть заказ
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- 4 -->
+        <div class="notification unread" data-type="orders">
+
+            <div class="notification-icon">
+                🚚
+            </div>
+
+            <div class="notification-content">
+
+                <h3>
+                    Обновление доставки
+                    <span class="badge">NEW</span>
+                </h3>
+
+                <p>
+                    Международная доставка получила
+                    новый статус: «В пути».
+                </p>
+
+                <div class="notification-time">
+                    Сегодня, 11:45
+                </div>
+
+                <div class="notification-action">
+
+                    <button onclick="openPage('../transport/index.html')">
+                        Отследить доставку
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- 5 -->
+        <div class="notification unread" data-type="messages">
+
+            <div class="notification-icon">
+                🏭
+            </div>
+
+            <div class="notification-content">
+
+                <h3>
+                    Ответ компании
+                    <span class="badge">NEW</span>
+                </h3>
+
+                <p>
+                    Machine Technology ответила
+                    на вашу промышленную заявку.
+                </p>
+
+                <div class="notification-time">
+                    Сегодня, 10:20
+                </div>
+
+                <div class="notification-action">
+
+                    <button onclick="openPage('../messages/index.html')">
+                        Открыть переписку
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- 6 -->
+        <div class="notification read" data-type="offers">
+
+            <div class="notification-icon">
+                💵
+            </div>
+
+            <div class="notification-content">
+
+                <h3>
+                    Получено предложение
+                </h3>
+
+                <p>
+                    Automation Systems подготовила
+                    предложение на систему PLC.
+                </p>
+
+                <div class="notification-time">
+                    Вчера, 18:40
+                </div>
+
+                <div class="notification-action">
+
+                    <button onclick="openPage('../offers/index.html')">
+                        Посмотреть
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- 7 -->
+        <div class="notification read" data-type="orders">
+
+            <div class="notification-icon">
+                ✅
+            </div>
+
+            <div class="notification-content">
+
+                <h3>
+                    Заказ подтверждён
+                </h3>
+
+                <p>
+                    Поставщик подтвердил ваш заказ
+                    на промышленную запчасть.
+                </p>
+
+                <div class="notification-time">
+                    18 сентября, 16:15
+                </div>
+
+                <div class="notification-action">
+
+                    <button onclick="openPage('../orders/index.html')">
+                        Открыть заказ
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- 8 -->
+        <div class="notification read" data-type="messages">
+
+            <div class="notification-icon">
+                👷
+            </div>
+
+            <div class="notification-content">
+
+                <h3>
+                    Ответ специалиста
+                </h3>
+
+                <p>
+                    Специалист ответил на ваш
+                    технический вопрос.
+                </p>
+
+                <div class="notification-time">
+                    18 сентября, 12:05
+                </div>
+
+                <div class="notification-action">
+
+                    <button onclick="openPage('../messages/index.html')">
+                        Открыть сообщение
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- 9 -->
+        <div class="notification read" data-type="offers">
+
+            <div class="notification-icon">
+                📋
+            </div>
+
+            <div class="notification-content">
+
+                <h3>
+                    Заявка обработана
+                </h3>
+
+                <p>
+                    Ваша заявка опубликована
+                    для поставщиков.
+                </p>
+
+                <div class="notification-time">
+                    17 сентября, 15:30
+                </div>
+
+                <div class="notification-action">
+
+                    <button onclick="openPage('../requests/index.html')">
+                        Открыть заявку
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <div class="empty" id="empty">
+        🔕 Уведомлений в этой категории нет.
+    </div>
+
+    <!-- FEATURES -->
+    <section class="features">
+
+        <h2>🌍 Что будет отслеживать WORKER PRO</h2>
+
+        <div class="feature-grid">
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    📋
+                </div>
+
+                <h3>Заявки</h3>
+
+                <p>
+                    Создание, изменение и ответы
+                    на промышленные заявки.
+                </p>
+
+            </div>
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    💰
+                </div>
+
+                <h3>Предложения</h3>
+
+                <p>
+                    Новые цены, условия и
+                    коммерческие предложения.
+                </p>
+
+            </div>
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    📦
+                </div>
+
+                <h3>Заказы</h3>
+
+                <p>
+                    Подтверждение, обработка,
+                    отправка и получение заказа.
+                </p>
+
+            </div>
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    🚚
+                </div>
+
+                <h3>Доставка</h3>
+
+                <p>
+                    Изменения маршрута, статуса
+                    и сроков доставки.
+                </p>
+
+            </div>
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    💬
+                </div>
+
+                <h3>Сообщения</h3>
+
+                <p>
+                    Новые сообщения от компаний,
+                    поставщиков и специалистов.
+                </p>
+
+            </div>
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    🔔
+                </div>
+
+                <h3>Система</h3>
+
+                <p>
+                    Важные системные уведомления
+                    и обновления платформы.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- DEMO -->
+    <div class="demo">
+
+        <strong>⚠️ Демо-версия WORKER PRO</strong>
+        <br><br>
+
+        Сейчас уведомления являются демонстрационными.
+        Реальная система будет подключена вместе
+        с аккаунтами, базой данных, сообщениями,
+        заявками, предложениями, заказами и доставкой.
+
+    </div>
+
+</div>
+
+<footer>
+
+    <strong>WORKER PRO</strong>
+    <br>
+
+    Глобальная промышленная платформа
+
+    <br><br>
+
+    Производство • Запчасти • Компании •
+    Специалисты • Обучение • Работа • Торговля
+
+    <br><br>
+
+    © 2026 WORKER PRO • F.S
+
+</footer>
+
+<script>
+
+function filterNotifications(type, button) {
+
+    const notifications =
+        document.querySelectorAll(".notification");
+
+    const buttons =
+        document.querySelectorAll(".toolbar button");
+
+    buttons.forEach(function(btn) {
+        btn.classList.remove("active");
+    });
+
+    button.classList.add("active");
+
+    let visible = 0;
+
+    notifications.forEach(function(notification) {
+
+        const notificationType =
+            notification.getAttribute("data-type");
+
+        const isUnread =
+            notification.classList.contains("unread");
+
+        let show = false;
+
+        if (type === "all") {
+            show = true;
+        }
+
+        if (type === "unread" && isUnread) {
+            show = true;
+        }
+
+        if (type === notificationType) {
+            show = true;
+        }
+
+        if (show) {
+            notification.style.display = "flex";
+            visible++;
+        } else {
+            notification.style.display = "none";
+        }
+
+    });
+
+    document.getElementById("empty").style.display =
+        visible === 0 ? "block" : "none";
+}
+
+
+function markAllRead() {
+
+    const notifications =
+        document.querySelectorAll(".notification");
+
+    notifications.forEach(function(notification) {
+
+        notification.classList.remove("unread");
+        notification.classList.add("read");
+
+    });
+
+    alert(
+        "Демо: все уведомления отмечены как прочитанные."
+    );
+}
+
+
+function openPage(page) {
+
+    window.location.href = page;
+
+}
+
+</script>
+
+<script src="../language.js"></script>
+
+</body>
+</html>
