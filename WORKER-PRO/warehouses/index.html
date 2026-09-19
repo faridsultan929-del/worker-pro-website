@@ -1,1 +1,821 @@
- 
+ <!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WORKER PRO — Warehouse</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f3f7f5;
+    color: #123;
+}
+
+.top-languages {
+    background: #063d25;
+    padding: 10px;
+    text-align: center;
+}
+
+.top-languages a {
+    display: inline-block;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 7px 10px;
+    margin: 3px;
+    border-radius: 7px;
+    background: #0b6b3d;
+}
+
+.top-languages a:hover {
+    background: #b7ff35;
+    color: #063d25;
+}
+
+header {
+    background: linear-gradient(135deg, #063d25, #0b6b3d);
+    color: white;
+    text-align: center;
+    padding: 30px 15px;
+}
+
+header h1 {
+    margin: 0 0 10px;
+    font-size: 34px;
+}
+
+header p {
+    margin: 6px auto;
+    max-width: 850px;
+    font-size: 17px;
+}
+
+nav {
+    background: #075b34;
+    padding: 10px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+    padding: 7px 9px;
+    font-size: 14px;
+}
+
+nav a:hover {
+    color: #b7ff35;
+}
+
+.container {
+    max-width: 1150px;
+    margin: auto;
+    padding: 25px 15px;
+}
+
+.section-title {
+    text-align: center;
+    color: #063d25;
+    margin: 25px 0;
+    font-size: 28px;
+}
+
+.intro {
+    background: white;
+    padding: 20px;
+    border-radius: 14px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+    margin-bottom: 25px;
+    line-height: 1.6;
+}
+
+.search-box {
+    background: #063d25;
+    padding: 20px;
+    border-radius: 14px;
+    margin-bottom: 30px;
+}
+
+.search-box input,
+.search-box select {
+    width: 100%;
+    padding: 13px;
+    margin: 7px 0;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 18px;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 14px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+    transition: 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+}
+
+.card h3 {
+    color: #075b34;
+    margin-top: 0;
+}
+
+.card p {
+    line-height: 1.5;
+}
+
+.badge {
+    display: inline-block;
+    background: #b7ff35;
+    color: #063d25;
+    padding: 5px 9px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.step {
+    background: white;
+    margin: 12px 0;
+    padding: 18px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+}
+
+.step strong {
+    color: #075b34;
+}
+
+.stock {
+    font-size: 14px;
+    font-weight: bold;
+    color: #075b34;
+    margin-top: 10px;
+}
+
+.warning {
+    background: #fff4d6;
+    border-left: 5px solid #e2a400;
+    padding: 18px;
+    border-radius: 10px;
+    margin-top: 25px;
+}
+
+footer {
+    background: #063d25;
+    color: white;
+    text-align: center;
+    padding: 25px 15px;
+    margin-top: 30px;
+}
+
+footer a {
+    color: #b7ff35;
+    text-decoration: none;
+}
+
+@media (max-width: 600px) {
+
+    header h1 {
+        font-size: 27px;
+    }
+
+    nav a {
+        font-size: 12px;
+        padding: 6px;
+    }
+
+}
+</style>
+</head>
+
+<body>
+
+<!-- LANGUAGES -->
+
+<div class="top-languages">
+    <a href="#">AZ</a>
+    <a href="#">RU</a>
+    <a href="#">EN</a>
+    <a href="#">TR</a>
+    <a href="#">DE</a>
+    <a href="#">AR</a>
+    <a href="#">ES</a>
+    <a href="#">FR</a>
+    <a href="#">IT</a>
+</div>
+
+<!-- HEADER -->
+
+<header>
+
+    <h1>🏭 WORKER PRO — Warehouse</h1>
+
+    <p>
+        Промышленные склады, хранение товаров,
+        запчастей и оборудования
+    </p>
+
+    <p>
+        Наличие • Количество • Хранение • Отгрузка • Доставка
+    </p>
+
+</header>
+
+<!-- NAVIGATION -->
+
+<nav>
+
+    <a href="../production/">🏭 Production</a>
+    <a href="../problems/">🛠 Problems</a>
+    <a href="../spare-parts/">⚙️ Spare Parts</a>
+    <a href="../products/">📦 Products</a>
+    <a href="../equipment/">🔧 Equipment</a>
+    <a href="../manufacturers/">🏭 Manufacturers</a>
+    <a href="../materials/">🧱 Materials</a>
+    <a href="../companies/">🏢 Companies</a>
+    <a href="../suppliers/">🚚 Suppliers</a>
+    <a href="../orders/">📋 Orders</a>
+    <a href="../community/">👥 Community</a>
+    <a href="../specialists/">👨‍🔧 Specialists</a>
+    <a href="../jobs/">💼 Jobs</a>
+    <a href="../training/">🎓 Training</a>
+    <a href="../transport/">🚛 Transport</a>
+    <a href="../services/">🔧 Services</a>
+    <a href="../maintenance/">🛠 Maintenance</a>
+    <a href="../Quotes/">🏆 Quality</a>
+
+</nav>
+
+<section class="container">
+
+    <!-- INTRO -->
+
+    <h2 class="section-title">
+        📦 Промышленный склад
+    </h2>
+
+    <div class="intro">
+
+        <p>
+            Раздел <strong>Warehouse</strong> предназначен
+            для хранения промышленных товаров, запчастей,
+            материалов и оборудования.
+        </p>
+
+        <p>
+            В будущем компании смогут показывать наличие
+            товара на складе, количество, место хранения
+            и готовность к отправке покупателю.
+        </p>
+
+    </div>
+
+    <!-- SEARCH -->
+
+    <div class="search-box">
+
+        <input
+            type="text"
+            placeholder="Поиск: подшипник, насос, клапан, датчик, сталь..."
+        >
+
+        <select>
+
+            <option>Все категории</option>
+
+            <option>Запчасти</option>
+
+            <option>Оборудование</option>
+
+            <option>Материалы</option>
+
+            <option>Насосы</option>
+
+            <option>Клапаны</option>
+
+            <option>Подшипники</option>
+
+            <option>Датчики</option>
+
+            <option>Электрооборудование</option>
+
+            <option>Гидравлика</option>
+
+            <option>Пневматика</option>
+
+            <option>Инструменты</option>
+
+        </select>
+
+        <select>
+
+            <option>Все страны</option>
+
+            <option>Азербайджан</option>
+
+            <option>Турция</option>
+
+            <option>Германия</option>
+
+            <option>Италия</option>
+
+            <option>Китай</option>
+
+            <option>Россия</option>
+
+            <option>США</option>
+
+            <option>Другие страны</option>
+
+        </select>
+
+    </div>
+
+    <!-- CATEGORIES -->
+
+    <h2 class="section-title">
+        📦 Категории склада
+    </h2>
+
+    <div class="grid">
+
+        <div class="card">
+
+            <h3>⚙️ Запчасти</h3>
+
+            <span class="badge">Spare Parts</span>
+
+            <p>
+                Подшипники, ремни, шестерни,
+                уплотнения и другие промышленные детали.
+            </p>
+
+            <div class="stock">
+                Проверка наличия
+            </div>
+
+        </div>
+
+        <div class="card">
+
+            <h3>💧 Насосы</h3>
+
+            <span class="badge">Pumps</span>
+
+            <p>
+                Промышленные насосы для воды,
+                масла, химических и других жидкостей.
+            </p>
+
+            <div class="stock">
+                Складская единица
+            </div>
+
+        </div>
+
+        <div class="card">
+
+            <h3>🔧 Клапаны</h3>
+
+            <span class="badge">Valves</span>
+
+            <p>
+                Промышленные клапаны, арматура
+                и комплектующие.
+            </p>
+
+            <div class="stock">
+                Наличие / заказ
+            </div>
+
+        </div>
+
+        <div class="card">
+
+            <h3>📡 Датчики</h3>
+
+            <span class="badge">Sensors</span>
+
+            <p>
+                Датчики давления, температуры,
+                положения и другие промышленные сенсоры.
+            </p>
+
+            <div class="stock">
+                Складская единица
+            </div>
+
+        </div>
+
+        <div class="card">
+
+            <h3>⚡ Электрооборудование</h3>
+
+            <span class="badge">Electrical</span>
+
+            <p>
+                Кабели, контакторы, автоматы,
+                двигатели и электрические компоненты.
+            </p>
+
+            <div class="stock">
+                Проверка наличия
+            </div>
+
+        </div>
+
+        <div class="card">
+
+            <h3>💧 Гидравлика</h3>
+
+            <span class="badge">Hydraulics</span>
+
+            <p>
+                Гидронасосы, цилиндры, шланги,
+                фильтры и гидравлическая арматура.
+            </p>
+
+            <div class="stock">
+                Складская единица
+            </div>
+
+        </div>
+
+        <div class="card">
+
+            <h3>🔵 Пневматика</h3>
+
+            <span class="badge">Pneumatics</span>
+
+            <p>
+                Цилиндры, клапаны, фитинги,
+                шланги и пневматические компоненты.
+            </p>
+
+            <div class="stock">
+                Наличие / заказ
+            </div>
+
+        </div>
+
+        <div class="card">
+
+            <h3>🧱 Материалы</h3>
+
+            <span class="badge">Materials</span>
+
+            <p>
+                Сталь, алюминий, медь, пластики,
+                резина и другие технические материалы.
+            </p>
+
+            <div class="stock">
+                Количество на складе
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- WAREHOUSE INFORMATION -->
+
+    <h2 class="section-title">
+        📋 Информация о товаре
+    </h2>
+
+    <div class="grid">
+
+        <div class="card">
+
+            <h3>🔖 Артикул</h3>
+
+            <p>
+                Уникальный номер или код товара
+                для поиска и заказа.
+            </p>
+
+        </div>
+
+        <div class="card">
+
+            <h3>📦 Количество</h3>
+
+            <p>
+                Количество доступных единиц
+                товара на складе.
+            </p>
+
+        </div>
+
+        <div class="card">
+
+            <h3>📍 Место хранения</h3>
+
+            <p>
+                Страна, город, склад, секция,
+                ряд или ячейка.
+            </p>
+
+        </div>
+
+        <div class="card">
+
+            <h3>📏 Размер</h3>
+
+            <p>
+                Размеры, вес и технические параметры
+                складской продукции.
+            </p>
+
+        </div>
+
+        <div class="card">
+
+            <h3>📜 Документы</h3>
+
+            <p>
+                Сертификаты, паспорта и техническая
+                документация на товар.
+            </p>
+
+        </div>
+
+        <div class="card">
+
+            <h3>🚚 Готовность к отправке</h3>
+
+            <p>
+                Информация о возможности подготовить
+                товар к отгрузке.
+            </p>
+
+        </div>
+
+    </div>
+
+    <!-- WAREHOUSE PROCESS -->
+
+    <h2 class="section-title">
+        🔄 Работа со складом
+    </h2>
+
+    <div class="step">
+
+        <strong>1. Поступление товара</strong>
+
+        <p>
+            Товар поступает от производителя
+            или поставщика на склад.
+        </p>
+
+    </div>
+
+    <div class="step">
+
+        <strong>2. Проверка</strong>
+
+        <p>
+            Проверяется количество, состояние,
+            упаковка и документы.
+        </p>
+
+    </div>
+
+    <div class="step">
+
+        <strong>3. Размещение</strong>
+
+        <p>
+            Товар получает складское место
+            и регистрируется в системе.
+        </p>
+
+    </div>
+
+    <div class="step">
+
+        <strong>4. Заказ покупателя</strong>
+
+        <p>
+            Покупатель создаёт запрос
+            на необходимый товар.
+        </p>
+
+    </div>
+
+    <div class="step">
+
+        <strong>5. Комплектация</strong>
+
+        <p>
+            Товар собирается и подготавливается
+            к отправке.
+        </p>
+
+    </div>
+
+    <div class="step">
+
+        <strong>6. Отгрузка</strong>
+
+        <p>
+            Груз передаётся транспортной компании
+            для доставки покупателю.
+        </p>
+
+    </div>
+
+    <!-- STOCK TYPES -->
+
+    <h2 class="section-title">
+        🏷 Типы складских запасов
+    </h2>
+
+    <div class="grid">
+
+        <div class="card">
+
+            <h3>🟢 В наличии</h3>
+
+            <p>
+                Товар доступен для заказа
+                и может быть подготовлен к отправке.
+            </p>
+
+        </div>
+
+        <div class="card">
+
+            <h3>🟡 Мало на складе</h3>
+
+            <p>
+                Количество ограничено.
+                Требуется уточнение перед заказом.
+            </p>
+
+        </div>
+
+        <div class="card">
+
+            <h3>🔵 Под заказ</h3>
+
+            <p>
+                Товар отсутствует на складе,
+                но может быть заказан у производителя.
+            </p>
+
+        </div>
+
+        <div class="card">
+
+            <h3>🔴 Нет в наличии</h3>
+
+            <p>
+                Товар временно отсутствует
+                и требует поиска другого поставщика.
+            </p>
+
+        </div>
+
+    </div>
+
+    <!-- INTERNATIONAL -->
+
+    <h2 class="section-title">
+        🌍 Международные склады
+    </h2>
+
+    <div class="intro">
+
+        <p>
+            В будущем WORKER PRO сможет объединять
+            промышленные склады разных стран.
+        </p>
+
+        <p>
+            Покупатель сможет найти товар,
+            узнать его наличие, получить цену,
+            заказать и организовать доставку.
+        </p>
+
+        <p>
+            Например:
+            🇹🇷 склад в Турции → 🇦🇿 покупатель в Азербайджане.
+        </p>
+
+    </div>
+
+    <!-- FUTURE -->
+
+    <h2 class="section-title">
+        🚀 Будущее WORKER PRO Warehouse
+    </h2>
+
+    <div class="grid">
+
+        <div class="card">
+
+            <h3>📊 Управление запасами</h3>
+
+            <p>
+                Контроль количества товаров
+                и складских остатков.
+            </p>
+
+        </div>
+
+        <div class="card">
+
+            <h3>🔔 Уведомления</h3>
+
+            <p>
+                Уведомление о низком количестве
+                товара на складе.
+            </p>
+
+        </div>
+
+        <div class="card">
+
+            <h3>📦 Комплектация заказа</h3>
+
+            <p>
+                Подготовка нескольких товаров
+                в один заказ.
+            </p>
+
+        </div>
+
+        <div class="card">
+
+            <h3>🚛 Связь с Transport</h3>
+
+            <p>
+                Передача готового заказа
+                в международную или местную доставку.
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="warning">
+
+        <strong>⚠️ Важно:</strong>
+
+        информация о наличии, количестве и готовности
+        товара должна подтверждаться владельцем склада
+        перед оформлением заказа.
+
+    </div>
+
+</section>
+
+<!-- FOOTER -->
+
+<footer>
+
+    <h3>WORKER PRO</h3>
+
+    <p>
+        Работа • Знания • Производство • Склад
+    </p>
+
+    <p>
+        Международная промышленная платформа
+    </p>
+
+    <p>
+        <a href="../">← Вернуться в WORKER PRO</a>
+    </p>
+
+    <p>
+        © 2026 WORKER PRO — F.S
+    </p>
+
+</footer>
+
+</body>
+</html>
