@@ -1,1 +1,1765 @@
- 
+ <!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WORKER PRO — Logistics</title>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f4f7f5;
+    color:#123;
+}
+
+.top-languages{
+    background:#063d25;
+    padding:10px;
+    text-align:center;
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+.top-languages button{
+    background:#0b6b3d;
+    color:white;
+    border:1px solid #b7ff35;
+    border-radius:8px;
+    padding:8px 11px;
+    margin:3px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.top-languages button:hover{
+    background:#b7ff35;
+    color:#063d25;
+}
+
+header{
+    background:linear-gradient(135deg,#063d25,#0b6b3d);
+    color:white;
+    text-align:center;
+    padding:35px 20px;
+}
+
+header h1{
+    margin:0 0 10px;
+    font-size:34px;
+}
+
+header p{
+    max-width:900px;
+    margin:auto;
+    line-height:1.6;
+}
+
+nav{
+    background:#075b34;
+    padding:12px;
+    text-align:center;
+    position:sticky;
+    top:58px;
+    z-index:999;
+    overflow-x:auto;
+    white-space:nowrap;
+}
+
+nav a{
+    display:inline-block;
+    color:white;
+    text-decoration:none;
+    background:#0b6b3d;
+    padding:9px 13px;
+    margin:4px;
+    border-radius:7px;
+    font-size:14px;
+}
+
+nav a:hover{
+    background:#b7ff35;
+    color:#063d25;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+    padding:25px 15px;
+}
+
+.hero{
+    background:white;
+    border-left:6px solid #0b6b3d;
+    border-radius:15px;
+    padding:25px;
+    box-shadow:0 3px 12px rgba(0,0,0,.08);
+    margin-bottom:25px;
+}
+
+.hero h2{
+    color:#063d25;
+    margin-top:0;
+}
+
+.hero p{
+    line-height:1.7;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
+    gap:15px;
+    margin-bottom:25px;
+}
+
+.stat{
+    background:white;
+    padding:20px;
+    text-align:center;
+    border-radius:14px;
+    box-shadow:0 3px 10px rgba(0,0,0,.07);
+}
+
+.stat .number{
+    color:#0b6b3d;
+    font-size:30px;
+    font-weight:bold;
+}
+
+.stat span{
+    display:block;
+    margin-top:8px;
+    font-weight:bold;
+}
+
+.search-box{
+    background:white;
+    padding:20px;
+    border-radius:14px;
+    box-shadow:0 3px 10px rgba(0,0,0,.07);
+    margin-bottom:25px;
+}
+
+.search-grid{
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr;
+    gap:12px;
+}
+
+.search-box input,
+.search-box select{
+    width:100%;
+    padding:13px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    font-size:16px;
+}
+
+.filters{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:15px;
+}
+
+.filters button{
+    border:0;
+    background:#e8f1ec;
+    color:#063d25;
+    padding:10px 14px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.filters button.active,
+.filters button:hover{
+    background:#0b6b3d;
+    color:white;
+}
+
+.section-title{
+    color:#063d25;
+    margin:30px 0 15px;
+}
+
+.routes-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:18px;
+}
+
+.route-card{
+    background:white;
+    border-radius:15px;
+    padding:20px;
+    box-shadow:0 3px 12px rgba(0,0,0,.08);
+    border-top:5px solid #0b6b3d;
+}
+
+.route-card h3{
+    color:#063d25;
+    margin-top:0;
+}
+
+.route-card p{
+    line-height:1.55;
+}
+
+.badge{
+    display:inline-block;
+    padding:6px 10px;
+    border-radius:20px;
+    background:#e8f5ed;
+    color:#075b34;
+    font-size:12px;
+    font-weight:bold;
+    margin-bottom:10px;
+}
+
+.badge.sea{
+    background:#dceeff;
+    color:#075b80;
+}
+
+.badge.air{
+    background:#eee5ff;
+    color:#603c9d;
+}
+
+.badge.rail{
+    background:#fff0d6;
+    color:#875b00;
+}
+
+.badge.road{
+    background:#e7f5df;
+    color:#347126;
+}
+
+.route-line{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    margin:15px 0;
+    font-weight:bold;
+    color:#063d25;
+}
+
+.route-line .line{
+    flex:1;
+    height:3px;
+    background:#b7ff35;
+}
+
+.card-buttons button,
+.primary-btn{
+    border:0;
+    background:#0b6b3d;
+    color:white;
+    padding:10px 15px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.card-buttons button:hover,
+.primary-btn:hover{
+    background:#063d25;
+}
+
+.transport-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:15px;
+}
+
+.transport-card{
+    background:white;
+    padding:20px;
+    border-radius:14px;
+    text-align:center;
+    box-shadow:0 3px 10px rgba(0,0,0,.07);
+}
+
+.transport-card .icon{
+    font-size:40px;
+}
+
+.transport-card h3{
+    color:#063d25;
+}
+
+.form-box{
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 3px 12px rgba(0,0,0,.08);
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:15px;
+}
+
+.form-group{
+    display:flex;
+    flex-direction:column;
+}
+
+.form-group label{
+    font-weight:bold;
+    margin-bottom:6px;
+    color:#063d25;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea{
+    padding:12px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    font-size:15px;
+}
+
+.form-group textarea{
+    min-height:120px;
+    resize:vertical;
+}
+
+.full{
+    grid-column:1/-1;
+}
+
+.workflow{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(145px,1fr));
+    gap:12px;
+}
+
+.step{
+    background:#063d25;
+    color:white;
+    padding:18px 12px;
+    border-radius:12px;
+    text-align:center;
+}
+
+.step strong{
+    display:block;
+    color:#b7ff35;
+    font-size:20px;
+    margin-bottom:8px;
+}
+
+.tracking{
+    background:white;
+    border-radius:15px;
+    padding:25px;
+    box-shadow:0 3px 12px rgba(0,0,0,.08);
+}
+
+.tracking-box{
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:12px;
+}
+
+.tracking-box input{
+    padding:13px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    font-size:16px;
+}
+
+.tracking-result{
+    margin-top:20px;
+    padding:18px;
+    background:#eaf5ee;
+    border-left:5px solid #0b6b3d;
+    border-radius:8px;
+    display:none;
+}
+
+.future{
+    background:#063d25;
+    color:white;
+    padding:25px;
+    border-radius:15px;
+}
+
+.future li{
+    margin:10px 0;
+}
+
+.quick-links{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:12px;
+}
+
+.quick-links a{
+    background:white;
+    color:#063d25;
+    text-decoration:none;
+    padding:17px;
+    border-radius:12px;
+    text-align:center;
+    font-weight:bold;
+    box-shadow:0 3px 10px rgba(0,0,0,.07);
+}
+
+.quick-links a:hover{
+    background:#0b6b3d;
+    color:white;
+}
+
+.demo-warning{
+    background:#fff4d6;
+    color:#664d03;
+    border:1px solid #e6c767;
+    padding:16px;
+    border-radius:10px;
+    margin-top:25px;
+}
+
+footer{
+    background:#063d25;
+    color:white;
+    text-align:center;
+    padding:30px 15px;
+    margin-top:40px;
+}
+
+@media(max-width:700px){
+
+    header h1{
+        font-size:27px;
+    }
+
+    .search-grid,
+    .tracking-box{
+        grid-template-columns:1fr;
+    }
+
+    .container{
+        padding:18px 10px;
+    }
+
+    .hero,
+    .form-box,
+    .tracking{
+        padding:18px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="top-languages">
+
+    <button onclick="setLanguage('AZ')">🇦🇿 AZ</button>
+    <button onclick="setLanguage('RU')">🇷🇺 RU</button>
+    <button onclick="setLanguage('EN')">🇬🇧 EN</button>
+    <button onclick="setLanguage('TR')">🇹🇷 TR</button>
+    <button onclick="setLanguage('DE')">🇩🇪 DE</button>
+    <button onclick="setLanguage('AR')">🇸🇦 AR</button>
+    <button onclick="setLanguage('ES')">🇪🇸 ES</button>
+    <button onclick="setLanguage('FR')">🇫🇷 FR</button>
+    <button onclick="setLanguage('IT')">🇮🇹 IT</button>
+
+</div>
+
+
+<header>
+
+    <h1>
+        🚚 WORKER PRO — Logistics
+    </h1>
+
+    <p>
+        Международная промышленная логистика:
+        автомобильные, морские, авиационные и
+        железнодорожные перевозки оборудования,
+        запчастей и промышленных грузов.
+    </p>
+
+</header>
+
+
+<nav>
+
+    <a href="../index.html">Главная</a>
+    <a href="../map/index.html">Карта</a>
+    <a href="../companies/index.html">Компании</a>
+    <a href="../manufacturers/index.html">Производители</a>
+    <a href="../suppliers/index.html">Поставщики</a>
+    <a href="../products/index.html">Продукты</a>
+    <a href="../equipment/index.html">Оборудование</a>
+    <a href="../warehouse/index.html">Склад</a>
+    <a href="../requests/index.html">Заявки</a>
+    <a href="../offers/index.html">Предложения</a>
+    <a href="../orders/index.html">Заказы</a>
+    <a href="../transport/index.html">Транспорт</a>
+    <a href="../documents/index.html">Документы</a>
+    <a href="../dashboard/index.html">Кабинет</a>
+
+</nav>
+
+
+<div class="container">
+
+
+<section class="hero">
+
+    <h2>
+        🌍 Международная промышленная логистика
+    </h2>
+
+    <p>
+        WORKER PRO сможет соединить покупателя,
+        поставщика, склад и транспортную компанию
+        в единую логистическую систему.
+    </p>
+
+    <p>
+        Пользователь сможет заказать промышленное
+        оборудование или запчасти в другой стране,
+        получить предложение по перевозке,
+        выбрать маршрут и отслеживать груз.
+    </p>
+
+</section>
+
+
+<div class="stats">
+
+    <div class="stat">
+        <div class="number">48</div>
+        <span>Стран</span>
+    </div>
+
+    <div class="stat">
+        <div class="number">326</div>
+        <span>Логистических компаний</span>
+    </div>
+
+    <div class="stat">
+        <div class="number">1,240</div>
+        <span>Маршрутов</span>
+    </div>
+
+    <div class="stat">
+        <div class="number">8,420</div>
+        <span>Доставок</span>
+    </div>
+
+    <div class="stat">
+        <div class="number">96%</div>
+        <span>Доставок вовремя</span>
+    </div>
+
+</div>
+
+
+<section class="search-box">
+
+    <div class="search-grid">
+
+        <input
+            id="searchInput"
+            type="text"
+            placeholder="🔎 Поиск маршрута, страны, города..."
+            onkeyup="filterRoutes()"
+        >
+
+
+        <select id="countryFilter" onchange="filterRoutes()">
+
+            <option value="all">
+                Все направления
+            </option>
+
+            <option value="azerbaijan">
+                Азербайджан
+            </option>
+
+            <option value="turkey">
+                Турция
+            </option>
+
+            <option value="germany">
+                Германия
+            </option>
+
+            <option value="italy">
+                Италия
+            </option>
+
+            <option value="china">
+                Китай
+            </option>
+
+            <option value="usa">
+                США
+            </option>
+
+        </select>
+
+
+        <select id="transportFilter" onchange="filterRoutes()">
+
+            <option value="all">
+                Все виды транспорта
+            </option>
+
+            <option value="road">
+                Авто
+            </option>
+
+            <option value="sea">
+                Море
+            </option>
+
+            <option value="air">
+                Авиа
+            </option>
+
+            <option value="rail">
+                Ж/д
+            </option>
+
+        </select>
+
+    </div>
+
+
+    <div class="filters">
+
+        <button
+            class="active"
+            onclick="setTransport('all',this)">
+            Все
+        </button>
+
+        <button
+            onclick="setTransport('road',this)">
+            🚚 Авто
+        </button>
+
+        <button
+            onclick="setTransport('sea',this)">
+            🚢 Море
+        </button>
+
+        <button
+            onclick="setTransport('air',this)">
+            ✈️ Авиа
+        </button>
+
+        <button
+            onclick="setTransport('rail',this)">
+            🚆 Ж/д
+        </button>
+
+    </div>
+
+</section>
+
+
+<h2 class="section-title">
+    🌍 Международные маршруты
+</h2>
+
+
+<div class="routes-grid" id="routesGrid">
+
+
+    <div
+        class="route-card"
+        data-country="azerbaijan turkey"
+        data-transport="road">
+
+        <span class="badge road">
+            🚚 Автомобиль
+        </span>
+
+        <h3>
+            Турция → Азербайджан
+        </h3>
+
+        <div class="route-line">
+            🇹🇷 Турция
+            <div class="line"></div>
+            🇦🇿 Азербайджан
+        </div>
+
+        <p>
+            Промышленные запчасти,
+            оборудование, материалы.
+        </p>
+
+        <p>
+            <strong>Тип:</strong>
+            Международная автомобильная перевозка
+        </p>
+
+        <p>
+            <strong>Статус:</strong>
+            Доступен
+        </p>
+
+        <div class="card-buttons">
+
+            <button onclick="routeInfo('Турция → Азербайджан')">
+                Подробнее
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div
+        class="route-card"
+        data-country="china azerbaijan"
+        data-transport="sea">
+
+        <span class="badge sea">
+            🚢 Морской
+        </span>
+
+        <h3>
+            Китай → Азербайджан
+        </h3>
+
+        <div class="route-line">
+            🇨🇳 Китай
+            <div class="line"></div>
+            🇦🇿 Азербайджан
+        </div>
+
+        <p>
+            Станки, оборудование,
+            запчасти и промышленные товары.
+        </p>
+
+        <p>
+            <strong>Тип:</strong>
+            Морская + наземная доставка
+        </p>
+
+        <p>
+            <strong>Статус:</strong>
+            Доступен
+        </p>
+
+        <div class="card-buttons">
+
+            <button onclick="routeInfo('Китай → Азербайджан')">
+                Подробнее
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div
+        class="route-card"
+        data-country="germany azerbaijan"
+        data-transport="road">
+
+        <span class="badge road">
+            🚚 Авто
+        </span>
+
+        <h3>
+            Германия → Азербайджан
+        </h3>
+
+        <div class="route-line">
+            🇩🇪 Германия
+            <div class="line"></div>
+            🇦🇿 Азербайджан
+        </div>
+
+        <p>
+            CNC оборудование,
+            автоматика и промышленные компоненты.
+        </p>
+
+        <p>
+            <strong>Тип:</strong>
+            Международная доставка
+        </p>
+
+        <p>
+            <strong>Статус:</strong>
+            Доступен
+        </p>
+
+        <div class="card-buttons">
+
+            <button onclick="routeInfo('Германия → Азербайджан')">
+                Подробнее
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div
+        class="route-card"
+        data-country="italy azerbaijan"
+        data-transport="road">
+
+        <span class="badge road">
+            🚚 Авто
+        </span>
+
+        <h3>
+            Италия → Азербайджан
+        </h3>
+
+        <div class="route-line">
+            🇮🇹 Италия
+            <div class="line"></div>
+            🇦🇿 Азербайджан
+        </div>
+
+        <p>
+            Автоматика, насосы,
+            оборудование и запчасти.
+        </p>
+
+        <p>
+            <strong>Тип:</strong>
+            Международная перевозка
+        </p>
+
+        <p>
+            <strong>Статус:</strong>
+            Доступен
+        </p>
+
+        <div class="card-buttons">
+
+            <button onclick="routeInfo('Италия → Азербайджан')">
+                Подробнее
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div
+        class="route-card"
+        data-country="usa azerbaijan"
+        data-transport="air">
+
+        <span class="badge air">
+            ✈️ Авиа
+        </span>
+
+        <h3>
+            США → Азербайджан
+        </h3>
+
+        <div class="route-line">
+            🇺🇸 США
+            <div class="line"></div>
+            🇦🇿 Азербайджан
+        </div>
+
+        <p>
+            Срочные запчасти,
+            электроника и датчики.
+        </p>
+
+        <p>
+            <strong>Тип:</strong>
+            Авиационная доставка
+        </p>
+
+        <p>
+            <strong>Статус:</strong>
+            Доступен
+        </p>
+
+        <div class="card-buttons">
+
+            <button onclick="routeInfo('США → Азербайджан')">
+                Подробнее
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div
+        class="route-card"
+        data-country="turkey germany"
+        data-transport="rail">
+
+        <span class="badge rail">
+            🚆 Ж/д
+        </span>
+
+        <h3>
+            Турция → Европа
+        </h3>
+
+        <div class="route-line">
+            🇹🇷 Турция
+            <div class="line"></div>
+            🇪🇺 Европа
+        </div>
+
+        <p>
+            Промышленное оборудование,
+            материалы и комплектующие.
+        </p>
+
+        <p>
+            <strong>Тип:</strong>
+            Железнодорожная перевозка
+        </p>
+
+        <p>
+            <strong>Статус:</strong>
+            Доступен
+        </p>
+
+        <div class="card-buttons">
+
+            <button onclick="routeInfo('Турция → Европа')">
+                Подробнее
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<h2 class="section-title">
+    🚚 Виды транспорта
+</h2>
+
+
+<div class="transport-grid">
+
+
+    <div class="transport-card">
+
+        <div class="icon">
+            🚚
+        </div>
+
+        <h3>
+            Автомобиль
+        </h3>
+
+        <p>
+            Грузовые автомобили,
+            фуры и специальные перевозки.
+        </p>
+
+    </div>
+
+
+    <div class="transport-card">
+
+        <div class="icon">
+            🚢
+        </div>
+
+        <h3>
+            Морской
+        </h3>
+
+        <p>
+            Контейнерные и крупные
+            промышленные грузы.
+        </p>
+
+    </div>
+
+
+    <div class="transport-card">
+
+        <div class="icon">
+            ✈️
+        </div>
+
+        <h3>
+            Авиационный
+        </h3>
+
+        <p>
+            Срочная доставка запчастей
+            и небольших грузов.
+        </p>
+
+    </div>
+
+
+    <div class="transport-card">
+
+        <div class="icon">
+            🚆
+        </div>
+
+        <h3>
+            Железнодорожный
+        </h3>
+
+        <p>
+            Массовые и промышленные
+            грузы на большие расстояния.
+        </p>
+
+    </div>
+
+
+    <div class="transport-card">
+
+        <div class="icon">
+            🏗️
+        </div>
+
+        <h3>
+            Негабаритный
+        </h3>
+
+        <p>
+            Станки, прессы, печи
+            и крупное оборудование.
+        </p>
+
+    </div>
+
+
+    <div class="transport-card">
+
+        <div class="icon">
+            📦
+        </div>
+
+        <h3>
+            Сборный груз
+        </h3>
+
+        <p>
+            Небольшие партии
+            промышленной продукции.
+        </p>
+
+    </div>
+
+</div>
+
+
+<h2 class="section-title">
+    📍 Отслеживание груза
+</h2>
+
+
+<section class="tracking">
+
+    <p>
+        Введите демонстрационный номер отправления,
+        чтобы проверить статус доставки.
+    </p>
+
+    <div class="tracking-box">
+
+        <input
+            id="trackingNumber"
+            placeholder="Например: WP-2026-001"
+        >
+
+        <button
+            class="primary-btn"
+            onclick="trackCargo()">
+
+            🔎 Отследить
+
+        </button>
+
+    </div>
+
+
+    <div
+        class="tracking-result"
+        id="trackingResult">
+
+    </div>
+
+</section>
+
+
+<h2 class="section-title">
+    📝 Запросить перевозку
+</h2>
+
+
+<section class="form-box">
+
+    <div class="form-grid">
+
+        <div class="form-group">
+
+            <label>
+                Откуда
+            </label>
+
+            <input
+                id="from"
+                placeholder="Страна / город"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Куда
+            </label>
+
+            <input
+                id="to"
+                placeholder="Страна / город"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Вид транспорта
+            </label>
+
+            <select id="transportType">
+
+                <option>
+                    Автомобиль
+                </option>
+
+                <option>
+                    Морской
+                </option>
+
+                <option>
+                    Авиационный
+                </option>
+
+                <option>
+                    Железнодорожный
+                </option>
+
+                <option>
+                    Негабаритная перевозка
+                </option>
+
+                <option>
+                    Сборный груз
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Вес груза
+            </label>
+
+            <input
+                id="weight"
+                placeholder="Например: 1500 кг"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Тип груза
+            </label>
+
+            <select id="cargoType">
+
+                <option>
+                    Запчасти
+                </option>
+
+                <option>
+                    Оборудование
+                </option>
+
+                <option>
+                    Станок
+                </option>
+
+                <option>
+                    Насос
+                </option>
+
+                <option>
+                    Материалы
+                </option>
+
+                <option>
+                    Электроника
+                </option>
+
+                <option>
+                    Другое
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Желаемый срок
+            </label>
+
+            <input
+                id="deliveryDate"
+                type="date"
+            >
+
+        </div>
+
+
+        <div class="form-group full">
+
+            <label>
+                Описание груза
+            </label>
+
+            <textarea
+                id="cargoDescription"
+                placeholder="Опишите груз, размеры, особенности перевозки..."
+            ></textarea>
+
+        </div>
+
+    </div>
+
+    <br>
+
+    <button
+        class="primary-btn"
+        onclick="requestTransport()">
+
+        🚚 Запросить стоимость перевозки
+
+    </button>
+
+</section>
+
+
+<h2 class="section-title">
+    🔄 Как работает логистика WORKER PRO
+</h2>
+
+
+<div class="workflow">
+
+    <div class="step">
+        <strong>1</strong>
+        Найти товар
+    </div>
+
+    <div class="step">
+        <strong>2</strong>
+        Получить предложение
+    </div>
+
+    <div class="step">
+        <strong>3</strong>
+        Создать заказ
+    </div>
+
+    <div class="step">
+        <strong>4</strong>
+        Запросить перевозку
+    </div>
+
+    <div class="step">
+        <strong>5</strong>
+        Выбрать маршрут
+    </div>
+
+    <div class="step">
+        <strong>6</strong>
+        Отследить груз
+    </div>
+
+    <div class="step">
+        <strong>7</strong>
+        Получить товар
+    </div>
+
+</div>
+
+
+<h2 class="section-title">
+    📄 Логистические документы
+</h2>
+
+
+<div class="transport-grid">
+
+    <div class="transport-card">
+        <div class="icon">📄</div>
+        <h3>Invoice</h3>
+        <p>
+            Коммерческий счёт на товар.
+        </p>
+    </div>
+
+    <div class="transport-card">
+        <div class="icon">📦</div>
+        <h3>Packing List</h3>
+        <p>
+            Информация об упаковке и грузовых местах.
+        </p>
+    </div>
+
+    <div class="transport-card">
+        <div class="icon">🚚</div>
+        <h3>Transport Document</h3>
+        <p>
+            Документы перевозчика.
+        </p>
+    </div>
+
+    <div class="transport-card">
+        <div class="icon">🛃</div>
+        <h3>Customs</h3>
+        <p>
+            Таможенные документы.
+        </p>
+    </div>
+
+    <div class="transport-card">
+        <div class="icon">🛡️</div>
+        <h3>Insurance</h3>
+        <p>
+            Страхование промышленного груза.
+        </p>
+    </div>
+
+    <div class="transport-card">
+        <div class="icon">📍</div>
+        <h3>Tracking</h3>
+        <p>
+            Отслеживание перемещения груза.
+        </p>
+    </div>
+
+</div>
+
+
+<h2 class="section-title">
+    🚀 Будущие возможности
+</h2>
+
+
+<section class="future">
+
+    <ul>
+
+        <li>
+            Онлайн-расчёт стоимости доставки.
+        </li>
+
+        <li>
+            Реальные предложения от транспортных компаний.
+        </li>
+
+        <li>
+            Сравнение нескольких перевозчиков.
+        </li>
+
+        <li>
+            Онлайн-бронирование перевозки.
+        </li>
+
+        <li>
+            GPS-отслеживание груза.
+        </li>
+
+        <li>
+            Автоматический расчёт маршрута.
+        </li>
+
+        <li>
+            Интеграция с картой WORKER PRO.
+        </li>
+
+        <li>
+            Интеграция со складами.
+        </li>
+
+        <li>
+            Связь с Orders и Payments.
+        </li>
+
+        <li>
+            Электронные транспортные документы.
+        </li>
+
+        <li>
+            Страхование груза.
+        </li>
+
+        <li>
+            Международные таможенные услуги.
+        </li>
+
+    </ul>
+
+</section>
+
+
+<h2 class="section-title">
+    🔗 Быстрый доступ
+</h2>
+
+
+<div class="quick-links">
+
+    <a href="../map/index.html">
+        🌍 Карта
+    </a>
+
+    <a href="../warehouse/index.html">
+        📦 Склад
+    </a>
+
+    <a href="../products/index.html">
+        ⚙️ Продукты
+    </a>
+
+    <a href="../equipment/index.html">
+        🏭 Оборудование
+    </a>
+
+    <a href="../requests/index.html">
+        📝 Заявки
+    </a>
+
+    <a href="../offers/index.html">
+        💰 Предложения
+    </a>
+
+    <a href="../orders/index.html">
+        📋 Заказы
+    </a>
+
+    <a href="../documents/index.html">
+        📄 Документы
+    </a>
+
+    <a href="../payments/index.html">
+        💳 Платежи
+    </a>
+
+    <a href="../support/index.html">
+        🎧 Поддержка
+    </a>
+
+</div>
+
+
+<div class="demo-warning">
+
+    <strong>⚠️ Демо-версия:</strong>
+
+    маршруты, сроки, статусы, цены и транспортные
+    компании на этой странице являются демонстрационными.
+    Реальные расчёты, бронирование, GPS-отслеживание
+    и платежи будут подключаться после создания
+    рабочей логистической системы WORKER PRO.
+
+</div>
+
+</div>
+
+
+<footer>
+
+    <h3>
+        WORKER PRO
+    </h3>
+
+    <p>
+        Международная промышленная платформа
+    </p>
+
+    <p>
+        Logistics • Transport • Warehouse • Delivery
+    </p>
+
+    <p>
+        © 2026 WORKER PRO — F.S
+    </p>
+
+</footer>
+
+
+<script src="../language.js"></script>
+
+<script>
+
+let selectedTransport = "all";
+
+
+function setTransport(type,button){
+
+    selectedTransport = type;
+
+    document
+        .querySelectorAll(".filters button")
+        .forEach(function(btn){
+
+            btn.classList.remove("active");
+
+        });
+
+    button.classList.add("active");
+
+    document.getElementById("transportFilter").value = type;
+
+    filterRoutes();
+
+}
+
+
+function filterRoutes(){
+
+    const search =
+        document
+        .getElementById("searchInput")
+        .value
+        .toLowerCase();
+
+    const country =
+        document
+        .getElementById("countryFilter")
+        .value
+        .toLowerCase();
+
+    const transport =
+        document
+        .getElementById("transportFilter")
+        .value
+        .toLowerCase();
+
+    const cards =
+        document.querySelectorAll(".route-card");
+
+
+    cards.forEach(function(card){
+
+        const text =
+            card.innerText.toLowerCase();
+
+        const cardCountry =
+            card.dataset.country.toLowerCase();
+
+        const cardTransport =
+            card.dataset.transport.toLowerCase();
+
+
+        const searchMatch =
+            text.includes(search);
+
+        const countryMatch =
+            country === "all" ||
+            cardCountry.includes(country);
+
+        const transportMatch =
+            transport === "all" ||
+            cardTransport === transport;
+
+
+        if(
+            searchMatch &&
+            countryMatch &&
+            transportMatch
+        ){
+
+            card.style.display = "block";
+
+        }else{
+
+            card.style.display = "none";
+
+        }
+
+    });
+
+}
+
+
+function routeInfo(route){
+
+    alert(
+        "🚚 Маршрут WORKER PRO\\n\\n" +
+        route +
+        "\\n\\n" +
+        "Это демонстрационный маршрут.\\n\\n" +
+        "В рабочей версии здесь будут: " +
+        "перевозчики, стоимость, сроки, " +
+        "варианты транспорта, документы и " +
+        "возможность заказать перевозку."
+    );
+
+}
+
+
+function trackCargo(){
+
+    const number =
+        document
+        .getElementById("trackingNumber")
+        .value
+        .trim();
+
+    const result =
+        document.getElementById("trackingResult");
+
+
+    if(!number){
+
+        alert(
+            "Введите номер отправления."
+        );
+
+        return;
+
+    }
+
+
+    result.style.display = "block";
+
+    result.innerHTML =
+        "<strong>📦 Отправление:</strong> " +
+        number +
+        "<br><br>" +
+
+        "<strong>Статус:</strong> " +
+        "🚚 Груз находится в пути" +
+        "<br><br>" +
+
+        "<strong>Маршрут:</strong> " +
+        "Поставщик → Склад → Азербайджан" +
+        "<br><br>" +
+
+        "<strong>Следующий этап:</strong> " +
+        "Таможенное оформление";
+
+}
+
+
+function requestTransport(){
+
+    const from =
+        document.getElementById("from").value.trim();
+
+    const to =
+        document.getElementById("to").value.trim();
+
+    const weight =
+        document.getElementById("weight").value.trim();
+
+    const type =
+        document.getElementById("transportType").value;
+
+    const cargo =
+        document.getElementById("cargoType").value;
+
+
+    if(!from){
+
+        alert(
+            "Введите место отправления."
+        );
+
+        return;
+
+    }
+
+
+    if(!to){
+
+        alert(
+            "Введите место назначения."
+        );
+
+        return;
+
+    }
+
+
+    if(!weight){
+
+        alert(
+            "Введите вес груза."
+        );
+
+        return;
+
+    }
+
+
+    alert(
+        "🚚 Запрос создан в демо-режиме.\\n\\n" +
+
+        "Откуда: " + from +
+        "\\nКуда: " + to +
+        "\\nТранспорт: " + type +
+        "\\nГруз: " + cargo +
+        "\\nВес: " + weight +
+
+        "\\n\\n" +
+
+        "В рабочей версии запрос будет отправлен " +
+        "транспортным компаниям для получения " +
+        "реальных предложений."
+    );
+
+}
+
+</script>
+
+</body>
+</html>
