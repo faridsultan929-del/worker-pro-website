@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WORKER PRO — Carriers</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f7f5;
+    color: #123;
+}
+
+.top-languages {
+    background: #063d25;
+    padding: 10px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.top-languages button {
+    background: #0b6b3d;
+    color: white;
+    border: none;
+    padding: 9px 13px;
+    margin: 3px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.top-languages button:hover {
+    background: #b7ff35;
+    color: #063d25;
+}
+
+nav {
+    background: #075b34;
+    padding: 12px;
+    text-align: center;
+    position: sticky;
+    top: 58px;
+    z-index: 999;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 5px 8px;
+    font-weight: bold;
+    display: inline-block;
+}
+
+nav a:hover {
+    color: #b7ff35;
+}
+
+header {
+    background: linear-gradient(135deg, #063d25, #0b6b3d);
+    color: white;
+    padding: 45px 20px;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0 0 10px;
+    font-size: 42px;
+}
+
+header p {
+    margin: 0;
+    font-size: 19px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 25px 15px;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.stat {
+    background: white;
+    border-radius: 14px;
+    padding: 22px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.stat strong {
+    display: block;
+    font-size: 30px;
+    color: #0b6b3d;
+}
+
+.stat span {
+    color: #555;
+}
+
+.filters {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+}
+
+.filters h2 {
+    margin-top: 0;
+    color: #063d25;
+}
+
+.filter-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccd8d1;
+    border-radius: 9px;
+    font-size: 15px;
+}
+
+.carriers {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.carrier {
+    background: white;
+    border-radius: 16px;
+    padding: 22px;
+    box-shadow: 0 5px 18px rgba(0,0,0,0.08);
+    border-top: 5px solid #0b6b3d;
+}
+
+.carrier h3 {
+    margin-top: 0;
+    color: #063d25;
+    font-size: 21px;
+}
+
+.badge {
+    display: inline-block;
+    background: #e8f7ed;
+    color: #08733f;
+    padding: 6px 10px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.badge.busy {
+    background: #fff2d8;
+    color: #a66a00;
+}
+
+.info {
+    margin: 9px 0;
+    line-height: 1.5;
+}
+
+.info strong {
+    color: #063d25;
+}
+
+.buttons {
+    margin-top: 18px;
+}
+
+button.action {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 9px;
+    background: #0b6b3d;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button.action:hover {
+    background: #063d25;
+}
+
+button.secondary {
+    margin-top: 8px;
+    background: #e7eee9;
+    color: #063d25;
+}
+
+.section {
+    margin-top: 35px;
+}
+
+.section h2 {
+    color: #063d25;
+}
+
+.types {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+}
+
+.type {
+    background: white;
+    padding: 20px;
+    border-radius: 13px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.07);
+}
+
+.type-icon {
+    font-size: 35px;
+    margin-bottom: 8px;
+}
+
+.quote-box {
+    display: none;
+    background: white;
+    margin-top: 25px;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 5px 18px rgba(0,0,0,0.09);
+}
+
+.quote-box h2 {
+    color: #063d25;
+    margin-top: 0;
+}
+
+.route {
+    background: #eef7f1;
+    padding: 12px;
+    border-radius: 9px;
+    margin: 10px 0;
+    font-weight: bold;
+}
+
+.quick-links {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+.quick-links a {
+    background: #063d25;
+    color: white;
+    text-decoration: none;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.quick-links a:hover {
+    background: #0b6b3d;
+}
+
+.notice {
+    background: #fff7df;
+    border-left: 5px solid #d99a00;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 25px;
+}
+
+footer {
+    margin-top: 40px;
+    background: #063d25;
+    color: white;
+    text-align: center;
+    padding: 25px;
+}
+
+@media (max-width: 900px) {
+    .stats,
+    .carriers,
+    .types {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .filter-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .quick-links {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    header h1 {
+        font-size: 32px;
+    }
+
+    .stats,
+    .carriers,
+    .types,
+    .filter-grid,
+    .quick-links {
+        grid-template-columns: 1fr;
+    }
+
+    nav {
+        position: relative;
+        top: 0;
+    }
+
+    .top-languages {
+        position: relative;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="top-languages">
+    <button onclick="setLanguage('AZ')">AZ</button>
+    <button onclick="setLanguage('RU')">RU</button>
+    <button onclick="setLanguage('EN')">EN</button>
+    <button onclick="setLanguage('TR')">TR</button>
+    <button onclick="setLanguage('DE')">DE</button>
+    <button onclick="setLanguage('AR')">AR</button>
+    <button onclick="setLanguage('ES')">ES</button>
+    <button onclick="setLanguage('FR')">FR</button>
+    <button onclick="setLanguage('IT')">IT</button>
+</div>
+
+<nav>
+    <a href="../index.html">Home</a>
+    <a href="../map/index.html">Map</a>
+    <a href="../logistics/index.html">Logistics</a>
+    <a href="../transport/index.html">Transport</a>
+    <a href="../transport-booking/index.html">Booking</a>
+    <a href="../delivery/index.html">Delivery</a>
+    <a href="../tracking/index.html">Tracking</a>
+    <a href="../warehouse/index.html">Warehouse</a>
+    <a href="../orders/index.html">Orders</a>
+    <a href="../requests/index.html">Requests</a>
+    <a href="../offers/index.html">Offers</a>
+    <a href="../companies/index.html">Companies</a>
+    <a href="../documents/index.html">Documents</a>
+    <a href="../notifications/index.html">Notifications</a>
+    <a href="../dashboard/index.html">Dashboard</a>
+</nav>
+
+<header>
+    <h1>🚚 WORKER PRO — Carriers</h1>
+    <p>Международные транспортные компании и перевозчики</p>
+</header>
+
+<div class="container">
+
+    <div class="stats">
+        <div class="stat">
+            <strong>386</strong>
+            <span>Перевозчиков</span>
+        </div>
+
+        <div class="stat">
+            <strong>42</strong>
+            <span>Страны</span>
+        </div>
+
+        <div class="stat">
+            <strong>1,248</strong>
+            <span>Заявок</span>
+        </div>
+
+        <div class="stat">
+            <strong>96%</strong>
+            <span>Выполнено</span>
+        </div>
+    </div>
+
+    <div class="filters">
+        <h2>🔎 Поиск перевозчика</h2>
+
+        <div class="filter-grid">
+            <input
+                type="text"
+                id="search"
+                placeholder="Название компании..."
+                oninput="filterCarriers()">
+
+            <select id="country" onchange="filterCarriers()">
+                <option value="">Все страны</option>
+                <option value="Azerbaijan">Azerbaijan</option>
+                <option value="Turkey">Turkey</option>
+                <option value="Germany">Germany</option>
+                <option value="China">China</option>
+                <option value="Georgia">Georgia</option>
+                <option value="Russia">Russia</option>
+                <option value="Italy">Italy</option>
+            </select>
+
+            <select id="transportType" onchange="filterCarriers()">
+                <option value="">Все виды транспорта</option>
+                <option value="Road">Road</option>
+                <option value="Sea">Sea</option>
+                <option value="Air">Air</option>
+                <option value="Rail">Rail</option>
+            </select>
+
+            <select id="status" onchange="filterCarriers()">
+                <option value="">Все статусы</option>
+                <option value="available">Available</option>
+                <option value="busy">Busy</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="carriers" id="carrierList">
+
+        <div class="carrier"
+             data-name="Global Road Transport"
+             data-country="Turkey"
+             data-type="Road"
+             data-status="available">
+
+            <span class="badge">AVAILABLE</span>
+
+            <h3>🚛 Global Road Transport</h3>
+
+            <div class="info">
+                <strong>Страна:</strong> Turkey
+            </div>
+
+            <div class="info">
+                <strong>Маршрут:</strong> Turkey → Azerbaijan → Georgia
+            </div>
+
+            <div class="info">
+                <strong>Транспорт:</strong> Road / Truck
+            </div>
+
+            <div class="info">
+                <strong>Груз:</strong> Machinery, Spare Parts, Equipment
+            </div>
+
+            <div class="info">
+                <strong>Города:</strong> Istanbul, Ankara, Baku, Tbilisi
+            </div>
+
+            <div class="buttons">
+                <button class="action"
+                        onclick="requestQuote('Global Road Transport')">
+                    Request Quote
+                </button>
+
+                <button class="action secondary"
+                        onclick="showCarrier('Global Road Transport')">
+                    Подробнее
+                </button>
+            </div>
+        </div>
+
+        <div class="carrier"
+             data-name="Caspian Cargo"
+             data-country="Azerbaijan"
+             data-type="Sea"
+             data-status="available">
+
+            <span class="badge">AVAILABLE</span>
+
+            <h3>🚢 Caspian Cargo</h3>
+
+            <div class="info">
+                <strong>Страна:</strong> Azerbaijan
+            </div>
+
+            <div class="info">
+                <strong>Маршрут:</strong> China → Caspian Sea → Azerbaijan
+            </div>
+
+            <div class="info">
+                <strong>Транспорт:</strong> Sea
+            </div>
+
+            <div class="info">
+                <strong>Груз:</strong> Containers, Machinery, Spare Parts
+            </div>
+
+            <div class="info">
+                <strong>Города:</strong> Baku, Aktau, Alat
+            </div>
+
+            <div class="buttons">
+                <button class="action"
+                        onclick="requestQuote('Caspian Cargo')">
+                    Request Quote
+                </button>
+
+                <button class="action secondary"
+                        onclick="showCarrier('Caspian Cargo')">
+                    Подробнее
+                </button>
+            </div>
+        </div>
+
+        <div class="carrier"
+             data-name="Euro Industrial Logistics"
+             data-country="Germany"
+             data-type="Road"
+             data-status="available">
+
+            <span class="badge">AVAILABLE</span>
+
+            <h3>🚚 Euro Industrial Logistics</h3>
+
+            <div class="info">
+                <strong>Страна:</strong> Germany
+            </div>
+
+            <div class="info">
+                <strong>Маршрут:</strong> Germany → Turkey → Azerbaijan
+            </div>
+
+            <div class="info">
+                <strong>Транспорт:</strong> Road
+            </div>
+
+            <div class="info">
+                <strong>Груз:</strong> Industrial Equipment, CNC Machines
+            </div>
+
+            <div class="info">
+                <strong>Города:</strong> Berlin, Munich, Istanbul, Baku
+            </div>
+
+            <div class="buttons">
+                <button class="action"
+                        onclick="requestQuote('Euro Industrial Logistics')">
+                    Request Quote
+                </button>
+
+                <button class="action secondary"
+                        onclick="showCarrier('Euro Industrial Logistics')">
+                    Подробнее
+                </button>
+            </div>
+        </div>
+
+        <div class="carrier"
+             data-name="Asia Rail Cargo"
+             data-country="China"
+             data-type="Rail"
+             data-status="busy">
+
+            <span class="badge busy">BUSY</span>
+
+            <h3>🚆 Asia Rail Cargo</h3>
+
+            <div class="info">
+                <strong>Страна:</strong> China
+            </div>
+
+            <div class="info">
+                <strong>Маршрут:</strong> China → Kazakhstan → Azerbaijan
+            </div>
+
+            <div class="info">
+                <strong>Транспорт:</strong> Rail
+            </div>
+
+            <div class="info">
+                <strong>Груз:</strong> Machinery, Electronics, Spare Parts
+            </div>
+
+            <div class="info">
+                <strong>Города:</strong> Shanghai, Urumqi, Almaty, Baku
+            </div>
+
+            <div class="buttons">
+                <button class="action"
+                        onclick="requestQuote('Asia Rail Cargo')">
+                    Request Quote
+                </button>
+
+                <button class="action secondary"
+                        onclick="showCarrier('Asia Rail Cargo')">
+                    Подробнее
+                </button>
+            </div>
+        </div>
+
+        <div class="carrier"
+             data-name="Aero Industrial Cargo"
+             data-country="Germany"
+             data-type="Air"
+             data-status="available">
+
+            <span class="badge">AVAILABLE</span>
+
+            <h3>✈️ Aero Industrial Cargo</h3>
+
+            <div class="info">
+                <strong>Страна:</strong> Germany
+            </div>
+
+            <div class="info">
+                <strong>Маршрут:</strong> Europe → Azerbaijan
+            </div>
+
+            <div class="info">
+                <strong>Транспорт:</strong> Air
+            </div>
+
+            <div class="info">
+                <strong>Груз:</strong> Sensors, Electronics, Urgent Parts
+            </div>
+
+            <div class="info">
+                <strong>Города:</strong> Frankfurt, Istanbul, Baku
+            </div>
+
+            <div class="buttons">
+                <button class="action"
+                        onclick="requestQuote('Aero Industrial Cargo')">
+                    Request Quote
+                </button>
+
+                <button class="action secondary"
+                        onclick="showCarrier('Aero Industrial Cargo')">
+                    Подробнее
+                </button>
+            </div>
+        </div>
+
+        <div class="carrier"
+             data-name="Caucasus Transport"
+             data-country="Georgia"
+             data-type="Road"
+             data-status="available">
+
+            <span class="badge">AVAILABLE</span>
+
+            <h3>🚛 Caucasus Transport</h3>
+
+            <div class="info">
+                <strong>Страна:</strong> Georgia
+            </div>
+
+            <div class="info">
+                <strong>Маршрут:</strong> Georgia → Azerbaijan → Turkey
+            </div>
+
+            <div class="info">
+                <strong>Транспорт:</strong> Road
+            </div>
+
+            <div class="info">
+                <strong>Груз:</strong> Spare Parts, Tools, Equipment
+            </div>
+
+            <div class="info">
+                <strong>Города:</strong> Tbilisi, Batumi, Baku, Ganja
+            </div>
+
+            <div class="buttons">
+                <button class="action"
+                        onclick="requestQuote('Caucasus Transport')">
+                    Request Quote
+                </button>
+
+                <button class="action secondary"
+                        onclick="showCarrier('Caucasus Transport')">
+                    Подробнее
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="section">
+        <h2>📦 Виды грузов</h2>
+
+        <div class="types">
+
+            <div class="type">
+                <div class="type-icon">⚙️</div>
+                <strong>Machinery</strong>
+                <p>Станки и оборудование</p>
+            </div>
+
+            <div class="type">
+                <div class="type-icon">🔩</div>
+                <strong>Spare Parts</strong>
+                <p>Запчасти и комплектующие</p>
+            </div>
+
+            <div class="type">
+                <div class="type-icon">🏭</div>
+                <strong>Industrial Equipment</strong>
+                <p>Промышленное оборудование</p>
+            </div>
+
+            <div class="type">
+                <div class="type-icon">📦</div>
+                <strong>Containers</strong>
+                <p>Контейнерные грузы</p>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="quote-box" id="quoteBox">
+
+        <h2>📋 Запрос цены перевозки</h2>
+
+        <div class="route" id="selectedCarrier">
+            Перевозчик не выбран
+        </div>
+
+        <div class="filter-grid">
+
+            <input
+                type="text"
+                id="quoteFrom"
+                placeholder="Откуда">
+
+            <input
+                type="text"
+                id="quoteTo"
+                placeholder="Куда">
+
+            <input
+                type="text"
+                id="quoteCargo"
+                placeholder="Название груза">
+
+            <input
+                type="number"
+                id="quoteWeight"
+                placeholder="Вес, кг">
+
+        </div>
+
+        <br>
+
+        <textarea
+            id="quoteMessage"
+            rows="4"
+            placeholder="Дополнительные требования"></textarea>
+
+        <br><br>
+
+        <button class="action" onclick="sendQuote()">
+            Отправить запрос
+        </button>
+
+    </div>
+
+    <div class="section">
+
+        <h2>🔄 Как работает WORKER PRO</h2>
+
+        <div class="types">
+
+            <div class="type">
+                <div class="type-icon">1️⃣</div>
+                <strong>Создайте заявку</strong>
+                <p>Укажите маршрут и груз.</p>
+            </div>
+
+            <div class="type">
+                <div class="type-icon">2️⃣</div>
+                <strong>Выберите перевозчика</strong>
+                <p>Сравните доступные компании.</p>
+            </div>
+
+            <div class="type">
+                <div class="type-icon">3️⃣</div>
+                <strong>Получите цену</strong>
+                <p>Перевозчик отправляет условия.</p>
+            </div>
+
+            <div class="type">
+                <div class="type-icon">4️⃣</div>
+                <strong>Отслеживайте груз</strong>
+                <p>Используйте Tracking.</p>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="section">
+
+        <h2>🔗 Быстрый доступ</h2>
+
+        <div class="quick-links">
+
+            <a href="../transport-booking/index.html">
+                🚚 Transport Booking
+            </a>
+
+            <a href="../tracking/index.html">
+                📍 Tracking
+            </a>
+
+            <a href="../logistics/index.html">
+                🌍 Logistics
+            </a>
+
+            <a href="../transport/index.html">
+                🚛 Transport
+            </a>
+
+            <a href="../delivery/index.html">
+                📦 Delivery
+            </a>
+
+            <a href="../orders/index.html">
+                🧾 Orders
+            </a>
+
+            <a href="../offers/index.html">
+                💰 Offers
+            </a>
+
+            <a href="../companies/index.html">
+                🏢 Companies
+            </a>
+
+        </div>
+    </div>
+
+    <div class="notice">
+        <strong>⚠️ DEMO VERSION</strong><br><br>
+        Сейчас данные перевозчиков являются демонстрационными.
+        В следующей версии WORKER PRO можно подключить реальные
+        компании, цены, контакты, документы, предложения,
+        оплату и систему онлайн-бронирования.
+    </div>
+
+</div>
+
+<footer>
+    <strong>WORKER PRO</strong><br>
+    Global Industrial Platform<br><br>
+    Production • Suppliers • Logistics • Transport • Tracking
+</footer>
+
+<script src="../language.js"></script>
+
+<script>
+
+function filterCarriers() {
+
+    const search =
+        document.getElementById("search").value.toLowerCase();
+
+    const country =
+        document.getElementById("country").value;
+
+    const type =
+        document.getElementById("transportType").value;
+
+    const status =
+        document.getElementById("status").value;
+
+    const carriers =
+        document.querySelectorAll(".carrier");
+
+    carriers.forEach(carrier => {
+
+        const name =
+            carrier.dataset.name.toLowerCase();
+
+        const carrierCountry =
+            carrier.dataset.country;
+
+        const carrierType =
+            carrier.dataset.type;
+
+        const carrierStatus =
+            carrier.dataset.status;
+
+        const searchOK =
+            name.includes(search);
+
+        const countryOK =
+            !country || carrierCountry === country;
+
+        const typeOK =
+            !type || carrierType === type;
+
+        const statusOK =
+            !status || carrierStatus === status;
+
+        if (
+            searchOK &&
+            countryOK &&
+            typeOK &&
+            statusOK
+        ) {
+            carrier.style.display = "block";
+        } else {
+            carrier.style.display = "none";
+        }
+
+    });
+}
+
+
+function requestQuote(carrier) {
+
+    document.getElementById("quoteBox").style.display = "block";
+
+    document.getElementById("selectedCarrier").innerHTML =
+        "Выбран перевозчик: <strong>" + carrier + "</strong>";
+
+    document.getElementById("quoteBox")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
+}
+
+
+function showCarrier(carrier) {
+
+    alert(
+        "WORKER PRO\n\n" +
+        "Перевозчик: " + carrier +
+        "\n\n" +
+        "Здесь в будущей версии будут:\n" +
+        "• рейтинг\n" +
+        "• реальные контакты\n" +
+        "• лицензии\n" +
+        "• маршруты\n" +
+        "• типы транспорта\n" +
+        "• цены\n" +
+        "• отзывы\n" +
+        "• документы"
+    );
+}
+
+
+function sendQuote() {
+
+    const carrier =
+        document.getElementById("selectedCarrier").innerText;
+
+    const from =
+        document.getElementById("quoteFrom").value;
+
+    const to =
+        document.getElementById("quoteTo").value;
+
+    const cargo =
+        document.getElementById("quoteCargo").value;
+
+    const weight =
+        document.getElementById("quoteWeight").value;
+
+    if (!from || !to || !cargo || !weight) {
+
+        alert(
+            "Пожалуйста, заполните маршрут, груз и вес."
+        );
+
+        return;
+    }
+
+    const quoteNumber =
+        "RQ-" +
+        new Date().getFullYear() +
+        "-" +
+        Math.floor(
+            100 + Math.random() * 900
+        );
+
+    alert(
+        "WORKER PRO\n\n" +
+        "Запрос отправлен!\n\n" +
+        "Номер запроса: " +
+        quoteNumber +
+        "\n\n" +
+        carrier +
+        "\n" +
+        from +
+        " → " +
+        to +
+        "\n\n" +
+        "Груз: " +
+        cargo +
+        "\n" +
+        "Вес: " +
+        weight +
+        " кг\n\n" +
+        "Статус: REQUESTED"
+    );
+
+}
+
+</script>
+
+</body>
+</html>
