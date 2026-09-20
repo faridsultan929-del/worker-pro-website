@@ -80,33 +80,34 @@ body{
     background:#0b6b3d;
 }
 
-/* ПРАВЫЕ ЯЗЫКИ */
+/* ЯЗЫКИ СВЕРХУ */
 
-.right-languages{
+.top-languages{
     position:fixed;
-    right:0;
     top:0;
-    bottom:0;
-    width:75px;
+    left:220px;
+    right:0;
+    height:58px;
     background:#063d25;
-    z-index:1000;
+    z-index:1100;
     display:flex;
-    flex-direction:column;
     align-items:center;
-    padding-top:18px;
+    justify-content:center;
     gap:7px;
+    padding:7px;
+    box-shadow:0 2px 10px #0003;
 }
 
 .language-title{
     color:#b7ff35;
     font-size:11px;
     font-weight:bold;
-    margin-bottom:4px;
+    margin-right:5px;
 }
 
-.right-languages button{
-    width:52px;
-    padding:8px 3px;
+.top-languages button{
+    min-width:48px;
+    padding:8px 6px;
     border:1px solid #b7ff35;
     border-radius:8px;
     background:transparent;
@@ -115,8 +116,8 @@ body{
     cursor:pointer;
 }
 
-.right-languages button:hover,
-.right-languages button.active{
+.top-languages button:hover,
+.top-languages button.active{
     background:#0b6b3d;
     color:#b7ff35;
 }
@@ -125,7 +126,7 @@ body{
 
 .main{
     margin-left:220px;
-    margin-right:75px;
+    padding-top:58px;
     min-height:100vh;
 }
 
@@ -325,7 +326,7 @@ footer strong{
     color:#b7ff35;
 }
 
-/* АДАПТАЦИЯ */
+/* МОБИЛЬНАЯ ВЕРСИЯ */
 
 @media(max-width:950px){
 
@@ -333,13 +334,12 @@ footer strong{
         width:190px;
     }
 
-    .main{
-        margin-left:190px;
-        margin-right:65px;
+    .top-languages{
+        left:190px;
     }
 
-    .right-languages{
-        width:65px;
+    .main{
+        margin-left:190px;
     }
 
     .cards{
@@ -353,6 +353,11 @@ footer strong{
     .flow{
         grid-template-columns:repeat(3,1fr);
     }
+
+    .top-languages{
+        overflow-x:auto;
+        justify-content:flex-start;
+    }
 }
 
 @media(max-width:600px){
@@ -364,27 +369,18 @@ footer strong{
         max-height:none;
     }
 
-    .right-languages{
+    .top-languages{
         position:relative;
+        left:0;
         width:100%;
         height:auto;
-        flex-direction:row;
-        justify-content:center;
         flex-wrap:wrap;
-        padding:10px;
-    }
-
-    .language-title{
-        width:100%;
-        text-align:center;
-    }
-
-    .right-languages button{
-        width:45px;
+        justify-content:center;
     }
 
     .main{
         margin:0;
+        padding-top:0;
     }
 
     .top h1{
@@ -424,81 +420,81 @@ footer strong{
     <div class="left-logo">
         <img src="worker%20pro/logo.png" alt="WORKER PRO">
         <h2>WORKER PRO</h2>
-        <p>Industrial Platform</p>
+        <p data-i18n="industrial_platform">Industrial Platform</p>
     </div>
 
-    <div class="menu-title">Главное</div>
+    <div class="menu-title" data-i18n="main_menu">Главное</div>
 
-    <a class="active" href="index.html">🏠 Главная</a>
-    <a href="worker%20pro/production/index.html">🏭 Производство</a>
-    <a href="worker%20pro/technologies/index.html">⚙️ Технологии</a>
-    <a href="worker%20pro/industries/index.html">🏗️ Отрасли</a>
+    <a class="active" href="index.html">🏠 <span data-i18n="home">Главная</span></a>
+    <a href="worker%20pro/production/index.html">🏭 <span data-i18n="production">Производство</span></a>
+    <a href="worker%20pro/technologies/index.html">⚙️ <span data-i18n="technologies">Технологии</span></a>
+    <a href="worker%20pro/industries/index.html">🏗️ <span data-i18n="industries">Отрасли</span></a>
 
-    <div class="menu-title">Торговля</div>
+    <div class="menu-title" data-i18n="trade">Торговля</div>
 
-    <a href="worker%20pro/catalog/index.html">📦 Каталог</a>
-    <a href="worker%20pro/categories/index.html">🗂️ Категории</a>
-    <a href="worker%20pro/products/index.html">🔩 Товары</a>
-    <a href="worker%20pro/brands/index.html">🏷️ Бренды</a>
-    <a href="worker%20pro/manufacturers/index.html">🏭 Производители</a>
-    <a href="worker%20pro/suppliers/index.html">🚚 Поставщики</a>
-    <a href="worker%20pro/companies/index.html">🏢 Компании</a>
+    <a href="worker%20pro/catalog/index.html">📦 <span data-i18n="catalog">Каталог</span></a>
+    <a href="worker%20pro/categories/index.html">🗂️ <span data-i18n="categories">Категории</span></a>
+    <a href="worker%20pro/products/index.html">🔩 <span data-i18n="products">Товары</span></a>
+    <a href="worker%20pro/brands/index.html">🏷️ <span data-i18n="brands">Бренды</span></a>
+    <a href="worker%20pro/manufacturers/index.html">🏭 <span data-i18n="manufacturers">Производители</span></a>
+    <a href="worker%20pro/suppliers/index.html">🚚 <span data-i18n="suppliers">Поставщики</span></a>
+    <a href="worker%20pro/companies/index.html">🏢 <span data-i18n="companies">Компании</span></a>
 
-    <div class="menu-title">Работа</div>
+    <div class="menu-title" data-i18n="work">Работа</div>
 
-    <a href="worker%20pro/specialists/index.html">👷 Специалисты</a>
-    <a href="worker%20pro/vacancies/index.html">💼 Вакансии</a>
-    <a href="worker%20pro/training/index.html">🎓 Обучение</a>
-    <a href="worker%20pro/training-courses/index.html">📚 Курсы</a>
-    <a href="worker%20pro/certificates/index.html">📜 Сертификаты</a>
+    <a href="worker%20pro/specialists/index.html">👷 <span data-i18n="specialists">Специалисты</span></a>
+    <a href="worker%20pro/vacancies/index.html">💼 <span data-i18n="vacancies">Вакансии</span></a>
+    <a href="worker%20pro/training/index.html">🎓 <span data-i18n="training">Обучение</span></a>
+    <a href="worker%20pro/training-courses/index.html">📚 <span data-i18n="courses">Курсы</span></a>
+    <a href="worker%20pro/certificates/index.html">📜 <span data-i18n="certificates">Сертификаты</span></a>
 
-    <div class="menu-title">Запросы</div>
+    <div class="menu-title" data-i18n="requests">Запросы</div>
 
-    <a href="worker%20pro/requests/index.html">📋 Запросы</a>
+    <a href="worker%20pro/requests/index.html">📋 <span data-i18n="requests">Запросы</span></a>
     <a href="worker%20pro/rfq/index.html">💰 RFQ</a>
-    <a href="worker%20pro/offers/index.html">🤝 Предложения</a>
-    <a href="worker%20pro/contracts/index.html">📝 Контракты</a>
-    <a href="worker%20pro/orders/index.html">🛒 Заказы</a>
+    <a href="worker%20pro/offers/index.html">🤝 <span data-i18n="offers">Предложения</span></a>
+    <a href="worker%20pro/contracts/index.html">📝 <span data-i18n="contracts">Контракты</span></a>
+    <a href="worker%20pro/orders/index.html">🛒 <span data-i18n="orders">Заказы</span></a>
 
-    <div class="menu-title">Логистика</div>
+    <div class="menu-title" data-i18n="logistics">Логистика</div>
 
-    <a href="worker%20pro/transport-booking/index.html">🚛 Перевозка</a>
-    <a href="worker%20pro/shipments/index.html">📦 Отправления</a>
+    <a href="worker%20pro/transport-booking/index.html">🚛 <span data-i18n="transport">Перевозка</span></a>
+    <a href="worker%20pro/shipments/index.html">📦 <span data-i18n="shipments">Отправления</span></a>
     <a href="worker%20pro/tracking/index.html">📍 Tracking</a>
-    <a href="worker%20pro/delivery/index.html">🚚 Доставка</a>
-    <a href="worker%20pro/warehouses/index.html">🏢 Склады</a>
+    <a href="worker%20pro/delivery/index.html">🚚 <span data-i18n="delivery">Доставка</span></a>
+    <a href="worker%20pro/warehouses/index.html">🏢 <span data-i18n="warehouses">Склады</span></a>
 
-    <div class="menu-title">Профиль</div>
+    <div class="menu-title" data-i18n="profile">Профиль</div>
 
-    <a href="worker%20pro/profile/index.html">👤 Профиль</a>
+    <a href="worker%20pro/profile/index.html">👤 <span data-i18n="profile">Профиль</span></a>
     <a href="worker%20pro/dashboard/index.html">📊 Dashboard</a>
-    <a href="worker%20pro/messages/index.html">💬 Сообщения</a>
-    <a href="worker%20pro/notifications/index.html">🔔 Уведомления</a>
-    <a href="worker%20pro/settings/index.html">⚙️ Настройки</a>
+    <a href="worker%20pro/messages/index.html">💬 <span data-i18n="messages">Сообщения</span></a>
+    <a href="worker%20pro/notifications/index.html">🔔 <span data-i18n="notifications">Уведомления</span></a>
+    <a href="worker%20pro/settings/index.html">⚙️ <span data-i18n="settings">Настройки</span></a>
 
 </aside>
 
 
-<!-- ЯЗЫКИ СПРАВА -->
+<!-- ЯЗЫКИ СВЕРХУ -->
 
-<aside class="right-languages">
+<div class="top-languages">
 
-    <div class="language-title">LANG</div>
+    <span class="language-title">LANG</span>
 
-    <button onclick="setLanguage('AZ')">AZ</button>
-    <button onclick="setLanguage('RU')" class="active">RU</button>
-    <button onclick="setLanguage('EN')">EN</button>
-    <button onclick="setLanguage('TR')">TR</button>
-    <button onclick="setLanguage('DE')">DE</button>
-    <button onclick="setLanguage('AR')">AR</button>
-    <button onclick="setLanguage('ES')">ES</button>
-    <button onclick="setLanguage('FR')">FR</button>
-    <button onclick="setLanguage('IT')">IT</button>
+    <button data-lang="AZ" onclick="changeLanguage('AZ')">AZ</button>
+    <button data-lang="RU" onclick="changeLanguage('RU')" class="active">RU</button>
+    <button data-lang="EN" onclick="changeLanguage('EN')">EN</button>
+    <button data-lang="TR" onclick="changeLanguage('TR')">TR</button>
+    <button data-lang="DE" onclick="changeLanguage('DE')">DE</button>
+    <button data-lang="AR" onclick="changeLanguage('AR')">AR</button>
+    <button data-lang="ES" onclick="changeLanguage('ES')">ES</button>
+    <button data-lang="FR" onclick="changeLanguage('FR')">FR</button>
+    <button data-lang="IT" onclick="changeLanguage('IT')">IT</button>
 
-</aside>
+</div>
 
 
-<!-- ЦЕНТРАЛЬНАЯ ЧАСТЬ -->
+<!-- ЦЕНТР -->
 
 <main class="main">
 
@@ -508,7 +504,7 @@ footer strong{
 
     <h1>WORKER PRO</h1>
 
-    <p>
+    <p data-i18n="industrial_platform">
         Глобальная промышленная платформа
     </p>
 
@@ -517,9 +513,11 @@ footer strong{
 
 <section class="hero">
 
-    <h2>Работа. Знания. Производство.</h2>
+    <h2 data-i18n="hero_title">
+        Работа. Знания. Производство.
+    </h2>
 
-    <p>
+    <p data-i18n="hero_text">
         Международная промышленная платформа
         для рабочих, инженеров, специалистов,
         производителей, поставщиков и компаний.
@@ -530,11 +528,12 @@ footer strong{
         <input
             id="mainSearch"
             type="text"
+            data-placeholder="search_placeholder"
             placeholder="Поиск: насос, станок, подшипник, запчасть..."
             onkeydown="searchEnter(event)"
         >
 
-        <button onclick="startSearch()">
+        <button onclick="startSearch()" data-i18n="search">
             🔎 Поиск
         </button>
 
@@ -545,7 +544,7 @@ footer strong{
 
 <div class="container">
 
-<h2 class="section-title">
+<h2 class="section-title" data-i18n="main_sections">
     Основные разделы WORKER PRO
 </h2>
 
@@ -554,58 +553,58 @@ footer strong{
 
     <div class="card">
         <div class="icon">🏭</div>
-        <h3>Производство</h3>
-        <p>Производственные процессы и технологии.</p>
-        <a href="worker%20pro/production/index.html">Открыть</a>
+        <h3 data-i18n="production">Производство</h3>
+        <p data-i18n="production_text">Производственные процессы и технологии.</p>
+        <a href="worker%20pro/production/index.html" data-i18n="open">Открыть</a>
     </div>
 
     <div class="card">
         <div class="icon">🔩</div>
-        <h3>Запчасти</h3>
-        <p>Промышленные товары и детали.</p>
-        <a href="worker%20pro/products/index.html">Открыть</a>
+        <h3 data-i18n="parts">Запчасти</h3>
+        <p data-i18n="parts_text">Промышленные товары и детали.</p>
+        <a href="worker%20pro/products/index.html" data-i18n="open">Открыть</a>
     </div>
 
     <div class="card">
         <div class="icon">🏢</div>
-        <h3>Компании</h3>
-        <p>Компании, производители и поставщики.</p>
-        <a href="worker%20pro/companies/index.html">Открыть</a>
+        <h3 data-i18n="companies">Компании</h3>
+        <p data-i18n="companies_text">Компании, производители и поставщики.</p>
+        <a href="worker%20pro/companies/index.html" data-i18n="open">Открыть</a>
     </div>
 
     <div class="card">
         <div class="icon">👷</div>
-        <h3>Специалисты</h3>
-        <p>Профессионалы промышленности.</p>
-        <a href="worker%20pro/specialists/index.html">Открыть</a>
+        <h3 data-i18n="specialists">Специалисты</h3>
+        <p data-i18n="specialists_text">Профессионалы промышленности.</p>
+        <a href="worker%20pro/specialists/index.html" data-i18n="open">Открыть</a>
     </div>
 
     <div class="card">
         <div class="icon">💼</div>
-        <h3>Вакансии</h3>
-        <p>Работа в промышленности.</p>
-        <a href="worker%20pro/vacancies/index.html">Открыть</a>
+        <h3 data-i18n="vacancies">Вакансии</h3>
+        <p data-i18n="vacancies_text">Работа в промышленности.</p>
+        <a href="worker%20pro/vacancies/index.html" data-i18n="open">Открыть</a>
     </div>
 
     <div class="card">
         <div class="icon">🎓</div>
-        <h3>Обучение</h3>
-        <p>Производство, безопасность и технологии.</p>
-        <a href="worker%20pro/training/index.html">Открыть</a>
+        <h3 data-i18n="training">Обучение</h3>
+        <p data-i18n="training_text">Производство, безопасность и технологии.</p>
+        <a href="worker%20pro/training/index.html" data-i18n="open">Открыть</a>
     </div>
 
     <div class="card">
         <div class="icon">🚚</div>
-        <h3>Логистика</h3>
-        <p>Перевозка промышленного оборудования.</p>
-        <a href="worker%20pro/transport-booking/index.html">Открыть</a>
+        <h3 data-i18n="logistics">Логистика</h3>
+        <p data-i18n="logistics_text">Перевозка промышленного оборудования.</p>
+        <a href="worker%20pro/transport-booking/index.html" data-i18n="open">Открыть</a>
     </div>
 
     <div class="card">
         <div class="icon">📍</div>
         <h3>Tracking</h3>
-        <p>Отслеживание отправлений.</p>
-        <a href="worker%20pro/tracking/index.html">Открыть</a>
+        <p data-i18n="tracking_text">Отслеживание отправлений.</p>
+        <a href="worker%20pro/tracking/index.html" data-i18n="open">Открыть</a>
     </div>
 
 </section>
@@ -613,23 +612,23 @@ footer strong{
 
 <section class="quick">
 
-<h2 class="section-title">
+<h2 class="section-title" data-i18n="quick_access">
     Быстрый доступ
 </h2>
 
 <div class="quick-grid">
 
-    <a href="worker%20pro/catalog/index.html">📦 Каталог</a>
-    <a href="worker%20pro/categories/index.html">🗂️ Категории</a>
-    <a href="worker%20pro/manufacturers/index.html">🏭 Производители</a>
-    <a href="worker%20pro/suppliers/index.html">🚚 Поставщики</a>
+    <a href="worker%20pro/catalog/index.html">📦 <span data-i18n="catalog">Каталог</span></a>
+    <a href="worker%20pro/categories/index.html">🗂️ <span data-i18n="categories">Категории</span></a>
+    <a href="worker%20pro/manufacturers/index.html">🏭 <span data-i18n="manufacturers">Производители</span></a>
+    <a href="worker%20pro/suppliers/index.html">🚚 <span data-i18n="suppliers">Поставщики</span></a>
     <a href="worker%20pro/rfq/index.html">💰 RFQ</a>
 
-    <a href="worker%20pro/requests/index.html">📋 Запросы</a>
-    <a href="worker%20pro/offers/index.html">🤝 Предложения</a>
-    <a href="worker%20pro/orders/index.html">🛒 Заказы</a>
-    <a href="worker%20pro/certificates/index.html">📜 Сертификаты</a>
-    <a href="worker%20pro/news/index.html">📰 Новости</a>
+    <a href="worker%20pro/requests/index.html">📋 <span data-i18n="requests">Запросы</span></a>
+    <a href="worker%20pro/offers/index.html">🤝 <span data-i18n="offers">Предложения</span></a>
+    <a href="worker%20pro/orders/index.html">🛒 <span data-i18n="orders">Заказы</span></a>
+    <a href="worker%20pro/certificates/index.html">📜 <span data-i18n="certificates">Сертификаты</span></a>
+    <a href="worker%20pro/news/index.html">📰 <span data-i18n="news">Новости</span></a>
 
 </div>
 
@@ -638,41 +637,18 @@ footer strong{
 
 <section class="quick">
 
-<h2 class="section-title">
+<h2 class="section-title" data-i18n="how_it_works">
     Как работает WORKER PRO
 </h2>
 
 <div class="flow">
 
-    <div class="flow-item">
-        🌍<br>
-        Язык<br>и страна
-    </div>
-
-    <div class="flow-item">
-        🔎<br>
-        Поиск
-    </div>
-
-    <div class="flow-item">
-        🏢<br>
-        Компания
-    </div>
-
-    <div class="flow-item">
-        💰<br>
-        Цена<br>и условия
-    </div>
-
-    <div class="flow-item">
-        🚚<br>
-        Перевозка
-    </div>
-
-    <div class="flow-item">
-        📦<br>
-        Получение
-    </div>
+    <div class="flow-item">🌍<br><span data-i18n="language_country">Язык<br>и страна</span></div>
+    <div class="flow-item">🔎<br><span data-i18n="search">Поиск</span></div>
+    <div class="flow-item">🏢<br><span data-i18n="company">Компания</span></div>
+    <div class="flow-item">💰<br><span data-i18n="price_terms">Цена<br>и условия</span></div>
+    <div class="flow-item">🚚<br><span data-i18n="transport">Перевозка</span></div>
+    <div class="flow-item">📦<br><span data-i18n="receiving">Получение</span></div>
 
 </div>
 
@@ -681,11 +657,11 @@ footer strong{
 
 <section class="quick">
 
-<h2 class="section-title">
+<h2 class="section-title" data-i18n="worker_unites">
     🌐 WORKER PRO объединяет
 </h2>
 
-<p style="text-align:center;line-height:1.8">
+<p style="text-align:center;line-height:1.8" data-i18n="worker_unites_text">
 
     Рабочих • Инженеров • Мастеров • Производителей •
     Поставщиков • Компании • Логистические компании •
@@ -704,11 +680,15 @@ footer strong{
 
 <br><br>
 
+<span data-i18n="work_knowledge_production">
 Работа • Знания • Производство
+</span>
 
 <br><br>
 
+<span data-i18n="industrial_platform">
 Глобальная промышленная платформа
+</span>
 
 <br><br>
 
@@ -720,6 +700,606 @@ footer strong{
 
 
 <script>
+
+const translations = {
+
+RU:{
+    industrial_platform:"Глобальная промышленная платформа",
+    main_menu:"Главное",
+    home:"Главная",
+    production:"Производство",
+    technologies:"Технологии",
+    industries:"Отрасли",
+    trade:"Торговля",
+    catalog:"Каталог",
+    categories:"Категории",
+    products:"Товары",
+    brands:"Бренды",
+    manufacturers:"Производители",
+    suppliers:"Поставщики",
+    companies:"Компании",
+    work:"Работа",
+    specialists:"Специалисты",
+    vacancies:"Вакансии",
+    training:"Обучение",
+    courses:"Курсы",
+    certificates:"Сертификаты",
+    requests:"Запросы",
+    offers:"Предложения",
+    contracts:"Контракты",
+    orders:"Заказы",
+    logistics:"Логистика",
+    transport:"Перевозка",
+    shipments:"Отправления",
+    delivery:"Доставка",
+    warehouses:"Склады",
+    profile:"Профиль",
+    messages:"Сообщения",
+    notifications:"Уведомления",
+    settings:"Настройки",
+    hero_title:"Работа. Знания. Производство.",
+    hero_text:"Международная промышленная платформа для рабочих, инженеров, специалистов, производителей, поставщиков и компаний.",
+    search:"🔎 Поиск",
+    search_placeholder:"Поиск: насос, станок, подшипник, запчасть...",
+    main_sections:"Основные разделы WORKER PRO",
+    open:"Открыть",
+    parts:"Запчасти",
+    production_text:"Производственные процессы и технологии.",
+    parts_text:"Промышленные товары и детали.",
+    companies_text:"Компании, производители и поставщики.",
+    specialists_text:"Профессионалы промышленности.",
+    vacancies_text:"Работа в промышленности.",
+    training_text:"Производство, безопасность и технологии.",
+    logistics_text:"Перевозка промышленного оборудования.",
+    tracking_text:"Отслеживание отправлений.",
+    quick_access:"Быстрый доступ",
+    news:"Новости",
+    how_it_works:"Как работает WORKER PRO",
+    language_country:"Язык и страна",
+    company:"Компания",
+    price_terms:"Цена и условия",
+    receiving:"Получение",
+    worker_unites:"🌐 WORKER PRO объединяет",
+    worker_unites_text:"Рабочих • Инженеров • Мастеров • Производителей • Поставщиков • Компании • Логистические компании • Сервисные центры • Учебные центры",
+    work_knowledge_production:"Работа • Знания • Производство"
+},
+
+AZ:{
+    industrial_platform:"Qlobal sənaye platforması",
+    main_menu:"Əsas",
+    home:"Ana səhifə",
+    production:"İstehsalat",
+    technologies:"Texnologiyalar",
+    industries:"Sənaye sahələri",
+    trade:"Ticarət",
+    catalog:"Kataloq",
+    categories:"Kateqoriyalar",
+    products:"Məhsullar",
+    brands:"Brendlər",
+    manufacturers:"İstehsalçılar",
+    suppliers:"Təchizatçılar",
+    companies:"Şirkətlər",
+    work:"İş",
+    specialists:"Mütəxəssislər",
+    vacancies:"Vakansiyalar",
+    training:"Təlim",
+    courses:"Kurslar",
+    certificates:"Sertifikatlar",
+    requests:"Sorğular",
+    offers:"Təkliflər",
+    contracts:"Müqavilələr",
+    orders:"Sifarişlər",
+    logistics:"Logistika",
+    transport:"Daşıma",
+    shipments:"Göndərişlər",
+    delivery:"Çatdırılma",
+    warehouses:"Anbarlar",
+    profile:"Profil",
+    messages:"Mesajlar",
+    notifications:"Bildirişlər",
+    settings:"Parametrlər",
+    hero_title:"İş. Bilik. İstehsalat.",
+    hero_text:"Fəhlələr, mühəndislər, mütəxəssislər, istehsalçılar, təchizatçılar və şirkətlər üçün beynəlxalq sənaye platforması.",
+    search:"🔎 Axtarış",
+    search_placeholder:"Axtarış: nasos, dəzgah, podşipnik, ehtiyat hissəsi...",
+    main_sections:"WORKER PRO əsas bölmələri",
+    open:"Aç",
+    parts:"Ehtiyat hissələri",
+    production_text:"İstehsal prosesləri və texnologiyalar.",
+    parts_text:"Sənaye məhsulları və hissələri.",
+    companies_text:"Şirkətlər, istehsalçılar və təchizatçılar.",
+    specialists_text:"Sənaye mütəxəssisləri.",
+    vacancies_text:"Sənayedə iş imkanları.",
+    training_text:"İstehsalat, təhlükəsizlik və texnologiyalar.",
+    logistics_text:"Sənaye avadanlıqlarının daşınması.",
+    tracking_text:"Göndərişlərin izlənməsi.",
+    quick_access:"Sürətli giriş",
+    news:"Xəbərlər",
+    how_it_works:"WORKER PRO necə işləyir",
+    language_country:"Dil və ölkə",
+    company:"Şirkət",
+    price_terms:"Qiymət və şərtlər",
+    receiving:"Alınması",
+    worker_unites:"🌐 WORKER PRO birləşdirir",
+    worker_unites_text:"Fəhlələr • Mühəndislər • Ustalar • İstehsalçılar • Təchizatçılar • Şirkətlər • Logistika şirkətləri • Servis mərkəzləri • Təlim mərkəzləri",
+    work_knowledge_production:"İş • Bilik • İstehsalat"
+},
+
+EN:{
+    industrial_platform:"Global Industrial Platform",
+    main_menu:"Main",
+    home:"Home",
+    production:"Production",
+    technologies:"Technologies",
+    industries:"Industries",
+    trade:"Trade",
+    catalog:"Catalog",
+    categories:"Categories",
+    products:"Products",
+    brands:"Brands",
+    manufacturers:"Manufacturers",
+    suppliers:"Suppliers",
+    companies:"Companies",
+    work:"Jobs",
+    specialists:"Specialists",
+    vacancies:"Vacancies",
+    training:"Training",
+    courses:"Courses",
+    certificates:"Certificates",
+    requests:"Requests",
+    offers:"Offers",
+    contracts:"Contracts",
+    orders:"Orders",
+    logistics:"Logistics",
+    transport:"Transport",
+    shipments:"Shipments",
+    delivery:"Delivery",
+    warehouses:"Warehouses",
+    profile:"Profile",
+    messages:"Messages",
+    notifications:"Notifications",
+    settings:"Settings",
+    hero_title:"Work. Knowledge. Production.",
+    hero_text:"An international industrial platform for workers, engineers, specialists, manufacturers, suppliers and companies.",
+    search:"🔎 Search",
+    search_placeholder:"Search: pump, machine, bearing, spare part...",
+    main_sections:"WORKER PRO Main Sections",
+    open:"Open",
+    parts:"Spare Parts",
+    production_text:"Production processes and technologies.",
+    parts_text:"Industrial products and parts.",
+    companies_text:"Companies, manufacturers and suppliers.",
+    specialists_text:"Industrial professionals.",
+    vacancies_text:"Industrial jobs.",
+    training_text:"Production, safety and technologies.",
+    logistics_text:"Industrial equipment transportation.",
+    tracking_text:"Shipment tracking.",
+    quick_access:"Quick Access",
+    news:"News",
+    how_it_works:"How WORKER PRO Works",
+    language_country:"Language and country",
+    company:"Company",
+    price_terms:"Price and terms",
+    receiving:"Receiving",
+    worker_unites:"🌐 WORKER PRO Connects",
+    worker_unites_text:"Workers • Engineers • Technicians • Manufacturers • Suppliers • Companies • Logistics companies • Service centers • Training centers",
+    work_knowledge_production:"Work • Knowledge • Production"
+},
+
+TR:{
+    industrial_platform:"Küresel Endüstriyel Platform",
+    main_menu:"Ana",
+    home:"Ana Sayfa",
+    production:"Üretim",
+    technologies:"Teknolojiler",
+    industries:"Sektörler",
+    trade:"Ticaret",
+    catalog:"Katalog",
+    categories:"Kategoriler",
+    products:"Ürünler",
+    brands:"Markalar",
+    manufacturers:"Üreticiler",
+    suppliers:"Tedarikçiler",
+    companies:"Şirketler",
+    work:"İş",
+    specialists:"Uzmanlar",
+    vacancies:"İş İlanları",
+    training:"Eğitim",
+    courses:"Kurslar",
+    certificates:"Sertifikalar",
+    requests:"Talepler",
+    offers:"Teklifler",
+    contracts:"Sözleşmeler",
+    orders:"Siparişler",
+    logistics:"Lojistik",
+    transport:"Taşıma",
+    shipments:"Gönderiler",
+    delivery:"Teslimat",
+    warehouses:"Depolar",
+    profile:"Profil",
+    messages:"Mesajlar",
+    notifications:"Bildirimler",
+    settings:"Ayarlar",
+    hero_title:"İş. Bilgi. Üretim.",
+    hero_text:"İşçiler, mühendisler, uzmanlar, üreticiler, tedarikçiler ve şirketler için uluslararası endüstriyel platform.",
+    search:"🔎 Ara",
+    search_placeholder:"Ara: pompa, makine, rulman, yedek parça...",
+    main_sections:"WORKER PRO Ana Bölümleri",
+    open:"Aç",
+    parts:"Yedek Parçalar",
+    production_text:"Üretim süreçleri ve teknolojileri.",
+    parts_text:"Endüstriyel ürünler ve parçalar.",
+    companies_text:"Şirketler, üreticiler ve tedarikçiler.",
+    specialists_text:"Endüstri profesyonelleri.",
+    vacancies_text:"Endüstriyel işler.",
+    training_text:"Üretim, güvenlik ve teknolojiler.",
+    logistics_text:"Endüstriyel ekipman taşımacılığı.",
+    tracking_text:"Gönderi takibi.",
+    quick_access:"Hızlı Erişim",
+    news:"Haberler",
+    how_it_works:"WORKER PRO Nasıl Çalışır",
+    language_country:"Dil ve ülke",
+    company:"Şirket",
+    price_terms:"Fiyat ve şartlar",
+    receiving:"Teslim Alma",
+    worker_unites:"🌐 WORKER PRO Birleştirir",
+    worker_unites_text:"İşçiler • Mühendisler • Ustalar • Üreticiler • Tedarikçiler • Şirketler • Lojistik şirketleri • Servis merkezleri • Eğitim merkezleri",
+    work_knowledge_production:"İş • Bilgi • Üretim"
+},
+
+DE:{
+    industrial_platform:"Globale Industrieplattform",
+    main_menu:"Hauptmenü",
+    home:"Startseite",
+    production:"Produktion",
+    technologies:"Technologien",
+    industries:"Branchen",
+    trade:"Handel",
+    catalog:"Katalog",
+    categories:"Kategorien",
+    products:"Produkte",
+    brands:"Marken",
+    manufacturers:"Hersteller",
+    suppliers:"Lieferanten",
+    companies:"Unternehmen",
+    work:"Arbeit",
+    specialists:"Fachkräfte",
+    vacancies:"Stellenangebote",
+    training:"Schulung",
+    courses:"Kurse",
+    certificates:"Zertifikate",
+    requests:"Anfragen",
+    offers:"Angebote",
+    contracts:"Verträge",
+    orders:"Bestellungen",
+    logistics:"Logistik",
+    transport:"Transport",
+    shipments:"Sendungen",
+    delivery:"Lieferung",
+    warehouses:"Lager",
+    profile:"Profil",
+    messages:"Nachrichten",
+    notifications:"Benachrichtigungen",
+    settings:"Einstellungen",
+    hero_title:"Arbeit. Wissen. Produktion.",
+    hero_text:"Internationale Industrieplattform für Arbeiter, Ingenieure, Fachkräfte, Hersteller, Lieferanten und Unternehmen.",
+    search:"🔎 Suchen",
+    search_placeholder:"Suche: Pumpe, Maschine, Lager, Ersatzteil...",
+    main_sections:"WORKER PRO Hauptbereiche",
+    open:"Öffnen",
+    parts:"Ersatzteile",
+    production_text:"Produktionsprozesse und Technologien.",
+    parts_text:"Industrieprodukte und Ersatzteile.",
+    companies_text:"Unternehmen, Hersteller und Lieferanten.",
+    specialists_text:"Industriefachkräfte.",
+    vacancies_text:"Arbeitsplätze in der Industrie.",
+    training_text:"Produktion, Sicherheit und Technologien.",
+    logistics_text:"Transport von Industrieanlagen.",
+    tracking_text:"Sendungsverfolgung.",
+    quick_access:"Schnellzugriff",
+    news:"Nachrichten",
+    how_it_works:"So funktioniert WORKER PRO",
+    language_country:"Sprache und Land",
+    company:"Unternehmen",
+    price_terms:"Preis und Bedingungen",
+    receiving:"Erhalt",
+    worker_unites:"🌐 WORKER PRO verbindet",
+    worker_unites_text:"Arbeiter • Ingenieure • Techniker • Hersteller • Lieferanten • Unternehmen • Logistikunternehmen • Servicezentren • Schulungszentren",
+    work_knowledge_production:"Arbeit • Wissen • Produktion"
+},
+
+AR:{
+    industrial_platform:"منصة صناعية عالمية",
+    main_menu:"الرئيسية",
+    home:"الصفحة الرئيسية",
+    production:"الإنتاج",
+    technologies:"التقنيات",
+    industries:"القطاعات",
+    trade:"التجارة",
+    catalog:"الكتالوج",
+    categories:"الفئات",
+    products:"المنتجات",
+    brands:"العلامات التجارية",
+    manufacturers:"المصنعون",
+    suppliers:"الموردون",
+    companies:"الشركات",
+    work:"العمل",
+    specialists:"المتخصصون",
+    vacancies:"الوظائف",
+    training:"التدريب",
+    courses:"الدورات",
+    certificates:"الشهادات",
+    requests:"الطلبات",
+    offers:"العروض",
+    contracts:"العقود",
+    orders:"الطلبات",
+    logistics:"الخدمات اللوجستية",
+    transport:"النقل",
+    shipments:"الشحنات",
+    delivery:"التوصيل",
+    warehouses:"المستودعات",
+    profile:"الملف الشخصي",
+    messages:"الرسائل",
+    notifications:"الإشعارات",
+    settings:"الإعدادات",
+    hero_title:"العمل. المعرفة. الإنتاج.",
+    hero_text:"منصة صناعية دولية للعمال والمهندسين والمتخصصين والمصنعين والموردين والشركات.",
+    search:"🔎 بحث",
+    search_placeholder:"بحث: مضخة، آلة، محمل، قطعة غيار...",
+    main_sections:"الأقسام الرئيسية في WORKER PRO",
+    open:"فتح",
+    parts:"قطع الغيار",
+    production_text:"عمليات الإنتاج والتقنيات.",
+    parts_text:"المنتجات والقطع الصناعية.",
+    companies_text:"الشركات والمصنعون والموردون.",
+    specialists_text:"المتخصصون في الصناعة.",
+    vacancies_text:"وظائف صناعية.",
+    training_text:"الإنتاج والسلامة والتقنيات.",
+    logistics_text:"نقل المعدات الصناعية.",
+    tracking_text:"تتبع الشحنات.",
+    quick_access:"الوصول السريع",
+    news:"الأخبار",
+    how_it_works:"كيف تعمل WORKER PRO",
+    language_country:"اللغة والبلد",
+    company:"الشركة",
+    price_terms:"السعر والشروط",
+    receiving:"الاستلام",
+    worker_unites:"🌐 WORKER PRO تجمع",
+    worker_unites_text:"العمال • المهندسون • الفنيون • المصنعون • الموردون • الشركات • شركات الخدمات اللوجستية • مراكز الخدمة • مراكز التدريب",
+    work_knowledge_production:"العمل • المعرفة • الإنتاج"
+},
+
+ES:{
+    industrial_platform:"Plataforma Industrial Global",
+    main_menu:"Principal",
+    home:"Inicio",
+    production:"Producción",
+    technologies:"Tecnologías",
+    industries:"Industrias",
+    trade:"Comercio",
+    catalog:"Catálogo",
+    categories:"Categorías",
+    products:"Productos",
+    brands:"Marcas",
+    manufacturers:"Fabricantes",
+    suppliers:"Proveedores",
+    companies:"Empresas",
+    work:"Trabajo",
+    specialists:"Especialistas",
+    vacancies:"Vacantes",
+    training:"Formación",
+    courses:"Cursos",
+    certificates:"Certificados",
+    requests:"Solicitudes",
+    offers:"Ofertas",
+    contracts:"Contratos",
+    orders:"Pedidos",
+    logistics:"Logística",
+    transport:"Transporte",
+    shipments:"Envíos",
+    delivery:"Entrega",
+    warehouses:"Almacenes",
+    profile:"Perfil",
+    messages:"Mensajes",
+    notifications:"Notificaciones",
+    settings:"Configuración",
+    hero_title:"Trabajo. Conocimiento. Producción.",
+    hero_text:"Plataforma industrial internacional para trabajadores, ingenieros, especialistas, fabricantes, proveedores y empresas.",
+    search:"🔎 Buscar",
+    search_placeholder:"Buscar: bomba, máquina, rodamiento, repuesto...",
+    main_sections:"Secciones principales de WORKER PRO",
+    open:"Abrir",
+    parts:"Repuestos",
+    production_text:"Procesos de producción y tecnologías.",
+    parts_text:"Productos y piezas industriales.",
+    companies_text:"Empresas, fabricantes y proveedores.",
+    specialists_text:"Profesionales de la industria.",
+    vacancies_text:"Empleos industriales.",
+    training_text:"Producción, seguridad y tecnologías.",
+    logistics_text:"Transporte de equipos industriales.",
+    tracking_text:"Seguimiento de envíos.",
+    quick_access:"Acceso rápido",
+    news:"Noticias",
+    how_it_works:"Cómo funciona WORKER PRO",
+    language_country:"Idioma y país",
+    company:"Empresa",
+    price_terms:"Precio y condiciones",
+    receiving:"Recepción",
+    worker_unites:"🌐 WORKER PRO conecta",
+    worker_unites_text:"Trabajadores • Ingenieros • Técnicos • Fabricantes • Proveedores • Empresas • Empresas logísticas • Centros de servicio • Centros de formación",
+    work_knowledge_production:"Trabajo • Conocimiento • Producción"
+},
+
+FR:{
+    industrial_platform:"Plateforme Industrielle Mondiale",
+    main_menu:"Principal",
+    home:"Accueil",
+    production:"Production",
+    technologies:"Technologies",
+    industries:"Industries",
+    trade:"Commerce",
+    catalog:"Catalogue",
+    categories:"Catégories",
+    products:"Produits",
+    brands:"Marques",
+    manufacturers:"Fabricants",
+    suppliers:"Fournisseurs",
+    companies:"Entreprises",
+    work:"Emploi",
+    specialists:"Spécialistes",
+    vacancies:"Offres d'emploi",
+    training:"Formation",
+    courses:"Cours",
+    certificates:"Certificats",
+    requests:"Demandes",
+    offers:"Offres",
+    contracts:"Contrats",
+    orders:"Commandes",
+    logistics:"Logistique",
+    transport:"Transport",
+    shipments:"Expéditions",
+    delivery:"Livraison",
+    warehouses:"Entrepôts",
+    profile:"Profil",
+    messages:"Messages",
+    notifications:"Notifications",
+    settings:"Paramètres",
+    hero_title:"Travail. Connaissance. Production.",
+    hero_text:"Plateforme industrielle internationale pour les travailleurs, ingénieurs, spécialistes, fabricants, fournisseurs et entreprises.",
+    search:"🔎 Rechercher",
+    search_placeholder:"Rechercher : pompe, machine, roulement, pièce détachée...",
+    main_sections:"Sections principales de WORKER PRO",
+    open:"Ouvrir",
+    parts:"Pièces détachées",
+    production_text:"Processus de production et technologies.",
+    parts_text:"Produits et pièces industrielles.",
+    companies_text:"Entreprises, fabricants et fournisseurs.",
+    specialists_text:"Professionnels de l'industrie.",
+    vacancies_text:"Emplois industriels.",
+    training_text:"Production, sécurité et technologies.",
+    logistics_text:"Transport d'équipements industriels.",
+    tracking_text:"Suivi des expéditions.",
+    quick_access:"Accès rapide",
+    news:"Actualités",
+    how_it_works:"Comment fonctionne WORKER PRO",
+    language_country:"Langue et pays",
+    company:"Entreprise",
+    price_terms:"Prix et conditions",
+    receiving:"Réception",
+    worker_unites:"🌐 WORKER PRO réunit",
+    worker_unites_text:"Travailleurs • Ingénieurs • Techniciens • Fabricants • Fournisseurs • Entreprises • Entreprises logistiques • Centres de service • Centres de formation",
+    work_knowledge_production:"Travail • Connaissance • Production"
+},
+
+IT:{
+    industrial_platform:"Piattaforma Industriale Globale",
+    main_menu:"Principale",
+    home:"Home",
+    production:"Produzione",
+    technologies:"Tecnologie",
+    industries:"Settori",
+    trade:"Commercio",
+    catalog:"Catalogo",
+    categories:"Categorie",
+    products:"Prodotti",
+    brands:"Marchi",
+    manufacturers:"Produttori",
+    suppliers:"Fornitori",
+    companies:"Aziende",
+    work:"Lavoro",
+    specialists:"Specialisti",
+    vacancies:"Offerte di lavoro",
+    training:"Formazione",
+    courses:"Corsi",
+    certificates:"Certificati",
+    requests:"Richieste",
+    offers:"Offerte",
+    contracts:"Contratti",
+    orders:"Ordini",
+    logistics:"Logistica",
+    transport:"Trasporto",
+    shipments:"Spedizioni",
+    delivery:"Consegna",
+    warehouses:"Magazzini",
+    profile:"Profilo",
+    messages:"Messaggi",
+    notifications:"Notifiche",
+    settings:"Impostazioni",
+    hero_title:"Lavoro. Conoscenza. Produzione.",
+    hero_text:"Piattaforma industriale internazionale per lavoratori, ingegneri, specialisti, produttori, fornitori e aziende.",
+    search:"🔎 Cerca",
+    search_placeholder:"Cerca: pompa, macchina, cuscinetto, ricambio...",
+    main_sections:"Sezioni principali di WORKER PRO",
+    open:"Apri",
+    parts:"Ricambi",
+    production_text:"Processi produttivi e tecnologie.",
+    parts_text:"Prodotti e componenti industriali.",
+    companies_text:"Aziende, produttori e fornitori.",
+    specialists_text:"Professionisti dell'industria.",
+    vacancies_text:"Offerte di lavoro industriali.",
+    training_text:"Produzione, sicurezza e tecnologie.",
+    logistics_text:"Trasporto di attrezzature industriali.",
+    tracking_text:"Tracciamento delle spedizioni.",
+    quick_access:"Accesso rapido",
+    news:"Notizie",
+    how_it_works:"Come funziona WORKER PRO",
+    language_country:"Lingua e paese",
+    company:"Azienda",
+    price_terms:"Prezzo e condizioni",
+    receiving:"Ricezione",
+    worker_unites:"🌐 WORKER PRO riunisce",
+    worker_unites_text:"Lavoratori • Ingegneri • Tecnici • Produttori • Fornitori • Aziende • Aziende logistiche • Centri di assistenza • Centri di formazione",
+    work_knowledge_production:"Lavoro • Conoscenza • Produzione"
+}
+
+};
+
+function changeLanguage(lang){
+
+    const data = translations[lang];
+
+    if(!data) return;
+
+    document.documentElement.lang = lang.toLowerCase();
+
+    document.querySelectorAll("[data-i18n]").forEach(function(element){
+
+        const key = element.getAttribute("data-i18n");
+
+        if(data[key]){
+            element.innerHTML = data[key];
+        }
+
+    });
+
+    document.querySelectorAll("[data-placeholder]").forEach(function(element){
+
+        const key = element.getAttribute("data-placeholder");
+
+        if(data[key]){
+            element.placeholder = data[key];
+        }
+
+    });
+
+    document.querySelectorAll(".top-languages button").forEach(function(button){
+
+        button.classList.remove("active");
+
+        if(button.getAttribute("data-lang") === lang){
+            button.classList.add("active");
+        }
+
+    });
+
+    if(lang === "AR"){
+        document.body.dir = "rtl";
+    }else{
+        document.body.dir = "ltr";
+    }
+
+    localStorage.setItem("workerProLanguage",lang);
+}
 
 function startSearch(){
 
@@ -748,9 +1328,16 @@ function searchEnter(event){
 
 }
 
-</script>
+document.addEventListener("DOMContentLoaded",function(){
 
-<script src="worker%20pro/language.js"></script>
+    const savedLanguage =
+        localStorage.getItem("workerProLanguage") || "RU";
+
+    changeLanguage(savedLanguage);
+
+});
+
+</script>
 
 </body>
 </html>
