@@ -1,1 +1,547 @@
- 
+ <!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WORKER PRO — Profile</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f4f7f5;
+    color:#123;
+}
+
+.top-languages{
+    background:#063d25;
+    padding:10px;
+    text-align:center;
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+.top-languages button{
+    border:0;
+    margin:3px;
+    padding:9px 13px;
+    border-radius:8px;
+    background:#0b6b3d;
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.top-languages button:hover{
+    background:#b7ff35;
+    color:#063d25;
+}
+
+nav{
+    background:#075b34;
+    padding:12px;
+    text-align:center;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    margin:5px 8px;
+    font-weight:bold;
+    display:inline-block;
+}
+
+nav a:hover{
+    color:#b7ff35;
+}
+
+.container{
+    max-width:1100px;
+    margin:auto;
+    padding:20px;
+}
+
+.hero{
+    background:linear-gradient(135deg,#063d25,#0b6b3d);
+    color:white;
+    padding:40px 25px;
+    border-radius:18px;
+    margin-bottom:25px;
+}
+
+.hero h1{
+    margin:0 0 10px;
+    font-size:36px;
+}
+
+.hero p{
+    font-size:18px;
+    line-height:1.6;
+}
+
+.profile-header{
+    display:flex;
+    align-items:center;
+    gap:25px;
+    background:white;
+    padding:25px;
+    border-radius:18px;
+    box-shadow:0 4px 15px rgba(0,0,0,.06);
+    margin-bottom:20px;
+}
+
+.avatar{
+    width:110px;
+    height:110px;
+    border-radius:50%;
+    background:#0b6b3d;
+    color:#b7ff35;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:42px;
+    font-weight:bold;
+    border:5px solid #b7ff35;
+    flex-shrink:0;
+}
+
+.profile-header h2{
+    margin:0 0 8px;
+    color:#063d25;
+}
+
+.verified{
+    display:inline-block;
+    background:#b7ff35;
+    color:#063d25;
+    padding:6px 10px;
+    border-radius:20px;
+    font-size:13px;
+    font-weight:bold;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:20px;
+}
+
+.card{
+    background:white;
+    padding:22px;
+    border-radius:16px;
+    box-shadow:0 4px 15px rgba(0,0,0,.06);
+}
+
+.card h3{
+    color:#075b34;
+    margin-top:0;
+}
+
+.card p{
+    line-height:1.6;
+}
+
+.info-row{
+    padding:10px 0;
+    border-bottom:1px solid #e1e9e4;
+}
+
+.info-row:last-child{
+    border-bottom:0;
+}
+
+.label{
+    font-size:13px;
+    color:#777;
+    margin-bottom:4px;
+}
+
+.value{
+    font-weight:bold;
+    color:#123;
+}
+
+.skills{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+}
+
+.skill{
+    background:#eaf5ee;
+    color:#075b34;
+    padding:8px 11px;
+    border-radius:20px;
+    font-weight:bold;
+}
+
+.progress{
+    background:#dce9e1;
+    height:10px;
+    border-radius:10px;
+    overflow:hidden;
+    margin-top:8px;
+}
+
+.progress div{
+    height:100%;
+    background:#0b6b3d;
+}
+
+.actions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:20px;
+}
+
+.btn{
+    border:0;
+    padding:12px 17px;
+    border-radius:9px;
+    background:#0b6b3d;
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+    text-decoration:none;
+    display:inline-block;
+}
+
+.btn:hover{
+    background:#063d25;
+}
+
+.btn.light{
+    background:#e3eee8;
+    color:#063d25;
+}
+
+.btn.light:hover{
+    background:#b7ff35;
+}
+
+.badge{
+    display:inline-block;
+    background:#b7ff35;
+    color:#063d25;
+    padding:6px 10px;
+    border-radius:20px;
+    font-weight:bold;
+    margin:3px;
+}
+
+.section{
+    margin-top:20px;
+}
+
+footer{
+    background:#063d25;
+    color:white;
+    text-align:center;
+    padding:25px;
+    margin-top:30px;
+}
+
+@media(max-width:600px){
+    .profile-header{
+        flex-direction:column;
+        text-align:center;
+    }
+
+    .hero h1{
+        font-size:30px;
+    }
+
+    nav a{
+        font-size:14px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="top-languages">
+    <button onclick="setLanguage('AZ')">AZ</button>
+    <button onclick="setLanguage('RU')">RU</button>
+    <button onclick="setLanguage('EN')">EN</button>
+    <button onclick="setLanguage('TR')">TR</button>
+    <button onclick="setLanguage('DE')">DE</button>
+    <button onclick="setLanguage('AR')">AR</button>
+    <button onclick="setLanguage('ES')">ES</button>
+    <button onclick="setLanguage('FR')">FR</button>
+    <button onclick="setLanguage('IT')">IT</button>
+</div>
+
+<nav>
+    <a href="../index.html">Главная</a>
+    <a href="../dashboard/index.html">Dashboard</a>
+    <a href="../profile/index.html">Профиль</a>
+    <a href="../companies/index.html">Компании</a>
+    <a href="../specialists/index.html">Специалисты</a>
+    <a href="../products/index.html">Products</a>
+    <a href="../requests/index.html">Requests</a>
+    <a href="../messages/index.html">Messages</a>
+    <a href="../settings/index.html">Настройки</a>
+</nav>
+
+<div class="container">
+
+<section class="hero">
+    <h1>👤 Мой профиль</h1>
+    <p>
+        Профиль пользователя WORKER PRO — навыки, опыт,
+        специализация, сертификаты и профессиональная информация.
+    </p>
+
+    <span class="badge">WORKER PRO</span>
+    <span class="badge">Professional Profile</span>
+</section>
+
+<section class="profile-header">
+
+    <div class="avatar">
+        F.S
+    </div>
+
+    <div>
+        <h2>Профессиональный профиль</h2>
+
+        <p>
+            Специалист промышленного производства
+        </p>
+
+        <span class="verified">
+            ✓ Профиль создан
+        </span>
+    </div>
+
+</section>
+
+<div class="grid">
+
+<section class="card">
+    <h3>📋 Основная информация</h3>
+
+    <div class="info-row">
+        <div class="label">Имя</div>
+        <div class="value">Farid</div>
+    </div>
+
+    <div class="info-row">
+        <div class="label">Страна</div>
+        <div class="value">Azerbaijan</div>
+    </div>
+
+    <div class="info-row">
+        <div class="label">Город</div>
+        <div class="value">Baku</div>
+    </div>
+
+    <div class="info-row">
+        <div class="label">Профиль</div>
+        <div class="value">Industrial Specialist</div>
+    </div>
+
+    <div class="info-row">
+        <div class="label">Статус</div>
+        <div class="value">Active</div>
+    </div>
+</section>
+
+<section class="card">
+    <h3>⚙️ Специализация</h3>
+
+    <div class="skills">
+        <span class="skill">CNC</span>
+        <span class="skill">Stamping</span>
+        <span class="skill">Production</span>
+        <span class="skill">Safety</span>
+        <span class="skill">Machinery</span>
+        <span class="skill">Maintenance</span>
+    </div>
+
+    <p>
+        Профессиональные навыки и производственный опыт
+        могут быть расширены пользователем.
+    </p>
+</section>
+
+<section class="card">
+    <h3>🎓 Обучение</h3>
+
+    <p>
+        Пройдено курсов:
+        <strong>12</strong>
+    </p>
+
+    <p>
+        Завершено уроков:
+        <strong>86</strong>
+    </p>
+
+    <p>
+        Получено сертификатов:
+        <strong>4</strong>
+    </p>
+
+    <div class="progress">
+        <div style="width:72%"></div>
+    </div>
+
+    <p>
+        Прогресс обучения: <strong>72%</strong>
+    </p>
+</section>
+
+<section class="card">
+    <h3>🏆 Профессиональный уровень</h3>
+
+    <p>
+        Уровень профиля:
+        <strong>Professional</strong>
+    </p>
+
+    <p>
+        Производственный опыт:
+        <strong>10+ лет</strong>
+    </p>
+
+    <p>
+        Основные направления:
+        <strong>CNC / Stamping</strong>
+    </p>
+
+    <div class="progress">
+        <div style="width:80%"></div>
+    </div>
+
+    <p>
+        Заполненность профиля: <strong>80%</strong>
+    </p>
+</section>
+
+</div>
+
+<section class="card section">
+
+    <h3>📜 Сертификаты</h3>
+
+    <div class="info-row">
+        <div class="label">Industrial Safety</div>
+        <div class="value">✓ Добавлен</div>
+    </div>
+
+    <div class="info-row">
+        <div class="label">CNC Operator</div>
+        <div class="value">✓ Добавлен</div>
+    </div>
+
+    <div class="info-row">
+        <div class="label">Production Training</div>
+        <div class="value">✓ Добавлен</div>
+    </div>
+
+    <div class="actions">
+        <a class="btn" href="../certificates/index.html">
+            Мои сертификаты
+        </a>
+
+        <a class="btn light" href="../training/index.html">
+            Обучение
+        </a>
+    </div>
+
+</section>
+
+<section class="card section">
+
+    <h3>🔧 Действия профиля</h3>
+
+    <div class="actions">
+
+        <button class="btn" onclick="editProfile()">
+            ✏️ Редактировать профиль
+        </button>
+
+        <a class="btn" href="../applications/index.html">
+            📄 Мои заявки
+        </a>
+
+        <a class="btn" href="../requests/index.html">
+            📦 Мои запросы
+        </a>
+
+        <a class="btn" href="../offers/index.html">
+            💰 Мои предложения
+        </a>
+
+        <a class="btn" href="../messages/index.html">
+            💬 Сообщения
+        </a>
+
+        <a class="btn light" href="../settings/index.html">
+            ⚙️ Настройки
+        </a>
+
+    </div>
+
+</section>
+
+<section class="card section">
+
+    <h3>🌍 Профессиональная сеть WORKER PRO</h3>
+
+    <p>
+        Профиль специалиста в будущем сможет использоваться
+        для поиска работы, профессионального общения,
+        участия в обучении, получения сертификатов и
+        взаимодействия с промышленными компаниями.
+    </p>
+
+    <div class="actions">
+
+        <a class="btn" href="../specialists/index.html">
+            Найти специалистов
+        </a>
+
+        <a class="btn" href="../jobs/index.html">
+            Найти работу
+        </a>
+
+        <a class="btn" href="../companies/index.html">
+            Компании
+        </a>
+
+    </div>
+
+</section>
+
+</div>
+
+<footer>
+    <strong>WORKER PRO</strong><br>
+    Global Industrial Platform<br><br>
+    © 2026 WORKER PRO — F.S.
+</footer>
+
+<script src="../language.js"></script>
+
+<script>
+function editProfile(){
+
+    alert(
+        "Редактирование профиля будет подключено " +
+        "после создания системы аккаунтов и базы данных WORKER PRO."
+    );
+
+}
+</script>
+
+</body>
+</html>
