@@ -1,1 +1,1041 @@
- 
+ <!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WORKER PRO — Vacancies</title>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f4f7f5;
+    color:#123;
+}
+
+.top-languages{
+    background:#063d25;
+    padding:10px;
+    text-align:center;
+}
+
+.top-languages button{
+    border:1px solid #b7ff35;
+    background:transparent;
+    color:white;
+    padding:7px 10px;
+    margin:3px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.top-languages button:hover{
+    background:#0b6b3d;
+}
+
+header{
+    background:#063d25;
+    color:white;
+    padding:20px;
+    text-align:center;
+}
+
+.logo{
+    width:85px;
+    height:85px;
+    object-fit:contain;
+    border-radius:20px;
+    margin-bottom:8px;
+}
+
+header h1{
+    margin:5px 0;
+    color:#b7ff35;
+}
+
+header p{
+    margin:5px 0;
+}
+
+nav{
+    position:sticky;
+    top:0;
+    z-index:20;
+    background:#0b6b3d;
+    padding:10px;
+    text-align:center;
+}
+
+nav a{
+    display:inline-block;
+    color:white;
+    text-decoration:none;
+    margin:4px;
+    padding:8px 11px;
+    border-radius:8px;
+    font-size:14px;
+}
+
+nav a:hover{
+    background:#075b34;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+    padding:20px;
+}
+
+.hero{
+    background:linear-gradient(135deg,#063d25,#0b6b3d);
+    color:white;
+    padding:35px 20px;
+    border-radius:18px;
+    text-align:center;
+    margin-bottom:20px;
+}
+
+.hero h2{
+    font-size:32px;
+    margin:0 0 10px;
+    color:#b7ff35;
+}
+
+.hero p{
+    font-size:17px;
+    line-height:1.5;
+}
+
+.search-box{
+    background:white;
+    padding:20px;
+    border-radius:16px;
+    box-shadow:0 3px 12px #0001;
+    margin-bottom:20px;
+}
+
+.search-row{
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr 1fr auto;
+    gap:10px;
+}
+
+input,select,textarea{
+    width:100%;
+    padding:12px;
+    border:1px solid #ccd8d1;
+    border-radius:9px;
+    font-size:15px;
+}
+
+button.primary{
+    background:#0b6b3d;
+    color:white;
+    border:0;
+    padding:12px 18px;
+    border-radius:9px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+button.primary:hover{
+    background:#063d25;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+    margin-bottom:25px;
+}
+
+.stat{
+    background:white;
+    border-radius:14px;
+    padding:20px;
+    text-align:center;
+    box-shadow:0 3px 10px #0001;
+}
+
+.stat strong{
+    display:block;
+    font-size:28px;
+    color:#0b6b3d;
+}
+
+.filters{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:20px;
+}
+
+.filter{
+    border:1px solid #0b6b3d;
+    background:white;
+    color:#0b6b3d;
+    padding:9px 14px;
+    border-radius:20px;
+    cursor:pointer;
+}
+
+.filter.active,
+.filter:hover{
+    background:#0b6b3d;
+    color:white;
+}
+
+.jobs{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
+}
+
+.job{
+    background:white;
+    border-radius:16px;
+    padding:20px;
+    box-shadow:0 3px 12px #0001;
+    border-left:5px solid #0b6b3d;
+}
+
+.job h3{
+    margin-top:0;
+    color:#063d25;
+}
+
+.company{
+    font-weight:bold;
+    color:#0b6b3d;
+}
+
+.job-info{
+    display:flex;
+    flex-wrap:wrap;
+    gap:7px;
+    margin:12px 0;
+}
+
+.tag{
+    background:#e9f4ed;
+    color:#075b34;
+    padding:6px 9px;
+    border-radius:7px;
+    font-size:13px;
+}
+
+.salary{
+    color:#063d25;
+    font-weight:bold;
+    font-size:18px;
+}
+
+.job-actions{
+    margin-top:15px;
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+}
+
+.secondary{
+    border:1px solid #0b6b3d;
+    background:white;
+    color:#0b6b3d;
+    padding:10px 14px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.section{
+    background:white;
+    padding:25px;
+    border-radius:16px;
+    margin-top:25px;
+    box-shadow:0 3px 12px #0001;
+}
+
+.section h2{
+    color:#063d25;
+}
+
+.categories{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:12px;
+}
+
+.category{
+    background:#eef6f1;
+    padding:18px;
+    border-radius:12px;
+    text-align:center;
+    cursor:pointer;
+}
+
+.category:hover{
+    background:#dceee3;
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+}
+
+.full{
+    grid-column:1/-1;
+}
+
+footer{
+    margin-top:35px;
+    background:#063d25;
+    color:white;
+    text-align:center;
+    padding:25px;
+}
+
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:#0008;
+    z-index:100;
+    padding:20px;
+    overflow:auto;
+}
+
+.modal-content{
+    max-width:650px;
+    margin:50px auto;
+    background:white;
+    padding:25px;
+    border-radius:16px;
+}
+
+.close{
+    float:right;
+    font-size:25px;
+    cursor:pointer;
+}
+
+.empty{
+    text-align:center;
+    padding:35px;
+    background:white;
+    border-radius:15px;
+}
+
+@media(max-width:900px){
+    .search-row{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .jobs{
+        grid-template-columns:1fr;
+    }
+
+    .categories{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:600px){
+    .search-row,
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .stats{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .hero h2{
+        font-size:25px;
+    }
+
+    nav a{
+        font-size:12px;
+        padding:7px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="top-languages">
+    <button onclick="setLanguage('AZ')">AZ</button>
+    <button onclick="setLanguage('RU')">RU</button>
+    <button onclick="setLanguage('EN')">EN</button>
+    <button onclick="setLanguage('TR')">TR</button>
+    <button onclick="setLanguage('DE')">DE</button>
+    <button onclick="setLanguage('AR')">AR</button>
+    <button onclick="setLanguage('ES')">ES</button>
+    <button onclick="setLanguage('FR')">FR</button>
+    <button onclick="setLanguage('IT')">IT</button>
+</div>
+
+<header>
+    <img src="../logo.png" class="logo" alt="WORKER PRO">
+    <h1>WORKER PRO</h1>
+    <p>Глобальная промышленная платформа</p>
+</header>
+
+<nav>
+    <a href="../index.html">Главная</a>
+    <a href="../production/index.html">Производство</a>
+    <a href="../companies/index.html">Компании</a>
+    <a href="../specialists/index.html">Специалисты</a>
+    <a href="../manufacturers/index.html">Производители</a>
+    <a href="../suppliers/index.html">Поставщики</a>
+    <a href="../training/index.html">Обучение</a>
+    <a href="../profile/index.html">Профиль</a>
+</nav>
+
+<div class="container">
+
+<section class="hero">
+    <h2>💼 Вакансии WORKER PRO</h2>
+    <p>
+        Работа в промышленности, производстве, энергетике,
+        машиностроении, логистике и технических специальностях.
+    </p>
+</section>
+
+<div class="stats">
+    <div class="stat">
+        <strong id="totalJobs">24</strong>
+        Вакансий
+    </div>
+
+    <div class="stat">
+        <strong>42</strong>
+        Страны
+    </div>
+
+    <div class="stat">
+        <strong>180+</strong>
+        Компаний
+    </div>
+
+    <div class="stat">
+        <strong>9</strong>
+        Языков
+    </div>
+</div>
+
+<section class="search-box">
+
+    <h2>🔎 Найти работу</h2>
+
+    <div class="search-row">
+
+        <input
+            id="searchInput"
+            type="text"
+            placeholder="Например: CNC оператор, сварщик, инженер..."
+            oninput="filterJobs()"
+        >
+
+        <select id="countryFilter" onchange="filterJobs()">
+            <option value="">Все страны</option>
+            <option value="Azerbaijan">Азербайджан</option>
+            <option value="Turkey">Турция</option>
+            <option value="Germany">Германия</option>
+            <option value="Italy">Италия</option>
+            <option value="UAE">ОАЭ</option>
+        </select>
+
+        <select id="categoryFilter" onchange="filterJobs()">
+            <option value="">Все категории</option>
+            <option value="CNC">CNC</option>
+            <option value="Production">Производство</option>
+            <option value="Welding">Сварка</option>
+            <option value="Engineering">Инженерия</option>
+            <option value="Maintenance">Техническое обслуживание</option>
+            <option value="Logistics">Логистика</option>
+            <option value="Safety">Охрана труда</option>
+        </select>
+
+        <select id="typeFilter" onchange="filterJobs()">
+            <option value="">Любой график</option>
+            <option value="Full-time">Полная занятость</option>
+            <option value="Shift">Сменная работа</option>
+            <option value="Contract">Контракт</option>
+        </select>
+
+        <button class="primary" onclick="filterJobs()">Найти</button>
+
+    </div>
+
+</section>
+
+<div class="filters">
+    <button class="filter active" onclick="setCategory('all',this)">Все</button>
+    <button class="filter" onclick="setCategory('CNC',this)">CNC</button>
+    <button class="filter" onclick="setCategory('Production',this)">Производство</button>
+    <button class="filter" onclick="setCategory('Welding',this)">Сварка</button>
+    <button class="filter" onclick="setCategory('Engineering',this)">Инженеры</button>
+    <button class="filter" onclick="setCategory('Maintenance',this)">Механика</button>
+    <button class="filter" onclick="setCategory('Logistics',this)">Логистика</button>
+    <button class="filter" onclick="setCategory('Safety',this)">HSE / Safety</button>
+</div>
+
+<section id="jobs" class="jobs">
+
+<div class="job" data-category="CNC" data-country="Azerbaijan" data-type="Full-time">
+    <h3>Оператор CNC станка</h3>
+    <div class="company">Caspian Machinery</div>
+
+    <div class="job-info">
+        <span class="tag">🇦🇿 Баку</span>
+        <span class="tag">CNC</span>
+        <span class="tag">Полная занятость</span>
+    </div>
+
+    <p>Работа на CNC оборудовании, контроль размеров и качества деталей.</p>
+
+    <div class="salary">💰 1000–1500 AZN</div>
+
+    <div class="job-actions">
+        <button class="primary" onclick="applyJob('Оператор CNC станка')">Откликнуться</button>
+        <button class="secondary" onclick="showJob('Оператор CNC станка','Caspian Machinery','Azerbaijan','CNC','1000–1500 AZN')">Подробнее</button>
+    </div>
+</div>
+
+<div class="job" data-category="Production" data-country="Azerbaijan" data-type="Shift">
+    <h3>Оператор производства</h3>
+    <div class="company">Caspian Industrial Works</div>
+
+    <div class="job-info">
+        <span class="tag">🇦🇿 Сумгайыт</span>
+        <span class="tag">Производство</span>
+        <span class="tag">Сменная работа</span>
+    </div>
+
+    <p>Контроль производственной линии, оборудование и соблюдение безопасности.</p>
+
+    <div class="salary">💰 800–1200 AZN</div>
+
+    <div class="job-actions">
+        <button class="primary" onclick="applyJob('Оператор производства')">Откликнуться</button>
+        <button class="secondary" onclick="showJob('Оператор производства','Caspian Industrial Works','Azerbaijan','Production','800–1200 AZN')">Подробнее</button>
+    </div>
+</div>
+
+<div class="job" data-category="Welding" data-country="Turkey" data-type="Full-time">
+    <h3>Промышленный сварщик</h3>
+    <div class="company">Anatolia Industrial</div>
+
+    <div class="job-info">
+        <span class="tag">🇹🇷 Стамбул</span>
+        <span class="tag">Сварка</span>
+        <span class="tag">Полная занятость</span>
+    </div>
+
+    <p>Сварочные работы на промышленном оборудовании и металлоконструкциях.</p>
+
+    <div class="salary">💰 По договорённости</div>
+
+    <div class="job-actions">
+        <button class="primary" onclick="applyJob('Промышленный сварщик')">Откликнуться</button>
+        <button class="secondary" onclick="showJob('Промышленный сварщик','Anatolia Industrial','Turkey','Welding','По договорённости')">Подробнее</button>
+    </div>
+</div>
+
+<div class="job" data-category="Engineering" data-country="Germany" data-type="Full-time">
+    <h3>Инженер-механик</h3>
+    <div class="company">Germany CNC Systems</div>
+
+    <div class="job-info">
+        <span class="tag">🇩🇪 Германия</span>
+        <span class="tag">Инженерия</span>
+        <span class="tag">Full-time</span>
+    </div>
+
+    <p>Техническое обслуживание оборудования, анализ неисправностей и улучшение производства.</p>
+
+    <div class="salary">💰 2500–4000 EUR</div>
+
+    <div class="job-actions">
+        <button class="primary" onclick="applyJob('Инженер-механик')">Откликнуться</button>
+        <button class="secondary" onclick="showJob('Инженер-механик','Germany CNC Systems','Germany','Engineering','2500–4000 EUR')">Подробнее</button>
+    </div>
+</div>
+
+<div class="job" data-category="Maintenance" data-country="Italy" data-type="Shift">
+    <h3>Механик по промышленному оборудованию</h3>
+    <div class="company">Italia Industrial Systems</div>
+
+    <div class="job-info">
+        <span class="tag">🇮🇹 Италия</span>
+        <span class="tag">Maintenance</span>
+        <span class="tag">Смена</span>
+    </div>
+
+    <p>Диагностика, ремонт и техническое обслуживание промышленного оборудования.</p>
+
+    <div class="salary">💰 1800–2800 EUR</div>
+
+    <div class="job-actions">
+        <button class="primary" onclick="applyJob('Механик по промышленному оборудованию')">Откликнуться</button>
+        <button class="secondary" onclick="showJob('Механик по промышленному оборудованию','Italia Industrial Systems','Italy','Maintenance','1800–2800 EUR')">Подробнее</button>
+    </div>
+</div>
+
+<div class="job" data-category="Logistics" data-country="Azerbaijan" data-type="Full-time">
+    <h3>Специалист по промышленной логистике</h3>
+    <div class="company">Caspian Logistics</div>
+
+    <div class="job-info">
+        <span class="tag">🇦🇿 Баку</span>
+        <span class="tag">Логистика</span>
+        <span class="tag">Full-time</span>
+    </div>
+
+    <p>Организация перевозок оборудования, запасных частей и промышленных грузов.</p>
+
+    <div class="salary">💰 1200–1800 AZN</div>
+
+    <div class="job-actions">
+        <button class="primary" onclick="applyJob('Специалист по промышленной логистике')">Откликнуться</button>
+        <button class="secondary" onclick="showJob('Специалист по промышленной логистике','Caspian Logistics','Azerbaijan','Logistics','1200–1800 AZN')">Подробнее</button>
+    </div>
+</div>
+
+<div class="job" data-category="Safety" data-country="UAE" data-type="Full-time">
+    <h3>HSE / Safety Specialist</h3>
+    <div class="company">Global Industrial Services</div>
+
+    <div class="job-info">
+        <span class="tag">🇦🇪 ОАЭ</span>
+        <span class="tag">HSE</span>
+        <span class="tag">Full-time</span>
+    </div>
+
+    <p>Контроль промышленной безопасности, PPE, инструктажи и анализ рисков.</p>
+
+    <div class="salary">💰 2500–4000 USD</div>
+
+    <div class="job-actions">
+        <button class="primary" onclick="applyJob('HSE / Safety Specialist')">Откликнуться</button>
+        <button class="secondary" onclick="showJob('HSE / Safety Specialist','Global Industrial Services','UAE','Safety','2500–4000 USD')">Подробнее</button>
+    </div>
+</div>
+
+<div class="job" data-category="CNC" data-country="Italy" data-type="Contract">
+    <h3>CNC Programmer</h3>
+    <div class="company">Italia CNC Technology</div>
+
+    <div class="job-info">
+        <span class="tag">🇮🇹 Италия</span>
+        <span class="tag">CNC</span>
+        <span class="tag">Контракт</span>
+    </div>
+
+    <p>Программирование CNC, подготовка управляющих программ и оптимизация обработки.</p>
+
+    <div class="salary">💰 2200–3500 EUR</div>
+
+    <div class="job-actions">
+        <button class="primary" onclick="applyJob('CNC Programmer')">Откликнуться</button>
+        <button class="secondary" onclick="showJob('CNC Programmer','Italia CNC Technology','Italy','CNC','2200–3500 EUR')">Подробнее</button>
+    </div>
+</div>
+
+</section>
+
+<div id="empty" class="empty" style="display:none;">
+    <h3>Вакансии не найдены</h3>
+    <p>Попробуйте изменить поиск или фильтры.</p>
+</div>
+
+<section class="section">
+
+<h2>🏭 Категории промышленной работы</h2>
+
+<div class="categories">
+
+<div class="category" onclick="setCategory('CNC',null)">
+    ⚙️<br><b>CNC</b>
+</div>
+
+<div class="category" onclick="setCategory('Production',null)">
+    🏭<br><b>Производство</b>
+</div>
+
+<div class="category" onclick="setCategory('Welding',null)">
+    🔥<br><b>Сварка</b>
+</div>
+
+<div class="category" onclick="setCategory('Engineering',null)">
+    👷<br><b>Инженеры</b>
+</div>
+
+<div class="category" onclick="setCategory('Maintenance',null)">
+    🔧<br><b>Механики</b>
+</div>
+
+<div class="category" onclick="setCategory('Logistics',null)">
+    🚚<br><b>Логистика</b>
+</div>
+
+<div class="category" onclick="setCategory('Safety',null)">
+    🦺<br><b>Safety / HSE</b>
+</div>
+
+<div class="category">
+    📐<br><b>Quality Control</b>
+</div>
+
+</div>
+
+</section>
+
+<section class="section">
+
+<h2>➕ Разместить вакансию</h2>
+
+<p>
+Компания или производитель может разместить вакансию
+для специалистов WORKER PRO.
+</p>
+
+<form onsubmit="addVacancy(event)">
+
+<div class="form-grid">
+
+<div>
+<label>Название вакансии</label>
+<input id="vacancyTitle" required placeholder="Например: CNC Operator">
+</div>
+
+<div>
+<label>Компания</label>
+<input id="vacancyCompany" required placeholder="Название компании">
+</div>
+
+<div>
+<label>Страна</label>
+<select id="vacancyCountry">
+<option>Azerbaijan</option>
+<option>Turkey</option>
+<option>Germany</option>
+<option>Italy</option>
+<option>China</option>
+<option>USA</option>
+<option>UAE</option>
+</select>
+</div>
+
+<div>
+<label>Город</label>
+<input id="vacancyCity" required placeholder="Baku">
+</div>
+
+<div>
+<label>Категория</label>
+<select id="vacancyCategory">
+<option>CNC</option>
+<option>Production</option>
+<option>Welding</option>
+<option>Engineering</option>
+<option>Maintenance</option>
+<option>Logistics</option>
+<option>Safety</option>
+</select>
+</div>
+
+<div>
+<label>Зарплата</label>
+<input id="vacancySalary" placeholder="1000–1500 AZN">
+</div>
+
+<div class="full">
+<label>Описание</label>
+<textarea id="vacancyDescription" rows="4" placeholder="Требования, обязанности, опыт..."></textarea>
+</div>
+
+<div class="full">
+<button class="primary" type="submit">
+    Опубликовать вакансию
+</button>
+</div>
+
+</div>
+
+</form>
+
+</section>
+
+<section class="section">
+
+<h2>🌍 Как работает раздел Vacancies</h2>
+
+<p>1️⃣ Специалист создаёт профессиональный профиль.</p>
+<p>2️⃣ Компания публикует промышленную вакансию.</p>
+<p>3️⃣ Специалист ищет работу по профессии, стране и навыкам.</p>
+<p>4️⃣ Открывает вакансию и отправляет отклик.</p>
+<p>5️⃣ Компания рассматривает кандидата и связывается с ним.</p>
+
+<p>
+В будущем этот раздел можно связать с профилями специалистов,
+сертификатами, обучением, компаниями и международным поиском работы.
+</p>
+
+</section>
+
+</div>
+
+<footer>
+    <b>WORKER PRO</b><br>
+    Работа • Знания • Производство<br><br>
+    © 2026 WORKER PRO • F.S
+</footer>
+
+<div id="jobModal" class="modal">
+
+<div class="modal-content">
+
+<span class="close" onclick="closeModal()">×</span>
+
+<h2 id="modalTitle"></h2>
+
+<p><b>Компания:</b> <span id="modalCompany"></span></p>
+<p><b>Страна:</b> <span id="modalCountry"></span></p>
+<p><b>Категория:</b> <span id="modalCategory"></span></p>
+<p><b>Зарплата:</b> <span id="modalSalary"></span></p>
+
+<hr>
+
+<p>
+Эта вакансия является демонстрационной.
+В рабочей версии здесь будет полное описание,
+требования, контакты работодателя и возможность отправить заявку.
+</p>
+
+<button class="primary" onclick="applyFromModal()">
+    Откликнуться
+</button>
+
+</div>
+
+</div>
+
+<script src="../language.js"></script>
+
+<script>
+
+let selectedCategory = "all";
+let currentJob = "";
+
+function filterJobs(){
+
+    const search =
+        document.getElementById("searchInput").value.toLowerCase();
+
+    const country =
+        document.getElementById("countryFilter").value;
+
+    const category =
+        document.getElementById("categoryFilter").value;
+
+    const type =
+        document.getElementById("typeFilter").value;
+
+    const jobs =
+        document.querySelectorAll(".job");
+
+    let visible = 0;
+
+    jobs.forEach(job => {
+
+        const text = job.innerText.toLowerCase();
+
+        const jobCategory = job.dataset.category;
+        const jobCountry = job.dataset.country;
+        const jobType = job.dataset.type;
+
+        const searchOK =
+            !search || text.includes(search);
+
+        const countryOK =
+            !country || jobCountry === country;
+
+        const categoryOK =
+            (!category || jobCategory === category) &&
+            (selectedCategory === "all" ||
+             jobCategory === selectedCategory);
+
+        const typeOK =
+            !type || jobType === type;
+
+        if(searchOK && countryOK && categoryOK && typeOK){
+
+            job.style.display = "";
+
+            visible++;
+
+        }else{
+
+            job.style.display = "none";
+
+        }
+
+    });
+
+    document.getElementById("empty").style.display =
+        visible === 0 ? "block" : "none";
+}
+
+function setCategory(category, button){
+
+    selectedCategory = category;
+
+    document.querySelectorAll(".filter")
+        .forEach(btn => btn.classList.remove("active"));
+
+    if(button){
+        button.classList.add("active");
+    }
+
+    filterJobs();
+}
+
+function showJob(title,company,country,category,salary){
+
+    currentJob = title;
+
+    document.getElementById("modalTitle").innerText = title;
+    document.getElementById("modalCompany").innerText = company;
+    document.getElementById("modalCountry").innerText = country;
+    document.getElementById("modalCategory").innerText = category;
+    document.getElementById("modalSalary").innerText = salary;
+
+    document.getElementById("jobModal").style.display = "block";
+}
+
+function closeModal(){
+
+    document.getElementById("jobModal").style.display = "none";
+}
+
+function applyJob(title){
+
+    alert(
+        "Отклик на вакансию:\n\n" +
+        title +
+        "\n\nВ рабочей версии здесь будет форма отклика и отправка работодателю."
+    );
+}
+
+function applyFromModal(){
+
+    closeModal();
+    applyJob(currentJob);
+}
+
+function addVacancy(event){
+
+    event.preventDefault();
+
+    const title =
+        document.getElementById("vacancyTitle").value;
+
+    const company =
+        document.getElementById("vacancyCompany").value;
+
+    const country =
+        document.getElementById("vacancyCountry").value;
+
+    const city =
+        document.getElementById("vacancyCity").value;
+
+    const category =
+        document.getElementById("vacancyCategory").value;
+
+    const salary =
+        document.getElementById("vacancySalary").value ||
+        "По договорённости";
+
+    const description =
+        document.getElementById("vacancyDescription").value;
+
+    const job = document.createElement("div");
+
+    job.className = "job";
+
+    job.dataset.category = category;
+    job.dataset.country = country;
+    job.dataset.type = "Full-time";
+
+    job.innerHTML = `
+
+        <h3>${title}</h3>
+
+        <div class="company">${company}</div>
+
+        <div class="job-info">
+
+            <span class="tag">🌍 ${city}, ${country}</span>
+
+            <span class="tag">${category}</span>
+
+            <span class="tag">Full-time</span>
+
+        </div>
+
+        <p>${description || "Промышленная вакансия WORKER PRO."}</p>
+
+        <div class="salary">💰 ${salary}</div>
+
+        <div class="job-actions">
+
+            <button class="primary"
+            onclick="applyJob('${title.replace(/'/g,"\\'")}')">
+            Откликнуться
+            </button>
+
+        </div>
+    `;
+
+    document.getElementById("jobs").prepend(job);
+
+    document.getElementById("totalJobs").innerText =
+        parseInt(document.getElementById("totalJobs").innerText) + 1;
+
+    event.target.reset();
+
+    alert(
+        "Вакансия добавлена!\n\n" +
+        "В демонстрационной версии она отображается только на этой странице."
+    );
+
+    filterJobs();
+}
+
+window.onclick = function(event){
+
+    const modal =
+        document.getElementById("jobModal");
+
+    if(event.target === modal){
+        closeModal();
+    }
+
+};
+
+</script>
+
+</body>
+</html>
