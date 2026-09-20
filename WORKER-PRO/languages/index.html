@@ -1,1 +1,627 @@
- 
+ <!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WORKER PRO — Languages</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f4f7f5;
+    color:#123;
+}
+
+.top-languages{
+    background:#063d25;
+    padding:10px;
+    display:flex;
+    justify-content:center;
+    gap:8px;
+    flex-wrap:wrap;
+}
+
+.top-languages button{
+    background:#0b6b3d;
+    color:white;
+    border:1px solid #75a98c;
+    border-radius:8px;
+    padding:8px 12px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.top-languages button:hover{
+    background:#b7ff35;
+    color:#063d25;
+}
+
+nav{
+    background:#075b34;
+    padding:12px;
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    flex-wrap:wrap;
+    position:sticky;
+    top:0;
+    z-index:100;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    padding:9px 12px;
+    border-radius:7px;
+    font-weight:bold;
+}
+
+nav a:hover{
+    background:#b7ff35;
+    color:#063d25;
+}
+
+.hero{
+    background:linear-gradient(135deg,#063d25,#0b6b3d);
+    color:white;
+    text-align:center;
+    padding:55px 20px;
+}
+
+.hero h1{
+    font-size:42px;
+    margin:0 0 15px;
+}
+
+.hero p{
+    max-width:850px;
+    margin:auto;
+    font-size:18px;
+    line-height:1.6;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+    padding:25px 15px;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:15px;
+    margin-top:-30px;
+    position:relative;
+}
+
+.stat{
+    background:white;
+    border-radius:14px;
+    padding:22px;
+    text-align:center;
+    box-shadow:0 4px 15px rgba(0,0,0,.08);
+}
+
+.stat strong{
+    display:block;
+    color:#0b6b3d;
+    font-size:28px;
+    margin-bottom:6px;
+}
+
+.controls{
+    background:white;
+    padding:20px;
+    border-radius:14px;
+    margin:30px 0;
+    box-shadow:0 4px 15px rgba(0,0,0,.07);
+}
+
+.search{
+    width:100%;
+    padding:14px;
+    border:1px solid #ccd8d1;
+    border-radius:10px;
+    font-size:16px;
+    margin-bottom:15px;
+}
+
+.language-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(270px,1fr));
+    gap:20px;
+}
+
+.language-card{
+    background:white;
+    border-radius:15px;
+    padding:22px;
+    box-shadow:0 4px 15px rgba(0,0,0,.07);
+    transition:.2s;
+}
+
+.language-card:hover{
+    transform:translateY(-3px);
+}
+
+.flag{
+    font-size:42px;
+}
+
+.language-card h3{
+    color:#063d25;
+    margin:10px 0;
+}
+
+.language-card p{
+    line-height:1.5;
+    color:#456;
+}
+
+.code{
+    display:inline-block;
+    background:#e9f7df;
+    color:#386b17;
+    padding:6px 10px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.status{
+    display:inline-block;
+    background:#dff5df;
+    color:#187329;
+    padding:6px 10px;
+    border-radius:20px;
+    font-size:12px;
+    margin:5px 3px;
+    font-weight:bold;
+}
+
+.language-card button,
+.main-btn{
+    border:none;
+    background:#0b6b3d;
+    color:white;
+    padding:11px 16px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+    margin-top:10px;
+}
+
+.language-card button:hover,
+.main-btn:hover{
+    background:#063d25;
+}
+
+.info{
+    background:#063d25;
+    color:white;
+    padding:30px;
+    border-radius:15px;
+    margin-top:35px;
+}
+
+.info h2{
+    color:#b7ff35;
+    margin-top:0;
+}
+
+.info p{
+    line-height:1.7;
+}
+
+.links{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:20px;
+}
+
+.links a{
+    background:white;
+    color:#063d25;
+    padding:10px 15px;
+    border-radius:8px;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+footer{
+    background:#063d25;
+    color:white;
+    text-align:center;
+    padding:25px;
+    margin-top:40px;
+}
+
+@media(max-width:600px){
+    .hero h1{font-size:32px}
+    .hero p{font-size:16px}
+
+    nav a{
+        font-size:13px;
+        padding:7px 9px;
+    }
+
+    .top-languages button{
+        padding:7px 9px;
+        font-size:12px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="top-languages">
+    <button onclick="setLanguage('AZ')">AZ</button>
+    <button onclick="setLanguage('RU')">RU</button>
+    <button onclick="setLanguage('EN')">EN</button>
+    <button onclick="setLanguage('TR')">TR</button>
+    <button onclick="setLanguage('DE')">DE</button>
+    <button onclick="setLanguage('AR')">AR</button>
+    <button onclick="setLanguage('ES')">ES</button>
+    <button onclick="setLanguage('FR')">FR</button>
+    <button onclick="setLanguage('IT')">IT</button>
+</div>
+
+<nav>
+    <a href="../index.html">Главная</a>
+    <a href="../about/">О платформе</a>
+    <a href="../training/">Обучение</a>
+    <a href="../training-courses/">Курсы</a>
+    <a href="../specialists/">Специалисты</a>
+    <a href="../companies/">Компании</a>
+    <a href="../jobs/">Работа</a>
+    <a href="../contact/">Контакты</a>
+</nav>
+
+<section class="hero">
+    <h1>🌍 Languages</h1>
+    <p>
+        Языковая система WORKER PRO для международной
+        промышленной платформы.
+    </p>
+</section>
+
+<div class="container">
+
+    <div class="stats">
+
+        <div class="stat">
+            <strong>9</strong>
+            Языков
+        </div>
+
+        <div class="stat">
+            <strong>42</strong>
+            Страны
+        </div>
+
+        <div class="stat">
+            <strong>24/7</strong>
+            Доступ
+        </div>
+
+        <div class="stat">
+            <strong>Global</strong>
+            Платформа
+        </div>
+
+    </div>
+
+    <div class="controls">
+
+        <input
+            id="searchInput"
+            class="search"
+            type="text"
+            placeholder="Поиск языка: English, русский, Türkçe..."
+            oninput="searchLanguages()"
+        >
+
+    </div>
+
+    <div class="language-grid" id="languageGrid">
+
+        <div class="language-card"
+             data-search="azerbaijani azerbaijan az azərbaycan dili">
+
+            <div class="flag">🇦🇿</div>
+
+            <h3>Azərbaycan dili</h3>
+
+            <span class="code">AZ</span>
+            <span class="status">Доступен</span>
+
+            <p>
+                Основной язык для пользователей и компаний
+                из Азербайджана.
+            </p>
+
+            <button onclick="selectLanguage('AZ')">
+                Выбрать AZ
+            </button>
+
+        </div>
+
+
+        <div class="language-card"
+             data-search="russian русский ru россия">
+
+            <div class="flag">🇷🇺</div>
+
+            <h3>Русский язык</h3>
+
+            <span class="code">RU</span>
+            <span class="status">Доступен</span>
+
+            <p>
+                Язык для специалистов, компаний и поставщиков
+                русскоязычного рынка.
+            </p>
+
+            <button onclick="selectLanguage('RU')">
+                Выбрать RU
+            </button>
+
+        </div>
+
+
+        <div class="language-card"
+             data-search="english английский en international global">
+
+            <div class="flag">🇬🇧</div>
+
+            <h3>English</h3>
+
+            <span class="code">EN</span>
+            <span class="status">Доступен</span>
+
+            <p>
+                Международный язык WORKER PRO для глобальной
+                промышленной торговли и коммуникации.
+            </p>
+
+            <button onclick="selectLanguage('EN')">
+                Select EN
+            </button>
+
+        </div>
+
+
+        <div class="language-card"
+             data-search="turkish türkçe турецкий tr türkiye">
+
+            <div class="flag">🇹🇷</div>
+
+            <h3>Türkçe</h3>
+
+            <span class="code">TR</span>
+            <span class="status">Доступен</span>
+
+            <p>
+                Язык для специалистов, производителей
+                и поставщиков из Турции.
+            </p>
+
+            <button onclick="selectLanguage('TR')">
+                TR seç
+            </button>
+
+        </div>
+
+
+        <div class="language-card"
+             data-search="german deutsch немецкий de deutschland">
+
+            <div class="flag">🇩🇪</div>
+
+            <h3>Deutsch</h3>
+
+            <span class="code">DE</span>
+            <span class="status">Доступен</span>
+
+            <p>
+                Язык для промышленного сотрудничества
+                с немецкими компаниями и производителями.
+            </p>
+
+            <button onclick="selectLanguage('DE')">
+                DE wählen
+            </button>
+
+        </div>
+
+
+        <div class="language-card"
+             data-search="arabic العربية арабский ar">
+
+            <div class="flag">🇸🇦</div>
+
+            <h3>العربية</h3>
+
+            <span class="code">AR</span>
+            <span class="status">Доступен</span>
+
+            <p>
+                Арабский язык для пользователей
+                и промышленного рынка региона.
+            </p>
+
+            <button onclick="selectLanguage('AR')">
+                اختيار AR
+            </button>
+
+        </div>
+
+
+        <div class="language-card"
+             data-search="spanish español испанский es">
+
+            <div class="flag">🇪🇸</div>
+
+            <h3>Español</h3>
+
+            <span class="code">ES</span>
+            <span class="status">Доступен</span>
+
+            <p>
+                Испанский язык для международных специалистов,
+                компаний и поставщиков.
+            </p>
+
+            <button onclick="selectLanguage('ES')">
+                Elegir ES
+            </button>
+
+        </div>
+
+
+        <div class="language-card"
+             data-search="french français французский fr">
+
+            <div class="flag">🇫🇷</div>
+
+            <h3>Français</h3>
+
+            <span class="code">FR</span>
+            <span class="status">Доступен</span>
+
+            <p>
+                Французский язык для международного
+                промышленного сотрудничества.
+            </p>
+
+            <button onclick="selectLanguage('FR')">
+                Choisir FR
+            </button>
+
+        </div>
+
+
+        <div class="language-card"
+             data-search="italian italiano итальянский it italia">
+
+            <div class="flag">🇮🇹</div>
+
+            <h3>Italiano</h3>
+
+            <span class="code">IT</span>
+            <span class="status">Доступен</span>
+
+            <p>
+                Итальянский язык для производителей,
+                поставщиков и специалистов Италии.
+            </p>
+
+            <button onclick="selectLanguage('IT')">
+                Scegli IT
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div class="info">
+
+        <h2>🌐 Как работает Languages в WORKER PRO</h2>
+
+        <p>
+            Пользователь выбирает язык платформы и продолжает
+            работу с каталогом, производством, обучением,
+            компаниями, товарами и поставщиками.
+        </p>
+
+        <p>
+            Выбранный язык может сохраняться в браузере,
+            чтобы при следующем посещении WORKER PRO
+            автоматически открывался на выбранном языке.
+        </p>
+
+        <p>
+            Языковая система предназначена для международного
+            развития платформы и дальнейшего подключения
+            дополнительных языков.
+        </p>
+
+        <div class="links">
+            <a href="../index.html">Главная</a>
+            <a href="../catalog/">Каталог</a>
+            <a href="../production/">Производство</a>
+            <a href="../training/">Обучение</a>
+            <a href="../companies/">Компании</a>
+            <a href="../specialists/">Специалисты</a>
+            <a href="../jobs/">Работа</a>
+            <a href="../contact/">Контакты</a>
+        </div>
+
+    </div>
+
+</div>
+
+<footer>
+    © 2026 WORKER PRO — Industrial Platform
+</footer>
+
+<script src="../language.js"></script>
+
+<script>
+
+function selectLanguage(language){
+
+    if(typeof setLanguage === "function"){
+
+        setLanguage(language);
+
+    }else{
+
+        localStorage.setItem(
+            "workerProLanguage",
+            language
+        );
+
+        alert(
+            "Язык выбран: " + language
+        );
+    }
+}
+
+
+function searchLanguages(){
+
+    const search =
+        document.getElementById("searchInput")
+        .value
+        .toLowerCase()
+        .trim();
+
+    const cards =
+        document.querySelectorAll(".language-card");
+
+    cards.forEach(function(card){
+
+        const text =
+            card.dataset.search.toLowerCase();
+
+        if(search === "" || text.includes(search)){
+            card.style.display = "block";
+        }else{
+            card.style.display = "none";
+        }
+
+    });
+}
+
+</script>
+
+</body>
+</html>
