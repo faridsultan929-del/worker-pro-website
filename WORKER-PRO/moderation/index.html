@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WORKER PRO — Moderation</title>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f4f7f5;
+    color:#123;
+}
+
+.top-languages{
+    background:#063d25;
+    padding:10px;
+    text-align:center;
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+.top-languages button{
+    border:0;
+    background:#0b6b3d;
+    color:white;
+    padding:8px 11px;
+    margin:3px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.top-languages button:hover{
+    background:#b7ff35;
+    color:#063d25;
+}
+
+header{
+    background:linear-gradient(135deg,#063d25,#0b6b3d);
+    color:white;
+    padding:28px 16px;
+    text-align:center;
+}
+
+header h1{
+    margin:0 0 8px;
+    font-size:30px;
+}
+
+header p{
+    margin:0;
+}
+
+nav{
+    background:#075b34;
+    padding:10px;
+    text-align:center;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    display:inline-block;
+    padding:8px 10px;
+    margin:3px;
+    border-radius:7px;
+    font-size:14px;
+}
+
+nav a:hover{
+    background:#b7ff35;
+    color:#063d25;
+}
+
+.container{
+    max-width:1250px;
+    margin:auto;
+    padding:20px;
+}
+
+.hero{
+    background:white;
+    border-radius:16px;
+    padding:24px;
+    margin-bottom:20px;
+    box-shadow:0 4px 15px rgba(0,0,0,.07);
+}
+
+.hero h2{
+    margin-top:0;
+    color:#063d25;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+    gap:15px;
+}
+
+.card{
+    background:white;
+    border-radius:14px;
+    padding:20px;
+    box-shadow:0 3px 12px rgba(0,0,0,.06);
+}
+
+.card h3{
+    margin-top:0;
+    color:#063d25;
+}
+
+.stat{
+    font-size:29px;
+    font-weight:bold;
+    color:#0b6b3d;
+    margin:8px 0;
+}
+
+.section-title{
+    margin:30px 0 15px;
+    color:#063d25;
+}
+
+.green{
+    border-left:5px solid #0b6b3d;
+}
+
+.orange{
+    border-left:5px solid #d98b00;
+}
+
+.red{
+    border-left:5px solid #b52b2b;
+}
+
+.blue{
+    border-left:5px solid #2878b5;
+}
+
+.controls{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-bottom:18px;
+}
+
+.controls input,
+.controls select{
+    padding:11px;
+    border:1px solid #ccd8d1;
+    border-radius:8px;
+    min-width:180px;
+    flex:1;
+}
+
+.item{
+    background:white;
+    border-radius:14px;
+    padding:18px;
+    margin-bottom:12px;
+    border:1px solid #e0e8e3;
+}
+
+.item h3{
+    margin-top:0;
+    color:#063d25;
+}
+
+.meta{
+    color:#66756d;
+    font-size:14px;
+    margin:6px 0;
+}
+
+.status{
+    display:inline-block;
+    padding:6px 10px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:bold;
+    margin:5px 5px 5px 0;
+}
+
+.pending{
+    background:#fff0c7;
+    color:#8a6200;
+}
+
+.approved{
+    background:#d9f1df;
+    color:#0b6b3d;
+}
+
+.rejected{
+    background:#f7dada;
+    color:#9c2424;
+}
+
+.review{
+    background:#dcecf8;
+    color:#24648c;
+}
+
+.actions{
+    margin-top:12px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+}
+
+button.action,
+a.action{
+    display:inline-block;
+    border:0;
+    background:#0b6b3d;
+    color:white;
+    padding:9px 13px;
+    border-radius:8px;
+    text-decoration:none;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+button.action:hover,
+a.action:hover{
+    background:#063d25;
+}
+
+button.reject{
+    background:#a92c2c;
+}
+
+button.reject:hover{
+    background:#7d2020;
+}
+
+button.view{
+    background:#2878b5;
+}
+
+button.warning{
+    background:#c98200;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    background:white;
+}
+
+th,
+td{
+    padding:12px;
+    border-bottom:1px solid #e4e9e6;
+    text-align:left;
+}
+
+th{
+    background:#063d25;
+    color:white;
+}
+
+.activity{
+    padding:13px;
+    border-bottom:1px solid #e5ebe7;
+}
+
+.activity:last-child{
+    border-bottom:0;
+}
+
+.workflow{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+    gap:10px;
+}
+
+.step{
+    background:#e9f2ec;
+    padding:15px;
+    border-radius:10px;
+    text-align:center;
+    font-weight:bold;
+}
+
+.future{
+    background:#eef8f1;
+    border:1px solid #c9dfd0;
+    border-radius:14px;
+    padding:20px;
+}
+
+.future li{
+    margin:8px 0;
+}
+
+.demo{
+    margin-top:25px;
+    background:#fff8df;
+    border:1px solid #ead58a;
+    border-radius:12px;
+    padding:16px;
+    color:#705b00;
+}
+
+footer{
+    margin-top:35px;
+    background:#063d25;
+    color:white;
+    text-align:center;
+    padding:25px;
+}
+
+@media(max-width:600px){
+
+    header h1{
+        font-size:25px;
+    }
+
+    .container{
+        padding:12px;
+    }
+
+    table{
+        font-size:13px;
+    }
+
+    th,
+    td{
+        padding:8px;
+    }
+}
+</style>
+
+<script src="../language.js"></script>
+</head>
+
+<body>
+
+<div class="top-languages">
+    <button onclick="setLanguage('AZ')">AZ</button>
+    <button onclick="setLanguage('RU')">RU</button>
+    <button onclick="setLanguage('EN')">EN</button>
+    <button onclick="setLanguage('TR')">TR</button>
+    <button onclick="setLanguage('DE')">DE</button>
+    <button onclick="setLanguage('AR')">AR</button>
+    <button onclick="setLanguage('ES')">ES</button>
+    <button onclick="setLanguage('FR')">FR</button>
+    <button onclick="setLanguage('IT')">IT</button>
+</div>
+
+<header>
+    <h1>WORKER PRO — Moderation</h1>
+    <p>Модерация пользователей, компаний и промышленного контента</p>
+</header>
+
+<nav>
+    <a href="../index.html">Главная</a>
+    <a href="../admin/index.html">Admin</a>
+    <a href="../companies/index.html">Компании</a>
+    <a href="../products/index.html">Товары</a>
+    <a href="../requests/index.html">Заявки</a>
+    <a href="../offers/index.html">Предложения</a>
+    <a href="../reviews/index.html">Отзывы</a>
+    <a href="../documents/index.html">Документы</a>
+    <a href="../verification/index.html">Верификация</a>
+    <a href="../security/index.html">Безопасность</a>
+</nav>
+
+<div class="container">
+
+<section class="hero">
+
+    <h2>Центр модерации</h2>
+
+    <p>
+        Модерация WORKER PRO предназначена для проверки
+        пользователей, компаний, товаров, заявок, отзывов,
+        документов и другого контента платформы.
+    </p>
+
+    <p>
+        Модератор сможет проверить информацию, одобрить её,
+        отправить на дополнительную проверку или отклонить
+        нарушение правил.
+    </p>
+
+</section>
+
+<h2 class="section-title">Статистика модерации</h2>
+
+<div class="grid">
+
+    <div class="card orange">
+        <h3>⏳ На проверке</h3>
+        <div class="stat">127</div>
+        <p>Объектов ожидают решения</p>
+    </div>
+
+    <div class="card green">
+        <h3>✅ Одобрено</h3>
+        <div class="stat">4 820</div>
+        <p>Проверено успешно</p>
+    </div>
+
+    <div class="card red">
+        <h3>❌ Отклонено</h3>
+        <div class="stat">186</div>
+        <p>Нарушения или ошибки</p>
+    </div>
+
+    <div class="card blue">
+        <h3>🔍 Доп. проверка</h3>
+        <div class="stat">34</div>
+        <p>Требуют дополнительного анализа</p>
+    </div>
+
+</div>
+
+<h2 class="section-title">Что проверяется</h2>
+
+<div class="grid">
+
+    <div class="card">
+        <h3>👥 Пользователи</h3>
+        <p>
+            Профили, регистрационные данные,
+            фотографии и контактная информация.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>🏢 Компании</h3>
+        <p>
+            Название, страна, деятельность,
+            документы и описание компании.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>📦 Товары</h3>
+        <p>
+            Промышленные товары, запчасти,
+            оборудование и характеристики.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>📋 Заявки</h3>
+        <p>
+            Заявки покупателей и запросы
+            на промышленную продукцию.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>⭐ Отзывы</h3>
+        <p>
+            Отзывы пользователей, оценки
+            и комментарии о компаниях.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>📄 Документы</h3>
+        <p>
+            Сертификаты, документы компаний,
+            качества и безопасности.
+        </p>
+    </div>
+
+</div>
+
+<h2 class="section-title">Очередь модерации</h2>
+
+<div class="controls">
+
+    <input
+        type="text"
+        id="search"
+        placeholder="Поиск объекта..."
+        onkeyup="filterItems()"
+    >
+
+    <select id="typeFilter" onchange="filterItems()">
+        <option value="all">Все типы</option>
+        <option value="company">Компании</option>
+        <option value="product">Товары</option>
+        <option value="request">Заявки</option>
+        <option value="review">Отзывы</option>
+        <option value="document">Документы</option>
+        <option value="user">Пользователи</option>
+    </select>
+
+    <select id="statusFilter" onchange="filterItems()">
+        <option value="all">Все статусы</option>
+        <option value="pending">На проверке</option>
+        <option value="review">Доп. проверка</option>
+        <option value="approved">Одобрено</option>
+        <option value="rejected">Отклонено</option>
+    </select>
+
+</div>
+
+<div id="moderationList">
+
+<div class="item"
+     data-type="company"
+     data-status="pending">
+
+    <h3>🏢 New Industrial Supplier</h3>
+
+    <div class="meta">
+        Тип: Компания · 🇩🇪 Germany
+    </div>
+
+    <div class="meta">
+        Отправлено: 18.09.2026
+    </div>
+
+    <span class="status pending">
+        На проверке
+    </span>
+
+    <div class="actions">
+
+        <button class="action view"
+                onclick="viewItem('New Industrial Supplier')">
+            Просмотреть
+        </button>
+
+        <button class="action"
+                onclick="approveItem('New Industrial Supplier')">
+            Одобрить
+        </button>
+
+        <button class="action reject"
+                onclick="rejectItem('New Industrial Supplier')">
+            Отклонить
+        </button>
+
+    </div>
+
+</div>
+
+<div class="item"
+     data-type="product"
+     data-status="pending">
+
+    <h3>⚙️ CNC Hydraulic Pump</h3>
+
+    <div class="meta">
+        Категория: Hydraulics · Industrial Equipment
+    </div>
+
+    <div class="meta">
+        Производитель: Hydraulic Solutions
+    </div>
+
+    <span class="status pending">
+        На проверке
+    </span>
+
+    <div class="actions">
+
+        <button class="action view"
+                onclick="viewItem('CNC Hydraulic Pump')">
+            Просмотреть
+        </button>
+
+        <button class="action"
+                onclick="approveItem('CNC Hydraulic Pump')">
+            Одобрить
+        </button>
+
+        <button class="action reject"
+                onclick="rejectItem('CNC Hydraulic Pump')">
+            Отклонить
+        </button>
+
+    </div>
+
+</div>
+
+<div class="item"
+     data-type="request"
+     data-status="review">
+
+    <h3>📋 Запрос на CNC запчасти</h3>
+
+    <div class="meta">
+        Покупатель: Azerbaijan Industrial
+    </div>
+
+    <div class="meta">
+        Страна: 🇦🇿 Azerbaijan
+    </div>
+
+    <span class="status review">
+        Дополнительная проверка
+    </span>
+
+    <div class="actions">
+
+        <button class="action view"
+                onclick="viewItem('Запрос на CNC запчасти')">
+            Просмотреть
+        </button>
+
+        <button class="action"
+                onclick="approveItem('Запрос на CNC запчасти')">
+            Одобрить
+        </button>
+
+        <button class="action reject"
+                onclick="rejectItem('Запрос на CNC запчасти')">
+            Отклонить
+        </button>
+
+    </div>
+
+</div>
+
+<div class="item"
+     data-type="review"
+     data-status="pending">
+
+    <h3>⭐ Новый отзыв</h3>
+
+    <div class="meta">
+        Компания: Machine Technology
+    </div>
+
+    <div class="meta">
+        Оценка: ★★★★★
+    </div>
+
+    <span class="status pending">
+        На проверке
+    </span>
+
+    <div class="actions">
+
+        <button class="action view"
+                onclick="viewItem('Новый отзыв')">
+            Просмотреть
+        </button>
+
+        <button class="action"
+                onclick="approveItem('Новый отзыв')">
+            Опубликовать
+        </button>
+
+        <button class="action reject"
+                onclick="rejectItem('Новый отзыв')">
+            Отклонить
+        </button>
+
+    </div>
+
+</div>
+
+<div class="item"
+     data-type="document"
+     data-status="review">
+
+    <h3>📄 Сертификат качества</h3>
+
+    <div class="meta">
+        Компания: Automation Systems
+    </div>
+
+    <div class="meta">
+        Документ: Quality Certificate
+    </div>
+
+    <span class="status review">
+        Дополнительная проверка
+    </span>
+
+    <div class="actions">
+
+        <button class="action view"
+                onclick="viewItem('Сертификат качества')">
+            Просмотреть
+        </button>
+
+        <button class="action"
+                onclick="approveItem('Сертификат качества')">
+            Подтвердить
+        </button>
+
+        <button class="action reject"
+                onclick="rejectItem('Сертификат качества')">
+            Отклонить
+        </button>
+
+    </div>
+
+</div>
+
+<div class="item"
+     data-type="user"
+     data-status="pending">
+
+    <h3>👤 New Specialist</h3>
+
+    <div class="meta">
+        Профессия: CNC Operator
+    </div>
+
+    <div class="meta">
+        Страна: 🇦🇿 Azerbaijan
+    </div>
+
+    <span class="status pending">
+        На проверке
+    </span>
+
+    <div class="actions">
+
+        <button class="action view"
+                onclick="viewItem('New Specialist')">
+            Просмотреть
+        </button>
+
+        <button class="action"
+                onclick="approveItem('New Specialist')">
+            Одобрить
+        </button>
+
+        <button class="action reject"
+                onclick="rejectItem('New Specialist')">
+            Отклонить
+        </button>
+
+    </div>
+
+</div>
+
+</div>
+
+<h2 class="section-title">Причины отклонения</h2>
+
+<div class="grid">
+
+    <div class="card red">
+        <h3>🚫 Недостоверная информация</h3>
+        <p>
+            Данные компании или пользователя
+            не подтверждены.
+        </p>
+    </div>
+
+    <div class="card red">
+        <h3>📄 Неправильный документ</h3>
+        <p>
+            Документ отсутствует, повреждён
+            или содержит ошибку.
+        </p>
+    </div>
+
+    <div class="card red">
+        <h3>⚠️ Нарушение правил</h3>
+        <p>
+            Контент нарушает правила платформы.
+        </p>
+    </div>
+
+    <div class="card red">
+        <h3>📦 Неправильный товар</h3>
+        <p>
+            Товар не соответствует промышленной
+            категории или описанию.
+        </p>
+    </div>
+
+</div>
+
+<h2 class="section-title">Журнал модерации</h2>
+
+<div class="card">
+
+<div class="activity">
+    <strong>18.09.2026 — Компания одобрена</strong>
+    <br>
+    Industrial Manufacturer · Azerbaijan
+</div>
+
+<div class="activity">
+    <strong>18.09.2026 — Товар отклонён</strong>
+    <br>
+    Demo Industrial Product · Причина: неполное описание
+</div>
+
+<div class="activity">
+    <strong>17.09.2026 — Документ отправлен на проверку</strong>
+    <br>
+    Automation Systems · Germany
+</div>
+
+<div class="activity">
+    <strong>17.09.2026 — Отзыв опубликован</strong>
+    <br>
+    Machine Technology
+</div>
+
+<div class="activity">
+    <strong>16.09.2026 — Пользователь проверен</strong>
+    <br>
+    CNC Specialist · Azerbaijan
+</div>
+
+</div>
+
+<h2 class="section-title">Контроль нарушений</h2>
+
+<div class="grid">
+
+    <div class="card">
+        <h3>🚨 Жалобы</h3>
+        <div class="stat">24</div>
+        <p>Новые жалобы пользователей</p>
+        <button class="action"
+                onclick="demo('Жалобы')">
+            Открыть
+        </button>
+    </div>
+
+    <div class="card">
+        <h3>⚠️ Подозрительный контент</h3>
+        <div class="stat">13</div>
+        <p>Требует дополнительного анализа</p>
+        <button class="action warning"
+                onclick="demo('Подозрительный контент')">
+            Проверить
+        </button>
+    </div>
+
+    <div class="card">
+        <h3>🚫 Заблокированные</h3>
+        <div class="stat">8</div>
+        <p>Демонстрационные блокировки</p>
+        <button class="action reject"
+                onclick="demo('Заблокированные')">
+            Управлять
+        </button>
+    </div>
+
+</div>
+
+<h2 class="section-title">Связанные разделы</h2>
+
+<div class="grid">
+
+    <div class="card">
+        <h3>🛡️ Верификация</h3>
+        <p>Проверка компаний и документов.</p>
+        <a class="action" href="../verification/index.html">
+            Открыть
+        </a>
+    </div>
+
+    <div class="card">
+        <h3>⭐ Отзывы</h3>
+        <p>Рейтинги и отзывы пользователей.</p>
+        <a class="action" href="../reviews/index.html">
+            Открыть
+        </a>
+    </div>
+
+    <div class="card">
+        <h3>📄 Документы</h3>
+        <p>Промышленные документы.</p>
+        <a class="action" href="../documents/index.html">
+            Открыть
+        </a>
+    </div>
+
+    <div class="card">
+        <h3>🔐 Безопасность</h3>
+        <p>Защита аккаунтов и контроль активности.</p>
+        <a class="action" href="../security/index.html">
+            Открыть
+        </a>
+    </div>
+
+    <div class="card">
+        <h3>👑 Admin Panel</h3>
+        <p>Центральное управление платформой.</p>
+        <a class="action" href="../admin/index.html">
+            Открыть
+        </a>
+    </div>
+
+</div>
+
+<h2 class="section-title">Процесс модерации</h2>
+
+<div class="workflow">
+
+    <div class="step">1. Получение</div>
+    <div class="step">2. Проверка</div>
+    <div class="step">3. Анализ</div>
+    <div class="step">4. Решение</div>
+    <div class="step">5. Одобрение</div>
+    <div class="step">6. Публикация</div>
+    <div class="step">7. Контроль</div>
+
+</div>
+
+<h2 class="section-title">Будущие возможности</h2>
+
+<div class="future">
+
+<ul>
+
+    <li>Полноценная система жалоб.</li>
+
+    <li>Роли Moderator и Senior Moderator.</li>
+
+    <li>История каждого решения модератора.</li>
+
+    <li>Автоматическая проверка изображений и документов.</li>
+
+    <li>AI-анализ подозрительного контента.</li>
+
+    <li>Антиспам и защита от массовой регистрации.</li>
+
+    <li>Автоматическое обнаружение дубликатов.</li>
+
+    <li>Проверка промышленных товаров по категориям.</li>
+
+    <li>Мультиязычная модерация.</li>
+
+    <li>Уведомление пользователя о решении.</li>
+
+    <li>Система апелляций.</li>
+
+    <li>Журнал действий модераторов.</li>
+
+    <li>Статистика работы команды модерации.</li>
+
+</ul>
+
+</div>
+
+<div class="demo">
+
+    <strong>⚠️ Демо-режим</strong>
+
+    <p>
+        Все пользователи, компании, товары, заявки,
+        отзывы и действия на этой странице являются
+        демонстрационными.
+    </p>
+
+    <p>
+        Реальная модерация появится после подключения
+        базы данных, авторизации, серверной части
+        и системы ролей.
+    </p>
+
+</div>
+
+</div>
+
+<footer>
+
+    <strong>WORKER PRO</strong>
+
+    <p>Глобальная промышленная платформа</p>
+
+    <p>© 2026 WORKER PRO — F.S</p>
+
+</footer>
+
+<script>
+
+function filterItems(){
+
+    const search =
+        document.getElementById("search")
+        .value
+        .toLowerCase();
+
+    const type =
+        document.getElementById("typeFilter")
+        .value;
+
+    const status =
+        document.getElementById("statusFilter")
+        .value;
+
+    const items =
+        document.querySelectorAll(".item");
+
+    items.forEach(function(item){
+
+        const text =
+            item.innerText.toLowerCase();
+
+        const itemType =
+            item.dataset.type;
+
+        const itemStatus =
+            item.dataset.status;
+
+        const searchMatch =
+            text.includes(search);
+
+        const typeMatch =
+            type === "all" ||
+            itemType === type;
+
+        const statusMatch =
+            status === "all" ||
+            itemStatus === status;
+
+        item.style.display =
+            searchMatch &&
+            typeMatch &&
+            statusMatch
+            ? "block"
+            : "none";
+
+    });
+
+}
+
+function viewItem(name){
+
+    alert(
+        "Просмотр объекта:\n\n" +
+        name +
+        "\n\nДемо-режим."
+    );
+
+}
+
+function approveItem(name){
+
+    alert(
+        "Объект одобрен:\n\n" +
+        name +
+        "\n\nВ рабочей версии действие будет сохранено в базе данных."
+    );
+
+}
+
+function rejectItem(name){
+
+    const reason =
+        prompt(
+            "Укажите причину отклонения для:\n\n" +
+            name
+        );
+
+    if(reason){
+
+        alert(
+            "Объект отклонён.\n\n" +
+            "Причина: " +
+            reason
+        );
+
+    }
+
+}
+
+function demo(name){
+
+    alert(
+        name +
+        " — демонстрационная функция.\n\n" +
+        "В рабочей версии здесь будет полноценное управление."
+    );
+
+}
+
+</script>
+
+</body>
+</html>
