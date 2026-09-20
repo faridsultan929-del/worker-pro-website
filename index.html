@@ -22,47 +22,52 @@ body{
     color:#123;
 }
 
-/* =========================
-   ЯЗЫКИ — САМАЯ ВЕРХНЯЯ ПАНЕЛЬ
-========================= */
+/* =================================
+   ЯЗЫКИ — СПРАВА СВЕРХУ
+================================= */
 
 .top-languages{
     position:fixed;
     top:0;
-    left:0;
     right:0;
-    height:58px;
+    left:220px;
+
+    height:42px;
+
     background:#063d25;
+
     z-index:2000;
 
     display:flex;
     align-items:center;
-    justify-content:center;
-    gap:8px;
+    justify-content:flex-end;
 
-    padding:6px 10px;
+    gap:5px;
 
-    box-shadow:0 2px 10px #0004;
+    padding:4px 10px;
+
+    box-shadow:0 2px 8px #0004;
 }
 
 .language-title{
-    color:#b7ff35;
-    font-size:11px;
-    font-weight:bold;
-    margin-right:8px;
+    display:none;
 }
 
 .top-languages button{
-    min-width:48px;
-    padding:8px 6px;
+    min-width:38px;
+    height:32px;
+
+    padding:4px 6px;
 
     border:1px solid #b7ff35;
-    border-radius:8px;
+    border-radius:6px;
 
     background:transparent;
     color:white;
 
+    font-size:12px;
     font-weight:bold;
+
     cursor:pointer;
 }
 
@@ -72,13 +77,14 @@ body{
     color:#b7ff35;
 }
 
-/* =========================
+/* =================================
    ЛЕВОЕ МЕНЮ
-========================= */
+================================= */
 
 .left-menu{
     position:fixed;
-    top:58px;
+
+    top:0;
     left:0;
     bottom:0;
 
@@ -88,14 +94,15 @@ body{
     color:white;
 
     overflow-y:auto;
-    z-index:1500;
+
+    z-index:2100;
 
     padding:12px;
 }
 
 .logo{
     text-align:center;
-    margin-bottom:15px;
+    margin:4px 0 15px;
 }
 
 .logo img{
@@ -106,9 +113,12 @@ body{
 
 .menu-title{
     color:#b7ff35;
+
     font-size:12px;
     font-weight:bold;
+
     margin:15px 5px 7px;
+
     text-transform:uppercase;
 }
 
@@ -131,20 +141,21 @@ body{
     color:#b7ff35;
 }
 
-/* =========================
-   ОСНОВНОЙ КОНТЕНТ
-========================= */
+/* =================================
+   MAIN
+================================= */
 
 .main{
     margin-left:220px;
-    padding-top:58px;
+
+    padding-top:42px;
 
     min-height:100vh;
 }
 
-/* =========================
+/* =================================
    HERO
-========================= */
+================================= */
 
 .hero{
     background:linear-gradient(
@@ -156,6 +167,7 @@ body{
     color:white;
 
     padding:55px 35px;
+
     text-align:center;
 }
 
@@ -163,26 +175,31 @@ body{
     margin:0 0 15px;
 
     font-size:42px;
+
     color:#b7ff35;
 }
 
 .hero p{
     max-width:850px;
+
     margin:0 auto 25px;
 
     font-size:18px;
+
     line-height:1.6;
 }
 
-/* =========================
+/* =================================
    SEARCH
-========================= */
+================================= */
 
 .search-box{
     max-width:850px;
+
     margin:auto;
 
     display:flex;
+
     gap:8px;
 }
 
@@ -192,6 +209,7 @@ body{
     padding:15px;
 
     border:0;
+
     border-radius:8px;
 
     font-size:16px;
@@ -201,18 +219,21 @@ body{
     padding:15px 22px;
 
     border:0;
+
     border-radius:8px;
 
     background:#b7ff35;
+
     color:#063d25;
 
     font-weight:bold;
+
     cursor:pointer;
 }
 
-/* =========================
+/* =================================
    SECTIONS
-========================= */
+================================= */
 
 .section{
     padding:40px 30px;
@@ -220,18 +241,21 @@ body{
 
 .section h2{
     color:#063d25;
+
     margin-top:0;
+
     font-size:28px;
 }
 
 .section-intro{
     color:#555;
+
     line-height:1.6;
 }
 
-/* =========================
+/* =================================
    CARDS
-========================= */
+================================= */
 
 .cards{
     display:grid;
@@ -266,11 +290,13 @@ body{
 
 .card h3{
     margin-top:0;
+
     color:#075b34;
 }
 
 .card p{
     color:#555;
+
     line-height:1.5;
 }
 
@@ -280,14 +306,15 @@ body{
     margin-top:10px;
 
     color:#075b34;
+
     font-weight:bold;
 
     text-decoration:none;
 }
 
-/* =========================
+/* =================================
    QUICK ACCESS
-========================= */
+================================= */
 
 .quick-grid{
     display:grid;
@@ -302,6 +329,7 @@ body{
 
 .quick-grid a{
     background:#063d25;
+
     color:white;
 
     padding:15px;
@@ -311,17 +339,19 @@ body{
     border-radius:8px;
 
     text-decoration:none;
+
     font-weight:bold;
 }
 
 .quick-grid a:hover{
     background:#0b6b3d;
+
     color:#b7ff35;
 }
 
-/* =========================
+/* =================================
    FLOW
-========================= */
+================================= */
 
 .flow{
     display:grid;
@@ -355,18 +385,20 @@ body{
     border-radius:50%;
 
     background:#0b6b3d;
+
     color:#b7ff35;
 
     display:flex;
+
     align-items:center;
     justify-content:center;
 
     font-weight:bold;
 }
 
-/* =========================
+/* =================================
    FOOTER
-========================= */
+================================= */
 
 .footer{
     background:#063d25;
@@ -384,9 +416,9 @@ body{
     color:#b7ff35;
 }
 
-/* =========================
+/* =================================
    RTL
-========================= */
+================================= */
 
 body.rtl{
     direction:rtl;
@@ -395,6 +427,13 @@ body.rtl{
 body.rtl .left-menu{
     left:auto;
     right:0;
+}
+
+body.rtl .top-languages{
+    left:0;
+    right:220px;
+
+    justify-content:flex-start;
 }
 
 body.rtl .main{
@@ -407,9 +446,9 @@ body.rtl .card{
     border-right:5px solid #0b6b3d;
 }
 
-/* =========================
+/* =================================
    TABLET
-========================= */
+================================= */
 
 @media(max-width:950px){
 
@@ -418,13 +457,18 @@ body.rtl .card{
     }
 
     .top-languages{
-        left:0;
+        left:190px;
         right:0;
     }
 
     .main{
         margin-left:190px;
-        padding-top:58px;
+        padding-top:42px;
+    }
+
+    body.rtl .top-languages{
+        left:0;
+        right:190px;
     }
 
     body.rtl .main{
@@ -437,23 +481,24 @@ body.rtl .card{
     }
 }
 
-/* =========================
+/* =================================
    PHONE
-========================= */
+================================= */
 
 @media(max-width:600px){
 
     .top-languages{
-        position:fixed;
+        position:relative;
 
-        top:0;
+        top:auto;
         left:0;
         right:0;
 
         width:100%;
+
         height:auto;
 
-        min-height:58px;
+        min-height:42px;
 
         flex-wrap:wrap;
 
@@ -462,14 +507,14 @@ body.rtl .card{
         padding:5px;
     }
 
-    .language-title{
-        display:none;
-    }
-
     .top-languages button{
-        min-width:40px;
-        padding:7px 5px;
-        font-size:12px;
+        min-width:38px;
+
+        height:30px;
+
+        padding:4px 5px;
+
+        font-size:11px;
     }
 
     .left-menu{
@@ -477,18 +522,28 @@ body.rtl .card{
 
         top:auto;
         left:auto;
+        bottom:auto;
 
         width:100%;
+
         height:auto;
 
         max-height:none;
 
-        padding-top:10px;
+        padding:10px;
     }
 
     .main{
         margin:0;
-        padding-top:70px;
+
+        padding-top:0;
+    }
+
+    body.rtl .top-languages{
+        left:0;
+        right:0;
+
+        justify-content:center;
     }
 
     body.rtl .left-menu{
@@ -528,15 +583,11 @@ body.rtl .card{
 
 <body>
 
-<!-- =========================
+<!-- =================================
      ЯЗЫКИ
-========================= -->
+================================= -->
 
 <div class="top-languages">
-
-    <span class="language-title">
-        WORKER PRO
-    </span>
 
     <button onclick="changeLanguage('AZ')">AZ</button>
     <button onclick="changeLanguage('RU')" class="active">RU</button>
@@ -551,36 +602,49 @@ body.rtl .card{
 </div>
 
 
-<!-- =========================
+<!-- =================================
      ЛЕВОЕ МЕНЮ
-========================= -->
+================================= -->
 
 <aside class="left-menu">
 
     <div class="logo">
+
         <a href="index.html">
-            <img src="worker%20pro/logo.png" alt="WORKER PRO">
+
+            <img
+                src="worker%20pro/logo.png"
+                alt="WORKER PRO"
+            >
+
         </a>
+
     </div>
 
 
-    <div class="menu-title" data-i18n="main_menu">
+    <div class="menu-title"
+         data-i18n="main_menu">
         Главное
     </div>
 
-    <a href="index.html" data-i18n="home">
+
+    <a href="index.html"
+       data-i18n="home">
         Главная
     </a>
+
 
     <a href="worker%20pro/production/index.html"
        data-i18n="production">
         Производство
     </a>
 
+
     <a href="worker%20pro/tecnologies/index.html"
        data-i18n="technologies">
         Технологии
     </a>
+
 
     <a href="worker%20pro/industries/index.html"
        data-i18n="industries">
@@ -588,34 +652,41 @@ body.rtl .card{
     </a>
 
 
-    <div class="menu-title" data-i18n="trade">
+    <div class="menu-title"
+         data-i18n="trade">
         Торговля
     </div>
+
 
     <a href="worker%20pro/catalog/index.html"
        data-i18n="catalog">
         Каталог
     </a>
 
+
     <a href="worker%20pro/cateqories/index.html"
        data-i18n="categories">
         Категории
     </a>
+
 
     <a href="worker%20pro/products/index.html"
        data-i18n="products">
         Товары
     </a>
 
+
     <a href="worker%20pro/brands/index.html"
        data-i18n="brands">
         Бренды
     </a>
 
+
     <a href="worker%20pro/companies/index.html"
        data-i18n="companies">
         Компании
     </a>
+
 
     <a href="worker%20pro/suppliers/index.html"
        data-i18n="suppliers">
@@ -623,29 +694,35 @@ body.rtl .card{
     </a>
 
 
-    <div class="menu-title" data-i18n="work">
+    <div class="menu-title"
+         data-i18n="work">
         Работа
     </div>
+
 
     <a href="worker%20pro/specialists/index.html"
        data-i18n="specialists">
         Специалисты
     </a>
 
+
     <a href="worker%20pro/vacancies/index.html"
        data-i18n="vacancies">
         Вакансии
     </a>
+
 
     <a href="worker%20pro/training/index.html"
        data-i18n="training">
         Обучение
     </a>
 
+
     <a href="worker%20pro/training-courses/index.html"
        data-i18n="courses">
         Курсы
     </a>
+
 
     <a href="worker%20pro/certificates/index.html"
        data-i18n="certificates">
@@ -653,29 +730,35 @@ body.rtl .card{
     </a>
 
 
-    <div class="menu-title" data-i18n="requests">
+    <div class="menu-title"
+         data-i18n="requests_title">
         Запросы
     </div>
+
 
     <a href="worker%20pro/requests/index.html"
        data-i18n="requests">
         Запросы
     </a>
 
+
     <a href="worker%20pro/rfq/index.html"
        data-i18n="rfq">
         RFQ
     </a>
+
 
     <a href="worker%20pro/offers/index.html"
        data-i18n="offers">
         Предложения
     </a>
 
+
     <a href="worker%20pro/contracts/index.html"
        data-i18n="contracts">
         Контракты
     </a>
+
 
     <a href="worker%20pro/orders/index.html"
        data-i18n="orders">
@@ -683,29 +766,35 @@ body.rtl .card{
     </a>
 
 
-    <div class="menu-title" data-i18n="logistics">
+    <div class="menu-title"
+         data-i18n="logistics">
         Логистика
     </div>
+
 
     <a href="worker%20pro/transport/index.html"
        data-i18n="transport">
         Перевозка
     </a>
 
+
     <a href="worker%20pro/shipments/index.html"
        data-i18n="shipments">
         Отправления
     </a>
+
 
     <a href="worker%20pro/tracking/index.html"
        data-i18n="tracking">
         Tracking
     </a>
 
+
     <a href="worker%20pro/delivery/index.html"
        data-i18n="delivery">
         Доставка
     </a>
+
 
     <a href="worker%20pro/warehouses/index.html"
        data-i18n="warehouses">
@@ -713,29 +802,35 @@ body.rtl .card{
     </a>
 
 
-    <div class="menu-title" data-i18n="profile">
+    <div class="menu-title"
+         data-i18n="profile_title">
         Профиль
     </div>
+
 
     <a href="worker%20pro/profile/index.html"
        data-i18n="profile">
         Профиль
     </a>
 
+
     <a href="worker%20pro/dashboard/index.html"
        data-i18n="dashboard">
         Dashboard
     </a>
+
 
     <a href="worker%20pro/messages/index.html"
        data-i18n="messages">
         Сообщения
     </a>
 
+
     <a href="worker%20pro/notifications/index.html"
        data-i18n="notifications">
         Уведомления
     </a>
+
 
     <a href="worker%20pro/settings/index.html"
        data-i18n="settings">
@@ -745,20 +840,19 @@ body.rtl .card{
 </aside>
 
 
-<!-- =========================
+<!-- =================================
      MAIN
-========================= -->
+================================= -->
 
 <main class="main">
 
-
-    <!-- HERO -->
 
     <section class="hero">
 
         <h1 data-i18n="hero_title">
             Работа. Знания. Производство.
         </h1>
+
 
         <p data-i18n="hero_text">
             Международная промышленная платформа
@@ -776,8 +870,10 @@ body.rtl .card{
                 placeholder="Поиск: насос, станок, подшипник, запчасть..."
             >
 
-            <button onclick="doSearch()"
-                    data-i18n="search">
+
+            <button
+                onclick="doSearch()"
+                data-i18n="search">
                 Поиск
             </button>
 
@@ -786,9 +882,9 @@ body.rtl .card{
     </section>
 
 
-    <!-- =========================
-         MAIN SERVICES
-    ========================= -->
+    <!-- =================================
+         ОСНОВНЫЕ РАЗДЕЛЫ
+    ================================= -->
 
     <section class="section">
 
@@ -796,18 +892,23 @@ body.rtl .card{
             WORKER PRO
         </h2>
 
+
         <p class="section-intro"
            data-i18n="platform_text">
+
             Единая промышленная платформа,
             объединяющая производство,
             специалистов, компании,
             товары, обучение и логистику.
+
         </p>
 
 
         <div class="cards">
 
+
             <div class="card">
+
                 <h3 data-i18n="production">
                     Производство
                 </h3>
@@ -821,10 +922,12 @@ body.rtl .card{
                    data-i18n="open">
                     Открыть →
                 </a>
+
             </div>
 
 
             <div class="card">
+
                 <h3 data-i18n="spare_parts">
                     Запчасти
                 </h3>
@@ -838,10 +941,12 @@ body.rtl .card{
                    data-i18n="open">
                     Открыть →
                 </a>
+
             </div>
 
 
             <div class="card">
+
                 <h3 data-i18n="companies">
                     Компании
                 </h3>
@@ -855,10 +960,12 @@ body.rtl .card{
                    data-i18n="open">
                     Открыть →
                 </a>
+
             </div>
 
 
             <div class="card">
+
                 <h3 data-i18n="specialists">
                     Специалисты
                 </h3>
@@ -872,10 +979,12 @@ body.rtl .card{
                    data-i18n="open">
                     Открыть →
                 </a>
+
             </div>
 
 
             <div class="card">
+
                 <h3 data-i18n="vacancies">
                     Вакансии
                 </h3>
@@ -889,10 +998,12 @@ body.rtl .card{
                    data-i18n="open">
                     Открыть →
                 </a>
+
             </div>
 
 
             <div class="card">
+
                 <h3 data-i18n="training">
                     Обучение
                 </h3>
@@ -906,10 +1017,12 @@ body.rtl .card{
                    data-i18n="open">
                     Открыть →
                 </a>
+
             </div>
 
 
             <div class="card">
+
                 <h3 data-i18n="logistics">
                     Логистика
                 </h3>
@@ -923,10 +1036,12 @@ body.rtl .card{
                    data-i18n="open">
                     Открыть →
                 </a>
+
             </div>
 
 
             <div class="card">
+
                 <h3 data-i18n="tracking">
                     Tracking
                 </h3>
@@ -940,6 +1055,7 @@ body.rtl .card{
                    data-i18n="open">
                     Открыть →
                 </a>
+
             </div>
 
         </div>
@@ -947,9 +1063,9 @@ body.rtl .card{
     </section>
 
 
-    <!-- =========================
-         QUICK ACCESS
-    ========================= -->
+    <!-- =================================
+         БЫСТРЫЙ ДОСТУП
+    ================================= -->
 
     <section class="section">
 
@@ -1025,9 +1141,9 @@ body.rtl .card{
     </section>
 
 
-    <!-- =========================
-         PLATFORM FLOW
-    ========================= -->
+    <!-- =================================
+         КАК РАБОТАЕТ
+    ================================= -->
 
     <section class="section">
 
@@ -1037,6 +1153,7 @@ body.rtl .card{
 
 
         <div class="flow">
+
 
             <div class="flow-step">
 
@@ -1150,9 +1267,9 @@ body.rtl .card{
     </section>
 
 
-    <!-- =========================
+    <!-- =================================
          FOOTER
-    ========================= -->
+    ================================= -->
 
     <footer class="footer">
 
@@ -1175,14 +1292,13 @@ body.rtl .card{
 
 <script>
 
-/* ==========================================
+/* =================================
    ПЕРЕВОДЫ
-========================================== */
+================================= */
 
 const translations = {
 
-RU: {
-
+RU:{
 main_menu:"Главное",
 home:"Главная",
 production:"Производство",
@@ -1204,6 +1320,7 @@ training:"Обучение",
 courses:"Курсы",
 certificates:"Сертификаты",
 
+requests_title:"Запросы",
 requests:"Запросы",
 rfq:"RFQ",
 offers:"Предложения",
@@ -1217,6 +1334,7 @@ tracking:"Tracking",
 delivery:"Доставка",
 warehouses:"Склады",
 
+profile_title:"Профиль",
 profile:"Профиль",
 dashboard:"Dashboard",
 messages:"Сообщения",
@@ -1291,12 +1409,10 @@ step6_title:"Получение",
 step6_text:"Получает промышленный товар или запчасть.",
 
 footer_text:"Международная промышленная платформа"
-
 },
 
 
-AZ: {
-
+AZ:{
 main_menu:"Əsas",
 home:"Ana səhifə",
 production:"İstehsalat",
@@ -1318,6 +1434,7 @@ training:"Təlim",
 courses:"Kurslar",
 certificates:"Sertifikatlar",
 
+requests_title:"Sorğular",
 requests:"Sorğular",
 rfq:"RFQ",
 offers:"Təkliflər",
@@ -1331,6 +1448,7 @@ tracking:"İzləmə",
 delivery:"Çatdırılma",
 warehouses:"Anbarlar",
 
+profile_title:"Profil",
 profile:"Profil",
 dashboard:"Panel",
 messages:"Mesajlar",
@@ -1405,12 +1523,10 @@ step6_title:"Alınması",
 step6_text:"Sənaye məhsulunu və ya ehtiyat hissəsini alır.",
 
 footer_text:"Beynəlxalq sənaye platforması"
-
 },
 
 
-EN: {
-
+EN:{
 main_menu:"Main",
 home:"Home",
 production:"Production",
@@ -1432,6 +1548,7 @@ training:"Training",
 courses:"Courses",
 certificates:"Certificates",
 
+requests_title:"Requests",
 requests:"Requests",
 rfq:"RFQ",
 offers:"Offers",
@@ -1445,6 +1562,7 @@ tracking:"Tracking",
 delivery:"Delivery",
 warehouses:"Warehouses",
 
+profile_title:"Profile",
 profile:"Profile",
 dashboard:"Dashboard",
 messages:"Messages",
@@ -1519,12 +1637,10 @@ step6_title:"Receiving",
 step6_text:"Receives the industrial product or spare part.",
 
 footer_text:"International industrial platform"
-
 },
 
 
-TR: {
-
+TR:{
 main_menu:"Ana Menü",
 home:"Ana Sayfa",
 production:"Üretim",
@@ -1546,6 +1662,7 @@ training:"Eğitim",
 courses:"Kurslar",
 certificates:"Sertifikalar",
 
+requests_title:"Talepler",
 requests:"Talepler",
 rfq:"RFQ",
 offers:"Teklifler",
@@ -1559,6 +1676,7 @@ tracking:"Takip",
 delivery:"Teslimat",
 warehouses:"Depolar",
 
+profile_title:"Profil",
 profile:"Profil",
 dashboard:"Panel",
 messages:"Mesajlar",
@@ -1633,12 +1751,10 @@ step6_title:"Teslim Alma",
 step6_text:"Endüstriyel ürünü veya yedek parçayı teslim alır.",
 
 footer_text:"Uluslararası sanayi platformu"
-
 },
 
 
-DE: {
-
+DE:{
 main_menu:"Hauptmenü",
 home:"Startseite",
 production:"Produktion",
@@ -1660,6 +1776,7 @@ training:"Ausbildung",
 courses:"Kurse",
 certificates:"Zertifikate",
 
+requests_title:"Anfragen",
 requests:"Anfragen",
 rfq:"RFQ",
 offers:"Angebote",
@@ -1673,6 +1790,7 @@ tracking:"Tracking",
 delivery:"Lieferung",
 warehouses:"Lager",
 
+profile_title:"Profil",
 profile:"Profil",
 dashboard:"Dashboard",
 messages:"Nachrichten",
@@ -1747,12 +1865,10 @@ step6_title:"Erhalt",
 step6_text:"Industrieprodukt oder Ersatzteil erhalten.",
 
 footer_text:"Internationale Industrieplattform"
-
 },
 
 
-AR: {
-
+AR:{
 main_menu:"القائمة الرئيسية",
 home:"الرئيسية",
 production:"الإنتاج",
@@ -1774,6 +1890,7 @@ training:"التدريب",
 courses:"الدورات",
 certificates:"الشهادات",
 
+requests_title:"الطلبات",
 requests:"الطلبات",
 rfq:"RFQ",
 offers:"العروض",
@@ -1787,6 +1904,7 @@ tracking:"التتبع",
 delivery:"التوصيل",
 warehouses:"المستودعات",
 
+profile_title:"الملف الشخصي",
 profile:"الملف الشخصي",
 dashboard:"لوحة التحكم",
 messages:"الرسائل",
@@ -1861,12 +1979,10 @@ step6_title:"الاستلام",
 step6_text:"يستلم المنتج الصناعي أو قطعة الغيار.",
 
 footer_text:"منصة صناعية دولية"
-
 },
 
 
-ES: {
-
+ES:{
 main_menu:"Menú principal",
 home:"Inicio",
 production:"Producción",
@@ -1888,6 +2004,7 @@ training:"Formación",
 courses:"Cursos",
 certificates:"Certificados",
 
+requests_title:"Solicitudes",
 requests:"Solicitudes",
 rfq:"RFQ",
 offers:"Ofertas",
@@ -1901,6 +2018,7 @@ tracking:"Seguimiento",
 delivery:"Entrega",
 warehouses:"Almacenes",
 
+profile_title:"Perfil",
 profile:"Perfil",
 dashboard:"Panel",
 messages:"Mensajes",
@@ -1975,12 +2093,10 @@ step6_title:"Recepción",
 step6_text:"Recibe el producto industrial o repuesto.",
 
 footer_text:"Plataforma industrial internacional"
-
 },
 
 
-FR: {
-
+FR:{
 main_menu:"Menu principal",
 home:"Accueil",
 production:"Production",
@@ -2002,6 +2118,7 @@ training:"Formation",
 courses:"Cours",
 certificates:"Certificats",
 
+requests_title:"Demandes",
 requests:"Demandes",
 rfq:"RFQ",
 offers:"Offres",
@@ -2015,6 +2132,7 @@ tracking:"Suivi",
 delivery:"Livraison",
 warehouses:"Entrepôts",
 
+profile_title:"Profil",
 profile:"Profil",
 dashboard:"Tableau de bord",
 messages:"Messages",
@@ -2089,12 +2207,10 @@ step6_title:"Réception",
 step6_text:"Reçoit le produit industriel ou la pièce détachée.",
 
 footer_text:"Plateforme industrielle internationale"
-
 },
 
 
-IT: {
-
+IT:{
 main_menu:"Menu principale",
 home:"Home",
 production:"Produzione",
@@ -2116,6 +2232,7 @@ training:"Formazione",
 courses:"Corsi",
 certificates:"Certificati",
 
+requests_title:"Richieste",
 requests:"Richieste",
 rfq:"RFQ",
 offers:"Offerte",
@@ -2129,6 +2246,7 @@ tracking:"Tracking",
 delivery:"Consegna",
 warehouses:"Magazzini",
 
+profile_title:"Profilo",
 profile:"Profilo",
 dashboard:"Dashboard",
 messages:"Messaggi",
@@ -2203,15 +2321,14 @@ step6_title:"Ricezione",
 step6_text:"Riceve il prodotto industriale o il ricambio.",
 
 footer_text:"Piattaforma industriale internazionale"
-
 }
 
 };
 
 
-/* ==========================================
+/* =================================
    СМЕНА ЯЗЫКА
-========================================== */
+================================= */
 
 function changeLanguage(lang){
 
@@ -2220,6 +2337,7 @@ function changeLanguage(lang){
     if(!data){
         return;
     }
+
 
     document
         .querySelectorAll("[data-i18n]")
@@ -2286,9 +2404,9 @@ function changeLanguage(lang){
 }
 
 
-/* ==========================================
+/* =================================
    ПОИСК
-========================================== */
+================================= */
 
 function doSearch(){
 
@@ -2302,30 +2420,34 @@ function doSearch(){
         return;
     }
 
+
     window.location.href =
         "worker%20pro/search/index.html?q="
         + encodeURIComponent(query);
 }
 
 
-/* ==========================================
+/* =================================
    ENTER В ПОИСКЕ
-========================================== */
+================================= */
 
 document
     .getElementById("searchInput")
-    .addEventListener("keydown", function(event){
+    .addEventListener(
+        "keydown",
+        function(event){
 
-        if(event.key === "Enter"){
-            doSearch();
+            if(event.key === "Enter"){
+                doSearch();
+            }
+
         }
+    );
 
-    });
 
-
-/* ==========================================
+/* =================================
    ЗАПУСК
-========================================== */
+================================= */
 
 document.addEventListener(
     "DOMContentLoaded",
