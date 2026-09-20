@@ -1,1 +1,415 @@
- 
+ <!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WORKER PRO — Contact</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f4f7f5;
+    color:#123;
+}
+
+.top-languages{
+    background:#063d25;
+    padding:10px;
+    text-align:center;
+}
+
+.top-languages button{
+    background:#0b6b3d;
+    color:white;
+    border:1px solid #b7ff35;
+    border-radius:8px;
+    padding:8px 12px;
+    margin:3px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.top-languages button:hover{
+    background:#b7ff35;
+    color:#063d25;
+}
+
+header{
+    background:linear-gradient(135deg,#063d25,#0b6b3d);
+    color:white;
+    text-align:center;
+    padding:28px 15px;
+}
+
+header h1{
+    margin:0 0 8px;
+    font-size:32px;
+}
+
+header p{
+    margin:0;
+}
+
+nav{
+    background:#075b34;
+    padding:12px;
+    text-align:center;
+    position:sticky;
+    top:0;
+    z-index:10;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    margin:5px 8px;
+    font-weight:bold;
+    font-size:14px;
+}
+
+nav a:hover{
+    color:#b7ff35;
+}
+
+.container{
+    max-width:1150px;
+    margin:auto;
+    padding:25px 15px;
+}
+
+.hero{
+    background:white;
+    border-radius:16px;
+    padding:30px 20px;
+    text-align:center;
+    box-shadow:0 4px 15px rgba(0,0,0,.08);
+    margin-bottom:25px;
+}
+
+.hero h2{
+    color:#063d25;
+    font-size:30px;
+    margin-top:0;
+}
+
+.hero p{
+    max-width:750px;
+    margin:auto;
+    line-height:1.6;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:20px;
+}
+
+.card{
+    background:white;
+    border-radius:15px;
+    padding:24px;
+    box-shadow:0 4px 14px rgba(0,0,0,.08);
+}
+
+.card h2{
+    color:#063d25;
+    margin-top:0;
+}
+
+.card p{
+    line-height:1.6;
+    color:#456;
+}
+
+.contact-item{
+    background:#eef6f1;
+    padding:15px;
+    border-radius:10px;
+    margin:10px 0;
+}
+
+.contact-item strong{
+    display:block;
+    color:#063d25;
+    margin-bottom:5px;
+}
+
+form{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+
+input,textarea,select{
+    width:100%;
+    padding:13px;
+    border:1px solid #b8c9bf;
+    border-radius:9px;
+    font-size:15px;
+    font-family:Arial,sans-serif;
+}
+
+textarea{
+    min-height:140px;
+    resize:vertical;
+}
+
+button.submit{
+    background:#0b6b3d;
+    color:white;
+    border:0;
+    padding:14px;
+    border-radius:9px;
+    font-weight:bold;
+    font-size:16px;
+    cursor:pointer;
+}
+
+button.submit:hover{
+    background:#063d25;
+}
+
+.info{
+    background:#063d25;
+    color:white;
+    padding:28px;
+    border-radius:15px;
+    margin-top:25px;
+    line-height:1.7;
+}
+
+.info h2{
+    color:#b7ff35;
+}
+
+.links{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:20px;
+}
+
+.links a{
+    background:#b7ff35;
+    color:#063d25;
+    padding:11px 15px;
+    border-radius:9px;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+footer{
+    background:#063d25;
+    color:white;
+    text-align:center;
+    padding:25px;
+    margin-top:35px;
+}
+
+@media(max-width:600px){
+    header h1{font-size:26px}
+    .hero h2{font-size:24px}
+    nav a{
+        display:inline-block;
+        margin:4px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="top-languages">
+    <button onclick="setLanguage('AZ')">AZ</button>
+    <button onclick="setLanguage('RU')">RU</button>
+    <button onclick="setLanguage('EN')">EN</button>
+    <button onclick="setLanguage('TR')">TR</button>
+    <button onclick="setLanguage('DE')">DE</button>
+    <button onclick="setLanguage('AR')">AR</button>
+    <button onclick="setLanguage('ES')">ES</button>
+    <button onclick="setLanguage('FR')">FR</button>
+    <button onclick="setLanguage('IT')">IT</button>
+</div>
+
+<header>
+    <h1>WORKER PRO</h1>
+    <p>Связь с промышленной платформой</p>
+</header>
+
+<nav>
+    <a href="../index.html">Главная</a>
+    <a href="../about/">О платформе</a>
+    <a href="../companies/">Компании</a>
+    <a href="../manufacturers/">Производители</a>
+    <a href="../suppliers/">Поставщики</a>
+    <a href="../specialists/">Специалисты</a>
+    <a href="../support/">Поддержка</a>
+    <a href="../help/">Помощь</a>
+</nav>
+
+<div class="container">
+
+<section class="hero">
+    <h2>Связаться с WORKER PRO</h2>
+    <p>
+        Свяжитесь с нами по вопросам сотрудничества,
+        регистрации компании, размещения товаров,
+        обучения, технической поддержки и развития платформы.
+    </p>
+</section>
+
+<div class="grid">
+
+    <section class="card">
+
+        <h2>Контактная информация</h2>
+
+        <div class="contact-item">
+            <strong>🌐 Платформа</strong>
+            WORKER PRO Industrial Platform
+        </div>
+
+        <div class="contact-item">
+            <strong>📍 Регион</strong>
+            Azerbaijan • Baku
+        </div>
+
+        <div class="contact-item">
+            <strong>💼 Направление</strong>
+            Production • Industry • Trade • Logistics
+        </div>
+
+        <div class="contact-item">
+            <strong>🤝 Сотрудничество</strong>
+            Компании • Производители • Поставщики • Специалисты
+        </div>
+
+        <div class="contact-item">
+            <strong>🛠 Поддержка</strong>
+            Технические вопросы и предложения по платформе
+        </div>
+
+    </section>
+
+    <section class="card">
+
+        <h2>Отправить сообщение</h2>
+
+        <form onsubmit="sendMessage(event)">
+
+            <input
+                id="name"
+                type="text"
+                placeholder="Ваше имя или компания"
+                required
+            >
+
+            <input
+                id="email"
+                type="email"
+                placeholder="Email"
+                required
+            >
+
+            <select id="topic" required>
+                <option value="">Выберите тему</option>
+                <option>Сотрудничество</option>
+                <option>Регистрация компании</option>
+                <option>Поставщик / производитель</option>
+                <option>Специалист</option>
+                <option>Товары и запчасти</option>
+                <option>Логистика</option>
+                <option>Обучение</option>
+                <option>Техническая поддержка</option>
+                <option>Другое</option>
+            </select>
+
+            <textarea
+                id="message"
+                placeholder="Напишите ваше сообщение..."
+                required
+            ></textarea>
+
+            <button class="submit" type="submit">
+                Отправить сообщение
+            </button>
+
+        </form>
+
+    </section>
+
+</div>
+
+<section class="info">
+
+    <h2>WORKER PRO объединяет промышленность</h2>
+
+    <p>
+        Платформа предназначена для связи специалистов,
+        инженеров, рабочих, производителей, поставщиков,
+        компаний и транспортных организаций.
+    </p>
+
+    <p>
+        В будущем через контактный центр можно будет
+        отправлять запросы, получать уведомления,
+        общаться с компаниями и отслеживать обращения
+        непосредственно внутри WORKER PRO.
+    </p>
+
+    <div class="links">
+        <a href="../companies/">Компании</a>
+        <a href="../manufacturers/">Производители</a>
+        <a href="../suppliers/">Поставщики</a>
+        <a href="../specialists/">Специалисты</a>
+        <a href="../products/">Товары</a>
+        <a href="../logistics/">Логистика</a>
+        <a href="../support/">Поддержка</a>
+    </div>
+
+</section>
+
+</div>
+
+<footer>
+    WORKER PRO © 2026<br>
+    Industrial Platform — Production • Skills • Companies • Trade • Logistics
+</footer>
+
+<script src="../language.js"></script>
+
+<script>
+
+function sendMessage(event){
+
+    event.preventDefault();
+
+    const name =
+        document.getElementById("name").value;
+
+    const topic =
+        document.getElementById("topic").value;
+
+    const number =
+        "MSG-2026-" +
+        Math.floor(100 + Math.random() * 900);
+
+    alert(
+        "Сообщение принято!\n\n" +
+        "Номер обращения: " + number + "\n" +
+        "Имя: " + name + "\n" +
+        "Тема: " + topic + "\n\n" +
+        "Это демонстрационная версия WORKER PRO."
+    );
+
+    document.querySelector("form").reset();
+}
+
+</script>
+
+</body>
+</html>
