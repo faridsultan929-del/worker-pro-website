@@ -1,0 +1,1591 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WORKER PRO — Industrial Map</title>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f4f7f5;
+    color:#123;
+}
+
+.top-languages{
+    background:#063d25;
+    padding:10px;
+    text-align:center;
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+.top-languages button{
+    background:#0b6b3d;
+    color:white;
+    border:1px solid #b7ff35;
+    border-radius:8px;
+    padding:8px 11px;
+    margin:3px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.top-languages button:hover{
+    background:#b7ff35;
+    color:#063d25;
+}
+
+header{
+    background:linear-gradient(135deg,#063d25,#0b6b3d);
+    color:white;
+    text-align:center;
+    padding:35px 20px;
+}
+
+header h1{
+    margin:0 0 10px;
+    font-size:34px;
+}
+
+header p{
+    max-width:900px;
+    margin:auto;
+    line-height:1.6;
+}
+
+nav{
+    background:#075b34;
+    padding:12px;
+    text-align:center;
+    position:sticky;
+    top:58px;
+    z-index:999;
+    overflow-x:auto;
+    white-space:nowrap;
+}
+
+nav a{
+    display:inline-block;
+    color:white;
+    text-decoration:none;
+    background:#0b6b3d;
+    padding:9px 13px;
+    margin:4px;
+    border-radius:7px;
+    font-size:14px;
+}
+
+nav a:hover{
+    background:#b7ff35;
+    color:#063d25;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+    padding:25px 15px;
+}
+
+.hero{
+    background:white;
+    border-left:6px solid #0b6b3d;
+    border-radius:15px;
+    padding:25px;
+    box-shadow:0 3px 12px rgba(0,0,0,.08);
+    margin-bottom:25px;
+}
+
+.hero h2{
+    color:#063d25;
+    margin-top:0;
+}
+
+.hero p{
+    line-height:1.7;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
+    gap:15px;
+    margin-bottom:25px;
+}
+
+.stat{
+    background:white;
+    padding:20px;
+    text-align:center;
+    border-radius:14px;
+    box-shadow:0 3px 10px rgba(0,0,0,.07);
+}
+
+.stat .number{
+    color:#0b6b3d;
+    font-size:30px;
+    font-weight:bold;
+}
+
+.stat span{
+    display:block;
+    margin-top:8px;
+    font-weight:bold;
+}
+
+.search-box{
+    background:white;
+    padding:20px;
+    border-radius:14px;
+    box-shadow:0 3px 10px rgba(0,0,0,.07);
+    margin-bottom:25px;
+}
+
+.search-grid{
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr;
+    gap:12px;
+}
+
+.search-box input,
+.search-box select{
+    width:100%;
+    padding:13px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    font-size:16px;
+}
+
+.filters{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:15px;
+}
+
+.filters button{
+    border:0;
+    background:#e8f1ec;
+    color:#063d25;
+    padding:10px 14px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.filters button.active,
+.filters button:hover{
+    background:#0b6b3d;
+    color:white;
+}
+
+.section-title{
+    color:#063d25;
+    margin:30px 0 15px;
+}
+
+.map-box{
+    position:relative;
+    min-height:560px;
+    overflow:hidden;
+    border-radius:18px;
+    background:#dce9df;
+    box-shadow:0 3px 12px rgba(0,0,0,.1);
+    border:5px solid white;
+}
+
+.map-background{
+    position:absolute;
+    inset:0;
+    background:
+        linear-gradient(25deg,transparent 47%,rgba(255,255,255,.75) 48%,rgba(255,255,255,.75) 50%,transparent 51%),
+        linear-gradient(-35deg,transparent 48%,rgba(255,255,255,.65) 49%,rgba(255,255,255,.65) 51%,transparent 52%),
+        linear-gradient(90deg,transparent 48%,rgba(255,255,255,.5) 49%,rgba(255,255,255,.5) 50%,transparent 51%),
+        #d7e6da;
+    background-size:170px 140px,210px 180px,240px 180px,auto;
+}
+
+.sea{
+    position:absolute;
+    background:#b9dbe4;
+    border-radius:50%;
+    opacity:.75;
+}
+
+.sea.one{
+    width:370px;
+    height:230px;
+    left:-120px;
+    top:80px;
+}
+
+.sea.two{
+    width:420px;
+    height:250px;
+    right:-170px;
+    bottom:20px;
+}
+
+.country-label{
+    position:absolute;
+    color:#496052;
+    font-weight:bold;
+    opacity:.8;
+    font-size:17px;
+}
+
+.country-az{
+    left:47%;
+    top:43%;
+}
+
+.country-tr{
+    left:42%;
+    top:53%;
+}
+
+.country-de{
+    left:25%;
+    top:27%;
+}
+
+.country-it{
+    left:32%;
+    top:52%;
+}
+
+.country-cn{
+    right:14%;
+    top:35%;
+}
+
+.country-us{
+    left:9%;
+    bottom:30%;
+}
+
+.marker{
+    position:absolute;
+    transform:translate(-50%,-100%);
+    cursor:pointer;
+    z-index:10;
+}
+
+.marker-icon{
+    width:42px;
+    height:42px;
+    border-radius:50% 50% 50% 0;
+    transform:rotate(-45deg);
+    background:#0b6b3d;
+    border:3px solid white;
+    box-shadow:0 3px 8px rgba(0,0,0,.3);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.marker-icon span{
+    transform:rotate(45deg);
+    color:white;
+    font-size:19px;
+}
+
+.marker:hover .marker-icon{
+    background:#063d25;
+    transform:rotate(-45deg) scale(1.12);
+}
+
+.marker.az{
+    left:50%;
+    top:47%;
+}
+
+.marker.tr{
+    left:44%;
+    top:57%;
+}
+
+.marker.de{
+    left:27%;
+    top:31%;
+}
+
+.marker.it{
+    left:34%;
+    top:56%;
+}
+
+.marker.cn{
+    right:14%;
+    top:40%;
+}
+
+.marker.us{
+    left:12%;
+    bottom:31%;
+}
+
+.map-title{
+    position:absolute;
+    top:18px;
+    left:18px;
+    background:white;
+    padding:14px 18px;
+    border-radius:10px;
+    box-shadow:0 3px 10px rgba(0,0,0,.15);
+    z-index:20;
+    color:#063d25;
+    font-weight:bold;
+}
+
+.map-controls{
+    position:absolute;
+    right:18px;
+    top:18px;
+    z-index:20;
+    display:flex;
+    flex-direction:column;
+    gap:7px;
+}
+
+.map-controls button{
+    background:white;
+    border:0;
+    width:42px;
+    height:42px;
+    border-radius:8px;
+    font-size:20px;
+    cursor:pointer;
+    box-shadow:0 3px 10px rgba(0,0,0,.15);
+}
+
+.map-controls button:hover{
+    background:#b7ff35;
+}
+
+.legend{
+    position:absolute;
+    bottom:18px;
+    left:18px;
+    background:white;
+    padding:15px;
+    border-radius:10px;
+    box-shadow:0 3px 10px rgba(0,0,0,.15);
+    z-index:20;
+}
+
+.legend div{
+    margin:7px 0;
+}
+
+.objects-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(270px,1fr));
+    gap:18px;
+}
+
+.object-card{
+    background:white;
+    border-radius:15px;
+    padding:20px;
+    box-shadow:0 3px 12px rgba(0,0,0,.08);
+    border-top:5px solid #0b6b3d;
+}
+
+.object-card h3{
+    color:#063d25;
+    margin-top:0;
+}
+
+.object-card p{
+    line-height:1.55;
+}
+
+.badge{
+    display:inline-block;
+    padding:6px 10px;
+    border-radius:20px;
+    background:#e8f5ed;
+    color:#075b34;
+    font-size:12px;
+    font-weight:bold;
+    margin-bottom:10px;
+}
+
+.object-card button{
+    border:0;
+    background:#0b6b3d;
+    color:white;
+    padding:10px 15px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.object-card button:hover{
+    background:#063d25;
+}
+
+.types-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+    gap:15px;
+}
+
+.type-card{
+    background:white;
+    padding:20px;
+    text-align:center;
+    border-radius:14px;
+    box-shadow:0 3px 10px rgba(0,0,0,.07);
+}
+
+.type-card .icon{
+    font-size:38px;
+}
+
+.type-card h3{
+    color:#063d25;
+}
+
+.workflow{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+    gap:12px;
+}
+
+.step{
+    background:#063d25;
+    color:white;
+    padding:18px 12px;
+    border-radius:12px;
+    text-align:center;
+}
+
+.step strong{
+    display:block;
+    color:#b7ff35;
+    font-size:20px;
+    margin-bottom:8px;
+}
+
+.future{
+    background:#063d25;
+    color:white;
+    padding:25px;
+    border-radius:15px;
+}
+
+.future li{
+    margin:10px 0;
+}
+
+.quick-links{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:12px;
+}
+
+.quick-links a{
+    background:white;
+    color:#063d25;
+    text-decoration:none;
+    padding:17px;
+    border-radius:12px;
+    text-align:center;
+    font-weight:bold;
+    box-shadow:0 3px 10px rgba(0,0,0,.07);
+}
+
+.quick-links a:hover{
+    background:#0b6b3d;
+    color:white;
+}
+
+.demo-warning{
+    background:#fff4d6;
+    color:#664d03;
+    border:1px solid #e6c767;
+    padding:16px;
+    border-radius:10px;
+    margin-top:25px;
+}
+
+footer{
+    background:#063d25;
+    color:white;
+    text-align:center;
+    padding:30px 15px;
+    margin-top:40px;
+}
+
+@media(max-width:700px){
+
+    header h1{
+        font-size:27px;
+    }
+
+    .search-grid{
+        grid-template-columns:1fr;
+    }
+
+    .map-box{
+        min-height:500px;
+    }
+
+    .map-title{
+        font-size:13px;
+    }
+
+    .country-label{
+        font-size:12px;
+    }
+
+    .marker-icon{
+        width:36px;
+        height:36px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="top-languages">
+
+    <button onclick="setLanguage('AZ')">🇦🇿 AZ</button>
+    <button onclick="setLanguage('RU')">🇷🇺 RU</button>
+    <button onclick="setLanguage('EN')">🇬🇧 EN</button>
+    <button onclick="setLanguage('TR')">🇹🇷 TR</button>
+    <button onclick="setLanguage('DE')">🇩🇪 DE</button>
+    <button onclick="setLanguage('AR')">🇸🇦 AR</button>
+    <button onclick="setLanguage('ES')">🇪🇸 ES</button>
+    <button onclick="setLanguage('FR')">🇫🇷 FR</button>
+    <button onclick="setLanguage('IT')">🇮🇹 IT</button>
+
+</div>
+
+
+<header>
+
+    <h1>
+        🌍 WORKER PRO — Industrial Map
+    </h1>
+
+    <p>
+        Международная карта промышленности:
+        компании, производители, поставщики,
+        сервисные центры, специалисты, склады
+        и транспорт.
+    </p>
+
+</header>
+
+
+<nav>
+
+    <a href="../index.html">Главная</a>
+    <a href="../companies/index.html">Компании</a>
+    <a href="../manufacturers/index.html">Производители</a>
+    <a href="../suppliers/index.html">Поставщики</a>
+    <a href="../service-centers/index.html">Сервисные центры</a>
+    <a href="../specialists/index.html">Специалисты</a>
+    <a href="../warehouse/index.html">Склады</a>
+    <a href="../transport/index.html">Транспорт</a>
+    <a href="../products/index.html">Продукты</a>
+    <a href="../equipment/index.html">Оборудование</a>
+    <a href="../requests/index.html">Заявки</a>
+    <a href="../dashboard/index.html">Кабинет</a>
+
+</nav>
+
+
+<div class="container">
+
+
+<section class="hero">
+
+    <h2>
+        🗺️ Международная промышленная карта
+    </h2>
+
+    <p>
+        WORKER PRO сможет объединить промышленный рынок
+        разных стран на одной карте.
+    </p>
+
+    <p>
+        Пользователь сможет выбрать страну, город,
+        категорию промышленности и найти компании,
+        производителей, поставщиков, сервисные центры,
+        специалистов, склады и другие объекты.
+    </p>
+
+</section>
+
+
+<div class="stats">
+
+    <div class="stat">
+        <div class="number">48</div>
+        <span>Стран</span>
+    </div>
+
+    <div class="stat">
+        <div class="number">1,850</div>
+        <span>Компаний</span>
+    </div>
+
+    <div class="stat">
+        <div class="number">640</div>
+        <span>Сервисных центров</span>
+    </div>
+
+    <div class="stat">
+        <div class="number">3,420</div>
+        <span>Специалистов</span>
+    </div>
+
+    <div class="stat">
+        <div class="number">920</div>
+        <span>Складов</span>
+    </div>
+
+</div>
+
+
+<section class="search-box">
+
+    <div class="search-grid">
+
+        <input
+            id="searchInput"
+            type="text"
+            placeholder="🔎 Поиск компании, города, оборудования..."
+            onkeyup="filterObjects()"
+        >
+
+
+        <select id="countryFilter" onchange="filterObjects()">
+
+            <option value="all">
+                Все страны
+            </option>
+
+            <option value="azerbaijan">
+                Азербайджан
+            </option>
+
+            <option value="turkey">
+                Турция
+            </option>
+
+            <option value="germany">
+                Германия
+            </option>
+
+            <option value="italy">
+                Италия
+            </option>
+
+            <option value="china">
+                Китай
+            </option>
+
+            <option value="usa">
+                США
+            </option>
+
+        </select>
+
+
+        <select id="typeFilter" onchange="filterObjects()">
+
+            <option value="all">
+                Все объекты
+            </option>
+
+            <option value="company">
+                Компании
+            </option>
+
+            <option value="manufacturer">
+                Производители
+            </option>
+
+            <option value="service">
+                Сервис
+            </option>
+
+            <option value="warehouse">
+                Склады
+            </option>
+
+            <option value="specialist">
+                Специалисты
+            </option>
+
+        </select>
+
+    </div>
+
+
+    <div class="filters">
+
+        <button class="active" onclick="showType('all',this)">
+            Все
+        </button>
+
+        <button onclick="showType('company',this)">
+            🏢 Компании
+        </button>
+
+        <button onclick="showType('manufacturer',this)">
+            🏭 Производители
+        </button>
+
+        <button onclick="showType('service',this)">
+            🔧 Сервис
+        </button>
+
+        <button onclick="showType('warehouse',this)">
+            📦 Склады
+        </button>
+
+        <button onclick="showType('specialist',this)">
+            👨‍🔧 Специалисты
+        </button>
+
+    </div>
+
+</section>
+
+
+<h2 class="section-title">
+    🗺️ Карта промышленности
+</h2>
+
+
+<div class="map-box" id="mapBox">
+
+    <div class="map-background"></div>
+
+    <div class="sea one"></div>
+    <div class="sea two"></div>
+
+
+    <div class="map-title">
+        🌍 WORKER PRO Industrial Map
+    </div>
+
+
+    <div class="map-controls">
+
+        <button onclick="zoomIn()">
+            +
+        </button>
+
+        <button onclick="zoomOut()">
+            −
+        </button>
+
+        <button onclick="resetMap()">
+            ⌂
+        </button>
+
+    </div>
+
+
+    <div class="country-label country-az">
+        AZERBAIJAN
+    </div>
+
+    <div class="country-label country-tr">
+        TURKEY
+    </div>
+
+    <div class="country-label country-de">
+        GERMANY
+    </div>
+
+    <div class="country-label country-it">
+        ITALY
+    </div>
+
+    <div class="country-label country-cn">
+        CHINA
+    </div>
+
+    <div class="country-label country-us">
+        USA
+    </div>
+
+
+    <div
+        class="marker az"
+        onclick="showLocation('Баку, Азербайджан')">
+
+        <div class="marker-icon">
+            <span>🏢</span>
+        </div>
+
+    </div>
+
+
+    <div
+        class="marker tr"
+        onclick="showLocation('Стамбул, Турция')">
+
+        <div class="marker-icon">
+            <span>🔧</span>
+        </div>
+
+    </div>
+
+
+    <div
+        class="marker de"
+        onclick="showLocation('Дортмунд, Германия')">
+
+        <div class="marker-icon">
+            <span>🏭</span>
+        </div>
+
+    </div>
+
+
+    <div
+        class="marker it"
+        onclick="showLocation('Милан, Италия')">
+
+        <div class="marker-icon">
+            <span>⚙️</span>
+        </div>
+
+    </div>
+
+
+    <div
+        class="marker cn"
+        onclick="showLocation('Шанхай, Китай')">
+
+        <div class="marker-icon">
+            <span>📦</span>
+        </div>
+
+    </div>
+
+
+    <div
+        class="marker us"
+        onclick="showLocation('Хьюстон, США')">
+
+        <div class="marker-icon">
+            <span>👨‍🔧</span>
+        </div>
+
+    </div>
+
+
+    <div class="legend">
+
+        <strong>
+            Легенда
+        </strong>
+
+        <div>
+            🏢 Компания
+        </div>
+
+        <div>
+            🏭 Производитель
+        </div>
+
+        <div>
+            🔧 Сервис
+        </div>
+
+        <div>
+            📦 Склад
+        </div>
+
+        <div>
+            👨‍🔧 Специалист
+        </div>
+
+    </div>
+
+</div>
+
+
+<h2 class="section-title">
+    📍 Промышленные объекты
+</h2>
+
+
+<div class="objects-grid" id="objectsGrid">
+
+
+    <div
+        class="object-card"
+        data-country="azerbaijan"
+        data-type="company">
+
+        <span class="badge">
+            🏢 Компания
+        </span>
+
+        <h3>
+            Industrial Manufacturer
+        </h3>
+
+        <p>
+            📍 Баку, Азербайджан
+        </p>
+
+        <p>
+            Производство промышленного оборудования,
+            запчастей и компонентов.
+        </p>
+
+        <button onclick="openObject('Industrial Manufacturer')">
+            Открыть
+        </button>
+
+    </div>
+
+
+    <div
+        class="object-card"
+        data-country="turkey"
+        data-type="service">
+
+        <span class="badge">
+            🔧 Сервис
+        </span>
+
+        <h3>
+            Istanbul CNC Service
+        </h3>
+
+        <p>
+            📍 Стамбул, Турция
+        </p>
+
+        <p>
+            CNC, станки, диагностика,
+            ремонт и обслуживание.
+        </p>
+
+        <button onclick="openObject('Istanbul CNC Service')">
+            Открыть
+        </button>
+
+    </div>
+
+
+    <div
+        class="object-card"
+        data-country="germany"
+        data-type="manufacturer">
+
+        <span class="badge">
+            🏭 Производитель
+        </span>
+
+        <h3>
+            German Machine Technology
+        </h3>
+
+        <p>
+            📍 Дортмунд, Германия
+        </p>
+
+        <p>
+            CNC оборудование, автоматика,
+            промышленные машины.
+        </p>
+
+        <button onclick="openObject('German Machine Technology')">
+            Открыть
+        </button>
+
+    </div>
+
+
+    <div
+        class="object-card"
+        data-country="italy"
+        data-type="company">
+
+        <span class="badge">
+            🏢 Компания
+        </span>
+
+        <h3>
+            Italy Industrial Tech
+        </h3>
+
+        <p>
+            📍 Милан, Италия
+        </p>
+
+        <p>
+            Автоматика, датчики,
+            электроника и промышленное оборудование.
+        </p>
+
+        <button onclick="openObject('Italy Industrial Tech')">
+            Открыть
+        </button>
+
+    </div>
+
+
+    <div
+        class="object-card"
+        data-country="china"
+        data-type="warehouse">
+
+        <span class="badge">
+            📦 Склад
+        </span>
+
+        <h3>
+            Shanghai Industrial Warehouse
+        </h3>
+
+        <p>
+            📍 Шанхай, Китай
+        </p>
+
+        <p>
+            Запчасти, насосы, клапаны,
+            электрические компоненты.
+        </p>
+
+        <button onclick="openObject('Shanghai Industrial Warehouse')">
+            Открыть
+        </button>
+
+    </div>
+
+
+    <div
+        class="object-card"
+        data-country="usa"
+        data-type="specialist">
+
+        <span class="badge">
+            👨‍🔧 Специалист
+        </span>
+
+        <h3>
+            Oil & Gas Service Specialist
+        </h3>
+
+        <p>
+            📍 Хьюстон, США
+        </p>
+
+        <p>
+            Нефтегазовое оборудование,
+            насосы, автоматика и диагностика.
+        </p>
+
+        <button onclick="openObject('Oil & Gas Service Specialist')">
+            Открыть
+        </button>
+
+    </div>
+
+</div>
+
+
+<h2 class="section-title">
+    🌍 Что будет на карте
+</h2>
+
+
+<div class="types-grid">
+
+
+    <div class="type-card">
+
+        <div class="icon">
+            🏢
+        </div>
+
+        <h3>
+            Компании
+        </h3>
+
+        <p>
+            Производители, поставщики
+            и промышленные компании.
+        </p>
+
+    </div>
+
+
+    <div class="type-card">
+
+        <div class="icon">
+            🏭
+        </div>
+
+        <h3>
+            Производители
+        </h3>
+
+        <p>
+            Заводы и предприятия
+            разных стран.
+        </p>
+
+    </div>
+
+
+    <div class="type-card">
+
+        <div class="icon">
+            🔧
+        </div>
+
+        <h3>
+            Сервис
+        </h3>
+
+        <p>
+            Ремонт, диагностика
+            и обслуживание.
+        </p>
+
+    </div>
+
+
+    <div class="type-card">
+
+        <div class="icon">
+            📦
+        </div>
+
+        <h3>
+            Склады
+        </h3>
+
+        <p>
+            Наличие запчастей,
+            материалов и оборудования.
+        </p>
+
+    </div>
+
+
+    <div class="type-card">
+
+        <div class="icon">
+            👨‍🔧
+        </div>
+
+        <h3>
+            Специалисты
+        </h3>
+
+        <p>
+            Рабочие, инженеры,
+            мастера и сервисные специалисты.
+        </p>
+
+    </div>
+
+
+    <div class="type-card">
+
+        <div class="icon">
+            🚚
+        </div>
+
+        <h3>
+            Логистика
+        </h3>
+
+        <p>
+            Перевозка оборудования
+            и промышленных грузов.
+        </p>
+
+    </div>
+
+</div>
+
+
+<h2 class="section-title">
+    🔄 Как будет работать карта
+</h2>
+
+
+<div class="workflow">
+
+    <div class="step">
+        <strong>1</strong>
+        Выбрать страну
+    </div>
+
+    <div class="step">
+        <strong>2</strong>
+        Выбрать город
+    </div>
+
+    <div class="step">
+        <strong>3</strong>
+        Выбрать объект
+    </div>
+
+    <div class="step">
+        <strong>4</strong>
+        Найти компанию
+    </div>
+
+    <div class="step">
+        <strong>5</strong>
+        Посмотреть профиль
+    </div>
+
+    <div class="step">
+        <strong>6</strong>
+        Отправить запрос
+    </div>
+
+    <div class="step">
+        <strong>7</strong>
+        Получить предложение
+    </div>
+
+</div>
+
+
+<h2 class="section-title">
+    🚀 Будущие возможности
+</h2>
+
+
+<section class="future">
+
+    <ul>
+
+        <li>
+            Настоящая интерактивная карта мира.
+        </li>
+
+        <li>
+            Определение ближайших компаний и сервисов.
+        </li>
+
+        <li>
+            Фильтр по стране, городу и отрасли.
+        </li>
+
+        <li>
+            Фильтр по расстоянию.
+        </li>
+
+        <li>
+            Поиск ближайшего сервисного центра.
+        </li>
+
+        <li>
+            Отображение наличия запчастей рядом.
+        </li>
+
+        <li>
+            Поиск специалистов по местоположению.
+        </li>
+
+        <li>
+            Маршрут от пользователя до компании.
+        </li>
+
+        <li>
+            Связь карты с Requests, Offers и Orders.
+        </li>
+
+        <li>
+            Интеграция с Transport и Warehouse.
+        </li>
+
+        <li>
+            Онлайн-связь с компанией.
+        </li>
+
+        <li>
+            Реальные отзывы и рейтинги.
+        </li>
+
+    </ul>
+
+</section>
+
+
+<h2 class="section-title">
+    🔗 Быстрый доступ
+</h2>
+
+
+<div class="quick-links">
+
+    <a href="../companies/index.html">
+        🏢 Компании
+    </a>
+
+    <a href="../manufacturers/index.html">
+        🏭 Производители
+    </a>
+
+    <a href="../suppliers/index.html">
+        📦 Поставщики
+    </a>
+
+    <a href="../service-centers/index.html">
+        🔧 Сервисные центры
+    </a>
+
+    <a href="../specialists/index.html">
+        👨‍🔧 Специалисты
+    </a>
+
+    <a href="../warehouse/index.html">
+        📦 Склады
+    </a>
+
+    <a href="../transport/index.html">
+        🚚 Транспорт
+    </a>
+
+    <a href="../requests/index.html">
+        📝 Заявки
+    </a>
+
+    <a href="../offers/index.html">
+        💰 Предложения
+    </a>
+
+    <a href="../orders/index.html">
+        📋 Заказы
+    </a>
+
+</div>
+
+
+<div class="demo-warning">
+
+    <strong>⚠️ Демо-версия:</strong>
+
+    карта сейчас является демонстрационной.
+    Показанные страны, города, компании и объекты
+    являются примерами.
+
+    В рабочей версии здесь можно будет подключить
+    настоящую интерактивную карту, базу компаний,
+    GPS-позиции, маршруты и поиск ближайших объектов.
+
+</div>
+
+
+</div>
+
+
+<footer>
+
+    <h3>
+        WORKER PRO
+    </h3>
+
+    <p>
+        Международная промышленная платформа
+    </p>
+
+    <p>
+        Industrial Map • Companies • Service • Logistics
+    </p>
+
+    <p>
+        © 2026 WORKER PRO — F.S
+    </p>
+
+</footer>
+
+
+<script src="../language.js"></script>
+
+<script>
+
+let selectedType = "all";
+
+
+function showType(type,button){
+
+    selectedType = type;
+
+    document
+        .querySelectorAll(".filters button")
+        .forEach(function(btn){
+
+            btn.classList.remove("active");
+
+        });
+
+    button.classList.add("active");
+
+    document.getElementById("typeFilter").value = type;
+
+    filterObjects();
+}
+
+
+function filterObjects(){
+
+    const search =
+        document
+        .getElementById("searchInput")
+        .value
+        .toLowerCase();
+
+    const country =
+        document
+        .getElementById("countryFilter")
+        .value;
+
+    const type =
+        document
+        .getElementById("typeFilter")
+        .value;
+
+    const cards =
+        document.querySelectorAll(".object-card");
+
+
+    cards.forEach(function(card){
+
+        const text =
+            card.innerText.toLowerCase();
+
+        const cardCountry =
+            card.dataset.country;
+
+        const cardType =
+            card.dataset.type;
+
+
+        const searchMatch =
+            text.includes(search);
+
+
+        const countryMatch =
+            country === "all" ||
+            cardCountry === country;
+
+
+        const typeMatch =
+            type === "all" ||
+            cardType === type;
+
+
+        if(
+            searchMatch &&
+            countryMatch &&
+            typeMatch
+        ){
+
+            card.style.display = "block";
+
+        }else{
+
+            card.style.display = "none";
+
+        }
+
+    });
+
+}
+
+
+function showLocation(location){
+
+    alert(
+        "📍 " + location +
+        "\\n\\n" +
+        "Это демонстрационная точка WORKER PRO.\\n\\n" +
+        "В рабочей версии здесь будут показаны " +
+        "компании, сервисные центры, производители, " +
+        "специалисты, склады и транспорт."
+    );
+
+}
+
+
+function openObject(name){
+
+    alert(
+        "WORKER PRO\\n\\n" +
+        "Объект: " + name +
+        "\\n\\n" +
+        "Демонстрационный профиль.\\n\\n" +
+        "В рабочей версии пользователь сможет " +
+        "открыть профиль, посмотреть контакты, " +
+        "товары, услуги, отзывы и отправить заявку."
+    );
+
+}
+
+
+let mapScale = 1;
+
+
+function zoomIn(){
+
+    mapScale += 0.1;
+
+    if(mapScale > 1.5){
+        mapScale = 1.5;
+    }
+
+    document.getElementById("mapBox").style.transform =
+        "scale(" + mapScale + ")";
+
+}
+
+
+function zoomOut(){
+
+    mapScale -= 0.1;
+
+    if(mapScale < 0.8){
+        mapScale = 0.8;
+    }
+
+    document.getElementById("mapBox").style.transform =
+        "scale(" + mapScale + ")";
+
+}
+
+
+function resetMap(){
+
+    mapScale = 1;
+
+    document.getElementById("mapBox").style.transform =
+        "scale(1)";
+
+}
+
+</script>
+
+</body>
+</html>
