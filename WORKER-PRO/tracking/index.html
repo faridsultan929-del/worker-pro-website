@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WORKER PRO — Tracking</title>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f4f7f5;
+    color:#123;
+}
+
+.top-languages{
+    background:#063d25;
+    padding:10px;
+    text-align:center;
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+.top-languages button{
+    background:#0b6b3d;
+    color:white;
+    border:1px solid #b7ff35;
+    border-radius:8px;
+    padding:7px 10px;
+    margin:3px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.top-languages button:hover{
+    background:#075b34;
+}
+
+header{
+    background:linear-gradient(135deg,#063d25,#0b6b3d);
+    color:white;
+    padding:30px 15px;
+    text-align:center;
+}
+
+header h1{
+    margin:0;
+    font-size:32px;
+}
+
+header p{
+    margin:10px 0 0;
+    font-size:17px;
+}
+
+nav{
+    background:#075b34;
+    padding:10px;
+    text-align:center;
+    position:sticky;
+    top:55px;
+    z-index:999;
+    overflow-x:auto;
+    white-space:nowrap;
+}
+
+nav a{
+    display:inline-block;
+    color:white;
+    text-decoration:none;
+    padding:8px 10px;
+    margin:3px;
+    border-radius:6px;
+    background:#0b6b3d;
+    font-size:14px;
+}
+
+nav a:hover{
+    background:#b7ff35;
+    color:#063d25;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+    padding:20px;
+}
+
+.hero{
+    background:white;
+    border-left:6px solid #b7ff35;
+    padding:25px;
+    border-radius:12px;
+    margin-bottom:20px;
+    box-shadow:0 3px 10px rgba(0,0,0,.08);
+}
+
+.hero h2{
+    margin-top:0;
+    color:#063d25;
+}
+
+.search-box{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:20px;
+}
+
+.search-box input,
+.search-box select,
+.form-box input,
+.form-box select,
+.form-box textarea{
+    flex:1;
+    min-width:180px;
+    padding:12px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    font-size:15px;
+}
+
+button.action{
+    background:#0b6b3d;
+    color:white;
+    border:none;
+    border-radius:8px;
+    padding:12px 18px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+button.action:hover{
+    background:#063d25;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
+    gap:15px;
+    margin:20px 0;
+}
+
+.stat{
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    text-align:center;
+    box-shadow:0 3px 10px rgba(0,0,0,.08);
+}
+
+.stat strong{
+    display:block;
+    font-size:28px;
+    color:#0b6b3d;
+}
+
+.stat span{
+    display:block;
+    margin-top:7px;
+    color:#555;
+}
+
+.section-title{
+    color:#063d25;
+    margin-top:30px;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:18px;
+}
+
+.card{
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 3px 10px rgba(0,0,0,.08);
+}
+
+.card h3{
+    margin-top:0;
+    color:#075b34;
+}
+
+.card p{
+    line-height:1.5;
+}
+
+.badge{
+    display:inline-block;
+    padding:5px 9px;
+    border-radius:15px;
+    font-size:12px;
+    font-weight:bold;
+    margin-bottom:8px;
+}
+
+.green{
+    background:#d9f8df;
+    color:#08752f;
+}
+
+.yellow{
+    background:#fff2b8;
+    color:#856600;
+}
+
+.red{
+    background:#ffd9d9;
+    color:#a00000;
+}
+
+.blue{
+    background:#dceeff;
+    color:#075b9a;
+}
+
+.progress{
+    background:#ddd;
+    height:10px;
+    border-radius:10px;
+    overflow:hidden;
+    margin:10px 0;
+}
+
+.progress div{
+    height:100%;
+    background:#0b6b3d;
+}
+
+.route{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    margin:15px 0;
+}
+
+.route .point{
+    background:#063d25;
+    color:white;
+    padding:8px 12px;
+    border-radius:8px;
+    text-align:center;
+}
+
+.route .line{
+    height:4px;
+    background:#b7ff35;
+    flex:1;
+}
+
+.tracking-panel{
+    background:white;
+    border:2px solid #0b6b3d;
+    border-radius:12px;
+    padding:22px;
+    margin-top:20px;
+}
+
+.timeline{
+    position:relative;
+    margin:25px 0;
+    padding-left:25px;
+}
+
+.timeline:before{
+    content:"";
+    position:absolute;
+    left:7px;
+    top:0;
+    bottom:0;
+    width:3px;
+    background:#0b6b3d;
+}
+
+.timeline-item{
+    position:relative;
+    padding:0 0 22px 20px;
+}
+
+.timeline-item:before{
+    content:"";
+    position:absolute;
+    left:-24px;
+    top:2px;
+    width:12px;
+    height:12px;
+    border-radius:50%;
+    background:#b7ff35;
+    border:3px solid #063d25;
+}
+
+.timeline-item strong{
+    color:#063d25;
+}
+
+.map-demo{
+    background:#dfeee6;
+    min-height:230px;
+    border-radius:12px;
+    position:relative;
+    overflow:hidden;
+    border:1px solid #b8d4c4;
+}
+
+.map-line{
+    position:absolute;
+    width:70%;
+    height:5px;
+    background:#0b6b3d;
+    transform:rotate(-15deg);
+    top:48%;
+    left:15%;
+}
+
+.map-point{
+    position:absolute;
+    width:18px;
+    height:18px;
+    border-radius:50%;
+    background:#b7ff35;
+    border:3px solid #063d25;
+}
+
+.point-a{
+    left:12%;
+    top:55%;
+}
+
+.point-b{
+    left:48%;
+    top:38%;
+}
+
+.point-c{
+    right:12%;
+    top:25%;
+}
+
+.map-label{
+    position:absolute;
+    background:white;
+    padding:6px 9px;
+    border-radius:6px;
+    font-size:12px;
+    box-shadow:0 2px 5px rgba(0,0,0,.15);
+}
+
+.label-a{
+    left:7%;
+    top:65%;
+}
+
+.label-b{
+    left:43%;
+    top:25%;
+}
+
+.label-c{
+    right:5%;
+    top:12%;
+}
+
+.form-box{
+    background:white;
+    padding:22px;
+    border-radius:12px;
+    box-shadow:0 3px 10px rgba(0,0,0,.08);
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:12px;
+}
+
+.form-box textarea{
+    width:100%;
+    margin-top:12px;
+    min-height:100px;
+}
+
+.notification{
+    background:#f1f8f3;
+    padding:12px;
+    border-radius:8px;
+    margin:8px 0;
+}
+
+.quick-links{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+    gap:10px;
+}
+
+.quick-links a{
+    text-decoration:none;
+    background:#0b6b3d;
+    color:white;
+    padding:12px;
+    text-align:center;
+    border-radius:8px;
+}
+
+.warning{
+    margin-top:30px;
+    background:#fff3cd;
+    border-left:5px solid #d6a700;
+    padding:15px;
+    border-radius:8px;
+}
+
+footer{
+    background:#063d25;
+    color:white;
+    text-align:center;
+    padding:25px;
+    margin-top:35px;
+}
+
+@media(max-width:600px){
+    header h1{
+        font-size:25px;
+    }
+
+    nav{
+        top:54px;
+    }
+
+    .container{
+        padding:12px;
+    }
+
+    .route{
+        flex-direction:column;
+    }
+
+    .route .line{
+        width:4px;
+        height:30px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="top-languages">
+    <button onclick="setLanguage('AZ')">AZ</button>
+    <button onclick="setLanguage('RU')">RU</button>
+    <button onclick="setLanguage('EN')">EN</button>
+    <button onclick="setLanguage('TR')">TR</button>
+    <button onclick="setLanguage('DE')">DE</button>
+    <button onclick="setLanguage('AR')">AR</button>
+    <button onclick="setLanguage('ES')">ES</button>
+    <button onclick="setLanguage('FR')">FR</button>
+    <button onclick="setLanguage('IT')">IT</button>
+</div>
+
+<header>
+    <h1>WORKER PRO — Tracking</h1>
+    <p>Отслеживание промышленных грузов и заказов</p>
+</header>
+
+<nav>
+    <a href="../index.html">Home</a>
+    <a href="../map/index.html">Map</a>
+    <a href="../logistics/index.html">Logistics</a>
+    <a href="../transport/index.html">Transport</a>
+    <a href="../delivery/index.html">Delivery</a>
+    <a href="../warehouse/index.html">Warehouse</a>
+    <a href="../orders/index.html">Orders</a>
+    <a href="../requests/index.html">Requests</a>
+    <a href="../offers/index.html">Offers</a>
+    <a href="../companies/index.html">Companies</a>
+    <a href="../documents/index.html">Documents</a>
+    <a href="../notifications/index.html">Notifications</a>
+    <a href="../dashboard/index.html">Dashboard</a>
+</nav>
+
+<div class="container">
+
+<section class="hero">
+    <h2>Единый центр отслеживания</h2>
+
+    <p>
+        WORKER PRO Tracking позволяет отслеживать промышленные товары,
+        запчасти, оборудование и международные поставки.
+    </p>
+
+    <div class="search-box">
+        <input id="searchInput"
+               type="text"
+               placeholder="Номер tracking, заказа, товара или города">
+
+        <select id="statusFilter">
+            <option value="all">Все статусы</option>
+            <option value="transit">В пути</option>
+            <option value="delivered">Доставлено</option>
+            <option value="delay">Задержка</option>
+            <option value="ready">Готово к отправке</option>
+        </select>
+
+        <select id="countryFilter">
+            <option value="all">Все страны</option>
+            <option value="Azerbaijan">Azerbaijan</option>
+            <option value="Turkey">Turkey</option>
+            <option value="Germany">Germany</option>
+            <option value="Italy">Italy</option>
+            <option value="China">China</option>
+            <option value="USA">USA</option>
+        </select>
+
+        <select id="transportFilter">
+            <option value="all">Все виды транспорта</option>
+            <option value="Road">Авто</option>
+            <option value="Sea">Море</option>
+            <option value="Air">Авиа</option>
+            <option value="Rail">Ж/Д</option>
+        </select>
+
+        <button class="action" onclick="filterShipments()">Поиск</button>
+    </div>
+</section>
+
+<div class="stats">
+
+    <div class="stat">
+        <strong>8,420</strong>
+        <span>Всего отправлений</span>
+    </div>
+
+    <div class="stat">
+        <strong>2,180</strong>
+        <span>В пути</span>
+    </div>
+
+    <div class="stat">
+        <strong>5,720</strong>
+        <span>Доставлено</span>
+    </div>
+
+    <div class="stat">
+        <strong>96</strong>
+        <span>Задержаны</span>
+    </div>
+
+    <div class="stat">
+        <strong>48</strong>
+        <span>Стран</span>
+    </div>
+
+</div>
+
+<h2 class="section-title">Отправления</h2>
+
+<div class="cards" id="shipmentList">
+
+    <div class="card shipment"
+         data-status="transit"
+         data-country="Turkey"
+         data-transport="Road"
+         data-search="TRK-2026-001 Istanbul Baku hydraulic spare parts">
+
+        <span class="badge blue">В ПУТИ</span>
+
+        <h3>TRK-2026-001</h3>
+
+        <p><strong>Маршрут:</strong> Istanbul → Baku</p>
+        <p><strong>Груз:</strong> Hydraulic Spare Parts</p>
+        <p><strong>Вес:</strong> 850 kg</p>
+
+        <div class="progress">
+            <div style="width:65%"></div>
+        </div>
+
+        <p><strong>Прогресс:</strong> 65%</p>
+        <p>Последнее обновление: Istanbul → Georgia</p>
+        <p><strong>ETA:</strong> 22 September 2026</p>
+
+        <button class="action" onclick="openTracking('TRK-2026-001')">
+            Отследить
+        </button>
+    </div>
+
+
+    <div class="card shipment"
+         data-status="ready"
+         data-country="Germany"
+         data-transport="Road"
+         data-search="TRK-2026-002 Dortmund Baku CNC components">
+
+        <span class="badge yellow">ГОТОВО К ОТПРАВКЕ</span>
+
+        <h3>TRK-2026-002</h3>
+
+        <p><strong>Маршрут:</strong> Dortmund → Baku</p>
+        <p><strong>Груз:</strong> CNC Components</p>
+        <p><strong>Вес:</strong> 420 kg</p>
+
+        <div class="progress">
+            <div style="width:25%"></div>
+        </div>
+
+        <p><strong>Прогресс:</strong> 25%</p>
+        <p>Последнее обновление: Dortmund Warehouse</p>
+        <p><strong>ETA:</strong> 27 September 2026</p>
+
+        <button class="action" onclick="openTracking('TRK-2026-002')">
+            Отследить
+        </button>
+    </div>
+
+
+    <div class="card shipment"
+         data-status="delivered"
+         data-country="Italy"
+         data-transport="Road"
+         data-search="TRK-2026-003 Milan Baku industrial pump">
+
+        <span class="badge green">ДОСТАВЛЕНО</span>
+
+        <h3>TRK-2026-003</h3>
+
+        <p><strong>Маршрут:</strong> Milan → Baku</p>
+        <p><strong>Груз:</strong> Industrial Pump</p>
+        <p><strong>Вес:</strong> 1,200 kg</p>
+
+        <div class="progress">
+            <div style="width:100%"></div>
+        </div>
+
+        <p><strong>Прогресс:</strong> 100%</p>
+        <p>Последнее обновление: Baku Warehouse</p>
+        <p><strong>Дата доставки:</strong> 19 September 2026</p>
+
+        <button class="action" onclick="openTracking('TRK-2026-003')">
+            Открыть
+        </button>
+    </div>
+
+
+    <div class="card shipment"
+         data-status="transit"
+         data-country="China"
+         data-transport="Sea"
+         data-search="TRK-2026-004 Shanghai Baku industrial equipment">
+
+        <span class="badge blue">В ПУТИ</span>
+
+        <h3>TRK-2026-004</h3>
+
+        <p><strong>Маршрут:</strong> Shanghai → Baku</p>
+        <p><strong>Груз:</strong> Industrial Equipment</p>
+        <p><strong>Вес:</strong> 4,500 kg</p>
+
+        <div class="progress">
+            <div style="width:48%"></div>
+        </div>
+
+        <p><strong>Прогресс:</strong> 48%</p>
+        <p>Последнее обновление: Caspian Sea Route</p>
+        <p><strong>ETA:</strong> 30 September 2026</p>
+
+        <button class="action" onclick="openTracking('TRK-2026-004')">
+            Отследить
+        </button>
+    </div>
+
+
+    <div class="card shipment"
+         data-status="delay"
+         data-country="USA"
+         data-transport="Air"
+         data-search="TRK-2026-005 Houston Baku electrical components">
+
+        <span class="badge red">ЗАДЕРЖКА</span>
+
+        <h3>TRK-2026-005</h3>
+
+        <p><strong>Маршрут:</strong> Houston → Baku</p>
+        <p><strong>Груз:</strong> Electrical Components</p>
+        <p><strong>Вес:</strong> 180 kg</p>
+
+        <div class="progress">
+            <div style="width:72%"></div>
+        </div>
+
+        <p><strong>Прогресс:</strong> 72%</p>
+        <p>Причина: проверка документов</p>
+        <p><strong>Последнее обновление:</strong> Customs</p>
+
+        <button class="action" onclick="openTracking('TRK-2026-005')">
+            Отследить
+        </button>
+    </div>
+
+
+    <div class="card shipment"
+         data-status="delivered"
+         data-country="Turkey"
+         data-transport="Road"
+         data-search="TRK-2026-006 Ankara Baku pressure sensors">
+
+        <span class="badge green">ДОСТАВЛЕНО</span>
+
+        <h3>TRK-2026-006</h3>
+
+        <p><strong>Маршрут:</strong> Ankara → Baku</p>
+        <p><strong>Груз:</strong> Pressure Sensors</p>
+        <p><strong>Вес:</strong> 95 kg</p>
+
+        <div class="progress">
+            <div style="width:100%"></div>
+        </div>
+
+        <p><strong>Прогресс:</strong> 100%</p>
+        <p>Последнее обновление: Baku</p>
+        <p><strong>Дата доставки:</strong> 18 September 2026</p>
+
+        <button class="action" onclick="openTracking('TRK-2026-006')">
+            Открыть
+        </button>
+    </div>
+
+</div>
+
+
+<section class="tracking-panel" id="trackingPanel">
+
+    <h2>Детальное отслеживание</h2>
+
+    <div class="search-box">
+        <input id="trackingNumber"
+               placeholder="Введите TRK-2026-001">
+
+        <button class="action" onclick="trackNumber()">
+            Найти груз
+        </button>
+    </div>
+
+    <div id="trackingResult" style="margin-top:20px;">
+
+        <h3>TRK-2026-001</h3>
+
+        <span class="badge blue">В ПУТИ</span>
+
+        <div class="route">
+            <div class="point">Istanbul</div>
+            <div class="line"></div>
+            <div class="point">Georgia</div>
+            <div class="line"></div>
+            <div class="point">Baku</div>
+        </div>
+
+        <p><strong>Груз:</strong> Hydraulic Spare Parts</p>
+        <p><strong>Текущая позиция:</strong> Georgia</p>
+        <p><strong>Прогресс:</strong> 65%</p>
+        <p><strong>Последнее обновление:</strong> 19 September 2026, 12:40</p>
+        <p><strong>Ожидаемая доставка:</strong> 22 September 2026</p>
+
+    </div>
+
+</section>
+
+
+<h2 class="section-title">Этапы доставки</h2>
+
+<div class="tracking-panel">
+
+    <div class="timeline">
+
+        <div class="timeline-item">
+            <strong>Заказ создан</strong>
+            <p>Заказ подтверждён покупателем.</p>
+        </div>
+
+        <div class="timeline-item">
+            <strong>Поставщик</strong>
+            <p>Товар подготовлен поставщиком.</p>
+        </div>
+
+        <div class="timeline-item">
+            <strong>Pickup</strong>
+            <p>Груз передан перевозчику.</p>
+        </div>
+
+        <div class="timeline-item">
+            <strong>Warehouse</strong>
+            <p>Груз прошёл складскую обработку.</p>
+        </div>
+
+        <div class="timeline-item">
+            <strong>Transit</strong>
+            <p>Груз находится в пути.</p>
+        </div>
+
+        <div class="timeline-item">
+            <strong>Customs</strong>
+            <p>Таможенная проверка.</p>
+        </div>
+
+        <div class="timeline-item">
+            <strong>Delivery</strong>
+            <p>Груз направлен получателю.</p>
+        </div>
+
+        <div class="timeline-item">
+            <strong>Received</strong>
+            <p>Получатель подтвердил получение.</p>
+        </div>
+
+    </div>
+
+</div>
+
+
+<h2 class="section-title">Карта маршрута</h2>
+
+<div class="map-demo">
+
+    <div class="map-line"></div>
+
+    <div class="map-point point-a"></div>
+    <div class="map-point point-b"></div>
+    <div class="map-point point-c"></div>
+
+    <div class="map-label label-a">Istanbul</div>
+    <div class="map-label label-b">Georgia</div>
+    <div class="map-label label-c">Baku</div>
+
+</div>
+
+<p>
+    <strong>Демо-карта:</strong>
+    в будущей версии здесь может работать реальная карта,
+    GPS и онлайн-позиция транспорта.
+</p>
+
+
+<h2 class="section-title">История движения</h2>
+
+<div class="cards">
+
+    <div class="card">
+        <h3>19 Sep 2026 — 12:40</h3>
+        <p><strong>Location:</strong> Georgia</p>
+        <p>Груз продолжает движение в направлении Baku.</p>
+    </div>
+
+    <div class="card">
+        <h3>18 Sep 2026 — 18:20</h3>
+        <p><strong>Location:</strong> Istanbul</p>
+        <p>Груз покинул склад поставщика.</p>
+    </div>
+
+    <div class="card">
+        <h3>18 Sep 2026 — 10:15</h3>
+        <p><strong>Location:</strong> Istanbul Warehouse</p>
+        <p>Груз принят перевозчиком.</p>
+    </div>
+
+    <div class="card">
+        <h3>17 Sep 2026 — 16:40</h3>
+        <p><strong>Location:</strong> Supplier</p>
+        <p>Товар подготовлен к отправке.</p>
+    </div>
+
+</div>
+
+
+<h2 class="section-title">Уведомления Tracking</h2>
+
+<div class="tracking-panel">
+
+    <div class="notification">
+        ✓ Уведомление при изменении статуса
+    </div>
+
+    <div class="notification">
+        ✓ Уведомление при прохождении таможни
+    </div>
+
+    <div class="notification">
+        ✓ Уведомление при задержке
+    </div>
+
+    <div class="notification">
+        ✓ Уведомление перед доставкой
+    </div>
+
+    <button class="action" onclick="enableNotifications()">
+        Включить уведомления
+    </button>
+
+</div>
+
+
+<h2 class="section-title">Создать Tracking-запрос</h2>
+
+<div class="form-box">
+
+    <div class="form-grid">
+
+        <input id="requestNumber"
+               placeholder="Номер заказа">
+
+        <input id="requestCargo"
+               placeholder="Название груза">
+
+        <input id="requestFrom"
+               placeholder="Откуда">
+
+        <input id="requestTo"
+               placeholder="Куда">
+
+    </div>
+
+    <textarea id="requestComment"
+              placeholder="Дополнительная информация"></textarea>
+
+    <br>
+
+    <button class="action" onclick="createTrackingRequest()">
+        Создать запрос
+    </button>
+
+</div>
+
+
+<h2 class="section-title">WORKER PRO Tracking</h2>
+
+<div class="cards">
+
+    <div class="card">
+        <h3>GPS Tracking</h3>
+        <p>Будущее подключение GPS и онлайн-позиции транспорта.</p>
+    </div>
+
+    <div class="card">
+        <h3>Live Map</h3>
+        <p>Отображение транспорта и груза на интерактивной карте.</p>
+    </div>
+
+    <div class="card">
+        <h3>ETA</h3>
+        <p>Расчёт предполагаемого времени прибытия.</p>
+    </div>
+
+    <div class="card">
+        <h3>Carrier API</h3>
+        <p>Подключение международных транспортных компаний.</p>
+    </div>
+
+    <div class="card">
+        <h3>Geofencing</h3>
+        <p>Уведомления при входе или выходе из заданной зоны.</p>
+    </div>
+
+    <div class="card">
+        <h3>Proof of Delivery</h3>
+        <p>Фото, документы и подтверждение получения товара.</p>
+    </div>
+
+</div>
+
+
+<h2 class="section-title">Быстрые разделы</h2>
+
+<div class="quick-links">
+
+    <a href="../delivery/index.html">Delivery</a>
+    <a href="../logistics/index.html">Logistics</a>
+    <a href="../transport/index.html">Transport</a>
+    <a href="../map/index.html">Map</a>
+    <a href="../orders/index.html">Orders</a>
+    <a href="../warehouse/index.html">Warehouse</a>
+    <a href="../documents/index.html">Documents</a>
+    <a href="../notifications/index.html">Notifications</a>
+    <a href="../dashboard/index.html">Dashboard</a>
+
+</div>
+
+
+<div class="warning">
+    <strong>Демо-версия:</strong>
+    Tracking сейчас работает как демонстрационный интерфейс.
+    Реальные GPS-данные, перевозчики, API, онлайн-карта,
+    таможенные данные и автоматические уведомления будут подключаться
+    после создания серверной части WORKER PRO.
+</div>
+
+</div>
+
+<footer>
+    <strong>WORKER PRO</strong><br>
+    Global Industrial Platform<br><br>
+    © 2026 WORKER PRO — F.S
+</footer>
+
+
+<script src="../language.js"></script>
+
+<script>
+
+function filterShipments(){
+
+    const search =
+        document.getElementById("searchInput")
+        .value
+        .toLowerCase();
+
+    const status =
+        document.getElementById("statusFilter").value;
+
+    const country =
+        document.getElementById("countryFilter").value;
+
+    const transport =
+        document.getElementById("transportFilter").value;
+
+    const cards =
+        document.querySelectorAll(".shipment");
+
+    cards.forEach(card => {
+
+        const cardSearch =
+            card.dataset.search.toLowerCase();
+
+        const matchSearch =
+            cardSearch.includes(search);
+
+        const matchStatus =
+            status === "all" ||
+            card.dataset.status === status;
+
+        const matchCountry =
+            country === "all" ||
+            card.dataset.country === country;
+
+        const matchTransport =
+            transport === "all" ||
+            card.dataset.transport === transport;
+
+        if(
+            matchSearch &&
+            matchStatus &&
+            matchCountry &&
+            matchTransport
+        ){
+            card.style.display = "block";
+        }else{
+            card.style.display = "none";
+        }
+
+    });
+
+}
+
+
+function openTracking(number){
+
+    document.getElementById("trackingNumber").value = number;
+
+    trackNumber();
+
+    document.getElementById("trackingPanel")
+        .scrollIntoView({
+            behavior:"smooth"
+        });
+
+}
+
+
+function trackNumber(){
+
+    const number =
+        document.getElementById("trackingNumber")
+        .value
+        .trim()
+        .toUpperCase();
+
+    if(!number){
+
+        alert("Введите номер Tracking.");
+
+        return;
+    }
+
+    const result =
+        document.getElementById("trackingResult");
+
+    const data = {
+
+        "TRK-2026-001":{
+            status:"В ПУТИ",
+            cargo:"Hydraulic Spare Parts",
+            from:"Istanbul",
+            location:"Georgia",
+            to:"Baku",
+            progress:"65%",
+            update:"19 September 2026, 12:40",
+            eta:"22 September 2026"
+        },
+
+        "TRK-2026-002":{
+            status:"ГОТОВО К ОТПРАВКЕ",
+            cargo:"CNC Components",
+            from:"Dortmund",
+            location:"Dortmund Warehouse",
+            to:"Baku",
+            progress:"25%",
+            update:"19 September 2026, 09:30",
+            eta:"27 September 2026"
+        },
+
+        "TRK-2026-003":{
+            status:"ДОСТАВЛЕНО",
+            cargo:"Industrial Pump",
+            from:"Milan",
+            location:"Baku Warehouse",
+            to:"Baku",
+            progress:"100%",
+            update:"19 September 2026, 08:15",
+            eta:"Доставлено"
+        },
+
+        "TRK-2026-004":{
+            status:"В ПУТИ",
+            cargo:"Industrial Equipment",
+            from:"Shanghai",
+            location:"Caspian Sea Route",
+            to:"Baku",
+            progress:"48%",
+            update:"19 September 2026, 11:20",
+            eta:"30 September 2026"
+        },
+
+        "TRK-2026-005":{
+            status:"ЗАДЕРЖКА",
+            cargo:"Electrical Components",
+            from:"Houston",
+            location:"Customs",
+            to:"Baku",
+            progress:"72%",
+            update:"19 September 2026, 10:05",
+            eta:"Ожидается"
+        },
+
+        "TRK-2026-006":{
+            status:"ДОСТАВЛЕНО",
+            cargo:"Pressure Sensors",
+            from:"Ankara",
+            location:"Baku",
+            to:"Baku",
+            progress:"100%",
+            update:"18 September 2026, 17:45",
+            eta:"Доставлено"
+        }
+
+    };
+
+    if(!data[number]){
+
+        result.innerHTML =
+            "<div class='notification'>" +
+            "Tracking номер <strong>" +
+            number +
+            "</strong> не найден в демо-базе." +
+            "</div>";
+
+        return;
+    }
+
+    const item = data[number];
+
+    result.innerHTML = `
+
+        <h3>${number}</h3>
+
+        <span class="badge blue">
+            ${item.status}
+        </span>
+
+        <div class="route">
+
+            <div class="point">
+                ${item.from}
+            </div>
+
+            <div class="line"></div>
+
+            <div class="point">
+                ${item.location}
+            </div>
+
+            <div class="line"></div>
+
+            <div class="point">
+                ${item.to}
+            </div>
+
+        </div>
+
+        <p>
+            <strong>Груз:</strong>
+            ${item.cargo}
+        </p>
+
+        <p>
+            <strong>Текущая позиция:</strong>
+            ${item.location}
+        </p>
+
+        <p>
+            <strong>Прогресс:</strong>
+            ${item.progress}
+        </p>
+
+        <div class="progress">
+            <div style="width:${item.progress}"></div>
+        </div>
+
+        <p>
+            <strong>Последнее обновление:</strong>
+            ${item.update}
+        </p>
+
+        <p>
+            <strong>ETA:</strong>
+            ${item.eta}
+        </p>
+
+    `;
+
+}
+
+
+function enableNotifications(){
+
+    alert(
+        "Уведомления включены в демо-режиме.\n\n" +
+        "В реальной версии здесь будут Push, Email и SMS."
+    );
+
+}
+
+
+function createTrackingRequest(){
+
+    const number =
+        document.getElementById("requestNumber").value;
+
+    const cargo =
+        document.getElementById("requestCargo").value;
+
+    const from =
+        document.getElementById("requestFrom").value;
+
+    const to =
+        document.getElementById("requestTo").value;
+
+    if(!number || !cargo || !from || !to){
+
+        alert("Заполните основные поля.");
+
+        return;
+    }
+
+    alert(
+        "Tracking-запрос создан в демо-режиме.\n\n" +
+        "Заказ: " + number +
+        "\nГруз: " + cargo +
+        "\nМаршрут: " + from + " → " + to
+    );
+
+}
+
+</script>
+
+</body>
+</html>
