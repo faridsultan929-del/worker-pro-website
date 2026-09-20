@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WORKER PRO — Privacy</title>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f4f7f5;
+    color:#123;
+}
+
+.top-languages{
+    background:#063d25;
+    padding:10px;
+    display:flex;
+    justify-content:center;
+    gap:8px;
+    flex-wrap:wrap;
+}
+
+.top-languages button{
+    border:none;
+    padding:8px 13px;
+    border-radius:20px;
+    background:white;
+    color:#063d25;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.top-languages button:hover{
+    background:#b7ff35;
+}
+
+header{
+    background:#0b6b3d;
+    color:white;
+    text-align:center;
+    padding:22px 15px;
+}
+
+header h1{
+    margin:0;
+    font-size:32px;
+}
+
+header p{
+    margin:8px 0 0;
+    font-size:17px;
+}
+
+nav{
+    position:sticky;
+    top:0;
+    z-index:10;
+    background:#075b34;
+    padding:10px;
+    display:flex;
+    justify-content:center;
+    gap:8px;
+    flex-wrap:wrap;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+    padding:8px 11px;
+    border-radius:8px;
+}
+
+nav a:hover{
+    background:#b7ff35;
+    color:#063d25;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+    padding:25px 15px;
+}
+
+.hero{
+    background:white;
+    border-radius:16px;
+    padding:25px;
+    box-shadow:0 3px 12px rgba(0,0,0,.08);
+    margin-bottom:25px;
+}
+
+.hero h2{
+    color:#075b34;
+    margin-top:0;
+}
+
+.hero p{
+    line-height:1.7;
+}
+
+.search{
+    width:100%;
+    padding:14px;
+    border:2px solid #d9e3dd;
+    border-radius:10px;
+    font-size:16px;
+    margin-top:12px;
+}
+
+.section-title{
+    color:#075b34;
+    margin-top:30px;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:18px;
+}
+
+.card{
+    background:white;
+    border-radius:15px;
+    padding:20px;
+    box-shadow:0 3px 12px rgba(0,0,0,.08);
+}
+
+.card h3{
+    margin-top:0;
+    color:#075b34;
+}
+
+.card p{
+    line-height:1.6;
+}
+
+.card ul{
+    padding-left:20px;
+    line-height:1.8;
+}
+
+.status{
+    display:inline-block;
+    background:#dff7e8;
+    color:#075b34;
+    padding:6px 12px;
+    border-radius:20px;
+    font-weight:bold;
+    font-size:13px;
+}
+
+.switch-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+    padding:13px 0;
+    border-bottom:1px solid #e4ebe7;
+}
+
+.switch-row:last-child{
+    border-bottom:none;
+}
+
+.switch{
+    position:relative;
+    width:52px;
+    height:28px;
+    flex-shrink:0;
+}
+
+.switch input{
+    display:none;
+}
+
+.slider{
+    position:absolute;
+    inset:0;
+    background:#bbb;
+    border-radius:30px;
+    cursor:pointer;
+}
+
+.slider:before{
+    content:"";
+    position:absolute;
+    width:22px;
+    height:22px;
+    left:3px;
+    top:3px;
+    background:white;
+    border-radius:50%;
+    transition:.25s;
+}
+
+.switch input:checked + .slider{
+    background:#0b6b3d;
+}
+
+.switch input:checked + .slider:before{
+    transform:translateX(24px);
+}
+
+.button{
+    border:none;
+    background:#0b6b3d;
+    color:white;
+    padding:11px 17px;
+    border-radius:9px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.button:hover{
+    background:#063d25;
+}
+
+.button-danger{
+    background:#a52222;
+}
+
+.button-danger:hover{
+    background:#7d1717;
+}
+
+.info{
+    background:#eef8f2;
+    border-left:5px solid #0b6b3d;
+    padding:16px;
+    border-radius:8px;
+    line-height:1.6;
+}
+
+.warning{
+    background:#fff6d9;
+    border-left:5px solid #e0a800;
+    padding:16px;
+    border-radius:8px;
+    line-height:1.6;
+}
+
+.danger{
+    background:#fff0f0;
+    border-left:5px solid #b52222;
+    padding:16px;
+    border-radius:8px;
+    line-height:1.6;
+}
+
+.data-table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:10px;
+}
+
+.data-table th,
+.data-table td{
+    padding:12px;
+    border-bottom:1px solid #e0e8e3;
+    text-align:left;
+}
+
+.data-table th{
+    background:#eef5f0;
+    color:#075b34;
+}
+
+footer{
+    margin-top:40px;
+    background:#063d25;
+    color:white;
+    text-align:center;
+    padding:25px 15px;
+}
+
+footer a{
+    color:#b7ff35;
+    text-decoration:none;
+}
+
+@media(max-width:600px){
+    header h1{
+        font-size:26px;
+    }
+
+    header p{
+        font-size:15px;
+    }
+
+    nav a{
+        font-size:13px;
+        padding:7px 8px;
+    }
+
+    .hero,
+    .card{
+        padding:17px;
+    }
+
+    .data-table{
+        font-size:13px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- LANGUAGES -->
+<div class="top-languages">
+    <button onclick="setLang('AZ')">AZ</button>
+    <button onclick="setLang('RU')">RU</button>
+    <button onclick="setLang('EN')">EN</button>
+    <button onclick="setLang('TR')">TR</button>
+    <button onclick="setLang('DE')">DE</button>
+    <button onclick="setLang('AR')">AR</button>
+    <button onclick="setLang('ES')">ES</button>
+    <button onclick="setLang('FR')">FR</button>
+    <button onclick="setLang('IT')">IT</button>
+</div>
+
+<header>
+    <h1>🔐 WORKER PRO</h1>
+    <p>Privacy / Конфиденциальность</p>
+</header>
+
+<!-- NAVIGATION -->
+<nav>
+    <a href="../index.html">Home</a>
+    <a href="../companies/index.html">Companies</a>
+    <a href="../manufacturers/index.html">Manufacturers</a>
+    <a href="../suppliers/index.html">Suppliers</a>
+    <a href="../products/index.html">Products</a>
+    <a href="../requests/index.html">Requests</a>
+    <a href="../offers/index.html">Offers</a>
+    <a href="../orders/index.html">Orders</a>
+    <a href="../security/index.html">Security</a>
+    <a href="../settings/index.html">Settings</a>
+    <a href="../help/index.html">Help</a>
+    <a href="../dashboard/index.html">Dashboard</a>
+</nav>
+
+<div class="container">
+
+    <section class="hero">
+        <h2>🔐 Конфиденциальность пользователя</h2>
+
+        <p>
+            WORKER PRO предназначен для международного промышленного
+            сообщества. На этой странице пользователь может управлять
+            настройками конфиденциальности, видимостью информации и
+            доступом к своим данным.
+        </p>
+
+        <input
+            class="search"
+            id="privacySearch"
+            type="text"
+            placeholder="Поиск настроек конфиденциальности..."
+            onkeyup="searchPrivacy()"
+        >
+    </section>
+
+
+    <h2 class="section-title">👤 Настройки приватности</h2>
+
+    <div class="grid" id="privacyGrid">
+
+        <div class="card privacy-card">
+            <h3>👤 Видимость профиля</h3>
+            <p>
+                Определяет, могут ли другие пользователи находить
+                ваш профессиональный профиль.
+            </p>
+
+            <div class="switch-row">
+                <span>Публичный профиль</span>
+
+                <label class="switch">
+                    <input type="checkbox" checked onchange="privacyChanged()">
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </div>
+
+
+        <div class="card privacy-card">
+            <h3>🏢 Видимость компании</h3>
+            <p>
+                Управление отображением информации о компании
+                в международном каталоге.
+            </p>
+
+            <div class="switch-row">
+                <span>Показывать компанию</span>
+
+                <label class="switch">
+                    <input type="checkbox" checked onchange="privacyChanged()">
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </div>
+
+
+        <div class="card privacy-card">
+            <h3>📦 Видимость товаров</h3>
+            <p>
+                Управление отображением продукции и запчастей
+                в каталоге WORKER PRO.
+            </p>
+
+            <div class="switch-row">
+                <span>Показывать товары</span>
+
+                <label class="switch">
+                    <input type="checkbox" checked onchange="privacyChanged()">
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </div>
+
+
+        <div class="card privacy-card">
+            <h3>💬 Сообщения</h3>
+            <p>
+                Управление тем, кто может отправлять вам
+                сообщения и коммерческие предложения.
+            </p>
+
+            <div class="switch-row">
+                <span>Разрешить сообщения</span>
+
+                <label class="switch">
+                    <input type="checkbox" checked onchange="privacyChanged()">
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </div>
+
+
+        <div class="card privacy-card">
+            <h3>📄 Документы</h3>
+            <p>
+                Контроль доступа к загруженным промышленным,
+                техническим и сертификационным документам.
+            </p>
+
+            <div class="switch-row">
+                <span>Показывать документы</span>
+
+                <label class="switch">
+                    <input type="checkbox" onchange="privacyChanged()">
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </div>
+
+
+        <div class="card privacy-card">
+            <h3>📊 Статистика</h3>
+            <p>
+                Управление использованием обезличенной статистики
+                для улучшения платформы.
+            </p>
+
+            <div class="switch-row">
+                <span>Аналитика</span>
+
+                <label class="switch">
+                    <input type="checkbox" checked onchange="privacyChanged()">
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </div>
+
+    </div>
+
+
+    <h2 class="section-title">🔔 Уведомления</h2>
+
+    <div class="grid">
+
+        <div class="card">
+            <h3>📩 Email</h3>
+
+            <div class="switch-row">
+                <span>Получать Email</span>
+
+                <label class="switch">
+                    <input type="checkbox" checked>
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <div class="switch-row">
+                <span>Коммерческие предложения</span>
+
+                <label class="switch">
+                    <input type="checkbox" checked>
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </div>
+
+
+        <div class="card">
+            <h3>📱 Push</h3>
+
+            <div class="switch-row">
+                <span>Push-уведомления</span>
+
+                <label class="switch">
+                    <input type="checkbox" checked>
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <div class="switch-row">
+                <span>Сообщения</span>
+
+                <label class="switch">
+                    <input type="checkbox" checked>
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </div>
+
+    </div>
+
+
+    <h2 class="section-title">🍪 Cookies</h2>
+
+    <div class="card">
+        <h3>Настройки cookies</h3>
+
+        <p>
+            Cookies могут использоваться для сохранения настроек
+            языка, авторизации и параметров пользователя.
+        </p>
+
+        <div class="switch-row">
+            <span>Необходимые cookies</span>
+            <span class="status">Всегда включены</span>
+        </div>
+
+        <div class="switch-row">
+            <span>Аналитические cookies</span>
+
+            <label class="switch">
+                <input type="checkbox" checked>
+                <span class="slider"></span>
+            </label>
+        </div>
+
+        <br>
+
+        <button class="button" onclick="saveCookies()">
+            Сохранить настройки
+        </button>
+    </div>
+
+
+    <h2 class="section-title">📋 Какие данные используются</h2>
+
+    <div class="card">
+
+        <table class="data-table">
+
+            <tr>
+                <th>Тип данных</th>
+                <th>Назначение</th>
+            </tr>
+
+            <tr>
+                <td>Имя / профиль</td>
+                <td>Отображение профессиональной информации</td>
+            </tr>
+
+            <tr>
+                <td>Email</td>
+                <td>Авторизация и связь</td>
+            </tr>
+
+            <tr>
+                <td>Телефон</td>
+                <td>Связь и подтверждение аккаунта</td>
+            </tr>
+
+            <tr>
+                <td>Компания</td>
+                <td>Каталог и деловые контакты</td>
+            </tr>
+
+            <tr>
+                <td>Товары</td>
+                <td>Промышленный каталог и Marketplace</td>
+            </tr>
+
+            <tr>
+                <td>Заявки</td>
+                <td>Поиск поставщиков и покупателей</td>
+            </tr>
+
+        </table>
+
+    </div>
+
+
+    <h2 class="section-title">📥 Управление данными</h2>
+
+    <div class="grid">
+
+        <div class="card">
+            <h3>📥 Экспорт данных</h3>
+
+            <p>
+                В будущем пользователь сможет получить копию
+                информации своего аккаунта.
+            </p>
+
+            <button class="button" onclick="exportData()">
+                Запросить данные
+            </button>
+        </div>
+
+
+        <div class="card">
+            <h3>🗑️ Удаление данных</h3>
+
+            <p>
+                Пользователь сможет запросить удаление аккаунта
+                и связанных с ним данных.
+            </p>
+
+            <button class="button button-danger" onclick="deleteData()">
+                Запросить удаление
+            </button>
+        </div>
+
+    </div>
+
+
+    <h2 class="section-title">🌍 Международная конфиденциальность</h2>
+
+    <div class="card">
+
+        <p>
+            WORKER PRO рассчитан на пользователей из разных стран.
+            В будущем настройки конфиденциальности могут учитывать
+            требования законодательства конкретной страны.
+        </p>
+
+        <ul>
+            <li>🇦🇿 Azerbaijan</li>
+            <li>🇹🇷 Turkey</li>
+            <li>🇩🇪 Germany</li>
+            <li>🇮🇹 Italy</li>
+            <li>🇨🇳 China</li>
+            <li>🇺🇸 USA</li>
+            <li>🌍 Other countries</li>
+        </ul>
+
+    </div>
+
+
+    <h2 class="section-title">🔒 Принципы конфиденциальности</h2>
+
+    <div class="grid">
+
+        <div class="card">
+            <h3>🔐 Контроль</h3>
+            <p>
+                Пользователь должен иметь возможность управлять
+                видимостью своей информации.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>👁️ Прозрачность</h3>
+            <p>
+                Пользователь должен понимать, какие данные
+                используются и для чего.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>🛡️ Защита</h3>
+            <p>
+                Данные аккаунта должны защищаться от
+                несанкционированного доступа.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>🌍 Международность</h3>
+            <p>
+                Настройки должны быть удобными для пользователей
+                из разных стран.
+            </p>
+        </div>
+
+    </div>
+
+
+    <h2 class="section-title">🚀 Будущие функции</h2>
+
+    <div class="info">
+
+        В будущей версии WORKER PRO можно добавить:
+
+        <ul>
+            <li>двухфакторную защиту данных;</li>
+            <li>подтверждение телефона;</li>
+            <li>подтверждение Email;</li>
+            <li>управление сессиями;</li>
+            <li>историю доступа к данным;</li>
+            <li>полный экспорт профиля;</li>
+            <li>удаление отдельных данных;</li>
+            <li>настройки GDPR и других требований;</li>
+            <li>центральный Privacy Center.</li>
+        </ul>
+
+    </div>
+
+
+    <h2 class="section-title">⚠️ Важно</h2>
+
+    <div class="warning">
+        Эта страница является демонстрационной частью концепции
+        WORKER PRO. Реальное хранение, обработка, экспорт и удаление
+        данных появятся после подключения серверной части платформы.
+    </div>
+
+</div>
+
+
+<footer>
+    <strong>WORKER PRO</strong><br>
+    Global Industrial Platform<br><br>
+
+    <a href="../about/index.html">About</a> |
+    <a href="../help/index.html">Help</a> |
+    <a href="../security/index.html">Security</a> |
+    <a href="../settings/index.html">Settings</a><br><br>
+
+    © 2026 WORKER PRO — F.S
+</footer>
+
+
+<script src="../language.js"></script>
+
+<script>
+
+function privacyChanged(){
+    alert("Настройка конфиденциальности изменена.");
+}
+
+function saveCookies(){
+    alert("Настройки cookies сохранены в демонстрационном режиме.");
+}
+
+function exportData(){
+    alert(
+        "Запрос на экспорт данных создан.\n\n" +
+        "В будущей версии здесь будет формироваться файл с данными пользователя."
+    );
+}
+
+function deleteData(){
+
+    const confirmDelete =
+        confirm(
+            "Вы действительно хотите запросить удаление данных?"
+        );
+
+    if(confirmDelete){
+
+        alert(
+            "Запрос на удаление данных создан.\n\n" +
+            "В демонстрационной версии данные не удаляются."
+        );
+
+    }
+}
+
+function searchPrivacy(){
+
+    const value =
+        document
+        .getElementById("privacySearch")
+        .value
+        .toLowerCase();
+
+    const cards =
+        document.querySelectorAll(".privacy-card");
+
+    cards.forEach(function(card){
+
+        const text =
+            card.innerText.toLowerCase();
+
+        if(text.includes(value)){
+            card.style.display = "";
+        }else{
+            card.style.display = "none";
+        }
+
+    });
+}
+
+</script>
+
+</body>
+</html>
