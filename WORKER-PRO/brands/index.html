@@ -1,1 +1,992 @@
- 
+ <!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WORKER PRO — Brands</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f4f7f5;
+    color:#123;
+}
+
+.top-languages{
+    background:#063d25;
+    padding:10px;
+    text-align:center;
+}
+
+.top-languages button{
+    border:none;
+    background:#0b6b3d;
+    color:white;
+    font-weight:bold;
+    padding:9px 12px;
+    margin:3px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.top-languages button:hover{
+    background:#b7ff35;
+    color:#063d25;
+}
+
+header{
+    background:#075b34;
+    color:white;
+    text-align:center;
+    padding:30px 15px;
+}
+
+header h1{
+    margin:0;
+    font-size:34px;
+}
+
+header p{
+    margin:10px 0 0;
+    font-size:18px;
+}
+
+nav{
+    background:white;
+    padding:12px;
+    text-align:center;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+    position:sticky;
+    top:0;
+    z-index:10;
+}
+
+nav a{
+    display:inline-block;
+    color:#075b34;
+    text-decoration:none;
+    font-weight:bold;
+    margin:5px 8px;
+}
+
+nav a:hover{
+    color:#0b9b57;
+}
+
+.container{
+    max-width:1150px;
+    margin:auto;
+    padding:25px 15px;
+}
+
+.hero{
+    background:linear-gradient(135deg,#063d25,#0b6b3d);
+    color:white;
+    border-radius:18px;
+    padding:35px 25px;
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.hero h2{
+    margin-top:0;
+    font-size:30px;
+}
+
+.hero p{
+    font-size:17px;
+    line-height:1.6;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:15px;
+    margin:25px 0 30px;
+}
+
+.stat{
+    background:white;
+    border-radius:15px;
+    padding:20px;
+    text-align:center;
+    box-shadow:0 3px 12px rgba(0,0,0,.08);
+}
+
+.stat strong{
+    display:block;
+    color:#075b34;
+    font-size:28px;
+    margin-bottom:7px;
+}
+
+.search-box{
+    max-width:750px;
+    margin:25px auto;
+}
+
+.search-box input{
+    width:100%;
+    padding:16px;
+    border:2px solid #0b6b3d;
+    border-radius:12px;
+    font-size:16px;
+    outline:none;
+}
+
+.filters{
+    text-align:center;
+    margin:20px 0 30px;
+}
+
+.filter-btn{
+    border:none;
+    background:#e8f7ed;
+    color:#075b34;
+    padding:10px 15px;
+    margin:4px;
+    border-radius:10px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.filter-btn.active,
+.filter-btn:hover{
+    background:#0b6b3d;
+    color:white;
+}
+
+.brands{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:18px;
+}
+
+.brand{
+    background:white;
+    border-radius:16px;
+    padding:22px;
+    box-shadow:0 3px 12px rgba(0,0,0,.08);
+    border-left:5px solid #0b6b3d;
+    transition:.2s;
+}
+
+.brand:hover{
+    transform:translateY(-4px);
+}
+
+.brand-logo{
+    width:65px;
+    height:65px;
+    border-radius:14px;
+    background:#e8f7ed;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:32px;
+    margin-bottom:15px;
+}
+
+.brand h3{
+    color:#075b34;
+    margin:8px 0;
+    font-size:21px;
+}
+
+.brand p{
+    color:#456;
+    line-height:1.5;
+}
+
+.tag{
+    display:inline-block;
+    background:#e8f7ed;
+    color:#075b34;
+    padding:6px 9px;
+    border-radius:8px;
+    font-size:12px;
+    font-weight:bold;
+    margin:3px 3px 3px 0;
+}
+
+.brand-buttons{
+    margin-top:12px;
+}
+
+.btn-small{
+    border:none;
+    background:#0b6b3d;
+    color:white;
+    padding:9px 12px;
+    border-radius:8px;
+    font-weight:bold;
+    cursor:pointer;
+    margin:3px;
+}
+
+.btn-small:hover{
+    background:#063d25;
+}
+
+.empty{
+    display:none;
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    text-align:center;
+    color:#666;
+}
+
+.info{
+    background:white;
+    border-radius:18px;
+    padding:25px;
+    margin-top:35px;
+    box-shadow:0 3px 12px rgba(0,0,0,.07);
+}
+
+.info-item{
+    background:#f1f7f3;
+    border-radius:12px;
+    padding:15px;
+    margin:10px 0;
+}
+
+.info-item strong{
+    color:#075b34;
+}
+
+.buttons{
+    text-align:center;
+    margin:35px 0;
+}
+
+.btn{
+    display:inline-block;
+    background:#0b6b3d;
+    color:white;
+    text-decoration:none;
+    padding:13px 20px;
+    margin:6px;
+    border-radius:10px;
+    font-weight:bold;
+}
+
+.btn:hover{
+    background:#063d25;
+}
+
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.65);
+    z-index:100;
+    padding:20px;
+    overflow:auto;
+}
+
+.modal-box{
+    max-width:700px;
+    margin:40px auto;
+    background:white;
+    border-radius:18px;
+    padding:25px;
+}
+
+.modal-box h2{
+    color:#075b34;
+}
+
+.close{
+    float:right;
+    background:#063d25;
+    color:white;
+    border:none;
+    border-radius:8px;
+    padding:8px 12px;
+    cursor:pointer;
+}
+
+footer{
+    background:#063d25;
+    color:white;
+    text-align:center;
+    padding:25px 15px;
+    margin-top:40px;
+}
+
+footer p{
+    margin:6px;
+}
+
+@media(max-width:600px){
+    header h1{font-size:28px}
+    .hero h2{font-size:25px}
+    nav a{font-size:14px;margin:4px}
+}
+</style>
+</head>
+
+<body>
+
+<!-- LANGUAGES -->
+
+<div class="top-languages">
+    <button onclick="setLanguage('AZ')">AZ</button>
+    <button onclick="setLanguage('RU')">RU</button>
+    <button onclick="setLanguage('EN')">EN</button>
+    <button onclick="setLanguage('TR')">TR</button>
+    <button onclick="setLanguage('DE')">DE</button>
+    <button onclick="setLanguage('AR')">AR</button>
+    <button onclick="setLanguage('ES')">ES</button>
+    <button onclick="setLanguage('FR')">FR</button>
+    <button onclick="setLanguage('IT')">IT</button>
+</div>
+
+<header>
+    <h1>🏷️ WORKER PRO</h1>
+    <p>Промышленные бренды со всего мира</p>
+</header>
+
+<nav>
+    <a href="../index.html">Главная</a>
+    <a href="../catalog/index.html">Каталог</a>
+    <a href="../categories/index.html">Категории</a>
+    <a href="../products/index.html">Товары</a>
+    <a href="../manufacturers/index.html">Производители</a>
+    <a href="../suppliers/index.html">Поставщики</a>
+    <a href="../marketplace/index.html">Marketplace</a>
+    <a href="../rfq/index.html">RFQ</a>
+</nav>
+
+<div class="container">
+
+<section class="hero">
+
+    <h2>🏷️ Промышленные бренды</h2>
+
+    <p>
+        Найдите оборудование, запчасти и технологии
+        по известным промышленным брендам.
+    </p>
+
+    <p>
+        Бренд → Товары → Производитель → Поставщик → Запрос цены
+    </p>
+
+</section>
+
+<!-- STATS -->
+
+<div class="stats">
+
+    <div class="stat">
+        <strong>1 850+</strong>
+        Брендов
+    </div>
+
+    <div class="stat">
+        <strong>42</strong>
+        Страны
+    </div>
+
+    <div class="stat">
+        <strong>28 400+</strong>
+        Товаров
+    </div>
+
+    <div class="stat">
+        <strong>740+</strong>
+        Производителей
+    </div>
+
+</div>
+
+<!-- SEARCH -->
+
+<div class="search-box">
+
+    <input
+        id="searchInput"
+        type="text"
+        placeholder="🔍 Поиск бренда: CNC, насосы, электроника..."
+        oninput="searchBrands()"
+    >
+
+</div>
+
+<!-- FILTERS -->
+
+<div class="filters">
+
+    <button class="filter-btn active"
+            onclick="filterBrands('all',this)">
+        Все
+    </button>
+
+    <button class="filter-btn"
+            onclick="filterBrands('cnc',this)">
+        🖥️ CNC
+    </button>
+
+    <button class="filter-btn"
+            onclick="filterBrands('automation',this)">
+        🤖 Автоматизация
+    </button>
+
+    <button class="filter-btn"
+            onclick="filterBrands('hydraulic',this)">
+        💧 Гидравлика
+    </button>
+
+    <button class="filter-btn"
+            onclick="filterBrands('electrical',this)">
+        ⚡ Электрика
+    </button>
+
+    <button class="filter-btn"
+            onclick="filterBrands('welding',this)">
+        🔥 Сварка
+    </button>
+
+</div>
+
+<!-- BRANDS -->
+
+<div class="brands" id="brandsList">
+
+    <div class="brand"
+         data-category="cnc"
+         data-search="siemens germany cnc automation">
+
+        <div class="brand-logo">⚙️</div>
+
+        <h3>Siemens</h3>
+
+        <span class="tag">Germany</span>
+        <span class="tag">CNC</span>
+        <span class="tag">Automation</span>
+
+        <p>
+            Промышленная автоматизация, CNC,
+            контроллеры и электротехническое оборудование.
+        </p>
+
+        <div class="brand-buttons">
+
+            <button class="btn-small"
+                    onclick="showBrand('Siemens')">
+                Подробнее
+            </button>
+
+            <a class="btn-small"
+               href="../products/index.html">
+                Товары
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="brand"
+         data-category="cnc"
+         data-search="fanuc japan cnc robotics">
+
+        <div class="brand-logo">🖥️</div>
+
+        <h3>FANUC</h3>
+
+        <span class="tag">Japan</span>
+        <span class="tag">CNC</span>
+        <span class="tag">Robotics</span>
+
+        <p>
+            CNC системы, промышленные роботы,
+            приводы и автоматизация производства.
+        </p>
+
+        <div class="brand-buttons">
+
+            <button class="btn-small"
+                    onclick="showBrand('FANUC')">
+                Подробнее
+            </button>
+
+            <a class="btn-small"
+               href="../products/index.html">
+                Товары
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="brand"
+         data-category="automation"
+         data-search="abb switzerland automation robotics electrical">
+
+        <div class="brand-logo">🤖</div>
+
+        <h3>ABB</h3>
+
+        <span class="tag">Switzerland</span>
+        <span class="tag">Automation</span>
+        <span class="tag">Electrical</span>
+
+        <p>
+            Автоматизация, электродвигатели,
+            приводы, роботы и энергетические системы.
+        </p>
+
+        <div class="brand-buttons">
+
+            <button class="btn-small"
+                    onclick="showBrand('ABB')">
+                Подробнее
+            </button>
+
+            <a class="btn-small"
+               href="../products/index.html">
+                Товары
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="brand"
+         data-category="hydraulic"
+         data-search="bosch rexroth germany hydraulic">
+
+        <div class="brand-logo">💧</div>
+
+        <h3>Bosch Rexroth</h3>
+
+        <span class="tag">Germany</span>
+        <span class="tag">Hydraulic</span>
+        <span class="tag">Automation</span>
+
+        <p>
+            Гидравлические системы, насосы,
+            клапаны, приводы и автоматизация.
+        </p>
+
+        <div class="brand-buttons">
+
+            <button class="btn-small"
+                    onclick="showBrand('Bosch Rexroth')">
+                Подробнее
+            </button>
+
+            <a class="btn-small"
+               href="../products/index.html">
+                Товары
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="brand"
+         data-category="welding"
+         data-search="fronius austria welding">
+
+        <div class="brand-logo">🔥</div>
+
+        <h3>Fronius</h3>
+
+        <span class="tag">Austria</span>
+        <span class="tag">Welding</span>
+
+        <p>
+            Сварочные системы, источники питания
+            и промышленное сварочное оборудование.
+        </p>
+
+        <div class="brand-buttons">
+
+            <button class="btn-small"
+                    onclick="showBrand('Fronius')">
+                Подробнее
+            </button>
+
+            <a class="btn-small"
+               href="../products/index.html">
+                Товары
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="brand"
+         data-category="electrical"
+         data-search="schneider electric france electrical automation">
+
+        <div class="brand-logo">⚡</div>
+
+        <h3>Schneider Electric</h3>
+
+        <span class="tag">France</span>
+        <span class="tag">Electrical</span>
+        <span class="tag">Automation</span>
+
+        <p>
+            Электрооборудование, автоматизация,
+            распределение энергии и системы управления.
+        </p>
+
+        <div class="brand-buttons">
+
+            <button class="btn-small"
+                    onclick="showBrand('Schneider Electric')">
+                Подробнее
+            </button>
+
+            <a class="btn-small"
+               href="../products/index.html">
+                Товары
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="brand"
+         data-category="electrical"
+         data-search="siemens electrical motors germany">
+
+        <div class="brand-logo">⚡</div>
+
+        <h3>Siemens Industrial</h3>
+
+        <span class="tag">Germany</span>
+        <span class="tag">Electrical</span>
+
+        <p>
+            Электродвигатели, промышленная автоматика,
+            приводы и электрические компоненты.
+        </p>
+
+        <div class="brand-buttons">
+
+            <button class="btn-small"
+                    onclick="showBrand('Siemens Industrial')">
+                Подробнее
+            </button>
+
+            <a class="btn-small"
+               href="../products/index.html">
+                Товары
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="brand"
+         data-category="hydraulic"
+         data-search="parker usa hydraulic pneumatics">
+
+        <div class="brand-logo">🔧</div>
+
+        <h3>Parker</h3>
+
+        <span class="tag">USA</span>
+        <span class="tag">Hydraulic</span>
+        <span class="tag">Pneumatics</span>
+
+        <p>
+            Гидравлика, пневматика, шланги,
+            клапаны и промышленная автоматизация.
+        </p>
+
+        <div class="brand-buttons">
+
+            <button class="btn-small"
+                    onclick="showBrand('Parker')">
+                Подробнее
+            </button>
+
+            <a class="btn-small"
+               href="../products/index.html">
+                Товары
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="empty" id="emptyMessage">
+    🔍 Бренды не найдены.
+</div>
+
+<!-- INFORMATION -->
+
+<div class="info">
+
+    <h2 style="text-align:center;color:#063d25;">
+        🔗 Как работает раздел брендов
+    </h2>
+
+    <div class="info-item">
+        <strong>1. Выберите бренд</strong><br>
+        Пользователь может найти нужный промышленный бренд
+        по названию или категории.
+    </div>
+
+    <div class="info-item">
+        <strong>2. Найдите товары</strong><br>
+        После выбора бренда отображаются связанные
+        товары и оборудование.
+    </div>
+
+    <div class="info-item">
+        <strong>3. Найдите поставщика</strong><br>
+        Пользователь сможет искать компании,
+        которые предлагают продукцию выбранного бренда.
+    </div>
+
+    <div class="info-item">
+        <strong>4. Запросите цену</strong><br>
+        Можно отправить запрос поставщику
+        и получить коммерческое предложение.
+    </div>
+
+</div>
+
+<div class="buttons">
+
+    <a class="btn" href="../catalog/index.html">
+        📦 Каталог
+    </a>
+
+    <a class="btn" href="../categories/index.html">
+        📂 Категории
+    </a>
+
+    <a class="btn" href="../products/index.html">
+        ⚙️ Товары
+    </a>
+
+    <a class="btn" href="../manufacturers/index.html">
+        🏭 Производители
+    </a>
+
+    <a class="btn" href="../suppliers/index.html">
+        🚚 Поставщики
+    </a>
+
+    <a class="btn" href="../rfq/index.html">
+        📋 RFQ
+    </a>
+
+</div>
+
+</div>
+
+<!-- MODAL -->
+
+<div class="modal" id="brandModal">
+
+    <div class="modal-box">
+
+        <button class="close" onclick="closeBrand()">
+            ✕
+        </button>
+
+        <h2 id="brandTitle"></h2>
+
+        <div id="brandText"></div>
+
+    </div>
+
+</div>
+
+<footer>
+
+    <p><strong>WORKER PRO</strong></p>
+    <p>🌍 Международная промышленная платформа</p>
+    <p>Бренды • Товары • Производители • Поставщики</p>
+    <p>F.S</p>
+
+</footer>
+
+<script src="../language.js"></script>
+
+<script>
+
+function filterBrands(type,button){
+
+    const brands=document.querySelectorAll(".brand");
+
+    document.querySelectorAll(".filter-btn").forEach(function(btn){
+        btn.classList.remove("active");
+    });
+
+    button.classList.add("active");
+
+    let visible=0;
+
+    brands.forEach(function(brand){
+
+        if(type==="all" || brand.dataset.category===type){
+
+            brand.style.display="block";
+            visible++;
+
+        }else{
+
+            brand.style.display="none";
+
+        }
+
+    });
+
+    document.getElementById("emptyMessage").style.display=
+        visible===0 ? "block" : "none";
+}
+
+function searchBrands(){
+
+    const value=document
+        .getElementById("searchInput")
+        .value
+        .toLowerCase()
+        .trim();
+
+    const brands=document.querySelectorAll(".brand");
+
+    let visible=0;
+
+    brands.forEach(function(brand){
+
+        const text=(
+            brand.dataset.search+
+            " "+
+            brand.innerText
+        ).toLowerCase();
+
+        if(text.includes(value)){
+
+            brand.style.display="block";
+            visible++;
+
+        }else{
+
+            brand.style.display="none";
+
+        }
+
+    });
+
+    document.getElementById("emptyMessage").style.display=
+        visible===0 ? "block" : "none";
+}
+
+function showBrand(name){
+
+    const information={
+
+        "Siemens":`
+            <p><strong>Категории:</strong> CNC, automation, electrical.</p>
+            <p>
+            В WORKER PRO этот раздел может связывать бренд
+            с каталогом продукции, производителями,
+            поставщиками и коммерческими предложениями.
+            </p>
+        `,
+
+        "FANUC":`
+            <p><strong>Категории:</strong> CNC, robotics.</p>
+            <p>
+            Страница бренда может содержать связанные
+            CNC системы, роботов, приводы и комплектующие.
+            </p>
+        `,
+
+        "ABB":`
+            <p><strong>Категории:</strong> automation, electrical, robotics.</p>
+            <p>
+            Здесь в будущем можно показывать продукцию,
+            поставщиков и сервисные центры бренда.
+            </p>
+        `,
+
+        "Bosch Rexroth":`
+            <p><strong>Категории:</strong> hydraulic, automation.</p>
+            <p>
+            Каталог может включать гидравлические насосы,
+            клапаны, приводы и другие компоненты.
+            </p>
+        `,
+
+        "Fronius":`
+            <p><strong>Категория:</strong> welding.</p>
+            <p>
+            В будущем здесь можно разместить сварочное
+            оборудование и предложения поставщиков.
+            </p>
+        `,
+
+        "Schneider Electric":`
+            <p><strong>Категории:</strong> electrical, automation.</p>
+            <p>
+            Раздел может связывать электрические компоненты,
+            автоматизацию и поставщиков.
+            </p>
+        `,
+
+        "Siemens Industrial":`
+            <p><strong>Категории:</strong> electrical, motors, automation.</p>
+            <p>
+            Пользователь сможет перейти к товарам
+            и предложениям поставщиков.
+            </p>
+        `,
+
+        "Parker":`
+            <p><strong>Категории:</strong> hydraulic, pneumatics.</p>
+            <p>
+            В будущем здесь можно отображать гидравлические
+            и пневматические компоненты.
+            </p>
+        `
+    };
+
+    document.getElementById("brandTitle").innerText=name;
+
+    document.getElementById("brandText").innerHTML=
+        information[name] ||
+        "<p>Информация о бренде будет добавлена позже.</p>";
+
+    document.getElementById("brandModal").style.display="block";
+}
+
+function closeBrand(){
+
+    document.getElementById("brandModal").style.display="none";
+
+}
+
+window.onclick=function(event){
+
+    const modal=document.getElementById("brandModal");
+
+    if(event.target===modal){
+        closeBrand();
+    }
+
+};
+
+</script>
+
+</body>
+</html>
