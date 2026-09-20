@@ -1,1 +1,736 @@
- 
+ <!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WORKER PRO — FAQ</title>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f4f7f5;
+    color:#123;
+}
+
+.top-languages{
+    background:#063d25;
+    padding:10px;
+    text-align:center;
+}
+
+.top-languages button{
+    background:#0b6b3d;
+    color:white;
+    border:1px solid #b7ff35;
+    border-radius:8px;
+    padding:8px 12px;
+    margin:3px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.top-languages button:hover{
+    background:#b7ff35;
+    color:#063d25;
+}
+
+header{
+    background:linear-gradient(135deg,#063d25,#0b6b3d);
+    color:white;
+    text-align:center;
+    padding:30px 15px;
+}
+
+header h1{
+    margin:0 0 8px;
+    font-size:32px;
+}
+
+header p{
+    margin:0;
+}
+
+nav{
+    background:#075b34;
+    padding:12px;
+    text-align:center;
+    position:sticky;
+    top:0;
+    z-index:10;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    margin:5px 8px;
+    font-weight:bold;
+    font-size:14px;
+}
+
+nav a:hover{
+    color:#b7ff35;
+}
+
+.container{
+    max-width:1000px;
+    margin:auto;
+    padding:25px 15px;
+}
+
+.hero{
+    background:white;
+    border-radius:16px;
+    padding:30px 20px;
+    text-align:center;
+    box-shadow:0 4px 15px rgba(0,0,0,.08);
+    margin-bottom:25px;
+}
+
+.hero h2{
+    color:#063d25;
+    font-size:30px;
+    margin-top:0;
+}
+
+.hero p{
+    max-width:750px;
+    margin:auto;
+    line-height:1.6;
+}
+
+.search-box{
+    background:white;
+    padding:20px;
+    border-radius:15px;
+    box-shadow:0 3px 12px rgba(0,0,0,.07);
+    margin-bottom:25px;
+}
+
+.search{
+    width:100%;
+    padding:14px;
+    border:2px solid #0b6b3d;
+    border-radius:10px;
+    font-size:16px;
+}
+
+.filters{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:15px;
+}
+
+.filters button{
+    border:0;
+    background:#e5eee9;
+    color:#063d25;
+    padding:10px 15px;
+    border-radius:9px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.filters button:hover,
+.filters button.active{
+    background:#0b6b3d;
+    color:white;
+}
+
+.faq-list{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+
+.faq{
+    background:white;
+    border-radius:13px;
+    box-shadow:0 3px 12px rgba(0,0,0,.07);
+    overflow:hidden;
+    border-left:5px solid #0b6b3d;
+}
+
+.question{
+    width:100%;
+    background:white;
+    border:0;
+    padding:20px;
+    text-align:left;
+    font-size:16px;
+    font-weight:bold;
+    color:#063d25;
+    cursor:pointer;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.question:hover{
+    background:#f0f7f3;
+}
+
+.icon{
+    font-size:22px;
+    color:#0b6b3d;
+}
+
+.answer{
+    display:none;
+    padding:0 20px 20px;
+    line-height:1.7;
+    color:#456;
+}
+
+.answer.open{
+    display:block;
+}
+
+.contact{
+    background:#063d25;
+    color:white;
+    padding:28px;
+    border-radius:15px;
+    margin-top:30px;
+    line-height:1.7;
+}
+
+.contact h2{
+    color:#b7ff35;
+}
+
+.links{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:20px;
+}
+
+.links a{
+    background:#b7ff35;
+    color:#063d25;
+    padding:11px 15px;
+    border-radius:9px;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+footer{
+    background:#063d25;
+    color:white;
+    text-align:center;
+    padding:25px;
+    margin-top:35px;
+}
+
+@media(max-width:600px){
+    header h1{
+        font-size:26px;
+    }
+
+    .hero h2{
+        font-size:24px;
+    }
+
+    nav a{
+        display:inline-block;
+        margin:4px;
+    }
+
+    .question{
+        font-size:15px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="top-languages">
+    <button onclick="setLanguage('AZ')">AZ</button>
+    <button onclick="setLanguage('RU')">RU</button>
+    <button onclick="setLanguage('EN')">EN</button>
+    <button onclick="setLanguage('TR')">TR</button>
+    <button onclick="setLanguage('DE')">DE</button>
+    <button onclick="setLanguage('AR')">AR</button>
+    <button onclick="setLanguage('ES')">ES</button>
+    <button onclick="setLanguage('FR')">FR</button>
+    <button onclick="setLanguage('IT')">IT</button>
+</div>
+
+<header>
+    <h1>WORKER PRO</h1>
+    <p>Часто задаваемые вопросы</p>
+</header>
+
+<nav>
+    <a href="../index.html">Главная</a>
+    <a href="../about/">О платформе</a>
+    <a href="../catalog/">Каталог</a>
+    <a href="../products/">Товары</a>
+    <a href="../companies/">Компании</a>
+    <a href="../manufacturers/">Производители</a>
+    <a href="../suppliers/">Поставщики</a>
+    <a href="../specialists/">Специалисты</a>
+    <a href="../training/">Обучение</a>
+    <a href="../contact/">Контакты</a>
+</nav>
+
+<div class="container">
+
+<section class="hero">
+
+    <h2>FAQ — Помощь</h2>
+
+    <p>
+        Здесь собраны основные вопросы о WORKER PRO,
+        регистрации, товарах, компаниях, специалистах,
+        запросах, заказах, доставке и обучении.
+    </p>
+
+</section>
+
+
+<section class="search-box">
+
+    <input
+        id="search"
+        class="search"
+        type="text"
+        placeholder="Поиск вопроса..."
+        onkeyup="searchFAQ()"
+    >
+
+    <div class="filters">
+
+        <button
+            class="active"
+            onclick="filterFAQ('all',this)">
+            Все
+        </button>
+
+        <button
+            onclick="filterFAQ('platform',this)">
+            Платформа
+        </button>
+
+        <button
+            onclick="filterFAQ('account',this)">
+            Аккаунт
+        </button>
+
+        <button
+            onclick="filterFAQ('products',this)">
+            Товары
+        </button>
+
+        <button
+            onclick="filterFAQ('business',this)">
+            Бизнес
+        </button>
+
+        <button
+            onclick="filterFAQ('training',this)">
+            Обучение
+        </button>
+
+        <button
+            onclick="filterFAQ('delivery',this)">
+            Доставка
+        </button>
+
+    </div>
+
+</section>
+
+
+<section class="faq-list" id="faqList">
+
+
+<div class="faq" data-category="platform">
+
+    <button class="question" onclick="toggleFAQ(this)">
+        Что такое WORKER PRO?
+        <span class="icon">+</span>
+    </button>
+
+    <div class="answer">
+        WORKER PRO — международная промышленная платформа,
+        которая объединяет специалистов, производителей,
+        поставщиков, компании, промышленные товары,
+        обучение и логистику.
+    </div>
+
+</div>
+
+
+<div class="faq" data-category="account">
+
+    <button class="question" onclick="toggleFAQ(this)">
+        Кто может зарегистрироваться?
+        <span class="icon">+</span>
+    </button>
+
+    <div class="answer">
+        Зарегистрироваться смогут специалисты, рабочие,
+        инженеры, компании, производители, поставщики,
+        сервисные центры и другие участники промышленного рынка.
+    </div>
+
+</div>
+
+
+<div class="faq" data-category="account">
+
+    <button class="question" onclick="toggleFAQ(this)">
+        Можно ли выбрать страну и язык?
+        <span class="icon">+</span>
+    </button>
+
+    <div class="answer">
+        Да. WORKER PRO рассчитан на международное использование.
+        Пользователь сможет выбрать язык и страну и получать
+        соответствующую информацию.
+    </div>
+
+</div>
+
+
+<div class="faq" data-category="products">
+
+    <button class="question" onclick="toggleFAQ(this)">
+        Можно ли найти промышленную запчасть?
+        <span class="icon">+</span>
+    </button>
+
+    <div class="answer">
+        Да. В каталоге можно будет искать оборудование,
+        запчасти, насосы, клапаны, подшипники, датчики,
+        инструменты и другие промышленные товары.
+    </div>
+
+</div>
+
+
+<div class="faq" data-category="business">
+
+    <button class="question" onclick="toggleFAQ(this)">
+        Как найти поставщика?
+        <span class="icon">+</span>
+    </button>
+
+    <div class="answer">
+        Пользователь сможет найти товар или компанию,
+        открыть профиль поставщика, отправить запрос
+        и получить предложение с ценой и условиями.
+    </div>
+
+</div>
+
+
+<div class="faq" data-category="business">
+
+    <button class="question" onclick="toggleFAQ(this)">
+        Можно ли зарегистрировать свою компанию?
+        <span class="icon">+</span>
+    </button>
+
+    <div class="answer">
+        Да. В будущей полной версии компании смогут создать
+        профиль, добавить товары, указать страну и город,
+        показать производственные возможности и принимать
+        запросы от покупателей.
+    </div>
+
+</div>
+
+
+<div class="faq" data-category="products">
+
+    <button class="question" onclick="toggleFAQ(this)">
+        Как отправить запрос на товар?
+        <span class="icon">+</span>
+    </button>
+
+    <div class="answer">
+        Покупатель указывает необходимый товар или запчасть,
+        количество, технические требования и условия.
+        После этого запрос может быть отправлен поставщикам.
+    </div>
+
+</div>
+
+
+<div class="faq" data-category="business">
+
+    <button class="question" onclick="toggleFAQ(this)">
+        Что происходит после получения предложения?
+        <span class="icon">+</span>
+    </button>
+
+    <div class="answer">
+        Покупатель сможет сравнить условия предложения,
+        связаться с поставщиком, согласовать детали,
+        оформить заказ и перейти к заключению сделки.
+    </div>
+
+</div>
+
+
+<div class="faq" data-category="delivery">
+
+    <button class="question" onclick="toggleFAQ(this)">
+        Можно ли организовать международную доставку?
+        <span class="icon">+</span>
+    </button>
+
+    <div class="answer">
+        Да. В концепции WORKER PRO предусмотрена организация
+        местной и международной перевозки после оформления
+        промышленной сделки.
+    </div>
+
+</div>
+
+
+<div class="faq" data-category="delivery">
+
+    <button class="question" onclick="toggleFAQ(this)">
+        Можно ли отслеживать груз?
+        <span class="icon">+</span>
+    </button>
+
+    <div class="answer">
+        Да. Раздел Tracking предназначен для отслеживания
+        заказа и перевозки. В полной версии сюда можно будет
+        подключить данные транспортных компаний и GPS.
+    </div>
+
+</div>
+
+
+<div class="faq" data-category="training">
+
+    <button class="question" onclick="toggleFAQ(this)">
+        Есть ли обучение?
+        <span class="icon">+</span>
+    </button>
+
+    <div class="answer">
+        Да. WORKER PRO включает направление обучения:
+        производство, технологии, безопасность, оборудование,
+        английский для работников и профессиональные курсы.
+    </div>
+
+</div>
+
+
+<div class="faq" data-category="training">
+
+    <button class="question" onclick="toggleFAQ(this)">
+        Можно ли получить сертификат?
+        <span class="icon">+</span>
+    </button>
+
+    <div class="answer">
+        Раздел Certificates предназначен для профессиональных
+        сертификатов и подтверждения квалификации специалистов.
+        В полной версии сертификаты смогут проходить проверку.
+    </div>
+
+</div>
+
+
+<div class="faq" data-category="platform">
+
+    <button class="question" onclick="toggleFAQ(this)">
+        WORKER PRO будет работать только в Азербайджане?
+        <span class="icon">+</span>
+    </button>
+
+    <div class="answer">
+        Нет. Концепция платформы международная. Пользователь
+        сможет искать специалистов, компании, производителей,
+        поставщиков и товары в разных странах.
+    </div>
+
+</div>
+
+
+<div class="faq" data-category="platform">
+
+    <button class="question" onclick="toggleFAQ(this)">
+        Это уже полноценная торговая площадка?
+        <span class="icon">+</span>
+    </button>
+
+    <div class="answer">
+        Сейчас сайт является развивающимся демо-проектом.
+        Структура уже подготовлена под будущую систему
+        каталогов, запросов, предложений, заказов,
+        контрактов, оплаты и логистики.
+    </div>
+
+</div>
+
+
+<div class="faq" data-category="account">
+
+    <button class="question" onclick="toggleFAQ(this)">
+        Как связаться с WORKER PRO?
+        <span class="icon">+</span>
+    </button>
+
+    <div class="answer">
+        Для связи используйте раздел Contact. В будущей
+        серверной версии обращения будут сохраняться
+        в системе поддержки пользователя.
+    </div>
+
+</div>
+
+
+</section>
+
+
+<section class="contact">
+
+    <h2>Не нашли ответ?</h2>
+
+    <p>
+        Если вашего вопроса нет в списке, отправьте обращение
+        через раздел контактов или поддержки.
+    </p>
+
+    <div class="links">
+
+        <a href="../contact/">Связаться с нами</a>
+
+        <a href="../support/">Поддержка</a>
+
+        <a href="../help/">Помощь</a>
+
+        <a href="../training/">Обучение</a>
+
+        <a href="../index.html">Главная</a>
+
+    </div>
+
+</section>
+
+</div>
+
+
+<footer>
+    WORKER PRO © 2026<br>
+    Industrial Platform — Production • Skills • Companies • Trade • Logistics
+</footer>
+
+
+<script src="../language.js"></script>
+
+<script>
+
+let currentFilter = "all";
+
+
+function toggleFAQ(button){
+
+    const answer =
+        button.nextElementSibling;
+
+    const icon =
+        button.querySelector(".icon");
+
+    if(answer.classList.contains("open")){
+
+        answer.classList.remove("open");
+
+        icon.innerText = "+";
+
+    }else{
+
+        answer.classList.add("open");
+
+        icon.innerText = "−";
+
+    }
+
+}
+
+
+function filterFAQ(category,button){
+
+    currentFilter = category;
+
+    document
+        .querySelectorAll(".filters button")
+        .forEach(function(btn){
+
+            btn.classList.remove("active");
+
+        });
+
+    button.classList.add("active");
+
+    applyFAQFilters();
+
+}
+
+
+function searchFAQ(){
+
+    applyFAQFilters();
+
+}
+
+
+function applyFAQFilters(){
+
+    const search =
+        document
+        .getElementById("search")
+        .value
+        .toLowerCase();
+
+    document
+        .querySelectorAll(".faq")
+        .forEach(function(item){
+
+            const text =
+                item.innerText.toLowerCase();
+
+            const category =
+                item.getAttribute("data-category");
+
+            const searchMatch =
+                text.includes(search);
+
+            const categoryMatch =
+                currentFilter === "all" ||
+                category === currentFilter;
+
+            if(searchMatch && categoryMatch){
+
+                item.style.display = "block";
+
+            }else{
+
+                item.style.display = "none";
+
+            }
+
+        });
+
+}
+
+</script>
+
+</body>
+</html>
