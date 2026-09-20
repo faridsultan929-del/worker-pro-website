@@ -1,1 +1,1079 @@
- 
+ <!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WORKER PRO — Payments</title>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f4f7f5;
+    color:#123;
+}
+
+.top-languages{
+    background:#063d25;
+    padding:10px;
+    text-align:center;
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+.top-languages a{
+    display:inline-block;
+    color:white;
+    text-decoration:none;
+    padding:8px 11px;
+    margin:3px;
+    border-radius:7px;
+    background:#0b6b3d;
+    font-weight:bold;
+    font-size:14px;
+}
+
+.top-languages a:hover{
+    background:#b7ff35;
+    color:#063d25;
+}
+
+header{
+    background:#075b34;
+    color:white;
+    text-align:center;
+    padding:28px 15px;
+}
+
+header h1{
+    margin:0 0 8px;
+    font-size:32px;
+}
+
+header p{
+    margin:0;
+    font-size:17px;
+}
+
+nav{
+    background:#063d25;
+    padding:12px;
+    text-align:center;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    margin:5px 8px;
+    font-size:14px;
+}
+
+nav a:hover{
+    color:#b7ff35;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+    padding:20px;
+}
+
+.hero{
+    background:white;
+    padding:30px;
+    border-radius:16px;
+    text-align:center;
+    box-shadow:0 3px 12px rgba(0,0,0,.08);
+}
+
+.hero h2{
+    color:#075b34;
+    margin-top:0;
+    font-size:28px;
+}
+
+.hero p{
+    font-size:17px;
+    line-height:1.6;
+}
+
+.section-title{
+    color:#075b34;
+    margin-top:38px;
+    margin-bottom:18px;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:18px;
+}
+
+.card{
+    background:white;
+    padding:22px;
+    border-radius:14px;
+    box-shadow:0 3px 10px rgba(0,0,0,.07);
+}
+
+.card h3{
+    color:#075b34;
+    margin-top:0;
+}
+
+.price{
+    font-size:28px;
+    font-weight:bold;
+    color:#075b34;
+    margin:15px 0;
+}
+
+.badge{
+    display:inline-block;
+    padding:5px 10px;
+    border-radius:6px;
+    background:#b7ff35;
+    color:#063d25;
+    font-size:12px;
+    font-weight:bold;
+}
+
+button{
+    background:#0b6b3d;
+    color:white;
+    border:0;
+    padding:12px 20px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+button:hover{
+    background:#063d25;
+}
+
+.full{
+    width:100%;
+}
+
+.currency{
+    text-align:center;
+    margin:25px 0;
+}
+
+.currency button{
+    margin:4px;
+}
+
+.currency button.active{
+    background:#b7ff35;
+    color:#063d25;
+}
+
+.payment-method{
+    border:2px solid #e3e8e5;
+    transition:.2s;
+}
+
+.payment-method:hover{
+    border-color:#0b6b3d;
+}
+
+.payment-method.selected{
+    border-color:#0b6b3d;
+    background:#f0f9f4;
+}
+
+.icon{
+    font-size:35px;
+    margin-bottom:10px;
+}
+
+.form-box{
+    background:white;
+    padding:25px;
+    border-radius:14px;
+    box-shadow:0 3px 10px rgba(0,0,0,.07);
+}
+
+.form-box label{
+    display:block;
+    font-weight:bold;
+    margin-top:10px;
+}
+
+.form-box input,
+.form-box select{
+    width:100%;
+    padding:13px;
+    margin:7px 0 12px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    font-size:15px;
+}
+
+.summary{
+    background:#075b34;
+    color:white;
+    padding:22px;
+    border-radius:12px;
+    margin-top:18px;
+}
+
+.summary strong{
+    color:#b7ff35;
+}
+
+.table-box{
+    width:100%;
+    overflow-x:auto;
+    background:white;
+    border-radius:14px;
+    box-shadow:0 3px 10px rgba(0,0,0,.07);
+}
+
+table{
+    width:100%;
+    min-width:750px;
+    border-collapse:collapse;
+}
+
+th,td{
+    padding:14px;
+    border-bottom:1px solid #ddd;
+    text-align:center;
+}
+
+th{
+    background:#075b34;
+    color:white;
+}
+
+.status-paid{
+    color:#075b34;
+    font-weight:bold;
+}
+
+.status-pending{
+    color:#b37b00;
+    font-weight:bold;
+}
+
+.status-cancelled{
+    color:#b00020;
+    font-weight:bold;
+}
+
+.workflow{
+    counter-reset:step;
+}
+
+.step{
+    background:white;
+    padding:18px 18px 18px 58px;
+    margin:12px 0;
+    border-radius:10px;
+    position:relative;
+    box-shadow:0 2px 7px rgba(0,0,0,.06);
+}
+
+.step:before{
+    counter-increment:step;
+    content:counter(step);
+    position:absolute;
+    left:15px;
+    top:15px;
+    width:30px;
+    height:30px;
+    border-radius:50%;
+    background:#0b6b3d;
+    color:white;
+    text-align:center;
+    line-height:30px;
+    font-weight:bold;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
+    gap:15px;
+}
+
+.stat{
+    background:#075b34;
+    color:white;
+    padding:20px;
+    border-radius:12px;
+    text-align:center;
+}
+
+.stat strong{
+    display:block;
+    color:#b7ff35;
+    font-size:28px;
+    margin-bottom:6px;
+}
+
+.warning{
+    margin-top:25px;
+    padding:18px;
+    background:#fff8d8;
+    border-left:5px solid #e0b400;
+    border-radius:8px;
+}
+
+footer{
+    margin-top:40px;
+    background:#063d25;
+    color:white;
+    text-align:center;
+    padding:25px;
+}
+
+@media(max-width:600px){
+
+    header h1{
+        font-size:25px;
+    }
+
+    nav{
+        padding:10px 5px;
+    }
+
+    nav a{
+        font-size:13px;
+        margin:4px;
+    }
+
+    .container{
+        padding:12px;
+    }
+
+    .hero{
+        padding:20px;
+    }
+
+    .hero h2{
+        font-size:23px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="top-languages">
+    <a href="#">AZ</a>
+    <a href="#">RU</a>
+    <a href="#">EN</a>
+    <a href="#">TR</a>
+    <a href="#">DE</a>
+    <a href="#">AR</a>
+    <a href="#">ES</a>
+    <a href="#">FR</a>
+    <a href="#">IT</a>
+</div>
+
+<header>
+    <h1>WORKER PRO</h1>
+    <p>Платежи и финансовые операции платформы</p>
+</header>
+
+<nav>
+    <a href="../index.html">Главная</a>
+    <a href="../pricing/index.html">Тарифы</a>
+    <a href="../subscriptions/index.html">Подписки</a>
+    <a href="../advertising/index.html">Реклама</a>
+    <a href="../companies/index.html">Компании</a>
+    <a href="../products/index.html">Товары</a>
+    <a href="../requests/index.html">Заявки</a>
+    <a href="../offers/index.html">Предложения</a>
+    <a href="../orders/index.html">Заказы</a>
+    <a href="../dashboard/index.html">Dashboard</a>
+</nav>
+
+<div class="container">
+
+<section class="hero">
+
+    <h2>Платежи WORKER PRO</h2>
+
+    <p>
+        В будущем пользователи смогут оплачивать подписки,
+        рекламу, продвижение и другие профессиональные услуги
+        непосредственно через платформу WORKER PRO.
+    </p>
+
+    <div class="currency">
+
+        <button id="aznBtn"
+                class="active"
+                onclick="changeCurrency('AZN')">
+            AZN
+        </button>
+
+        <button id="usdBtn"
+                onclick="changeCurrency('USD')">
+            USD
+        </button>
+
+        <button id="eurBtn"
+                onclick="changeCurrency('EUR')">
+            EUR
+        </button>
+
+        <button id="tryBtn"
+                onclick="changeCurrency('TRY')">
+            TRY
+        </button>
+
+    </div>
+
+</section>
+
+
+<h2 class="section-title">Что можно оплачивать</h2>
+
+<div class="grid">
+
+    <div class="card">
+        <div class="icon">⭐</div>
+        <h3>Подписки</h3>
+        <p>
+            Specialist, Company, Supplier,
+            Manufacturer и Professional.
+        </p>
+    </div>
+
+    <div class="card">
+        <div class="icon">📢</div>
+        <h3>Реклама</h3>
+        <p>
+            Продвижение компании, товаров,
+            оборудования и услуг.
+        </p>
+    </div>
+
+    <div class="card">
+        <div class="icon">🚀</div>
+        <h3>Premium продвижение</h3>
+        <p>
+            Выделенное размещение профиля,
+            товара или рекламной кампании.
+        </p>
+    </div>
+
+    <div class="card">
+        <div class="icon">🎓</div>
+        <h3>Обучение</h3>
+        <p>
+            Будущие платные профессиональные
+            курсы и программы обучения.
+        </p>
+    </div>
+
+</div>
+
+
+<h2 class="section-title">Способы оплаты</h2>
+
+<div class="grid">
+
+    <div class="card payment-method"
+         onclick="selectPayment(this,'Банковская карта')">
+
+        <div class="icon">💳</div>
+
+        <h3>Банковская карта</h3>
+
+        <p>
+            Visa / Mastercard и другие поддерживаемые карты.
+        </p>
+
+        <button>
+            Выбрать
+        </button>
+
+    </div>
+
+
+    <div class="card payment-method"
+         onclick="selectPayment(this,'Банковский перевод')">
+
+        <div class="icon">🏦</div>
+
+        <h3>Банковский перевод</h3>
+
+        <p>
+            Оплата через банковский счёт компании.
+        </p>
+
+        <button>
+            Выбрать
+        </button>
+
+    </div>
+
+
+    <div class="card payment-method"
+         onclick="selectPayment(this,'Электронный кошелёк')">
+
+        <div class="icon">📱</div>
+
+        <h3>Электронный кошелёк</h3>
+
+        <p>
+            Поддержка электронных платёжных сервисов
+            в будущем.
+        </p>
+
+        <button>
+            Выбрать
+        </button>
+
+    </div>
+
+
+    <div class="card payment-method"
+         onclick="selectPayment(this,'Корпоративная оплата')">
+
+        <div class="icon">🏢</div>
+
+        <h3>Корпоративная оплата</h3>
+
+        <p>
+            Специальный способ оплаты для промышленных компаний.
+        </p>
+
+        <button>
+            Выбрать
+        </button>
+
+    </div>
+
+</div>
+
+
+<h2 class="section-title">Демо-платёж</h2>
+
+<div class="form-box">
+
+    <label>Пользователь или компания</label>
+
+    <input
+        type="text"
+        id="customer"
+        placeholder="Введите имя или название компании"
+    >
+
+    <label>Что оплачивается?</label>
+
+    <select id="paymentType"
+            onchange="updatePrice()">
+
+        <option value="5">
+            Specialist — подписка
+        </option>
+
+        <option value="15">
+            Company — подписка
+        </option>
+
+        <option value="20">
+            Supplier — подписка
+        </option>
+
+        <option value="25">
+            Manufacturer — подписка
+        </option>
+
+        <option value="35">
+            Professional — подписка
+        </option>
+
+        <option value="5">
+            Basic Advertising
+        </option>
+
+        <option value="15">
+            Business Advertising
+        </option>
+
+        <option value="30">
+            Premium Advertising
+        </option>
+
+    </select>
+
+    <label>Период</label>
+
+    <select id="period"
+            onchange="updatePrice()">
+
+        <option value="1">
+            1 месяц
+        </option>
+
+        <option value="12">
+            12 месяцев
+        </option>
+
+    </select>
+
+    <div class="summary">
+
+        <p>
+            Валюта:
+            <strong id="summaryCurrency">
+                AZN
+            </strong>
+        </p>
+
+        <p>
+            Сумма:
+            <strong id="summaryPrice">
+                5 AZN
+            </strong>
+        </p>
+
+        <p>
+            Статус:
+            <strong>Демо</strong>
+        </p>
+
+    </div>
+
+    <br>
+
+    <button class="full"
+            onclick="makePayment()">
+
+        Перейти к оплате
+
+    </button>
+
+</div>
+
+
+<h2 class="section-title">История платежей</h2>
+
+<div class="table-box">
+
+<table>
+
+<thead>
+
+<tr>
+    <th>ID</th>
+    <th>Дата</th>
+    <th>Операция</th>
+    <th>Сумма</th>
+    <th>Валюта</th>
+    <th>Статус</th>
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+    <td>WP-1001</td>
+    <td>18.09.2026</td>
+    <td>Company Subscription</td>
+    <td>15</td>
+    <td>AZN</td>
+    <td class="status-paid">Оплачено</td>
+</tr>
+
+<tr>
+    <td>WP-1002</td>
+    <td>17.09.2026</td>
+    <td>Business Advertising</td>
+    <td>15</td>
+    <td>AZN</td>
+    <td class="status-paid">Оплачено</td>
+</tr>
+
+<tr>
+    <td>WP-1003</td>
+    <td>16.09.2026</td>
+    <td>Manufacturer Subscription</td>
+    <td>25</td>
+    <td>AZN</td>
+    <td class="status-pending">Ожидает</td>
+</tr>
+
+<tr>
+    <td>WP-1004</td>
+    <td>15.09.2026</td>
+    <td>Premium Advertising</td>
+    <td>30</td>
+    <td>AZN</td>
+    <td class="status-cancelled">Отменено</td>
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+
+<h2 class="section-title">Статистика платежей</h2>
+
+<div class="stats">
+
+    <div class="stat">
+        <strong>1,240</strong>
+        Платежей
+    </div>
+
+    <div class="stat">
+        <strong>860</strong>
+        Подписок
+    </div>
+
+    <div class="stat">
+        <strong>270</strong>
+        Реклам
+    </div>
+
+    <div class="stat">
+        <strong>110</strong>
+        Других операций
+    </div>
+
+</div>
+
+
+<h2 class="section-title">Как работает оплата</h2>
+
+<div class="workflow">
+
+    <div class="step">
+        <strong>Выбор услуги</strong><br>
+        Пользователь выбирает подписку, рекламу или другую услугу.
+    </div>
+
+    <div class="step">
+        <strong>Выбор валюты</strong><br>
+        Пользователь выбирает доступную валюту оплаты.
+    </div>
+
+    <div class="step">
+        <strong>Выбор способа оплаты</strong><br>
+        Карта, банковский перевод или другой доступный способ.
+    </div>
+
+    <div class="step">
+        <strong>Проверка заказа</strong><br>
+        Система показывает услугу, период и сумму.
+    </div>
+
+    <div class="step">
+        <strong>Оплата</strong><br>
+        В будущем платёж будет обработан платёжной системой.
+    </div>
+
+    <div class="step">
+        <strong>Подтверждение</strong><br>
+        Пользователь получает подтверждение операции.
+    </div>
+
+    <div class="step">
+        <strong>Активация</strong><br>
+        Подписка или оплаченная услуга становится активной.
+    </div>
+
+</div>
+
+
+<h2 class="section-title">Безопасность платежей</h2>
+
+<div class="grid">
+
+    <div class="card">
+        <h3>🔐 Защита данных</h3>
+        <p>
+            Платёжные данные должны обрабатываться
+            через защищённую платёжную систему.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>🧾 История операций</h3>
+        <p>
+            Пользователь сможет просматривать историю
+            своих платежей и получать подтверждения.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>🔔 Уведомления</h3>
+        <p>
+            Будущая система сможет отправлять уведомления
+            об успешных и неуспешных платежах.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>↩️ Возвраты</h3>
+        <p>
+            В будущем можно будет реализовать систему
+            возврата средств согласно правилам платформы.
+        </p>
+    </div>
+
+</div>
+
+
+<h2 class="section-title">Будущая финансовая система</h2>
+
+<div class="grid">
+
+    <div class="card">
+        <h3>💳 Онлайн-эквайринг</h3>
+        <p>
+            Подключение реального платёжного провайдера.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>🌍 Международные платежи</h3>
+        <p>
+            Возможность принимать платежи
+            от пользователей разных стран.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>🔄 Автоплатежи</h3>
+        <p>
+            Автоматическое продление подписки
+            по желанию пользователя.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>📊 Финансовая аналитика</h3>
+        <p>
+            Доходы, подписки, реклама, комиссии
+            и другие показатели платформы.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>🏢 Корпоративные счета</h3>
+        <p>
+            Управление платежами крупных компаний
+            и корпоративными аккаунтами.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>🧾 Электронные документы</h3>
+        <p>
+            Будущая генерация счетов,
+            квитанций и платёжных документов.
+        </p>
+    </div>
+
+</div>
+
+
+<div class="warning">
+
+<strong>Демо-версия:</strong><br>
+
+Эта страница не выполняет реальные денежные операции.
+Кнопки и платежные формы являются демонстрационными.
+Для настоящих платежей в будущем потребуется серверная
+часть, база данных и подключение официального платёжного
+провайдера.
+
+</div>
+
+</div>
+
+
+<footer>
+
+<strong>WORKER PRO</strong><br>
+
+Международная промышленная платформа
+
+<br><br>
+
+Pricing • Subscriptions • Advertising • Payments
+
+<br><br>
+
+© WORKER PRO — F.S
+
+</footer>
+
+
+<script src="../language.js"></script>
+
+<script>
+
+let currentCurrency = "AZN";
+let selectedPayment = "";
+
+const rates = {
+    AZN: 1,
+    USD: 0.588,
+    EUR: 0.545,
+    TRY: 26.7
+};
+
+function changeCurrency(currency){
+
+    currentCurrency = currency;
+
+    document.querySelectorAll(".currency button")
+        .forEach(function(button){
+            button.classList.remove("active");
+        });
+
+    if(currency === "AZN"){
+        document.getElementById("aznBtn")
+            .classList.add("active");
+    }
+
+    if(currency === "USD"){
+        document.getElementById("usdBtn")
+            .classList.add("active");
+    }
+
+    if(currency === "EUR"){
+        document.getElementById("eurBtn")
+            .classList.add("active");
+    }
+
+    if(currency === "TRY"){
+        document.getElementById("tryBtn")
+            .classList.add("active");
+    }
+
+    updatePrice();
+}
+
+function updatePrice(){
+
+    const select =
+        document.getElementById("paymentType");
+
+    const period =
+        document.getElementById("period");
+
+    const basePrice =
+        parseFloat(select.value);
+
+    const months =
+        parseInt(period.value);
+
+    let total;
+
+    if(months === 12){
+        total = basePrice * 10.5;
+    }else{
+        total = basePrice;
+    }
+
+    const converted =
+        total * rates[currentCurrency];
+
+    document.getElementById("summaryCurrency")
+        .textContent = currentCurrency;
+
+    document.getElementById("summaryPrice")
+        .textContent =
+        converted.toFixed(2) +
+        " " +
+        currentCurrency;
+}
+
+function selectPayment(element, method){
+
+    document.querySelectorAll(".payment-method")
+        .forEach(function(card){
+            card.classList.remove("selected");
+        });
+
+    element.classList.add("selected");
+
+    selectedPayment = method;
+
+    alert(
+        "Выбран способ оплаты:\n\n" +
+        method +
+        "\n\n" +
+        "Сейчас работает демо-режим."
+    );
+}
+
+function makePayment(){
+
+    const customer =
+        document.getElementById("customer")
+        .value.trim();
+
+    const paymentType =
+        document.getElementById("paymentType");
+
+    const selectedText =
+        paymentType.options[
+            paymentType.selectedIndex
+        ].text;
+
+    const period =
+        document.getElementById("period");
+
+    const periodText =
+        period.options[
+            period.selectedIndex
+        ].text;
+
+    if(!customer){
+
+        alert(
+            "Введите имя пользователя " +
+            "или название компании."
+        );
+
+        return;
+    }
+
+    if(!selectedPayment){
+
+        alert(
+            "Сначала выберите способ оплаты."
+        );
+
+        return;
+    }
+
+    alert(
+        "Платёж подготовлен!\n\n" +
+        "Пользователь: " + customer +
+        "\nУслуга: " + selectedText +
+        "\nПериод: " + periodText +
+        "\nВалюта: " + currentCurrency +
+        "\nСпособ: " + selectedPayment +
+        "\n\nДемо-режим — деньги не списываются."
+    );
+}
+
+updatePrice();
+
+</script>
+
+</body>
+</html>
