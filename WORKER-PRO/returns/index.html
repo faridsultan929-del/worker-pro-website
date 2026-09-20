@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WORKER PRO — Returns</title>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f4f7f5;
+    color:#123;
+}
+
+.top-languages{
+    background:#063d25;
+    padding:10px;
+    text-align:center;
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+.top-languages button{
+    background:#0b6b3d;
+    color:white;
+    border:1px solid #b7ff35;
+    border-radius:8px;
+    padding:8px 11px;
+    margin:3px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.top-languages button:hover{
+    background:#b7ff35;
+    color:#063d25;
+}
+
+header{
+    background:linear-gradient(135deg,#063d25,#0b6b3d);
+    color:white;
+    padding:35px 20px;
+    text-align:center;
+}
+
+header h1{
+    margin:0 0 10px;
+    font-size:34px;
+}
+
+header p{
+    max-width:900px;
+    margin:auto;
+    font-size:17px;
+    line-height:1.6;
+}
+
+nav{
+    background:#075b34;
+    padding:12px;
+    text-align:center;
+    position:sticky;
+    top:58px;
+    z-index:999;
+    overflow-x:auto;
+    white-space:nowrap;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    display:inline-block;
+    margin:4px;
+    padding:9px 13px;
+    border-radius:7px;
+    background:#0b6b3d;
+    font-size:14px;
+}
+
+nav a:hover{
+    background:#b7ff35;
+    color:#063d25;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+    padding:25px 15px;
+}
+
+.hero{
+    background:white;
+    border-radius:15px;
+    padding:25px;
+    box-shadow:0 3px 12px rgba(0,0,0,.08);
+    margin-bottom:25px;
+    border-left:6px solid #0b6b3d;
+}
+
+.hero h2{
+    color:#063d25;
+    margin-top:0;
+}
+
+.hero p{
+    line-height:1.7;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
+    gap:15px;
+    margin-bottom:25px;
+}
+
+.stat{
+    background:white;
+    padding:20px;
+    border-radius:14px;
+    text-align:center;
+    box-shadow:0 3px 10px rgba(0,0,0,.07);
+}
+
+.stat .number{
+    font-size:30px;
+    font-weight:bold;
+    color:#0b6b3d;
+}
+
+.stat span{
+    display:block;
+    margin-top:8px;
+    font-weight:bold;
+}
+
+.search-box{
+    background:white;
+    padding:20px;
+    border-radius:14px;
+    margin-bottom:25px;
+    box-shadow:0 3px 10px rgba(0,0,0,.07);
+}
+
+.search-box input{
+    width:100%;
+    padding:13px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    font-size:16px;
+    margin-bottom:12px;
+}
+
+.filters{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+}
+
+.filters button{
+    border:0;
+    background:#e8f1ec;
+    color:#063d25;
+    padding:10px 14px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.filters button.active,
+.filters button:hover{
+    background:#0b6b3d;
+    color:white;
+}
+
+.section-title{
+    color:#063d25;
+    margin:30px 0 15px;
+}
+
+.returns-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(290px,1fr));
+    gap:18px;
+}
+
+.return-card{
+    background:white;
+    border-radius:15px;
+    padding:20px;
+    box-shadow:0 3px 12px rgba(0,0,0,.08);
+    border-top:5px solid #0b6b3d;
+}
+
+.return-card h3{
+    color:#063d25;
+    margin-top:0;
+}
+
+.return-card p{
+    line-height:1.55;
+}
+
+.badge{
+    display:inline-block;
+    padding:6px 10px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:bold;
+    margin-bottom:10px;
+    background:#e8f5ed;
+    color:#075b34;
+}
+
+.badge.review{
+    background:#fff3cd;
+    color:#856404;
+}
+
+.badge.processing{
+    background:#dceeff;
+    color:#075b80;
+}
+
+.badge.completed{
+    background:#d9f7df;
+    color:#176b2d;
+}
+
+.badge.rejected{
+    background:#ffe0e0;
+    color:#9b2226;
+}
+
+.card-buttons{
+    margin-top:15px;
+}
+
+.card-buttons button,
+.primary-btn{
+    border:0;
+    background:#0b6b3d;
+    color:white;
+    padding:10px 15px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.card-buttons button:hover,
+.primary-btn:hover{
+    background:#063d25;
+}
+
+.return-types{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+    gap:15px;
+}
+
+.type-card{
+    background:white;
+    padding:20px;
+    border-radius:14px;
+    text-align:center;
+    box-shadow:0 3px 10px rgba(0,0,0,.07);
+}
+
+.type-card .icon{
+    font-size:38px;
+    margin-bottom:10px;
+}
+
+.type-card h3{
+    color:#063d25;
+}
+
+.workflow{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+    gap:12px;
+    margin-top:20px;
+}
+
+.step{
+    background:#063d25;
+    color:white;
+    padding:18px 12px;
+    border-radius:12px;
+    text-align:center;
+}
+
+.step strong{
+    display:block;
+    color:#b7ff35;
+    font-size:20px;
+    margin-bottom:8px;
+}
+
+.form-box{
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 3px 12px rgba(0,0,0,.08);
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:15px;
+}
+
+.form-group{
+    display:flex;
+    flex-direction:column;
+}
+
+.form-group label{
+    font-weight:bold;
+    margin-bottom:6px;
+    color:#063d25;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea{
+    padding:12px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    font-size:15px;
+}
+
+.form-group textarea{
+    min-height:110px;
+    resize:vertical;
+}
+
+.full{
+    grid-column:1/-1;
+}
+
+.quick-links{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:12px;
+}
+
+.quick-links a{
+    text-decoration:none;
+    background:white;
+    color:#063d25;
+    padding:17px;
+    border-radius:12px;
+    box-shadow:0 3px 10px rgba(0,0,0,.07);
+    font-weight:bold;
+    text-align:center;
+}
+
+.quick-links a:hover{
+    background:#0b6b3d;
+    color:white;
+}
+
+.future{
+    background:#063d25;
+    color:white;
+    border-radius:15px;
+    padding:25px;
+}
+
+.future li{
+    margin:10px 0;
+}
+
+.demo-warning{
+    background:#fff4d6;
+    color:#664d03;
+    border:1px solid #e6c767;
+    padding:16px;
+    border-radius:10px;
+    margin-top:25px;
+}
+
+footer{
+    background:#063d25;
+    color:white;
+    text-align:center;
+    padding:30px 15px;
+    margin-top:40px;
+}
+
+@media(max-width:600px){
+    header h1{
+        font-size:27px;
+    }
+
+    header p{
+        font-size:15px;
+    }
+
+    nav{
+        top:58px;
+    }
+
+    .container{
+        padding:18px 10px;
+    }
+
+    .hero,
+    .form-box{
+        padding:18px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="top-languages">
+    <button onclick="setLanguage('AZ')">🇦🇿 AZ</button>
+    <button onclick="setLanguage('RU')">🇷🇺 RU</button>
+    <button onclick="setLanguage('EN')">🇬🇧 EN</button>
+    <button onclick="setLanguage('TR')">🇹🇷 TR</button>
+    <button onclick="setLanguage('DE')">🇩🇪 DE</button>
+    <button onclick="setLanguage('AR')">🇸🇦 AR</button>
+    <button onclick="setLanguage('ES')">🇪🇸 ES</button>
+    <button onclick="setLanguage('FR')">🇫🇷 FR</button>
+    <button onclick="setLanguage('IT')">🇮🇹 IT</button>
+</div>
+
+<header>
+    <h1>↩️ WORKER PRO — Returns</h1>
+    <p>
+        Возвраты товаров, возврат денежных средств, обмен продукции,
+        возврат через транспорт и контроль статуса заявки.
+    </p>
+</header>
+
+<nav>
+    <a href="../index.html">Главная</a>
+    <a href="../orders/index.html">Заказы</a>
+    <a href="../payments/index.html">Платежи</a>
+    <a href="../wallet/index.html">Кошелёк</a>
+    <a href="../disputes/index.html">Споры</a>
+    <a href="../support/index.html">Поддержка</a>
+    <a href="../transport/index.html">Транспорт</a>
+    <a href="../documents/index.html">Документы</a>
+    <a href="../notifications/index.html">Уведомления</a>
+    <a href="../dashboard/index.html">Кабинет</a>
+</nav>
+
+<div class="container">
+
+<section class="hero">
+    <h2>Возвраты и возврат средств</h2>
+    <p>
+        Раздел WORKER PRO для управления возвратом промышленных товаров,
+        запчастей, оборудования и денежных средств. Пользователь сможет
+        создать заявку, приложить документы и фотографии, получить ответ
+        поставщика и отслеживать весь процесс возврата.
+    </p>
+</section>
+
+<div class="stats">
+    <div class="stat">
+        <div class="number">18</div>
+        <span>Новые заявки</span>
+    </div>
+
+    <div class="stat">
+        <div class="number">11</div>
+        <span>На проверке</span>
+    </div>
+
+    <div class="stat">
+        <div class="number">7</div>
+        <span>Одобрено</span>
+    </div>
+
+    <div class="stat">
+        <div class="number">5</div>
+        <span>В процессе</span>
+    </div>
+
+    <div class="stat">
+        <div class="number">24</div>
+        <span>Завершено</span>
+    </div>
+</div>
+
+<section class="search-box">
+    <input
+        type="text"
+        id="searchInput"
+        placeholder="Поиск по номеру заказа, товару, поставщику..."
+        onkeyup="filterReturns()"
+    >
+
+    <div class="filters">
+        <button class="active" onclick="filterStatus('all',this)">Все</button>
+        <button onclick="filterStatus('new',this)">Новые</button>
+        <button onclick="filterStatus('review',this)">На проверке</button>
+        <button onclick="filterStatus('approved',this)">Одобрено</button>
+        <button onclick="filterStatus('processing',this)">В процессе</button>
+        <button onclick="filterStatus('completed',this)">Завершено</button>
+        <button onclick="filterStatus('rejected',this)">Отклонено</button>
+    </div>
+</section>
+
+<h2 class="section-title">Заявки на возврат</h2>
+
+<div class="returns-grid" id="returnsGrid">
+
+    <div class="return-card" data-status="review">
+        <span class="badge review">На проверке</span>
+        <h3>Возврат промышленного насоса</h3>
+        <p><strong>Заказ:</strong> ORD-2026-104</p>
+        <p><strong>Причина:</strong> Повреждение при доставке</p>
+        <p><strong>Поставщик:</strong> Hydraulic Solutions</p>
+        <p>Необходимо проверить состояние корпуса и документы перевозки.</p>
+        <div class="card-buttons">
+            <button onclick="openReturn('RET-2026-001')">Открыть</button>
+        </div>
+    </div>
+
+    <div class="return-card" data-status="new">
+        <span class="badge">Новая</span>
+        <h3>Неправильная запчасть</h3>
+        <p><strong>Заказ:</strong> ORD-2026-117</p>
+        <p><strong>Причина:</strong> Деталь не соответствует заказу</p>
+        <p><strong>Поставщик:</strong> Machine Technology</p>
+        <p>Покупатель запросил замену детали на правильную модель.</p>
+        <div class="card-buttons">
+            <button onclick="openReturn('RET-2026-002')">Открыть</button>
+        </div>
+    </div>
+
+    <div class="return-card" data-status="approved">
+        <span class="badge">Одобрено</span>
+        <h3>Возврат за отменённый заказ</h3>
+        <p><strong>Заказ:</strong> ORD-2026-122</p>
+        <p><strong>Сумма:</strong> 850 AZN</p>
+        <p><strong>Причина:</strong> Заказ отменён</p>
+        <p>Возврат денежных средств одобрен.</p>
+        <div class="card-buttons">
+            <button onclick="openReturn('RET-2026-003')">Открыть</button>
+        </div>
+    </div>
+
+    <div class="return-card" data-status="processing">
+        <span class="badge processing">В процессе</span>
+        <h3>Обмен промышленного датчика</h3>
+        <p><strong>Заказ:</strong> ORD-2026-130</p>
+        <p><strong>Причина:</strong> Неисправность датчика</p>
+        <p><strong>Поставщик:</strong> Automation Systems</p>
+        <p>Новый датчик готовится к отправке.</p>
+        <div class="card-buttons">
+            <button onclick="openReturn('RET-2026-004')">Открыть</button>
+        </div>
+    </div>
+
+    <div class="return-card" data-status="processing">
+        <span class="badge processing">В процессе</span>
+        <h3>Возврат через транспорт</h3>
+        <p><strong>Заказ:</strong> ORD-2026-141</p>
+        <p><strong>Маршрут:</strong> Турция → Азербайджан</p>
+        <p><strong>Причина:</strong> Товар повреждён</p>
+        <p>Возврат организуется транспортной службой.</p>
+        <div class="card-buttons">
+            <button onclick="openReturn('RET-2026-005')">Открыть</button>
+        </div>
+    </div>
+
+    <div class="return-card" data-status="approved">
+        <span class="badge">Одобрено</span>
+        <h3>Возврат платежа</h3>
+        <p><strong>Заказ:</strong> ORD-2026-155</p>
+        <p><strong>Сумма:</strong> 420 AZN</p>
+        <p><strong>Метод:</strong> Кошелёк WORKER PRO</p>
+        <p>Возврат подготовлен к зачислению.</p>
+        <div class="card-buttons">
+            <button onclick="openReturn('RET-2026-006')">Открыть</button>
+        </div>
+    </div>
+
+    <div class="return-card" data-status="new">
+        <span class="badge">Новая</span>
+        <h3>Возврат производителю</h3>
+        <p><strong>Заказ:</strong> ORD-2026-162</p>
+        <p><strong>Причина:</strong> Несоответствие характеристик</p>
+        <p><strong>Производитель:</strong> Industrial Furnace</p>
+        <p>Заявка ожидает рассмотрения производителя.</p>
+        <div class="card-buttons">
+            <button onclick="openReturn('RET-2026-007')">Открыть</button>
+        </div>
+    </div>
+
+    <div class="return-card" data-status="completed">
+        <span class="badge completed">Завершено</span>
+        <h3>Возврат запчасти</h3>
+        <p><strong>Заказ:</strong> ORD-2026-090</p>
+        <p><strong>Причина:</strong> Ошибка заказа</p>
+        <p><strong>Результат:</strong> Средства возвращены</p>
+        <p>Заявка успешно закрыта.</p>
+        <div class="card-buttons">
+            <button onclick="openReturn('RET-2026-008')">Открыть</button>
+        </div>
+    </div>
+
+</div>
+
+<h2 class="section-title">Типы возврата</h2>
+
+<div class="return-types">
+
+    <div class="type-card">
+        <div class="icon">📦</div>
+        <h3>Возврат товара</h3>
+        <p>Возврат запчастей, оборудования и материалов поставщику.</p>
+    </div>
+
+    <div class="type-card">
+        <div class="icon">💰</div>
+        <h3>Возврат средств</h3>
+        <p>Возврат оплаты за отменённый или возвращённый заказ.</p>
+    </div>
+
+    <div class="type-card">
+        <div class="icon">🔄</div>
+        <h3>Обмен</h3>
+        <p>Замена неисправной или неправильной продукции.</p>
+    </div>
+
+    <div class="type-card">
+        <div class="icon">🚚</div>
+        <h3>Возврат через транспорт</h3>
+        <p>Организация обратной перевозки товара.</p>
+    </div>
+
+    <div class="type-card">
+        <div class="icon">🛡️</div>
+        <h3>Гарантия</h3>
+        <p>Возврат или ремонт продукции по гарантийному случаю.</p>
+    </div>
+
+    <div class="type-card">
+        <div class="icon">🏭</div>
+        <h3>Поставщику</h3>
+        <p>Передача заявки производителю или поставщику.</p>
+    </div>
+
+</div>
+
+<h2 class="section-title">Создать заявку на возврат</h2>
+
+<section class="form-box">
+
+    <div class="form-grid">
+
+        <div class="form-group">
+            <label>Номер заказа</label>
+            <input id="orderNumber" placeholder="Например: ORD-2026-200">
+        </div>
+
+        <div class="form-group">
+            <label>Тип возврата</label>
+            <select id="returnType">
+                <option>Возврат товара</option>
+                <option>Возврат средств</option>
+                <option>Обмен</option>
+                <option>Гарантийный возврат</option>
+                <option>Возврат через транспорт</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Причина</label>
+            <select id="returnReason">
+                <option>Повреждение товара</option>
+                <option>Неправильный товар</option>
+                <option>Неисправность</option>
+                <option>Несоответствие характеристик</option>
+                <option>Отмена заказа</option>
+                <option>Другая причина</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Поставщик / компания</label>
+            <input id="supplier" placeholder="Название компании">
+        </div>
+
+        <div class="form-group full">
+            <label>Описание проблемы</label>
+            <textarea id="description"
+                placeholder="Опишите причину возврата и состояние товара..."></textarea>
+        </div>
+
+        <div class="form-group full">
+            <label>Документы / фотографии</label>
+            <input type="file" multiple>
+        </div>
+
+    </div>
+
+    <br>
+
+    <button class="primary-btn" onclick="createReturn()">
+        Создать заявку
+    </button>
+
+</section>
+
+<h2 class="section-title">Процесс возврата</h2>
+
+<div class="workflow">
+
+    <div class="step">
+        <strong>1</strong>
+        Пользователь
+    </div>
+
+    <div class="step">
+        <strong>2</strong>
+        Заявка
+    </div>
+
+    <div class="step">
+        <strong>3</strong>
+        Проверка
+    </div>
+
+    <div class="step">
+        <strong>4</strong>
+        Ответ поставщика
+    </div>
+
+    <div class="step">
+        <strong>5</strong>
+        Решение
+    </div>
+
+    <div class="step">
+        <strong>6</strong>
+        Возврат / обмен
+    </div>
+
+    <div class="step">
+        <strong>7</strong>
+        Закрытие
+    </div>
+
+</div>
+
+<h2 class="section-title">Быстрый доступ</h2>
+
+<div class="quick-links">
+    <a href="../orders/index.html">📦 Заказы</a>
+    <a href="../payments/index.html">💳 Платежи</a>
+    <a href="../wallet/index.html">💰 Кошелёк</a>
+    <a href="../disputes/index.html">⚖️ Споры</a>
+    <a href="../transport/index.html">🚚 Транспорт</a>
+    <a href="../documents/index.html">📄 Документы</a>
+    <a href="../support/index.html">🎧 Поддержка</a>
+    <a href="../notifications/index.html">🔔 Уведомления</a>
+</div>
+
+<h2 class="section-title">Будущие возможности</h2>
+
+<section class="future">
+    <ul>
+        <li>Онлайн-возврат денежных средств.</li>
+        <li>Интеграция с платёжными системами.</li>
+        <li>Автоматическое зачисление возврата в кошелёк.</li>
+        <li>Отслеживание обратной доставки.</li>
+        <li>Автоматическая проверка заявки.</li>
+        <li>Загрузка фотографий и документов.</li>
+        <li>Уведомления о каждом изменении статуса.</li>
+        <li>Многоязычная система возвратов.</li>
+        <li>Статистика и аналитика возвратов.</li>
+        <li>Интеграция с поставщиками и производителями.</li>
+    </ul>
+</section>
+
+<div class="demo-warning">
+    <strong>⚠️ Демо-версия:</strong>
+    данный раздел пока работает как демонстрация интерфейса.
+    Реальные возвраты денежных средств, банковские операции,
+    автоматические выплаты и транспортные интеграции пока не подключены.
+</div>
+
+</div>
+
+<footer>
+    <h3>WORKER PRO</h3>
+    <p>Международная промышленная платформа</p>
+    <p>Returns • Payments • Orders • Transport • Support</p>
+    <p>© 2026 WORKER PRO — F.S</p>
+</footer>
+
+<script src="../language.js"></script>
+
+<script>
+
+let currentStatus = "all";
+
+function filterStatus(status, button){
+
+    currentStatus = status;
+
+    document.querySelectorAll(".filters button").forEach(function(btn){
+        btn.classList.remove("active");
+    });
+
+    button.classList.add("active");
+
+    filterReturns();
+}
+
+function filterReturns(){
+
+    const search =
+        document.getElementById("searchInput").value.toLowerCase();
+
+    const cards =
+        document.querySelectorAll(".return-card");
+
+    cards.forEach(function(card){
+
+        const text =
+            card.innerText.toLowerCase();
+
+        const status =
+            card.dataset.status;
+
+        const searchMatch =
+            text.includes(search);
+
+        const statusMatch =
+            currentStatus === "all" ||
+            status === currentStatus;
+
+        if(searchMatch && statusMatch){
+            card.style.display = "block";
+        }else{
+            card.style.display = "none";
+        }
+
+    });
+}
+
+function openReturn(id){
+
+    alert(
+        "Заявка " + id +
+        "\\n\\nЭто демонстрационный просмотр возврата. " +
+        "В рабочей версии здесь будет открываться подробная информация, " +
+        "документы, статус, поставщик, транспорт и история возврата."
+    );
+}
+
+function createReturn(){
+
+    const order =
+        document.getElementById("orderNumber").value.trim();
+
+    if(!order){
+
+        alert("Введите номер заказа.");
+
+        return;
+    }
+
+    alert(
+        "Заявка на возврат создана в демо-режиме.\\n\\n" +
+        "Заказ: " + order +
+        "\\n\\nВ рабочей версии заявка будет отправлена поставщику " +
+        "и появится в разделе «Возвраты»."
+    );
+}
+
+</script>
+
+</body>
+</html>
