@@ -1,1 +1,912 @@
- 
+ <!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WORKER PRO — Articles</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f4f7f5;
+    color:#123;
+}
+
+.top-languages{
+    background:#063d25;
+    padding:10px;
+    text-align:center;
+}
+
+.top-languages button{
+    border:none;
+    background:#0b6b3d;
+    color:white;
+    font-weight:bold;
+    padding:9px 12px;
+    margin:3px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.top-languages button:hover{
+    background:#b7ff35;
+    color:#063d25;
+}
+
+header{
+    background:#075b34;
+    color:white;
+    text-align:center;
+    padding:30px 15px;
+}
+
+header h1{
+    margin:0;
+    font-size:34px;
+}
+
+header p{
+    margin:10px 0 0;
+    font-size:18px;
+}
+
+nav{
+    background:white;
+    padding:12px;
+    text-align:center;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+    position:sticky;
+    top:0;
+    z-index:10;
+}
+
+nav a{
+    display:inline-block;
+    color:#075b34;
+    text-decoration:none;
+    font-weight:bold;
+    margin:5px 8px;
+}
+
+nav a:hover{
+    color:#0b9b57;
+}
+
+.container{
+    max-width:1150px;
+    margin:auto;
+    padding:25px 15px;
+}
+
+.hero{
+    background:linear-gradient(135deg,#063d25,#0b6b3d);
+    color:white;
+    border-radius:18px;
+    padding:35px 25px;
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.hero h2{
+    margin-top:0;
+    font-size:30px;
+}
+
+.hero p{
+    font-size:17px;
+    line-height:1.6;
+}
+
+.search-box{
+    max-width:750px;
+    margin:25px auto;
+}
+
+.search-box input{
+    width:100%;
+    padding:16px;
+    border:2px solid #0b6b3d;
+    border-radius:12px;
+    font-size:16px;
+    outline:none;
+}
+
+.filters{
+    text-align:center;
+    margin:20px 0 30px;
+}
+
+.filter-btn{
+    border:none;
+    background:#e8f7ed;
+    color:#075b34;
+    padding:10px 15px;
+    margin:4px;
+    border-radius:10px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.filter-btn.active,
+.filter-btn:hover{
+    background:#0b6b3d;
+    color:white;
+}
+
+.articles{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(270px,1fr));
+    gap:20px;
+}
+
+.article{
+    background:white;
+    border-radius:16px;
+    overflow:hidden;
+    box-shadow:0 3px 12px rgba(0,0,0,.08);
+    border-top:5px solid #0b6b3d;
+    transition:.2s;
+}
+
+.article:hover{
+    transform:translateY(-4px);
+}
+
+.article-top{
+    background:#e8f7ed;
+    padding:25px;
+    text-align:center;
+    font-size:42px;
+}
+
+.article-content{
+    padding:20px;
+}
+
+.tag{
+    display:inline-block;
+    background:#e8f7ed;
+    color:#075b34;
+    padding:6px 10px;
+    border-radius:8px;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.article h3{
+    color:#075b34;
+    font-size:21px;
+    margin:12px 0;
+}
+
+.article p{
+    color:#456;
+    line-height:1.6;
+}
+
+.read-btn{
+    display:inline-block;
+    background:#0b6b3d;
+    color:white;
+    padding:11px 16px;
+    border-radius:9px;
+    text-decoration:none;
+    font-weight:bold;
+    margin-top:8px;
+    cursor:pointer;
+    border:none;
+}
+
+.read-btn:hover{
+    background:#063d25;
+}
+
+.empty{
+    display:none;
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    text-align:center;
+    color:#666;
+}
+
+.info{
+    background:white;
+    border-radius:18px;
+    padding:25px;
+    margin-top:35px;
+    box-shadow:0 3px 12px rgba(0,0,0,.07);
+}
+
+.info-item{
+    background:#f1f7f3;
+    border-radius:12px;
+    padding:15px;
+    margin:10px 0;
+}
+
+.info-item strong{
+    color:#075b34;
+}
+
+.buttons{
+    text-align:center;
+    margin:35px 0;
+}
+
+.btn{
+    display:inline-block;
+    background:#0b6b3d;
+    color:white;
+    text-decoration:none;
+    padding:13px 20px;
+    margin:6px;
+    border-radius:10px;
+    font-weight:bold;
+}
+
+.btn:hover{
+    background:#063d25;
+}
+
+footer{
+    background:#063d25;
+    color:white;
+    text-align:center;
+    padding:25px 15px;
+    margin-top:40px;
+}
+
+footer p{
+    margin:6px;
+}
+
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.65);
+    z-index:100;
+    padding:20px;
+    overflow:auto;
+}
+
+.modal-box{
+    max-width:750px;
+    margin:40px auto;
+    background:white;
+    border-radius:18px;
+    padding:25px;
+}
+
+.modal-box h2{
+    color:#075b34;
+}
+
+.close{
+    float:right;
+    background:#063d25;
+    color:white;
+    border:none;
+    border-radius:8px;
+    padding:8px 12px;
+    cursor:pointer;
+}
+
+@media(max-width:600px){
+    header h1{font-size:28px}
+    .hero h2{font-size:25px}
+    nav a{font-size:14px;margin:4px}
+}
+</style>
+</head>
+
+<body>
+
+<!-- LANGUAGES -->
+
+<div class="top-languages">
+    <button onclick="setLanguage('AZ')">AZ</button>
+    <button onclick="setLanguage('RU')">RU</button>
+    <button onclick="setLanguage('EN')">EN</button>
+    <button onclick="setLanguage('TR')">TR</button>
+    <button onclick="setLanguage('DE')">DE</button>
+    <button onclick="setLanguage('AR')">AR</button>
+    <button onclick="setLanguage('ES')">ES</button>
+    <button onclick="setLanguage('FR')">FR</button>
+    <button onclick="setLanguage('IT')">IT</button>
+</div>
+
+<header>
+    <h1>📚 WORKER PRO</h1>
+    <p>Промышленные статьи, знания и технологии</p>
+</header>
+
+<nav>
+    <a href="../index.html">Главная</a>
+    <a href="../production/index.html">Производство</a>
+    <a href="../problems/index.html">Проблемы</a>
+    <a href="../technologies/index.html">Технологии</a>
+    <a href="../equipment/index.html">Оборудование</a>
+    <a href="../training/index.html">Обучение</a>
+    <a href="../products/index.html">Товары</a>
+    <a href="../companies/index.html">Компании</a>
+    <a href="../news/index.html">Новости</a>
+</nav>
+
+<div class="container">
+
+<section class="hero">
+
+    <h2>📚 База промышленных знаний</h2>
+
+    <p>
+        Практические статьи для рабочих, операторов,
+        инженеров, мастеров, производителей и поставщиков.
+    </p>
+
+    <p>
+        Производство • Технологии • Безопасность • Оборудование • Торговля
+    </p>
+
+</section>
+
+<div class="search-box">
+
+    <input
+        id="searchInput"
+        type="text"
+        placeholder="🔍 Поиск статьи: CNC, насос, сварка, безопасность..."
+        oninput="searchArticles()"
+    >
+
+</div>
+
+<div class="filters">
+
+    <button class="filter-btn active"
+            onclick="filterArticles('all',this)">
+        Все
+    </button>
+
+    <button class="filter-btn"
+            onclick="filterArticles('production',this)">
+        🏭 Производство
+    </button>
+
+    <button class="filter-btn"
+            onclick="filterArticles('safety',this)">
+        🦺 Безопасность
+    </button>
+
+    <button class="filter-btn"
+            onclick="filterArticles('technology',this)">
+        ⚙️ Технологии
+    </button>
+
+    <button class="filter-btn"
+            onclick="filterArticles('training',this)">
+        🎓 Обучение
+    </button>
+
+    <button class="filter-btn"
+            onclick="filterArticles('trade',this)">
+        🌍 Торговля
+    </button>
+
+</div>
+
+<div class="articles" id="articlesList">
+
+    <article class="article"
+             data-category="production"
+             data-search="cnc станок оператор производство">
+
+        <div class="article-top">🖥️</div>
+
+        <div class="article-content">
+
+            <span class="tag">ПРОИЗВОДСТВО</span>
+
+            <h3>Основы работы на CNC станке</h3>
+
+            <p>
+                Основные элементы CNC станка,
+                подготовка оборудования и правила
+                работы оператора.
+            </p>
+
+            <button class="read-btn"
+                    onclick="openArticle('CNC станок')">
+                Читать
+            </button>
+
+        </div>
+
+    </article>
+
+    <article class="article"
+             data-category="safety"
+             data-search="безопасность ppe средства защиты производство">
+
+        <div class="article-top">🦺</div>
+
+        <div class="article-content">
+
+            <span class="tag">БЕЗОПАСНОСТЬ</span>
+
+            <h3>Безопасность на производстве</h3>
+
+            <p>
+                PPE, проверка оборудования,
+                безопасная рабочая зона и основные
+                правила промышленной безопасности.
+            </p>
+
+            <button class="read-btn"
+                    onclick="openArticle('Безопасность')">
+                Читать
+            </button>
+
+        </div>
+
+    </article>
+
+    <article class="article"
+             data-category="technology"
+             data-search="гидравлика насос hydraulic pump">
+
+        <div class="article-top">💧</div>
+
+        <div class="article-content">
+
+            <span class="tag">ТЕХНОЛОГИИ</span>
+
+            <h3>Основы промышленной гидравлики</h3>
+
+            <p>
+                Насосы, гидроцилиндры, клапаны,
+                давление и основные элементы
+                гидравлической системы.
+            </p>
+
+            <button class="read-btn"
+                    onclick="openArticle('Гидравлика')">
+                Читать
+            </button>
+
+        </div>
+
+    </article>
+
+    <article class="article"
+             data-category="technology"
+             data-search="датчики sensors automation plc">
+
+        <div class="article-top">📡</div>
+
+        <div class="article-content">
+
+            <span class="tag">АВТОМАТИЗАЦИЯ</span>
+
+            <h3>Промышленные датчики</h3>
+
+            <p>
+                Датчики давления, температуры,
+                уровня, положения и приближения.
+            </p>
+
+            <button class="read-btn"
+                    onclick="openArticle('Датчики')">
+                Читать
+            </button>
+
+        </div>
+
+    </article>
+
+    <article class="article"
+             data-category="production"
+             data-search="штамповка пресс stamping production">
+
+        <div class="article-top">🏗️</div>
+
+        <div class="article-content">
+
+            <span class="tag">ПРОИЗВОДСТВО</span>
+
+            <h3>Промышленная штамповка</h3>
+
+            <p>
+                Прессы, штампы, заготовки,
+                технологический процесс и безопасность
+                оператора.
+            </p>
+
+            <button class="read-btn"
+                    onclick="openArticle('Штамповка')">
+                Читать
+            </button>
+
+        </div>
+
+    </article>
+
+    <article class="article"
+             data-category="technology"
+             data-search="сварка welding metal">
+
+        <div class="article-top">🔥</div>
+
+        <div class="article-content">
+
+            <span class="tag">ТЕХНОЛОГИИ</span>
+
+            <h3>Основы промышленной сварки</h3>
+
+            <p>
+                Основные методы сварки, оборудование,
+                материалы и требования безопасности.
+            </p>
+
+            <button class="read-btn"
+                    onclick="openArticle('Сварка')">
+                Читать
+            </button>
+
+        </div>
+
+    </article>
+
+    <article class="article"
+             data-category="training"
+             data-search="английский english workers vocabulary">
+
+        <div class="article-top">🇬🇧</div>
+
+        <div class="article-content">
+
+            <span class="tag">ОБУЧЕНИЕ</span>
+
+            <h3>Английский для работников</h3>
+
+            <p>
+                Основные английские слова и фразы,
+                которые используются на промышленном
+                предприятии.
+            </p>
+
+            <button class="read-btn"
+                    onclick="openArticle('English for Workers')">
+                Читать
+            </button>
+
+        </div>
+
+    </article>
+
+    <article class="article"
+             data-category="trade"
+             data-search="supplier manufacturer industrial trade international">
+
+        <div class="article-top">🌍</div>
+
+        <div class="article-content">
+
+            <span class="tag">ТОРГОВЛЯ</span>
+
+            <h3>Как найти промышленного поставщика</h3>
+
+            <p>
+                Поиск производителя, сравнение предложений,
+                запрос цены и организация поставки.
+            </p>
+
+            <button class="read-btn"
+                    onclick="openArticle('Поиск поставщика')">
+                Читать
+            </button>
+
+        </div>
+
+    </article>
+
+</div>
+
+<div class="empty" id="emptyMessage">
+    🔍 Статьи не найдены.
+</div>
+
+<div class="info">
+
+    <h2 style="text-align:center;color:#063d25;">
+        💡 Что будет в разделе Articles
+    </h2>
+
+    <div class="info-item">
+        <strong>🏭 Производство</strong><br>
+        Технологические процессы, станки,
+        оборудование и производственные операции.
+    </div>
+
+    <div class="info-item">
+        <strong>🦺 Безопасность</strong><br>
+        PPE, рабочая зона, пожарная безопасность
+        и предотвращение производственных рисков.
+    </div>
+
+    <div class="info-item">
+        <strong>⚙️ Технологии</strong><br>
+        CNC, гидравлика, автоматизация,
+        датчики, сварка и другие технологии.
+    </div>
+
+    <div class="info-item">
+        <strong>🎓 Обучение</strong><br>
+        Практические материалы для рабочих,
+        мастеров и инженеров.
+    </div>
+
+    <div class="info-item">
+        <strong>🌍 Международная торговля</strong><br>
+        Производители, поставщики, RFQ,
+        цены, условия и логистика.
+    </div>
+
+</div>
+
+<div class="buttons">
+
+    <a class="btn" href="../training/index.html">
+        🎓 Обучение
+    </a>
+
+    <a class="btn" href="../production/index.html">
+        🏭 Производство
+    </a>
+
+    <a class="btn" href="../technologies/index.html">
+        ⚙️ Технологии
+    </a>
+
+    <a class="btn" href="../products/index.html">
+        📦 Товары
+    </a>
+
+    <a class="btn" href="../news/index.html">
+        📰 Новости
+    </a>
+
+    <a class="btn" href="../index.html">
+        🏠 Главная
+    </a>
+
+</div>
+
+</div>
+
+<!-- ARTICLE MODAL -->
+
+<div class="modal" id="articleModal">
+
+    <div class="modal-box">
+
+        <button class="close" onclick="closeArticle()">
+            ✕
+        </button>
+
+        <h2 id="modalTitle"></h2>
+
+        <div id="modalText"></div>
+
+    </div>
+
+</div>
+
+<footer>
+
+    <p><strong>WORKER PRO</strong></p>
+    <p>🌍 Международная промышленная платформа</p>
+    <p>Знания • Производство • Технологии • Обучение</p>
+    <p>F.S</p>
+
+</footer>
+
+<script src="../language.js"></script>
+
+<script>
+
+function filterArticles(type,button){
+
+    const articles=document.querySelectorAll(".article");
+
+    document.querySelectorAll(".filter-btn").forEach(function(btn){
+        btn.classList.remove("active");
+    });
+
+    button.classList.add("active");
+
+    let visible=0;
+
+    articles.forEach(function(article){
+
+        if(type==="all" || article.dataset.category===type){
+
+            article.style.display="block";
+            visible++;
+
+        }else{
+
+            article.style.display="none";
+
+        }
+
+    });
+
+    document.getElementById("emptyMessage").style.display=
+        visible===0 ? "block" : "none";
+}
+
+function searchArticles(){
+
+    const value=document
+        .getElementById("searchInput")
+        .value
+        .toLowerCase()
+        .trim();
+
+    const articles=document.querySelectorAll(".article");
+
+    let visible=0;
+
+    articles.forEach(function(article){
+
+        const text=(
+            article.dataset.search+
+            " "+
+            article.innerText
+        ).toLowerCase();
+
+        if(text.includes(value)){
+
+            article.style.display="block";
+            visible++;
+
+        }else{
+
+            article.style.display="none";
+
+        }
+
+    });
+
+    document.getElementById("emptyMessage").style.display=
+        visible===0 ? "block" : "none";
+}
+
+function openArticle(title){
+
+    const contents={
+
+        "CNC станок":`
+            <p><strong>Основы работы на CNC станке</strong></p>
+            <p>
+            CNC оборудование используется для точной обработки
+            металлических и других промышленных деталей.
+            Перед началом работы оператор должен проверить
+            состояние станка, инструмента и рабочей зоны.
+            </p>
+            <p>
+            В WORKER PRO этот материал может быть дополнен
+            практическими уроками, техническими терминами
+            и инструкциями производителя.
+            </p>
+        `,
+
+        "Безопасность":`
+            <p><strong>Безопасность на производстве</strong></p>
+            <p>
+            Перед работой необходимо использовать соответствующие
+            средства индивидуальной защиты и убедиться,
+            что оборудование находится в безопасном состоянии.
+            </p>
+            <p>
+            Любая неисправность оборудования должна сообщаться
+            ответственному сотруднику.
+            </p>
+        `,
+
+        "Гидравлика":`
+            <p><strong>Основы промышленной гидравлики</strong></p>
+            <p>
+            Гидравлические системы используют жидкость под давлением
+            для передачи энергии. Основные элементы — насос,
+            клапаны, гидроцилиндры, фильтры и трубопроводы.
+            </p>
+        `,
+
+        "Датчики":`
+            <p><strong>Промышленные датчики</strong></p>
+            <p>
+            Датчики позволяют системе получать информацию
+            о давлении, температуре, уровне, положении
+            и других параметрах процесса.
+            </p>
+        `,
+
+        "Штамповка":`
+            <p><strong>Промышленная штамповка</strong></p>
+            <p>
+            Штамповка используется для получения деталей
+            из листового или другого материала с помощью
+            пресса и специальной оснастки.
+            </p>
+        `,
+
+        "Сварка":`
+            <p><strong>Основы промышленной сварки</strong></p>
+            <p>
+            Сварочные процессы требуют правильного выбора
+            оборудования, материалов и режима работы.
+            Безопасность сварщика является обязательной частью
+            рабочего процесса.
+            </p>
+        `,
+
+        "English for Workers":`
+            <p><strong>Английский для работников</strong></p>
+            <p>
+            WORKER PRO может помогать изучать промышленную
+            лексику: machine, pump, valve, bearing, pressure,
+            temperature, safety, maintenance и другие термины.
+            </p>
+        `,
+
+        "Поиск поставщика":`
+            <p><strong>Как найти промышленного поставщика</strong></p>
+            <p>
+            Пользователь выбирает товар или оборудование,
+            затем может найти производителей и поставщиков,
+            запросить цену и сравнить условия.
+            </p>
+            <p>
+            Следующий этап — заказ и организация доставки
+            через систему WORKER PRO.
+            </p>
+        `
+    };
+
+    document.getElementById("modalTitle").innerText=title;
+
+    document.getElementById("modalText").innerHTML=
+        contents[title] ||
+        "<p>Материал статьи будет добавлен позже.</p>";
+
+    document.getElementById("articleModal").style.display="block";
+}
+
+function closeArticle(){
+
+    document.getElementById("articleModal").style.display="none";
+
+}
+
+window.onclick=function(event){
+
+    const modal=document.getElementById("articleModal");
+
+    if(event.target===modal){
+        closeArticle();
+    }
+
+};
+
+</script>
+
+</body>
+</html>
