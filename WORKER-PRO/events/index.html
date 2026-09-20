@@ -1,1 +1,1010 @@
- 
+ <!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WORKER PRO — Events</title>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f4f7f5;
+    color:#123;
+}
+
+.top-languages{
+    background:#063d25;
+    padding:10px;
+    text-align:center;
+}
+
+.top-languages button{
+    background:#0b6b3d;
+    color:white;
+    border:1px solid #b7ff35;
+    border-radius:8px;
+    padding:8px 12px;
+    margin:3px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.top-languages button:hover{
+    background:#b7ff35;
+    color:#063d25;
+}
+
+header{
+    background:linear-gradient(135deg,#063d25,#0b6b3d);
+    color:white;
+    text-align:center;
+    padding:28px 15px;
+}
+
+header h1{
+    margin:0 0 8px;
+    font-size:32px;
+}
+
+header p{
+    margin:0;
+}
+
+nav{
+    background:#075b34;
+    padding:12px;
+    text-align:center;
+    position:sticky;
+    top:0;
+    z-index:10;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    margin:5px 8px;
+    font-weight:bold;
+    font-size:14px;
+}
+
+nav a:hover{
+    color:#b7ff35;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+    padding:25px 15px;
+}
+
+.hero{
+    background:white;
+    border-radius:16px;
+    padding:30px 20px;
+    text-align:center;
+    box-shadow:0 4px 15px rgba(0,0,0,.08);
+    margin-bottom:25px;
+}
+
+.hero h2{
+    color:#063d25;
+    font-size:30px;
+    margin-top:0;
+}
+
+.hero p{
+    max-width:800px;
+    margin:auto;
+    line-height:1.6;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:15px;
+    margin:25px 0;
+}
+
+.stat{
+    background:#063d25;
+    color:white;
+    padding:22px;
+    border-radius:14px;
+    text-align:center;
+}
+
+.stat strong{
+    display:block;
+    font-size:28px;
+    color:#b7ff35;
+}
+
+.stat span{
+    display:block;
+    margin-top:6px;
+}
+
+.tools{
+    background:white;
+    padding:20px;
+    border-radius:15px;
+    box-shadow:0 3px 12px rgba(0,0,0,.07);
+    margin-bottom:25px;
+}
+
+.search{
+    width:100%;
+    padding:14px;
+    border:2px solid #0b6b3d;
+    border-radius:10px;
+    font-size:16px;
+    margin-bottom:15px;
+}
+
+.filters{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+}
+
+.filters button{
+    border:0;
+    background:#e5eee9;
+    color:#063d25;
+    padding:10px 15px;
+    border-radius:9px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.filters button.active,
+.filters button:hover{
+    background:#0b6b3d;
+    color:white;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:20px;
+}
+
+.card{
+    background:white;
+    border-radius:15px;
+    padding:20px;
+    box-shadow:0 4px 14px rgba(0,0,0,.08);
+    border-top:5px solid #0b6b3d;
+}
+
+.date{
+    background:#063d25;
+    color:white;
+    border-radius:10px;
+    padding:12px;
+    text-align:center;
+    margin-bottom:15px;
+}
+
+.date strong{
+    display:block;
+    color:#b7ff35;
+    font-size:24px;
+}
+
+.badge{
+    display:inline-block;
+    background:#e8f6df;
+    color:#075b34;
+    padding:5px 9px;
+    border-radius:7px;
+    font-size:12px;
+    font-weight:bold;
+    margin-bottom:10px;
+}
+
+.card h3{
+    color:#063d25;
+    margin-top:0;
+}
+
+.card p{
+    line-height:1.5;
+    color:#456;
+}
+
+.card button{
+    width:100%;
+    background:#0b6b3d;
+    color:white;
+    border:0;
+    padding:12px;
+    border-radius:9px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.card button:hover{
+    background:#063d25;
+}
+
+.create{
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 4px 14px rgba(0,0,0,.08);
+    margin-top:30px;
+}
+
+.create h2{
+    color:#063d25;
+    margin-top:0;
+}
+
+form{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+
+input,select,textarea{
+    width:100%;
+    padding:13px;
+    border:1px solid #b8c9bf;
+    border-radius:9px;
+    font-size:15px;
+    font-family:Arial,sans-serif;
+}
+
+textarea{
+    min-height:120px;
+    resize:vertical;
+}
+
+.submit{
+    background:#0b6b3d;
+    color:white;
+    border:0;
+    padding:14px;
+    border-radius:9px;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.submit:hover{
+    background:#063d25;
+}
+
+.info{
+    background:#063d25;
+    color:white;
+    padding:28px;
+    border-radius:15px;
+    margin-top:30px;
+    line-height:1.7;
+}
+
+.info h2{
+    color:#b7ff35;
+}
+
+.links{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:20px;
+}
+
+.links a{
+    background:#b7ff35;
+    color:#063d25;
+    padding:11px 15px;
+    border-radius:9px;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+footer{
+    background:#063d25;
+    color:white;
+    text-align:center;
+    padding:25px;
+    margin-top:35px;
+}
+
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.65);
+    z-index:100;
+    padding:20px;
+    overflow:auto;
+}
+
+.modal-box{
+    background:white;
+    max-width:650px;
+    margin:50px auto;
+    padding:25px;
+    border-radius:16px;
+}
+
+.modal-box h2{
+    color:#063d25;
+}
+
+.close{
+    float:right;
+    font-size:28px;
+    cursor:pointer;
+    color:#063d25;
+}
+
+@media(max-width:600px){
+    header h1{
+        font-size:26px;
+    }
+
+    .hero h2{
+        font-size:24px;
+    }
+
+    nav a{
+        display:inline-block;
+        margin:4px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="top-languages">
+    <button onclick="setLanguage('AZ')">AZ</button>
+    <button onclick="setLanguage('RU')">RU</button>
+    <button onclick="setLanguage('EN')">EN</button>
+    <button onclick="setLanguage('TR')">TR</button>
+    <button onclick="setLanguage('DE')">DE</button>
+    <button onclick="setLanguage('AR')">AR</button>
+    <button onclick="setLanguage('ES')">ES</button>
+    <button onclick="setLanguage('FR')">FR</button>
+    <button onclick="setLanguage('IT')">IT</button>
+</div>
+
+<header>
+    <h1>WORKER PRO</h1>
+    <p>Промышленные события, выставки и обучение</p>
+</header>
+
+<nav>
+    <a href="../index.html">Главная</a>
+    <a href="../production/">Production</a>
+    <a href="../training/">Training</a>
+    <a href="../training-courses/">Курсы</a>
+    <a href="../companies/">Компании</a>
+    <a href="../manufacturers/">Производители</a>
+    <a href="../suppliers/">Поставщики</a>
+    <a href="../specialists/">Специалисты</a>
+    <a href="../news/">Новости</a>
+</nav>
+
+<div class="container">
+
+<section class="hero">
+    <h2>События WORKER PRO</h2>
+
+    <p>
+        Выставки, промышленные конференции, технические
+        мероприятия, профессиональные встречи, обучение
+        и другие события промышленного мира.
+    </p>
+</section>
+
+<section class="stats">
+
+    <div class="stat">
+        <strong>186+</strong>
+        <span>Событий</span>
+    </div>
+
+    <div class="stat">
+        <strong>42</strong>
+        <span>Страны</span>
+    </div>
+
+    <div class="stat">
+        <strong>8,420+</strong>
+        <span>Участников</span>
+    </div>
+
+    <div class="stat">
+        <strong>96</strong>
+        <span>Компаний</span>
+    </div>
+
+</section>
+
+<section class="tools">
+
+    <input
+        id="search"
+        class="search"
+        type="text"
+        placeholder="Поиск события, города, отрасли..."
+        onkeyup="searchEvents()"
+    >
+
+    <div class="filters">
+
+        <button
+            class="active"
+            onclick="filterEvents('all',this)">
+            Все
+        </button>
+
+        <button
+            onclick="filterEvents('exhibition',this)">
+            Выставки
+        </button>
+
+        <button
+            onclick="filterEvents('conference',this)">
+            Конференции
+        </button>
+
+        <button
+            onclick="filterEvents('training',this)">
+            Обучение
+        </button>
+
+        <button
+            onclick="filterEvents('technology',this)">
+            Технологии
+        </button>
+
+        <button
+            onclick="filterEvents('business',this)">
+            Бизнес
+        </button>
+
+    </div>
+
+</section>
+
+<section class="grid" id="eventGrid">
+
+    <div class="card event" data-type="exhibition">
+
+        <div class="date">
+            <strong>15</strong>
+            MAY 2026
+        </div>
+
+        <span class="badge">EXHIBITION</span>
+
+        <h3>Industrial Technology Expo</h3>
+
+        <p>
+            Международная выставка промышленного оборудования,
+            станков, автоматизации и технологий.
+        </p>
+
+        <p>
+            <b>📍 Место:</b> Baku, Azerbaijan
+        </p>
+
+        <p>
+            <b>👥 Участники:</b> Manufacturers & Suppliers
+        </p>
+
+        <button onclick="showEvent(
+            'Industrial Technology Expo',
+            '15 May 2026',
+            'Baku, Azerbaijan',
+            'Exhibition',
+            'Промышленное оборудование и технологии'
+        )">
+            Подробнее
+        </button>
+
+    </div>
+
+
+    <div class="card event" data-type="conference">
+
+        <div class="date">
+            <strong>22</strong>
+            JUN 2026
+        </div>
+
+        <span class="badge">CONFERENCE</span>
+
+        <h3>Global Manufacturing Forum</h3>
+
+        <p>
+            Международная встреча специалистов,
+            производителей и промышленных компаний.
+        </p>
+
+        <p>
+            <b>📍 Место:</b> Istanbul, Turkey
+        </p>
+
+        <p>
+            <b>👥 Участники:</b> Engineers & Companies
+        </p>
+
+        <button onclick="showEvent(
+            'Global Manufacturing Forum',
+            '22 June 2026',
+            'Istanbul, Turkey',
+            'Conference',
+            'Global Manufacturing'
+        )">
+            Подробнее
+        </button>
+
+    </div>
+
+
+    <div class="card event" data-type="training">
+
+        <div class="date">
+            <strong>10</strong>
+            JUL 2026
+        </div>
+
+        <span class="badge">TRAINING</span>
+
+        <h3>CNC Operator Training Day</h3>
+
+        <p>
+            Практическое обучение операторов CNC,
+            основы настройки и промышленной безопасности.
+        </p>
+
+        <p>
+            <b>📍 Место:</b> Baku, Azerbaijan
+        </p>
+
+        <p>
+            <b>👥 Участники:</b> Specialists
+        </p>
+
+        <button onclick="showEvent(
+            'CNC Operator Training Day',
+            '10 July 2026',
+            'Baku, Azerbaijan',
+            'Training',
+            'CNC Operation & Safety'
+        )">
+            Подробнее
+        </button>
+
+    </div>
+
+
+    <div class="card event" data-type="technology">
+
+        <div class="date">
+            <strong>18</strong>
+            AUG 2026
+        </div>
+
+        <span class="badge">TECHNOLOGY</span>
+
+        <h3>Automation & Robotics Day</h3>
+
+        <p>
+            Новые решения в промышленной автоматизации,
+            робототехнике, датчиках и системах управления.
+        </p>
+
+        <p>
+            <b>📍 Место:</b> Munich, Germany
+        </p>
+
+        <p>
+            <b>👥 Участники:</b> Technology Companies
+        </p>
+
+        <button onclick="showEvent(
+            'Automation & Robotics Day',
+            '18 August 2026',
+            'Munich, Germany',
+            'Technology',
+            'Automation & Robotics'
+        )">
+            Подробнее
+        </button>
+
+    </div>
+
+
+    <div class="card event" data-type="business">
+
+        <div class="date">
+            <strong>05</strong>
+            SEP 2026
+        </div>
+
+        <span class="badge">BUSINESS</span>
+
+        <h3>Industrial Supplier Meeting</h3>
+
+        <p>
+            Деловая встреча производителей, поставщиков
+            и покупателей промышленной продукции.
+        </p>
+
+        <p>
+            <b>📍 Место:</b> Milan, Italy
+        </p>
+
+        <p>
+            <b>👥 Участники:</b> Buyers & Suppliers
+        </p>
+
+        <button onclick="showEvent(
+            'Industrial Supplier Meeting',
+            '05 September 2026',
+            'Milan, Italy',
+            'Business',
+            'Industrial Trade'
+        )">
+            Подробнее
+        </button>
+
+    </div>
+
+
+    <div class="card event" data-type="conference">
+
+        <div class="date">
+            <strong>20</strong>
+            OCT 2026
+        </div>
+
+        <span class="badge">CONFERENCE</span>
+
+        <h3>Future of Industry Conference</h3>
+
+        <p>
+            Обсуждение будущего производства, цифровизации,
+            автоматизации и международной промышленной торговли.
+        </p>
+
+        <p>
+            <b>📍 Место:</b> Dubai, UAE
+        </p>
+
+        <p>
+            <b>👥 Участники:</b> Industrial Professionals
+        </p>
+
+        <button onclick="showEvent(
+            'Future of Industry Conference',
+            '20 October 2026',
+            'Dubai, UAE',
+            'Conference',
+            'Future Industry & Digitalization'
+        )">
+            Подробнее
+        </button>
+
+    </div>
+
+</section>
+
+
+<section class="create">
+
+    <h2>Создать событие</h2>
+
+    <form onsubmit="createEvent(event)">
+
+        <input
+            id="eventName"
+            type="text"
+            placeholder="Название события"
+            required
+        >
+
+        <input
+            id="eventDate"
+            type="date"
+            required
+        >
+
+        <input
+            id="eventLocation"
+            type="text"
+            placeholder="Город и страна"
+            required
+        >
+
+        <select id="eventType" required>
+
+            <option value="">
+                Тип события
+            </option>
+
+            <option>
+                Exhibition
+            </option>
+
+            <option>
+                Conference
+            </option>
+
+            <option>
+                Training
+            </option>
+
+            <option>
+                Technology
+            </option>
+
+            <option>
+                Business
+            </option>
+
+        </select>
+
+        <textarea
+            id="eventDescription"
+            placeholder="Описание события..."
+            required
+        ></textarea>
+
+        <button class="submit" type="submit">
+            Создать событие
+        </button>
+
+    </form>
+
+</section>
+
+
+<section class="info">
+
+    <h2>Что будет в системе Events?</h2>
+
+    <p>
+        В будущем раздел Events позволит компаниям и специалистам
+        находить промышленные мероприятия в разных странах,
+        регистрироваться на них и создавать собственные события.
+    </p>
+
+    <p>
+        События могут быть связаны с компаниями, производителями,
+        специалистами, товарами, обучением и промышленными технологиями.
+    </p>
+
+    <div class="links">
+
+        <a href="../training/">Обучение</a>
+        <a href="../training-courses/">Курсы</a>
+        <a href="../companies/">Компании</a>
+        <a href="../manufacturers/">Производители</a>
+        <a href="../suppliers/">Поставщики</a>
+        <a href="../news/">Новости</a>
+        <a href="../contact/">Контакты</a>
+
+    </div>
+
+</section>
+
+</div>
+
+
+<footer>
+    WORKER PRO © 2026<br>
+    Industrial Platform — Production • Skills • Companies • Trade • Logistics
+</footer>
+
+
+<div class="modal" id="eventModal">
+
+    <div class="modal-box">
+
+        <span class="close" onclick="closeModal()">×</span>
+
+        <h2 id="modalTitle"></h2>
+
+        <p>
+            <b>Дата:</b>
+            <span id="modalDate"></span>
+        </p>
+
+        <p>
+            <b>Место:</b>
+            <span id="modalLocation"></span>
+        </p>
+
+        <p>
+            <b>Тип:</b>
+            <span id="modalType"></span>
+        </p>
+
+        <p>
+            <b>Тема:</b>
+            <span id="modalDescription"></span>
+        </p>
+
+        <button
+            class="submit"
+            onclick="alert('Регистрация на событие будет доступна в полной версии WORKER PRO.')">
+            Зарегистрироваться
+        </button>
+
+    </div>
+
+</div>
+
+
+<script src="../language.js"></script>
+
+<script>
+
+let currentFilter = "all";
+
+
+function filterEvents(type,button){
+
+    currentFilter = type;
+
+    document
+        .querySelectorAll(".filters button")
+        .forEach(function(btn){
+            btn.classList.remove("active");
+        });
+
+    button.classList.add("active");
+
+    applyFilters();
+}
+
+
+function searchEvents(){
+
+    applyFilters();
+
+}
+
+
+function applyFilters(){
+
+    const search =
+        document
+        .getElementById("search")
+        .value
+        .toLowerCase();
+
+    document
+        .querySelectorAll(".event")
+        .forEach(function(card){
+
+            const text =
+                card.innerText.toLowerCase();
+
+            const type =
+                card.getAttribute("data-type");
+
+            const searchMatch =
+                text.includes(search);
+
+            const filterMatch =
+                currentFilter === "all" ||
+                type === currentFilter;
+
+            if(searchMatch && filterMatch){
+
+                card.style.display = "block";
+
+            }else{
+
+                card.style.display = "none";
+
+            }
+
+        });
+
+}
+
+
+function showEvent(
+    title,
+    date,
+    location,
+    type,
+    description
+){
+
+    document.getElementById("modalTitle")
+        .innerText = title;
+
+    document.getElementById("modalDate")
+        .innerText = date;
+
+    document.getElementById("modalLocation")
+        .innerText = location;
+
+    document.getElementById("modalType")
+        .innerText = type;
+
+    document.getElementById("modalDescription")
+        .innerText = description;
+
+    document.getElementById("eventModal")
+        .style.display = "block";
+
+}
+
+
+function closeModal(){
+
+    document.getElementById("eventModal")
+        .style.display = "none";
+
+}
+
+
+function createEvent(event){
+
+    event.preventDefault();
+
+    const name =
+        document.getElementById("eventName").value;
+
+    const date =
+        document.getElementById("eventDate").value;
+
+    const location =
+        document.getElementById("eventLocation").value;
+
+    const id =
+        "EVT-2026-" +
+        Math.floor(100 + Math.random() * 900);
+
+    alert(
+        "Событие создано!\n\n" +
+        "Номер: " + id + "\n" +
+        "Название: " + name + "\n" +
+        "Дата: " + date + "\n" +
+        "Место: " + location + "\n\n" +
+        "Это демонстрационная версия WORKER PRO."
+    );
+
+    document
+        .querySelector(".create form")
+        .reset();
+
+}
+
+
+window.onclick = function(event){
+
+    const modal =
+        document.getElementById("eventModal");
+
+    if(event.target === modal){
+
+        modal.style.display = "none";
+
+    }
+
+};
+
+</script>
+
+</body>
+</html>
