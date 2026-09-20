@@ -1,0 +1,1651 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WORKER PRO — Service Centers</title>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f4f7f5;
+    color:#123;
+}
+
+.top-languages{
+    background:#063d25;
+    padding:10px;
+    text-align:center;
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+.top-languages button{
+    background:#0b6b3d;
+    color:white;
+    border:1px solid #b7ff35;
+    border-radius:8px;
+    padding:8px 11px;
+    margin:3px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.top-languages button:hover{
+    background:#b7ff35;
+    color:#063d25;
+}
+
+header{
+    background:linear-gradient(135deg,#063d25,#0b6b3d);
+    color:white;
+    padding:35px 20px;
+    text-align:center;
+}
+
+header h1{
+    margin:0 0 10px;
+    font-size:34px;
+}
+
+header p{
+    max-width:900px;
+    margin:auto;
+    font-size:17px;
+    line-height:1.6;
+}
+
+nav{
+    background:#075b34;
+    padding:12px;
+    text-align:center;
+    position:sticky;
+    top:58px;
+    z-index:999;
+    overflow-x:auto;
+    white-space:nowrap;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    display:inline-block;
+    margin:4px;
+    padding:9px 13px;
+    border-radius:7px;
+    background:#0b6b3d;
+    font-size:14px;
+}
+
+nav a:hover{
+    background:#b7ff35;
+    color:#063d25;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+    padding:25px 15px;
+}
+
+.hero{
+    background:white;
+    border-radius:15px;
+    padding:25px;
+    box-shadow:0 3px 12px rgba(0,0,0,.08);
+    margin-bottom:25px;
+    border-left:6px solid #0b6b3d;
+}
+
+.hero h2{
+    color:#063d25;
+    margin-top:0;
+}
+
+.hero p{
+    line-height:1.7;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
+    gap:15px;
+    margin-bottom:25px;
+}
+
+.stat{
+    background:white;
+    padding:20px;
+    border-radius:14px;
+    text-align:center;
+    box-shadow:0 3px 10px rgba(0,0,0,.07);
+}
+
+.stat .number{
+    font-size:30px;
+    font-weight:bold;
+    color:#0b6b3d;
+}
+
+.stat span{
+    display:block;
+    margin-top:8px;
+    font-weight:bold;
+}
+
+.search-box{
+    background:white;
+    padding:20px;
+    border-radius:14px;
+    margin-bottom:25px;
+    box-shadow:0 3px 10px rgba(0,0,0,.07);
+}
+
+.search-box input,
+.search-box select{
+    width:100%;
+    padding:13px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    font-size:16px;
+    margin-bottom:12px;
+}
+
+.search-grid{
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr;
+    gap:12px;
+}
+
+.filters{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+}
+
+.filters button{
+    border:0;
+    background:#e8f1ec;
+    color:#063d25;
+    padding:10px 14px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.filters button.active,
+.filters button:hover{
+    background:#0b6b3d;
+    color:white;
+}
+
+.section-title{
+    color:#063d25;
+    margin:30px 0 15px;
+}
+
+.centers-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(290px,1fr));
+    gap:18px;
+}
+
+.center-card{
+    background:white;
+    border-radius:15px;
+    padding:20px;
+    box-shadow:0 3px 12px rgba(0,0,0,.08);
+    border-top:5px solid #0b6b3d;
+}
+
+.center-card h3{
+    color:#063d25;
+    margin-top:0;
+}
+
+.center-card p{
+    line-height:1.55;
+}
+
+.badge{
+    display:inline-block;
+    padding:6px 10px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:bold;
+    margin-bottom:10px;
+    background:#e8f5ed;
+    color:#075b34;
+}
+
+.badge.verified{
+    background:#d9f7df;
+    color:#176b2d;
+}
+
+.badge.pending{
+    background:#fff3cd;
+    color:#856404;
+}
+
+.badge.service{
+    background:#dceeff;
+    color:#075b80;
+}
+
+.badge.international{
+    background:#eee5ff;
+    color:#603c9d;
+}
+
+.rating{
+    color:#d19a00;
+    font-size:18px;
+    margin:8px 0;
+}
+
+.card-buttons{
+    margin-top:15px;
+}
+
+.card-buttons button,
+.primary-btn{
+    border:0;
+    background:#0b6b3d;
+    color:white;
+    padding:10px 15px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+    margin-right:5px;
+}
+
+.card-buttons button:hover,
+.primary-btn:hover{
+    background:#063d25;
+}
+
+.services-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+    gap:15px;
+}
+
+.service-card{
+    background:white;
+    padding:20px;
+    border-radius:14px;
+    text-align:center;
+    box-shadow:0 3px 10px rgba(0,0,0,.07);
+}
+
+.service-card .icon{
+    font-size:38px;
+    margin-bottom:10px;
+}
+
+.service-card h3{
+    color:#063d25;
+}
+
+.form-box{
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 3px 12px rgba(0,0,0,.08);
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:15px;
+}
+
+.form-group{
+    display:flex;
+    flex-direction:column;
+}
+
+.form-group label{
+    font-weight:bold;
+    margin-bottom:6px;
+    color:#063d25;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea{
+    padding:12px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    font-size:15px;
+}
+
+.form-group textarea{
+    min-height:120px;
+    resize:vertical;
+}
+
+.full{
+    grid-column:1/-1;
+}
+
+.workflow{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+    gap:12px;
+    margin-top:20px;
+}
+
+.step{
+    background:#063d25;
+    color:white;
+    padding:18px 12px;
+    border-radius:12px;
+    text-align:center;
+}
+
+.step strong{
+    display:block;
+    color:#b7ff35;
+    font-size:20px;
+    margin-bottom:8px;
+}
+
+.quick-links{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:12px;
+}
+
+.quick-links a{
+    text-decoration:none;
+    background:white;
+    color:#063d25;
+    padding:17px;
+    border-radius:12px;
+    box-shadow:0 3px 10px rgba(0,0,0,.07);
+    font-weight:bold;
+    text-align:center;
+}
+
+.quick-links a:hover{
+    background:#0b6b3d;
+    color:white;
+}
+
+.future{
+    background:#063d25;
+    color:white;
+    border-radius:15px;
+    padding:25px;
+}
+
+.future li{
+    margin:10px 0;
+}
+
+.demo-warning{
+    background:#fff4d6;
+    color:#664d03;
+    border:1px solid #e6c767;
+    padding:16px;
+    border-radius:10px;
+    margin-top:25px;
+}
+
+footer{
+    background:#063d25;
+    color:white;
+    text-align:center;
+    padding:30px 15px;
+    margin-top:40px;
+}
+
+@media(max-width:700px){
+
+    header h1{
+        font-size:27px;
+    }
+
+    header p{
+        font-size:15px;
+    }
+
+    .container{
+        padding:18px 10px;
+    }
+
+    .hero,
+    .form-box{
+        padding:18px;
+    }
+
+    .search-grid{
+        grid-template-columns:1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="top-languages">
+    <button onclick="setLanguage('AZ')">🇦🇿 AZ</button>
+    <button onclick="setLanguage('RU')">🇷🇺 RU</button>
+    <button onclick="setLanguage('EN')">🇬🇧 EN</button>
+    <button onclick="setLanguage('TR')">🇹🇷 TR</button>
+    <button onclick="setLanguage('DE')">🇩🇪 DE</button>
+    <button onclick="setLanguage('AR')">🇸🇦 AR</button>
+    <button onclick="setLanguage('ES')">🇪🇸 ES</button>
+    <button onclick="setLanguage('FR')">🇫🇷 FR</button>
+    <button onclick="setLanguage('IT')">🇮🇹 IT</button>
+</div>
+
+<header>
+    <h1>🔧 WORKER PRO — Service Centers</h1>
+    <p>
+        Сервисные центры, ремонт промышленного оборудования,
+        гарантийное обслуживание и техническая поддержка.
+    </p>
+</header>
+
+<nav>
+    <a href="../index.html">Главная</a>
+    <a href="../companies/index.html">Компании</a>
+    <a href="../manufacturers/index.html">Производители</a>
+    <a href="../suppliers/index.html">Поставщики</a>
+    <a href="../services/index.html">Сервисы</a>
+    <a href="../maintenance/index.html">Обслуживание</a>
+    <a href="../equipment/index.html">Оборудование</a>
+    <a href="../warranty/index.html">Гарантия</a>
+    <a href="../claims/index.html">Претензии</a>
+    <a href="../returns/index.html">Возвраты</a>
+    <a href="../transport/index.html">Транспорт</a>
+    <a href="../support/index.html">Поддержка</a>
+    <a href="../dashboard/index.html">Кабинет</a>
+</nav>
+
+<div class="container">
+
+<section class="hero">
+
+    <h2>
+        Сервисные центры WORKER PRO
+    </h2>
+
+    <p>
+        Здесь пользователи смогут находить сервисные центры
+        для ремонта и технического обслуживания промышленного
+        оборудования, станков, насосов, гидравлики, автоматики,
+        электрических систем и других промышленных компонентов.
+    </p>
+
+    <p>
+        В будущем сервисные центры смогут создавать свои профили,
+        указывать специалистов, оборудование, услуги, цены,
+        города обслуживания и гарантийные возможности.
+    </p>
+
+</section>
+
+
+<div class="stats">
+
+    <div class="stat">
+        <div class="number">126</div>
+        <span>Сервисных центров</span>
+    </div>
+
+    <div class="stat">
+        <div class="number">82</div>
+        <span>Проверенные</span>
+    </div>
+
+    <div class="stat">
+        <div class="number">34</div>
+        <span>Страны</span>
+    </div>
+
+    <div class="stat">
+        <div class="number">418</div>
+        <span>Специалистов</span>
+    </div>
+
+    <div class="stat">
+        <div class="number">27</div>
+        <span>Направлений</span>
+    </div>
+
+</div>
+
+
+<section class="search-box">
+
+    <div class="search-grid">
+
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Поиск сервиса, города, компании..."
+            onkeyup="filterCenters()"
+        >
+
+        <select id="countryFilter" onchange="filterCenters()">
+
+            <option value="all">
+                Все страны
+            </option>
+
+            <option value="azerbaijan">
+                Азербайджан
+            </option>
+
+            <option value="turkey">
+                Турция
+            </option>
+
+            <option value="germany">
+                Германия
+            </option>
+
+            <option value="italy">
+                Италия
+            </option>
+
+            <option value="china">
+                Китай
+            </option>
+
+            <option value="usa">
+                США
+            </option>
+
+        </select>
+
+
+        <select id="serviceFilter" onchange="filterCenters()">
+
+            <option value="all">
+                Все услуги
+            </option>
+
+            <option value="cnc">
+                CNC
+            </option>
+
+            <option value="hydraulic">
+                Гидравлика
+            </option>
+
+            <option value="electrical">
+                Электрика
+            </option>
+
+            <option value="automation">
+                Автоматика
+            </option>
+
+            <option value="welding">
+                Сварка
+            </option>
+
+            <option value="pump">
+                Насосы
+            </option>
+
+        </select>
+
+    </div>
+
+    <div class="filters">
+
+        <button
+            class="active"
+            onclick="filterStatus('all',this)">
+            Все
+        </button>
+
+        <button
+            onclick="filterStatus('verified',this)">
+            Проверенные
+        </button>
+
+        <button
+            onclick="filterStatus('service',this)">
+            Сервис
+        </button>
+
+        <button
+            onclick="filterStatus('international',this)">
+            Международные
+        </button>
+
+        <button
+            onclick="filterStatus('pending',this)">
+            На проверке
+        </button>
+
+    </div>
+
+</section>
+
+
+<h2 class="section-title">
+    Сервисные центры
+</h2>
+
+
+<div class="centers-grid" id="centersGrid">
+
+
+    <div
+        class="center-card"
+        data-status="verified"
+        data-country="azerbaijan"
+        data-service="hydraulic pump">
+
+        <span class="badge verified">
+            ✓ Проверенный
+        </span>
+
+        <h3>
+            Baku Industrial Service
+        </h3>
+
+        <div class="rating">
+            ★★★★★
+        </div>
+
+        <p>
+            <strong>📍 Страна:</strong> Азербайджан
+        </p>
+
+        <p>
+            <strong>📍 Город:</strong> Баку
+        </p>
+
+        <p>
+            <strong>🔧 Услуги:</strong>
+            насосы, гидравлика, механика
+        </p>
+
+        <p>
+            <strong>🛡️ Гарантия:</strong>
+            Да
+        </p>
+
+        <p>
+            Авторизованный промышленный сервис.
+        </p>
+
+        <div class="card-buttons">
+            <button onclick="openCenter('Baku Industrial Service')">
+                Профиль
+            </button>
+        </div>
+
+    </div>
+
+
+    <div
+        class="center-card"
+        data-status="service"
+        data-country="turkey"
+        data-service="cnc">
+
+        <span class="badge service">
+            CNC Service
+        </span>
+
+        <h3>
+            Istanbul CNC Service
+        </h3>
+
+        <div class="rating">
+            ★★★★☆
+        </div>
+
+        <p>
+            <strong>📍 Страна:</strong> Турция
+        </p>
+
+        <p>
+            <strong>📍 Город:</strong> Стамбул
+        </p>
+
+        <p>
+            <strong>🔧 Услуги:</strong>
+            CNC, станки, диагностика
+        </p>
+
+        <p>
+            <strong>🛡️ Гарантия:</strong>
+            Да
+        </p>
+
+        <p>
+            Техническое обслуживание CNC оборудования.
+        </p>
+
+        <div class="card-buttons">
+            <button onclick="openCenter('Istanbul CNC Service')">
+                Профиль
+            </button>
+        </div>
+
+    </div>
+
+
+    <div
+        class="center-card"
+        data-status="international"
+        data-country="germany"
+        data-service="automation electrical">
+
+        <span class="badge international">
+            Международный
+        </span>
+
+        <h3>
+            German Automation Service
+        </h3>
+
+        <div class="rating">
+            ★★★★★
+        </div>
+
+        <p>
+            <strong>📍 Страна:</strong> Германия
+        </p>
+
+        <p>
+            <strong>📍 Город:</strong> Дортмунд
+        </p>
+
+        <p>
+            <strong>🔧 Услуги:</strong>
+            PLC, автоматика, электрика
+        </p>
+
+        <p>
+            <strong>🛡️ Гарантия:</strong>
+            Да
+        </p>
+
+        <p>
+            Международное промышленное обслуживание.
+        </p>
+
+        <div class="card-buttons">
+            <button onclick="openCenter('German Automation Service')">
+                Профиль
+            </button>
+        </div>
+
+    </div>
+
+
+    <div
+        class="center-card"
+        data-status="verified"
+        data-country="italy"
+        data-service="automation electrical">
+
+        <span class="badge verified">
+            ✓ Проверенный
+        </span>
+
+        <h3>
+            Italy Industrial Tech
+        </h3>
+
+        <div class="rating">
+            ★★★★★
+        </div>
+
+        <p>
+            <strong>📍 Страна:</strong> Италия
+        </p>
+
+        <p>
+            <strong>📍 Город:</strong> Милан
+        </p>
+
+        <p>
+            <strong>🔧 Услуги:</strong>
+            автоматика, датчики, электроника
+        </p>
+
+        <p>
+            <strong>🛡️ Гарантия:</strong>
+            Да
+        </p>
+
+        <p>
+            Промышленная диагностика и ремонт.
+        </p>
+
+        <div class="card-buttons">
+            <button onclick="openCenter('Italy Industrial Tech')">
+                Профиль
+            </button>
+        </div>
+
+    </div>
+
+
+    <div
+        class="center-card"
+        data-status="international"
+        data-country="china"
+        data-service="pump hydraulic">
+
+        <span class="badge international">
+            Международный
+        </span>
+
+        <h3>
+            China Pump Service
+        </h3>
+
+        <div class="rating">
+            ★★★★☆
+        </div>
+
+        <p>
+            <strong>📍 Страна:</strong> Китай
+        </p>
+
+        <p>
+            <strong>📍 Город:</strong> Шанхай
+        </p>
+
+        <p>
+            <strong>🔧 Услуги:</strong>
+            насосы, клапаны, гидравлика
+        </p>
+
+        <p>
+            <strong>🛡️ Гарантия:</strong>
+            Да
+        </p>
+
+        <p>
+            Сервис для промышленного насосного оборудования.
+        </p>
+
+        <div class="card-buttons">
+            <button onclick="openCenter('China Pump Service')">
+                Профиль
+            </button>
+        </div>
+
+    </div>
+
+
+    <div
+        class="center-card"
+        data-status="pending"
+        data-country="usa"
+        data-service="electrical">
+
+        <span class="badge pending">
+            На проверке
+        </span>
+
+        <h3>
+            USA Industrial Electronics
+        </h3>
+
+        <div class="rating">
+            ★★★★☆
+        </div>
+
+        <p>
+            <strong>📍 Страна:</strong> США
+        </p>
+
+        <p>
+            <strong>📍 Город:</strong> Хьюстон
+        </p>
+
+        <p>
+            <strong>🔧 Услуги:</strong>
+            электрика, датчики, электроника
+        </p>
+
+        <p>
+            <strong>🛡️ Гарантия:</strong>
+            На проверке
+        </p>
+
+        <p>
+            Профиль ожидает подтверждения платформы.
+        </p>
+
+        <div class="card-buttons">
+            <button onclick="openCenter('USA Industrial Electronics')">
+                Профиль
+            </button>
+        </div>
+
+    </div>
+
+
+    <div
+        class="center-card"
+        data-status="service"
+        data-country="azerbaijan"
+        data-service="cnc welding">
+
+        <span class="badge service">
+            Сервис
+        </span>
+
+        <h3>
+            Sumqayit Machine Service
+        </h3>
+
+        <div class="rating">
+            ★★★★☆
+        </div>
+
+        <p>
+            <strong>📍 Страна:</strong> Азербайджан
+        </p>
+
+        <p>
+            <strong>📍 Город:</strong> Сумгайыт
+        </p>
+
+        <p>
+            <strong>🔧 Услуги:</strong>
+            CNC, сварка, механика
+        </p>
+
+        <p>
+            <strong>🛡️ Гарантия:</strong>
+            Да
+        </p>
+
+        <p>
+            Ремонт и обслуживание промышленного оборудования.
+        </p>
+
+        <div class="card-buttons">
+            <button onclick="openCenter('Sumqayit Machine Service')">
+                Профиль
+            </button>
+        </div>
+
+    </div>
+
+
+    <div
+        class="center-card"
+        data-status="verified"
+        data-country="germany"
+        data-service="cnc">
+
+        <span class="badge verified">
+            ✓ Проверенный
+        </span>
+
+        <h3>
+            German CNC Technik
+        </h3>
+
+        <div class="rating">
+            ★★★★★
+        </div>
+
+        <p>
+            <strong>📍 Страна:</strong> Германия
+        </p>
+
+        <p>
+            <strong>📍 Город:</strong> Штутгарт
+        </p>
+
+        <p>
+            <strong>🔧 Услуги:</strong>
+            CNC, станки, диагностика
+        </p>
+
+        <p>
+            <strong>🛡️ Гарантия:</strong>
+            Да
+        </p>
+
+        <p>
+            Техническое обслуживание станков.
+        </p>
+
+        <div class="card-buttons">
+            <button onclick="openCenter('German CNC Technik')">
+                Профиль
+            </button>
+        </div>
+
+    </div>
+
+</div>
+
+
+<h2 class="section-title">
+    Основные виды сервиса
+</h2>
+
+
+<div class="services-grid">
+
+    <div class="service-card">
+        <div class="icon">⚙️</div>
+        <h3>CNC</h3>
+        <p>
+            Диагностика, ремонт и настройка станков CNC.
+        </p>
+    </div>
+
+    <div class="service-card">
+        <div class="icon">💧</div>
+        <h3>Гидравлика</h3>
+        <p>
+            Насосы, клапаны, гидростанции и цилиндры.
+        </p>
+    </div>
+
+    <div class="service-card">
+        <div class="icon">⚡</div>
+        <h3>Электрика</h3>
+        <p>
+            Электродвигатели, панели и промышленная электрика.
+        </p>
+    </div>
+
+    <div class="service-card">
+        <div class="icon">🤖</div>
+        <h3>Автоматика</h3>
+        <p>
+            PLC, датчики, контроллеры и системы управления.
+        </p>
+    </div>
+
+    <div class="service-card">
+        <div class="icon">🔥</div>
+        <h3>Печи</h3>
+        <p>
+            Промышленные печи, нагрев и термообработка.
+        </p>
+    </div>
+
+    <div class="service-card">
+        <div class="icon">🔩</div>
+        <h3>Механика</h3>
+        <p>
+            Ремонт механических узлов и оборудования.
+        </p>
+    </div>
+
+    <div class="service-card">
+        <div class="icon">🔥</div>
+        <h3>Сварка</h3>
+        <p>
+            Сварочное оборудование и промышленные работы.
+        </p>
+    </div>
+
+    <div class="service-card">
+        <div class="icon">🔬</div>
+        <h3>Диагностика</h3>
+        <p>
+            Поиск неисправностей и технический контроль.
+        </p>
+    </div>
+
+</div>
+
+
+<h2 class="section-title">
+    Добавить сервисный центр
+</h2>
+
+
+<section class="form-box">
+
+    <div class="form-grid">
+
+        <div class="form-group">
+
+            <label>
+                Название сервисного центра
+            </label>
+
+            <input
+                id="centerName"
+                placeholder="Название компании"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Страна
+            </label>
+
+            <select id="country">
+
+                <option>
+                    Азербайджан
+                </option>
+
+                <option>
+                    Турция
+                </option>
+
+                <option>
+                    Германия
+                </option>
+
+                <option>
+                    Италия
+                </option>
+
+                <option>
+                    Китай
+                </option>
+
+                <option>
+                    США
+                </option>
+
+                <option>
+                    Другая страна
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Город
+            </label>
+
+            <input
+                id="city"
+                placeholder="Город"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Основная услуга
+            </label>
+
+            <select id="mainService">
+
+                <option>
+                    CNC
+                </option>
+
+                <option>
+                    Гидравлика
+                </option>
+
+                <option>
+                    Электрика
+                </option>
+
+                <option>
+                    Автоматика
+                </option>
+
+                <option>
+                    Насосы
+                </option>
+
+                <option>
+                    Сварка
+                </option>
+
+                <option>
+                    Механика
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Телефон
+            </label>
+
+            <input
+                id="phone"
+                placeholder="+994..."
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Email
+            </label>
+
+            <input
+                type="email"
+                id="email"
+                placeholder="service@example.com"
+            >
+
+        </div>
+
+
+        <div class="form-group full">
+
+            <label>
+                Описание услуг
+            </label>
+
+            <textarea
+                id="description"
+                placeholder="Опишите оборудование, услуги и возможности сервисного центра..."
+            ></textarea>
+
+        </div>
+
+    </div>
+
+    <br>
+
+    <button
+        class="primary-btn"
+        onclick="addCenter()">
+
+        Добавить сервисный центр
+
+    </button>
+
+</section>
+
+
+<h2 class="section-title">
+    Как работает сервис
+</h2>
+
+
+<div class="workflow">
+
+    <div class="step">
+        <strong>1</strong>
+        Поиск центра
+    </div>
+
+    <div class="step">
+        <strong>2</strong>
+        Выбор услуги
+    </div>
+
+    <div class="step">
+        <strong>3</strong>
+        Заявка
+    </div>
+
+    <div class="step">
+        <strong>4</strong>
+        Диагностика
+    </div>
+
+    <div class="step">
+        <strong>5</strong>
+        Ремонт
+    </div>
+
+    <div class="step">
+        <strong>6</strong>
+        Проверка
+    </div>
+
+    <div class="step">
+        <strong>7</strong>
+        Получение
+    </div>
+
+</div>
+
+
+<h2 class="section-title">
+    Быстрый доступ
+</h2>
+
+
+<div class="quick-links">
+
+    <a href="../services/index.html">
+        🔧 Сервисы
+    </a>
+
+    <a href="../maintenance/index.html">
+        🛠️ Обслуживание
+    </a>
+
+    <a href="../warranty/index.html">
+        🛡️ Гарантия
+    </a>
+
+    <a href="../claims/index.html">
+        ⚖️ Претензии
+    </a>
+
+    <a href="../returns/index.html">
+        ↩️ Возвраты
+    </a>
+
+    <a href="../equipment/index.html">
+        ⚙️ Оборудование
+    </a>
+
+    <a href="../companies/index.html">
+        🏢 Компании
+    </a>
+
+    <a href="../specialists/index.html">
+        👨‍🔧 Специалисты
+    </a>
+
+    <a href="../transport/index.html">
+        🚚 Транспорт
+    </a>
+
+    <a href="../support/index.html">
+        🎧 Поддержка
+    </a>
+
+</div>
+
+
+<h2 class="section-title">
+    Будущие возможности
+</h2>
+
+
+<section class="future">
+
+    <ul>
+
+        <li>
+            Карта сервисных центров по всему миру.
+        </li>
+
+        <li>
+            Поиск ближайшего сервисного центра.
+        </li>
+
+        <li>
+            Онлайн-запись на ремонт.
+        </li>
+
+        <li>
+            Авторизация сервисных центров производителями.
+        </li>
+
+        <li>
+            Реальные рейтинги и отзывы клиентов.
+        </li>
+
+        <li>
+            Расчёт стоимости ремонта.
+        </li>
+
+        <li>
+            Онлайн-оплата сервисных работ.
+        </li>
+
+        <li>
+            Отслеживание ремонта.
+        </li>
+
+        <li>
+            Связь с гарантийной системой.
+        </li>
+
+        <li>
+            Международная доставка оборудования в сервис.
+        </li>
+
+        <li>
+            Каталог специалистов сервисного центра.
+        </li>
+
+    </ul>
+
+</section>
+
+
+<div class="demo-warning">
+
+    <strong>⚠️ Демо-версия:</strong>
+
+    представленные сервисные центры являются демонстрационными.
+    Реальные адреса, телефоны, рейтинги, цены и сервисные заявки
+    будут подключаться после создания рабочей базы компаний.
+
+</div>
+
+</div>
+
+
+<footer>
+
+    <h3>
+        WORKER PRO
+    </h3>
+
+    <p>
+        Международная промышленная платформа
+    </p>
+
+    <p>
+        Service Centers • Warranty • Maintenance • Repair
+    </p>
+
+    <p>
+        © 2026 WORKER PRO — F.S
+    </p>
+
+</footer>
+
+
+<script src="../language.js"></script>
+
+<script>
+
+let currentStatus = "all";
+
+
+function filterStatus(status,button){
+
+    currentStatus = status;
+
+    document
+        .querySelectorAll(".filters button")
+        .forEach(function(btn){
+
+            btn.classList.remove("active");
+
+        });
+
+    button.classList.add("active");
+
+    filterCenters();
+}
+
+
+function filterCenters(){
+
+    const search =
+        document
+        .getElementById("searchInput")
+        .value
+        .toLowerCase();
+
+    const country =
+        document
+        .getElementById("countryFilter")
+        .value;
+
+    const service =
+        document
+        .getElementById("serviceFilter")
+        .value;
+
+    const cards =
+        document.querySelectorAll(".center-card");
+
+    cards.forEach(function(card){
+
+        const text =
+            card.innerText.toLowerCase();
+
+        const cardCountry =
+            card.dataset.country;
+
+        const cardService =
+            card.dataset.service;
+
+        const status =
+            card.dataset.status;
+
+        const searchMatch =
+            text.includes(search);
+
+        const countryMatch =
+            country === "all" ||
+            cardCountry === country;
+
+        const serviceMatch =
+            service === "all" ||
+            cardService.includes(service);
+
+        const statusMatch =
+            currentStatus === "all" ||
+            status === currentStatus;
+
+        if(
+            searchMatch &&
+            countryMatch &&
+            serviceMatch &&
+            statusMatch
+        ){
+
+            card.style.display = "block";
+
+        }else{
+
+            card.style.display = "none";
+
+        }
+
+    });
+
+}
+
+
+function openCenter(name){
+
+    alert(
+        "Сервисный центр: " + name +
+        "\\n\\n" +
+        "Это демонстрационный профиль. " +
+        "В рабочей версии здесь будут адрес, телефон, " +
+        "услуги, специалисты, рейтинг, отзывы, " +
+        "гарантия и возможность создать заявку на ремонт."
+    );
+
+}
+
+
+function addCenter(){
+
+    const name =
+        document
+        .getElementById("centerName")
+        .value
+        .trim();
+
+    const city =
+        document
+        .getElementById("city")
+        .value
+        .trim();
+
+    if(!name){
+
+        alert(
+            "Введите название сервисного центра."
+        );
+
+        return;
+    }
+
+    if(!city){
+
+        alert(
+            "Введите город."
+        );
+
+        return;
+    }
+
+    const country =
+        document
+        .getElementById("country")
+        .value;
+
+    const service =
+        document
+        .getElementById("mainService")
+        .value;
+
+    alert(
+        "Сервисный центр добавлен " +
+        "в демо-режиме.\\n\\n" +
+
+        "Название: " + name +
+        "\\nСтрана: " + country +
+        "\\nГород: " + city +
+        "\\nУслуга: " + service +
+
+        "\\n\\n" +
+
+        "В рабочей версии профиль будет отправлен " +
+        "на проверку WORKER PRO."
+    );
+
+}
+
+</script>
+
+</body>
+</html>
