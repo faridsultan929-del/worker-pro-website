@@ -1,0 +1,1676 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WORKER PRO — Delivery</title>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f4f7f5;
+    color:#123;
+}
+
+.top-languages{
+    background:#063d25;
+    padding:10px;
+    text-align:center;
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+.top-languages button{
+    background:#0b6b3d;
+    color:white;
+    border:1px solid #b7ff35;
+    border-radius:8px;
+    padding:8px 11px;
+    margin:3px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.top-languages button:hover{
+    background:#b7ff35;
+    color:#063d25;
+}
+
+header{
+    background:linear-gradient(135deg,#063d25,#0b6b3d);
+    color:white;
+    text-align:center;
+    padding:35px 20px;
+}
+
+header h1{
+    margin:0 0 10px;
+    font-size:34px;
+}
+
+header p{
+    max-width:900px;
+    margin:auto;
+    line-height:1.6;
+}
+
+nav{
+    background:#075b34;
+    padding:12px;
+    text-align:center;
+    position:sticky;
+    top:58px;
+    z-index:999;
+    overflow-x:auto;
+    white-space:nowrap;
+}
+
+nav a{
+    display:inline-block;
+    color:white;
+    text-decoration:none;
+    background:#0b6b3d;
+    padding:9px 13px;
+    margin:4px;
+    border-radius:7px;
+    font-size:14px;
+}
+
+nav a:hover{
+    background:#b7ff35;
+    color:#063d25;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+    padding:25px 15px;
+}
+
+.hero{
+    background:white;
+    border-left:6px solid #0b6b3d;
+    border-radius:15px;
+    padding:25px;
+    box-shadow:0 3px 12px rgba(0,0,0,.08);
+    margin-bottom:25px;
+}
+
+.hero h2{
+    color:#063d25;
+    margin-top:0;
+}
+
+.hero p{
+    line-height:1.7;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
+    gap:15px;
+    margin-bottom:25px;
+}
+
+.stat{
+    background:white;
+    padding:20px;
+    text-align:center;
+    border-radius:14px;
+    box-shadow:0 3px 10px rgba(0,0,0,.07);
+}
+
+.number{
+    color:#0b6b3d;
+    font-size:30px;
+    font-weight:bold;
+}
+
+.stat span{
+    display:block;
+    margin-top:8px;
+    font-weight:bold;
+}
+
+.search-box{
+    background:white;
+    padding:20px;
+    border-radius:14px;
+    box-shadow:0 3px 10px rgba(0,0,0,.07);
+    margin-bottom:25px;
+}
+
+.search-grid{
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr;
+    gap:12px;
+}
+
+.search-box input,
+.search-box select{
+    width:100%;
+    padding:13px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    font-size:16px;
+}
+
+.filters{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:15px;
+}
+
+.filters button{
+    border:0;
+    background:#e8f1ec;
+    color:#063d25;
+    padding:10px 14px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.filters button.active,
+.filters button:hover{
+    background:#0b6b3d;
+    color:white;
+}
+
+.section-title{
+    color:#063d25;
+    margin:30px 0 15px;
+}
+
+.delivery-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:18px;
+}
+
+.delivery-card{
+    background:white;
+    border-radius:15px;
+    padding:20px;
+    box-shadow:0 3px 12px rgba(0,0,0,.08);
+    border-top:5px solid #0b6b3d;
+}
+
+.delivery-card h3{
+    color:#063d25;
+    margin-top:0;
+}
+
+.delivery-card p{
+    line-height:1.55;
+}
+
+.badge{
+    display:inline-block;
+    padding:6px 10px;
+    border-radius:20px;
+    background:#e8f5ed;
+    color:#075b34;
+    font-size:12px;
+    font-weight:bold;
+    margin-bottom:10px;
+}
+
+.badge.transit{
+    background:#fff0d6;
+    color:#875b00;
+}
+
+.badge.ready{
+    background:#dceeff;
+    color:#075b80;
+}
+
+.badge.done{
+    background:#dff5df;
+    color:#347126;
+}
+
+.badge.warning{
+    background:#ffe2e2;
+    color:#9b2222;
+}
+
+.route{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    margin:15px 0;
+    font-weight:bold;
+    color:#063d25;
+}
+
+.route-line{
+    flex:1;
+    height:3px;
+    background:#b7ff35;
+}
+
+.progress{
+    height:10px;
+    background:#e1e8e3;
+    border-radius:20px;
+    overflow:hidden;
+    margin:15px 0;
+}
+
+.progress-bar{
+    height:100%;
+    background:#0b6b3d;
+    border-radius:20px;
+}
+
+.card-button{
+    border:0;
+    background:#0b6b3d;
+    color:white;
+    padding:10px 15px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.card-button:hover{
+    background:#063d25;
+}
+
+.tracking{
+    background:white;
+    border-radius:15px;
+    padding:25px;
+    box-shadow:0 3px 12px rgba(0,0,0,.08);
+}
+
+.tracking-box{
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:12px;
+}
+
+.tracking-box input{
+    padding:13px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    font-size:16px;
+}
+
+.primary{
+    border:0;
+    background:#0b6b3d;
+    color:white;
+    padding:13px 18px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.primary:hover{
+    background:#063d25;
+}
+
+.tracking-result{
+    display:none;
+    margin-top:20px;
+    background:#eaf5ee;
+    border-left:5px solid #0b6b3d;
+    padding:20px;
+    border-radius:8px;
+}
+
+.timeline{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+    gap:10px;
+}
+
+.timeline-step{
+    background:#063d25;
+    color:white;
+    padding:18px 10px;
+    border-radius:12px;
+    text-align:center;
+}
+
+.timeline-step strong{
+    display:block;
+    color:#b7ff35;
+    font-size:22px;
+    margin-bottom:7px;
+}
+
+.form-box{
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 3px 12px rgba(0,0,0,.08);
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:15px;
+}
+
+.form-group{
+    display:flex;
+    flex-direction:column;
+}
+
+.form-group label{
+    font-weight:bold;
+    color:#063d25;
+    margin-bottom:6px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea{
+    padding:12px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    font-size:15px;
+}
+
+.form-group textarea{
+    min-height:110px;
+    resize:vertical;
+}
+
+.full{
+    grid-column:1/-1;
+}
+
+.types-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+    gap:15px;
+}
+
+.type-card{
+    background:white;
+    padding:20px;
+    text-align:center;
+    border-radius:14px;
+    box-shadow:0 3px 10px rgba(0,0,0,.07);
+}
+
+.type-card .icon{
+    font-size:40px;
+}
+
+.type-card h3{
+    color:#063d25;
+}
+
+.future{
+    background:#063d25;
+    color:white;
+    padding:25px;
+    border-radius:15px;
+}
+
+.future li{
+    margin:10px 0;
+}
+
+.quick-links{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:12px;
+}
+
+.quick-links a{
+    background:white;
+    color:#063d25;
+    text-decoration:none;
+    padding:17px;
+    border-radius:12px;
+    text-align:center;
+    font-weight:bold;
+    box-shadow:0 3px 10px rgba(0,0,0,.07);
+}
+
+.quick-links a:hover{
+    background:#0b6b3d;
+    color:white;
+}
+
+.demo-warning{
+    background:#fff4d6;
+    color:#664d03;
+    border:1px solid #e6c767;
+    padding:16px;
+    border-radius:10px;
+    margin-top:25px;
+}
+
+footer{
+    background:#063d25;
+    color:white;
+    text-align:center;
+    padding:30px 15px;
+    margin-top:40px;
+}
+
+@media(max-width:700px){
+
+    header h1{
+        font-size:27px;
+    }
+
+    .search-grid,
+    .tracking-box{
+        grid-template-columns:1fr;
+    }
+
+    .container{
+        padding:18px 10px;
+    }
+
+    .hero,
+    .form-box,
+    .tracking{
+        padding:18px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="top-languages">
+
+<button onclick="setLanguage('AZ')">🇦🇿 AZ</button>
+<button onclick="setLanguage('RU')">🇷🇺 RU</button>
+<button onclick="setLanguage('EN')">🇬🇧 EN</button>
+<button onclick="setLanguage('TR')">🇹🇷 TR</button>
+<button onclick="setLanguage('DE')">🇩🇪 DE</button>
+<button onclick="setLanguage('AR')">🇸🇦 AR</button>
+<button onclick="setLanguage('ES')">🇪🇸 ES</button>
+<button onclick="setLanguage('FR')">🇫🇷 FR</button>
+<button onclick="setLanguage('IT')">🇮🇹 IT</button>
+
+</div>
+
+
+<header>
+
+<h1>📦 WORKER PRO — Delivery</h1>
+
+<p>
+Международная и локальная доставка
+промышленного оборудования, запчастей,
+материалов и других товаров.
+</p>
+
+</header>
+
+
+<nav>
+
+<a href="../index.html">Главная</a>
+<a href="../map/index.html">Карта</a>
+<a href="../logistics/index.html">Логистика</a>
+<a href="../transport/index.html">Транспорт</a>
+<a href="../warehouse/index.html">Склад</a>
+<a href="../orders/index.html">Заказы</a>
+<a href="../requests/index.html">Заявки</a>
+<a href="../offers/index.html">Предложения</a>
+<a href="../companies/index.html">Компании</a>
+<a href="../suppliers/index.html">Поставщики</a>
+<a href="../documents/index.html">Документы</a>
+<a href="../notifications/index.html">Уведомления</a>
+<a href="../dashboard/index.html">Кабинет</a>
+
+</nav>
+
+
+<div class="container">
+
+
+<section class="hero">
+
+<h2>🚚 Система доставки WORKER PRO</h2>
+
+<p>
+После оформления заказа WORKER PRO связывает
+поставщика, транспортную компанию, склад
+и покупателя.
+</p>
+
+<p>
+Пользователь сможет видеть текущий статус груза,
+местоположение, этап доставки и документы.
+</p>
+
+</section>
+
+
+<div class="stats">
+
+<div class="stat">
+<div class="number">8,420</div>
+<span>Доставок</span>
+</div>
+
+<div class="stat">
+<div class="number">326</div>
+<span>Перевозчиков</span>
+</div>
+
+<div class="stat">
+<div class="number">48</div>
+<span>Стран</span>
+</div>
+
+<div class="stat">
+<div class="number">1,240</div>
+<span>Маршрутов</span>
+</div>
+
+<div class="stat">
+<div class="number">96%</div>
+<span>Вовремя</span>
+</div>
+
+</div>
+
+
+<section class="search-box">
+
+<div class="search-grid">
+
+<input
+id="searchInput"
+type="text"
+placeholder="🔎 Поиск доставки, города, заказа..."
+onkeyup="filterDeliveries()"
+>
+
+<select id="statusFilter" onchange="filterDeliveries()">
+
+<option value="all">Все статусы</option>
+<option value="transit">В пути</option>
+<option value="ready">Готово к отправке</option>
+<option value="done">Доставлено</option>
+<option value="warning">Проблема</option>
+
+</select>
+
+
+<select id="countryFilter" onchange="filterDeliveries()">
+
+<option value="all">Все страны</option>
+<option value="azerbaijan">Азербайджан</option>
+<option value="turkey">Турция</option>
+<option value="germany">Германия</option>
+<option value="italy">Италия</option>
+<option value="china">Китай</option>
+<option value="usa">США</option>
+
+</select>
+
+</div>
+
+
+<div class="filters">
+
+<button class="active" onclick="setStatus('all',this)">
+Все
+</button>
+
+<button onclick="setStatus('transit',this)">
+🚚 В пути
+</button>
+
+<button onclick="setStatus('ready',this)">
+📦 Готово
+</button>
+
+<button onclick="setStatus('done',this)">
+✅ Доставлено
+</button>
+
+<button onclick="setStatus('warning',this)">
+⚠️ Проблема
+</button>
+
+</div>
+
+</section>
+
+
+<h2 class="section-title">
+📦 Текущие доставки
+</h2>
+
+
+<div class="delivery-grid" id="deliveryGrid">
+
+
+<div
+class="delivery-card"
+data-status="transit"
+data-country="azerbaijan turkey"
+>
+
+<span class="badge transit">
+🚚 В пути
+</span>
+
+<h3>
+Заказ WP-2026-001
+</h3>
+
+<div class="route">
+🇹🇷 Istanbul
+<div class="route-line"></div>
+🇦🇿 Baku
+</div>
+
+<p>
+<strong>Груз:</strong>
+Гидравлические запчасти
+</p>
+
+<p>
+<strong>Вес:</strong>
+850 кг
+</p>
+
+<p>
+<strong>Перевозчик:</strong>
+Demo Logistics
+</p>
+
+<div class="progress">
+<div class="progress-bar" style="width:65%"></div>
+</div>
+
+<p>
+65% маршрута
+</p>
+
+<button
+class="card-button"
+onclick="openDelivery('WP-2026-001')"
+>
+Подробнее
+</button>
+
+</div>
+
+
+<div
+class="delivery-card"
+data-status="ready"
+data-country="germany azerbaijan"
+>
+
+<span class="badge ready">
+📦 Готово к отправке
+</span>
+
+<h3>
+Заказ WP-2026-002
+</h3>
+
+<div class="route">
+🇩🇪 Dortmund
+<div class="route-line"></div>
+🇦🇿 Baku
+</div>
+
+<p>
+<strong>Груз:</strong>
+CNC комплектующие
+</p>
+
+<p>
+<strong>Вес:</strong>
+420 кг
+</p>
+
+<p>
+<strong>Перевозчик:</strong>
+Industrial Cargo
+</p>
+
+<div class="progress">
+<div class="progress-bar" style="width:25%"></div>
+</div>
+
+<p>
+Подготовка груза
+</p>
+
+<button
+class="card-button"
+onclick="openDelivery('WP-2026-002')"
+>
+Подробнее
+</button>
+
+</div>
+
+
+<div
+class="delivery-card"
+data-status="done"
+data-country="italy azerbaijan"
+>
+
+<span class="badge done">
+✅ Доставлено
+</span>
+
+<h3>
+Заказ WP-2026-003
+</h3>
+
+<div class="route">
+🇮🇹 Milan
+<div class="route-line"></div>
+🇦🇿 Baku
+</div>
+
+<p>
+<strong>Груз:</strong>
+Промышленный насос
+</p>
+
+<p>
+<strong>Вес:</strong>
+1,200 кг
+</p>
+
+<p>
+<strong>Получатель:</strong>
+Baku Industrial
+</p>
+
+<div class="progress">
+<div class="progress-bar" style="width:100%"></div>
+</div>
+
+<p>
+Доставка завершена
+</p>
+
+<button
+class="card-button"
+onclick="openDelivery('WP-2026-003')"
+>
+Подробнее
+</button>
+
+</div>
+
+
+<div
+class="delivery-card"
+data-status="transit"
+data-country="china azerbaijan"
+>
+
+<span class="badge transit">
+🚢 В пути
+</span>
+
+<h3>
+Заказ WP-2026-004
+</h3>
+
+<div class="route">
+🇨🇳 Shanghai
+<div class="route-line"></div>
+🇦🇿 Baku
+</div>
+
+<p>
+<strong>Груз:</strong>
+Промышленное оборудование
+</p>
+
+<p>
+<strong>Вес:</strong>
+4,500 кг
+</p>
+
+<p>
+<strong>Транспорт:</strong>
+Море + авто
+</p>
+
+<div class="progress">
+<div class="progress-bar" style="width:48%"></div>
+</div>
+
+<p>
+48% маршрута
+</p>
+
+<button
+class="card-button"
+onclick="openDelivery('WP-2026-004')"
+>
+Подробнее
+</button>
+
+</div>
+
+
+<div
+class="delivery-card"
+data-status="warning"
+data-country="usa azerbaijan"
+>
+
+<span class="badge warning">
+⚠️ Задержка
+</span>
+
+<h3>
+Заказ WP-2026-005
+</h3>
+
+<div class="route">
+🇺🇸 Houston
+<div class="route-line"></div>
+🇦🇿 Baku
+</div>
+
+<p>
+<strong>Груз:</strong>
+Электрические компоненты
+</p>
+
+<p>
+<strong>Вес:</strong>
+180 кг
+</p>
+
+<p>
+<strong>Причина:</strong>
+Дополнительная проверка документов
+</p>
+
+<div class="progress">
+<div class="progress-bar" style="width:72%"></div>
+</div>
+
+<p>
+Ожидается оформление
+</p>
+
+<button
+class="card-button"
+onclick="openDelivery('WP-2026-005')"
+>
+Подробнее
+</button>
+
+</div>
+
+
+<div
+class="delivery-card"
+data-status="done"
+data-country="turkey azerbaijan"
+>
+
+<span class="badge done">
+✅ Доставлено
+</span>
+
+<h3>
+Заказ WP-2026-006
+</h3>
+
+<div class="route">
+🇹🇷 Ankara
+<div class="route-line"></div>
+🇦🇿 Baku
+</div>
+
+<p>
+<strong>Груз:</strong>
+Датчики давления
+</p>
+
+<p>
+<strong>Вес:</strong>
+95 кг
+</p>
+
+<p>
+<strong>Получатель:</strong>
+Industrial Service
+</p>
+
+<div class="progress">
+<div class="progress-bar" style="width:100%"></div>
+</div>
+
+<p>
+Доставка завершена
+</p>
+
+<button
+class="card-button"
+onclick="openDelivery('WP-2026-006')"
+>
+Подробнее
+</button>
+
+</div>
+
+</div>
+
+
+<h2 class="section-title">
+🔎 Отслеживание доставки
+</h2>
+
+
+<section class="tracking">
+
+<p>
+Введите номер заказа или номер доставки.
+</p>
+
+<div class="tracking-box">
+
+<input
+id="trackingNumber"
+placeholder="Например: WP-2026-001"
+>
+
+<button
+class="primary"
+onclick="trackDelivery()"
+>
+🔎 Отследить
+</button>
+
+</div>
+
+
+<div
+class="tracking-result"
+id="trackingResult"
+>
+</div>
+
+</section>
+
+
+<h2 class="section-title">
+🔄 Этапы доставки
+</h2>
+
+
+<div class="timeline">
+
+<div class="timeline-step">
+<strong>1</strong>
+Заказ
+</div>
+
+<div class="timeline-step">
+<strong>2</strong>
+Поставщик
+</div>
+
+<div class="timeline-step">
+<strong>3</strong>
+Упаковка
+</div>
+
+<div class="timeline-step">
+<strong>4</strong>
+Забор
+</div>
+
+<div class="timeline-step">
+<strong>5</strong>
+Транспорт
+</div>
+
+<div class="timeline-step">
+<strong>6</strong>
+Таможня
+</div>
+
+<div class="timeline-step">
+<strong>7</strong>
+Склад
+</div>
+
+<div class="timeline-step">
+<strong>8</strong>
+Получатель
+</div>
+
+</div>
+
+
+<h2 class="section-title">
+📦 Типы доставки
+</h2>
+
+
+<div class="types-grid">
+
+<div class="type-card">
+<div class="icon">🚚</div>
+<h3>Местная</h3>
+<p>
+Доставка внутри одной страны.
+</p>
+</div>
+
+<div class="type-card">
+<div class="icon">🌍</div>
+<h3>Международная</h3>
+<p>
+Доставка между странами.
+</p>
+</div>
+
+<div class="type-card">
+<div class="icon">⚡</div>
+<h3>Срочная</h3>
+<p>
+Быстрая доставка важных запчастей.
+</p>
+</div>
+
+<div class="type-card">
+<div class="icon">🏭</div>
+<h3>Оборудование</h3>
+<p>
+Станки и промышленное оборудование.
+</p>
+</div>
+
+<div class="type-card">
+<div class="icon">📦</div>
+<h3>Запчасти</h3>
+<p>
+Небольшие промышленные комплектующие.
+</p>
+</div>
+
+<div class="type-card">
+<div class="icon">🏗️</div>
+<h3>Негабарит</h3>
+<p>
+Крупные промышленные грузы.
+</p>
+</div>
+
+</div>
+
+
+<h2 class="section-title">
+📝 Создать запрос на доставку
+</h2>
+
+
+<section class="form-box">
+
+<div class="form-grid">
+
+<div class="form-group">
+<label>Номер заказа</label>
+<input
+id="orderNumber"
+placeholder="Например: ORD-2026-001"
+>
+</div>
+
+<div class="form-group">
+<label>Откуда</label>
+<input
+id="deliveryFrom"
+placeholder="Город / страна"
+>
+</div>
+
+<div class="form-group">
+<label>Куда</label>
+<input
+id="deliveryTo"
+placeholder="Город / страна"
+>
+</div>
+
+<div class="form-group">
+<label>Тип транспорта</label>
+
+<select id="deliveryTransport">
+
+<option>Автомобиль</option>
+<option>Морской</option>
+<option>Авиационный</option>
+<option>Железнодорожный</option>
+<option>Мультимодальный</option>
+
+</select>
+
+</div>
+
+<div class="form-group">
+<label>Вес</label>
+<input
+id="deliveryWeight"
+placeholder="Например: 500 кг"
+>
+</div>
+
+<div class="form-group">
+<label>Количество мест</label>
+<input
+id="packages"
+placeholder="Например: 4"
+>
+</div>
+
+<div class="form-group full">
+<label>Дополнительная информация</label>
+
+<textarea
+id="deliveryDescription"
+placeholder="Опишите груз и требования к доставке..."
+></textarea>
+
+</div>
+
+</div>
+
+<br>
+
+<button
+class="primary"
+onclick="createDeliveryRequest()"
+>
+🚚 Создать запрос
+</button>
+
+</section>
+
+
+<h2 class="section-title">
+🔗 Связь с WORKER PRO
+</h2>
+
+
+<div class="timeline">
+
+<div class="timeline-step">
+<strong>1</strong>
+Products
+</div>
+
+<div class="timeline-step">
+<strong>2</strong>
+Requests
+</div>
+
+<div class="timeline-step">
+<strong>3</strong>
+Offers
+</div>
+
+<div class="timeline-step">
+<strong>4</strong>
+Orders
+</div>
+
+<div class="timeline-step">
+<strong>5</strong>
+Logistics
+</div>
+
+<div class="timeline-step">
+<strong>6</strong>
+Transport
+</div>
+
+<div class="timeline-step">
+<strong>7</strong>
+Delivery
+</div>
+
+<div class="timeline-step">
+<strong>8</strong>
+Warehouse
+</div>
+
+</div>
+
+
+<h2 class="section-title">
+🚀 Будущие возможности
+</h2>
+
+
+<section class="future">
+
+<ul>
+
+<li>
+GPS-отслеживание транспорта в реальном времени.
+</li>
+
+<li>
+Автоматические уведомления о каждом этапе.
+</li>
+
+<li>
+Точная дата и время прибытия.
+</li>
+
+<li>
+Онлайн-карта движения груза.
+</li>
+
+<li>
+Сравнение транспортных компаний.
+</li>
+
+<li>
+Автоматический расчёт стоимости доставки.
+</li>
+
+<li>
+Онлайн-бронирование перевозки.
+</li>
+
+<li>
+Интеграция с таможенными сервисами.
+</li>
+
+<li>
+Связь со складом и системой заказов.
+</li>
+
+<li>
+Электронное подтверждение получения товара.
+</li>
+
+<li>
+Фото и документы при получении.
+</li>
+
+<li>
+Система рейтингов перевозчиков.
+</li>
+
+</ul>
+
+</section>
+
+
+<h2 class="section-title">
+🔗 Быстрый доступ
+</h2>
+
+
+<div class="quick-links">
+
+<a href="../logistics/index.html">
+🚚 Логистика
+</a>
+
+<a href="../transport/index.html">
+🚛 Транспорт
+</a>
+
+<a href="../warehouse/index.html">
+📦 Склад
+</a>
+
+<a href="../orders/index.html">
+📋 Заказы
+</a>
+
+<a href="../requests/index.html">
+📝 Заявки
+</a>
+
+<a href="../offers/index.html">
+💰 Предложения
+</a>
+
+<a href="../map/index.html">
+🌍 Карта
+</a>
+
+<a href="../documents/index.html">
+📄 Документы
+</a>
+
+<a href="../notifications/index.html">
+🔔 Уведомления
+</a>
+
+<a href="../dashboard/index.html">
+👤 Кабинет
+</a>
+
+</div>
+
+
+<div class="demo-warning">
+
+<strong>⚠️ Демо-версия:</strong>
+
+статусы доставок, маршруты, перевозчики,
+сроки и данные на этой странице являются
+демонстрационными.
+
+В рабочей версии будут подключены реальные
+заказы, транспортные компании, GPS,
+уведомления и система отслеживания.
+
+</div>
+
+</div>
+
+
+<footer>
+
+<h3>WORKER PRO</h3>
+
+<p>
+International Industrial Platform
+</p>
+
+<p>
+Products • Orders • Logistics • Delivery
+</p>
+
+<p>
+© 2026 WORKER PRO — F.S
+</p>
+
+</footer>
+
+
+<script src="../language.js"></script>
+
+<script>
+
+let selectedStatus = "all";
+
+
+function setStatus(status,button){
+
+selectedStatus = status;
+
+document
+.querySelectorAll(".filters button")
+.forEach(function(btn){
+btn.classList.remove("active");
+});
+
+button.classList.add("active");
+
+document.getElementById("statusFilter").value = status;
+
+filterDeliveries();
+
+}
+
+
+function filterDeliveries(){
+
+const search =
+document
+.getElementById("searchInput")
+.value
+.toLowerCase();
+
+const status =
+document
+.getElementById("statusFilter")
+.value
+.toLowerCase();
+
+const country =
+document
+.getElementById("countryFilter")
+.value
+.toLowerCase();
+
+
+const cards =
+document.querySelectorAll(".delivery-card");
+
+
+cards.forEach(function(card){
+
+const text =
+card.innerText.toLowerCase();
+
+const cardStatus =
+card.dataset.status.toLowerCase();
+
+const cardCountry =
+card.dataset.country.toLowerCase();
+
+
+const searchMatch =
+text.includes(search);
+
+const statusMatch =
+status === "all" ||
+cardStatus === status;
+
+const countryMatch =
+country === "all" ||
+cardCountry.includes(country);
+
+
+if(
+searchMatch &&
+statusMatch &&
+countryMatch
+){
+
+card.style.display="block";
+
+}else{
+
+card.style.display="none";
+
+}
+
+});
+
+}
+
+
+function openDelivery(number){
+
+alert(
+"📦 Доставка WORKER PRO\n\n" +
+"Номер: " + number +
+"\n\n" +
+"В рабочей версии здесь будет полная информация о доставке:\n\n" +
+"• маршрут\n" +
+"• перевозчик\n" +
+"• статус\n" +
+"• GPS\n" +
+"• документы\n" +
+"• сроки\n" +
+"• стоимость\n" +
+"• история движения"
+);
+
+}
+
+
+function trackDelivery(){
+
+const number =
+document
+.getElementById("trackingNumber")
+.value
+.trim();
+
+const result =
+document.getElementById("trackingResult");
+
+
+if(!number){
+
+alert(
+"Введите номер доставки."
+);
+
+return;
+
+}
+
+
+result.style.display="block";
+
+result.innerHTML =
+
+"<strong>📦 Номер:</strong> " +
+number +
+
+"<br><br>" +
+
+"<strong>Статус:</strong> 🚚 Груз находится в пути" +
+
+"<br><br>" +
+
+"<strong>Маршрут:</strong> " +
+"Поставщик → Перевозчик → Склад → Получатель" +
+
+"<br><br>" +
+
+"<strong>Последнее обновление:</strong> " +
+"Сегодня, 12:30" +
+
+"<br><br>" +
+
+"<strong>Следующий этап:</strong> " +
+"Прибытие на склад";
+
+}
+
+
+function createDeliveryRequest(){
+
+const order =
+document
+.getElementById("orderNumber")
+.value
+.trim();
+
+const from =
+document
+.getElementById("deliveryFrom")
+.value
+.trim();
+
+const to =
+document
+.getElementById("deliveryTo")
+.value
+.trim();
+
+const weight =
+document
+.getElementById("deliveryWeight")
+.value
+.trim();
+
+
+if(!order){
+
+alert(
+"Введите номер заказа."
+);
+
+return;
+
+}
+
+
+if(!from){
+
+alert(
+"Введите место отправления."
+);
+
+return;
+
+}
+
+
+if(!to){
+
+alert(
+"Введите место назначения."
+);
+
+return;
+
+}
+
+
+if(!weight){
+
+alert(
+"Введите вес груза."
+);
+
+return;
+
+}
+
+
+alert(
+
+"🚚 Запрос на доставку создан!\n\n" +
+
+"Заказ: " + order +
+"\nОткуда: " + from +
+"\nКуда: " + to +
+"\nВес: " + weight +
+
+"\n\n" +
+
+"Это демонстрационный режим.\n" +
+
+"В рабочей версии запрос будет передан " +
+"транспортным компаниям для получения " +
+"реальных предложений."
+
+);
+
+}
+
+</script>
+
+</body>
+</html>
