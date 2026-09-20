@@ -1,0 +1,1480 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WORKER PRO — Transport Booking</title>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f4f7f5;
+    color:#123;
+}
+
+.top-languages{
+    background:#063d25;
+    padding:10px;
+    text-align:center;
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+.top-languages button{
+    background:#0b6b3d;
+    color:white;
+    border:1px solid #b7ff35;
+    border-radius:8px;
+    padding:7px 10px;
+    margin:3px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.top-languages button:hover{
+    background:#075b34;
+}
+
+header{
+    background:linear-gradient(135deg,#063d25,#0b6b3d);
+    color:white;
+    padding:30px 15px;
+    text-align:center;
+}
+
+header h1{
+    margin:0;
+    font-size:32px;
+}
+
+header p{
+    margin:10px 0 0;
+    font-size:17px;
+}
+
+nav{
+    background:#075b34;
+    padding:10px;
+    text-align:center;
+    position:sticky;
+    top:55px;
+    z-index:999;
+    overflow-x:auto;
+    white-space:nowrap;
+}
+
+nav a{
+    display:inline-block;
+    color:white;
+    text-decoration:none;
+    padding:8px 10px;
+    margin:3px;
+    border-radius:6px;
+    background:#0b6b3d;
+    font-size:14px;
+}
+
+nav a:hover{
+    background:#b7ff35;
+    color:#063d25;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+    padding:20px;
+}
+
+.hero{
+    background:white;
+    border-left:6px solid #b7ff35;
+    padding:25px;
+    border-radius:12px;
+    margin-bottom:20px;
+    box-shadow:0 3px 10px rgba(0,0,0,.08);
+}
+
+.hero h2{
+    margin-top:0;
+    color:#063d25;
+}
+
+.form-box{
+    background:white;
+    padding:22px;
+    border-radius:12px;
+    box-shadow:0 3px 10px rgba(0,0,0,.08);
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:12px;
+}
+
+.form-box input,
+.form-box select,
+.form-box textarea{
+    width:100%;
+    padding:12px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    font-size:15px;
+}
+
+.form-box textarea{
+    min-height:100px;
+    margin-top:12px;
+    resize:vertical;
+}
+
+.field-title{
+    font-weight:bold;
+    color:#063d25;
+    margin:18px 0 8px;
+}
+
+button.action{
+    background:#0b6b3d;
+    color:white;
+    border:none;
+    border-radius:8px;
+    padding:12px 18px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+button.action:hover{
+    background:#063d25;
+}
+
+button.secondary{
+    background:#e8f1ec;
+    color:#063d25;
+    border:1px solid #0b6b3d;
+    border-radius:8px;
+    padding:11px 16px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.transport-types{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:12px;
+}
+
+.transport-option{
+    background:#f8fbf9;
+    border:2px solid #d5e4da;
+    border-radius:10px;
+    padding:18px;
+    cursor:pointer;
+    text-align:center;
+    transition:.2s;
+}
+
+.transport-option:hover{
+    border-color:#0b6b3d;
+    transform:translateY(-2px);
+}
+
+.transport-option.active{
+    border-color:#0b6b3d;
+    background:#e8f7ed;
+}
+
+.transport-icon{
+    font-size:32px;
+    display:block;
+    margin-bottom:8px;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:18px;
+}
+
+.card{
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 3px 10px rgba(0,0,0,.08);
+}
+
+.card h3{
+    margin-top:0;
+    color:#075b34;
+}
+
+.card p{
+    line-height:1.5;
+}
+
+.badge{
+    display:inline-block;
+    padding:5px 9px;
+    border-radius:15px;
+    font-size:12px;
+    font-weight:bold;
+    margin-bottom:8px;
+}
+
+.green{
+    background:#d9f8df;
+    color:#08752f;
+}
+
+.yellow{
+    background:#fff2b8;
+    color:#856600;
+}
+
+.blue{
+    background:#dceeff;
+    color:#075b9a;
+}
+
+.red{
+    background:#ffd9d9;
+    color:#a00000;
+}
+
+.route{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    margin:15px 0;
+}
+
+.route .point{
+    background:#063d25;
+    color:white;
+    padding:8px 12px;
+    border-radius:8px;
+    text-align:center;
+}
+
+.route .line{
+    height:4px;
+    background:#b7ff35;
+    flex:1;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
+    gap:15px;
+    margin:20px 0;
+}
+
+.stat{
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    text-align:center;
+    box-shadow:0 3px 10px rgba(0,0,0,.08);
+}
+
+.stat strong{
+    display:block;
+    font-size:28px;
+    color:#0b6b3d;
+}
+
+.stat span{
+    display:block;
+    margin-top:7px;
+    color:#555;
+}
+
+.section-title{
+    color:#063d25;
+    margin-top:30px;
+}
+
+.notification{
+    background:#f1f8f3;
+    padding:12px;
+    border-radius:8px;
+    margin:8px 0;
+}
+
+.success{
+    display:none;
+    background:#d9f8df;
+    color:#08752f;
+    padding:15px;
+    border-radius:10px;
+    margin-top:15px;
+    border-left:5px solid #0b6b3d;
+}
+
+.quick-links{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+    gap:10px;
+}
+
+.quick-links a{
+    text-decoration:none;
+    background:#0b6b3d;
+    color:white;
+    padding:12px;
+    text-align:center;
+    border-radius:8px;
+}
+
+.warning{
+    margin-top:30px;
+    background:#fff3cd;
+    border-left:5px solid #d6a700;
+    padding:15px;
+    border-radius:8px;
+}
+
+footer{
+    background:#063d25;
+    color:white;
+    text-align:center;
+    padding:25px;
+    margin-top:35px;
+}
+
+@media(max-width:600px){
+
+    header h1{
+        font-size:25px;
+    }
+
+    nav{
+        top:54px;
+    }
+
+    .container{
+        padding:12px;
+    }
+
+    .route{
+        flex-direction:column;
+    }
+
+    .route .line{
+        width:4px;
+        height:30px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="top-languages">
+
+    <button onclick="setLanguage('AZ')">AZ</button>
+    <button onclick="setLanguage('RU')">RU</button>
+    <button onclick="setLanguage('EN')">EN</button>
+    <button onclick="setLanguage('TR')">TR</button>
+    <button onclick="setLanguage('DE')">DE</button>
+    <button onclick="setLanguage('AR')">AR</button>
+    <button onclick="setLanguage('ES')">ES</button>
+    <button onclick="setLanguage('FR')">FR</button>
+    <button onclick="setLanguage('IT')">IT</button>
+
+</div>
+
+<header>
+
+    <h1>WORKER PRO — Transport Booking</h1>
+
+    <p>
+        Заказ транспорта для промышленных грузов
+    </p>
+
+</header>
+
+<nav>
+
+    <a href="../index.html">Home</a>
+    <a href="../map/index.html">Map</a>
+    <a href="../logistics/index.html">Logistics</a>
+    <a href="../transport/index.html">Transport</a>
+    <a href="../delivery/index.html">Delivery</a>
+    <a href="../tracking/index.html">Tracking</a>
+    <a href="../warehouse/index.html">Warehouse</a>
+    <a href="../orders/index.html">Orders</a>
+    <a href="../requests/index.html">Requests</a>
+    <a href="../offers/index.html">Offers</a>
+    <a href="../companies/index.html">Companies</a>
+    <a href="../documents/index.html">Documents</a>
+    <a href="../notifications/index.html">Notifications</a>
+    <a href="../dashboard/index.html">Dashboard</a>
+
+</nav>
+
+<div class="container">
+
+<section class="hero">
+
+    <h2>Заказать транспорт</h2>
+
+    <p>
+        Создайте заявку на перевозку промышленного оборудования,
+        запчастей, материалов и других грузов.
+    </p>
+
+</section>
+
+
+<div class="stats">
+
+    <div class="stat">
+        <strong>1,248</strong>
+        <span>Заявок</span>
+    </div>
+
+    <div class="stat">
+        <strong>386</strong>
+        <span>Перевозчиков</span>
+    </div>
+
+    <div class="stat">
+        <strong>42</strong>
+        <span>Страны</span>
+    </div>
+
+    <div class="stat">
+        <strong>96%</strong>
+        <span>Выполнено</span>
+    </div>
+
+</div>
+
+
+<h2 class="section-title">
+    Создать заказ перевозки
+</h2>
+
+
+<div class="form-box">
+
+    <div class="field-title">
+        Маршрут
+    </div>
+
+    <div class="form-grid">
+
+        <input
+            id="fromCity"
+            placeholder="Откуда — город / страна">
+
+        <input
+            id="toCity"
+            placeholder="Куда — город / страна">
+
+    </div>
+
+
+    <div class="field-title">
+        Груз
+    </div>
+
+    <div class="form-grid">
+
+        <input
+            id="cargoName"
+            placeholder="Название груза">
+
+        <input
+            id="cargoWeight"
+            type="number"
+            placeholder="Вес, кг">
+
+        <input
+            id="cargoVolume"
+            type="number"
+            placeholder="Объём, м³">
+
+        <select id="cargoType">
+
+            <option value="">
+                Тип груза
+            </option>
+
+            <option>
+                Industrial Equipment
+            </option>
+
+            <option>
+                Spare Parts
+            </option>
+
+            <option>
+                Machinery
+            </option>
+
+            <option>
+                Raw Materials
+            </option>
+
+            <option>
+                Electrical Components
+            </option>
+
+            <option>
+                Other
+            </option>
+
+        </select>
+
+    </div>
+
+
+    <div class="field-title">
+        Тип транспорта
+    </div>
+
+
+    <div class="transport-types">
+
+        <div
+            class="transport-option"
+            onclick="selectTransport(this,'Road')">
+
+            <span class="transport-icon">🚛</span>
+
+            <strong>Авто</strong>
+
+            <p>
+                Truck / Road
+            </p>
+
+        </div>
+
+
+        <div
+            class="transport-option"
+            onclick="selectTransport(this,'Sea')">
+
+            <span class="transport-icon">🚢</span>
+
+            <strong>Море</strong>
+
+            <p>
+                Sea Freight
+            </p>
+
+        </div>
+
+
+        <div
+            class="transport-option"
+            onclick="selectTransport(this,'Air')">
+
+            <span class="transport-icon">✈️</span>
+
+            <strong>Авиа</strong>
+
+            <p>
+                Air Freight
+            </p>
+
+        </div>
+
+
+        <div
+            class="transport-option"
+            onclick="selectTransport(this,'Rail')">
+
+            <span class="transport-icon">🚆</span>
+
+            <strong>Ж/Д</strong>
+
+            <p>
+                Rail Freight
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="field-title">
+        Дата перевозки
+    </div>
+
+    <div class="form-grid">
+
+        <input
+            id="pickupDate"
+            type="date">
+
+        <select id="cargoCondition">
+
+            <option>
+                Обычный груз
+            </option>
+
+            <option>
+                Хрупкий груз
+            </option>
+
+            <option>
+                Опасный груз
+            </option>
+
+            <option>
+                Температурный режим
+            </option>
+
+        </select>
+
+    </div>
+
+
+    <div class="field-title">
+        Дополнительные требования
+    </div>
+
+    <textarea
+        id="requirements"
+        placeholder="Например: нужен кран, погрузка сверху, специальная упаковка..."></textarea>
+
+
+    <br>
+
+
+    <button
+        class="action"
+        onclick="createBooking()">
+
+        Запросить транспорт
+
+    </button>
+
+
+    <button
+        class="secondary"
+        onclick="clearForm()">
+
+        Очистить
+
+    </button>
+
+
+    <div
+        id="successMessage"
+        class="success">
+    </div>
+
+</div>
+
+
+
+<h2 class="section-title">
+    Последние заявки
+</h2>
+
+
+<div class="cards" id="bookingList">
+
+
+    <div class="card booking-card">
+
+        <span class="badge yellow">
+            REQUESTED
+        </span>
+
+        <h3>
+            TB-2026-001
+        </h3>
+
+        <p>
+            <strong>Маршрут:</strong>
+            Istanbul → Baku
+        </p>
+
+        <p>
+            <strong>Груз:</strong>
+            Hydraulic Spare Parts
+        </p>
+
+        <p>
+            <strong>Вес:</strong>
+            850 kg
+        </p>
+
+        <p>
+            <strong>Транспорт:</strong>
+            🚛 Road
+        </p>
+
+        <button
+            class="action"
+            onclick="showBooking('TB-2026-001')">
+
+            Открыть
+
+        </button>
+
+    </div>
+
+
+    <div class="card booking-card">
+
+        <span class="badge blue">
+            OFFERS RECEIVED
+        </span>
+
+        <h3>
+            TB-2026-002
+        </h3>
+
+        <p>
+            <strong>Маршрут:</strong>
+            Dortmund → Baku
+        </p>
+
+        <p>
+            <strong>Груз:</strong>
+            CNC Components
+        </p>
+
+        <p>
+            <strong>Вес:</strong>
+            420 kg
+        </p>
+
+        <p>
+            <strong>Транспорт:</strong>
+            🚛 Road
+        </p>
+
+        <button
+            class="action"
+            onclick="showBooking('TB-2026-002')">
+
+            Открыть
+
+        </button>
+
+    </div>
+
+
+    <div class="card booking-card">
+
+        <span class="badge green">
+            TRANSPORT BOOKED
+        </span>
+
+        <h3>
+            TB-2026-003
+        </h3>
+
+        <p>
+            <strong>Маршрут:</strong>
+            Milan → Baku
+        </p>
+
+        <p>
+            <strong>Груз:</strong>
+            Industrial Pump
+        </p>
+
+        <p>
+            <strong>Вес:</strong>
+            1,200 kg
+        </p>
+
+        <p>
+            <strong>Транспорт:</strong>
+            🚛 Road
+        </p>
+
+        <button
+            class="action"
+            onclick="showBooking('TB-2026-003')">
+
+            Открыть
+
+        </button>
+
+    </div>
+
+
+    <div class="card booking-card">
+
+        <span class="badge blue">
+            REQUESTED
+        </span>
+
+        <h3>
+            TB-2026-004
+        </h3>
+
+        <p>
+            <strong>Маршрут:</strong>
+            Shanghai → Baku
+        </p>
+
+        <p>
+            <strong>Груз:</strong>
+            Industrial Equipment
+        </p>
+
+        <p>
+            <strong>Вес:</strong>
+            4,500 kg
+        </p>
+
+        <p>
+            <strong>Транспорт:</strong>
+            🚢 Sea
+        </p>
+
+        <button
+            class="action"
+            onclick="showBooking('TB-2026-004')">
+
+            Открыть
+
+        </button>
+
+    </div>
+
+</div>
+
+
+
+<h2 class="section-title">
+    Статус заказа
+</h2>
+
+
+<div class="form-box">
+
+    <div class="route">
+
+        <div class="point">
+            Request
+        </div>
+
+        <div class="line"></div>
+
+        <div class="point">
+            Offers
+        </div>
+
+        <div class="line"></div>
+
+        <div class="point">
+            Booking
+        </div>
+
+        <div class="line"></div>
+
+        <div class="point">
+            Pickup
+        </div>
+
+        <div class="line"></div>
+
+        <div class="point">
+            Delivery
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<h2 class="section-title">
+    Как работает Transport Booking
+</h2>
+
+
+<div class="cards">
+
+    <div class="card">
+
+        <h3>
+            1. Создание заявки
+        </h3>
+
+        <p>
+            Покупатель указывает маршрут,
+            груз, вес, объём и дату перевозки.
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>
+            2. Поиск перевозчиков
+        </h3>
+
+        <p>
+            WORKER PRO может отправить запрос
+            подходящим транспортным компаниям.
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>
+            3. Получение предложений
+        </h3>
+
+        <p>
+            Перевозчики отправляют цену,
+            срок и условия перевозки.
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>
+            4. Выбор перевозчика
+        </h3>
+
+        <p>
+            Пользователь выбирает подходящее
+            предложение и подтверждает заказ.
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>
+            5. Pickup
+        </h3>
+
+        <p>
+            Перевозчик забирает груз
+            у поставщика или со склада.
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>
+            6. Tracking
+        </h3>
+
+        <p>
+            После отправки создаётся Tracking
+            номер и груз можно отслеживать.
+        </p>
+
+    </div>
+
+</div>
+
+
+
+<h2 class="section-title">
+    Доступные перевозчики
+</h2>
+
+
+<div class="cards">
+
+    <div class="card">
+
+        <span class="badge green">
+            AVAILABLE
+        </span>
+
+        <h3>
+            Global Road Transport
+        </h3>
+
+        <p>
+            🌍 Turkey → Azerbaijan
+        </p>
+
+        <p>
+            🚛 Truck
+        </p>
+
+        <p>
+            Международные промышленные перевозки.
+        </p>
+
+        <button
+            class="action"
+            onclick="requestCarrier('Global Road Transport')">
+
+            Запросить цену
+
+        </button>
+
+    </div>
+
+
+    <div class="card">
+
+        <span class="badge green">
+            AVAILABLE
+        </span>
+
+        <h3>
+            Caspian Cargo
+        </h3>
+
+        <p>
+            🌍 China → Azerbaijan
+        </p>
+
+        <p>
+            🚢 Sea
+        </p>
+
+        <p>
+            Контейнерные перевозки.
+        </p>
+
+        <button
+            class="action"
+            onclick="requestCarrier('Caspian Cargo')">
+
+            Запросить цену
+
+        </button>
+
+    </div>
+
+
+    <div class="card">
+
+        <span class="badge green">
+            AVAILABLE
+        </span>
+
+        <h3>
+            Euro Industrial Logistics
+        </h3>
+
+        <p>
+            🌍 Germany → Azerbaijan
+        </p>
+
+        <p>
+            🚛 Truck
+        </p>
+
+        <p>
+            Перевозка оборудования и запчастей.
+        </p>
+
+        <button
+            class="action"
+            onclick="requestCarrier('Euro Industrial Logistics')">
+
+            Запросить цену
+
+        </button>
+
+    </div>
+
+</div>
+
+
+
+<h2 class="section-title">
+    Быстрые разделы
+</h2>
+
+
+<div class="quick-links">
+
+    <a href="../orders/index.html">
+        Orders
+    </a>
+
+    <a href="../logistics/index.html">
+        Logistics
+    </a>
+
+    <a href="../transport/index.html">
+        Transport
+    </a>
+
+    <a href="../delivery/index.html">
+        Delivery
+    </a>
+
+    <a href="../tracking/index.html">
+        Tracking
+    </a>
+
+    <a href="../warehouse/index.html">
+        Warehouse
+    </a>
+
+    <a href="../offers/index.html">
+        Offers
+    </a>
+
+    <a href="../companies/index.html">
+        Companies
+    </a>
+
+    <a href="../documents/index.html">
+        Documents
+    </a>
+
+    <a href="../notifications/index.html">
+        Notifications
+    </a>
+
+    <a href="../dashboard/index.html">
+        Dashboard
+    </a>
+
+</div>
+
+
+
+<div class="warning">
+
+    <strong>Демо-версия:</strong>
+
+    сейчас Transport Booking работает
+    как демонстрационный интерфейс.
+
+    В будущей серверной версии можно подключить
+    реальных перевозчиков, цены, онлайн-предложения,
+    оплату, документы, GPS и автоматическое создание Tracking.
+
+</div>
+
+</div>
+
+
+<footer>
+
+    <strong>WORKER PRO</strong>
+
+    <br>
+
+    Global Industrial Platform
+
+    <br><br>
+
+    © 2026 WORKER PRO — F.S
+
+</footer>
+
+
+<script src="../language.js"></script>
+
+
+<script>
+
+let selectedTransport = "";
+
+
+function selectTransport(element,type){
+
+    document
+        .querySelectorAll(".transport-option")
+        .forEach(option => {
+
+            option.classList.remove("active");
+
+        });
+
+
+    element.classList.add("active");
+
+    selectedTransport = type;
+
+}
+
+
+function createBooking(){
+
+    const from =
+        document.getElementById("fromCity")
+        .value
+        .trim();
+
+    const to =
+        document.getElementById("toCity")
+        .value
+        .trim();
+
+    const cargo =
+        document.getElementById("cargoName")
+        .value
+        .trim();
+
+    const weight =
+        document.getElementById("cargoWeight")
+        .value
+        .trim();
+
+    const volume =
+        document.getElementById("cargoVolume")
+        .value
+        .trim();
+
+    const date =
+        document.getElementById("pickupDate")
+        .value;
+
+
+    if(
+        !from ||
+        !to ||
+        !cargo ||
+        !weight ||
+        !selectedTransport
+    ){
+
+        alert(
+            "Заполните маршрут, груз, вес и выберите транспорт."
+        );
+
+        return;
+
+    }
+
+
+    const number =
+        "TB-" +
+        new Date().getFullYear() +
+        "-" +
+        Math.floor(
+            100 + Math.random() * 900
+        );
+
+
+    const tracking =
+        "TRK-" +
+        new Date().getFullYear() +
+        "-" +
+        Math.floor(
+            100 + Math.random() * 900
+        );
+
+
+    const message =
+        document.getElementById("successMessage");
+
+
+    message.style.display = "block";
+
+
+    message.innerHTML =
+
+        "<strong>Заявка создана!</strong><br><br>" +
+
+        "Номер заказа: <strong>" +
+        number +
+        "</strong><br>" +
+
+        "Маршрут: " +
+        from +
+        " → " +
+        to +
+        "<br>" +
+
+        "Груз: " +
+        cargo +
+        "<br>" +
+
+        "Вес: " +
+        weight +
+        " kg<br>" +
+
+        (volume
+        ? "Объём: " + volume + " m³<br>"
+        : "") +
+
+        "Транспорт: " +
+        selectedTransport +
+        "<br>" +
+
+        (date
+        ? "Дата: " + date + "<br>"
+        : "") +
+
+        "<br>" +
+
+        "Статус: <strong>REQUESTED</strong><br>" +
+
+        "После подтверждения перевозчика будет создан Tracking.";
+
+}
+
+
+function clearForm(){
+
+    document
+        .getElementById("fromCity")
+        .value = "";
+
+    document
+        .getElementById("toCity")
+        .value = "";
+
+    document
+        .getElementById("cargoName")
+        .value = "";
+
+    document
+        .getElementById("cargoWeight")
+        .value = "";
+
+    document
+        .getElementById("cargoVolume")
+        .value = "";
+
+    document
+        .getElementById("cargoType")
+        .value = "";
+
+    document
+        .getElementById("pickupDate")
+        .value = "";
+
+    document
+        .getElementById("requirements")
+        .value = "";
+
+
+    selectedTransport = "";
+
+
+    document
+        .querySelectorAll(".transport-option")
+        .forEach(option => {
+
+            option.classList.remove("active");
+
+        });
+
+
+    document
+        .getElementById("successMessage")
+        .style.display = "none";
+
+}
+
+
+function showBooking(number){
+
+    const data = {
+
+        "TB-2026-001":{
+            route:"Istanbul → Baku",
+            cargo:"Hydraulic Spare Parts",
+            weight:"850 kg",
+            transport:"Road",
+            status:"REQUESTED"
+        },
+
+        "TB-2026-002":{
+            route:"Dortmund → Baku",
+            cargo:"CNC Components",
+            weight:"420 kg",
+            transport:"Road",
+            status:"OFFERS RECEIVED"
+        },
+
+        "TB-2026-003":{
+            route:"Milan → Baku",
+            cargo:"Industrial Pump",
+            weight:"1,200 kg",
+            transport:"Road",
+            status:"TRANSPORT BOOKED"
+        },
+
+        "TB-2026-004":{
+            route:"Shanghai → Baku",
+            cargo:"Industrial Equipment",
+            weight:"4,500 kg",
+            transport:"Sea",
+            status:"REQUESTED"
+        }
+
+    };
+
+
+    const item = data[number];
+
+
+    if(!item){
+
+        alert(
+            "Заявка не найдена."
+        );
+
+        return;
+
+    }
+
+
+    alert(
+
+        "WORKER PRO Transport Booking\n\n" +
+
+        "Заказ: " + number + "\n" +
+
+        "Статус: " + item.status + "\n" +
+
+        "Маршрут: " + item.route + "\n" +
+
+        "Груз: " + item.cargo + "\n" +
+
+        "Вес: " + item.weight + "\n" +
+
+        "Транспорт: " + item.transport
+
+    );
+
+}
+
+
+function requestCarrier(carrier){
+
+    alert(
+
+        "Запрос отправлен перевозчику:\n\n" +
+
+        carrier +
+
+        "\n\nВ реальной версии перевозчик сможет " +
+
+        "отправить цену и условия перевозки."
+
+    );
+
+}
+
+</script>
+
+</body>
+</html>
