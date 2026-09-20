@@ -1,0 +1,1246 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WORKER PRO — Feedback</title>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f4f7f5;
+    color:#123;
+}
+
+.top-languages{
+    background:#063d25;
+    padding:10px;
+    text-align:center;
+}
+
+.top-languages button{
+    background:#0b6b3d;
+    color:white;
+    border:1px solid #b7ff35;
+    border-radius:8px;
+    padding:8px 11px;
+    margin:3px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.top-languages button:hover{
+    background:#075b34;
+}
+
+header{
+    background:#063d25;
+    color:white;
+    text-align:center;
+    padding:25px 15px;
+}
+
+header h1{
+    margin:0 0 8px;
+    font-size:32px;
+}
+
+header p{
+    margin:0;
+    color:#dcefe5;
+}
+
+nav{
+    position:sticky;
+    top:0;
+    z-index:10;
+    background:#0b6b3d;
+    padding:10px;
+    text-align:center;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+    display:inline-block;
+    padding:7px 9px;
+}
+
+nav a:hover{
+    color:#b7ff35;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+    padding:20px;
+}
+
+.hero{
+    background:linear-gradient(135deg,#063d25,#0b6b3d);
+    color:white;
+    border-radius:18px;
+    padding:30px;
+    margin-bottom:20px;
+}
+
+.hero h2{
+    margin-top:0;
+    font-size:28px;
+}
+
+.hero p{
+    line-height:1.6;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+    margin-bottom:25px;
+}
+
+.stat{
+    background:white;
+    border-radius:15px;
+    padding:20px;
+    text-align:center;
+    box-shadow:0 3px 12px rgba(0,0,0,.08);
+}
+
+.stat .number{
+    font-size:30px;
+    font-weight:bold;
+    color:#0b6b3d;
+}
+
+.stat p{
+    margin:7px 0 0;
+}
+
+.section-title{
+    color:#063d25;
+    margin-top:30px;
+}
+
+.search-box{
+    background:white;
+    padding:20px;
+    border-radius:16px;
+    margin-bottom:20px;
+    box-shadow:0 3px 12px rgba(0,0,0,.08);
+}
+
+.search-box input{
+    width:100%;
+    padding:13px;
+    border:1px solid #ccc;
+    border-radius:10px;
+    font-size:16px;
+    margin-bottom:12px;
+}
+
+.filters{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+}
+
+.filter-btn{
+    border:0;
+    background:#e5eee9;
+    color:#063d25;
+    padding:10px 14px;
+    border-radius:9px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.filter-btn.active,
+.filter-btn:hover{
+    background:#0b6b3d;
+    color:white;
+}
+
+.reviews{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
+}
+
+.review{
+    background:white;
+    border-radius:16px;
+    padding:20px;
+    box-shadow:0 3px 12px rgba(0,0,0,.08);
+    border-left:5px solid #0b6b3d;
+}
+
+.review h3{
+    margin-top:0;
+    color:#063d25;
+}
+
+.review p{
+    line-height:1.5;
+}
+
+.stars{
+    color:#d99b00;
+    font-size:22px;
+    letter-spacing:2px;
+}
+
+.review-info{
+    display:flex;
+    flex-wrap:wrap;
+    gap:7px;
+    margin:12px 0;
+}
+
+.tag{
+    background:#e8f2ed;
+    color:#063d25;
+    padding:6px 9px;
+    border-radius:7px;
+    font-size:13px;
+    font-weight:bold;
+}
+
+.review button,
+.submit-btn{
+    background:#0b6b3d;
+    color:white;
+    border:0;
+    padding:11px 16px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+    margin-top:8px;
+}
+
+.review button:hover,
+.submit-btn:hover{
+    background:#075b34;
+}
+
+.rating-box{
+    background:white;
+    border-radius:16px;
+    padding:25px;
+    box-shadow:0 3px 12px rgba(0,0,0,.08);
+    text-align:center;
+}
+
+.rating-number{
+    font-size:48px;
+    font-weight:bold;
+    color:#0b6b3d;
+}
+
+.rating-stars{
+    font-size:30px;
+    color:#d99b00;
+    margin:8px 0;
+}
+
+.rating-line{
+    max-width:500px;
+    margin:10px auto;
+    text-align:left;
+}
+
+.rating-line span{
+    display:inline-block;
+    width:55px;
+}
+
+.bar{
+    display:inline-block;
+    width:70%;
+    height:10px;
+    background:#e5eee9;
+    border-radius:10px;
+    overflow:hidden;
+    vertical-align:middle;
+}
+
+.bar-fill{
+    height:100%;
+    background:#0b6b3d;
+}
+
+.form-box{
+    background:white;
+    border-radius:16px;
+    padding:25px;
+    box-shadow:0 3px 12px rgba(0,0,0,.08);
+}
+
+.form-box input,
+.form-box select,
+.form-box textarea{
+    width:100%;
+    padding:12px;
+    margin:7px 0 14px;
+    border:1px solid #ccc;
+    border-radius:9px;
+    font-size:15px;
+}
+
+.form-box textarea{
+    min-height:130px;
+    resize:vertical;
+}
+
+.form-box label{
+    font-weight:bold;
+    color:#063d25;
+}
+
+.star-select{
+    font-size:30px;
+    color:#bbb;
+    cursor:pointer;
+    margin:8px 0 15px;
+}
+
+.star-select span{
+    margin-right:4px;
+}
+
+.star-select span.selected{
+    color:#d99b00;
+}
+
+.feedback-types{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+}
+
+.type-card{
+    background:white;
+    padding:20px;
+    border-radius:14px;
+    text-align:center;
+    box-shadow:0 3px 10px rgba(0,0,0,.07);
+}
+
+.type-card .icon{
+    font-size:30px;
+}
+
+.type-card h3{
+    color:#063d25;
+}
+
+.quick-links{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:12px;
+    margin-top:20px;
+}
+
+.quick-links a{
+    background:white;
+    color:#063d25;
+    text-decoration:none;
+    padding:18px;
+    border-radius:13px;
+    text-align:center;
+    font-weight:bold;
+    box-shadow:0 3px 10px rgba(0,0,0,.07);
+}
+
+.quick-links a:hover{
+    background:#0b6b3d;
+    color:white;
+}
+
+.workflow{
+    display:grid;
+    grid-template-columns:repeat(6,1fr);
+    gap:10px;
+    margin-top:20px;
+}
+
+.step{
+    background:white;
+    border-radius:12px;
+    padding:16px 8px;
+    text-align:center;
+    box-shadow:0 3px 10px rgba(0,0,0,.06);
+    font-weight:bold;
+}
+
+.step span{
+    display:block;
+    font-size:25px;
+    margin-bottom:7px;
+}
+
+.future{
+    background:#eaf5ef;
+    border-radius:16px;
+    padding:22px;
+    margin-top:25px;
+}
+
+.future li{
+    margin:9px 0;
+}
+
+.demo{
+    background:#fff8df;
+    border-left:6px solid #d39e00;
+    padding:18px;
+    border-radius:10px;
+    margin-top:25px;
+}
+
+footer{
+    margin-top:40px;
+    background:#063d25;
+    color:white;
+    text-align:center;
+    padding:25px;
+}
+
+@media(max-width:900px){
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .reviews{
+        grid-template-columns:1fr;
+    }
+
+    .feedback-types{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .quick-links{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .workflow{
+        grid-template-columns:repeat(3,1fr);
+    }
+}
+
+@media(max-width:600px){
+
+    header h1{
+        font-size:25px;
+    }
+
+    .container{
+        padding:12px;
+    }
+
+    .stats{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .feedback-types{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .quick-links{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .workflow{
+        grid-template-columns:1fr 1fr;
+    }
+
+    nav a{
+        font-size:13px;
+        padding:6px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="top-languages">
+    <button onclick="setLanguage('AZ')">AZ</button>
+    <button onclick="setLanguage('RU')">RU</button>
+    <button onclick="setLanguage('EN')">EN</button>
+    <button onclick="setLanguage('TR')">TR</button>
+    <button onclick="setLanguage('DE')">DE</button>
+    <button onclick="setLanguage('AR')">AR</button>
+    <button onclick="setLanguage('ES')">ES</button>
+    <button onclick="setLanguage('FR')">FR</button>
+    <button onclick="setLanguage('IT')">IT</button>
+</div>
+
+<header>
+    <h1>WORKER PRO</h1>
+    <p>Feedback / Обратная связь</p>
+</header>
+
+<nav>
+    <a href="../index.html">Главная</a>
+    <a href="../admin/index.html">Admin</a>
+    <a href="../moderation/index.html">Moderation</a>
+    <a href="../support/index.html">Support</a>
+    <a href="../reviews/index.html">Reviews</a>
+    <a href="../help/index.html">Help</a>
+    <a href="../messages/index.html">Messages</a>
+    <a href="../notifications/index.html">Уведомления</a>
+    <a href="../companies/index.html">Компании</a>
+    <a href="../orders/index.html">Заказы</a>
+    <a href="../payments/index.html">Платежи</a>
+</nav>
+
+<div class="container">
+
+<section class="hero">
+
+    <h2>💬 Обратная связь WORKER PRO</h2>
+
+    <p>
+        Мнения пользователей помогают улучшать WORKER PRO.
+        Здесь можно оставить отзыв, оценить заказ, компанию,
+        товар, поставщика, доставку или сообщить о проблеме.
+    </p>
+
+</section>
+
+
+<section class="stats">
+
+    <div class="stat">
+        <div class="number">4.8</div>
+        <p>Средняя оценка</p>
+    </div>
+
+    <div class="stat">
+        <div class="number">428</div>
+        <p>Отзывов</p>
+    </div>
+
+    <div class="stat">
+        <div class="number">386</div>
+        <p>Положительных</p>
+    </div>
+
+    <div class="stat">
+        <div class="number">12</div>
+        <p>На рассмотрении</p>
+    </div>
+
+</section>
+
+
+<h2 class="section-title">⭐ Рейтинг WORKER PRO</h2>
+
+<section class="rating-box">
+
+    <div class="rating-number">4.8</div>
+
+    <div class="rating-stars">
+        ★★★★★
+    </div>
+
+    <p>
+        Демонстрационный рейтинг платформы
+    </p>
+
+    <div class="rating-line">
+        <span>5 ★</span>
+        <div class="bar">
+            <div class="bar-fill" style="width:82%;"></div>
+        </div>
+        82%
+    </div>
+
+    <div class="rating-line">
+        <span>4 ★</span>
+        <div class="bar">
+            <div class="bar-fill" style="width:12%;"></div>
+        </div>
+        12%
+    </div>
+
+    <div class="rating-line">
+        <span>3 ★</span>
+        <div class="bar">
+            <div class="bar-fill" style="width:4%;"></div>
+        </div>
+        4%
+    </div>
+
+    <div class="rating-line">
+        <span>2 ★</span>
+        <div class="bar">
+            <div class="bar-fill" style="width:1%;"></div>
+        </div>
+        1%
+    </div>
+
+    <div class="rating-line">
+        <span>1 ★</span>
+        <div class="bar">
+            <div class="bar-fill" style="width:1%;"></div>
+        </div>
+        1%
+    </div>
+
+</section>
+
+
+<h2 class="section-title">📝 Оставить отзыв</h2>
+
+<section class="form-box">
+
+    <label>Ваше имя</label>
+
+    <input
+        type="text"
+        id="userName"
+        placeholder="Введите имя"
+    >
+
+
+    <label>Тип обратной связи</label>
+
+    <select id="feedbackType">
+
+        <option value="platform">
+            Платформа WORKER PRO
+        </option>
+
+        <option value="company">
+            Компания
+        </option>
+
+        <option value="product">
+            Товар
+        </option>
+
+        <option value="supplier">
+            Поставщик
+        </option>
+
+        <option value="order">
+            Заказ
+        </option>
+
+        <option value="transport">
+            Доставка
+        </option>
+
+        <option value="training">
+            Обучение
+        </option>
+
+        <option value="support">
+            Поддержка
+        </option>
+
+        <option value="complaint">
+            Жалоба
+        </option>
+
+        <option value="suggestion">
+            Предложение
+        </option>
+
+    </select>
+
+
+    <label>Ваша оценка</label>
+
+    <div class="star-select" id="starSelect">
+
+        <span onclick="selectStar(1)">★</span>
+        <span onclick="selectStar(2)">★</span>
+        <span onclick="selectStar(3)">★</span>
+        <span onclick="selectStar(4)">★</span>
+        <span onclick="selectStar(5)">★</span>
+
+    </div>
+
+
+    <label>Ваш отзыв</label>
+
+    <textarea
+        id="feedbackText"
+        placeholder="Напишите ваш отзыв, предложение или проблему..."
+    ></textarea>
+
+
+    <button class="submit-btn" onclick="sendFeedback()">
+        Отправить отзыв
+    </button>
+
+</section>
+
+
+<h2 class="section-title">📋 Типы обратной связи</h2>
+
+<section class="feedback-types">
+
+    <div class="type-card">
+        <div class="icon">⭐</div>
+        <h3>Отзывы</h3>
+        <p>Оценка платформы и услуг.</p>
+    </div>
+
+    <div class="type-card">
+        <div class="icon">🏢</div>
+        <h3>Компании</h3>
+        <p>Отзывы о компаниях и производителях.</p>
+    </div>
+
+    <div class="type-card">
+        <div class="icon">📦</div>
+        <h3>Товары</h3>
+        <p>Оценка товаров и запчастей.</p>
+    </div>
+
+    <div class="type-card">
+        <div class="icon">🚚</div>
+        <h3>Доставка</h3>
+        <p>Оценка транспорта и доставки.</p>
+    </div>
+
+    <div class="type-card">
+        <div class="icon">🤝</div>
+        <h3>Поставщики</h3>
+        <p>Опыт работы с поставщиками.</p>
+    </div>
+
+    <div class="type-card">
+        <div class="icon">📚</div>
+        <h3>Обучение</h3>
+        <p>Отзывы об обучающих материалах.</p>
+    </div>
+
+    <div class="type-card">
+        <div class="icon">🎫</div>
+        <h3>Поддержка</h3>
+        <p>Оценка работы службы поддержки.</p>
+    </div>
+
+    <div class="type-card">
+        <div class="icon">💡</div>
+        <h3>Предложения</h3>
+        <p>Идеи для развития WORKER PRO.</p>
+    </div>
+
+</section>
+
+
+<h2 class="section-title">🔎 Отзывы пользователей</h2>
+
+<section class="search-box">
+
+    <input
+        type="text"
+        id="searchInput"
+        placeholder="Поиск отзывов..."
+        onkeyup="filterReviews()"
+    >
+
+    <div class="filters">
+
+        <button
+            class="filter-btn active"
+            onclick="setFilter('all',this)">
+            Все
+        </button>
+
+        <button
+            class="filter-btn"
+            onclick="setFilter('company',this)">
+            Компании
+        </button>
+
+        <button
+            class="filter-btn"
+            onclick="setFilter('product',this)">
+            Товары
+        </button>
+
+        <button
+            class="filter-btn"
+            onclick="setFilter('order',this)">
+            Заказы
+        </button>
+
+        <button
+            class="filter-btn"
+            onclick="setFilter('transport',this)">
+            Доставка
+        </button>
+
+        <button
+            class="filter-btn"
+            onclick="setFilter('training',this)">
+            Обучение
+        </button>
+
+    </div>
+
+</section>
+
+
+<section class="reviews" id="reviewsList">
+
+    <div
+        class="review"
+        data-type="company"
+        data-search="Industrial Manufacturer компания">
+
+        <h3>🏢 Industrial Manufacturer</h3>
+
+        <div class="stars">
+            ★★★★★
+        </div>
+
+        <p>
+            Хорошая коммуникация с компанией. Получил информацию
+            о промышленном оборудовании.
+        </p>
+
+        <div class="review-info">
+            <span class="tag">Компания</span>
+            <span class="tag">Azerbaijan</span>
+            <span class="tag">2026</span>
+        </div>
+
+        <button onclick="viewReview('REV-001')">
+            Открыть отзыв
+        </button>
+
+    </div>
+
+
+    <div
+        class="review"
+        data-type="product"
+        data-search="насос pump товар">
+
+        <h3>📦 Промышленный насос</h3>
+
+        <div class="stars">
+            ★★★★★
+        </div>
+
+        <p>
+            Удобно найти характеристики и связаться с поставщиком.
+        </p>
+
+        <div class="review-info">
+            <span class="tag">Товар</span>
+            <span class="tag">Pump</span>
+            <span class="tag">2026</span>
+        </div>
+
+        <button onclick="viewReview('REV-002')">
+            Открыть отзыв
+        </button>
+
+    </div>
+
+
+    <div
+        class="review"
+        data-type="order"
+        data-search="заказ order">
+
+        <h3>📋 Заказ промышленной детали</h3>
+
+        <div class="stars">
+            ★★★★☆
+        </div>
+
+        <p>
+            Заказ прошёл нормально. Хотелось бы больше информации
+            о статусе доставки.
+        </p>
+
+        <div class="review-info">
+            <span class="tag">Заказ</span>
+            <span class="tag">Delivery</span>
+            <span class="tag">2026</span>
+        </div>
+
+        <button onclick="viewReview('REV-003')">
+            Открыть отзыв
+        </button>
+
+    </div>
+
+
+    <div
+        class="review"
+        data-type="transport"
+        data-search="доставка transport">
+
+        <h3>🚚 Международная доставка</h3>
+
+        <div class="stars">
+            ★★★★★
+        </div>
+
+        <p>
+            Информация о международной перевозке была понятной.
+        </p>
+
+        <div class="review-info">
+            <span class="tag">Транспорт</span>
+            <span class="tag">International</span>
+            <span class="tag">2026</span>
+        </div>
+
+        <button onclick="viewReview('REV-004')">
+            Открыть отзыв
+        </button>
+
+    </div>
+
+
+    <div
+        class="review"
+        data-type="training"
+        data-search="обучение training">
+
+        <h3>📚 WORKER PRO Training</h3>
+
+        <div class="stars">
+            ★★★★★
+        </div>
+
+        <p>
+            Полезные материалы для работников производства
+            и технических специалистов.
+        </p>
+
+        <div class="review-info">
+            <span class="tag">Обучение</span>
+            <span class="tag">Safety</span>
+            <span class="tag">2026</span>
+        </div>
+
+        <button onclick="viewReview('REV-005')">
+            Открыть отзыв
+        </button>
+
+    </div>
+
+
+    <div
+        class="review"
+        data-type="company"
+        data-search="Machine Technology Turkey">
+
+        <h3>🏭 Machine Technology</h3>
+
+        <div class="stars">
+            ★★★★☆
+        </div>
+
+        <p>
+            Хороший промышленный каталог. Нужны дополнительные
+            фильтры по характеристикам оборудования.
+        </p>
+
+        <div class="review-info">
+            <span class="tag">Компания</span>
+            <span class="tag">Turkey</span>
+            <span class="tag">2026</span>
+        </div>
+
+        <button onclick="viewReview('REV-006')">
+            Открыть отзыв
+        </button>
+
+    </div>
+
+</section>
+
+
+<h2 class="section-title">🔗 Быстрый доступ</h2>
+
+<section class="quick-links">
+
+    <a href="../reviews/index.html">
+        ⭐ Reviews
+    </a>
+
+    <a href="../support/index.html">
+        🎫 Support
+    </a>
+
+    <a href="../moderation/index.html">
+        🛡 Moderation
+    </a>
+
+    <a href="../verification/index.html">
+        ✅ Verification
+    </a>
+
+    <a href="../companies/index.html">
+        🏢 Companies
+    </a>
+
+    <a href="../products/index.html">
+        📦 Products
+    </a>
+
+    <a href="../orders/index.html">
+        📋 Orders
+    </a>
+
+    <a href="../transport/index.html">
+        🚚 Transport
+    </a>
+
+</section>
+
+
+<h2 class="section-title">⚙️ Как работает обратная связь</h2>
+
+<section class="workflow">
+
+    <div class="step">
+        <span>👤</span>
+        Пользователь
+    </div>
+
+    <div class="step">
+        <span>⭐</span>
+        Оценка
+    </div>
+
+    <div class="step">
+        <span>📝</span>
+        Отзыв
+    </div>
+
+    <div class="step">
+        <span>🔎</span>
+        Проверка
+    </div>
+
+    <div class="step">
+        <span>🛡</span>
+        Moderation
+    </div>
+
+    <div class="step">
+        <span>📊</span>
+        Анализ
+    </div>
+
+</section>
+
+
+<section class="future">
+
+    <h2>🚀 Будущие возможности</h2>
+
+    <ul>
+        <li>Реальные отзывы пользователей</li>
+        <li>Проверенные отзывы после заказа</li>
+        <li>Оценка компаний и поставщиков</li>
+        <li>Оценка товаров и оборудования</li>
+        <li>Оценка международной доставки</li>
+        <li>Оценка службы поддержки</li>
+        <li>Фотографии и документы к отзыву</li>
+        <li>Автоматическая модерация</li>
+        <li>AI-анализ обратной связи</li>
+        <li>Статистика удовлетворённости пользователей</li>
+        <li>Уведомления о новых отзывах</li>
+        <li>Связь с Reviews, Support и Moderation</li>
+    </ul>
+
+</section>
+
+
+<section class="demo">
+
+    <b>⚠️ DEMO VERSION</b>
+
+    <p>
+        Эта страница является демонстрационной версией.
+        Отзывы, оценки и статистика являются примерами.
+        Реальная система будет подключена после создания базы данных
+        и серверной части WORKER PRO.
+    </p>
+
+</section>
+
+</div>
+
+
+<footer>
+    <b>WORKER PRO</b><br>
+    Global Industrial Platform<br><br>
+    Feedback Center • F.S
+</footer>
+
+
+<script src="../language.js"></script>
+
+<script>
+
+let currentFilter = "all";
+let selectedStars = 0;
+
+
+function setFilter(filter, button){
+
+    currentFilter = filter;
+
+    document.querySelectorAll(".filter-btn").forEach(function(btn){
+        btn.classList.remove("active");
+    });
+
+    button.classList.add("active");
+
+    filterReviews();
+}
+
+
+function filterReviews(){
+
+    const search =
+        document.getElementById("searchInput")
+        .value
+        .toLowerCase();
+
+    const reviews =
+        document.querySelectorAll(".review");
+
+    reviews.forEach(function(review){
+
+        const type =
+            review.getAttribute("data-type");
+
+        const text =
+            review.getAttribute("data-search")
+            .toLowerCase();
+
+        const typeMatch =
+            currentFilter === "all" ||
+            type === currentFilter;
+
+        const searchMatch =
+            text.includes(search);
+
+        if(typeMatch && searchMatch){
+            review.style.display = "block";
+        }else{
+            review.style.display = "none";
+        }
+
+    });
+}
+
+
+function selectStar(number){
+
+    selectedStars = number;
+
+    const stars =
+        document.querySelectorAll("#starSelect span");
+
+    stars.forEach(function(star,index){
+
+        if(index < number){
+            star.classList.add("selected");
+        }else{
+            star.classList.remove("selected");
+        }
+
+    });
+}
+
+
+function sendFeedback(){
+
+    const name =
+        document.getElementById("userName").value.trim();
+
+    const type =
+        document.getElementById("feedbackType").value;
+
+    const message =
+        document.getElementById("feedbackText").value.trim();
+
+    if(name === ""){
+        alert("Введите ваше имя.");
+        return;
+    }
+
+    if(selectedStars === 0){
+        alert("Выберите оценку от 1 до 5.");
+        return;
+    }
+
+    if(message === ""){
+        alert("Напишите ваш отзыв.");
+        return;
+    }
+
+    alert(
+        "Спасибо, " + name + "!\n\n" +
+        "Ваша оценка: " + selectedStars + "/5\n" +
+        "Тип: " + type + "\n\n" +
+        "DEMO: отзыв отправлен."
+    );
+
+    document.getElementById("userName").value = "";
+    document.getElementById("feedbackText").value = "";
+
+    selectStar(0);
+}
+
+
+function viewReview(id){
+
+    alert(
+        "DEMO: отзыв " + id +
+        " будет открыт в реальной системе."
+    );
+
+}
+
+
+function setLanguage(lang){
+
+    if(typeof window.setSiteLanguage === "function"){
+        window.setSiteLanguage(lang);
+        return;
+    }
+
+    localStorage.setItem(
+        "workerProLanguage",
+        lang
+    );
+
+    alert(
+        "Язык выбран: " + lang +
+        "\n\nЯзыковой модуль подключается через language.js."
+    );
+}
+
+</script>
+
+</body>
+</html>
