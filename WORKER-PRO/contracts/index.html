@@ -1,1 +1,1058 @@
- 
+ <!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WORKER PRO — Contracts</title>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f4f7f5;
+    color:#123;
+}
+
+.top-languages{
+    background:#063d25;
+    padding:10px;
+    text-align:center;
+}
+
+.top-languages button{
+    background:#0b6b3d;
+    color:white;
+    border:1px solid #b7ff35;
+    border-radius:8px;
+    padding:8px 12px;
+    margin:3px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.top-languages button:hover{
+    background:#b7ff35;
+    color:#063d25;
+}
+
+header{
+    background:linear-gradient(135deg,#063d25,#0b6b3d);
+    color:white;
+    text-align:center;
+    padding:28px 15px;
+}
+
+header h1{
+    margin:0 0 8px;
+    font-size:32px;
+}
+
+header p{
+    margin:0;
+}
+
+nav{
+    background:#075b34;
+    padding:12px;
+    text-align:center;
+    position:sticky;
+    top:0;
+    z-index:10;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    margin:5px 8px;
+    font-weight:bold;
+    font-size:14px;
+}
+
+nav a:hover{
+    color:#b7ff35;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+    padding:25px 15px;
+}
+
+.hero{
+    background:white;
+    border-radius:16px;
+    padding:30px 20px;
+    text-align:center;
+    box-shadow:0 4px 15px rgba(0,0,0,.08);
+    margin-bottom:25px;
+}
+
+.hero h2{
+    color:#063d25;
+    font-size:30px;
+    margin-top:0;
+}
+
+.hero p{
+    max-width:800px;
+    margin:auto;
+    line-height:1.6;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:15px;
+    margin:25px 0;
+}
+
+.stat{
+    background:#063d25;
+    color:white;
+    padding:22px;
+    border-radius:14px;
+    text-align:center;
+}
+
+.stat strong{
+    display:block;
+    color:#b7ff35;
+    font-size:28px;
+}
+
+.stat span{
+    display:block;
+    margin-top:6px;
+}
+
+.tools{
+    background:white;
+    padding:20px;
+    border-radius:15px;
+    box-shadow:0 3px 12px rgba(0,0,0,.07);
+    margin-bottom:25px;
+}
+
+.search{
+    width:100%;
+    padding:14px;
+    border:2px solid #0b6b3d;
+    border-radius:10px;
+    font-size:16px;
+    margin-bottom:15px;
+}
+
+.filters{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+}
+
+.filters button{
+    border:0;
+    background:#e5eee9;
+    color:#063d25;
+    padding:10px 15px;
+    border-radius:9px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.filters button.active,
+.filters button:hover{
+    background:#0b6b3d;
+    color:white;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:20px;
+}
+
+.card{
+    background:white;
+    border-radius:15px;
+    padding:20px;
+    box-shadow:0 4px 14px rgba(0,0,0,.08);
+    border-top:5px solid #0b6b3d;
+}
+
+.card h3{
+    color:#063d25;
+    margin-top:0;
+}
+
+.card p{
+    line-height:1.5;
+    color:#456;
+}
+
+.badge{
+    display:inline-block;
+    padding:5px 9px;
+    border-radius:7px;
+    background:#e8f6df;
+    color:#075b34;
+    font-size:12px;
+    font-weight:bold;
+    margin-bottom:10px;
+}
+
+.status{
+    font-weight:bold;
+    color:#08753f;
+}
+
+.card button{
+    width:100%;
+    background:#0b6b3d;
+    color:white;
+    border:0;
+    padding:12px;
+    border-radius:9px;
+    cursor:pointer;
+    font-weight:bold;
+    margin-top:8px;
+}
+
+.card button:hover{
+    background:#063d25;
+}
+
+.create{
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 4px 14px rgba(0,0,0,.08);
+    margin-top:30px;
+}
+
+.create h2{
+    color:#063d25;
+    margin-top:0;
+}
+
+form{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+
+input,select,textarea{
+    width:100%;
+    padding:13px;
+    border:1px solid #b8c9bf;
+    border-radius:9px;
+    font-size:15px;
+    font-family:Arial,sans-serif;
+}
+
+textarea{
+    min-height:120px;
+    resize:vertical;
+}
+
+.submit{
+    background:#0b6b3d;
+    color:white;
+    border:0;
+    padding:14px;
+    border-radius:9px;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.submit:hover{
+    background:#063d25;
+}
+
+.info{
+    background:#063d25;
+    color:white;
+    padding:28px;
+    border-radius:15px;
+    margin-top:30px;
+    line-height:1.7;
+}
+
+.info h2{
+    color:#b7ff35;
+}
+
+.steps{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:12px;
+    margin-top:20px;
+}
+
+.step{
+    background:#0b6b3d;
+    padding:16px;
+    border-radius:10px;
+}
+
+.step strong{
+    color:#b7ff35;
+    display:block;
+    margin-bottom:6px;
+}
+
+.links{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:20px;
+}
+
+.links a{
+    background:#b7ff35;
+    color:#063d25;
+    padding:11px 15px;
+    border-radius:9px;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+footer{
+    background:#063d25;
+    color:white;
+    text-align:center;
+    padding:25px;
+    margin-top:35px;
+}
+
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.65);
+    z-index:100;
+    padding:20px;
+    overflow:auto;
+}
+
+.modal-box{
+    background:white;
+    max-width:650px;
+    margin:50px auto;
+    padding:25px;
+    border-radius:16px;
+}
+
+.modal-box h2{
+    color:#063d25;
+}
+
+.close{
+    float:right;
+    font-size:28px;
+    cursor:pointer;
+    color:#063d25;
+}
+
+@media(max-width:600px){
+    header h1{
+        font-size:26px;
+    }
+
+    .hero h2{
+        font-size:24px;
+    }
+
+    nav a{
+        display:inline-block;
+        margin:4px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="top-languages">
+    <button onclick="setLanguage('AZ')">AZ</button>
+    <button onclick="setLanguage('RU')">RU</button>
+    <button onclick="setLanguage('EN')">EN</button>
+    <button onclick="setLanguage('TR')">TR</button>
+    <button onclick="setLanguage('DE')">DE</button>
+    <button onclick="setLanguage('AR')">AR</button>
+    <button onclick="setLanguage('ES')">ES</button>
+    <button onclick="setLanguage('FR')">FR</button>
+    <button onclick="setLanguage('IT')">IT</button>
+</div>
+
+<header>
+    <h1>WORKER PRO</h1>
+    <p>Промышленные контракты и сделки</p>
+</header>
+
+<nav>
+    <a href="../index.html">Главная</a>
+    <a href="../companies/">Компании</a>
+    <a href="../manufacturers/">Производители</a>
+    <a href="../suppliers/">Поставщики</a>
+    <a href="../products/">Товары</a>
+    <a href="../requests/">Запросы</a>
+    <a href="../offers/">Предложения</a>
+    <a href="../orders/">Заказы</a>
+    <a href="../delivery/">Доставка</a>
+    <a href="../documents/">Документы</a>
+</nav>
+
+<div class="container">
+
+<section class="hero">
+    <h2>Контракты</h2>
+    <p>
+        Раздел WORKER PRO для управления промышленными
+        сделками между компаниями, производителями,
+        поставщиками и покупателями.
+    </p>
+</section>
+
+<section class="stats">
+
+    <div class="stat">
+        <strong>1,248</strong>
+        <span>Всего контрактов</span>
+    </div>
+
+    <div class="stat">
+        <strong>386</strong>
+        <span>Активных</span>
+    </div>
+
+    <div class="stat">
+        <strong>742</strong>
+        <span>Завершённых</span>
+    </div>
+
+    <div class="stat">
+        <strong>42</strong>
+        <span>Страны</span>
+    </div>
+
+</section>
+
+<section class="tools">
+
+    <input
+        id="search"
+        class="search"
+        type="text"
+        placeholder="Поиск по номеру, компании, товару..."
+        onkeyup="searchContracts()"
+    >
+
+    <div class="filters">
+        <button class="active" onclick="filterContracts('all',this)">
+            Все
+        </button>
+
+        <button onclick="filterContracts('active',this)">
+            Активные
+        </button>
+
+        <button onclick="filterContracts('completed',this)">
+            Завершённые
+        </button>
+
+        <button onclick="filterContracts('pending',this)">
+            На проверке
+        </button>
+    </div>
+
+</section>
+
+<section class="grid" id="contractGrid">
+
+    <div class="card contract" data-status="active">
+
+        <span class="badge">ACTIVE</span>
+
+        <h3>CTR-2026-001</h3>
+
+        <p>
+            <b>Покупатель:</b>
+            Azerbaijan Industrial Group
+        </p>
+
+        <p>
+            <b>Поставщик:</b>
+            Anatolia Industrial
+        </p>
+
+        <p>
+            <b>Товар:</b>
+            Hydraulic Pump
+        </p>
+
+        <p>
+            <b>Страна:</b>
+            Turkey → Azerbaijan
+        </p>
+
+        <p class="status">● Активный</p>
+
+        <button onclick="showContract(
+            'CTR-2026-001',
+            'Azerbaijan Industrial Group',
+            'Anatolia Industrial',
+            'Hydraulic Pump',
+            'Turkey → Azerbaijan',
+            'ACTIVE'
+        )">
+            Подробнее
+        </button>
+
+    </div>
+
+
+    <div class="card contract" data-status="active">
+
+        <span class="badge">ACTIVE</span>
+
+        <h3>CTR-2026-002</h3>
+
+        <p>
+            <b>Покупатель:</b>
+            Caspian Machinery
+        </p>
+
+        <p>
+            <b>Поставщик:</b>
+            Germany CNC Systems
+        </p>
+
+        <p>
+            <b>Товар:</b>
+            CNC Spare Parts
+        </p>
+
+        <p>
+            <b>Страна:</b>
+            Germany → Azerbaijan
+        </p>
+
+        <p class="status">● Активный</p>
+
+        <button onclick="showContract(
+            'CTR-2026-002',
+            'Caspian Machinery',
+            'Germany CNC Systems',
+            'CNC Spare Parts',
+            'Germany → Azerbaijan',
+            'ACTIVE'
+        )">
+            Подробнее
+        </button>
+
+    </div>
+
+
+    <div class="card contract" data-status="completed">
+
+        <span class="badge">COMPLETED</span>
+
+        <h3>CTR-2026-003</h3>
+
+        <p>
+            <b>Покупатель:</b>
+            Euro Manufacturing
+        </p>
+
+        <p>
+            <b>Поставщик:</b>
+            Italia Welding Systems
+        </p>
+
+        <p>
+            <b>Товар:</b>
+            Welding Equipment
+        </p>
+
+        <p>
+            <b>Страна:</b>
+            Italy → Germany
+        </p>
+
+        <p class="status">✓ Завершён</p>
+
+        <button onclick="showContract(
+            'CTR-2026-003',
+            'Euro Manufacturing',
+            'Italia Welding Systems',
+            'Welding Equipment',
+            'Italy → Germany',
+            'COMPLETED'
+        )">
+            Подробнее
+        </button>
+
+    </div>
+
+
+    <div class="card contract" data-status="pending">
+
+        <span class="badge">PENDING</span>
+
+        <h3>CTR-2026-004</h3>
+
+        <p>
+            <b>Покупатель:</b>
+            Baku Industrial Supply
+        </p>
+
+        <p>
+            <b>Поставщик:</b>
+            Asia Automation
+        </p>
+
+        <p>
+            <b>Товар:</b>
+            Automation Sensors
+        </p>
+
+        <p>
+            <b>Страна:</b>
+            China → Azerbaijan
+        </p>
+
+        <p class="status">◷ На проверке</p>
+
+        <button onclick="showContract(
+            'CTR-2026-004',
+            'Baku Industrial Supply',
+            'Asia Automation',
+            'Automation Sensors',
+            'China → Azerbaijan',
+            'PENDING'
+        )">
+            Подробнее
+        </button>
+
+    </div>
+
+
+    <div class="card contract" data-status="completed">
+
+        <span class="badge">COMPLETED</span>
+
+        <h3>CTR-2026-005</h3>
+
+        <p>
+            <b>Покупатель:</b>
+            Industrial Solutions
+        </p>
+
+        <p>
+            <b>Поставщик:</b>
+            Parker Industrial
+        </p>
+
+        <p>
+            <b>Товар:</b>
+            Hydraulic Components
+        </p>
+
+        <p>
+            <b>Страна:</b>
+            USA → Germany
+        </p>
+
+        <p class="status">✓ Завершён</p>
+
+        <button onclick="showContract(
+            'CTR-2026-005',
+            'Industrial Solutions',
+            'Parker Industrial',
+            'Hydraulic Components',
+            'USA → Germany',
+            'COMPLETED'
+        )">
+            Подробнее
+        </button>
+
+    </div>
+
+
+    <div class="card contract" data-status="active">
+
+        <span class="badge">ACTIVE</span>
+
+        <h3>CTR-2026-006</h3>
+
+        <p>
+            <b>Покупатель:</b>
+            Caspian Pump Works
+        </p>
+
+        <p>
+            <b>Поставщик:</b>
+            Global Pump Systems
+        </p>
+
+        <p>
+            <b>Товар:</b>
+            Industrial Pumps
+        </p>
+
+        <p>
+            <b>Страна:</b>
+            Azerbaijan → Germany
+        </p>
+
+        <p class="status">● Активный</p>
+
+        <button onclick="showContract(
+            'CTR-2026-006',
+            'Caspian Pump Works',
+            'Global Pump Systems',
+            'Industrial Pumps',
+            'Azerbaijan → Germany',
+            'ACTIVE'
+        )">
+            Подробнее
+        </button>
+
+    </div>
+
+</section>
+
+
+<section class="create">
+
+    <h2>Создать контракт</h2>
+
+    <form onsubmit="createContract(event)">
+
+        <input
+            id="buyer"
+            type="text"
+            placeholder="Компания-покупатель"
+            required
+        >
+
+        <input
+            id="supplier"
+            type="text"
+            placeholder="Компания-поставщик"
+            required
+        >
+
+        <input
+            id="product"
+            type="text"
+            placeholder="Товар или оборудование"
+            required
+        >
+
+        <select id="contractType" required>
+
+            <option value="">
+                Тип контракта
+            </option>
+
+            <option>
+                Purchase Contract
+            </option>
+
+            <option>
+                Supply Contract
+            </option>
+
+            <option>
+                Service Contract
+            </option>
+
+            <option>
+                Transport Contract
+            </option>
+
+        </select>
+
+        <input
+            id="country"
+            type="text"
+            placeholder="Страны сделки"
+            required
+        >
+
+        <textarea
+            id="description"
+            placeholder="Описание условий сделки..."
+        ></textarea>
+
+        <button class="submit" type="submit">
+            Создать контракт
+        </button>
+
+    </form>
+
+</section>
+
+
+<section class="info">
+
+    <h2>Как работает система контрактов?</h2>
+
+    <div class="steps">
+
+        <div class="step">
+            <strong>1. Запрос</strong>
+            Покупатель создаёт запрос на товар или услугу.
+        </div>
+
+        <div class="step">
+            <strong>2. Предложение</strong>
+            Поставщик отправляет цену и условия.
+        </div>
+
+        <div class="step">
+            <strong>3. Согласование</strong>
+            Стороны согласовывают условия сделки.
+        </div>
+
+        <div class="step">
+            <strong>4. Контракт</strong>
+            Создаётся контракт с уникальным номером.
+        </div>
+
+        <div class="step">
+            <strong>5. Доставка</strong>
+            Организуется местная или международная доставка.
+        </div>
+
+        <div class="step">
+            <strong>6. Завершение</strong>
+            После выполнения условий контракт закрывается.
+        </div>
+
+    </div>
+
+    <div class="links">
+        <a href="../requests/">Запросы</a>
+        <a href="../offers/">Предложения</a>
+        <a href="../orders/">Заказы</a>
+        <a href="../transport-booking/">Транспорт</a>
+        <a href="../tracking/">Tracking</a>
+        <a href="../documents/">Документы</a>
+        <a href="../payments/">Платежи</a>
+    </div>
+
+</section>
+
+</div>
+
+<footer>
+    WORKER PRO © 2026<br>
+    Industrial Platform — Production • Skills • Companies • Trade • Logistics
+</footer>
+
+
+<div class="modal" id="contractModal">
+
+    <div class="modal-box">
+
+        <span class="close" onclick="closeModal()">×</span>
+
+        <h2 id="modalNumber"></h2>
+
+        <p>
+            <b>Покупатель:</b>
+            <span id="modalBuyer"></span>
+        </p>
+
+        <p>
+            <b>Поставщик:</b>
+            <span id="modalSupplier"></span>
+        </p>
+
+        <p>
+            <b>Товар:</b>
+            <span id="modalProduct"></span>
+        </p>
+
+        <p>
+            <b>Маршрут:</b>
+            <span id="modalCountry"></span>
+        </p>
+
+        <p>
+            <b>Статус:</b>
+            <span id="modalStatus"></span>
+        </p>
+
+        <hr>
+
+        <p>
+            В будущей версии WORKER PRO здесь будут доступны
+            электронные документы, история изменений,
+            подписи сторон, условия оплаты и статус исполнения.
+        </p>
+
+        <button
+            class="submit"
+            onclick="alert('Демонстрационная функция WORKER PRO')">
+            Открыть документы
+        </button>
+
+    </div>
+
+</div>
+
+
+<script src="../language.js"></script>
+
+<script>
+
+let currentFilter = "all";
+
+
+function filterContracts(type,button){
+
+    currentFilter = type;
+
+    document
+        .querySelectorAll(".filters button")
+        .forEach(function(btn){
+            btn.classList.remove("active");
+        });
+
+    button.classList.add("active");
+
+    applyFilters();
+}
+
+
+function searchContracts(){
+    applyFilters();
+}
+
+
+function applyFilters(){
+
+    const search =
+        document.getElementById("search")
+        .value
+        .toLowerCase();
+
+    document
+        .querySelectorAll(".contract")
+        .forEach(function(card){
+
+            const text =
+                card.innerText.toLowerCase();
+
+            const status =
+                card.getAttribute("data-status");
+
+            const searchMatch =
+                text.includes(search);
+
+            const filterMatch =
+                currentFilter === "all" ||
+                status === currentFilter;
+
+            if(searchMatch && filterMatch){
+                card.style.display = "block";
+            }else{
+                card.style.display = "none";
+            }
+
+        });
+}
+
+
+function showContract(
+    number,
+    buyer,
+    supplier,
+    product,
+    country,
+    status
+){
+
+    document.getElementById("modalNumber")
+        .innerText = number;
+
+    document.getElementById("modalBuyer")
+        .innerText = buyer;
+
+    document.getElementById("modalSupplier")
+        .innerText = supplier;
+
+    document.getElementById("modalProduct")
+        .innerText = product;
+
+    document.getElementById("modalCountry")
+        .innerText = country;
+
+    document.getElementById("modalStatus")
+        .innerText = status;
+
+    document.getElementById("contractModal")
+        .style.display = "block";
+}
+
+
+function closeModal(){
+
+    document.getElementById("contractModal")
+        .style.display = "none";
+}
+
+
+function createContract(event){
+
+    event.preventDefault();
+
+    const buyer =
+        document.getElementById("buyer").value;
+
+    const supplier =
+        document.getElementById("supplier").value;
+
+    const product =
+        document.getElementById("product").value;
+
+    const number =
+        "CTR-2026-" +
+        Math.floor(100 + Math.random() * 900);
+
+    alert(
+        "Контракт создан!\n\n" +
+        "Номер: " + number + "\n" +
+        "Покупатель: " + buyer + "\n" +
+        "Поставщик: " + supplier + "\n" +
+        "Товар: " + product + "\n\n" +
+        "Это демонстрационная версия WORKER PRO."
+    );
+
+    document.querySelector(".create form").reset();
+}
+
+
+window.onclick = function(event){
+
+    const modal =
+        document.getElementById("contractModal");
+
+    if(event.target === modal){
+        modal.style.display = "none";
+    }
+
+};
+
+</script>
+
+</body>
+</html>
