@@ -1,1 +1,785 @@
- 
+ <!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WORKER PRO — Applications</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f7f5;
+    color: #123;
+}
+
+.top-languages {
+    background: #063d25;
+    padding: 10px;
+    text-align: center;
+}
+
+.top-languages button {
+    border: none;
+    background: #0b6b3d;
+    color: white;
+    font-weight: bold;
+    padding: 9px 12px;
+    margin: 3px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.top-languages button:hover {
+    background: #b7ff35;
+    color: #063d25;
+}
+
+header {
+    background: #075b34;
+    color: white;
+    text-align: center;
+    padding: 30px 15px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 34px;
+}
+
+header p {
+    margin: 10px 0 0;
+    font-size: 18px;
+}
+
+nav {
+    background: white;
+    padding: 12px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+nav a {
+    display: inline-block;
+    color: #075b34;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 5px 8px;
+}
+
+nav a:hover {
+    color: #0b9b57;
+}
+
+.container {
+    max-width: 1150px;
+    margin: auto;
+    padding: 25px 15px;
+}
+
+.hero {
+    background: linear-gradient(135deg, #063d25, #0b6b3d);
+    color: white;
+    border-radius: 18px;
+    padding: 35px 25px;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.hero h2 {
+    margin-top: 0;
+    font-size: 30px;
+}
+
+.hero p {
+    font-size: 17px;
+    line-height: 1.6;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 15px;
+    margin: 25px 0;
+}
+
+.stat {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+}
+
+.stat strong {
+    display: block;
+    color: #075b34;
+    font-size: 28px;
+    margin-bottom: 7px;
+}
+
+.section-title {
+    color: #063d25;
+    font-size: 28px;
+    text-align: center;
+    margin: 35px 0 20px;
+}
+
+.application-types {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 18px;
+}
+
+.application-card {
+    background: white;
+    border-radius: 16px;
+    padding: 22px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+    border-left: 5px solid #0b6b3d;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.application-card:hover {
+    transform: translateY(-4px);
+}
+
+.application-icon {
+    font-size: 38px;
+}
+
+.application-card h3 {
+    color: #075b34;
+    margin: 10px 0;
+}
+
+.application-card p {
+    line-height: 1.5;
+    color: #456;
+}
+
+.form-box {
+    background: white;
+    border-radius: 18px;
+    padding: 25px;
+    margin-top: 30px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+}
+
+.form-box h2 {
+    color: #063d25;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    color: #075b34;
+    margin-bottom: 7px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #c9d8cf;
+    border-radius: 10px;
+    font-size: 15px;
+    outline: none;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #0b6b3d;
+}
+
+.form-group textarea {
+    min-height: 110px;
+    resize: vertical;
+}
+
+.btn {
+    display: inline-block;
+    background: #0b6b3d;
+    color: white;
+    text-decoration: none;
+    padding: 13px 20px;
+    margin: 5px;
+    border-radius: 10px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: #063d25;
+}
+
+.btn-secondary {
+    background: #e8f7ed;
+    color: #075b34;
+}
+
+.buttons {
+    text-align: center;
+    margin: 25px 0;
+}
+
+.application-list {
+    margin-top: 30px;
+}
+
+.application-item {
+    background: white;
+    border-radius: 15px;
+    padding: 18px;
+    margin: 12px 0;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+    border-left: 5px solid #0b6b3d;
+}
+
+.application-item h3 {
+    margin: 0 0 8px;
+    color: #075b34;
+}
+
+.status {
+    display: inline-block;
+    padding: 6px 10px;
+    border-radius: 8px;
+    background: #e8f7ed;
+    color: #075b34;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+.info {
+    background: #e8f7ed;
+    border-radius: 18px;
+    padding: 25px;
+    margin-top: 35px;
+}
+
+.info-item {
+    background: white;
+    border-radius: 12px;
+    padding: 15px;
+    margin: 10px 0;
+}
+
+.info-item strong {
+    color: #075b34;
+}
+
+footer {
+    background: #063d25;
+    color: white;
+    text-align: center;
+    padding: 25px 15px;
+    margin-top: 40px;
+}
+
+footer p {
+    margin: 6px;
+}
+
+@media (max-width: 600px) {
+
+    header h1 {
+        font-size: 28px;
+    }
+
+    .hero h2 {
+        font-size: 25px;
+    }
+
+    .section-title {
+        font-size: 24px;
+    }
+
+    nav a {
+        font-size: 14px;
+        margin: 4px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- LANGUAGES -->
+
+<div class="top-languages">
+    <button onclick="setLanguage('AZ')">AZ</button>
+    <button onclick="setLanguage('RU')">RU</button>
+    <button onclick="setLanguage('EN')">EN</button>
+    <button onclick="setLanguage('TR')">TR</button>
+    <button onclick="setLanguage('DE')">DE</button>
+    <button onclick="setLanguage('AR')">AR</button>
+    <button onclick="setLanguage('ES')">ES</button>
+    <button onclick="setLanguage('FR')">FR</button>
+    <button onclick="setLanguage('IT')">IT</button>
+</div>
+
+<header>
+    <h1>📋 WORKER PRO</h1>
+    <p>Заявки и обращения промышленной платформы</p>
+</header>
+
+<!-- NAVIGATION -->
+
+<nav>
+    <a href="../index.html">Главная</a>
+    <a href="../dashboard/index.html">Dashboard</a>
+    <a href="../companies/index.html">Компании</a>
+    <a href="../manufacturers/index.html">Производители</a>
+    <a href="../suppliers/index.html">Поставщики</a>
+    <a href="../specialists/index.html">Специалисты</a>
+    <a href="../products/index.html">Товары</a>
+    <a href="../requests/index.html">Заявки</a>
+    <a href="../offers/index.html">Предложения</a>
+    <a href="../orders/index.html">Заказы</a>
+</nav>
+
+<div class="container">
+
+<section class="hero">
+
+    <h2>📋 Applications</h2>
+
+    <p>
+        Единая система заявок WORKER PRO
+        для специалистов, компаний, производителей,
+        поставщиков и сервисных организаций.
+    </p>
+
+    <p>
+        Создание заявки → Проверка → Рассмотрение → Ответ → Выполнение
+    </p>
+
+</section>
+
+<!-- STATS -->
+
+<div class="stats">
+
+    <div class="stat">
+        <strong id="totalApplications">1 248</strong>
+        Всего заявок
+    </div>
+
+    <div class="stat">
+        <strong>386</strong>
+        Активных
+    </div>
+
+    <div class="stat">
+        <strong>742</strong>
+        Завершённых
+    </div>
+
+    <div class="stat">
+        <strong>120</strong>
+        На рассмотрении
+    </div>
+
+</div>
+
+<!-- TYPES -->
+
+<h2 class="section-title">
+    📝 Тип заявки
+</h2>
+
+<div class="application-types">
+
+    <div class="application-card" onclick="selectType('specialist')">
+        <div class="application-icon">👷</div>
+        <h3>Специалист</h3>
+        <p>
+            Регистрация специалиста,
+            добавление квалификации,
+            опыта и профессиональных навыков.
+        </p>
+    </div>
+
+    <div class="application-card" onclick="selectType('company')">
+        <div class="application-icon">🏢</div>
+        <h3>Компания</h3>
+        <p>
+            Заявка на регистрацию компании
+            и создание корпоративного профиля.
+        </p>
+    </div>
+
+    <div class="application-card" onclick="selectType('manufacturer')">
+        <div class="application-icon">🏭</div>
+        <h3>Производитель</h3>
+        <p>
+            Заявка производителя на размещение
+            продукции и оборудования.
+        </p>
+    </div>
+
+    <div class="application-card" onclick="selectType('supplier')">
+        <div class="application-icon">🚚</div>
+        <h3>Поставщик</h3>
+        <p>
+            Заявка поставщика на участие
+            в международной торговой платформе.
+        </p>
+    </div>
+
+    <div class="application-card" onclick="selectType('service')">
+        <div class="application-icon">🔧</div>
+        <h3>Сервисный центр</h3>
+        <p>
+            Регистрация сервисного центра
+            для ремонта и обслуживания оборудования.
+        </p>
+    </div>
+
+    <div class="application-card" onclick="selectType('product')">
+        <div class="application-icon">📦</div>
+        <h3>Товар</h3>
+        <p>
+            Заявка на добавление промышленного
+            товара или оборудования.
+        </p>
+    </div>
+
+</div>
+
+<!-- FORM -->
+
+<div class="form-box">
+
+    <h2>📨 Создать заявку</h2>
+
+    <div class="form-group">
+
+        <label>Тип заявки</label>
+
+        <select id="applicationType">
+
+            <option value="specialist">👷 Специалист</option>
+            <option value="company">🏢 Компания</option>
+            <option value="manufacturer">🏭 Производитель</option>
+            <option value="supplier">🚚 Поставщик</option>
+            <option value="service">🔧 Сервисный центр</option>
+            <option value="product">📦 Товар</option>
+
+        </select>
+
+    </div>
+
+    <div class="form-group">
+
+        <label>Имя / Название</label>
+
+        <input
+            id="applicantName"
+            type="text"
+            placeholder="Введите имя специалиста или название компании"
+        >
+
+    </div>
+
+    <div class="form-group">
+
+        <label>Страна</label>
+
+        <select id="country">
+
+            <option>Азербайджан</option>
+            <option>Турция</option>
+            <option>Германия</option>
+            <option>Италия</option>
+            <option>Китай</option>
+            <option>Россия</option>
+            <option>США</option>
+            <option>Другая страна</option>
+
+        </select>
+
+    </div>
+
+    <div class="form-group">
+
+        <label>Город</label>
+
+        <input
+            id="city"
+            type="text"
+            placeholder="Например: Baku"
+        >
+
+    </div>
+
+    <div class="form-group">
+
+        <label>Email / Телефон</label>
+
+        <input
+            id="contact"
+            type="text"
+            placeholder="Контактные данные"
+        >
+
+    </div>
+
+    <div class="form-group">
+
+        <label>Описание заявки</label>
+
+        <textarea
+            id="description"
+            placeholder="Опишите вашу заявку..."
+        ></textarea>
+
+    </div>
+
+    <div class="buttons">
+
+        <button class="btn" onclick="submitApplication()">
+            📤 Отправить заявку
+        </button>
+
+        <button class="btn btn-secondary" onclick="clearForm()">
+            Очистить
+        </button>
+
+    </div>
+
+</div>
+
+<!-- APPLICATIONS -->
+
+<div class="application-list">
+
+    <h2 class="section-title">
+        📊 Последние заявки
+    </h2>
+
+    <div class="application-item">
+
+        <h3>APP-2026-001 — Регистрация производителя</h3>
+
+        <p>
+            Caspian Industrial Systems — Azerbaijan
+        </p>
+
+        <span class="status">
+            На рассмотрении
+        </span>
+
+    </div>
+
+    <div class="application-item">
+
+        <h3>APP-2026-002 — Добавление товара</h3>
+
+        <p>
+            Промышленный насос CP-450
+        </p>
+
+        <span class="status">
+            Проверка
+        </span>
+
+    </div>
+
+    <div class="application-item">
+
+        <h3>APP-2026-003 — Регистрация специалиста</h3>
+
+        <p>
+            CNC Operator — Turkey
+        </p>
+
+        <span class="status">
+            Одобрено
+        </span>
+
+    </div>
+
+</div>
+
+<!-- HOW IT WORKS -->
+
+<div class="info">
+
+    <h2 class="section-title">
+        🔄 Как работает система
+    </h2>
+
+    <div class="info-item">
+        <strong>1. Создание заявки</strong><br>
+        Пользователь выбирает тип и заполняет информацию.
+    </div>
+
+    <div class="info-item">
+        <strong>2. Проверка</strong><br>
+        Заявка проходит первоначальную проверку.
+    </div>
+
+    <div class="info-item">
+        <strong>3. Рассмотрение</strong><br>
+        Ответственный раздел рассматривает заявку.
+    </div>
+
+    <div class="info-item">
+        <strong>4. Решение</strong><br>
+        Заявка может быть одобрена, отклонена или отправлена
+        на уточнение информации.
+    </div>
+
+    <div class="info-item">
+        <strong>5. Результат</strong><br>
+        После одобрения создаётся соответствующий профиль,
+        товар, компания или другой объект WORKER PRO.
+    </div>
+
+</div>
+
+<!-- LINKS -->
+
+<div class="buttons">
+
+    <a class="btn" href="../specialists/index.html">
+        👷 Специалисты
+    </a>
+
+    <a class="btn" href="../companies/index.html">
+        🏢 Компании
+    </a>
+
+    <a class="btn" href="../manufacturers/index.html">
+        🏭 Производители
+    </a>
+
+    <a class="btn" href="../suppliers/index.html">
+        🚚 Поставщики
+    </a>
+
+    <a class="btn" href="../products/index.html">
+        📦 Товары
+    </a>
+
+    <a class="btn" href="../dashboard/index.html">
+        📊 Dashboard
+    </a>
+
+</div>
+
+</div>
+
+<footer>
+
+    <p><strong>WORKER PRO</strong></p>
+    <p>🌍 Международная промышленная платформа</p>
+    <p>Заявки • Компании • Производители • Поставщики</p>
+    <p>F.S</p>
+
+</footer>
+
+<script src="../language.js"></script>
+
+<script>
+
+function selectType(type) {
+
+    document.getElementById("applicationType").value = type;
+
+    document.querySelector(".form-box").scrollIntoView({
+        behavior: "smooth"
+    });
+
+}
+
+function submitApplication() {
+
+    const type = document.getElementById("applicationType").value;
+    const name = document.getElementById("applicantName").value.trim();
+    const country = document.getElementById("country").value;
+    const city = document.getElementById("city").value.trim();
+    const contact = document.getElementById("contact").value.trim();
+    const description = document.getElementById("description").value.trim();
+
+    if (!name || !contact || !description) {
+
+        alert(
+            "Пожалуйста, заполните имя/название, контакт и описание заявки."
+        );
+
+        return;
+    }
+
+    const number =
+        "APP-2026-" +
+        String(Math.floor(Math.random() * 900) + 100);
+
+    const item = document.createElement("div");
+
+    item.className = "application-item";
+
+    item.innerHTML = `
+        <h3>${number} — Новая заявка</h3>
+
+        <p>
+            <strong>${name}</strong><br>
+            ${country}${city ? " — " + city : ""}<br>
+            Тип: ${type}
+        </p>
+
+        <p>
+            ${description}
+        </p>
+
+        <p>
+            Контакт: ${contact}
+        </p>
+
+        <span class="status">
+            Новая заявка
+        </span>
+    `;
+
+    document.querySelector(".application-list").appendChild(item);
+
+    alert(
+        "Заявка создана!\n\nНомер заявки: " + number +
+        "\n\nЭто демонстрационная версия WORKER PRO."
+    );
+
+    clearForm();
+}
+
+function clearForm() {
+
+    document.getElementById("applicantName").value = "";
+    document.getElementById("city").value = "";
+    document.getElementById("contact").value = "";
+    document.getElementById("description").value = "";
+
+}
+
+</script>
+
+</body>
+</html>
