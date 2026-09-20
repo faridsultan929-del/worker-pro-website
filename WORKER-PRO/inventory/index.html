@@ -1,1 +1,856 @@
- 
+ <!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WORKER PRO — Inventory</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f4f7f5;
+    color:#123;
+}
+
+.top-languages{
+    background:#063d25;
+    padding:10px;
+    display:flex;
+    justify-content:center;
+    gap:8px;
+    flex-wrap:wrap;
+}
+
+.top-languages button{
+    background:#0b6b3d;
+    color:white;
+    border:1px solid #75a98c;
+    border-radius:8px;
+    padding:8px 12px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.top-languages button:hover{
+    background:#b7ff35;
+    color:#063d25;
+}
+
+nav{
+    background:#075b34;
+    padding:12px;
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    flex-wrap:wrap;
+    position:sticky;
+    top:0;
+    z-index:100;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    padding:9px 12px;
+    border-radius:7px;
+    font-weight:bold;
+}
+
+nav a:hover{
+    background:#b7ff35;
+    color:#063d25;
+}
+
+.hero{
+    background:linear-gradient(135deg,#063d25,#0b6b3d);
+    color:white;
+    text-align:center;
+    padding:55px 20px;
+}
+
+.hero h1{
+    font-size:42px;
+    margin:0 0 15px;
+}
+
+.hero p{
+    max-width:850px;
+    margin:auto;
+    font-size:18px;
+    line-height:1.6;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+    padding:25px 15px;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:15px;
+    margin-top:-30px;
+    position:relative;
+}
+
+.stat{
+    background:white;
+    border-radius:14px;
+    padding:22px;
+    text-align:center;
+    box-shadow:0 4px 15px rgba(0,0,0,.08);
+}
+
+.stat strong{
+    display:block;
+    color:#0b6b3d;
+    font-size:28px;
+    margin-bottom:6px;
+}
+
+.controls{
+    background:white;
+    padding:20px;
+    border-radius:14px;
+    margin:30px 0;
+    box-shadow:0 4px 15px rgba(0,0,0,.07);
+}
+
+.search{
+    width:100%;
+    padding:14px;
+    border:1px solid #ccd8d1;
+    border-radius:10px;
+    font-size:16px;
+    margin-bottom:15px;
+}
+
+.filters{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+}
+
+.filters button{
+    border:none;
+    background:#e5eee9;
+    color:#063d25;
+    padding:10px 15px;
+    border-radius:9px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.filters button.active,
+.filters button:hover{
+    background:#0b6b3d;
+    color:white;
+}
+
+.inventory-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:20px;
+}
+
+.card{
+    background:white;
+    border-radius:15px;
+    padding:22px;
+    box-shadow:0 4px 15px rgba(0,0,0,.07);
+}
+
+.card h3{
+    color:#063d25;
+    margin-top:8px;
+}
+
+.icon{
+    font-size:40px;
+}
+
+.card p{
+    line-height:1.5;
+    color:#456;
+}
+
+.status{
+    display:inline-block;
+    padding:6px 10px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:bold;
+    margin-top:5px;
+}
+
+.available{
+    background:#dff5df;
+    color:#187329;
+}
+
+.low{
+    background:#fff0c7;
+    color:#8a5a00;
+}
+
+.out{
+    background:#ffe0e0;
+    color:#a00000;
+}
+
+.progress{
+    background:#e4ebe7;
+    height:9px;
+    border-radius:10px;
+    margin:12px 0;
+    overflow:hidden;
+}
+
+.progress-bar{
+    height:100%;
+    background:#0b6b3d;
+    border-radius:10px;
+}
+
+.card button,
+.main-btn{
+    border:none;
+    background:#0b6b3d;
+    color:white;
+    padding:11px 16px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+    margin-top:10px;
+}
+
+.card button:hover,
+.main-btn:hover{
+    background:#063d25;
+}
+
+.add-box{
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    margin-top:30px;
+    box-shadow:0 4px 15px rgba(0,0,0,.07);
+}
+
+.add-box h2{
+    color:#063d25;
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:12px;
+}
+
+.form-grid input,
+.form-grid select,
+.form-grid textarea{
+    width:100%;
+    padding:12px;
+    border:1px solid #ccd8d1;
+    border-radius:8px;
+    font-size:15px;
+}
+
+.form-grid textarea{
+    min-height:100px;
+    resize:vertical;
+    grid-column:1/-1;
+}
+
+.info{
+    background:#063d25;
+    color:white;
+    padding:30px;
+    border-radius:15px;
+    margin-top:35px;
+}
+
+.info h2{
+    color:#b7ff35;
+    margin-top:0;
+}
+
+.info p{
+    line-height:1.7;
+}
+
+.links{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:20px;
+}
+
+.links a{
+    background:white;
+    color:#063d25;
+    padding:10px 15px;
+    border-radius:8px;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+footer{
+    background:#063d25;
+    color:white;
+    text-align:center;
+    padding:25px;
+    margin-top:40px;
+}
+
+@media(max-width:600px){
+    .hero h1{font-size:32px}
+    .hero p{font-size:16px}
+
+    nav a{
+        font-size:13px;
+        padding:7px 9px;
+    }
+
+    .top-languages button{
+        padding:7px 9px;
+        font-size:12px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="top-languages">
+    <button onclick="setLanguage('AZ')">AZ</button>
+    <button onclick="setLanguage('RU')">RU</button>
+    <button onclick="setLanguage('EN')">EN</button>
+    <button onclick="setLanguage('TR')">TR</button>
+    <button onclick="setLanguage('DE')">DE</button>
+    <button onclick="setLanguage('AR')">AR</button>
+    <button onclick="setLanguage('ES')">ES</button>
+    <button onclick="setLanguage('FR')">FR</button>
+    <button onclick="setLanguage('IT')">IT</button>
+</div>
+
+<nav>
+    <a href="../index.html">Главная</a>
+    <a href="../catalog/">Каталог</a>
+    <a href="../products/">Продукты</a>
+    <a href="../equipment/">Оборудование</a>
+    <a href="../warehouses/">Склады</a>
+    <a href="../orders/">Заказы</a>
+    <a href="../suppliers/">Поставщики</a>
+    <a href="../companies/">Компании</a>
+</nav>
+
+<section class="hero">
+    <h1>📦 Inventory</h1>
+    <p>
+        Управление промышленными запасами, оборудованием,
+        запчастями, материалами и товарами на складах WORKER PRO.
+    </p>
+</section>
+
+<div class="container">
+
+    <div class="stats">
+        <div class="stat">
+            <strong>18,640+</strong>
+            Позиций
+        </div>
+
+        <div class="stat">
+            <strong>1,240+</strong>
+            Запчастей
+        </div>
+
+        <div class="stat">
+            <strong>386</strong>
+            Складов
+        </div>
+
+        <div class="stat">
+            <strong>42</strong>
+            Страны
+        </div>
+    </div>
+
+    <div class="controls">
+
+        <input
+            id="searchInput"
+            class="search"
+            type="text"
+            placeholder="Поиск: насос, подшипник, клапан, датчик..."
+            oninput="searchInventory()"
+        >
+
+        <div class="filters">
+            <button class="active" onclick="filterInventory('all',this)">
+                Все
+            </button>
+
+            <button onclick="filterInventory('parts',this)">
+                Запчасти
+            </button>
+
+            <button onclick="filterInventory('equipment',this)">
+                Оборудование
+            </button>
+
+            <button onclick="filterInventory('materials',this)">
+                Материалы
+            </button>
+
+            <button onclick="filterInventory('automation',this)">
+                Автоматизация
+            </button>
+
+            <button onclick="filterInventory('tools',this)">
+                Инструменты
+            </button>
+        </div>
+    </div>
+
+    <div class="inventory-grid" id="inventoryGrid">
+
+        <div class="card item"
+             data-category="parts"
+             data-search="подшипник bearing запчасть cnc">
+
+            <div class="icon">⚙️</div>
+
+            <h3>Промышленные подшипники</h3>
+
+            <p>
+                Подшипники для станков, насосов, двигателей
+                и промышленного оборудования.
+            </p>
+
+            <strong>Остаток: 248 шт.</strong>
+
+            <div class="progress">
+                <div class="progress-bar" style="width:82%"></div>
+            </div>
+
+            <span class="status available">В наличии</span>
+            <br>
+
+            <button onclick="showItem('Промышленные подшипники')">
+                Подробнее
+            </button>
+        </div>
+
+
+        <div class="card item"
+             data-category="parts"
+             data-search="насос pump насосы запчасти">
+
+            <div class="icon">💧</div>
+
+            <h3>Промышленные насосы</h3>
+
+            <p>
+                Центробежные, гидравлические и технологические
+                насосы для промышленности.
+            </p>
+
+            <strong>Остаток: 36 шт.</strong>
+
+            <div class="progress">
+                <div class="progress-bar" style="width:58%"></div>
+            </div>
+
+            <span class="status available">В наличии</span>
+            <br>
+
+            <button onclick="showItem('Промышленные насосы')">
+                Подробнее
+            </button>
+        </div>
+
+
+        <div class="card item"
+             data-category="parts"
+             data-search="клапан valve valves запчасть">
+
+            <div class="icon">🔧</div>
+
+            <h3>Промышленные клапаны</h3>
+
+            <p>
+                Клапаны, задвижки и регулирующая арматура
+                для промышленных систем.
+            </p>
+
+            <strong>Остаток: 74 шт.</strong>
+
+            <div class="progress">
+                <div class="progress-bar" style="width:67%"></div>
+            </div>
+
+            <span class="status available">В наличии</span>
+            <br>
+
+            <button onclick="showItem('Промышленные клапаны')">
+                Подробнее
+            </button>
+        </div>
+
+
+        <div class="card item"
+             data-category="automation"
+             data-search="датчик sensor sensors automation plc">
+
+            <div class="icon">📡</div>
+
+            <h3>Промышленные датчики</h3>
+
+            <p>
+                Датчики давления, температуры, уровня,
+                положения и расхода.
+            </p>
+
+            <strong>Остаток: 19 шт.</strong>
+
+            <div class="progress">
+                <div class="progress-bar" style="width:25%"></div>
+            </div>
+
+            <span class="status low">Низкий запас</span>
+            <br>
+
+            <button onclick="showItem('Промышленные датчики')">
+                Подробнее
+            </button>
+        </div>
+
+
+        <div class="card item"
+             data-category="equipment"
+             data-search="cnc станок machine оборудование">
+
+            <div class="icon">🏭</div>
+
+            <h3>CNC оборудование</h3>
+
+            <p>
+                CNC станки, комплектующие, контроллеры
+                и оборудование для производства.
+            </p>
+
+            <strong>Остаток: 8 шт.</strong>
+
+            <div class="progress">
+                <div class="progress-bar" style="width:18%"></div>
+            </div>
+
+            <span class="status low">Низкий запас</span>
+            <br>
+
+            <button onclick="showItem('CNC оборудование')">
+                Подробнее
+            </button>
+        </div>
+
+
+        <div class="card item"
+             data-category="materials"
+             data-search="металл steel aluminum металл материалы">
+
+            <div class="icon">🔩</div>
+
+            <h3>Металлические материалы</h3>
+
+            <p>
+                Сталь, алюминий, медь и другие материалы
+                для промышленного производства.
+            </p>
+
+            <strong>Остаток: 1,840 кг</strong>
+
+            <div class="progress">
+                <div class="progress-bar" style="width:72%"></div>
+            </div>
+
+            <span class="status available">В наличии</span>
+            <br>
+
+            <button onclick="showItem('Металлические материалы')">
+                Подробнее
+            </button>
+        </div>
+
+
+        <div class="card item"
+             data-category="tools"
+             data-search="инструменты tools cutter сверла фрезы">
+
+            <div class="icon">🛠️</div>
+
+            <h3>Режущий инструмент</h3>
+
+            <p>
+                Фрезы, сверла, резцы и другой инструмент
+                для металлообработки.
+            </p>
+
+            <strong>Остаток: 326 шт.</strong>
+
+            <div class="progress">
+                <div class="progress-bar" style="width:88%"></div>
+            </div>
+
+            <span class="status available">В наличии</span>
+            <br>
+
+            <button onclick="showItem('Режущий инструмент')">
+                Подробнее
+            </button>
+        </div>
+
+
+        <div class="card item"
+             data-category="automation"
+             data-search="plc controller контроллер automation">
+
+            <div class="icon">🖥️</div>
+
+            <h3>PLC контроллеры</h3>
+
+            <p>
+                Промышленные контроллеры, модули ввода-вывода
+                и системы автоматизации.
+            </p>
+
+            <strong>Остаток: 12 шт.</strong>
+
+            <div class="progress">
+                <div class="progress-bar" style="width:35%"></div>
+            </div>
+
+            <span class="status low">Низкий запас</span>
+            <br>
+
+            <button onclick="showItem('PLC контроллеры')">
+                Подробнее
+            </button>
+        </div>
+
+    </div>
+
+
+    <div class="add-box">
+
+        <h2>➕ Добавить позицию на склад</h2>
+
+        <div class="form-grid">
+
+            <input id="itemName"
+                   type="text"
+                   placeholder="Название товара">
+
+            <select id="itemCategory">
+                <option value="">Категория</option>
+                <option>Запчасти</option>
+                <option>Оборудование</option>
+                <option>Материалы</option>
+                <option>Автоматизация</option>
+                <option>Инструменты</option>
+            </select>
+
+            <input id="itemQuantity"
+                   type="number"
+                   placeholder="Количество">
+
+            <input id="itemWarehouse"
+                   type="text"
+                   placeholder="Склад / город">
+
+            <textarea id="itemDescription"
+                      placeholder="Описание товара"></textarea>
+
+        </div>
+
+        <button class="main-btn" onclick="addItem()">
+            Добавить в Inventory
+        </button>
+
+    </div>
+
+
+    <div class="info">
+
+        <h2>🌍 Inventory WORKER PRO</h2>
+
+        <p>
+            Inventory — это будущая система управления запасами
+            WORKER PRO. Компания сможет видеть свои товары,
+            оборудование, материалы и запчасти на складах.
+        </p>
+
+        <p>
+            Пользователь сможет найти нужную позицию,
+            увидеть наличие, количество, страну и город,
+            после чего связаться с владельцем товара
+            и отправить запрос.
+        </p>
+
+        <p>
+            В дальнейшем Inventory может быть связан с каталогом,
+            заказами, складами, поставщиками, доставкой,
+            счетами и международной логистикой.
+        </p>
+
+        <div class="links">
+            <a href="../catalog/">Каталог</a>
+            <a href="../products/">Продукты</a>
+            <a href="../warehouses/">Склады</a>
+            <a href="../orders/">Заказы</a>
+            <a href="../suppliers/">Поставщики</a>
+            <a href="../tracking/">Tracking</a>
+        </div>
+
+    </div>
+
+</div>
+
+<footer>
+    © 2026 WORKER PRO — Industrial Platform
+</footer>
+
+
+<script src="../language.js"></script>
+
+<script>
+
+let currentFilter = "all";
+
+
+function filterInventory(category, button){
+
+    currentFilter = category;
+
+    document.querySelectorAll(".filters button")
+        .forEach(function(btn){
+            btn.classList.remove("active");
+        });
+
+    button.classList.add("active");
+
+    searchInventory();
+}
+
+
+function searchInventory(){
+
+    const search =
+        document.getElementById("searchInput")
+        .value
+        .toLowerCase()
+        .trim();
+
+    const items =
+        document.querySelectorAll(".item");
+
+    items.forEach(function(item){
+
+        const category =
+            item.dataset.category;
+
+        const text =
+            item.dataset.search.toLowerCase();
+
+        const categoryMatch =
+            currentFilter === "all" ||
+            category === currentFilter;
+
+        const searchMatch =
+            search === "" ||
+            text.includes(search);
+
+        if(categoryMatch && searchMatch){
+            item.style.display = "block";
+        }else{
+            item.style.display = "none";
+        }
+
+    });
+}
+
+
+function showItem(name){
+
+    alert(
+        "WORKER PRO Inventory\n\n" +
+        "Позиция: " + name +
+        "\n\n" +
+        "Это демонстрационная карточка Inventory.\n" +
+        "В будущей версии здесь будут цена, " +
+        "количество, склад, страна, поставщик, " +
+        "фотографии и возможность отправить запрос."
+    );
+}
+
+
+function addItem(){
+
+    const name =
+        document.getElementById("itemName").value.trim();
+
+    const category =
+        document.getElementById("itemCategory").value;
+
+    const quantity =
+        document.getElementById("itemQuantity").value;
+
+    const warehouse =
+        document.getElementById("itemWarehouse").value.trim();
+
+    if(!name || !category || !quantity || !warehouse){
+
+        alert(
+            "Пожалуйста, заполните название, " +
+            "категорию, количество и склад."
+        );
+
+        return;
+    }
+
+    const number =
+        Math.floor(100 + Math.random() * 900);
+
+    alert(
+        "Позиция добавлена!\n\n" +
+        "Inventory ID: INV-2026-" + number +
+        "\n" +
+        "Товар: " + name +
+        "\n" +
+        "Категория: " + category +
+        "\n" +
+        "Количество: " + quantity +
+        "\n" +
+        "Склад: " + warehouse +
+        "\n\n" +
+        "Это демонстрационная версия."
+    );
+
+    document.getElementById("itemName").value = "";
+    document.getElementById("itemCategory").value = "";
+    document.getElementById("itemQuantity").value = "";
+    document.getElementById("itemWarehouse").value = "";
+    document.getElementById("itemDescription").value = "";
+}
+
+</script>
+
+</body>
+</html>
