@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WORKER PRO — Safety</title>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f4f7f5;
+    color:#123;
+}
+
+.top-languages{
+    background:#063d25;
+    padding:10px;
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:7px;
+}
+
+.top-languages button{
+    border:0;
+    padding:8px 12px;
+    border-radius:8px;
+    background:#0b6b3d;
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.top-languages button:hover{
+    background:#b7ff35;
+    color:#063d25;
+}
+
+header{
+    background:#075b34;
+    color:white;
+    text-align:center;
+    padding:25px 15px;
+}
+
+.logo{
+    font-size:55px;
+    margin-bottom:5px;
+}
+
+header h1{
+    margin:5px 0;
+    font-size:30px;
+}
+
+header p{
+    margin:8px 0 0;
+    font-size:17px;
+}
+
+nav{
+    position:sticky;
+    top:0;
+    z-index:10;
+    background:#063d25;
+    padding:10px;
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:7px;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    background:#0b6b3d;
+    padding:9px 12px;
+    border-radius:8px;
+    font-size:14px;
+    font-weight:bold;
+}
+
+nav a:hover{
+    background:#b7ff35;
+    color:#063d25;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+    padding:20px;
+}
+
+.hero{
+    background:white;
+    border-radius:16px;
+    padding:25px;
+    margin-bottom:20px;
+    box-shadow:0 3px 12px rgba(0,0,0,.08);
+    text-align:center;
+}
+
+.hero h2{
+    color:#075b34;
+    margin-top:0;
+    font-size:28px;
+}
+
+.hero p{
+    font-size:17px;
+    line-height:1.6;
+}
+
+.alert{
+    background:#fff1d6;
+    border-left:6px solid #d98b00;
+    padding:18px;
+    border-radius:9px;
+    margin-top:20px;
+    text-align:left;
+}
+
+.section-title{
+    color:#075b34;
+    margin:30px 0 15px;
+    font-size:25px;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:18px;
+}
+
+.card{
+    background:white;
+    border-radius:15px;
+    padding:20px;
+    box-shadow:0 3px 12px rgba(0,0,0,.07);
+}
+
+.card h3{
+    color:#075b34;
+    margin-top:0;
+}
+
+.card p{
+    line-height:1.5;
+}
+
+.icon{
+    font-size:38px;
+    margin-bottom:8px;
+}
+
+.badge{
+    display:inline-block;
+    margin-top:8px;
+    padding:7px 12px;
+    border-radius:20px;
+    background:#e5f7eb;
+    color:#075b34;
+    font-weight:bold;
+    font-size:13px;
+}
+
+.danger{
+    background:#ffe5e5;
+    border-left:5px solid #c90000;
+}
+
+.warning{
+    background:#fff3d5;
+    border-left:5px solid #d18b00;
+}
+
+.safe{
+    background:#e4f7e9;
+    border-left:5px solid #0b6b3d;
+}
+
+.checklist{
+    list-style:none;
+    padding:0;
+}
+
+.checklist li{
+    background:#f4f7f5;
+    padding:12px;
+    margin:8px 0;
+    border-radius:8px;
+}
+
+.checklist li::before{
+    content:"✓";
+    color:#0b6b3d;
+    font-weight:bold;
+    margin-right:9px;
+}
+
+.workflow{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:15px;
+}
+
+.step{
+    background:white;
+    border-radius:14px;
+    padding:18px;
+    text-align:center;
+    box-shadow:0 2px 8px rgba(0,0,0,.06);
+}
+
+.step-number{
+    width:42px;
+    height:42px;
+    line-height:42px;
+    margin:0 auto 10px;
+    background:#0b6b3d;
+    color:white;
+    border-radius:50%;
+    font-weight:bold;
+    font-size:18px;
+}
+
+.training{
+    background:#063d25;
+    color:white;
+    border-radius:16px;
+    padding:25px;
+    margin-top:25px;
+}
+
+.training h2{
+    margin-top:0;
+}
+
+.training-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:15px;
+    margin-top:18px;
+}
+
+.training-card{
+    background:#0b6b3d;
+    border-radius:12px;
+    padding:18px;
+}
+
+.training-card h3{
+    margin-top:0;
+}
+
+.form-box{
+    background:white;
+    padding:25px;
+    border-radius:16px;
+    box-shadow:0 3px 12px rgba(0,0,0,.08);
+}
+
+.form-box input,
+.form-box select,
+.form-box textarea{
+    width:100%;
+    padding:13px;
+    margin:7px 0 12px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    font-size:15px;
+}
+
+.form-box textarea{
+    min-height:110px;
+    resize:vertical;
+}
+
+.form-box button{
+    width:100%;
+    background:#0b6b3d;
+    color:white;
+    border:0;
+    padding:14px;
+    border-radius:9px;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.form-box button:hover{
+    background:#075b34;
+}
+
+footer{
+    background:#063d25;
+    color:white;
+    text-align:center;
+    padding:25px;
+    margin-top:35px;
+}
+
+@media(max-width:600px){
+
+    header h1{
+        font-size:25px;
+    }
+
+    .hero h2{
+        font-size:23px;
+    }
+
+    .container{
+        padding:13px;
+    }
+
+    nav a{
+        font-size:12px;
+        padding:8px 9px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="top-languages">
+    <button onclick="setLanguage('az')">AZ</button>
+    <button onclick="setLanguage('ru')">RU</button>
+    <button onclick="setLanguage('en')">EN</button>
+    <button onclick="setLanguage('tr')">TR</button>
+    <button onclick="setLanguage('de')">DE</button>
+    <button onclick="setLanguage('ar')">AR</button>
+    <button onclick="setLanguage('es')">ES</button>
+    <button onclick="setLanguage('fr')">FR</button>
+    <button onclick="setLanguage('it')">IT</button>
+</div>
+
+<header>
+    <div class="logo">🦺</div>
+
+    <h1>WORKER PRO</h1>
+
+    <p>
+        Safety / Промышленная безопасность
+    </p>
+</header>
+
+<nav>
+    <a href="../">Home</a>
+    <a href="../production/">Production</a>
+    <a href="../problems/">Problems</a>
+    <a href="../training/">Training</a>
+    <a href="../specialists/">Specialists</a>
+    <a href="../jobs/">Jobs</a>
+    <a href="../companies/">Companies</a>
+    <a href="../equipment/">Equipment</a>
+    <a href="../maintenance/">Maintenance</a>
+    <a href="../verification/">Verification</a>
+    <a href="../reviews/">Reviews</a>
+    <a href="../dashboard/">Dashboard</a>
+</nav>
+
+<div class="container">
+
+<section class="hero">
+
+    <h2>Промышленная безопасность</h2>
+
+    <p>
+        WORKER PRO помогает рабочим, операторам, инженерам,
+        мастерам и специалистам изучать правила безопасной
+        работы с промышленным оборудованием.
+    </p>
+
+    <div class="alert">
+        <strong>⚠ Важно:</strong>
+        обучение безопасности не заменяет инструкции
+        работодателя, производственную документацию,
+        оценку рисков и обязательные требования
+        законодательства.
+    </div>
+
+</section>
+
+<h2 class="section-title">
+    Основные направления безопасности
+</h2>
+
+<div class="grid">
+
+    <div class="card safe">
+        <div class="icon">🦺</div>
+        <h3>СИЗ</h3>
+        <p>
+            Каска, защитные очки, перчатки,
+            спецодежда, обувь и другие средства
+            индивидуальной защиты.
+        </p>
+        <span class="badge">Safety</span>
+    </div>
+
+    <div class="card">
+        <div class="icon">⚙️</div>
+        <h3>Безопасность станков</h3>
+        <p>
+            Проверка оборудования перед началом работы,
+            защитные устройства, аварийная остановка
+            и безопасная эксплуатация.
+        </p>
+    </div>
+
+    <div class="card">
+        <div class="icon">🔥</div>
+        <h3>Пожарная безопасность</h3>
+        <p>
+            Предупреждение пожаров, правильное обращение
+            с огнетушителями и действия при пожаре.
+        </p>
+    </div>
+
+    <div class="card">
+        <div class="icon">⚡</div>
+        <h3>Электробезопасность</h3>
+        <p>
+            Электрические шкафы, кабели, заземление,
+            отключение оборудования и безопасные работы.
+        </p>
+    </div>
+
+    <div class="card">
+        <div class="icon">💧</div>
+        <h3>Гидравлика</h3>
+        <p>
+            Давление, утечки масла, шланги,
+            клапаны и безопасное обслуживание
+            гидравлических систем.
+        </p>
+    </div>
+
+    <div class="card">
+        <div class="icon">💨</div>
+        <h3>Пневматика</h3>
+        <p>
+            Сжатый воздух, давление, пневмолинии,
+            клапаны и безопасное обслуживание.
+        </p>
+    </div>
+
+    <div class="card">
+        <div class="icon">🔥</div>
+        <h3>Печи и нагрев</h3>
+        <p>
+            Высокая температура, охлаждение,
+            защитные системы и контроль оборудования.
+        </p>
+    </div>
+
+    <div class="card">
+        <div class="icon">🧯</div>
+        <h3>Аварийные ситуации</h3>
+        <p>
+            Остановка оборудования, сообщение
+            ответственным лицам и действия
+            в аварийной ситуации.
+        </p>
+    </div>
+
+</div>
+
+<h2 class="section-title">
+    Проверка перед началом работы
+</h2>
+
+<div class="grid">
+
+    <div class="card">
+        <h3>1. Рабочее место</h3>
+
+        <ul class="checklist">
+            <li>Рабочая зона свободна</li>
+            <li>Освещение исправно</li>
+            <li>Проходы свободны</li>
+            <li>Нет посторонних предметов</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h3>2. Оборудование</h3>
+
+        <ul class="checklist">
+            <li>Проверить состояние станка</li>
+            <li>Проверить защитные устройства</li>
+            <li>Проверить аварийную остановку</li>
+            <li>Проверить утечки</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h3>3. СИЗ</h3>
+
+        <ul class="checklist">
+            <li>Каска</li>
+            <li>Очки</li>
+            <li>Перчатки</li>
+            <li>Спецодежда и обувь</li>
+        </ul>
+    </div>
+
+</div>
+
+<h2 class="section-title">
+    Опасные ситуации
+</h2>
+
+<div class="grid">
+
+    <div class="card danger">
+        <h3>🔴 Утечка масла</h3>
+
+        <p>
+            Остановить работу согласно установленной
+            процедуре, обозначить опасную зону и сообщить
+            ответственному специалисту.
+        </p>
+    </div>
+
+    <div class="card danger">
+        <h3>🔴 Неисправность станка</h3>
+
+        <p>
+            Не продолжать работу на неисправном
+            оборудовании. Следовать процедуре
+            остановки и сообщить ответственному.
+        </p>
+    </div>
+
+    <div class="card warning">
+        <h3>🟠 Перегрев оборудования</h3>
+
+        <p>
+            Прекратить работу в соответствии
+            с инструкцией оборудования и сообщить
+            ответственному персоналу.
+        </p>
+    </div>
+
+    <div class="card danger">
+        <h3>🔴 Повреждённый кабель</h3>
+
+        <p>
+            Не использовать оборудование до устранения
+            неисправности квалифицированным персоналом.
+        </p>
+    </div>
+
+</div>
+
+<h2 class="section-title">
+    Действия при аварии
+</h2>
+
+<div class="workflow">
+
+    <div class="step">
+        <div class="step-number">1</div>
+        <h3>Остановить</h3>
+        <p>
+            Безопасно остановить оборудование
+            согласно установленной процедуре.
+        </p>
+    </div>
+
+    <div class="step">
+        <div class="step-number">2</div>
+        <h3>Отойти</h3>
+        <p>
+            Покинуть опасную зону,
+            если это необходимо.
+        </p>
+    </div>
+
+    <div class="step">
+        <div class="step-number">3</div>
+        <h3>Сообщить</h3>
+        <p>
+            Немедленно сообщить ответственному
+            лицу или руководителю.
+        </p>
+    </div>
+
+    <div class="step">
+        <div class="step-number">4</div>
+        <h3>Помочь</h3>
+        <p>
+            Оказывать помощь только в пределах
+            своей подготовки и безопасных процедур.
+        </p>
+    </div>
+
+    <div class="step">
+        <div class="step-number">5</div>
+        <h3>Зафиксировать</h3>
+        <p>
+            Информация об инциденте может быть
+            зафиксирована для дальнейшего анализа.
+        </p>
+    </div>
+
+</div>
+
+<section class="training">
+
+    <h2>
+        🎓 Safety Training
+    </h2>
+
+    <p>
+        Безопасность будет связана с разделом
+        обучения WORKER PRO.
+    </p>
+
+    <div class="training-grid">
+
+        <div class="training-card">
+            <h3>Level 1</h3>
+            <p>
+                Основы промышленной безопасности
+            </p>
+        </div>
+
+        <div class="training-card">
+            <h3>Level 2</h3>
+            <p>
+                Безопасность оборудования
+            </p>
+        </div>
+
+        <div class="training-card">
+            <h3>Level 3</h3>
+            <p>
+                Производственные риски
+            </p>
+        </div>
+
+        <div class="training-card">
+            <h3>Level 4</h3>
+            <p>
+                Аварийные ситуации
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+<h2 class="section-title">
+    Сообщить о проблеме безопасности
+</h2>
+
+<div class="form-box">
+
+    <input
+        type="text"
+        id="reportName"
+        placeholder="Ваше имя">
+
+    <select id="reportType">
+
+        <option value="">
+            Выберите тип проблемы
+        </option>
+
+        <option>
+            Неисправное оборудование
+        </option>
+
+        <option>
+            Опасная зона
+        </option>
+
+        <option>
+            Отсутствие СИЗ
+        </option>
+
+        <option>
+            Электрическая опасность
+        </option>
+
+        <option>
+            Пожарная опасность
+        </option>
+
+        <option>
+            Утечка масла / жидкости
+        </option>
+
+        <option>
+            Другая проблема
+        </option>
+
+    </select>
+
+    <textarea
+        id="reportMessage"
+        placeholder="Опишите проблему">
+    </textarea>
+
+    <button onclick="sendSafetyReport()">
+        Отправить сообщение
+    </button>
+
+</div>
+
+<h2 class="section-title">
+    Будущие возможности WORKER PRO Safety
+</h2>
+
+<div class="grid">
+
+    <div class="card">
+        <div class="icon">📚</div>
+        <h3>Safety Courses</h3>
+        <p>
+            Полные курсы по промышленной безопасности
+            для разных профессий.
+        </p>
+    </div>
+
+    <div class="card">
+        <div class="icon">📝</div>
+        <h3>Safety Tests</h3>
+        <p>
+            Тесты после уроков и проверка знаний
+            сотрудников.
+        </p>
+    </div>
+
+    <div class="card">
+        <div class="icon">🏆</div>
+        <h3>Certificates</h3>
+        <p>
+            В будущем возможно создание сертификатов
+            после прохождения обучения.
+        </p>
+    </div>
+
+    <div class="card">
+        <div class="icon">📊</div>
+        <h3>Progress</h3>
+        <p>
+            Пользователь сможет видеть прогресс
+            обучения по безопасности.
+        </p>
+    </div>
+
+</div>
+
+<div class="alert">
+    <strong>⚠ Демо-версия:</strong><br>
+    Раздел Safety сейчас является информационной
+    частью платформы. Реальные курсы, тестирование,
+    сертификаты, сообщения об инцидентах и база
+    пользователей будут подключены после создания
+    серверной части WORKER PRO.
+</div>
+
+</div>
+
+<footer>
+
+    <strong>WORKER PRO</strong><br>
+
+    Global Industrial Platform<br><br>
+
+    Safety · Production · Training ·
+    Specialists · Companies · Equipment
+
+    <br><br>
+
+    F.S
+
+</footer>
+
+<script src="../language.js"></script>
+
+<script>
+
+function sendSafetyReport(){
+
+    const name =
+        document.getElementById("reportName").value.trim();
+
+    const type =
+        document.getElementById("reportType").value;
+
+    const message =
+        document.getElementById("reportMessage").value.trim();
+
+    if(!name || !type || !message){
+
+        alert(
+            "Пожалуйста, заполните имя, тип проблемы и описание."
+        );
+
+        return;
+    }
+
+    alert(
+        "Сообщение о проблеме безопасности принято " +
+        "в демо-режиме. Реальная отправка будет подключена " +
+        "после создания серверной части."
+    );
+
+}
+
+</script>
+
+</body>
+</html>
