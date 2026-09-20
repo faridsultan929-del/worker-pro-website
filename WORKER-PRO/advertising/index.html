@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WORKER PRO — Advertising</title>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f4f7f5;
+    color:#123;
+}
+
+.top-languages{
+    background:#063d25;
+    padding:10px;
+    text-align:center;
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+.top-languages a{
+    display:inline-block;
+    color:white;
+    text-decoration:none;
+    padding:8px 11px;
+    margin:3px;
+    border-radius:7px;
+    background:#0b6b3d;
+    font-weight:bold;
+    font-size:14px;
+}
+
+.top-languages a:hover{
+    background:#b7ff35;
+    color:#063d25;
+}
+
+header{
+    background:#075b34;
+    color:white;
+    padding:25px 15px;
+    text-align:center;
+}
+
+header h1{
+    margin:0 0 8px;
+    font-size:32px;
+}
+
+header p{
+    margin:0;
+    font-size:17px;
+}
+
+nav{
+    background:#063d25;
+    padding:12px;
+    text-align:center;
+    position:sticky;
+    top:58px;
+    z-index:999;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    margin:5px 8px;
+    font-size:14px;
+}
+
+nav a:hover{
+    color:#b7ff35;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+    padding:20px;
+}
+
+.hero{
+    background:white;
+    padding:30px;
+    border-radius:16px;
+    margin-bottom:20px;
+    box-shadow:0 3px 12px rgba(0,0,0,.08);
+    text-align:center;
+}
+
+.hero h2{
+    color:#075b34;
+    margin-top:0;
+    font-size:28px;
+}
+
+.hero p{
+    font-size:17px;
+    line-height:1.6;
+}
+
+.search-box{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:20px;
+}
+
+.search-box input,
+.search-box select{
+    flex:1;
+    min-width:180px;
+    padding:13px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    font-size:15px;
+}
+
+button{
+    background:#0b6b3d;
+    color:white;
+    border:0;
+    padding:13px 20px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+button:hover{
+    background:#063d25;
+}
+
+.section-title{
+    color:#075b34;
+    margin-top:35px;
+    margin-bottom:15px;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:18px;
+}
+
+.card{
+    background:white;
+    padding:22px;
+    border-radius:14px;
+    box-shadow:0 3px 10px rgba(0,0,0,.07);
+}
+
+.card h3{
+    color:#075b34;
+    margin-top:0;
+}
+
+.card p{
+    line-height:1.5;
+}
+
+.price{
+    font-size:25px;
+    color:#075b34;
+    font-weight:bold;
+    margin:15px 0;
+}
+
+.badge{
+    display:inline-block;
+    background:#b7ff35;
+    color:#063d25;
+    padding:5px 9px;
+    border-radius:6px;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
+    gap:15px;
+    margin-top:20px;
+}
+
+.stat{
+    background:#075b34;
+    color:white;
+    padding:20px;
+    border-radius:12px;
+    text-align:center;
+}
+
+.stat strong{
+    display:block;
+    font-size:28px;
+    color:#b7ff35;
+    margin-bottom:5px;
+}
+
+.target{
+    border-left:5px solid #0b6b3d;
+}
+
+.form-box{
+    background:white;
+    padding:25px;
+    border-radius:14px;
+    box-shadow:0 3px 10px rgba(0,0,0,.07);
+}
+
+.form-box input,
+.form-box select,
+.form-box textarea{
+    width:100%;
+    padding:13px;
+    margin:7px 0 12px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    font-size:15px;
+}
+
+.form-box textarea{
+    min-height:110px;
+    resize:vertical;
+}
+
+.workflow{
+    counter-reset:step;
+}
+
+.step{
+    background:white;
+    padding:18px 18px 18px 55px;
+    margin:12px 0;
+    border-radius:10px;
+    position:relative;
+    box-shadow:0 2px 7px rgba(0,0,0,.06);
+}
+
+.step:before{
+    counter-increment:step;
+    content:counter(step);
+    position:absolute;
+    left:15px;
+    top:15px;
+    width:28px;
+    height:28px;
+    border-radius:50%;
+    background:#0b6b3d;
+    color:white;
+    text-align:center;
+    line-height:28px;
+    font-weight:bold;
+}
+
+.warning{
+    margin-top:25px;
+    padding:18px;
+    background:#fff8d8;
+    border-left:5px solid #e0b400;
+    border-radius:8px;
+}
+
+footer{
+    margin-top:40px;
+    background:#063d25;
+    color:white;
+    text-align:center;
+    padding:25px;
+}
+
+@media(max-width:600px){
+    header h1{
+        font-size:25px;
+    }
+
+    header p{
+        font-size:15px;
+    }
+
+    nav{
+        position:static;
+    }
+
+    .container{
+        padding:12px;
+    }
+
+    .hero{
+        padding:20px;
+    }
+
+    .hero h2{
+        font-size:23px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="top-languages">
+    <a href="#">AZ</a>
+    <a href="#">RU</a>
+    <a href="#">EN</a>
+    <a href="#">TR</a>
+    <a href="#">DE</a>
+    <a href="#">AR</a>
+    <a href="#">ES</a>
+    <a href="#">FR</a>
+    <a href="#">IT</a>
+</div>
+
+<header>
+    <h1>WORKER PRO</h1>
+    <p>Реклама и продвижение промышленного бизнеса</p>
+</header>
+
+<nav>
+    <a href="../index.html">Главная</a>
+    <a href="../companies/index.html">Компании</a>
+    <a href="../manufacturers/index.html">Производители</a>
+    <a href="../suppliers/index.html">Поставщики</a>
+    <a href="../products/index.html">Товары</a>
+    <a href="../equipment/index.html">Оборудование</a>
+    <a href="../services/index.html">Услуги</a>
+    <a href="../pricing/index.html">Тарифы</a>
+    <a href="../dashboard/index.html">Dashboard</a>
+</nav>
+
+<div class="container">
+
+    <section class="hero">
+        <h2>Промышленная реклама WORKER PRO</h2>
+
+        <p>
+            Компании, производители, поставщики, специалисты и сервисные организации
+            смогут продвигать свои товары, оборудование и услуги среди участников
+            международной промышленной платформы.
+        </p>
+
+        <div class="search-box">
+            <input type="text" id="searchInput"
+                   placeholder="Поиск рекламы: насос, CNC, сварка...">
+
+            <select id="countryFilter">
+                <option value="all">Все страны</option>
+                <option>Азербайджан</option>
+                <option>Турция</option>
+                <option>Германия</option>
+                <option>Италия</option>
+                <option>Китай</option>
+                <option>США</option>
+            </select>
+
+            <select id="industryFilter">
+                <option value="all">Все отрасли</option>
+                <option>Производство</option>
+                <option>CNC</option>
+                <option>Гидравлика</option>
+                <option>Электрика</option>
+                <option>Автоматизация</option>
+                <option>Сварка</option>
+                <option>Логистика</option>
+            </select>
+
+            <button onclick="searchAds()">Найти</button>
+        </div>
+    </section>
+
+    <h2 class="section-title">Что можно рекламировать</h2>
+
+    <div class="grid">
+
+        <div class="card">
+            <h3>🏭 Компании</h3>
+            <p>
+                Продвижение профиля компании среди покупателей,
+                производителей и промышленных специалистов.
+            </p>
+            <span class="badge">COMPANY ADS</span>
+        </div>
+
+        <div class="card">
+            <h3>⚙️ Продукты</h3>
+            <p>
+                Реклама промышленной продукции: насосов, клапанов,
+                подшипников, датчиков, деталей и материалов.
+            </p>
+            <span class="badge">PRODUCT ADS</span>
+        </div>
+
+        <div class="card">
+            <h3>🏗️ Оборудование</h3>
+            <p>
+                Продвижение CNC, прессов, печей, станков,
+                производственных линий и другого оборудования.
+            </p>
+            <span class="badge">EQUIPMENT ADS</span>
+        </div>
+
+        <div class="card">
+            <h3>🔧 Услуги</h3>
+            <p>
+                Реклама ремонта, обслуживания, монтажа,
+                CNC-сервиса, сварки и технических услуг.
+            </p>
+            <span class="badge">SERVICE ADS</span>
+        </div>
+
+        <div class="card">
+            <h3>👷 Специалисты</h3>
+            <p>
+                Специалисты смогут продвигать свои профессиональные
+                услуги и находить промышленные заказы.
+            </p>
+            <span class="badge">SPECIALIST ADS</span>
+        </div>
+
+        <div class="card">
+            <h3>🚚 Логистика</h3>
+            <p>
+                Реклама транспортных компаний, международных перевозок,
+                складов и логистических услуг.
+            </p>
+            <span class="badge">LOGISTICS ADS</span>
+        </div>
+
+    </div>
+
+    <h2 class="section-title">Рекламные пакеты</h2>
+
+    <div class="grid">
+
+        <div class="card">
+            <h3>Basic</h3>
+            <div class="price">5 AZN</div>
+            <p>Базовое размещение рекламы.</p>
+            <p>✓ 7 дней</p>
+            <p>✓ Карточка компании/товара</p>
+            <p>✓ Статистика просмотров</p>
+            <button onclick="choosePlan('Basic')">Выбрать</button>
+        </div>
+
+        <div class="card">
+            <h3>Business</h3>
+            <div class="price">15 AZN</div>
+            <p>Расширенное продвижение.</p>
+            <p>✓ 30 дней</p>
+            <p>✓ Выделенное размещение</p>
+            <p>✓ Статистика</p>
+            <p>✓ Страна и отрасль</p>
+            <button onclick="choosePlan('Business')">Выбрать</button>
+        </div>
+
+        <div class="card">
+            <h3>Premium</h3>
+            <div class="price">30 AZN</div>
+            <p>Максимальное продвижение.</p>
+            <p>✓ 30 дней</p>
+            <p>✓ Premium позиция</p>
+            <p>✓ Международная аудитория</p>
+            <p>✓ Расширенная статистика</p>
+            <button onclick="choosePlan('Premium')">Выбрать</button>
+        </div>
+
+        <div class="card">
+            <h3>Enterprise</h3>
+            <div class="price">Custom</div>
+            <p>Индивидуальная реклама для крупных компаний.</p>
+            <p>✓ Международная кампания</p>
+            <p>✓ Несколько стран</p>
+            <p>✓ Несколько продуктов</p>
+            <p>✓ Индивидуальные условия</p>
+            <button onclick="choosePlan('Enterprise')">Выбрать</button>
+        </div>
+
+    </div>
+
+    <h2 class="section-title">Статистика рекламы</h2>
+
+    <div class="stats">
+
+        <div class="stat">
+            <strong>12,540</strong>
+            Просмотры
+        </div>
+
+        <div class="stat">
+            <strong>3,420</strong>
+            Переходы
+        </div>
+
+        <div class="stat">
+            <strong>860</strong>
+            Запросы
+        </div>
+
+        <div class="stat">
+            <strong>245</strong>
+            Контакты
+        </div>
+
+    </div>
+
+    <h2 class="section-title">Таргетинг рекламы</h2>
+
+    <div class="grid">
+
+        <div class="card target">
+            <h3>🌍 Страна</h3>
+            <p>
+                Можно выбирать страны, в которых будет показываться
+                рекламное предложение.
+            </p>
+        </div>
+
+        <div class="card target">
+            <h3>🏭 Отрасль</h3>
+            <p>
+                Производство, нефтегазовая отрасль, CNC,
+                автоматизация, энергетика и другие направления.
+            </p>
+        </div>
+
+        <div class="card target">
+            <h3>⚙️ Категория</h3>
+            <p>
+                Товары, оборудование, материалы, услуги,
+                специалисты или компании.
+            </p>
+        </div>
+
+        <div class="card target">
+            <h3>👥 Аудитория</h3>
+            <p>
+                Рабочие, инженеры, мастера, закупщики,
+                производители и поставщики.
+            </p>
+        </div>
+
+    </div>
+
+    <h2 class="section-title">Как работает реклама</h2>
+
+    <div class="workflow">
+
+        <div class="step">
+            <strong>Создание рекламы</strong><br>
+            Компания выбирает товар, услугу или профиль для продвижения.
+        </div>
+
+        <div class="step">
+            <strong>Выбор аудитории</strong><br>
+            Выбираются страна, отрасль и категория.
+        </div>
+
+        <div class="step">
+            <strong>Выбор пакета</strong><br>
+            Basic, Business, Premium или индивидуальный пакет.
+        </div>
+
+        <div class="step">
+            <strong>Размещение</strong><br>
+            Рекламное предложение появляется на платформе.
+        </div>
+
+        <div class="step">
+            <strong>Получение клиентов</strong><br>
+            Пользователь открывает рекламу, профиль или товар
+            и связывается с компанией.
+        </div>
+
+        <div class="step">
+            <strong>Статистика</strong><br>
+            Компания получает данные о просмотрах,
+            переходах и запросах.
+        </div>
+
+    </div>
+
+    <h2 class="section-title">Создать рекламную кампанию</h2>
+
+    <div class="form-box">
+
+        <label>Название компании</label>
+        <input type="text" id="companyName"
+               placeholder="Например: Industrial Manufacturer">
+
+        <label>Что рекламировать?</label>
+        <select id="adType">
+            <option>Компания</option>
+            <option>Продукт</option>
+            <option>Оборудование</option>
+            <option>Услуга</option>
+            <option>Специалист</option>
+            <option>Логистика</option>
+        </select>
+
+        <label>Страна</label>
+        <select id="adCountry">
+            <option>Азербайджан</option>
+            <option>Турция</option>
+            <option>Германия</option>
+            <option>Италия</option>
+            <option>Китай</option>
+            <option>США</option>
+            <option>Другие страны</option>
+        </select>
+
+        <label>Описание рекламы</label>
+        <textarea id="adDescription"
+                  placeholder="Опишите товар, оборудование или услугу..."></textarea>
+
+        <label>Рекламный пакет</label>
+        <select id="adPlan">
+            <option>Basic — 5 AZN</option>
+            <option>Business — 15 AZN</option>
+            <option>Premium — 30 AZN</option>
+            <option>Enterprise — Custom</option>
+        </select>
+
+        <button onclick="createCampaign()">
+            Создать рекламную кампанию
+        </button>
+
+    </div>
+
+    <h2 class="section-title">Будущие возможности</h2>
+
+    <div class="grid">
+
+        <div class="card">
+            <h3>📊 Расширенная аналитика</h3>
+            <p>
+                Просмотры, клики, заявки, контакты,
+                конверсия и эффективность рекламы.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>🎯 Умный таргетинг</h3>
+            <p>
+                Автоматический подбор аудитории
+                по интересам и промышленным категориям.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>🌐 Международная реклама</h3>
+            <p>
+                Продвижение товаров и компаний
+                сразу в нескольких странах.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>🤖 AI-реклама</h3>
+            <p>
+                В будущем AI сможет помогать создавать
+                рекламные объявления и подбирать аудиторию.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>💳 Онлайн-оплата</h3>
+            <p>
+                Оплата рекламных кампаний через
+                будущую платёжную систему WORKER PRO.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>⭐ Premium размещение</h3>
+            <p>
+                Выделение компании, товара или услуги
+                на главных страницах платформы.
+            </p>
+        </div>
+
+    </div>
+
+    <div class="warning">
+        <strong>Демо-версия:</strong><br>
+        Эта страница является демонстрационной частью WORKER PRO.
+        Функции оплаты, реального размещения рекламы,
+        статистики и таргетинга будут подключены после создания
+        серверной части платформы.
+    </div>
+
+</div>
+
+<footer>
+    <strong>WORKER PRO</strong><br>
+    Международная промышленная платформа<br><br>
+    Companies • Products • Equipment • Services • Specialists • Advertising
+    <br><br>
+    © WORKER PRO — F.S
+</footer>
+
+<script src="../language.js"></script>
+
+<script>
+
+function searchAds(){
+    const text = document.getElementById("searchInput").value.trim();
+    const country = document.getElementById("countryFilter").value;
+    const industry = document.getElementById("industryFilter").value;
+
+    alert(
+        "Поиск рекламы\n\n" +
+        "Запрос: " + (text || "Все") +
+        "\nСтрана: " + country +
+        "\nОтрасль: " + industry +
+        "\n\nДемо-режим."
+    );
+}
+
+function choosePlan(plan){
+    alert(
+        "Вы выбрали пакет: " + plan +
+        "\n\nВ будущем здесь будет подключена онлайн-оплата."
+    );
+}
+
+function createCampaign(){
+
+    const company = document.getElementById("companyName").value.trim();
+    const type = document.getElementById("adType").value;
+    const country = document.getElementById("adCountry").value;
+    const description = document.getElementById("adDescription").value.trim();
+    const plan = document.getElementById("adPlan").value;
+
+    if(!company){
+        alert("Введите название компании.");
+        return;
+    }
+
+    if(!description){
+        alert("Введите описание рекламы.");
+        return;
+    }
+
+    alert(
+        "Рекламная кампания создана в демо-режиме!\n\n" +
+        "Компания: " + company +
+        "\nТип: " + type +
+        "\nСтрана: " + country +
+        "\nПакет: " + plan
+    );
+}
+
+</script>
+
+</body>
+</html>
