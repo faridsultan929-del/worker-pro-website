@@ -1,1 +1,1175 @@
- 
+ <!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WORKER PRO — Documents</title>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f4f7f5;
+    color:#123;
+}
+
+.top-languages{
+    background:#063d25;
+    padding:10px;
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:7px;
+}
+
+.top-languages button{
+    border:0;
+    padding:8px 12px;
+    border-radius:8px;
+    background:#0b6b3d;
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.top-languages button:hover{
+    background:#b7ff35;
+    color:#063d25;
+}
+
+header{
+    background:#075b34;
+    color:white;
+    text-align:center;
+    padding:25px 15px;
+}
+
+.logo{
+    font-size:55px;
+    margin-bottom:5px;
+}
+
+header h1{
+    margin:5px 0;
+    font-size:30px;
+}
+
+header p{
+    margin:8px 0 0;
+    font-size:17px;
+}
+
+nav{
+    position:sticky;
+    top:0;
+    z-index:10;
+    background:#063d25;
+    padding:10px;
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:7px;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    background:#0b6b3d;
+    padding:9px 12px;
+    border-radius:8px;
+    font-size:14px;
+    font-weight:bold;
+}
+
+nav a:hover{
+    background:#b7ff35;
+    color:#063d25;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+    padding:20px;
+}
+
+.hero{
+    background:white;
+    border-radius:16px;
+    padding:25px;
+    margin-bottom:20px;
+    box-shadow:0 3px 12px rgba(0,0,0,.08);
+    text-align:center;
+}
+
+.hero h2{
+    color:#075b34;
+    margin-top:0;
+    font-size:28px;
+}
+
+.hero p{
+    font-size:17px;
+    line-height:1.6;
+}
+
+.search-box{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:20px;
+}
+
+.search-box input,
+.search-box select{
+    flex:1;
+    min-width:190px;
+    padding:13px;
+    border:1px solid #ccc;
+    border-radius:9px;
+    font-size:15px;
+}
+
+.search-box button{
+    background:#0b6b3d;
+    color:white;
+    border:0;
+    padding:13px 20px;
+    border-radius:9px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.section-title{
+    color:#075b34;
+    margin:30px 0 15px;
+    font-size:25px;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+    gap:18px;
+}
+
+.card{
+    background:white;
+    border-radius:15px;
+    padding:20px;
+    box-shadow:0 3px 12px rgba(0,0,0,.07);
+}
+
+.card h3{
+    color:#075b34;
+    margin-top:0;
+}
+
+.card p{
+    line-height:1.5;
+}
+
+.icon{
+    font-size:38px;
+    margin-bottom:8px;
+}
+
+.badge{
+    display:inline-block;
+    padding:7px 11px;
+    border-radius:20px;
+    background:#e5f7eb;
+    color:#075b34;
+    font-size:13px;
+    font-weight:bold;
+    margin-top:8px;
+}
+
+.document-list{
+    display:grid;
+    gap:12px;
+}
+
+.document{
+    background:white;
+    border-radius:14px;
+    padding:18px;
+    box-shadow:0 2px 8px rgba(0,0,0,.06);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    flex-wrap:wrap;
+}
+
+.document-info{
+    flex:1;
+    min-width:230px;
+}
+
+.document-info h3{
+    margin:0 0 7px;
+    color:#075b34;
+}
+
+.document-info p{
+    margin:5px 0;
+}
+
+.document-actions{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+}
+
+.document-actions button{
+    border:0;
+    background:#0b6b3d;
+    color:white;
+    padding:9px 13px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.document-actions button:hover{
+    background:#075b34;
+}
+
+.workflow{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:15px;
+}
+
+.step{
+    background:white;
+    border-radius:14px;
+    padding:18px;
+    text-align:center;
+    box-shadow:0 2px 8px rgba(0,0,0,.06);
+}
+
+.step-number{
+    width:42px;
+    height:42px;
+    line-height:42px;
+    margin:0 auto 10px;
+    background:#0b6b3d;
+    color:white;
+    border-radius:50%;
+    font-weight:bold;
+    font-size:18px;
+}
+
+.checklist{
+    list-style:none;
+    padding:0;
+}
+
+.checklist li{
+    background:#f4f7f5;
+    margin:8px 0;
+    padding:12px;
+    border-radius:8px;
+}
+
+.checklist li::before{
+    content:"✓";
+    color:#0b6b3d;
+    font-weight:bold;
+    margin-right:9px;
+}
+
+.form-box{
+    background:white;
+    padding:25px;
+    border-radius:16px;
+    box-shadow:0 3px 12px rgba(0,0,0,.08);
+}
+
+.form-box input,
+.form-box select,
+.form-box textarea{
+    width:100%;
+    padding:13px;
+    margin:7px 0 12px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    font-size:15px;
+}
+
+.form-box textarea{
+    min-height:110px;
+    resize:vertical;
+}
+
+.form-box button{
+    width:100%;
+    background:#0b6b3d;
+    color:white;
+    border:0;
+    padding:14px;
+    border-radius:9px;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.form-box button:hover{
+    background:#075b34;
+}
+
+.info{
+    background:#eaf8ee;
+    border-left:5px solid #0b6b3d;
+    padding:17px;
+    border-radius:8px;
+    margin-top:20px;
+    line-height:1.6;
+}
+
+.warning{
+    background:#fff4d6;
+    border-left:5px solid #d99b00;
+    padding:17px;
+    border-radius:8px;
+    margin-top:25px;
+    line-height:1.6;
+}
+
+footer{
+    background:#063d25;
+    color:white;
+    text-align:center;
+    padding:25px;
+    margin-top:35px;
+}
+
+@media(max-width:600px){
+
+    header h1{
+        font-size:25px;
+    }
+
+    .hero h2{
+        font-size:23px;
+    }
+
+    .container{
+        padding:13px;
+    }
+
+    nav a{
+        font-size:12px;
+        padding:8px 9px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="top-languages">
+    <button onclick="setLanguage('az')">AZ</button>
+    <button onclick="setLanguage('ru')">RU</button>
+    <button onclick="setLanguage('en')">EN</button>
+    <button onclick="setLanguage('tr')">TR</button>
+    <button onclick="setLanguage('de')">DE</button>
+    <button onclick="setLanguage('ar')">AR</button>
+    <button onclick="setLanguage('es')">ES</button>
+    <button onclick="setLanguage('fr')">FR</button>
+    <button onclick="setLanguage('it')">IT</button>
+</div>
+
+<header>
+
+    <div class="logo">📄</div>
+
+    <h1>WORKER PRO</h1>
+
+    <p>
+        Documents / Промышленные документы
+    </p>
+
+</header>
+
+<nav>
+    <a href="../">Home</a>
+    <a href="../companies/">Companies</a>
+    <a href="../manufacturers/">Manufacturers</a>
+    <a href="../suppliers/">Suppliers</a>
+    <a href="../products/">Products</a>
+    <a href="../equipment/">Equipment</a>
+    <a href="../materials/">Materials</a>
+    <a href="../warehouse/">Warehouse</a>
+    <a href="../requests/">Requests</a>
+    <a href="../offers/">Offers</a>
+    <a href="../orders/">Orders</a>
+    <a href="../transport/">Transport</a>
+    <a href="../verification/">Verification</a>
+    <a href="../safety/">Safety</a>
+    <a href="../dashboard/">Dashboard</a>
+</nav>
+
+<div class="container">
+
+<section class="hero">
+
+    <h2>
+        Промышленные документы
+    </h2>
+
+    <p>
+        WORKER PRO создаёт единое пространство
+        для хранения, поиска и использования
+        документов, связанных с компаниями,
+        товарами, оборудованием, качеством,
+        безопасностью и поставками.
+    </p>
+
+    <div class="search-box">
+
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Поиск документа...">
+
+        <select id="categoryFilter">
+
+            <option value="all">
+                Все категории
+            </option>
+
+            <option value="company">
+                Компания
+            </option>
+
+            <option value="product">
+                Товар
+            </option>
+
+            <option value="equipment">
+                Оборудование
+            </option>
+
+            <option value="quality">
+                Качество
+            </option>
+
+            <option value="safety">
+                Безопасность
+            </option>
+
+            <option value="transport">
+                Транспорт
+            </option>
+
+        </select>
+
+        <button onclick="searchDocuments()">
+            Поиск
+        </button>
+
+    </div>
+
+</section>
+
+<h2 class="section-title">
+    Категории документов
+</h2>
+
+<div class="grid">
+
+    <div class="card">
+        <div class="icon">🏢</div>
+        <h3>Документы компаний</h3>
+        <p>
+            Регистрационные данные, информация
+            о компании, адреса и документы
+            для Verification.
+        </p>
+    </div>
+
+    <div class="card">
+        <div class="icon">📦</div>
+        <h3>Документы товаров</h3>
+        <p>
+            Описание товара, характеристики,
+            сертификаты и документы производителя.
+        </p>
+    </div>
+
+    <div class="card">
+        <div class="icon">⚙️</div>
+        <h3>Оборудование</h3>
+        <p>
+            Паспорта станков, инструкции,
+            технические характеристики
+            и документация.
+        </p>
+    </div>
+
+    <div class="card">
+        <div class="icon">🏆</div>
+        <h3>Качество</h3>
+        <p>
+            Сертификаты качества, протоколы,
+            результаты контроля и инспекции.
+        </p>
+    </div>
+
+    <div class="card">
+        <div class="icon">🦺</div>
+        <h3>Безопасность</h3>
+        <p>
+            Инструкции по безопасности,
+            документы обучения и подтверждения.
+        </p>
+    </div>
+
+    <div class="card">
+        <div class="icon">🚚</div>
+        <h3>Транспорт</h3>
+        <p>
+            Документы перевозки, упаковки,
+            доставки и получения груза.
+        </p>
+    </div>
+
+</div>
+
+<h2 class="section-title">
+    Примеры документов
+</h2>
+
+<div class="document-list" id="documentList">
+
+    <div class="document"
+         data-name="Company Registration Certificate"
+         data-category="company">
+
+        <div class="document-info">
+
+            <h3>
+                📄 Company Registration Certificate
+            </h3>
+
+            <p>
+                Industrial Manufacturer · Azerbaijan
+            </p>
+
+            <p>
+                Регистрационный документ компании
+            </p>
+
+            <span class="badge">
+                Company
+            </span>
+
+        </div>
+
+        <div class="document-actions">
+
+            <button onclick="openDocument()">
+                Открыть
+            </button>
+
+            <button onclick="downloadDocument()">
+                Скачать
+            </button>
+
+        </div>
+
+    </div>
+
+    <div class="document"
+         data-name="CNC Machine Technical Passport"
+         data-category="equipment">
+
+        <div class="document-info">
+
+            <h3>
+                ⚙️ CNC Machine Technical Passport
+            </h3>
+
+            <p>
+                Machine Technology · Turkey
+            </p>
+
+            <p>
+                Технический паспорт станка
+            </p>
+
+            <span class="badge">
+                Equipment
+            </span>
+
+        </div>
+
+        <div class="document-actions">
+
+            <button onclick="openDocument()">
+                Открыть
+            </button>
+
+            <button onclick="downloadDocument()">
+                Скачать
+            </button>
+
+        </div>
+
+    </div>
+
+    <div class="document"
+         data-name="Hydraulic Pump Certificate"
+         data-category="product">
+
+        <div class="document-info">
+
+            <h3>
+                💧 Hydraulic Pump Certificate
+            </h3>
+
+            <p>
+                Hydraulic Solutions · Italy
+            </p>
+
+            <p>
+                Сертификат на гидравлический насос
+            </p>
+
+            <span class="badge">
+                Product
+            </span>
+
+        </div>
+
+        <div class="document-actions">
+
+            <button onclick="openDocument()">
+                Открыть
+            </button>
+
+            <button onclick="downloadDocument()">
+                Скачать
+            </button>
+
+        </div>
+
+    </div>
+
+    <div class="document"
+         data-name="Quality Inspection Report"
+         data-category="quality">
+
+        <div class="document-info">
+
+            <h3>
+                🔎 Quality Inspection Report
+            </h3>
+
+            <p>
+                Industrial Quality Department
+            </p>
+
+            <p>
+                Отчёт о контроле качества
+            </p>
+
+            <span class="badge">
+                Quality
+            </span>
+
+        </div>
+
+        <div class="document-actions">
+
+            <button onclick="openDocument()">
+                Открыть
+            </button>
+
+            <button onclick="downloadDocument()">
+                Скачать
+            </button>
+
+        </div>
+
+    </div>
+
+    <div class="document"
+         data-name="Safety Training Certificate"
+         data-category="safety">
+
+        <div class="document-info">
+
+            <h3>
+                🦺 Safety Training Certificate
+            </h3>
+
+            <p>
+                WORKER PRO Training
+            </p>
+
+            <p>
+                Сертификат обучения безопасности
+            </p>
+
+            <span class="badge">
+                Safety
+            </span>
+
+        </div>
+
+        <div class="document-actions">
+
+            <button onclick="openDocument()">
+                Открыть
+            </button>
+
+            <button onclick="downloadDocument()">
+                Скачать
+            </button>
+
+        </div>
+
+    </div>
+
+    <div class="document"
+         data-name="International Transport Document"
+         data-category="transport">
+
+        <div class="document-info">
+
+            <h3>
+                🚚 International Transport Document
+            </h3>
+
+            <p>
+                WORKER PRO Transport
+            </p>
+
+            <p>
+                Документ международной перевозки
+            </p>
+
+            <span class="badge">
+                Transport
+            </span>
+
+        </div>
+
+        <div class="document-actions">
+
+            <button onclick="openDocument()">
+                Открыть
+            </button>
+
+            <button onclick="downloadDocument()">
+                Скачать
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<h2 class="section-title">
+    Что может содержать документ
+</h2>
+
+<div class="grid">
+
+    <div class="card">
+
+        <h3>📋 Основная информация</h3>
+
+        <ul class="checklist">
+
+            <li>Название документа</li>
+            <li>Номер документа</li>
+            <li>Дата выдачи</li>
+            <li>Срок действия</li>
+
+        </ul>
+
+    </div>
+
+    <div class="card">
+
+        <h3>🏢 Владелец</h3>
+
+        <ul class="checklist">
+
+            <li>Компания</li>
+            <li>Производитель</li>
+            <li>Поставщик</li>
+            <li>Специалист</li>
+
+        </ul>
+
+    </div>
+
+    <div class="card">
+
+        <h3>🌍 География</h3>
+
+        <ul class="checklist">
+
+            <li>Страна</li>
+            <li>Город</li>
+            <li>Место выдачи</li>
+            <li>Международное использование</li>
+
+        </ul>
+
+    </div>
+
+</div>
+
+<h2 class="section-title">
+    Работа с документами
+</h2>
+
+<div class="workflow">
+
+    <div class="step">
+
+        <div class="step-number">1</div>
+
+        <h3>Загрузка</h3>
+
+        <p>
+            Пользователь добавляет документ
+            в свой профиль.
+        </p>
+
+    </div>
+
+    <div class="step">
+
+        <div class="step-number">2</div>
+
+        <h3>Проверка</h3>
+
+        <p>
+            Документ может быть проверен
+            в рамках Verification.
+        </p>
+
+    </div>
+
+    <div class="step">
+
+        <div class="step-number">3</div>
+
+        <h3>Хранение</h3>
+
+        <p>
+            Документ хранится в личном
+            кабинете пользователя.
+        </p>
+
+    </div>
+
+    <div class="step">
+
+        <div class="step-number">4</div>
+
+        <h3>Использование</h3>
+
+        <p>
+            Документ можно связать
+            с товаром, компанией или заказом.
+        </p>
+
+    </div>
+
+    <div class="step">
+
+        <div class="step-number">5</div>
+
+        <h3>Передача</h3>
+
+        <p>
+            В будущем документ можно будет
+            безопасно передавать партнёрам.
+        </p>
+
+    </div>
+
+</div>
+
+<div class="info">
+
+    <strong>🔐 Связь с Verification</strong><br>
+
+    Документы могут использоваться для подтверждения
+    компаний, производителей, поставщиков и специалистов.
+    Статус проверки будет отображаться отдельно
+    и не будет означать автоматическое подтверждение
+    каждого документа.
+
+</div>
+
+<h2 class="section-title">
+    Добавить документ
+</h2>
+
+<div class="form-box">
+
+    <input
+        type="text"
+        id="documentName"
+        placeholder="Название документа">
+
+    <select id="documentType">
+
+        <option value="">
+            Выберите категорию
+        </option>
+
+        <option value="company">
+            Компания
+        </option>
+
+        <option value="product">
+            Товар
+        </option>
+
+        <option value="equipment">
+            Оборудование
+        </option>
+
+        <option value="quality">
+            Качество
+        </option>
+
+        <option value="safety">
+            Безопасность
+        </option>
+
+        <option value="transport">
+            Транспорт
+        </option>
+
+    </select>
+
+    <input
+        type="text"
+        id="documentNumber"
+        placeholder="Номер документа">
+
+    <input
+        type="date"
+        id="documentDate">
+
+    <textarea
+        id="documentDescription"
+        placeholder="Описание документа">
+    </textarea>
+
+    <button onclick="addDocument()">
+        Добавить документ
+    </button>
+
+</div>
+
+<h2 class="section-title">
+    Будущие возможности
+</h2>
+
+<div class="grid">
+
+    <div class="card">
+
+        <div class="icon">☁️</div>
+
+        <h3>Cloud Documents</h3>
+
+        <p>
+            Безопасное хранение документов
+            в личном кабинете.
+        </p>
+
+    </div>
+
+    <div class="card">
+
+        <div class="icon">🔐</div>
+
+        <h3>Secure Access</h3>
+
+        <p>
+            Управление доступом к документам
+            для партнёров и поставщиков.
+        </p>
+
+    </div>
+
+    <div class="card">
+
+        <div class="icon">🔔</div>
+
+        <h3>Срок действия</h3>
+
+        <p>
+            Уведомления о приближении срока
+            окончания сертификатов.
+        </p>
+
+    </div>
+
+    <div class="card">
+
+        <div class="icon">🔎</div>
+
+        <h3>Document Search</h3>
+
+        <p>
+            Быстрый поиск документов
+            по компании, товару или заказу.
+        </p>
+
+    </div>
+
+</div>
+
+<div class="warning">
+
+    <strong>⚠ Демо-версия</strong><br>
+
+    Сейчас документы представлены
+    демонстрационными примерами.
+    Реальная загрузка файлов, хранение,
+    проверка, доступ пользователей
+    и безопасная передача будут подключены
+    после создания серверной части WORKER PRO.
+
+</div>
+
+</div>
+
+<footer>
+
+    <strong>WORKER PRO</strong><br>
+
+    Global Industrial Platform
+
+    <br><br>
+
+    Documents · Verification · Quality ·
+    Safety · Products · Orders · Transport
+
+    <br><br>
+
+    F.S
+
+</footer>
+
+<script src="../language.js"></script>
+
+<script>
+
+function searchDocuments(){
+
+    const search =
+        document.getElementById("searchInput")
+        .value
+        .toLowerCase();
+
+    const category =
+        document.getElementById("categoryFilter")
+        .value;
+
+    const documents =
+        document.querySelectorAll(".document");
+
+    documents.forEach(function(doc){
+
+        const name =
+            doc.dataset.name.toLowerCase();
+
+        const docCategory =
+            doc.dataset.category;
+
+        const searchMatch =
+            name.includes(search);
+
+        const categoryMatch =
+            category === "all" ||
+            docCategory === category;
+
+        if(searchMatch && categoryMatch){
+
+            doc.style.display = "flex";
+
+        }else{
+
+            doc.style.display = "none";
+
+        }
+
+    });
+
+}
+
+function openDocument(){
+
+    alert(
+        "Демонстрационный документ. " +
+        "Реальный просмотр будет подключён после создания базы данных."
+    );
+
+}
+
+function downloadDocument(){
+
+    alert(
+        "Демонстрационный режим. " +
+        "Реальное скачивание документов будет подключено позже."
+    );
+
+}
+
+function addDocument(){
+
+    const name =
+        document.getElementById("documentName")
+        .value
+        .trim();
+
+    const type =
+        document.getElementById("documentType")
+        .value;
+
+    const number =
+        document.getElementById("documentNumber")
+        .value
+        .trim();
+
+    if(!name || !type || !number){
+
+        alert(
+            "Пожалуйста, заполните название, категорию и номер документа."
+        );
+
+        return;
+
+    }
+
+    alert(
+        "Документ принят в демо-режиме. " +
+        "Реальная загрузка файла будет подключена после создания серверной части."
+    );
+
+}
+
+</script>
+
+</body>
+</html>
