@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WORKER PRO — Pricing</title>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f4f7f5;
+    color:#123;
+}
+
+.top-languages{
+    background:#063d25;
+    padding:10px;
+    display:flex;
+    justify-content:center;
+    gap:8px;
+    flex-wrap:wrap;
+}
+
+.top-languages button{
+    border:none;
+    padding:8px 13px;
+    border-radius:20px;
+    background:white;
+    color:#063d25;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.top-languages button:hover{
+    background:#b7ff35;
+}
+
+header{
+    background:#0b6b3d;
+    color:white;
+    text-align:center;
+    padding:25px 15px;
+}
+
+header h1{
+    margin:0;
+    font-size:32px;
+}
+
+header p{
+    margin:8px 0 0;
+    font-size:17px;
+}
+
+nav{
+    position:sticky;
+    top:0;
+    z-index:10;
+    background:#075b34;
+    padding:10px;
+    display:flex;
+    justify-content:center;
+    gap:7px;
+    flex-wrap:wrap;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+    padding:8px 10px;
+    border-radius:8px;
+    font-size:14px;
+}
+
+nav a:hover{
+    background:#b7ff35;
+    color:#063d25;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+    padding:25px 15px;
+}
+
+.hero{
+    background:white;
+    border-radius:16px;
+    padding:25px;
+    box-shadow:0 3px 12px rgba(0,0,0,.08);
+    margin-bottom:25px;
+    text-align:center;
+}
+
+.hero h2{
+    color:#075b34;
+    margin-top:0;
+}
+
+.hero p{
+    line-height:1.7;
+}
+
+.currency-box{
+    margin-top:18px;
+}
+
+.currency-box select{
+    padding:10px 15px;
+    border-radius:8px;
+    border:2px solid #d7e1db;
+    font-size:15px;
+}
+
+.section-title{
+    color:#075b34;
+    margin-top:32px;
+}
+
+.pricing-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(245px,1fr));
+    gap:18px;
+}
+
+.plan{
+    background:white;
+    border-radius:16px;
+    padding:23px;
+    box-shadow:0 3px 12px rgba(0,0,0,.08);
+    position:relative;
+    border:2px solid transparent;
+}
+
+.plan:hover{
+    border-color:#0b6b3d;
+}
+
+.plan.featured{
+    border-color:#b7ff35;
+    transform:translateY(-4px);
+}
+
+.badge{
+    position:absolute;
+    top:12px;
+    right:12px;
+    background:#b7ff35;
+    color:#063d25;
+    padding:6px 10px;
+    border-radius:15px;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.plan h3{
+    color:#075b34;
+    font-size:23px;
+    margin-top:0;
+}
+
+.price{
+    font-size:30px;
+    font-weight:bold;
+    color:#063d25;
+    margin:15px 0;
+}
+
+.price small{
+    font-size:14px;
+    font-weight:normal;
+}
+
+.plan ul{
+    padding-left:20px;
+    line-height:1.9;
+}
+
+.button{
+    width:100%;
+    border:none;
+    background:#0b6b3d;
+    color:white;
+    padding:12px 15px;
+    border-radius:9px;
+    cursor:pointer;
+    font-weight:bold;
+    font-size:15px;
+}
+
+.button:hover{
+    background:#063d25;
+}
+
+.button-light{
+    background:#eaf5ee;
+    color:#075b34;
+}
+
+.button-light:hover{
+    background:#d9ecdf;
+}
+
+.note{
+    margin-top:14px;
+    font-size:13px;
+    color:#667;
+}
+
+.income-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:18px;
+}
+
+.card{
+    background:white;
+    border-radius:15px;
+    padding:20px;
+    box-shadow:0 3px 12px rgba(0,0,0,.08);
+}
+
+.card h3{
+    margin-top:0;
+    color:#075b34;
+}
+
+.card p{
+    line-height:1.65;
+}
+
+.icon{
+    font-size:34px;
+    margin-bottom:8px;
+}
+
+.flow{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+    margin:20px 0;
+}
+
+.flow-step{
+    background:white;
+    padding:15px 18px;
+    border-radius:12px;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+    text-align:center;
+    font-weight:bold;
+}
+
+.arrow{
+    color:#075b34;
+    font-size:24px;
+}
+
+.info{
+    background:#eef8f2;
+    border-left:5px solid #0b6b3d;
+    padding:17px;
+    border-radius:8px;
+    line-height:1.7;
+}
+
+.warning{
+    background:#fff6d9;
+    border-left:5px solid #e0a800;
+    padding:17px;
+    border-radius:8px;
+    line-height:1.7;
+}
+
+.compare{
+    width:100%;
+    border-collapse:collapse;
+    background:white;
+    box-shadow:0 3px 12px rgba(0,0,0,.06);
+}
+
+.compare th,
+.compare td{
+    padding:12px;
+    border-bottom:1px solid #e2e9e4;
+    text-align:center;
+}
+
+.compare th{
+    background:#075b34;
+    color:white;
+}
+
+.compare td:first-child{
+    text-align:left;
+    font-weight:bold;
+}
+
+.yes{
+    color:#08753d;
+    font-weight:bold;
+}
+
+.no{
+    color:#999;
+}
+
+footer{
+    margin-top:40px;
+    background:#063d25;
+    color:white;
+    text-align:center;
+    padding:25px 15px;
+}
+
+footer a{
+    color:#b7ff35;
+    text-decoration:none;
+}
+
+@media(max-width:600px){
+
+    header h1{
+        font-size:26px;
+    }
+
+    header p{
+        font-size:15px;
+    }
+
+    nav a{
+        font-size:12px;
+        padding:7px 8px;
+    }
+
+    .hero,
+    .plan,
+    .card{
+        padding:17px;
+    }
+
+    .plan.featured{
+        transform:none;
+    }
+
+    .compare{
+        font-size:12px;
+    }
+
+    .compare th,
+    .compare td{
+        padding:8px 5px;
+    }
+
+    .arrow{
+        transform:rotate(90deg);
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- LANGUAGES -->
+<div class="top-languages">
+    <button onclick="setLang('AZ')">AZ</button>
+    <button onclick="setLang('RU')">RU</button>
+    <button onclick="setLang('EN')">EN</button>
+    <button onclick="setLang('TR')">TR</button>
+    <button onclick="setLang('DE')">DE</button>
+    <button onclick="setLang('AR')">AR</button>
+    <button onclick="setLang('ES')">ES</button>
+    <button onclick="setLang('FR')">FR</button>
+    <button onclick="setLang('IT')">IT</button>
+</div>
+
+<header>
+    <h1>💰 WORKER PRO</h1>
+    <p>Pricing / Тарифы и монетизация</p>
+</header>
+
+<!-- NAVIGATION -->
+<nav>
+    <a href="../index.html">Home</a>
+    <a href="../companies/index.html">Companies</a>
+    <a href="../manufacturers/index.html">Manufacturers</a>
+    <a href="../suppliers/index.html">Suppliers</a>
+    <a href="../specialists/index.html">Specialists</a>
+    <a href="../products/index.html">Products</a>
+    <a href="../requests/index.html">Requests</a>
+    <a href="../offers/index.html">Offers</a>
+    <a href="../orders/index.html">Orders</a>
+    <a href="../transport/index.html">Transport</a>
+    <a href="../training/index.html">Training</a>
+    <a href="../integrations/index.html">Integrations</a>
+    <a href="../dashboard/index.html">Dashboard</a>
+</nav>
+
+<div class="container">
+
+    <!-- HERO -->
+    <section class="hero">
+
+        <h2>💎 Тарифы WORKER PRO</h2>
+
+        <p>
+            Разные варианты для специалистов, компаний,
+            производителей и поставщиков.
+        </p>
+
+        <p>
+            На первом этапе тарифы являются демонстрационными.
+            Реальные цены и платежи можно подключить после
+            создания серверной части платформы.
+        </p>
+
+        <div class="currency-box">
+            <label><strong>Валюта:</strong></label>
+
+            <select id="currency" onchange="changeCurrency()">
+                <option value="AZN">AZN — Манат</option>
+                <option value="USD">USD — Dollar</option>
+                <option value="EUR">EUR — Euro</option>
+                <option value="TRY">TRY — Lira</option>
+            </select>
+        </div>
+
+    </section>
+
+
+    <!-- PLANS -->
+
+    <h2 class="section-title">⭐ Основные тарифы</h2>
+
+    <div class="pricing-grid">
+
+        <!-- FREE -->
+        <div class="plan">
+
+            <h3>🆓 Free</h3>
+
+            <div class="price">
+                <span data-price="free">0</span>
+                <small> / месяц</small>
+            </div>
+
+            <ul>
+                <li>Создание профиля</li>
+                <li>Просмотр компаний</li>
+                <li>Просмотр каталога</li>
+                <li>Поиск продукции</li>
+                <li>Базовое обучение</li>
+                <li>Сообщество</li>
+            </ul>
+
+            <button class="button button-light"
+                    onclick="selectPlan('Free')">
+                Начать бесплатно
+            </button>
+
+            <p class="note">
+                Подходит для знакомства с платформой.
+            </p>
+
+        </div>
+
+
+        <!-- SPECIALIST -->
+        <div class="plan">
+
+            <h3>👷 Specialist</h3>
+
+            <div class="price">
+                <span data-price="specialist">5</span>
+                <small> / месяц</small>
+            </div>
+
+            <ul>
+                <li>Профессиональный профиль</li>
+                <li>Навыки и опыт</li>
+                <li>Поиск вакансий</li>
+                <li>Отклики на работу</li>
+                <li>Профессиональное сообщество</li>
+                <li>Расширенное обучение</li>
+            </ul>
+
+            <button class="button"
+                    onclick="selectPlan('Specialist')">
+                Выбрать
+            </button>
+
+        </div>
+
+
+        <!-- COMPANY -->
+        <div class="plan">
+
+            <h3>🏢 Company</h3>
+
+            <div class="price">
+                <span data-price="company">15</span>
+                <small> / месяц</small>
+            </div>
+
+            <ul>
+                <li>Профиль компании</li>
+                <li>Добавление продукции</li>
+                <li>Получение заявок</li>
+                <li>Коммуникация с клиентами</li>
+                <li>Размещение услуг</li>
+                <li>Базовая аналитика</li>
+            </ul>
+
+            <button class="button"
+                    onclick="selectPlan('Company')">
+                Выбрать
+            </button>
+
+        </div>
+
+
+        <!-- SUPPLIER -->
+        <div class="plan">
+
+            <h3>🚚 Supplier</h3>
+
+            <div class="price">
+                <span data-price="supplier">20</span>
+                <small> / месяц</small>
+            </div>
+
+            <ul>
+                <li>Каталог товаров</li>
+                <li>Получение заявок</li>
+                <li>Коммерческие предложения</li>
+                <li>Работа с заказами</li>
+                <li>Продвижение продукции</li>
+                <li>Расширенная аналитика</li>
+            </ul>
+
+            <button class="button"
+                    onclick="selectPlan('Supplier')">
+                Выбрать
+            </button>
+
+        </div>
+
+
+        <!-- MANUFACTURER -->
+        <div class="plan">
+
+            <h3>🏭 Manufacturer</h3>
+
+            <div class="price">
+                <span data-price="manufacturer">25</span>
+                <small> / месяц</small>
+            </div>
+
+            <ul>
+                <li>Профиль производителя</li>
+                <li>Полный каталог</li>
+                <li>Получение международных заявок</li>
+                <li>Коммерческие предложения</li>
+                <li>Продвижение товаров</li>
+                <li>Расширенная аналитика</li>
+            </ul>
+
+            <button class="button"
+                    onclick="selectPlan('Manufacturer')">
+                Выбрать
+            </button>
+
+        </div>
+
+
+        <!-- PRO -->
+        <div class="plan featured">
+
+            <div class="badge">POPULAR</div>
+
+            <h3>🚀 WORKER PRO</h3>
+
+            <div class="price">
+                <span data-price="pro">35</span>
+                <small> / месяц</small>
+            </div>
+
+            <ul>
+                <li>Все возможности платформы</li>
+                <li>Расширенный профиль</li>
+                <li>Приоритетное размещение</li>
+                <li>Расширенная аналитика</li>
+                <li>Продвижение</li>
+                <li>Международные инструменты</li>
+                <li>Приоритетная поддержка</li>
+            </ul>
+
+            <button class="button"
+                    onclick="selectPlan('WORKER PRO')">
+                Выбрать PRO
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- MONETIZATION -->
+
+    <h2 class="section-title">💰 Возможные источники дохода</h2>
+
+    <div class="income-grid">
+
+        <div class="card">
+            <div class="icon">⭐</div>
+            <h3>Подписки</h3>
+            <p>
+                Ежемесячные или годовые тарифы для специалистов,
+                компаний, производителей и поставщиков.
+            </p>
+        </div>
+
+
+        <div class="card">
+            <div class="icon">📢</div>
+            <h3>Продвижение</h3>
+            <p>
+                Платное продвижение компаний, товаров,
+                услуг и объявлений.
+            </p>
+        </div>
+
+
+        <div class="card">
+            <div class="icon">🏭</div>
+            <h3>Premium Listing</h3>
+            <p>
+                Выделенное размещение продукции и компаний
+                в международном каталоге.
+            </p>
+        </div>
+
+
+        <div class="card">
+            <div class="icon">🤝</div>
+            <h3>Комиссия</h3>
+            <p>
+                В будущем возможна комиссия за отдельные
+                успешно завершённые сделки.
+            </p>
+        </div>
+
+
+        <div class="card">
+            <div class="icon">🎓</div>
+            <h3>Training</h3>
+            <p>
+                Платные профессиональные курсы,
+                сертификаты и специализированное обучение.
+            </p>
+        </div>
+
+
+        <div class="card">
+            <div class="icon">🔧</div>
+            <h3>Services</h3>
+            <p>
+                Доход от промышленных сервисов,
+                консультаций и технической поддержки.
+            </p>
+        </div>
+
+    </div>
+
+
+    <!-- COMPARISON -->
+
+    <h2 class="section-title">📊 Сравнение тарифов</h2>
+
+    <div style="overflow-x:auto;">
+
+        <table class="compare">
+
+            <tr>
+                <th>Функция</th>
+                <th>Free</th>
+                <th>Specialist</th>
+                <th>Company</th>
+                <th>Supplier</th>
+                <th>Manufacturer</th>
+                <th>PRO</th>
+            </tr>
+
+            <tr>
+                <td>Профиль</td>
+                <td class="yes">✓</td>
+                <td class="yes">✓</td>
+                <td class="yes">✓</td>
+                <td class="yes">✓</td>
+                <td class="yes">✓</td>
+                <td class="yes">✓</td>
+            </tr>
+
+            <tr>
+                <td>Каталог</td>
+                <td class="yes">✓</td>
+                <td class="yes">✓</td>
+                <td class="yes">✓</td>
+                <td class="yes">✓</td>
+                <td class="yes">✓</td>
+                <td class="yes">✓</td>
+            </tr>
+
+            <tr>
+                <td>Заявки</td>
+                <td class="no">—</td>
+                <td class="yes">✓</td>
+                <td class="yes">✓</td>
+                <td class="yes">✓</td>
+                <td class="yes">✓</td>
+                <td class="yes">✓</td>
+            </tr>
+
+            <tr>
+                <td>Коммерческие предложения</td>
+                <td class="no">—</td>
+                <td class="no">—</td>
+                <td class="yes">✓</td>
+                <td class="yes">✓</td>
+                <td class="yes">✓</td>
+                <td class="yes">✓</td>
+            </tr>
+
+            <tr>
+                <td>Продвижение</td>
+                <td class="no">—</td>
+                <td class="no">—</td>
+                <td class="no">—</td>
+                <td class="yes">✓</td>
+                <td class="yes">✓</td>
+                <td class="yes">✓</td>
+            </tr>
+
+            <tr>
+                <td>Расширенная аналитика</td>
+                <td class="no">—</td>
+                <td class="no">—</td>
+                <td class="yes">✓</td>
+                <td class="yes">✓</td>
+                <td class="yes">✓</td>
+                <td class="yes">✓</td>
+            </tr>
+
+            <tr>
+                <td>Приоритетная поддержка</td>
+                <td class="no">—</td>
+                <td class="no">—</td>
+                <td class="no">—</td>
+                <td class="no">—</td>
+                <td class="no">—</td>
+                <td class="yes">✓</td>
+            </tr>
+
+        </table>
+
+    </div>
+
+
+    <!-- BUSINESS MODEL -->
+
+    <h2 class="section-title">🌍 Международная бизнес-модель</h2>
+
+    <div class="card">
+
+        <p>
+            WORKER PRO может объединить несколько направлений
+            монетизации в одной промышленной экосистеме.
+        </p>
+
+        <div class="flow">
+
+            <div class="flow-step">
+                👤 Пользователь
+            </div>
+
+            <div class="arrow">→</div>
+
+            <div class="flow-step">
+                🌐 WORKER PRO
+            </div>
+
+            <div class="arrow">→</div>
+
+            <div class="flow-step">
+                🏭 Компания
+            </div>
+
+            <div class="arrow">→</div>
+
+            <div class="flow-step">
+                📦 Сделка
+            </div>
+
+            <div class="arrow">→</div>
+
+            <div class="flow-step">
+                🚚 Доставка
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- YEARLY -->
+
+    <h2 class="section-title">📅 Годовые тарифы</h2>
+
+    <div class="info">
+
+        В будущем можно предложить годовую подписку со скидкой
+        относительно помесячной оплаты.
+
+        <ul>
+            <li>Specialist — годовой тариф;</li>
+            <li>Company — годовой тариф;</li>
+            <li>Supplier — годовой тариф;</li>
+            <li>Manufacturer — годовой тариф;</li>
+            <li>WORKER PRO — годовой PRO.</li>
+        </ul>
+
+        Реальные цены будут определены после тестирования
+        платформы и анализа расходов на серверы, платежи,
+        поддержку и развитие.
+
+    </div>
+
+
+    <!-- FREE START -->
+
+    <h2 class="section-title">🆓 Бесплатный старт</h2>
+
+    <div class="card">
+
+        <h3>Почему нужен Free?</h3>
+
+        <p>
+            Бесплатный тариф позволит новым пользователям
+            попробовать WORKER PRO без обязательной оплаты.
+        </p>
+
+        <ul>
+            <li>создать профиль;</li>
+            <li>найти компании;</li>
+            <li>просматривать каталог;</li>
+            <li>изучать обучение;</li>
+            <li>познакомиться с платформой.</li>
+        </ul>
+
+        <p>
+            После знакомства пользователь сможет самостоятельно
+            выбрать дополнительные платные возможности.
+        </p>
+
+    </div>
+
+
+    <!-- FUTURE -->
+
+    <h2 class="section-title">🚀 Будущие возможности</h2>
+
+    <div class="info">
+
+        В дальнейшем раздел Pricing можно расширить:
+
+        <ul>
+            <li>онлайн-оплатой;</li>
+            <li>банковскими картами;</li>
+            <li>автоматическим продлением;</li>
+            <li>промокодами;</li>
+            <li>корпоративными тарифами;</li>
+            <li>индивидуальными предложениями для крупных компаний;</li>
+            <li>счётами для бизнеса;</li>
+            <li>историей платежей;</li>
+            <li>инвойсами;</li>
+            <li>международными валютами.</li>
+        </ul>
+
+    </div>
+
+
+    <!-- WARNING -->
+
+    <h2 class="section-title">⚠️ Важно</h2>
+
+    <div class="warning">
+
+        Цены на этой странице являются демонстрационными.
+        Оплата пока не подключена.
+
+        Реальная монетизация будет добавлена после создания
+        серверной части, системы аккаунтов и безопасного
+        платёжного модуля.
+
+    </div>
+
+</div>
+
+
+<footer>
+
+    <strong>WORKER PRO</strong><br>
+
+    Global Industrial Platform<br><br>
+
+    <a href="../about/index.html">About</a> |
+    <a href="../privacy/index.html">Privacy</a> |
+    <a href="../security/index.html">Security</a> |
+    <a href="../integrations/index.html">Integrations</a> |
+    <a href="../help/index.html">Help</a> |
+    <a href="../dashboard/index.html">Dashboard</a>
+
+    <br><br>
+
+    © 2026 WORKER PRO — F.S
+
+</footer>
+
+
+<script src="../language.js"></script>
+
+<script>
+
+const prices = {
+
+    AZN:{
+        specialist:5,
+        company:15,
+        supplier:20,
+        manufacturer:25,
+        pro:35
+    },
+
+    USD:{
+        specialist:3,
+        company:9,
+        supplier:12,
+        manufacturer:15,
+        pro:20
+    },
+
+    EUR:{
+        specialist:3,
+        company:8,
+        supplier:11,
+        manufacturer:14,
+        pro:19
+    },
+
+    TRY:{
+        specialist:120,
+        company:350,
+        supplier:470,
+        manufacturer:590,
+        pro:820
+    }
+
+};
+
+
+function changeCurrency(){
+
+    const currency =
+        document.getElementById("currency").value;
+
+    const current =
+        prices[currency];
+
+    document.querySelector(
+        '[data-price="specialist"]'
+    ).textContent = current.specialist;
+
+    document.querySelector(
+        '[data-price="company"]'
+    ).textContent = current.company;
+
+    document.querySelector(
+        '[data-price="supplier"]'
+    ).textContent = current.supplier;
+
+    document.querySelector(
+        '[data-price="manufacturer"]'
+    ).textContent = current.manufacturer;
+
+    document.querySelector(
+        '[data-price="pro"]'
+    ).textContent = current.pro;
+
+}
+
+
+function selectPlan(plan){
+
+    alert(
+        "Вы выбрали тариф: " +
+        plan +
+        "\n\n" +
+        "В демонстрационной версии оплата не подключена."
+    );
+
+}
+
+
+</script>
+
+</body>
+</html>
