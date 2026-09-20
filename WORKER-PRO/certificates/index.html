@@ -1,1 +1,629 @@
- 
+ <!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WORKER PRO — Certificates</title>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f4f7f5;
+    color:#123;
+}
+
+.top-languages{
+    background:#063d25;
+    padding:10px;
+    text-align:center;
+}
+
+.top-languages button{
+    background:#0b6b3d;
+    color:white;
+    border:1px solid #b7ff35;
+    border-radius:8px;
+    padding:8px 12px;
+    margin:3px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.top-languages button:hover{
+    background:#b7ff35;
+    color:#063d25;
+}
+
+header{
+    background:linear-gradient(135deg,#063d25,#0b6b3d);
+    color:white;
+    padding:25px 15px;
+    text-align:center;
+}
+
+header h1{
+    margin:0 0 8px;
+    font-size:32px;
+}
+
+header p{
+    margin:0;
+    font-size:16px;
+}
+
+nav{
+    background:#075b34;
+    padding:12px;
+    text-align:center;
+    position:sticky;
+    top:0;
+    z-index:10;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    margin:5px 8px;
+    font-weight:bold;
+    font-size:14px;
+}
+
+nav a:hover{
+    color:#b7ff35;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+    padding:25px 15px;
+}
+
+.hero{
+    background:white;
+    border-radius:16px;
+    padding:30px 20px;
+    text-align:center;
+    box-shadow:0 4px 15px rgba(0,0,0,.08);
+    margin-bottom:25px;
+}
+
+.hero h2{
+    color:#063d25;
+    font-size:30px;
+    margin-top:0;
+}
+
+.hero p{
+    max-width:800px;
+    margin:auto;
+    line-height:1.6;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:15px;
+    margin:25px 0;
+}
+
+.stat{
+    background:#063d25;
+    color:white;
+    padding:22px;
+    border-radius:14px;
+    text-align:center;
+}
+
+.stat strong{
+    display:block;
+    font-size:28px;
+    color:#b7ff35;
+}
+
+.stat span{
+    display:block;
+    margin-top:6px;
+}
+
+.tools{
+    background:white;
+    padding:20px;
+    border-radius:15px;
+    box-shadow:0 3px 12px rgba(0,0,0,.07);
+    margin-bottom:25px;
+}
+
+.search{
+    width:100%;
+    padding:14px;
+    border:2px solid #0b6b3d;
+    border-radius:10px;
+    font-size:16px;
+    margin-bottom:15px;
+}
+
+.filters{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+}
+
+.filters button{
+    border:0;
+    background:#e5eee9;
+    color:#063d25;
+    padding:10px 15px;
+    border-radius:9px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.filters button:hover,
+.filters button.active{
+    background:#0b6b3d;
+    color:white;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(270px,1fr));
+    gap:20px;
+}
+
+.card{
+    background:white;
+    border-radius:15px;
+    padding:20px;
+    box-shadow:0 4px 14px rgba(0,0,0,.08);
+    border-top:5px solid #0b6b3d;
+}
+
+.card h3{
+    color:#063d25;
+    margin-top:0;
+}
+
+.badge{
+    display:inline-block;
+    background:#e8f6df;
+    color:#075b34;
+    padding:5px 9px;
+    border-radius:7px;
+    font-size:12px;
+    font-weight:bold;
+    margin-bottom:10px;
+}
+
+.card p{
+    line-height:1.5;
+    color:#456;
+}
+
+.card button{
+    width:100%;
+    background:#0b6b3d;
+    color:white;
+    border:0;
+    padding:12px;
+    border-radius:9px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.card button:hover{
+    background:#063d25;
+}
+
+.info{
+    background:#063d25;
+    color:white;
+    padding:25px;
+    border-radius:15px;
+    margin-top:30px;
+    line-height:1.7;
+}
+
+.info h2{
+    color:#b7ff35;
+}
+
+.links{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:20px;
+}
+
+.links a{
+    background:#b7ff35;
+    color:#063d25;
+    padding:12px 16px;
+    border-radius:9px;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+footer{
+    background:#063d25;
+    color:white;
+    text-align:center;
+    padding:25px;
+    margin-top:35px;
+}
+
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.65);
+    z-index:100;
+    padding:20px;
+    overflow:auto;
+}
+
+.modal-box{
+    background:white;
+    max-width:600px;
+    margin:60px auto;
+    padding:25px;
+    border-radius:16px;
+}
+
+.modal-box h2{
+    color:#063d25;
+}
+
+.close{
+    float:right;
+    font-size:25px;
+    cursor:pointer;
+    color:#063d25;
+}
+
+@media(max-width:600px){
+    header h1{
+        font-size:26px;
+    }
+
+    .hero h2{
+        font-size:24px;
+    }
+
+    nav a{
+        display:inline-block;
+        margin:4px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="top-languages">
+    <button onclick="setLanguage('AZ')">AZ</button>
+    <button onclick="setLanguage('RU')">RU</button>
+    <button onclick="setLanguage('EN')">EN</button>
+    <button onclick="setLanguage('TR')">TR</button>
+    <button onclick="setLanguage('DE')">DE</button>
+    <button onclick="setLanguage('AR')">AR</button>
+    <button onclick="setLanguage('ES')">ES</button>
+    <button onclick="setLanguage('FR')">FR</button>
+    <button onclick="setLanguage('IT')">IT</button>
+</div>
+
+<header>
+    <h1>WORKER PRO</h1>
+    <p>Промышленные сертификаты и квалификация специалистов</p>
+</header>
+
+<nav>
+    <a href="../index.html">Главная</a>
+    <a href="../production/">Production</a>
+    <a href="../training/">Training</a>
+    <a href="../specialists/">Специалисты</a>
+    <a href="../companies/">Компании</a>
+    <a href="../manufacturers/">Производители</a>
+    <a href="../products/">Товары</a>
+    <a href="../services/">Сервисы</a>
+    <a href="../verification/">Verification</a>
+</nav>
+
+<div class="container">
+
+    <section class="hero">
+        <h2>Сертификаты</h2>
+        <p>
+            Раздел WORKER PRO для профессиональных сертификатов,
+            документов о квалификации, обучения, безопасности,
+            производства и проверки специалистов и компаний.
+        </p>
+    </section>
+
+    <section class="stats">
+        <div class="stat">
+            <strong>3,840+</strong>
+            <span>Сертификатов</span>
+        </div>
+
+        <div class="stat">
+            <strong>1,240+</strong>
+            <span>Специалистов</span>
+        </div>
+
+        <div class="stat">
+            <strong>420+</strong>
+            <span>Компаний</span>
+        </div>
+
+        <div class="stat">
+            <strong>38</strong>
+            <span>Стран</span>
+        </div>
+    </section>
+
+    <section class="tools">
+        <input
+            id="search"
+            class="search"
+            type="text"
+            placeholder="Поиск сертификата, специалиста, компании..."
+            onkeyup="searchCertificates()"
+        >
+
+        <div class="filters">
+            <button class="active" onclick="filterCertificates('all',this)">Все</button>
+            <button onclick="filterCertificates('safety',this)">Safety</button>
+            <button onclick="filterCertificates('cnc',this)">CNC</button>
+            <button onclick="filterCertificates('welding',this)">Welding</button>
+            <button onclick="filterCertificates('quality',this)">Quality</button>
+            <button onclick="filterCertificates('training',this)">Training</button>
+            <button onclick="filterCertificates('company',this)">Company</button>
+        </div>
+    </section>
+
+    <section class="grid" id="certificateGrid">
+
+        <div class="card certificate" data-type="safety">
+            <span class="badge">SAFETY</span>
+            <h3>Industrial Safety Certificate</h3>
+            <p><b>Специалист:</b> Ali Mammadov</p>
+            <p><b>Страна:</b> Azerbaijan</p>
+            <p><b>Статус:</b> Verified</p>
+            <button onclick="showCertificate('Industrial Safety Certificate','Ali Mammadov','Azerbaijan','Safety Training','CERT-2026-001')">
+                Подробнее
+            </button>
+        </div>
+
+        <div class="card certificate" data-type="cnc">
+            <span class="badge">CNC</span>
+            <h3>CNC Operator Certificate</h3>
+            <p><b>Специалист:</b> Mehmet Kaya</p>
+            <p><b>Страна:</b> Turkey</p>
+            <p><b>Статус:</b> Verified</p>
+            <button onclick="showCertificate('CNC Operator Certificate','Mehmet Kaya','Turkey','CNC Operation','CERT-2026-002')">
+                Подробнее
+            </button>
+        </div>
+
+        <div class="card certificate" data-type="welding">
+            <span class="badge">WELDING</span>
+            <h3>Industrial Welding Certificate</h3>
+            <p><b>Специалист:</b> Ivan Petrov</p>
+            <p><b>Страна:</b> Germany</p>
+            <p><b>Статус:</b> Verified</p>
+            <button onclick="showCertificate('Industrial Welding Certificate','Ivan Petrov','Germany','Industrial Welding','CERT-2026-003')">
+                Подробнее
+            </button>
+        </div>
+
+        <div class="card certificate" data-type="quality">
+            <span class="badge">QUALITY</span>
+            <h3>Quality Control Certificate</h3>
+            <p><b>Специалист:</b> Farid Hasanov</p>
+            <p><b>Страна:</b> Azerbaijan</p>
+            <p><b>Статус:</b> Verified</p>
+            <button onclick="showCertificate('Quality Control Certificate','Farid Hasanov','Azerbaijan','Quality Control','CERT-2026-004')">
+                Подробнее
+            </button>
+        </div>
+
+        <div class="card certificate" data-type="training">
+            <span class="badge">TRAINING</span>
+            <h3>Industrial Training Certificate</h3>
+            <p><b>Специалист:</b> John Smith</p>
+            <p><b>Страна:</b> United Kingdom</p>
+            <p><b>Статус:</b> Verified</p>
+            <button onclick="showCertificate('Industrial Training Certificate','John Smith','United Kingdom','Industrial Training','CERT-2026-005')">
+                Подробнее
+            </button>
+        </div>
+
+        <div class="card certificate" data-type="company">
+            <span class="badge">COMPANY</span>
+            <h3>Verified Industrial Company</h3>
+            <p><b>Компания:</b> Caspian Industrial Works</p>
+            <p><b>Страна:</b> Azerbaijan</p>
+            <p><b>Статус:</b> Verified</p>
+            <button onclick="showCertificate('Verified Industrial Company','Caspian Industrial Works','Azerbaijan','Company Verification','CERT-2026-006')">
+                Подробнее
+            </button>
+        </div>
+
+        <div class="card certificate" data-type="safety">
+            <span class="badge">SAFETY</span>
+            <h3>Fire Safety Certificate</h3>
+            <p><b>Специалист:</b> Ahmed Ali</p>
+            <p><b>Страна:</b> UAE</p>
+            <p><b>Статус:</b> Verified</p>
+            <button onclick="showCertificate('Fire Safety Certificate','Ahmed Ali','UAE','Fire Safety','CERT-2026-007')">
+                Подробнее
+            </button>
+        </div>
+
+        <div class="card certificate" data-type="cnc">
+            <span class="badge">CNC</span>
+            <h3>CNC Programming Certificate</h3>
+            <p><b>Специалист:</b> Luca Rossi</p>
+            <p><b>Страна:</b> Italy</p>
+            <p><b>Статус:</b> Verified</p>
+            <button onclick="showCertificate('CNC Programming Certificate','Luca Rossi','Italy','CNC Programming','CERT-2026-008')">
+                Подробнее
+            </button>
+        </div>
+
+    </section>
+
+    <section class="info">
+        <h2>Как работает система сертификатов?</h2>
+
+        <p>
+            <b>1. Специалист</b> — загружает сертификат или получает
+            сертификат после прохождения обучения WORKER PRO.
+        </p>
+
+        <p>
+            <b>2. Проверка</b> — документ проходит проверку.
+        </p>
+
+        <p>
+            <b>3. Verification</b> — сертификату присваивается уникальный
+            номер и статус проверки.
+        </p>
+
+        <p>
+            <b>4. Компания</b> — может проверить квалификацию специалиста
+            перед сотрудничеством или трудоустройством.
+        </p>
+
+        <p>
+            <b>5. Международная работа</b> — подтверждённая квалификация
+            может отображаться в профессиональном профиле специалиста.
+        </p>
+
+        <div class="links">
+            <a href="../training/">Обучение</a>
+            <a href="../training-courses/">Курсы</a>
+            <a href="../specialists/">Специалисты</a>
+            <a href="../verification/">Проверка</a>
+            <a href="../companies/">Компании</a>
+            <a href="../jobs/">Работа</a>
+        </div>
+    </section>
+
+</div>
+
+<footer>
+    WORKER PRO © 2026<br>
+    Industrial Platform — Production • Skills • Companies • Trade • Logistics
+</footer>
+
+<div class="modal" id="certificateModal">
+    <div class="modal-box">
+        <span class="close" onclick="closeModal()">×</span>
+
+        <h2 id="modalTitle"></h2>
+
+        <p><b>Владелец:</b> <span id="modalOwner"></span></p>
+        <p><b>Страна:</b> <span id="modalCountry"></span></p>
+        <p><b>Квалификация:</b> <span id="modalQualification"></span></p>
+        <p><b>Номер сертификата:</b> <span id="modalNumber"></span></p>
+
+        <p>
+            <b>Статус:</b>
+            <span style="color:#08753f;font-weight:bold;">
+                ✓ VERIFIED
+            </span>
+        </p>
+
+        <button
+            onclick="alert('В реальной версии WORKER PRO здесь будет онлайн-проверка сертификата.')"
+            style="width:100%;padding:13px;background:#0b6b3d;color:white;border:0;border-radius:9px;font-weight:bold;">
+            Проверить сертификат
+        </button>
+    </div>
+</div>
+
+<script src="../language.js"></script>
+
+<script>
+
+let currentFilter = "all";
+
+function filterCertificates(type,button){
+
+    currentFilter = type;
+
+    document.querySelectorAll(".filters button").forEach(function(btn){
+        btn.classList.remove("active");
+    });
+
+    button.classList.add("active");
+
+    applyFilters();
+}
+
+function searchCertificates(){
+    applyFilters();
+}
+
+function applyFilters(){
+
+    const search =
+        document.getElementById("search").value.toLowerCase();
+
+    const cards =
+        document.querySelectorAll(".certificate");
+
+    cards.forEach(function(card){
+
+        const text = card.innerText.toLowerCase();
+        const type = card.getAttribute("data-type");
+
+        const matchesSearch = text.includes(search);
+        const matchesFilter =
+            currentFilter === "all" ||
+            type === currentFilter;
+
+        if(matchesSearch && matchesFilter){
+            card.style.display = "block";
+        }else{
+            card.style.display = "none";
+        }
+    });
+}
+
+function showCertificate(title,owner,country,qualification,number){
+
+    document.getElementById("modalTitle").innerText = title;
+    document.getElementById("modalOwner").innerText = owner;
+    document.getElementById("modalCountry").innerText = country;
+    document.getElementById("modalQualification").innerText = qualification;
+    document.getElementById("modalNumber").innerText = number;
+
+    document.getElementById("certificateModal").style.display = "block";
+}
+
+function closeModal(){
+    document.getElementById("certificateModal").style.display = "none";
+}
+
+window.onclick = function(event){
+
+    const modal =
+        document.getElementById("certificateModal");
+
+    if(event.target === modal){
+        modal.style.display = "none";
+    }
+};
+
+</script>
+
+</body>
+</html>
