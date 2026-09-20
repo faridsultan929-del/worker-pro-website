@@ -1,1 +1,868 @@
- 
+ <!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WORKER PRO — Admin Panel</title>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f4f7f5;
+    color:#123;
+}
+
+.top-languages{
+    background:#063d25;
+    padding:10px;
+    text-align:center;
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+.top-languages button{
+    border:0;
+    background:#0b6b3d;
+    color:white;
+    padding:8px 11px;
+    margin:3px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.top-languages button:hover{
+    background:#b7ff35;
+    color:#063d25;
+}
+
+header{
+    background:linear-gradient(135deg,#063d25,#0b6b3d);
+    color:white;
+    padding:28px 16px;
+    text-align:center;
+}
+
+header h1{
+    margin:0 0 8px;
+    font-size:30px;
+}
+
+header p{
+    margin:0;
+}
+
+nav{
+    background:#075b34;
+    padding:10px;
+    text-align:center;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    display:inline-block;
+    padding:8px 10px;
+    margin:3px;
+    border-radius:7px;
+    font-size:14px;
+}
+
+nav a:hover{
+    background:#b7ff35;
+    color:#063d25;
+}
+
+.container{
+    max-width:1250px;
+    margin:auto;
+    padding:20px;
+}
+
+.hero{
+    background:white;
+    border-radius:16px;
+    padding:24px;
+    margin-bottom:20px;
+    box-shadow:0 4px 15px rgba(0,0,0,.07);
+}
+
+.hero h2{
+    margin-top:0;
+    color:#063d25;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+    gap:15px;
+}
+
+.card{
+    background:white;
+    border-radius:14px;
+    padding:20px;
+    box-shadow:0 3px 12px rgba(0,0,0,.06);
+}
+
+.card h3{
+    margin-top:0;
+    color:#063d25;
+}
+
+.stat{
+    font-size:29px;
+    font-weight:bold;
+    color:#0b6b3d;
+    margin:8px 0;
+}
+
+.card p{
+    line-height:1.5;
+}
+
+.section-title{
+    margin:30px 0 15px;
+    color:#063d25;
+}
+
+.admin-card{
+    border-left:5px solid #0b6b3d;
+}
+
+.admin-card.warning{
+    border-left-color:#d68a00;
+}
+
+.admin-card.danger{
+    border-left-color:#b52b2b;
+}
+
+.admin-card.info{
+    border-left-color:#2878b5;
+}
+
+.action{
+    display:inline-block;
+    background:#0b6b3d;
+    color:white;
+    border:0;
+    padding:10px 14px;
+    border-radius:8px;
+    text-decoration:none;
+    cursor:pointer;
+    font-weight:bold;
+    margin-top:8px;
+}
+
+.action:hover{
+    background:#063d25;
+}
+
+.search-box{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-bottom:15px;
+}
+
+.search-box input,
+.search-box select{
+    padding:11px;
+    border:1px solid #ccd8d1;
+    border-radius:8px;
+    min-width:180px;
+    flex:1;
+}
+
+.user{
+    background:white;
+    border-radius:12px;
+    padding:16px;
+    margin-bottom:12px;
+    border:1px solid #e2e9e4;
+}
+
+.user strong{
+    color:#063d25;
+}
+
+.status{
+    display:inline-block;
+    padding:5px 9px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:bold;
+    margin-top:7px;
+}
+
+.active{
+    background:#d9f1df;
+    color:#0b6b3d;
+}
+
+.pending{
+    background:#fff0c7;
+    color:#8a6200;
+}
+
+.blocked{
+    background:#f7dada;
+    color:#9c2424;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    background:white;
+    overflow:hidden;
+}
+
+th,td{
+    padding:12px;
+    border-bottom:1px solid #e5ebe7;
+    text-align:left;
+}
+
+th{
+    background:#063d25;
+    color:white;
+}
+
+.activity{
+    padding:13px;
+    border-bottom:1px solid #e5ebe7;
+}
+
+.activity:last-child{
+    border-bottom:0;
+}
+
+.activity strong{
+    color:#063d25;
+}
+
+.workflow{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+    gap:10px;
+}
+
+.step{
+    background:#e9f2ec;
+    padding:15px;
+    border-radius:10px;
+    text-align:center;
+    font-weight:bold;
+}
+
+.future{
+    background:#eef8f1;
+    border:1px solid #c9dfd0;
+    border-radius:14px;
+    padding:20px;
+}
+
+.future li{
+    margin:8px 0;
+}
+
+.demo{
+    margin-top:25px;
+    background:#fff8df;
+    border:1px solid #ead58a;
+    border-radius:12px;
+    padding:16px;
+    color:#705b00;
+}
+
+footer{
+    margin-top:35px;
+    background:#063d25;
+    color:white;
+    text-align:center;
+    padding:25px;
+}
+
+@media(max-width:600px){
+
+    header h1{
+        font-size:25px;
+    }
+
+    .container{
+        padding:12px;
+    }
+
+    table{
+        font-size:13px;
+    }
+
+    th,td{
+        padding:8px;
+    }
+}
+</style>
+
+<script src="../language.js"></script>
+</head>
+
+<body>
+
+<div class="top-languages">
+    <button onclick="setLanguage('AZ')">AZ</button>
+    <button onclick="setLanguage('RU')">RU</button>
+    <button onclick="setLanguage('EN')">EN</button>
+    <button onclick="setLanguage('TR')">TR</button>
+    <button onclick="setLanguage('DE')">DE</button>
+    <button onclick="setLanguage('AR')">AR</button>
+    <button onclick="setLanguage('ES')">ES</button>
+    <button onclick="setLanguage('FR')">FR</button>
+    <button onclick="setLanguage('IT')">IT</button>
+</div>
+
+<header>
+    <h1>WORKER PRO — Admin Panel</h1>
+    <p>Центральная панель управления промышленной платформой</p>
+</header>
+
+<nav>
+    <a href="../index.html">Главная</a>
+    <a href="../companies/index.html">Компании</a>
+    <a href="../manufacturers/index.html">Производители</a>
+    <a href="../suppliers/index.html">Поставщики</a>
+    <a href="../products/index.html">Товары</a>
+    <a href="../requests/index.html">Заявки</a>
+    <a href="../orders/index.html">Заказы</a>
+    <a href="../payments/index.html">Платежи</a>
+    <a href="../verification/index.html">Верификация</a>
+    <a href="../analytics/index.html">Аналитика</a>
+    <a href="../security/index.html">Безопасность</a>
+</nav>
+
+<div class="container">
+
+<section class="hero">
+
+    <h2>Панель администратора</h2>
+
+    <p>
+        Admin Panel — центральный раздел управления WORKER PRO.
+        Здесь администратор в будущем сможет контролировать
+        пользователей, компании, товары, заявки, заказы,
+        платежи, документы, отзывы и безопасность платформы.
+    </p>
+
+    <p>
+        Сейчас страница работает как демонстрационная модель
+        будущей административной системы.
+    </p>
+
+</section>
+
+<h2 class="section-title">Общая статистика</h2>
+
+<div class="grid">
+
+    <div class="card admin-card">
+        <h3>👥 Пользователи</h3>
+        <div class="stat">12 580</div>
+        <p>Зарегистрированные аккаунты</p>
+    </div>
+
+    <div class="card admin-card">
+        <h3>🏢 Компании</h3>
+        <div class="stat">2 430</div>
+        <p>Компании и организации</p>
+    </div>
+
+    <div class="card admin-card">
+        <h3>🏭 Производители</h3>
+        <div class="stat">860</div>
+        <p>Производители оборудования</p>
+    </div>
+
+    <div class="card admin-card">
+        <h3>📦 Товары</h3>
+        <div class="stat">48 920</div>
+        <p>Промышленные товары</p>
+    </div>
+
+    <div class="card admin-card info">
+        <h3>📋 Заявки</h3>
+        <div class="stat">6 740</div>
+        <p>Заявки покупателей</p>
+    </div>
+
+    <div class="card admin-card info">
+        <h3>🛒 Заказы</h3>
+        <div class="stat">2 185</div>
+        <p>Заказы платформы</p>
+    </div>
+
+    <div class="card admin-card warning">
+        <h3>💰 Платежи</h3>
+        <div class="stat">18 450</div>
+        <p>Демо операций</p>
+    </div>
+
+    <div class="card admin-card">
+        <h3>🌍 Страны</h3>
+        <div class="stat">42</div>
+        <p>Участники из разных стран</p>
+    </div>
+
+</div>
+
+<h2 class="section-title">Управление платформой</h2>
+
+<div class="grid">
+
+    <div class="card">
+        <h3>👥 Пользователи</h3>
+        <p>
+            Регистрация, профили, роли, статусы,
+            блокировка и восстановление аккаунтов.
+        </p>
+        <button class="action" onclick="demo('Пользователи')">
+            Управлять
+        </button>
+    </div>
+
+    <div class="card">
+        <h3>🏢 Компании</h3>
+        <p>
+            Проверка компаний, редактирование профилей
+            и управление статусами.
+        </p>
+        <a class="action" href="../companies/index.html">
+            Открыть
+        </a>
+    </div>
+
+    <div class="card">
+        <h3>🏭 Производители</h3>
+        <p>
+            Контроль производителей и их промышленной
+            продукции.
+        </p>
+        <a class="action" href="../manufacturers/index.html">
+            Открыть
+        </a>
+    </div>
+
+    <div class="card">
+        <h3>📦 Товары</h3>
+        <p>
+            Управление каталогом товаров, запчастей,
+            оборудования и материалов.
+        </p>
+        <a class="action" href="../products/index.html">
+            Открыть
+        </a>
+    </div>
+
+    <div class="card">
+        <h3>📋 Заявки</h3>
+        <p>
+            Контроль заявок покупателей и предложений
+            поставщиков.
+        </p>
+        <a class="action" href="../requests/index.html">
+            Открыть
+        </a>
+    </div>
+
+    <div class="card">
+        <h3>🛒 Заказы</h3>
+        <p>
+            Управление заказами и этапами доставки.
+        </p>
+        <a class="action" href="../orders/index.html">
+            Открыть
+        </a>
+    </div>
+
+    <div class="card">
+        <h3>💳 Платежи</h3>
+        <p>
+            Контроль платежей, счетов, кошельков
+            и финансовых операций.
+        </p>
+        <a class="action" href="../payments/index.html">
+            Открыть
+        </a>
+    </div>
+
+    <div class="card">
+        <h3>🛡️ Верификация</h3>
+        <p>
+            Проверка компаний, специалистов и
+            документов.
+        </p>
+        <a class="action" href="../verification/index.html">
+            Открыть
+        </a>
+    </div>
+
+</div>
+
+<h2 class="section-title">Контроль пользователей</h2>
+
+<div class="search-box">
+
+    <input
+        type="text"
+        id="userSearch"
+        placeholder="Поиск пользователя или компании..."
+        onkeyup="filterUsers()"
+    >
+
+    <select id="userStatus" onchange="filterUsers()">
+        <option value="all">Все статусы</option>
+        <option value="active">Активные</option>
+        <option value="pending">Ожидают проверки</option>
+        <option value="blocked">Заблокированные</option>
+    </select>
+
+</div>
+
+<div id="users">
+
+    <div class="user" data-status="active">
+        <strong>Industrial Manufacturer</strong>
+        <p>company@workerpro.demo</p>
+        <p>🇦🇿 Azerbaijan · Manufacturer</p>
+        <span class="status active">Активен</span>
+    </div>
+
+    <div class="user" data-status="active">
+        <strong>Machine Technology</strong>
+        <p>machine@workerpro.demo</p>
+        <p>🇹🇷 Turkey · Manufacturer</p>
+        <span class="status active">Активен</span>
+    </div>
+
+    <div class="user" data-status="pending">
+        <strong>New Industrial Supplier</strong>
+        <p>supplier@workerpro.demo</p>
+        <p>🇩🇪 Germany · Supplier</p>
+        <span class="status pending">Ожидает проверки</span>
+    </div>
+
+    <div class="user" data-status="blocked">
+        <strong>Demo Account</strong>
+        <p>demo@workerpro.demo</p>
+        <p>🇮🇹 Italy · Specialist</p>
+        <span class="status blocked">Заблокирован</span>
+    </div>
+
+</div>
+
+<h2 class="section-title">Последняя активность</h2>
+
+<div class="card">
+
+    <div class="activity">
+        <strong>Новая компания зарегистрирована</strong>
+        <br>
+        Industrial Solutions · Azerbaijan
+    </div>
+
+    <div class="activity">
+        <strong>Создана новая заявка</strong>
+        <br>
+        CNC spare parts · Germany
+    </div>
+
+    <div class="activity">
+        <strong>Получено коммерческое предложение</strong>
+        <br>
+        Hydraulic Solutions
+    </div>
+
+    <div class="activity">
+        <strong>Новый заказ</strong>
+        <br>
+        Industrial Pump · Turkey → Azerbaijan
+    </div>
+
+    <div class="activity">
+        <strong>Компания отправила документы</strong>
+        <br>
+        Automation Systems · Germany
+    </div>
+
+    <div class="activity">
+        <strong>Новый отзыв</strong>
+        <br>
+        Metal Production
+    </div>
+
+</div>
+
+<h2 class="section-title">Финансовый контроль</h2>
+
+<div class="grid">
+
+    <div class="card">
+        <h3>💰 Доход платформы</h3>
+        <div class="stat">8 450 AZN</div>
+        <p>Демонстрационный показатель</p>
+        <a class="action" href="../finance/index.html">
+            Финансы
+        </a>
+    </div>
+
+    <div class="card">
+        <h3>🧾 Счета</h3>
+        <div class="stat">24</div>
+        <p>Демонстрационные счета</p>
+        <a class="action" href="../invoices/index.html">
+            Счета
+        </a>
+    </div>
+
+    <div class="card">
+        <h3>🔄 Транзакции</h3>
+        <div class="stat">48</div>
+        <p>Финансовые операции</p>
+        <a class="action" href="../transactions/index.html">
+            Транзакции
+        </a>
+    </div>
+
+    <div class="card">
+        <h3>📢 Реклама</h3>
+        <div class="stat">126</div>
+        <p>Активные рекламные кампании</p>
+        <a class="action" href="../advertising/index.html">
+            Реклама
+        </a>
+    </div>
+
+</div>
+
+<h2 class="section-title">Безопасность</h2>
+
+<div class="grid">
+
+    <div class="card admin-card">
+        <h3>🛡️ Система безопасности</h3>
+        <p>
+            Контроль входов, аккаунтов, подозрительной
+            активности и защитных настроек.
+        </p>
+        <a class="action" href="../security/index.html">
+            Открыть
+        </a>
+    </div>
+
+    <div class="card admin-card warning">
+        <h3>⚠️ Ожидают проверки</h3>
+        <div class="stat">17</div>
+        <p>Компании и документы</p>
+        <a class="action" href="../verification/index.html">
+            Проверить
+        </a>
+    </div>
+
+    <div class="card admin-card danger">
+        <h3>🚫 Заблокированные</h3>
+        <div class="stat">8</div>
+        <p>Демонстрационные аккаунты</p>
+        <button class="action" onclick="demo('Заблокированные аккаунты')">
+            Управлять
+        </button>
+    </div>
+
+</div>
+
+<h2 class="section-title">Административные действия</h2>
+
+<div class="grid">
+
+    <div class="card">
+        <h3>🔔 Уведомления</h3>
+        <p>Управление системными уведомлениями.</p>
+        <a class="action" href="../notifications/index.html">
+            Открыть
+        </a>
+    </div>
+
+    <div class="card">
+        <h3>📊 Аналитика</h3>
+        <p>Статистика работы платформы.</p>
+        <a class="action" href="../analytics/index.html">
+            Открыть
+        </a>
+    </div>
+
+    <div class="card">
+        <h3>📑 Отчёты</h3>
+        <p>Финансовые и операционные отчёты.</p>
+        <a class="action" href="../reports/index.html">
+            Открыть
+        </a>
+    </div>
+
+    <div class="card">
+        <h3>⚙️ Настройки</h3>
+        <p>Основные настройки платформы.</p>
+        <a class="action" href="../settings/index.html">
+            Открыть
+        </a>
+    </div>
+
+</div>
+
+<h2 class="section-title">Работа администратора</h2>
+
+<div class="workflow">
+
+    <div class="step">1. Пользователь</div>
+    <div class="step">2. Регистрация</div>
+    <div class="step">3. Проверка</div>
+    <div class="step">4. Верификация</div>
+    <div class="step">5. Компания</div>
+    <div class="step">6. Товары</div>
+    <div class="step">7. Заявки</div>
+    <div class="step">8. Заказы</div>
+    <div class="step">9. Платежи</div>
+    <div class="step">10. Доставка</div>
+
+</div>
+
+<h2 class="section-title">Будущие возможности Admin Panel</h2>
+
+<div class="future">
+
+<ul>
+
+    <li>Полноценная база пользователей.</li>
+
+    <li>Роли: Administrator, Moderator, Manager, Support.</li>
+
+    <li>Проверка и верификация компаний.</li>
+
+    <li>Управление товарами и промышленным каталогом.</li>
+
+    <li>Модерация заявок и предложений.</li>
+
+    <li>Контроль заказов и международной доставки.</li>
+
+    <li>Управление платежами и подписками.</li>
+
+    <li>Финансовая аналитика платформы.</li>
+
+    <li>Управление рекламой.</li>
+
+    <li>Модерация отзывов.</li>
+
+    <li>Контроль документов.</li>
+
+    <li>Система уведомлений.</li>
+
+    <li>Журнал действий администратора.</li>
+
+    <li>Защита от мошенничества.</li>
+
+    <li>AI-анализ подозрительной активности.</li>
+
+    <li>Резервное копирование данных.</li>
+
+</ul>
+
+</div>
+
+<div class="demo">
+
+    <strong>⚠️ Демо-режим</strong>
+
+    <p>
+        Эта Admin Panel является демонстрационной.
+        Показанные пользователи, компании, суммы,
+        статистика и операции не являются реальными.
+    </p>
+
+    <p>
+        Реальная административная система появится
+        после подключения базы данных, авторизации,
+        серверной части и системы ролей.
+    </p>
+
+</div>
+
+</div>
+
+<footer>
+
+    <strong>WORKER PRO</strong>
+
+    <p>Глобальная промышленная платформа</p>
+
+    <p>© 2026 WORKER PRO — F.S</p>
+
+</footer>
+
+<script>
+
+function demo(name){
+
+    alert(
+        name +
+        " — демонстрационная функция.\n\n" +
+        "В рабочей версии здесь будет доступно управление."
+    );
+
+}
+
+function filterUsers(){
+
+    const search =
+        document.getElementById("userSearch")
+        .value
+        .toLowerCase();
+
+    const status =
+        document.getElementById("userStatus")
+        .value;
+
+    const users =
+        document.querySelectorAll(".user");
+
+    users.forEach(function(user){
+
+        const text =
+            user.innerText.toLowerCase();
+
+        const userStatus =
+            user.dataset.status;
+
+        const searchMatch =
+            text.includes(search);
+
+        const statusMatch =
+            status === "all" ||
+            userStatus === status;
+
+        user.style.display =
+            searchMatch && statusMatch
+            ? "block"
+            : "none";
+
+    });
+
+}
+
+</script>
+
+</body>
+</html>
