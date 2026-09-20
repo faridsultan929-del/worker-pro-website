@@ -4,255 +4,304 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>WORKER PRO — Production</title> 
+<title>WORKER PRO — Production</title>
 
 <style>
-* {
-    box-sizing: border-box;
+*{
+    box-sizing:border-box;
 }
 
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #f4f7f5;
-    color: #123;
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f3f7f5;
+    color:#123;
 }
 
-.top-languages {
-    background: #063d25;
-    padding: 10px;
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    flex-wrap: wrap;
+/* TOP LANGUAGES */
+.top-languages{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    background:#063d25;
+    display:flex;
+    justify-content:flex-end;
+    align-items:center;
+    gap:5px;
+    padding:6px 10px;
+    box-shadow:0 2px 8px #0004;
 }
 
-.top-languages button {
-    border: 1px solid #b7ff35;
-    background: transparent;
-    color: white;
-    padding: 8px 12px;
-    border-radius: 20px;
-    cursor: pointer;
-    font-weight: bold;
+.top-languages button{
+    min-width:38px;
+    height:32px;
+    padding:4px 6px;
+    border:1px solid #b7ff35;
+    border-radius:6px;
+    background:transparent;
+    color:white;
+    font-size:12px;
+    font-weight:bold;
+    cursor:pointer;
 }
 
-.top-languages button:hover {
-    background: #b7ff35;
-    color: #063d25;
+.top-languages button:hover,
+.top-languages button.active{
+    background:#0b6b3d;
+    color:#b7ff35;
 }
 
-header {
-    background: linear-gradient(135deg, #0b6b3d, #063d25);
-    color: white;
-    text-align: center;
-    padding: 35px 15px;
+/* HEADER */
+.header{
+    background:linear-gradient(135deg,#063d25,#0b6b3d);
+    color:white;
+    text-align:center;
+    padding:35px 20px;
 }
 
-.logo {
-    font-size: 34px;
-    font-weight: bold;
-    color: #b7ff35;
+.logo{
+    width:95px;
+    max-width:35%;
+    margin-bottom:10px;
 }
 
-header h1 {
-    margin: 12px 0 8px;
-    font-size: 32px;
+.header h1{
+    margin:5px 0;
+    font-size:34px;
 }
 
-header p {
-    margin: 0;
-    font-size: 17px;
+.header p{
+    margin:8px auto 0;
+    max-width:800px;
+    font-size:17px;
+    line-height:1.5;
+    color:#eaffdf;
 }
 
-nav {
-    background: #075b34;
-    padding: 12px;
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    flex-wrap: wrap;
-    position: sticky;
-    top: 0;
-    z-index: 10;
+/* SEARCH */
+.search-box{
+    max-width:700px;
+    margin:25px auto 5px;
+    padding:0 15px;
 }
 
-nav a {
-    color: white;
-    text-decoration: none;
-    padding: 9px 13px;
-    border-radius: 8px;
-    font-weight: bold;
+.search-box input{
+    width:100%;
+    padding:15px 18px;
+    border:none;
+    border-radius:10px;
+    font-size:16px;
+    outline:none;
+    box-shadow:0 2px 10px #0002;
 }
 
-nav a:hover {
-    background: #b7ff35;
-    color: #063d25;
+/* CONTENT */
+.container{
+    max-width:1250px;
+    margin:auto;
+    padding:30px 18px 50px;
 }
 
-.container {
-    max-width: 1100px;
-    margin: auto;
-    padding: 25px 15px;
+.section-title{
+    text-align:center;
+    color:#063d25;
+    font-size:28px;
+    margin:10px 0 8px;
 }
 
-.intro {
-    background: white;
-    border-radius: 15px;
-    padding: 25px;
-    box-shadow: 0 4px 15px rgba(0,0,0,.08);
-    margin-bottom: 25px;
+.section-subtitle{
+    text-align:center;
+    color:#567;
+    margin:0 auto 28px;
+    max-width:800px;
+    line-height:1.5;
 }
 
-.intro h2 {
-    color: #075b34;
-    margin-top: 0;
+/* STATS */
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+    margin-bottom:35px;
 }
 
-.search-box {
-    display: flex;
-    gap: 10px;
-    margin-top: 20px;
+.stat{
+    background:white;
+    border-radius:12px;
+    padding:20px;
+    text-align:center;
+    box-shadow:0 3px 12px #0001;
+    border-top:4px solid #0b6b3d;
 }
 
-.search-box input {
-    flex: 1;
-    padding: 14px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    font-size: 16px;
+.stat strong{
+    display:block;
+    font-size:28px;
+    color:#0b6b3d;
 }
 
-.search-box button {
-    background: #0b6b3d;
-    color: white;
-    border: none;
-    padding: 14px 20px;
-    border-radius: 10px;
-    font-weight: bold;
+.stat span{
+    color:#567;
+    font-size:14px;
 }
 
-.section-title {
-    text-align: center;
-    color: #063d25;
-    margin: 30px 0 20px;
+/* PRODUCTION GRID */
+.production-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
 }
 
-.cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-    gap: 18px;
+.card{
+    background:white;
+    border-radius:14px;
+    padding:20px;
+    box-shadow:0 3px 14px #0002;
+    border:1px solid #e0e8e3;
+    transition:.2s;
+    position:relative;
+    overflow:hidden;
 }
 
-.card {
-    background: white;
-    padding: 22px;
-    border-radius: 15px;
-    box-shadow: 0 4px 14px rgba(0,0,0,.08);
-    border-top: 5px solid #0b6b3d;
-    transition: .2s;
+.card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 7px 20px #0002;
+    border-color:#0b6b3d;
 }
 
-.card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 7px 20px rgba(0,0,0,.13);
+.card-number{
+    position:absolute;
+    right:12px;
+    top:10px;
+    font-size:12px;
+    color:#8aa;
+    font-weight:bold;
 }
 
-.card-icon {
-    font-size: 38px;
+.icon{
+    font-size:35px;
+    margin-bottom:10px;
 }
 
-.card h3 {
-    color: #075b34;
-    margin-bottom: 8px;
+.card h3{
+    margin:5px 0 8px;
+    color:#063d25;
+    font-size:20px;
 }
 
-.card p {
-    color: #555;
-    line-height: 1.5;
+.card p{
+    color:#567;
+    line-height:1.5;
+    min-height:48px;
+    margin:0 0 15px;
 }
 
-.card a {
-    display: inline-block;
-    margin-top: 10px;
-    color: #075b34;
-    font-weight: bold;
-    text-decoration: none;
+.card button{
+    width:100%;
+    border:none;
+    background:#0b6b3d;
+    color:white;
+    padding:11px;
+    border-radius:8px;
+    font-weight:bold;
+    cursor:pointer;
 }
 
-.process {
-    margin-top: 30px;
-    background: #063d25;
-    color: white;
-    padding: 25px;
-    border-radius: 15px;
+.card button:hover{
+    background:#075b34;
+    color:#b7ff35;
 }
 
-.process h2 {
-    color: #b7ff35;
-    text-align: center;
+/* INFO */
+.info{
+    margin-top:40px;
+    background:#063d25;
+    color:white;
+    border-radius:15px;
+    padding:30px;
+    text-align:center;
 }
 
-.steps {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 15px;
-    margin-top: 20px;
+.info h2{
+    margin-top:0;
+    color:#b7ff35;
 }
 
-.step {
-    background: rgba(255,255,255,.1);
-    padding: 18px;
-    border-radius: 12px;
-    text-align: center;
+.info p{
+    max-width:900px;
+    margin:auto;
+    line-height:1.7;
+    color:#e7f5ec;
 }
 
-.step-number {
-    width: 38px;
-    height: 38px;
-    line-height: 38px;
-    margin: auto auto 10px;
-    border-radius: 50%;
-    background: #b7ff35;
-    color: #063d25;
-    font-weight: bold;
+/* FOOTER */
+.footer{
+    background:#04291a;
+    color:#cfe4d7;
+    text-align:center;
+    padding:25px 15px;
 }
 
-footer {
-    margin-top: 35px;
-    background: #063d25;
-    color: white;
-    text-align: center;
-    padding: 25px 15px;
+.footer strong{
+    color:#b7ff35;
 }
 
-footer a {
-    color: #b7ff35;
-    text-decoration: none;
+/* RTL */
+body.rtl{
+    direction:rtl;
 }
 
-@media (max-width: 600px) {
+body.rtl .top-languages{
+    justify-content:flex-start;
+}
 
-    header h1 {
-        font-size: 26px;
+/* MOBILE */
+@media(max-width:950px){
+    .production-grid{
+        grid-template-columns:repeat(2,1fr);
     }
 
-    .logo {
-        font-size: 28px;
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:600px){
+    .top-languages{
+        justify-content:center;
+        flex-wrap:wrap;
     }
 
-    .search-box {
-        flex-direction: column;
+    .header{
+        padding:28px 15px;
     }
 
-    .top-languages {
-        justify-content: flex-start;
-        overflow-x: auto;
-        flex-wrap: nowrap;
+    .header h1{
+        font-size:27px;
     }
 
-    .top-languages button {
-        flex-shrink: 0;
+    .header p{
+        font-size:15px;
+    }
+
+    .production-grid{
+        grid-template-columns:1fr;
+    }
+
+    .stats{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .stat{
+        padding:15px 8px;
+    }
+
+    .stat strong{
+        font-size:23px;
+    }
+
+    .container{
+        padding:25px 12px 40px;
     }
 }
 </style>
@@ -260,284 +309,1159 @@ footer a {
 
 <body>
 
-<!-- ЯЗЫКИ -->
+<!-- LANGUAGES -->
 <div class="top-languages">
-    <button onclick="setLanguage('AZ')">🇦🇿 AZ</button>
-    <button onclick="setLanguage('RU')">🇷🇺 RU</button>
-    <button onclick="setLanguage('EN')">🇬🇧 EN</button>
-    <button onclick="setLanguage('TR')">🇹🇷 TR</button>
-    <button onclick="setLanguage('DE')">🇩🇪 DE</button>
-    <button onclick="setLanguage('AR')">🇸🇦 AR</button>
-    <button onclick="setLanguage('ES')">🇪🇸 ES</button>
-    <button onclick="setLanguage('FR')">🇫🇷 FR</button>
-    <button onclick="setLanguage('IT')">🇮🇹 IT</button>
+
+<button onclick="changeLanguage('AZ')">AZ</button>
+<button onclick="changeLanguage('RU')">RU</button>
+<button onclick="changeLanguage('EN')">EN</button>
+<button onclick="changeLanguage('TR')">TR</button>
+<button onclick="changeLanguage('DE')">DE</button>
+<button onclick="changeLanguage('AR')">AR</button>
+<button onclick="changeLanguage('ES')">ES</button>
+<button onclick="changeLanguage('FR')">FR</button>
+<button onclick="changeLanguage('IT')">IT</button>
+
 </div>
 
-<header>
+<!-- HEADER -->
+<header class="header">
 
-    <div class="logo">⚙️ WORKER PRO</div>
+<img src="../logo.png" class="logo" alt="WORKER PRO">
 
-    <h1 data-lang="production">Производство</h1>
+<h1 data-i18n="title">Производство</h1>
 
-    <p>
-        Промышленность • Технологии • Оборудование • Знания
-    </p>
+<p data-i18n="subtitle">
+Промышленные технологии, оборудование, производство,
+обслуживание и профессиональные знания.
+</p>
+
+<div class="search-box">
+<input
+    id="searchInput"
+    type="text"
+    data-placeholder="search"
+    placeholder="Поиск по производственным направлениям..."
+    oninput="filterCards()">
+</div>
 
 </header>
 
-<nav>
-    <a href="../index.html">🏠 Главная</a>
-    <a href="../problems/index.html">🛠 Проблемы</a>
-    <a href="../spare-parts/index.html">🔩 Запчасти</a>
-    <a href="../companies/index.html">🏢 Компании</a>
-    <a href="../suppliers/index.html">📦 Поставщики</a>
-    <a href="../training/index.html">🎓 Обучение</a>
-</nav>
-
+<!-- MAIN -->
 <main class="container">
 
-    <section class="intro">
-
-        <h2>🏭 Производство</h2>
-
-        <p>
-            WORKER PRO объединяет рабочих, мастеров, инженеров,
-            производителей и поставщиков промышленного оборудования.
-        </p>
-
-        <p>
-            Здесь можно изучать технологии производства,
-            находить оборудование, запчасти и специалистов.
-        </p>
-
-        <div class="search-box">
-
-            <input
-                type="text"
-                placeholder="Поиск: CNC, станок, насос, сварка..."
-            >
-
-            <button>🔍 Поиск</button>
-
-        </div>
-
-    </section>
-
-
-    <h2 class="section-title">
-        Основные направления производства
-    </h2>
-
-
-    <section class="cards">
-
-        <div class="card">
-
-            <div class="card-icon">⚙️</div>
-
-            <h3>CNC</h3>
-
-            <p>
-                CNC-станки, токарная и фрезерная обработка,
-                программирование и обслуживание оборудования.
-            </p>
-
-            <a href="../technologies/index.html">
-                Подробнее →
-            </a>
-
-        </div>
-
-
-        <div class="card">
-
-            <div class="card-icon">🔨</div>
-
-            <h3>Штамповка</h3>
-
-            <p>
-                Прессовое оборудование, штампы,
-                листовой металл и технологии обработки.
-            </p>
-
-            <a href="../technologies/index.html">
-                Подробнее →
-            </a>
-
-        </div>
-
-
-        <div class="card">
-
-            <div class="card-icon">🔥</div>
-
-            <h3>Термообработка</h3>
-
-            <p>
-                Печи, нагрев, закалка, отпуск
-                и контроль температуры.
-            </p>
-
-            <a href="../technologies/index.html">
-                Подробнее →
-            </a>
-
-        </div>
-
-
-        <div class="card">
-
-            <div class="card-icon">🤖</div>
-
-            <h3>Автоматизация</h3>
-
-            <p>
-                Датчики, PLC, роботы, системы управления
-                и промышленная автоматизация.
-            </p>
-
-            <a href="../technologies/index.html">
-                Подробнее →
-            </a>
-
-        </div>
-
-
-        <div class="card">
-
-            <div class="card-icon">💧</div>
-
-            <h3>Гидравлика</h3>
-
-            <p>
-                Насосы, клапаны, гидростанции,
-                цилиндры и гидравлические системы.
-            </p>
-
-            <a href="../equipment/index.html">
-                Подробнее →
-            </a>
-
-        </div>
-
-
-        <div class="card">
-
-            <div class="card-icon">⚡</div>
-
-            <h3>Электрика</h3>
-
-            <p>
-                Электродвигатели, кабели, панели,
-                датчики и промышленное оборудование.
-            </p>
-
-            <a href="../equipment/index.html">
-                Подробнее →
-            </a>
-
-        </div>
-
-
-        <div class="card">
-
-            <div class="card-icon">🔥</div>
-
-            <h3>Сварка</h3>
-
-            <p>
-                MIG, MAG, TIG, ручная сварка,
-                оборудование и безопасность.
-            </p>
-
-            <a href="../training/index.html">
-                Подробнее →
-            </a>
-
-        </div>
-
-
-        <div class="card">
-
-            <div class="card-icon">🔬</div>
-
-            <h3>Контроль качества</h3>
-
-            <p>
-                Измерения, контроль размеров,
-                дефекты и проверка продукции.
-            </p>
-
-            <a href="../quality-control/index.html">
-                Подробнее →
-            </a>
-
-        </div>
-
-    </section>
-
-
-    <section class="process">
-
-        <h2>🌍 Как работает WORKER PRO</h2>
-
-        <div class="steps">
-
-            <div class="step">
-                <div class="step-number">1</div>
-                Выберите язык и страну
-            </div>
-
-            <div class="step">
-                <div class="step-number">2</div>
-                Изучайте технологии
-            </div>
-
-            <div class="step">
-                <div class="step-number">3</div>
-                Найдите компанию
-            </div>
-
-            <div class="step">
-                <div class="step-number">4</div>
-                Найдите оборудование или запчасть
-            </div>
-
-            <div class="step">
-                <div class="step-number">5</div>
-                Свяжитесь с поставщиком
-            </div>
-
-            <div class="step">
-                <div class="step-number">6</div>
-                Организуйте доставку
-            </div>
-
-        </div>
-
-    </section>
+<h2 class="section-title" data-i18n="mainTitle">
+Промышленные направления
+</h2>
+
+<p class="section-subtitle" data-i18n="mainSubtitle">
+Изучайте технологии, оборудование, материалы, проблемы,
+запчасти, обслуживание и обучение по каждому направлению.
+</p>
+
+<!-- STATS -->
+<div class="stats">
+
+<div class="stat">
+<strong>25+</strong>
+<span data-i18n="directions">направлений</span>
+</div>
+
+<div class="stat">
+<strong>100+</strong>
+<span data-i18n="technologies">технологий</span>
+</div>
+
+<div class="stat">
+<strong>1000+</strong>
+<span data-i18n="parts">запчастей</span>
+</div>
+
+<div class="stat">
+<strong>24/7</strong>
+<span data-i18n="access">доступ к знаниям</span>
+</div>
+
+</div>
+
+<!-- PRODUCTION -->
+<div class="production-grid" id="productionGrid">
+
+<!-- 1 -->
+<div class="card" data-name="cnc">
+<span class="card-number">01</span>
+<div class="icon">⚙️</div>
+<h3 data-i18n="cnc">CNC / ЧПУ</h3>
+<p data-i18n="cncText">
+Токарные и фрезерные станки, программы, инструменты и обслуживание.
+</p>
+<button onclick="openSection('cnc')" data-i18n="open">
+Открыть раздел
+</button>
+</div>
+
+<!-- 2 -->
+<div class="card" data-name="stamping">
+<span class="card-number">02</span>
+<div class="icon">🔩</div>
+<h3 data-i18n="stamping">Штамповка</h3>
+<p data-i18n="stampingText">
+Прессы, штампы, листовой металл и технологии холодной и горячей штамповки.
+</p>
+<button onclick="openSection('stamping')" data-i18n="open">
+Открыть раздел
+</button>
+</div>
+
+<!-- 3 -->
+<div class="card" data-name="welding">
+<span class="card-number">03</span>
+<div class="icon">🔥</div>
+<h3 data-i18n="welding">Сварка</h3>
+<p data-i18n="weldingText">
+MIG, MAG, TIG, MMA, оборудование, материалы и безопасность.
+</p>
+<button onclick="openSection('welding')" data-i18n="open">
+Открыть раздел
+</button>
+</div>
+
+<!-- 4 -->
+<div class="card" data-name="heat treatment">
+<span class="card-number">04</span>
+<div class="icon">🌡️</div>
+<h3 data-i18n="heat">Термообработка</h3>
+<p data-i18n="heatText">
+Закалка, отпуск, нормализация, печи и контроль температуры.
+</p>
+<button onclick="openSection('heat')" data-i18n="open">
+Открыть раздел
+</button>
+</div>
+
+<!-- 5 -->
+<div class="card" data-name="casting">
+<span class="card-number">05</span>
+<div class="icon">🏭</div>
+<h3 data-i18n="casting">Литьё</h3>
+<p data-i18n="castingText">
+Литьё стали, чугуна, алюминия и других промышленных материалов.
+</p>
+<button onclick="openSection('casting')" data-i18n="open">
+Открыть раздел
+</button>
+</div>
+
+<!-- 6 -->
+<div class="card" data-name="forging">
+<span class="card-number">06</span>
+<div class="icon">🔨</div>
+<h3 data-i18n="forging">Ковка</h3>
+<p data-i18n="forgingText">
+Горячая и холодная ковка, прессы, молоты и инструмент.
+</p>
+<button onclick="openSection('forging')" data-i18n="open">
+Открыть раздел
+</button>
+</div>
+
+<!-- 7 -->
+<div class="card" data-name="machining">
+<span class="card-number">07</span>
+<div class="icon">🛠️</div>
+<h3 data-i18n="machining">Механообработка</h3>
+<p data-i18n="machiningText">
+Точение, фрезерование, сверление, шлифование и обработка деталей.
+</p>
+<button onclick="openSection('machining')" data-i18n="open">
+Открыть раздел
+</button>
+</div>
+
+<!-- 8 -->
+<div class="card" data-name="hydraulics">
+<span class="card-number">08</span>
+<div class="icon">💧</div>
+<h3 data-i18n="hydraulics">Гидравлика</h3>
+<p data-i18n="hydraulicsText">
+Гидронасосы, клапаны, цилиндры, гидростанции и диагностика.
+</p>
+<button onclick="openSection('hydraulics')" data-i18n="open">
+Открыть раздел
+</button>
+</div>
+
+<!-- 9 -->
+<div class="card" data-name="pneumatics">
+<span class="card-number">09</span>
+<div class="icon">💨</div>
+<h3 data-i18n="pneumatics">Пневматика</h3>
+<p data-i18n="pneumaticsText">
+Компрессоры, пневмоцилиндры, клапаны и системы управления.
+</p>
+<button onclick="openSection('pneumatics')" data-i18n="open">
+Открыть раздел
+</button>
+</div>
+
+<!-- 10 -->
+<div class="card" data-name="automation">
+<span class="card-number">10</span>
+<div class="icon">🤖</div>
+<h3 data-i18n="automation">Автоматизация</h3>
+<p data-i18n="automationText">
+PLC, промышленные контроллеры, роботизация и автоматические линии.
+</p>
+<button onclick="openSection('automation')" data-i18n="open">
+Открыть раздел
+</button>
+</div>
+
+<!-- 11 -->
+<div class="card" data-name="electrical">
+<span class="card-number">11</span>
+<div class="icon">⚡</div>
+<h3 data-i18n="electrical">Электрика</h3>
+<p data-i18n="electricalText">
+Электродвигатели, шкафы управления, кабели и промышленная электрика.
+</p>
+<button onclick="openSection('electrical')" data-i18n="open">
+Открыть раздел
+</button>
+</div>
+
+<!-- 12 -->
+<div class="card" data-name="sensors">
+<span class="card-number">12</span>
+<div class="icon">📡</div>
+<h3 data-i18n="sensors">Датчики</h3>
+<p data-i18n="sensorsText">
+Датчики давления, температуры, положения, уровня и движения.
+</p>
+<button onclick="openSection('sensors')" data-i18n="open">
+Открыть раздел
+</button>
+</div>
+
+<!-- 13 -->
+<div class="card" data-name="pumps">
+<span class="card-number">13</span>
+<div class="icon">💦</div>
+<h3 data-i18n="pumps">Насосы</h3>
+<p data-i18n="pumpsText">
+Центробежные, поршневые, шестерёнчатые и другие промышленные насосы.
+</p>
+<button onclick="openSection('pumps')" data-i18n="open">
+Открыть раздел
+</button>
+</div>
+
+<!-- 14 -->
+<div class="card" data-name="compressors">
+<span class="card-number">14</span>
+<div class="icon">🔧</div>
+<h3 data-i18n="compressors">Компрессоры</h3>
+<p data-i18n="compressorsText">
+Винтовые, поршневые и промышленные компрессорные установки.
+</p>
+<button onclick="openSection('compressors')" data-i18n="open">
+Открыть раздел
+</button>
+</div>
+
+<!-- 15 -->
+<div class="card" data-name="furnaces">
+<span class="card-number">15</span>
+<div class="icon">🔥</div>
+<h3 data-i18n="furnaces">Промышленные печи</h3>
+<p data-i18n="furnacesText">
+Электрические, газовые и индукционные печи для производства.
+</p>
+<button onclick="openSection('furnaces')" data-i18n="open">
+Открыть раздел
+</button>
+</div>
+
+<!-- 16 -->
+<div class="card" data-name="galvanic">
+<span class="card-number">16</span>
+<div class="icon">🧪</div>
+<h3 data-i18n="galvanic">Гальваника</h3>
+<p data-i18n="galvanicText">
+Покрытия, цинкование, хромирование и защита металлических деталей.
+</p>
+<button onclick="openSection('galvanic')" data-i18n="open">
+Открыть раздел
+</button>
+</div>
+
+<!-- 17 -->
+<div class="card" data-name="painting">
+<span class="card-number">17</span>
+<div class="icon">🎨</div>
+<h3 data-i18n="painting">Покраска</h3>
+<p data-i18n="paintingText">
+Промышленная окраска, подготовка поверхности и защитные покрытия.
+</p>
+<button onclick="openSection('painting')" data-i18n="open">
+Открыть раздел
+</button>
+</div>
+
+<!-- 18 -->
+<div class="card" data-name="assembly">
+<span class="card-number">18</span>
+<div class="icon">🔧</div>
+<h3 data-i18n="assembly">Сборка</h3>
+<p data-i18n="assemblyText">
+Сборочные операции, инструменты, контроль и производственные линии.
+</p>
+<button onclick="openSection('assembly')" data-i18n="open">
+Открыть раздел
+</button>
+</div>
+
+<!-- 19 -->
+<div class="card" data-name="quality">
+<span class="card-number">19</span>
+<div class="icon">✅</div>
+<h3 data-i18n="quality">Контроль качества</h3>
+<p data-i18n="qualityText">
+Измерения, допуски, дефекты, стандарты и контроль готовой продукции.
+</p>
+<button onclick="openSection('quality')" data-i18n="open">
+Открыть раздел
+</button>
+</div>
+
+<!-- 20 -->
+<div class="card" data-name="measurement">
+<span class="card-number">20</span>
+<div class="icon">📏</div>
+<h3 data-i18n="measurement">Измерения</h3>
+<p data-i18n="measurementText">
+Штангенциркули, микрометры, индикаторы и измерительное оборудование.
+</p>
+<button onclick="openSection('measurement')" data-i18n="open">
+Открыть раздел
+</button>
+</div>
+
+<!-- 21 -->
+<div class="card" data-name="maintenance">
+<span class="card-number">21</span>
+<div class="icon">🔩</div>
+<h3 data-i18n="maintenance">Техническое обслуживание</h3>
+<p data-i18n="maintenanceText">
+Плановое обслуживание, диагностика, ремонт и поиск неисправностей.
+</p>
+<button onclick="openSection('maintenance')" data-i18n="open">
+Открыть раздел
+</button>
+</div>
+
+<!-- 22 -->
+<div class="card" data-name="safety">
+<span class="card-number">22</span>
+<div class="icon">🦺</div>
+<h3 data-i18n="safety">Промышленная безопасность</h3>
+<p data-i18n="safetyText">
+PPE, безопасная работа с оборудованием, пожарная безопасность и процедуры.
+</p>
+<button onclick="openSection('safety')" data-i18n="open">
+Открыть раздел
+</button>
+</div>
+
+<!-- 23 -->
+<div class="card" data-name="oil gas">
+<span class="card-number">23</span>
+<div class="icon">🛢️</div>
+<h3 data-i18n="oilgas">Нефть и газ</h3>
+<p data-i18n="oilgasText">
+Оборудование, насосы, трубопроводы, производство и обслуживание.
+</p>
+<button onclick="openSection('oilgas')" data-i18n="open">
+Открыть раздел
+</button>
+</div>
+
+<!-- 24 -->
+<div class="card" data-name="energy">
+<span class="card-number">24</span>
+<div class="icon">⚡</div>
+<h3 data-i18n="energy">Энергетика</h3>
+<p data-i18n="energyText">
+Энергетические установки, генераторы, электростанции и оборудование.
+</p>
+<button onclick="openSection('energy')" data-i18n="open">
+Открыть раздел
+</button>
+</div>
+
+<!-- 25 -->
+<div class="card" data-name="logistics">
+<span class="card-number">25</span>
+<div class="icon">🚛</div>
+<h3 data-i18n="logistics">Промышленная логистика</h3>
+<p data-i18n="logisticsText">
+Перевозка оборудования, складирование, доставка и международная логистика.
+</p>
+<button onclick="openSection('logistics')" data-i18n="open">
+Открыть раздел
+</button>
+</div>
+
+</div>
+
+<!-- INFO -->
+<section class="info">
+
+<h2 data-i18n="futureTitle">
+Будущее Production в WORKER PRO
+</h2>
+
+<p data-i18n="futureText">
+Каждое направление будет постепенно расширяться.
+Здесь появятся оборудование, технологии, материалы,
+запчасти, специалисты, компании, обучение,
+проблемы и решения, а также возможность найти
+поставщика и запросить цену.
+</p>
+
+</section>
 
 </main>
 
+<!-- FOOTER -->
+<footer class="footer">
 
-<footer>
+<strong>WORKER PRO</strong>
 
-    <strong>WORKER PRO</strong>
+<br><br>
 
-    <p>
-        Глобальная промышленная платформа
-    </p>
+<span data-i18n="footer">
+Работа. Знания. Производство.
+</span>
 
-    <p>
-        <a href="../index.html">Вернуться на главную</a>
-    </p>
+<br><br>
 
-    <p>© 2026 WORKER PRO • F.S</p>
+F.S © 2026
 
 </footer>
 
+<script>
 
-<script src="../language.js"></script>
+/* TRANSLATIONS */
+
+const translations = {
+
+RU:{
+title:"Производство",
+subtitle:"Промышленные технологии, оборудование, производство, обслуживание и профессиональные знания.",
+search:"Поиск по производственным направлениям...",
+mainTitle:"Промышленные направления",
+mainSubtitle:"Изучайте технологии, оборудование, материалы, проблемы, запчасти, обслуживание и обучение по каждому направлению.",
+directions:"направлений",
+technologies:"технологий",
+parts:"запчастей",
+access:"доступ к знаниям",
+open:"Открыть раздел",
+cnc:"CNC / ЧПУ",
+cncText:"Токарные и фрезерные станки, программы, инструменты и обслуживание.",
+stamping:"Штамповка",
+stampingText:"Прессы, штампы, листовой металл и технологии холодной и горячей штамповки.",
+welding:"Сварка",
+weldingText:"MIG, MAG, TIG, MMA, оборудование, материалы и безопасность.",
+heat:"Термообработка",
+heatText:"Закалка, отпуск, нормализация, печи и контроль температуры.",
+casting:"Литьё",
+castingText:"Литьё стали, чугуна, алюминия и других промышленных материалов.",
+forging:"Ковка",
+forgingText:"Горячая и холодная ковка, прессы, молоты и инструмент.",
+machining:"Механообработка",
+machiningText:"Точение, фрезерование, сверление, шлифование и обработка деталей.",
+hydraulics:"Гидравлика",
+hydraulicsText:"Гидронасосы, клапаны, цилиндры, гидростанции и диагностика.",
+pneumatics:"Пневматика",
+pneumaticsText:"Компрессоры, пневмоцилиндры, клапаны и системы управления.",
+automation:"Автоматизация",
+automationText:"PLC, промышленные контроллеры, роботизация и автоматические линии.",
+electrical:"Электрика",
+electricalText:"Электродвигатели, шкафы управления, кабели и промышленная электрика.",
+sensors:"Датчики",
+sensorsText:"Датчики давления, температуры, положения, уровня и движения.",
+pumps:"Насосы",
+pumpsText:"Центробежные, поршневые, шестерёнчатые и другие промышленные насосы.",
+compressors:"Компрессоры",
+compressorsText:"Винтовые, поршневые и промышленные компрессорные установки.",
+furnaces:"Промышленные печи",
+furnacesText:"Электрические, газовые и индукционные печи для производства.",
+galvanic:"Гальваника",
+galvanicText:"Покрытия, цинкование, хромирование и защита металлических деталей.",
+painting:"Покраска",
+paintingText:"Промышленная окраска, подготовка поверхности и защитные покрытия.",
+assembly:"Сборка",
+assemblyText:"Сборочные операции, инструменты, контроль и производственные линии.",
+quality:"Контроль качества",
+qualityText:"Измерения, допуски, дефекты, стандарты и контроль готовой продукции.",
+measurement:"Измерения",
+measurementText:"Штангенциркули, микрометры, индикаторы и измерительное оборудование.",
+maintenance:"Техническое обслуживание",
+maintenanceText:"Плановое обслуживание, диагностика, ремонт и поиск неисправностей.",
+safety:"Промышленная безопасность",
+safetyText:"PPE, безопасная работа с оборудованием, пожарная безопасность и процедуры.",
+oilgas:"Нефть и газ",
+oilgasText:"Оборудование, насосы, трубопроводы, производство и обслуживание.",
+energy:"Энергетика",
+energyText:"Энергетические установки, генераторы, электростанции и оборудование.",
+logistics:"Промышленная логистика",
+logisticsText:"Перевозка оборудования, складирование, доставка и международная логистика.",
+futureTitle:"Будущее Production в WORKER PRO",
+futureText:"Каждое направление будет постепенно расширяться. Здесь появятся оборудование, технологии, материалы, запчасти, специалисты, компании, обучение, проблемы и решения, а также возможность найти поставщика и запросить цену.",
+footer:"Работа. Знания. Производство."
+},
+
+EN:{
+title:"Production",
+subtitle:"Industrial technologies, equipment, manufacturing, maintenance and professional knowledge.",
+search:"Search production areas...",
+mainTitle:"Industrial Areas",
+mainSubtitle:"Explore technologies, equipment, materials, spare parts, maintenance and training.",
+directions:"areas",
+technologies:"technologies",
+parts:"spare parts",
+access:"knowledge access",
+open:"Open section",
+cnc:"CNC",
+cncText:"CNC turning and milling machines, programs, tools and maintenance.",
+stamping:"Stamping",
+stampingText:"Presses, dies, sheet metal and hot and cold stamping.",
+welding:"Welding",
+weldingText:"MIG, MAG, TIG, MMA, equipment, materials and safety.",
+heat:"Heat Treatment",
+heatText:"Hardening, tempering, normalizing, furnaces and temperature control.",
+casting:"Casting",
+castingText:"Steel, cast iron, aluminum and industrial casting.",
+forging:"Forging",
+forgingText:"Hot and cold forging, presses, hammers and tools.",
+machining:"Machining",
+machiningText:"Turning, milling, drilling, grinding and parts machining.",
+hydraulics:"Hydraulics",
+hydraulicsText:"Hydraulic pumps, valves, cylinders, power units and diagnostics.",
+pneumatics:"Pneumatics",
+pneumaticsText:"Compressors, pneumatic cylinders, valves and control systems.",
+automation:"Automation",
+automationText:"PLC, industrial controllers, robotics and automated lines.",
+electrical:"Electrical",
+electricalText:"Electric motors, control cabinets, cables and industrial electrical systems.",
+sensors:"Sensors",
+sensorsText:"Pressure, temperature, position, level and motion sensors.",
+pumps:"Pumps",
+pumpsText:"Centrifugal, piston, gear and other industrial pumps.",
+compressors:"Compressors",
+compressorsText:"Screw, piston and industrial compressor systems.",
+furnaces:"Industrial Furnaces",
+furnacesText:"Electric, gas and induction furnaces for production.",
+galvanic:"Galvanic",
+galvanicText:"Coatings, zinc plating, chrome plating and metal protection.",
+painting:"Painting",
+paintingText:"Industrial painting, surface preparation and protective coatings.",
+assembly:"Assembly",
+assemblyText:"Assembly operations, tools, inspection and production lines.",
+quality:"Quality Control",
+qualityText:"Measurements, tolerances, defects, standards and final inspection.",
+measurement:"Measurement",
+measurementText:"Calipers, micrometers, indicators and measuring equipment.",
+maintenance:"Maintenance",
+maintenanceText:"Preventive maintenance, diagnostics, repair and troubleshooting.",
+safety:"Industrial Safety",
+safetyText:"PPE, safe equipment operation, fire safety and procedures.",
+oilgas:"Oil & Gas",
+oilgasText:"Equipment, pumps, pipelines, production and maintenance.",
+energy:"Energy",
+energyText:"Power systems, generators, power plants and equipment.",
+logistics:"Industrial Logistics",
+logisticsText:"Equipment transport, warehousing, delivery and international logistics.",
+futureTitle:"The Future of Production in WORKER PRO",
+futureText:"Every area will continue to grow with equipment, technologies, materials, spare parts, specialists, companies, training, problems and solutions, and supplier price requests.",
+footer:"Work. Knowledge. Production."
+},
+
+AZ:{
+title:"İstehsalat",
+subtitle:"Sənaye texnologiyaları, avadanlıqlar, istehsalat, texniki xidmət və peşəkar biliklər.",
+search:"İstehsalat sahələrində axtarış...",
+mainTitle:"Sənaye istiqamətləri",
+mainSubtitle:"Texnologiyaları, avadanlıqları, materialları, ehtiyat hissələrini və təlimləri öyrənin.",
+directions:"istiqamət",
+technologies:"texnologiya",
+parts:"ehtiyat hissəsi",
+access:"biliklərə çıxış",
+open:"Bölməni aç",
+cnc:"CNC / ÇPU",
+cncText:"CNC torna və frez dəzgahları, proqramlar, alətlər və texniki xidmət.",
+stamping:"Ştamplama",
+stampingText:"Preslər, ştamplar, təbəqə metal və isti-soyuq ştamplama.",
+welding:"Qaynaq",
+weldingText:"MIG, MAG, TIG, MMA, avadanlıq, materiallar və təhlükəsizlik.",
+heat:"Termiki emal",
+heatText:"Bərkitmə, buraxma, normallaşdırma, sobalar və temperatur nəzarəti.",
+casting:"Tökmə",
+castingText:"Polad, çuqun, alüminium və digər materialların tökülməsi.",
+forging:"Döymə",
+forgingText:"İsti və soyuq döymə, preslər, çəkiclər və alətlər.",
+machining:"Mexaniki emal",
+machiningText:"Yonma, frezləmə, qazma, cilalama və detalların emalı.",
+hydraulics:"Hidravlika",
+hydraulicsText:"Hidravlik nasoslar, klapanlar, silindrlər və diaqnostika.",
+pneumatics:"Pnevmatika",
+pneumaticsText:"Kompressorlar, pnevmosilindrlər, klapanlar və idarəetmə sistemləri.",
+automation:"Avtomatlaşdırma",
+automationText:"PLC, sənaye kontrollerləri, robotlaşdırma və avtomatik xətlər.",
+electrical:"Elektrik",
+electricalText:"Elektrik mühərrikləri, idarəetmə panelləri, kabellər və sənaye elektrik sistemləri.",
+sensors:"Sensorlar",
+sensorsText:"Təzyiq, temperatur, mövqe, səviyyə və hərəkət sensorları.",
+pumps:"Nasoslar",
+pumpsText:"Mərkəzdənqaçma, porşenli, dişli və digər sənaye nasosları.",
+compressors:"Kompressorlar",
+compressorsText:"Vintli, porşenli və sənaye kompressor sistemləri.",
+furnaces:"Sənaye sobaları",
+furnacesText:"Elektrik, qaz və induksiya sobaları.",
+galvanic:"Qalvanika",
+galvanicText:"Örtüklər, sinkləmə, xromlama və metal qorunması.",
+painting:"Boyama",
+paintingText:"Sənaye boyaması, səthin hazırlanması və qoruyucu örtüklər.",
+assembly:"Yığım",
+assemblyText:"Yığım əməliyyatları, alətlər, yoxlama və istehsal xətləri.",
+quality:"Keyfiyyətə nəzarət",
+qualityText:"Ölçmələr, toleranslar, qüsurlar və standartlar.",
+measurement:"Ölçmə",
+measurementText:"Ştangen, mikrometr, indikatorlar və ölçmə avadanlıqları.",
+maintenance:"Texniki xidmət",
+maintenanceText:"Planlı xidmət, diaqnostika, təmir və nasazlıqların axtarışı.",
+safety:"Sənaye təhlükəsizliyi",
+safetyText:"Fərdi qoruyucu vasitələr, təhlükəsiz iş və yanğın təhlükəsizliyi.",
+oilgas:"Neft və qaz",
+oilgasText:"Avadanlıqlar, nasoslar, boru kəmərləri, istehsalat və xidmət.",
+energy:"Energetika",
+energyText:"Generatorlar, elektrik stansiyaları və enerji avadanlıqları.",
+logistics:"Sənaye logistikası",
+logisticsText:"Avadanlıqların daşınması, anbar, çatdırılma və beynəlxalq logistika.",
+futureTitle:"WORKER PRO-da Production gələcəyi",
+futureText:"Hər istiqamət avadanlıq, texnologiyalar, materiallar, ehtiyat hissələri, mütəxəssislər, şirkətlər, təlim və həllərlə genişləndiriləcək.",
+footer:"İş. Bilik. İstehsalat."
+},
+
+TR:{
+title:"Üretim",
+subtitle:"Endüstriyel teknolojiler, ekipman, üretim, bakım ve mesleki bilgiler.",
+search:"Üretim alanlarında ara...",
+mainTitle:"Endüstriyel Alanlar",
+mainSubtitle:"Teknolojileri, ekipmanları, malzemeleri, yedek parçaları ve eğitimleri keşfedin.",
+directions:"alan",
+technologies:"teknoloji",
+parts:"yedek parça",
+access:"bilgi erişimi",
+open:"Bölümü aç",
+cnc:"CNC",
+cncText:"CNC torna ve freze tezgahları, programlar, takımlar ve bakım.",
+stamping:"Presleme",
+stampingText:"Presler, kalıplar, sac metal ve sıcak-soğuk presleme.",
+welding:"Kaynak",
+weldingText:"MIG, MAG, TIG, MMA, ekipman, malzeme ve güvenlik.",
+heat:"Isıl İşlem",
+heatText:"Sertleştirme, temperleme, normalizasyon ve fırınlar.",
+casting:"Döküm",
+castingText:"Çelik, dökme demir, alüminyum ve endüstriyel döküm.",
+forging:"Dövme",
+forgingText:"Sıcak ve soğuk dövme, presler, çekiçler ve takımlar.",
+machining:"Talaşlı İmalat",
+machiningText:"Torna, freze, delme, taşlama ve parça işleme.",
+hydraulics:"Hidrolik",
+hydraulicsText:"Hidrolik pompalar, valfler, silindirler ve teşhis.",
+pneumatics:"Pnömatik",
+pneumaticsText:"Kompresörler, pnömatik silindirler ve valfler.",
+automation:"Otomasyon",
+automationText:"PLC, endüstriyel kontrolörler, robotik ve otomatik hatlar.",
+electrical:"Elektrik",
+electricalText:"Elektrik motorları, kontrol panoları, kablolar ve sistemler.",
+sensors:"Sensörler",
+sensorsText:"Basınç, sıcaklık, konum, seviye ve hareket sensörleri.",
+pumps:"Pompalar",
+pumpsText:"Santrifüj, pistonlu, dişli ve diğer endüstriyel pompalar.",
+compressors:"Kompresörler",
+compressorsText:"Vidalı, pistonlu ve endüstriyel kompresör sistemleri.",
+furnaces:"Endüstriyel Fırınlar",
+furnacesText:"Elektrikli, gazlı ve indüksiyon fırınları.",
+galvanic:"Galvaniz",
+galvanicText:"Kaplama, çinko, krom ve metal koruma.",
+painting:"Boyama",
+paintingText:"Endüstriyel boyama, yüzey hazırlama ve koruyucu kaplamalar.",
+assembly:"Montaj",
+assemblyText:"Montaj işlemleri, takımlar, kontrol ve üretim hatları.",
+quality:"Kalite Kontrol",
+qualityText:"Ölçüm, tolerans, kusur, standart ve son kontrol.",
+measurement:"Ölçüm",
+measurementText:"Kumpas, mikrometre, komparatör ve ölçüm ekipmanları.",
+maintenance:"Bakım",
+maintenanceText:"Planlı bakım, teşhis, onarım ve arıza bulma.",
+safety:"İş Güvenliği",
+safetyText:"KKD, güvenli ekipman kullanımı ve yangın güvenliği.",
+oilgas:"Petrol ve Gaz",
+oilgasText:"Ekipman, pompalar, boru hatları, üretim ve bakım.",
+energy:"Enerji",
+energyText:"Jeneratörler, enerji santralleri ve enerji ekipmanları.",
+logistics:"Endüstriyel Lojistik",
+logisticsText:"Ekipman taşımacılığı, depolama, teslimat ve uluslararası lojistik.",
+futureTitle:"WORKER PRO'da Üretimin Geleceği",
+futureText:"Her alan ekipman, teknoloji, malzeme, yedek parça, uzman, şirket, eğitim ve çözümlerle genişletilecektir.",
+footer:"İş. Bilgi. Üretim."
+},
+
+DE:{
+title:"Produktion",
+subtitle:"Industrietechnologien, Anlagen, Produktion, Wartung und Fachwissen.",
+search:"Produktionsbereiche suchen...",
+mainTitle:"Industrielle Bereiche",
+mainSubtitle:"Technologien, Anlagen, Materialien, Ersatzteile, Wartung und Schulungen entdecken.",
+directions:"Bereiche",
+technologies:"Technologien",
+parts:"Ersatzteile",
+access:"Wissenszugang",
+open:"Bereich öffnen",
+cnc:"CNC",
+cncText:"CNC-Dreh- und Fräsmaschinen, Programme, Werkzeuge und Wartung.",
+stamping:"Stanzen",
+stampingText:"Pressen, Werkzeuge, Blech und Kalt- und Warmumformung.",
+welding:"Schweißen",
+weldingText:"MIG, MAG, TIG, MMA, Ausrüstung, Materialien und Sicherheit.",
+heat:"Wärmebehandlung",
+heatText:"Härten, Anlassen, Normalisieren, Öfen und Temperaturkontrolle.",
+casting:"Gießen",
+castingText:"Stahl-, Guss-, Aluminium- und Industrieguss.",
+forging:"Schmieden",
+forgingText:"Warm- und Kaltschmieden, Pressen, Hämmer und Werkzeuge.",
+machining:"Zerspanung",
+machiningText:"Drehen, Fräsen, Bohren, Schleifen und Teilebearbeitung.",
+hydraulics:"Hydraulik",
+hydraulicsText:"Hydraulikpumpen, Ventile, Zylinder und Diagnose.",
+pneumatics:"Pneumatik",
+pneumaticsText:"Kompressoren, Pneumatikzylinder, Ventile und Steuerungen.",
+automation:"Automatisierung",
+automationText:"SPS, industrielle Steuerungen, Robotik und automatische Linien.",
+electrical:"Elektrotechnik",
+electricalText:"Motoren, Schaltschränke, Kabel und industrielle Elektrosysteme.",
+sensors:"Sensoren",
+sensorsText:"Druck-, Temperatur-, Positions-, Niveau- und Bewegungssensoren.",
+pumps:"Pumpen",
+pumpsText:"Kreisel-, Kolben-, Zahnrad- und andere Industriepumpen.",
+compressors:"Kompressoren",
+compressorsText:"Schrauben-, Kolben- und industrielle Kompressorsysteme.",
+furnaces:"Industrieöfen",
+furnacesText:"Elektro-, Gas- und Induktionsöfen.",
+galvanic:"Galvanik",
+galvanicText:"Beschichtungen, Verzinken, Verchromen und Metallschutz.",
+painting:"Lackierung",
+paintingText:"Industrielackierung, Oberflächenvorbereitung und Schutzbeschichtungen.",
+assembly:"Montage",
+assemblyText:"Montagearbeiten, Werkzeuge, Prüfung und Produktionslinien.",
+quality:"Qualitätskontrolle",
+qualityText:"Messungen, Toleranzen, Fehler, Normen und Endkontrolle.",
+measurement:"Messtechnik",
+measurementText:"Messschieber, Mikrometer, Messuhren und Messgeräte.",
+maintenance:"Wartung",
+maintenanceText:"Wartung, Diagnose, Reparatur und Fehlersuche.",
+safety:"Arbeitssicherheit",
+safetyText:"PSA, sicherer Anlagenbetrieb und Brandschutz.",
+oilgas:"Öl und Gas",
+oilgasText:"Anlagen, Pumpen, Rohrleitungen, Produktion und Wartung.",
+energy:"Energie",
+energyText:"Generatoren, Kraftwerke und Energieanlagen.",
+logistics:"Industrielogistik",
+logisticsText:"Transport, Lagerung, Lieferung und internationale Logistik.",
+futureTitle:"Die Zukunft von Production bei WORKER PRO",
+futureText:"Jeder Bereich wird mit Anlagen, Technologien, Materialien, Ersatzteilen, Spezialisten, Unternehmen, Schulungen und Lösungen erweitert.",
+footer:"Arbeit. Wissen. Produktion."
+},
+
+ES:{
+title:"Producción",
+subtitle:"Tecnologías industriales, equipos, fabricación, mantenimiento y conocimientos profesionales.",
+search:"Buscar áreas de producción...",
+mainTitle:"Áreas industriales",
+mainSubtitle:"Explore tecnologías, equipos, materiales, repuestos, mantenimiento y formación.",
+directions:"áreas",
+technologies:"tecnologías",
+parts:"repuestos",
+access:"acceso al conocimiento",
+open:"Abrir sección",
+cnc:"CNC",
+cncText:"Tornos y fresadoras CNC, programas, herramientas y mantenimiento.",
+stamping:"Estampación",
+stampingText:"Prensas, matrices, chapa y estampación en frío y caliente.",
+welding:"Soldadura",
+weldingText:"MIG, MAG, TIG, MMA, equipos, materiales y seguridad.",
+heat:"Tratamiento térmico",
+heatText:"Temple, revenido, normalizado, hornos y control de temperatura.",
+casting:"Fundición",
+castingText:"Fundición de acero, hierro, aluminio y otros materiales.",
+forging:"Forja",
+forgingText:"Forja en caliente y en frío, prensas, martillos y herramientas.",
+machining:"Mecanizado",
+machiningText:"Torneado, fresado, taladrado, rectificado y mecanizado.",
+hydraulics:"Hidráulica",
+hydraulicsText:"Bombas hidráulicas, válvulas, cilindros y diagnóstico.",
+pneumatics:"Neumática",
+pneumaticsText:"Compresores, cilindros neumáticos, válvulas y control.",
+automation:"Automatización",
+automationText:"PLC, controladores industriales, robótica y líneas automáticas.",
+electrical:"Electricidad",
+electricalText:"Motores eléctricos, cuadros de control, cables y sistemas eléctricos.",
+sensors:"Sensores",
+sensorsText:"Sensores de presión, temperatura, posición, nivel y movimiento.",
+pumps:"Bombas",
+pumpsText:"Bombas centrífugas, de pistón, engranajes y otras bombas industriales.",
+compressors:"Compresores",
+compressorsText:"Compresores de tornillo, pistón y sistemas industriales.",
+furnaces:"Hornos industriales",
+furnacesText:"Hornos eléctricos, de gas y de inducción.",
+galvanic:"Galvánica",
+galvanicText:"Recubrimientos, zincado, cromado y protección de metales.",
+painting:"Pintura",
+paintingText:"Pintura industrial, preparación de superficies y recubrimientos.",
+assembly:"Montaje",
+assemblyText:"Operaciones de montaje, herramientas, inspección y líneas de producción.",
+quality:"Control de calidad",
+qualityText:"Mediciones, tolerancias, defectos, normas e inspección final.",
+measurement:"Medición",
+measurementText:"Calibres, micrómetros, indicadores y equipos de medición.",
+maintenance:"Mantenimiento",
+maintenanceText:"Mantenimiento preventivo, diagnóstico, reparación y solución de fallos.",
+safety:"Seguridad industrial",
+safetyText:"EPI, operación segura de equipos y seguridad contra incendios.",
+oilgas:"Petróleo y gas",
+oilgasText:"Equipos, bombas, tuberías, producción y mantenimiento.",
+energy:"Energía",
+energyText:"Generadores, centrales eléctricas y equipos energéticos.",
+logistics:"Logística industrial",
+logisticsText:"Transporte, almacenamiento, entrega y logística internacional.",
+futureTitle:"El futuro de Production en WORKER PRO",
+futureText:"Cada área se ampliará con equipos, tecnologías, materiales, repuestos, especialistas, empresas, formación y soluciones.",
+footer:"Trabajo. Conocimiento. Producción."
+},
+
+FR:{
+title:"Production",
+subtitle:"Technologies industrielles, équipements, fabrication, maintenance et connaissances professionnelles.",
+search:"Rechercher des domaines de production...",
+mainTitle:"Domaines industriels",
+mainSubtitle:"Découvrez les technologies, équipements, matériaux, pièces détachées, maintenance et formations.",
+directions:"domaines",
+technologies:"technologies",
+parts:"pièces détachées",
+access:"accès aux connaissances",
+open:"Ouvrir",
+cnc:"CNC",
+cncText:"Tours et fraiseuses CNC, programmes, outils et maintenance.",
+stamping:"Emboutissage",
+stampingText:"Presses, matrices, tôles et emboutissage à froid et à chaud.",
+welding:"Soudage",
+weldingText:"MIG, MAG, TIG, MMA, équipements, matériaux et sécurité.",
+heat:"Traitement thermique",
+heatText:"Trempe, revenu, normalisation, fours et contrôle de température.",
+casting:"Fonderie",
+castingText:"Fonderie d'acier, fonte, aluminium et autres matériaux.",
+forging:"Forgeage",
+forgingText:"Forgeage à chaud et à froid, presses, marteaux et outils.",
+machining:"Usinage",
+machiningText:"Tournage, fraisage, perçage, rectification et usinage.",
+hydraulics:"Hydraulique",
+hydraulicsText:"Pompes hydrauliques, vannes, vérins et diagnostic.",
+pneumatics:"Pneumatique",
+pneumaticsText:"Compresseurs, vérins pneumatiques, vannes et commande.",
+automation:"Automatisation",
+automationText:"PLC, contrôleurs industriels, robotique et lignes automatisées.",
+electrical:"Électricité",
+electricalText:"Moteurs électriques, armoires, câbles et systèmes électriques.",
+sensors:"Capteurs",
+sensorsText:"Capteurs de pression, température, position, niveau et mouvement.",
+pumps:"Pompes",
+pumpsText:"Pompes centrifuges, à piston, à engrenages et industrielles.",
+compressors:"Compresseurs",
+compressorsText:"Compresseurs à vis, à piston et systèmes industriels.",
+furnaces:"Fours industriels",
+furnacesText:"Fours électriques, à gaz et à induction.",
+galvanic:"Galvanique",
+galvanicText:"Revêtements, zingage, chromage et protection des métaux.",
+painting:"Peinture",
+paintingText:"Peinture industrielle, préparation des surfaces et revêtements.",
+assembly:"Assemblage",
+assemblyText:"Opérations d'assemblage, outils, contrôle et lignes de production.",
+quality:"Contrôle qualité",
+qualityText:"Mesures, tolérances, défauts, normes et contrôle final.",
+measurement:"Mesure",
+measurementText:"Pieds à coulisse, micromètres, comparateurs et équipements de mesure.",
+maintenance:"Maintenance",
+maintenanceText:"Maintenance préventive, diagnostic, réparation et dépannage.",
+safety:"Sécurité industrielle",
+safetyText:"EPI, utilisation sûre des équipements et sécurité incendie.",
+oilgas:"Pétrole et gaz",
+oilgasText:"Équipements, pompes, pipelines, production et maintenance.",
+energy:"Énergie",
+energyText:"Générateurs, centrales électriques et équipements énergétiques.",
+logistics:"Logistique industrielle",
+logisticsText:"Transport, stockage, livraison et logistique internationale.",
+futureTitle:"L'avenir de Production dans WORKER PRO",
+futureText:"Chaque domaine sera développé avec des équipements, technologies, matériaux, pièces détachées, spécialistes, entreprises, formations et solutions.",
+footer:"Travail. Connaissance. Production."
+},
+
+IT:{
+title:"Produzione",
+subtitle:"Tecnologie industriali, attrezzature, produzione, manutenzione e conoscenze professionali.",
+search:"Cerca aree di produzione...",
+mainTitle:"Aree industriali",
+mainSubtitle:"Scopri tecnologie, attrezzature, materiali, ricambi, manutenzione e formazione.",
+directions:"aree",
+technologies:"tecnologie",
+parts:"ricambi",
+access:"accesso alla conoscenza",
+open:"Apri sezione",
+cnc:"CNC",
+cncText:"Torni e fresatrici CNC, programmi, utensili e manutenzione.",
+stamping:"Stampaggio",
+stampingText:"Presse, stampi, lamiera e stampaggio a caldo e a freddo.",
+welding:"Saldatura",
+weldingText:"MIG, MAG, TIG, MMA, attrezzature, materiali e sicurezza.",
+heat:"Trattamento termico",
+heatText:"Tempra, rinvenimento, normalizzazione, forni e controllo della temperatura.",
+casting:"Fonderia",
+castingText:"Fusione di acciaio, ghisa, alluminio e altri materiali.",
+forging:"Forgiatura",
+forgingText:"Forgiatura a caldo e a freddo, presse, martelli e utensili.",
+machining:"Lavorazioni meccaniche",
+machiningText:"Tornitura, fresatura, foratura, rettifica e lavorazione dei pezzi.",
+hydraulics:"Idraulica",
+hydraulicsText:"Pompe idrauliche, valvole, cilindri e diagnostica.",
+pneumatics:"Pneumatica",
+pneumaticsText:"Compressori, cilindri pneumatici, valvole e sistemi di controllo.",
+automation:"Automazione",
+automationText:"PLC, controllori industriali, robotica e linee automatiche.",
+electrical:"Elettrico",
+electricalText:"Motori elettrici, quadri di controllo, cavi e sistemi industriali.",
+sensors:"Sensori",
+sensorsText:"Sensori di pressione, temperatura, posizione, livello e movimento.",
+pumps:"Pompe",
+pumpsText:"Pompe centrifughe, a pistone, a ingranaggi e altre pompe industriali.",
+compressors:"Compressori",
+compressorsText:"Compressori a vite, a pistone e sistemi industriali.",
+furnaces:"Forni industriali",
+furnacesText:"Forni elettrici, a gas e a induzione.",
+galvanic:"Galvanica",
+galvanicText:"Rivestimenti, zincatura, cromatura e protezione dei metalli.",
+painting:"Verniciatura",
+paintingText:"Verniciatura industriale, preparazione delle superfici e rivestimenti.",
+assembly:"Assemblaggio",
+assemblyText:"Operazioni di assemblaggio, utensili, controllo e linee di produzione.",
+quality:"Controllo qualità",
+qualityText:"Misure, tolleranze, difetti, standard e controllo finale.",
+measurement:"Misurazione",
+measurementText:"Calibri, micrometri, comparatori e strumenti di misura.",
+maintenance:"Manutenzione",
+maintenanceText:"Manutenzione preventiva, diagnosi, riparazione e ricerca guasti.",
+safety:"Sicurezza industriale",
+safetyText:"DPI, uso sicuro delle attrezzature e sicurezza antincendio.",
+oilgas:"Petrolio e gas",
+oilgasText:"Attrezzature, pompe, tubazioni, produzione e manutenzione.",
+energy:"Energia",
+energyText:"Generatori, centrali elettriche e apparecchiature energetiche.",
+logistics:"Logistica industriale",
+logisticsText:"Trasporto, stoccaggio, consegna e logistica internazionale.",
+futureTitle:"Il futuro di Production in WORKER PRO",
+futureText:"Ogni area sarà ampliata con attrezzature, tecnologie, materiali, ricambi, specialisti, aziende, formazione e soluzioni.",
+footer:"Lavoro. Conoscenza. Produzione."
+},
+
+AR:{
+title:"الإنتاج",
+subtitle:"التقنيات الصناعية والمعدات والإنتاج والصيانة والمعرفة المهنية.",
+search:"البحث في مجالات الإنتاج...",
+mainTitle:"المجالات الصناعية",
+mainSubtitle:"اكتشف التقنيات والمعدات والمواد وقطع الغيار والصيانة والتدريب.",
+directions:"مجالات",
+technologies:"تقنيات",
+parts:"قطع غيار",
+access:"الوصول إلى المعرفة",
+open:"فتح القسم",
+cnc:"CNC",
+cncText:"مخارط وطواحين CNC والبرامج والأدوات والصيانة.",
+stamping:"الختم",
+stampingText:"المكابس والقوالب والصفائح المعدنية والختم البارد والساخن.",
+welding:"اللحام",
+weldingText:"MIG وMAG وTIG وMMA والمعدات والمواد والسلامة.",
+heat:"المعالجة الحرارية",
+heatText:"التقسية والمراجعة والتطبيع والأفران والتحكم في الحرارة.",
+casting:"الصب",
+castingText:"صب الفولاذ والحديد والألومنيوم والمواد الصناعية الأخرى.",
+forging:"التشكيل",
+forgingText:"التشكيل الساخن والبارد والمكابس والمطارق والأدوات.",
+machining:"التشغيل الآلي",
+machiningText:"الخراطة والتفريز والحفر والطحن وتشغيل القطع.",
+hydraulics:"الهيدروليك",
+hydraulicsText:"المضخات الهيدروليكية والصمامات والأسطوانات والتشخيص.",
+pneumatics:"النيوماتيك",
+pneumaticsText:"الضواغط والأسطوانات الهوائية والصمامات وأنظمة التحكم.",
+automation:"الأتمتة",
+automationText:"PLC ووحدات التحكم الصناعية والروبوتات وخطوط الإنتاج الآلية.",
+electrical:"الكهرباء",
+electricalText:"المحركات الكهربائية وخزائن التحكم والكابلات والأنظمة الصناعية.",
+sensors:"أجهزة الاستشعار",
+sensorsText:"حساسات الضغط والحرارة والموقع والمستوى والحركة.",
+pumps:"المضخات",
+pumpsText:"المضخات الطاردة المركزية والمكبسية والتروسية والصناعية.",
+compressors:"الضواغط",
+compressorsText:"الضواغط اللولبية والمكبسية والأنظمة الصناعية.",
+furnaces:"الأفران الصناعية",
+furnacesText:"الأفران الكهربائية والغازية وأفران الحث.",
+galvanic:"الطلاء المعدني",
+galvanicText:"الطلاءات والجلفنة والكروم وحماية المعادن.",
+painting:"الدهان",
+paintingText:"الدهان الصناعي وتجهيز الأسطح والطلاءات الواقية.",
+assembly:"التجميع",
+assemblyText:"عمليات التجميع والأدوات والفحص وخطوط الإنتاج.",
+quality:"مراقبة الجودة",
+qualityText:"القياسات والتفاوتات والعيوب والمعايير والفحص النهائي.",
+measurement:"القياس",
+measurementText:"الفرجار والميكرومتر والمؤشرات وأجهزة القياس.",
+maintenance:"الصيانة",
+maintenanceText:"الصيانة الوقائية والتشخيص والإصلاح واكتشاف الأعطال.",
+safety:"السلامة الصناعية",
+safetyText:"معدات الوقاية الشخصية والتشغيل الآمن والسلامة من الحرائق.",
+oilgas:"النفط والغاز",
+oilgasText:"المعدات والمضخات وخطوط الأنابيب والإنتاج والصيانة.",
+energy:"الطاقة",
+energyText:"المولدات ومحطات الطاقة ومعدات الطاقة.",
+logistics:"الخدمات اللوجستية الصناعية",
+logisticsText:"نقل المعدات والتخزين والتسليم والخدمات اللوجستية الدولية.",
+futureTitle:"مستقبل الإنتاج في WORKER PRO",
+futureText:"سيتم توسيع كل مجال بالمعدات والتقنيات والمواد وقطع الغيار والمتخصصين والشركات والتدريب والحلول.",
+footer:"العمل. المعرفة. الإنتاج."
+}
+
+};
+
+/* LANGUAGE */
+
+function changeLanguage(lang){
+
+    const data=translations[lang];
+
+    if(!data) return;
+
+    document.querySelectorAll("[data-i18n]").forEach(el=>{
+        const key=el.dataset.i18n;
+
+        if(data[key]!==undefined){
+            el.textContent=data[key];
+        }
+    });
+
+    document.querySelectorAll("[data-placeholder]").forEach(el=>{
+        const key=el.dataset.placeholder;
+
+        if(data[key]!==undefined){
+            el.placeholder=data[key];
+        }
+    });
+
+    document.querySelectorAll(".top-languages button").forEach(btn=>{
+        btn.classList.remove("active");
+
+        if(btn.textContent.trim()===lang){
+            btn.classList.add("active");
+        }
+    });
+
+    document.documentElement.lang=lang.toLowerCase();
+
+    if(lang==="AR"){
+        document.body.classList.add("rtl");
+        document.body.dir="rtl";
+    }else{
+        document.body.classList.remove("rtl");
+        document.body.dir="ltr";
+    }
+
+    localStorage.setItem("workerProLanguage",lang);
+}
+
+/* SEARCH */
+
+function filterCards(){
+
+    const value=
+        document.getElementById("searchInput")
+        .value
+        .toLowerCase()
+        .trim();
+
+    document.querySelectorAll(".card").forEach(card=>{
+
+        const text=card.innerText.toLowerCase();
+        const name=card.dataset.name.toLowerCase();
+
+        if(text.includes(value) || name.includes(value)){
+            card.style.display="";
+        }else{
+            card.style.display="none";
+        }
+
+    });
+}
+
+/* SECTION LINKS */
+
+function openSection(section){
+
+    /*
+      Пока отдельные страницы направлений
+      не созданы, показываем сообщение.
+      Позже каждый раздел получит свою
+      полноценную страницу.
+    */
+
+    const lang=
+        localStorage.getItem("workerProLanguage") || "RU";
+
+    const messages={
+        RU:"Раздел «"+section+"» будет расширен отдельной страницей WORKER PRO.",
+        EN:"The "+section+" section will be expanded into a separate WORKER PRO page.",
+        AZ:"«"+section+"» bölməsi ayrıca WORKER PRO səhifəsi kimi genişləndiriləcək.",
+        TR:section+" bölümü ayrı bir WORKER PRO sayfası olarak genişletilecek.",
+        DE:"Der Bereich "+section+" wird als eigene WORKER PRO-Seite erweitert.",
+        ES:"La sección "+section+" se ampliará como una página independiente de WORKER PRO.",
+        FR:"La section "+section+" sera développée dans une page WORKER PRO séparée.",
+        IT:"La sezione "+section+" sarà sviluppata in una pagina WORKER PRO separata.",
+        AR:"سيتم توسيع قسم "+section+" في صفحة مستقلة داخل WORKER PRO."
+    };
+
+    alert(messages[lang] || messages.RU);
+}
+
+/* START */
+
+document.addEventListener("DOMContentLoaded",()=>{
+
+    const savedLanguage=
+        localStorage.getItem("workerProLanguage") || "RU";
+
+    changeLanguage(savedLanguage);
+
+});
+
+</script>
 
 </body>
 </html>
