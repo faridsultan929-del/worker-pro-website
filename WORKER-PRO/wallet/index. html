@@ -1,0 +1,1326 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WORKER PRO — Wallet</title>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f4f7f5;
+    color:#123;
+}
+
+.top-languages{
+    background:#063d25;
+    padding:10px;
+    text-align:center;
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+.top-languages a{
+    display:inline-block;
+    color:white;
+    text-decoration:none;
+    padding:8px 11px;
+    margin:3px;
+    border-radius:7px;
+    background:#0b6b3d;
+    font-weight:bold;
+    font-size:14px;
+}
+
+.top-languages a:hover{
+    background:#b7ff35;
+    color:#063d25;
+}
+
+header{
+    background:#075b34;
+    color:white;
+    text-align:center;
+    padding:30px 15px;
+}
+
+header h1{
+    margin:0 0 8px;
+    font-size:32px;
+}
+
+header p{
+    margin:0;
+    font-size:17px;
+}
+
+nav{
+    background:#063d25;
+    padding:12px;
+    text-align:center;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    margin:5px 8px;
+    font-size:14px;
+}
+
+nav a:hover{
+    color:#b7ff35;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+    padding:20px;
+}
+
+.hero{
+    background:white;
+    padding:30px;
+    border-radius:16px;
+    text-align:center;
+    box-shadow:0 3px 12px rgba(0,0,0,.08);
+}
+
+.hero h2{
+    color:#075b34;
+    margin-top:0;
+    font-size:28px;
+}
+
+.hero p{
+    font-size:17px;
+    line-height:1.6;
+}
+
+.balance-box{
+    background:#075b34;
+    color:white;
+    margin-top:25px;
+    padding:30px;
+    border-radius:16px;
+    text-align:center;
+}
+
+.balance-box .label{
+    font-size:16px;
+}
+
+.balance{
+    color:#b7ff35;
+    font-size:42px;
+    font-weight:bold;
+    margin:10px 0;
+}
+
+.balance-info{
+    font-size:14px;
+    opacity:.9;
+}
+
+.currency{
+    margin-top:18px;
+}
+
+.currency button{
+    margin:4px;
+}
+
+.currency button.active{
+    background:#b7ff35;
+    color:#063d25;
+}
+
+.section-title{
+    color:#075b34;
+    margin-top:40px;
+    margin-bottom:18px;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:18px;
+}
+
+.card{
+    background:white;
+    padding:22px;
+    border-radius:14px;
+    box-shadow:0 3px 10px rgba(0,0,0,.07);
+}
+
+.card h3{
+    color:#075b34;
+    margin-top:0;
+}
+
+.icon{
+    font-size:35px;
+    margin-bottom:10px;
+}
+
+.amount{
+    font-size:27px;
+    font-weight:bold;
+    color:#075b34;
+    margin:12px 0;
+}
+
+button{
+    background:#0b6b3d;
+    color:white;
+    border:0;
+    padding:12px 20px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+button:hover{
+    background:#063d25;
+}
+
+.full{
+    width:100%;
+}
+
+.form-box{
+    background:white;
+    padding:25px;
+    border-radius:14px;
+    box-shadow:0 3px 10px rgba(0,0,0,.07);
+}
+
+.form-box label{
+    display:block;
+    font-weight:bold;
+    margin-top:10px;
+}
+
+.form-box input,
+.form-box select{
+    width:100%;
+    padding:13px;
+    margin:7px 0 12px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    font-size:15px;
+}
+
+.summary{
+    background:#f0f7f3;
+    padding:18px;
+    border-radius:10px;
+    margin:15px 0;
+}
+
+.summary strong{
+    color:#075b34;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
+    gap:15px;
+}
+
+.stat{
+    background:#075b34;
+    color:white;
+    padding:20px;
+    border-radius:12px;
+    text-align:center;
+}
+
+.stat strong{
+    display:block;
+    color:#b7ff35;
+    font-size:28px;
+    margin-bottom:6px;
+}
+
+.table-box{
+    width:100%;
+    overflow-x:auto;
+    background:white;
+    border-radius:14px;
+    box-shadow:0 3px 10px rgba(0,0,0,.07);
+}
+
+table{
+    width:100%;
+    min-width:800px;
+    border-collapse:collapse;
+}
+
+th,td{
+    padding:14px;
+    border-bottom:1px solid #ddd;
+    text-align:center;
+}
+
+th{
+    background:#075b34;
+    color:white;
+}
+
+.income{
+    color:#08733f;
+    font-weight:bold;
+}
+
+.expense{
+    color:#b00020;
+    font-weight:bold;
+}
+
+.pending{
+    color:#b37b00;
+    font-weight:bold;
+}
+
+.workflow{
+    counter-reset:step;
+}
+
+.step{
+    background:white;
+    padding:18px 18px 18px 58px;
+    margin:12px 0;
+    border-radius:10px;
+    position:relative;
+    box-shadow:0 2px 7px rgba(0,0,0,.06);
+}
+
+.step:before{
+    counter-increment:step;
+    content:counter(step);
+    position:absolute;
+    left:15px;
+    top:15px;
+    width:30px;
+    height:30px;
+    border-radius:50%;
+    background:#0b6b3d;
+    color:white;
+    text-align:center;
+    line-height:30px;
+    font-weight:bold;
+}
+
+.feature{
+    border-left:5px solid #0b6b3d;
+}
+
+.warning{
+    margin-top:25px;
+    padding:18px;
+    background:#fff8d8;
+    border-left:5px solid #e0b400;
+    border-radius:8px;
+}
+
+footer{
+    margin-top:40px;
+    background:#063d25;
+    color:white;
+    text-align:center;
+    padding:25px;
+}
+
+@media(max-width:600px){
+
+    header h1{
+        font-size:25px;
+    }
+
+    nav{
+        padding:10px 5px;
+    }
+
+    nav a{
+        font-size:13px;
+        margin:4px;
+    }
+
+    .container{
+        padding:12px;
+    }
+
+    .hero{
+        padding:20px;
+    }
+
+    .hero h2{
+        font-size:23px;
+    }
+
+    .balance{
+        font-size:34px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="top-languages">
+    <a href="#">AZ</a>
+    <a href="#">RU</a>
+    <a href="#">EN</a>
+    <a href="#">TR</a>
+    <a href="#">DE</a>
+    <a href="#">AR</a>
+    <a href="#">ES</a>
+    <a href="#">FR</a>
+    <a href="#">IT</a>
+</div>
+
+<header>
+    <h1>WORKER PRO</h1>
+    <p>Кошелёк пользователя и финансовый баланс</p>
+</header>
+
+<nav>
+    <a href="../index.html">Главная</a>
+    <a href="../pricing/index.html">Тарифы</a>
+    <a href="../subscriptions/index.html">Подписки</a>
+    <a href="../payments/index.html">Платежи</a>
+    <a href="../advertising/index.html">Реклама</a>
+    <a href="../companies/index.html">Компании</a>
+    <a href="../products/index.html">Товары</a>
+    <a href="../requests/index.html">Заявки</a>
+    <a href="../offers/index.html">Предложения</a>
+    <a href="../orders/index.html">Заказы</a>
+    <a href="../dashboard/index.html">Dashboard</a>
+</nav>
+
+<div class="container">
+
+<section class="hero">
+
+    <h2>WORKER PRO Wallet</h2>
+
+    <p>
+        Будущий цифровой кошелёк WORKER PRO для управления
+        балансом, оплатой подписок, рекламой и другими
+        услугами платформы.
+    </p>
+
+    <div class="balance-box">
+
+        <div class="label">
+            Текущий баланс
+        </div>
+
+        <div class="balance" id="balance">
+            250.00 AZN
+        </div>
+
+        <div class="balance-info">
+            Демо-баланс пользователя
+        </div>
+
+        <div class="currency">
+
+            <button id="aznBtn"
+                    class="active"
+                    onclick="changeCurrency('AZN')">
+                AZN
+            </button>
+
+            <button id="usdBtn"
+                    onclick="changeCurrency('USD')">
+                USD
+            </button>
+
+            <button id="eurBtn"
+                    onclick="changeCurrency('EUR')">
+                EUR
+            </button>
+
+            <button id="tryBtn"
+                    onclick="changeCurrency('TRY')">
+                TRY
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<h2 class="section-title">Основные операции</h2>
+
+<div class="grid">
+
+    <div class="card feature">
+
+        <div class="icon">💰</div>
+
+        <h3>Пополнить баланс</h3>
+
+        <p>
+            Добавление средств в кошелёк
+            для будущих покупок и услуг.
+        </p>
+
+        <button
+            class="full"
+            onclick="showDeposit()">
+            Пополнить
+        </button>
+
+    </div>
+
+
+    <div class="card feature">
+
+        <div class="icon">💳</div>
+
+        <h3>Оплатить услугу</h3>
+
+        <p>
+            Использование баланса для подписки,
+            рекламы или другой услуги.
+        </p>
+
+        <button
+            class="full"
+            onclick="showPayment()">
+            Оплатить
+        </button>
+
+    </div>
+
+
+    <div class="card feature">
+
+        <div class="icon">↩️</div>
+
+        <h3>Возврат</h3>
+
+        <p>
+            Будущая возможность получения
+            возврата средств согласно правилам платформы.
+        </p>
+
+        <button
+            class="full"
+            onclick="showRefund()">
+            Запросить возврат
+        </button>
+
+    </div>
+
+
+    <div class="card feature">
+
+        <div class="icon">📊</div>
+
+        <h3>История</h3>
+
+        <p>
+            Просмотр всех операций
+            с балансом пользователя.
+        </p>
+
+        <button
+            class="full"
+            onclick="scrollToHistory()">
+            Открыть историю
+        </button>
+
+    </div>
+
+</div>
+
+
+<h2 class="section-title">Пополнение кошелька</h2>
+
+<div class="form-box">
+
+    <label>
+        Сумма пополнения
+    </label>
+
+    <input
+        type="number"
+        id="depositAmount"
+        placeholder="Например: 50"
+        min="1"
+    >
+
+    <label>
+        Способ оплаты
+    </label>
+
+    <select id="depositMethod">
+
+        <option>
+            Банковская карта
+        </option>
+
+        <option>
+            Банковский перевод
+        </option>
+
+        <option>
+            Электронный кошелёк
+        </option>
+
+        <option>
+            Корпоративная оплата
+        </option>
+
+    </select>
+
+    <div class="summary">
+
+        <p>
+            Валюта:
+            <strong id="depositCurrency">
+                AZN
+            </strong>
+        </p>
+
+        <p>
+            Сумма:
+            <strong id="depositPreview">
+                0.00 AZN
+            </strong>
+        </p>
+
+    </div>
+
+    <button
+        class="full"
+        onclick="depositMoney()">
+
+        Пополнить кошелёк
+
+    </button>
+
+</div>
+
+
+<h2 class="section-title">Оплата из кошелька</h2>
+
+<div class="form-box">
+
+    <label>
+        Выберите услугу
+    </label>
+
+    <select
+        id="walletService"
+        onchange="updateWalletPayment()">
+
+        <option value="5">
+            Specialist — подписка
+        </option>
+
+        <option value="15">
+            Company — подписка
+        </option>
+
+        <option value="20">
+            Supplier — подписка
+        </option>
+
+        <option value="25">
+            Manufacturer — подписка
+        </option>
+
+        <option value="35">
+            Professional — подписка
+        </option>
+
+        <option value="5">
+            Basic Advertising
+        </option>
+
+        <option value="15">
+            Business Advertising
+        </option>
+
+        <option value="30">
+            Premium Advertising
+        </option>
+
+    </select>
+
+    <div class="summary">
+
+        <p>
+            Стоимость:
+            <strong id="walletPaymentPrice">
+                5.00 AZN
+            </strong>
+        </p>
+
+        <p>
+            Баланс:
+            <strong id="walletPaymentBalance">
+                250.00 AZN
+            </strong>
+        </p>
+
+    </div>
+
+    <button
+        class="full"
+        onclick="payFromWallet()">
+
+        Оплатить из кошелька
+
+    </button>
+
+</div>
+
+
+<h2 class="section-title">Статистика кошелька</h2>
+
+<div class="stats">
+
+    <div class="stat">
+        <strong>250 AZN</strong>
+        Баланс
+    </div>
+
+    <div class="stat">
+        <strong>620 AZN</strong>
+        Пополнено
+    </div>
+
+    <div class="stat">
+        <strong>370 AZN</strong>
+        Потрачено
+    </div>
+
+    <div class="stat">
+        <strong>18</strong>
+        Операций
+    </div>
+
+</div>
+
+
+<h2 class="section-title" id="history">
+    История операций
+</h2>
+
+<div class="table-box">
+
+<table>
+
+<thead>
+
+<tr>
+    <th>ID</th>
+    <th>Дата</th>
+    <th>Операция</th>
+    <th>Описание</th>
+    <th>Сумма</th>
+    <th>Статус</th>
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+    <td>WAL-1001</td>
+    <td>18.09.2026</td>
+    <td class="income">Пополнение</td>
+    <td>Банковская карта</td>
+    <td class="income">+100 AZN</td>
+    <td class="income">Успешно</td>
+</tr>
+
+<tr>
+    <td>WAL-1002</td>
+    <td>17.09.2026</td>
+    <td class="expense">Оплата</td>
+    <td>Company Subscription</td>
+    <td class="expense">-15 AZN</td>
+    <td class="income">Успешно</td>
+</tr>
+
+<tr>
+    <td>WAL-1003</td>
+    <td>15.09.2026</td>
+    <td class="income">Пополнение</td>
+    <td>Банковский перевод</td>
+    <td class="income">+150 AZN</td>
+    <td class="income">Успешно</td>
+</tr>
+
+<tr>
+    <td>WAL-1004</td>
+    <td>13.09.2026</td>
+    <td class="expense">Оплата</td>
+    <td>Business Advertising</td>
+    <td class="expense">-15 AZN</td>
+    <td class="income">Успешно</td>
+</tr>
+
+<tr>
+    <td>WAL-1005</td>
+    <td>12.09.2026</td>
+    <td class="expense">Оплата</td>
+    <td>Premium Advertising</td>
+    <td class="expense">-30 AZN</td>
+    <td class="pending">Ожидает</td>
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+
+<h2 class="section-title">Для чего нужен кошелёк</h2>
+
+<div class="grid">
+
+    <div class="card">
+
+        <div class="icon">⭐</div>
+
+        <h3>Подписки</h3>
+
+        <p>
+            Оплата тарифов WORKER PRO
+            непосредственно с баланса.
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="icon">📢</div>
+
+        <h3>Реклама</h3>
+
+        <p>
+            Оплата рекламных кампаний
+            и Premium размещения.
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="icon">🛒</div>
+
+        <h3>Будущий Marketplace</h3>
+
+        <p>
+            В будущем кошелёк может использоваться
+            для оплаты промышленных услуг и других
+            операций платформы.
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="icon">🚚</div>
+
+        <h3>Логистика</h3>
+
+        <p>
+            Будущая возможность оплаты
+            транспортных и логистических услуг.
+        </p>
+
+    </div>
+
+</div>
+
+
+<h2 class="section-title">Как работает кошелёк</h2>
+
+<div class="workflow">
+
+    <div class="step">
+
+        <strong>Создание аккаунта</strong><br>
+
+        Пользователь регистрируется
+        в WORKER PRO.
+
+    </div>
+
+
+    <div class="step">
+
+        <strong>Пополнение</strong><br>
+
+        Пользователь пополняет свой баланс.
+
+    </div>
+
+
+    <div class="step">
+
+        <strong>Выбор услуги</strong><br>
+
+        Выбирается подписка, реклама
+        или другая доступная услуга.
+
+    </div>
+
+
+    <div class="step">
+
+        <strong>Оплата</strong><br>
+
+        Система списывает необходимую
+        сумму с баланса.
+
+    </div>
+
+
+    <div class="step">
+
+        <strong>Подтверждение</strong><br>
+
+        Операция появляется в истории кошелька.
+
+    </div>
+
+
+    <div class="step">
+
+        <strong>Контроль</strong><br>
+
+        Пользователь видит текущий баланс
+        и историю операций.
+
+    </div>
+
+</div>
+
+
+<h2 class="section-title">Будущие возможности</h2>
+
+<div class="grid">
+
+    <div class="card">
+
+        <h3>🔄 Автоматическое пополнение</h3>
+
+        <p>
+            Возможность автоматически пополнять
+            баланс при достижении установленного лимита.
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>💱 Несколько валют</h3>
+
+        <p>
+            Работа с AZN, USD, EUR, TRY
+            и другими валютами.
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>🧾 Электронные чеки</h3>
+
+        <p>
+            Хранение подтверждений
+            и документов по операциям.
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>↩️ Возвраты</h3>
+
+        <p>
+            Управление заявками на возврат
+            в соответствии с правилами платформы.
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>🏢 Корпоративный кошелёк</h3>
+
+        <p>
+            Отдельные финансовые инструменты
+            для компаний и организаций.
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>🔐 Защита операций</h3>
+
+        <p>
+            Подтверждение важных операций
+            и дополнительные меры безопасности.
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="warning">
+
+<strong>Демо-версия:</strong><br>
+
+Кошелёк сейчас является демонстрационной частью
+WORKER PRO. Реальные деньги не хранятся и не списываются.
+Для настоящего финансового кошелька потребуется серверная
+часть, база данных, система идентификации и официальная
+платёжная инфраструктура.
+
+</div>
+
+</div>
+
+
+<footer>
+
+<strong>WORKER PRO</strong><br>
+
+Международная промышленная платформа
+
+<br><br>
+
+Pricing • Subscriptions • Payments • Wallet • Advertising
+
+<br><br>
+
+© WORKER PRO — F.S
+
+</footer>
+
+
+<script src="../language.js"></script>
+
+<script>
+
+let currentCurrency = "AZN";
+
+let demoBalanceAZN = 250;
+
+const rates = {
+    AZN:1,
+    USD:0.588,
+    EUR:0.545,
+    TRY:26.7
+};
+
+
+function changeCurrency(currency){
+
+    currentCurrency = currency;
+
+    document.querySelectorAll(".currency button")
+        .forEach(function(button){
+
+            button.classList.remove("active");
+
+        });
+
+
+    if(currency === "AZN"){
+        document.getElementById("aznBtn")
+            .classList.add("active");
+    }
+
+    if(currency === "USD"){
+        document.getElementById("usdBtn")
+            .classList.add("active");
+    }
+
+    if(currency === "EUR"){
+        document.getElementById("eurBtn")
+            .classList.add("active");
+    }
+
+    if(currency === "TRY"){
+        document.getElementById("tryBtn")
+            .classList.add("active");
+    }
+
+    updateBalanceDisplay();
+
+    updateDepositPreview();
+
+    updateWalletPayment();
+
+}
+
+
+function convertFromAZN(amount){
+
+    return amount * rates[currentCurrency];
+
+}
+
+
+function updateBalanceDisplay(){
+
+    const value =
+        convertFromAZN(demoBalanceAZN);
+
+    document.getElementById("balance")
+        .textContent =
+        value.toFixed(2) +
+        " " +
+        currentCurrency;
+
+    document.getElementById("walletPaymentBalance")
+        .textContent =
+        value.toFixed(2) +
+        " " +
+        currentCurrency;
+
+    document.getElementById("depositCurrency")
+        .textContent =
+        currentCurrency;
+
+}
+
+
+function updateDepositPreview(){
+
+    const input =
+        document.getElementById("depositAmount");
+
+    const amount =
+        parseFloat(input.value) || 0;
+
+    document.getElementById("depositPreview")
+        .textContent =
+        amount.toFixed(2) +
+        " " +
+        currentCurrency;
+
+}
+
+
+document.getElementById("depositAmount")
+    .addEventListener(
+        "input",
+        updateDepositPreview
+    );
+
+
+function showDeposit(){
+
+    document.getElementById("depositAmount")
+        .focus();
+
+    window.scrollTo({
+        top:
+        document.querySelector(".form-box")
+        .offsetTop - 80,
+        behavior:"smooth"
+    });
+
+}
+
+
+function showPayment(){
+
+    const section =
+        document.getElementById("walletService");
+
+    section.focus();
+
+    window.scrollTo({
+        top:
+        section.offsetTop - 100,
+        behavior:"smooth"
+    });
+
+}
+
+
+function showRefund(){
+
+    alert(
+        "Запрос на возврат\n\n" +
+        "В будущем здесь будет форма " +
+        "для оформления возврата средств.\n\n" +
+        "Сейчас работает демо-режим."
+    );
+
+}
+
+
+function scrollToHistory(){
+
+    document.getElementById("history")
+        .scrollIntoView({
+            behavior:"smooth"
+        });
+
+}
+
+
+function depositMoney(){
+
+    const input =
+        document.getElementById("depositAmount");
+
+    const amount =
+        parseFloat(input.value);
+
+    const method =
+        document.getElementById("depositMethod")
+        .value;
+
+    if(!amount || amount <= 0){
+
+        alert(
+            "Введите сумму пополнения."
+        );
+
+        return;
+    }
+
+
+    const amountAZN =
+        amount / rates[currentCurrency];
+
+    demoBalanceAZN += amountAZN;
+
+    updateBalanceDisplay();
+
+    input.value = "";
+
+    updateDepositPreview();
+
+    alert(
+        "Баланс пополнен в демо-режиме!\n\n" +
+        "Сумма: " +
+        amount.toFixed(2) +
+        " " +
+        currentCurrency +
+        "\n" +
+        "Способ: " +
+        method +
+        "\n\n" +
+        "Реальные деньги не списываются."
+    );
+
+}
+
+
+function updateWalletPayment(){
+
+    const select =
+        document.getElementById("walletService");
+
+    const basePrice =
+        parseFloat(select.value);
+
+    const price =
+        convertFromAZN(basePrice);
+
+    document.getElementById("walletPaymentPrice")
+        .textContent =
+        price.toFixed(2) +
+        " " +
+        currentCurrency;
+
+}
+
+
+function payFromWallet(){
+
+    const select =
+        document.getElementById("walletService");
+
+    const selectedText =
+        select.options[
+            select.selectedIndex
+        ].text;
+
+    const basePrice =
+        parseFloat(select.value);
+
+    if(demoBalanceAZN < basePrice){
+
+        alert(
+            "Недостаточно средств.\n\n" +
+            "Баланс: " +
+            convertFromAZN(demoBalanceAZN)
+            .toFixed(2) +
+            " " +
+            currentCurrency
+        );
+
+        return;
+    }
+
+
+    demoBalanceAZN -= basePrice;
+
+    updateBalanceDisplay();
+
+    updateWalletPayment();
+
+    alert(
+        "Оплата выполнена в демо-режиме!\n\n" +
+        "Услуга: " +
+        selectedText +
+        "\nСумма: " +
+        convertFromAZN(basePrice)
+        .toFixed(2) +
+        " " +
+        currentCurrency +
+        "\n\n" +
+        "Реальные деньги не списываются."
+    );
+
+}
+
+
+updateBalanceDisplay();
+
+updateDepositPreview();
+
+updateWalletPayment();
+
+</script>
+
+</body>
+</html>
