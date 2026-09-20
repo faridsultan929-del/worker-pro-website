@@ -1,1 +1,748 @@
- 
+ <!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WORKER PRO — Industries</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f7f5;
+    color: #123;
+}
+
+.top-languages {
+    background: #063d25;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.top-languages button {
+    background: #0b6b3d;
+    color: white;
+    border: 1px solid #75a98c;
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.top-languages button:hover {
+    background: #b7ff35;
+    color: #063d25;
+}
+
+nav {
+    background: #075b34;
+    padding: 12px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    padding: 9px 12px;
+    border-radius: 7px;
+    font-weight: bold;
+}
+
+nav a:hover {
+    background: #b7ff35;
+    color: #063d25;
+}
+
+.hero {
+    background: linear-gradient(135deg, #063d25, #0b6b3d);
+    color: white;
+    padding: 55px 20px;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 42px;
+    margin: 0 0 15px;
+}
+
+.hero p {
+    max-width: 850px;
+    margin: auto;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 25px 15px;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 15px;
+    margin-top: -30px;
+    position: relative;
+}
+
+.stat {
+    background: white;
+    border-radius: 14px;
+    padding: 22px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.stat strong {
+    display: block;
+    color: #0b6b3d;
+    font-size: 28px;
+    margin-bottom: 6px;
+}
+
+.controls {
+    background: white;
+    padding: 20px;
+    border-radius: 14px;
+    margin: 30px 0;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+}
+
+.search {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #ccd8d1;
+    border-radius: 10px;
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.filters button {
+    border: none;
+    background: #e5eee9;
+    color: #063d25;
+    padding: 10px 15px;
+    border-radius: 9px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.filters button.active,
+.filters button:hover {
+    background: #0b6b3d;
+    color: white;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background: white;
+    border-radius: 15px;
+    padding: 22px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+    transition: 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+}
+
+.icon {
+    font-size: 42px;
+    margin-bottom: 10px;
+}
+
+.card h3 {
+    margin: 5px 0 10px;
+    color: #063d25;
+}
+
+.card p {
+    line-height: 1.5;
+    color: #456;
+}
+
+.tag {
+    display: inline-block;
+    background: #e9f7df;
+    color: #386b17;
+    padding: 5px 9px;
+    border-radius: 20px;
+    font-size: 12px;
+    margin: 3px;
+}
+
+.card button,
+.main-btn {
+    border: none;
+    background: #0b6b3d;
+    color: white;
+    padding: 11px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.card button:hover,
+.main-btn:hover {
+    background: #063d25;
+}
+
+.info {
+    background: #063d25;
+    color: white;
+    padding: 30px;
+    border-radius: 15px;
+    margin-top: 35px;
+}
+
+.info h2 {
+    margin-top: 0;
+    color: #b7ff35;
+}
+
+.info p {
+    line-height: 1.7;
+}
+
+.links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.links a {
+    background: white;
+    color: #063d25;
+    padding: 10px 15px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+footer {
+    background: #063d25;
+    color: white;
+    text-align: center;
+    padding: 25px;
+    margin-top: 40px;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.65);
+    z-index: 500;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.modal-content {
+    background: white;
+    max-width: 600px;
+    margin: 60px auto;
+    padding: 25px;
+    border-radius: 15px;
+}
+
+.close {
+    float: right;
+    font-size: 28px;
+    cursor: pointer;
+    color: #063d25;
+}
+
+@media (max-width: 600px) {
+    .hero h1 {
+        font-size: 32px;
+    }
+
+    .hero p {
+        font-size: 16px;
+    }
+
+    nav a {
+        font-size: 13px;
+        padding: 7px 9px;
+    }
+
+    .top-languages button {
+        padding: 7px 9px;
+        font-size: 12px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="top-languages">
+    <button onclick="setLanguage('AZ')">AZ</button>
+    <button onclick="setLanguage('RU')">RU</button>
+    <button onclick="setLanguage('EN')">EN</button>
+    <button onclick="setLanguage('TR')">TR</button>
+    <button onclick="setLanguage('DE')">DE</button>
+    <button onclick="setLanguage('AR')">AR</button>
+    <button onclick="setLanguage('ES')">ES</button>
+    <button onclick="setLanguage('FR')">FR</button>
+    <button onclick="setLanguage('IT')">IT</button>
+</div>
+
+<nav>
+    <a href="../index.html">Главная</a>
+    <a href="../production/">Производство</a>
+    <a href="../technologies/">Технологии</a>
+    <a href="../equipment/">Оборудование</a>
+    <a href="../products/">Продукты</a>
+    <a href="../manufacturers/">Производители</a>
+    <a href="../suppliers/">Поставщики</a>
+    <a href="../training/">Обучение</a>
+</nav>
+
+<section class="hero">
+    <h1>🏭 Industries</h1>
+    <p>
+        Промышленные отрасли WORKER PRO — производство,
+        энергетика, машиностроение, нефтегазовая промышленность,
+        автоматизация, металлургия и другие направления.
+    </p>
+</section>
+
+<div class="container">
+
+    <div class="stats">
+        <div class="stat">
+            <strong>24+</strong>
+            Отрасли
+        </div>
+
+        <div class="stat">
+            <strong>42</strong>
+            Страны
+        </div>
+
+        <div class="stat">
+            <strong>2,800+</strong>
+            Компаний
+        </div>
+
+        <div class="stat">
+            <strong>28,000+</strong>
+            Продуктов
+        </div>
+    </div>
+
+    <div class="controls">
+        <input
+            id="searchInput"
+            class="search"
+            type="text"
+            placeholder="Поиск отрасли: нефть, металлургия, CNC, энергетика..."
+            oninput="searchIndustries()"
+        >
+
+        <div class="filters">
+            <button class="active" onclick="filterIndustry('all', this)">Все</button>
+            <button onclick="filterIndustry('energy', this)">Энергетика</button>
+            <button onclick="filterIndustry('oil', this)">Нефть и газ</button>
+            <button onclick="filterIndustry('machinery', this)">Машиностроение</button>
+            <button onclick="filterIndustry('metal', this)">Металлургия</button>
+            <button onclick="filterIndustry('automation', this)">Автоматизация</button>
+            <button onclick="filterIndustry('construction', this)">Строительство</button>
+        </div>
+    </div>
+
+    <div class="grid" id="industryGrid">
+
+        <div class="card industry" data-category="machinery" data-search="машиностроение machinery cnc станки оборудование">
+            <div class="icon">⚙️</div>
+            <h3>Машиностроение</h3>
+            <p>
+                Производство машин, станков, промышленного оборудования
+                и комплектующих.
+            </p>
+            <span class="tag">CNC</span>
+            <span class="tag">Станки</span>
+            <span class="tag">Оборудование</span>
+            <br>
+            <button onclick="showIndustry('Машиностроение')">Подробнее</button>
+        </div>
+
+        <div class="card industry" data-category="oil" data-search="нефть газ oil gas нефтегаз насосы оборудование">
+            <div class="icon">🛢️</div>
+            <h3>Нефть и газ</h3>
+            <p>
+                Насосы, клапаны, трубопроводы, буровое оборудование,
+                запчасти и промышленная автоматизация.
+            </p>
+            <span class="tag">Oil & Gas</span>
+            <span class="tag">Насосы</span>
+            <span class="tag">Клапаны</span>
+            <br>
+            <button onclick="showIndustry('Нефть и газ')">Подробнее</button>
+        </div>
+
+        <div class="card industry" data-category="energy" data-search="энергетика energy электричество генераторы трансформаторы">
+            <div class="icon">⚡</div>
+            <h3>Энергетика</h3>
+            <p>
+                Генераторы, трансформаторы, электродвигатели,
+                распределительные системы и оборудование.
+            </p>
+            <span class="tag">Энергия</span>
+            <span class="tag">Генераторы</span>
+            <br>
+            <button onclick="showIndustry('Энергетика')">Подробнее</button>
+        </div>
+
+        <div class="card industry" data-category="metal" data-search="металлургия металл steel металл обработка">
+            <div class="icon">🔥</div>
+            <h3>Металлургия</h3>
+            <p>
+                Выплавка и обработка металлов, печи, термообработка,
+                прокатка и контроль качества.
+            </p>
+            <span class="tag">Steel</span>
+            <span class="tag">Печи</span>
+            <span class="tag">Heat Treatment</span>
+            <br>
+            <button onclick="showIndustry('Металлургия')">Подробнее</button>
+        </div>
+
+        <div class="card industry" data-category="automation" data-search="автоматизация automation sensors plc роботика robotics">
+            <div class="icon">🤖</div>
+            <h3>Автоматизация</h3>
+            <p>
+                PLC, датчики, промышленные роботы, системы управления
+                и цифровизация производства.
+            </p>
+            <span class="tag">PLC</span>
+            <span class="tag">Sensors</span>
+            <span class="tag">Robotics</span>
+            <br>
+            <button onclick="showIndustry('Автоматизация')">Подробнее</button>
+        </div>
+
+        <div class="card industry" data-category="machinery" data-search="автомобильная промышленность automotive машины детали">
+            <div class="icon">🚗</div>
+            <h3>Автомобильная промышленность</h3>
+            <p>
+                Производство автомобилей, деталей, компонентов,
+                пресс-форм и систем контроля.
+            </p>
+            <span class="tag">Automotive</span>
+            <span class="tag">Parts</span>
+            <br>
+            <button onclick="showIndustry('Автомобильная промышленность')">Подробнее</button>
+        </div>
+
+        <div class="card industry" data-category="machinery" data-search="авиация aviation aerospace самолет агрегаты детали">
+            <div class="icon">✈️</div>
+            <h3>Авиационная промышленность</h3>
+            <p>
+                Производство авиационных компонентов, агрегатов,
+                деталей и специального оборудования.
+            </p>
+            <span class="tag">Aviation</span>
+            <span class="tag">Components</span>
+            <br>
+            <button onclick="showIndustry('Авиационная промышленность')">Подробнее</button>
+        </div>
+
+        <div class="card industry" data-category="construction" data-search="строительство construction техника бетон краны">
+            <div class="icon">🏗️</div>
+            <h3>Строительство</h3>
+            <p>
+                Строительная техника, насосы, компрессоры,
+                краны и промышленное оборудование.
+            </p>
+            <span class="tag">Construction</span>
+            <span class="tag">Equipment</span>
+            <br>
+            <button onclick="showIndustry('Строительство')">Подробнее</button>
+        </div>
+
+        <div class="card industry" data-category="metal" data-search="сварка welding сварочное оборудование">
+            <div class="icon">🔧</div>
+            <h3>Сварочное производство</h3>
+            <p>
+                Сварочные аппараты, электроды, автоматическая сварка,
+                контроль сварных соединений.
+            </p>
+            <span class="tag">Welding</span>
+            <span class="tag">MIG</span>
+            <span class="tag">TIG</span>
+            <br>
+            <button onclick="showIndustry('Сварочное производство')">Подробнее</button>
+        </div>
+
+        <div class="card industry" data-category="machinery" data-search="штамповка stamping пресс прессование металл">
+            <div class="icon">🔩</div>
+            <h3>Штамповочное производство</h3>
+            <p>
+                Прессы, штампы, листовой металл, автоматические линии
+                и контроль деталей.
+            </p>
+            <span class="tag">Stamping</span>
+            <span class="tag">Press</span>
+            <br>
+            <button onclick="showIndustry('Штамповочное производство')">Подробнее</button>
+        </div>
+
+        <div class="card industry" data-category="energy" data-search="электротехника electrical электродвигатели кабели">
+            <div class="icon">🔌</div>
+            <h3>Электротехника</h3>
+            <p>
+                Электродвигатели, кабели, выключатели, шкафы управления
+                и электрические компоненты.
+            </p>
+            <span class="tag">Electrical</span>
+            <span class="tag">Motors</span>
+            <br>
+            <button onclick="showIndustry('Электротехника')">Подробнее</button>
+        </div>
+
+        <div class="card industry" data-category="automation" data-search="гидравлика hydraulics насосы клапаны цилиндры">
+            <div class="icon">💧</div>
+            <h3>Гидравлика</h3>
+            <p>
+                Гидравлические насосы, цилиндры, клапаны, фильтры,
+                шланги и гидростанции.
+            </p>
+            <span class="tag">Hydraulics</span>
+            <span class="tag">Pumps</span>
+            <br>
+            <button onclick="showIndustry('Гидравлика')">Подробнее</button>
+        </div>
+
+        <div class="card industry" data-category="automation" data-search="пневматика pneumatics air цилиндры клапаны компрессоры">
+            <div class="icon">💨</div>
+            <h3>Пневматика</h3>
+            <p>
+                Компрессоры, пневмоцилиндры, клапаны, фильтры
+                и системы подачи воздуха.
+            </p>
+            <span class="tag">Pneumatics</span>
+            <span class="tag">Air</span>
+            <br>
+            <button onclick="showIndustry('Пневматика')">Подробнее</button>
+        </div>
+
+        <div class="card industry" data-category="energy" data-search="возобновляемая энергия solar wind renewable">
+            <div class="icon">☀️</div>
+            <h3>Возобновляемая энергетика</h3>
+            <p>
+                Солнечная энергетика, ветрогенераторы, аккумуляторы
+                и системы хранения энергии.
+            </p>
+            <span class="tag">Solar</span>
+            <span class="tag">Wind</span>
+            <br>
+            <button onclick="showIndustry('Возобновляемая энергетика')">Подробнее</button>
+        </div>
+
+        <div class="card industry" data-category="machinery" data-search="химическая промышленность chemical химия реакторы">
+            <div class="icon">🧪</div>
+            <h3>Химическая промышленность</h3>
+            <p>
+                Реакторы, насосы, системы дозирования, промышленная
+                химия и оборудование.
+            </p>
+            <span class="tag">Chemical</span>
+            <span class="tag">Process</span>
+            <br>
+            <button onclick="showIndustry('Химическая промышленность')">Подробнее</button>
+        </div>
+
+        <div class="card industry" data-category="construction" data-search="горнодобывающая mining шахта дробилки конвейеры">
+            <div class="icon">⛏️</div>
+            <h3>Горнодобывающая промышленность</h3>
+            <p>
+                Дробилки, конвейеры, буровые установки, насосы
+                и горное оборудование.
+            </p>
+            <span class="tag">Mining</span>
+            <span class="tag">Crushers</span>
+            <br>
+            <button onclick="showIndustry('Горнодобывающая промышленность')">Подробнее</button>
+        </div>
+
+    </div>
+
+    <div class="info">
+        <h2>🌍 Industries в WORKER PRO</h2>
+
+        <p>
+            WORKER PRO объединяет специалистов, производителей,
+            поставщиков и компании разных промышленных отраслей.
+        </p>
+
+        <p>
+            Пользователь может выбрать отрасль, найти оборудование,
+            продукцию, запчасти, производителя или поставщика,
+            отправить запрос и перейти к предложению и дальнейшей
+            организации доставки.
+        </p>
+
+        <p>
+            Система отраслей является связующим уровнем между
+            производством, технологиями, компаниями, товарами,
+            специалистами и международной торговлей.
+        </p>
+
+        <div class="links">
+            <a href="../catalog/">Каталог</a>
+            <a href="../products/">Продукты</a>
+            <a href="../manufacturers/">Производители</a>
+            <a href="../suppliers/">Поставщики</a>
+            <a href="../companies/">Компании</a>
+            <a href="../specialists/">Специалисты</a>
+            <a href="../requests/">Запросы</a>
+            <a href="../training/">Обучение</a>
+        </div>
+    </div>
+
+</div>
+
+<div class="modal" id="industryModal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">×</span>
+        <h2 id="modalTitle"></h2>
+
+        <p>
+            Этот раздел WORKER PRO объединяет информацию,
+            оборудование, продукцию, специалистов, производителей
+            и поставщиков данной отрасли.
+        </p>
+
+        <p>
+            В будущем здесь можно будет искать конкретные товары,
+            запчасти, компании, специалистов и отправлять запрос
+            поставщикам.
+        </p>
+
+        <button class="main-btn" onclick="goProducts()">
+            Перейти к продуктам
+        </button>
+
+        <button class="main-btn" onclick="goManufacturers()">
+            Производители
+        </button>
+    </div>
+</div>
+
+<footer>
+    © 2026 WORKER PRO — Industrial Platform
+</footer>
+
+<script src="../language.js"></script>
+
+<script>
+
+let currentFilter = "all";
+
+function filterIndustry(category, button) {
+
+    currentFilter = category;
+
+    document.querySelectorAll(".filters button").forEach(function(btn) {
+        btn.classList.remove("active");
+    });
+
+    button.classList.add("active");
+
+    searchIndustries();
+}
+
+function searchIndustries() {
+
+    const search = document
+        .getElementById("searchInput")
+        .value
+        .toLowerCase()
+        .trim();
+
+    const cards = document.querySelectorAll(".industry");
+
+    cards.forEach(function(card) {
+
+        const category = card.dataset.category;
+        const text = card.dataset.search.toLowerCase();
+
+        const categoryMatch =
+            currentFilter === "all" ||
+            category === currentFilter;
+
+        const searchMatch =
+            search === "" ||
+            text.includes(search);
+
+        if (categoryMatch && searchMatch) {
+            card.style.display = "block";
+        } else {
+            card.style.display = "none";
+        }
+    });
+}
+
+function showIndustry(name) {
+
+    document.getElementById("modalTitle").textContent =
+        "🏭 " + name;
+
+    document.getElementById("industryModal").style.display = "block";
+}
+
+function closeModal() {
+    document.getElementById("industryModal").style.display = "none";
+}
+
+function goProducts() {
+    window.location.href = "../products/";
+}
+
+function goManufacturers() {
+    window.location.href = "../manufacturers/";
+}
+
+window.onclick = function(event) {
+
+    const modal = document.getElementById("industryModal");
+
+    if (event.target === modal) {
+        closeModal();
+    }
+};
+
+</script>
+
+</body>
+</html>
