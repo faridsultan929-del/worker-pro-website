@@ -1,0 +1,1353 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WORKER PRO — Transactions</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f7f5;
+    color: #123;
+}
+
+.top-languages {
+    background: #063d25;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 7px;
+}
+
+.top-languages button {
+    border: none;
+    border-radius: 8px;
+    padding: 8px 12px;
+    background: #0b6b3d;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.top-languages button:hover {
+    background: #b7ff35;
+    color: #063d25;
+}
+
+header {
+    background: linear-gradient(135deg, #063d25, #0b6b3d);
+    color: white;
+    text-align: center;
+    padding: 28px 15px;
+}
+
+header h1 {
+    margin: 0 0 8px;
+    font-size: 32px;
+}
+
+header p {
+    margin: 0;
+    font-size: 17px;
+}
+
+nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: #075b34;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 7px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    padding: 8px 11px;
+    border-radius: 7px;
+    font-size: 14px;
+}
+
+nav a:hover {
+    background: #b7ff35;
+    color: #063d25;
+}
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+}
+
+.hero {
+    background: white;
+    border-radius: 16px;
+    padding: 25px;
+    margin-bottom: 20px;
+    text-align: center;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+}
+
+.hero h2 {
+    color: #075b34;
+    margin-top: 0;
+}
+
+.hero p {
+    line-height: 1.6;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.stat {
+    background: white;
+    padding: 20px;
+    border-radius: 14px;
+    text-align: center;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.07);
+}
+
+.stat-icon {
+    font-size: 32px;
+}
+
+.stat-number {
+    font-size: 27px;
+    font-weight: bold;
+    color: #075b34;
+    margin: 8px 0;
+}
+
+.stat-title {
+    color: #555;
+}
+
+.section-title {
+    color: #063d25;
+    text-align: center;
+    margin: 30px 0 15px;
+}
+
+.filters {
+    background: white;
+    padding: 18px;
+    border-radius: 14px;
+    margin-bottom: 20px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.07);
+}
+
+.filters input,
+.filters select {
+    width: 100%;
+    padding: 12px;
+    margin: 6px 0;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 15px;
+}
+
+.transaction-list {
+    display: grid;
+    gap: 14px;
+}
+
+.transaction {
+    background: white;
+    border-radius: 14px;
+    padding: 18px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.07);
+    border-left: 5px solid #0b6b3d;
+}
+
+.transaction.income {
+    border-left-color: #168344;
+}
+
+.transaction.expense {
+    border-left-color: #c62828;
+}
+
+.transaction.refund {
+    border-left-color: #d97706;
+}
+
+.transaction.pending {
+    border-left-color: #8a5a00;
+}
+
+.transaction-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.transaction-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #075b34;
+}
+
+.transaction-amount {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.income .transaction-amount {
+    color: #168344;
+}
+
+.expense .transaction-amount {
+    color: #c62828;
+}
+
+.refund .transaction-amount {
+    color: #d97706;
+}
+
+.transaction-info {
+    color: #555;
+    line-height: 1.7;
+    margin-top: 10px;
+}
+
+.status {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: bold;
+    margin-top: 8px;
+}
+
+.status-success {
+    background: #d9f7e5;
+    color: #08743a;
+}
+
+.status-pending {
+    background: #fff1c7;
+    color: #8a5a00;
+}
+
+.status-refund {
+    background: #ffe8c2;
+    color: #9a5b00;
+}
+
+.status-cancelled {
+    background: #ffe0e0;
+    color: #a30000;
+}
+
+.transaction-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.transaction-buttons button {
+    border: none;
+    border-radius: 8px;
+    padding: 9px 13px;
+    background: #0b6b3d;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.transaction-buttons button:hover {
+    background: #063d25;
+}
+
+.summary {
+    background: white;
+    border-radius: 15px;
+    padding: 22px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.07);
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 13px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.summary-row:last-child {
+    border-bottom: none;
+}
+
+.green {
+    color: #168344;
+    font-weight: bold;
+}
+
+.red {
+    color: #c62828;
+    font-weight: bold;
+}
+
+.orange {
+    color: #d97706;
+    font-weight: bold;
+}
+
+.form-box {
+    background: white;
+    border-radius: 15px;
+    padding: 22px;
+    margin-bottom: 25px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.07);
+}
+
+.form-box h3 {
+    color: #075b34;
+    margin-top: 0;
+}
+
+.form-box input,
+.form-box select,
+.form-box textarea {
+    width: 100%;
+    padding: 12px;
+    margin: 6px 0 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 15px;
+}
+
+.form-box textarea {
+    min-height: 90px;
+}
+
+.form-box button {
+    width: 100%;
+    padding: 13px;
+    border: none;
+    border-radius: 9px;
+    background: #0b6b3d;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.info {
+    background: #e9f6ef;
+    border-left: 5px solid #0b6b3d;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 20px 0;
+    line-height: 1.6;
+}
+
+.warning {
+    background: #fff4d6;
+    border-left: 5px solid #d99a00;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 25px;
+    line-height: 1.6;
+}
+
+.workflow {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.step {
+    background: #075b34;
+    color: white;
+    padding: 12px 15px;
+    border-radius: 9px;
+    font-weight: bold;
+}
+
+.future-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 15px;
+}
+
+.future-card {
+    background: white;
+    padding: 20px;
+    border-radius: 14px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.07);
+}
+
+.future-card h3 {
+    color: #075b34;
+    margin-top: 0;
+}
+
+footer {
+    background: #063d25;
+    color: white;
+    text-align: center;
+    padding: 25px 15px;
+    margin-top: 35px;
+}
+
+footer a {
+    color: #b7ff35;
+    text-decoration: none;
+}
+
+@media (max-width: 700px) {
+
+    header h1 {
+        font-size: 26px;
+    }
+
+    nav a {
+        font-size: 12px;
+        padding: 7px 8px;
+    }
+
+    .transaction-top {
+        flex-direction: column;
+    }
+
+    .summary-row {
+        gap: 15px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- LANGUAGES -->
+<div class="top-languages">
+    <button onclick="setLanguage('AZ')">🇦🇿 AZ</button>
+    <button onclick="setLanguage('RU')">🇷🇺 RU</button>
+    <button onclick="setLanguage('EN')">🇬🇧 EN</button>
+    <button onclick="setLanguage('TR')">🇹🇷 TR</button>
+    <button onclick="setLanguage('DE')">🇩🇪 DE</button>
+    <button onclick="setLanguage('AR')">🇸🇦 AR</button>
+    <button onclick="setLanguage('ES')">🇪🇸 ES</button>
+    <button onclick="setLanguage('FR')">🇫🇷 FR</button>
+    <button onclick="setLanguage('IT')">🇮🇹 IT</button>
+</div>
+
+<header>
+    <h1>📊 WORKER PRO — Transactions</h1>
+    <p>История финансовых операций платформы</p>
+</header>
+
+<!-- NAVIGATION -->
+<nav>
+    <a href="../index.html">Главная</a>
+    <a href="../pricing/index.html">Тарифы</a>
+    <a href="../subscriptions/index.html">Подписки</a>
+    <a href="../payments/index.html">Платежи</a>
+    <a href="../wallet/index.html">Кошелёк</a>
+    <a href="../invoices/index.html">Счета</a>
+    <a href="../advertising/index.html">Реклама</a>
+    <a href="../orders/index.html">Заказы</a>
+    <a href="../documents/index.html">Документы</a>
+    <a href="../dashboard/index.html">Dashboard</a>
+</nav>
+
+<div class="container">
+
+    <!-- HERO -->
+    <section class="hero">
+
+        <h2>📊 История транзакций</h2>
+
+        <p>
+            Здесь пользователь сможет видеть все финансовые
+            операции WORKER PRO: пополнения, оплаты,
+            возвраты, подписки, рекламу, счета и заказы.
+        </p>
+
+    </section>
+
+    <!-- STATS -->
+    <div class="stats">
+
+        <div class="stat">
+            <div class="stat-icon">📊</div>
+            <div class="stat-number">48</div>
+            <div class="stat-title">Всего операций</div>
+        </div>
+
+        <div class="stat">
+            <div class="stat-icon">📥</div>
+            <div class="stat-number">18</div>
+            <div class="stat-title">Пополнений</div>
+        </div>
+
+        <div class="stat">
+            <div class="stat-icon">📤</div>
+            <div class="stat-number">25</div>
+            <div class="stat-title">Платежей</div>
+        </div>
+
+        <div class="stat">
+            <div class="stat-icon">↩️</div>
+            <div class="stat-number">5</div>
+            <div class="stat-title">Возвратов</div>
+        </div>
+
+    </div>
+
+    <!-- FILTERS -->
+    <h2 class="section-title">
+        Поиск и фильтры
+    </h2>
+
+    <div class="filters">
+
+        <input
+            type="text"
+            id="search"
+            placeholder="Поиск по операции, компании, номеру..."
+            oninput="filterTransactions()"
+        >
+
+        <select id="typeFilter" onchange="filterTransactions()">
+            <option value="all">Все операции</option>
+            <option value="income">Пополнение</option>
+            <option value="expense">Оплата</option>
+            <option value="refund">Возврат</option>
+            <option value="pending">Ожидает</option>
+        </select>
+
+        <select id="statusFilter" onchange="filterTransactions()">
+            <option value="all">Все статусы</option>
+            <option value="success">Выполнено</option>
+            <option value="pending">Ожидает</option>
+            <option value="refund">Возврат</option>
+            <option value="cancelled">Отменено</option>
+        </select>
+
+        <select id="currencyFilter" onchange="filterTransactions()">
+            <option value="all">Все валюты</option>
+            <option value="AZN">AZN</option>
+            <option value="USD">USD</option>
+            <option value="EUR">EUR</option>
+            <option value="TRY">TRY</option>
+        </select>
+
+    </div>
+
+    <!-- TRANSACTIONS -->
+    <h2 class="section-title">
+        Последние операции
+    </h2>
+
+    <div class="transaction-list" id="transactionList">
+
+        <div class="transaction income"
+             data-type="income"
+             data-status="success"
+             data-currency="AZN"
+             data-search="Пополнение Industrial Manufacturer INV-2026-001">
+
+            <div class="transaction-top">
+
+                <div>
+                    <div class="transaction-title">
+                        📥 Пополнение кошелька
+                    </div>
+
+                    <div class="transaction-info">
+                        ID: TX-2026-001<br>
+                        Дата: 18.09.2026<br>
+                        Источник: Банковская карта<br>
+                        Компания: Industrial Manufacturer
+                    </div>
+                </div>
+
+                <div class="transaction-amount">
+                    +200 AZN
+                </div>
+
+            </div>
+
+            <span class="status status-success">
+                Выполнено
+            </span>
+
+            <div class="transaction-buttons">
+
+                <button onclick="viewTransaction('TX-2026-001')">
+                    👁 Открыть
+                </button>
+
+                <button onclick="receipt('TX-2026-001')">
+                    🧾 Квитанция
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="transaction expense"
+             data-type="expense"
+             data-status="success"
+             data-currency="AZN"
+             data-search="Подписка Professional subscription">
+
+            <div class="transaction-top">
+
+                <div>
+                    <div class="transaction-title">
+                        ⭐ Оплата подписки
+                    </div>
+
+                    <div class="transaction-info">
+                        ID: TX-2026-002<br>
+                        Дата: 17.09.2026<br>
+                        Услуга: Professional<br>
+                        Модуль: Subscriptions
+                    </div>
+                </div>
+
+                <div class="transaction-amount">
+                    -35 AZN
+                </div>
+
+            </div>
+
+            <span class="status status-success">
+                Выполнено
+            </span>
+
+            <div class="transaction-buttons">
+
+                <button onclick="viewTransaction('TX-2026-002')">
+                    👁 Открыть
+                </button>
+
+                <button onclick="openModule('../subscriptions/index.html')">
+                    ⭐ Подписка
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="transaction expense"
+             data-type="expense"
+             data-status="success"
+             data-currency="AZN"
+             data-search="Реклама Business campaign Advertising">
+
+            <div class="transaction-top">
+
+                <div>
+                    <div class="transaction-title">
+                        📢 Оплата рекламы
+                    </div>
+
+                    <div class="transaction-info">
+                        ID: TX-2026-003<br>
+                        Дата: 15.09.2026<br>
+                        Услуга: Business Campaign<br>
+                        Модуль: Advertising
+                    </div>
+                </div>
+
+                <div class="transaction-amount">
+                    -15 AZN
+                </div>
+
+            </div>
+
+            <span class="status status-success">
+                Выполнено
+            </span>
+
+            <div class="transaction-buttons">
+
+                <button onclick="viewTransaction('TX-2026-003')">
+                    👁 Открыть
+                </button>
+
+                <button onclick="openModule('../advertising/index.html')">
+                    📢 Реклама
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="transaction refund"
+             data-type="refund"
+             data-status="refund"
+             data-currency="AZN"
+             data-search="Возврат отмена услуги refund">
+
+            <div class="transaction-top">
+
+                <div>
+                    <div class="transaction-title">
+                        ↩️ Возврат средств
+                    </div>
+
+                    <div class="transaction-info">
+                        ID: TX-2026-004<br>
+                        Дата: 12.09.2026<br>
+                        Причина: Отмена услуги<br>
+                        Связь: Payments
+                    </div>
+                </div>
+
+                <div class="transaction-amount">
+                    +50 AZN
+                </div>
+
+            </div>
+
+            <span class="status status-refund">
+                Возврат
+            </span>
+
+            <div class="transaction-buttons">
+
+                <button onclick="viewTransaction('TX-2026-004')">
+                    👁 Открыть
+                </button>
+
+                <button onclick="openModule('../payments/index.html')">
+                    💳 Платежи
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="transaction expense"
+             data-type="expense"
+             data-status="success"
+             data-currency="USD"
+             data-search="CNC Machine Technology INV-2026-002">
+
+            <div class="transaction-top">
+
+                <div>
+                    <div class="transaction-title">
+                        🏭 Оплата промышленного оборудования
+                    </div>
+
+                    <div class="transaction-info">
+                        ID: TX-2026-005<br>
+                        Дата: 10.09.2026<br>
+                        Поставщик: Machine Technology<br>
+                        Счёт: INV-2026-002
+                    </div>
+                </div>
+
+                <div class="transaction-amount">
+                    -4,800 USD
+                </div>
+
+            </div>
+
+            <span class="status status-success">
+                Выполнено
+            </span>
+
+            <div class="transaction-buttons">
+
+                <button onclick="viewTransaction('TX-2026-005')">
+                    👁 Открыть
+                </button>
+
+                <button onclick="openModule('../invoices/index.html')">
+                    🧾 Счёт
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="transaction pending"
+             data-type="pending"
+             data-status="pending"
+             data-currency="EUR"
+             data-search="Hydraulic Solutions насос EUR">
+
+            <div class="transaction-top">
+
+                <div>
+                    <div class="transaction-title">
+                        ⏳ Оплата гидравлического оборудования
+                    </div>
+
+                    <div class="transaction-info">
+                        ID: TX-2026-006<br>
+                        Дата: 08.09.2026<br>
+                        Поставщик: Hydraulic Solutions<br>
+                        Счёт: INV-2026-003
+                    </div>
+                </div>
+
+                <div class="transaction-amount">
+                    -2,150 EUR
+                </div>
+
+            </div>
+
+            <span class="status status-pending">
+                Ожидает
+            </span>
+
+            <div class="transaction-buttons">
+
+                <button onclick="viewTransaction('TX-2026-006')">
+                    👁 Открыть
+                </button>
+
+                <button onclick="payTransaction('TX-2026-006')">
+                    💳 Оплатить
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="transaction income"
+             data-type="income"
+             data-status="success"
+             data-currency="AZN"
+             data-search="Банковский перевод пополнение">
+
+            <div class="transaction-top">
+
+                <div>
+                    <div class="transaction-title">
+                        🏦 Банковское пополнение
+                    </div>
+
+                    <div class="transaction-info">
+                        ID: TX-2026-007<br>
+                        Дата: 05.09.2026<br>
+                        Метод: Банковский перевод<br>
+                        Кошелёк: WORKER PRO Wallet
+                    </div>
+                </div>
+
+                <div class="transaction-amount">
+                    +650 AZN
+                </div>
+
+            </div>
+
+            <span class="status status-success">
+                Выполнено
+            </span>
+
+            <div class="transaction-buttons">
+
+                <button onclick="viewTransaction('TX-2026-007')">
+                    👁 Открыть
+                </button>
+
+                <button onclick="openModule('../wallet/index.html')">
+                    💰 Wallet
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="transaction expense"
+             data-type="expense"
+             data-status="cancelled"
+             data-currency="TRY"
+             data-search="Industrial Furnace печь отмена">
+
+            <div class="transaction-top">
+
+                <div>
+                    <div class="transaction-title">
+                        🔥 Промышленная печь
+                    </div>
+
+                    <div class="transaction-info">
+                        ID: TX-2026-008<br>
+                        Дата: 02.09.2026<br>
+                        Поставщик: Industrial Furnace<br>
+                        Причина: Заказ отменён
+                    </div>
+                </div>
+
+                <div class="transaction-amount">
+                    -85,000 TRY
+                </div>
+
+            </div>
+
+            <span class="status status-cancelled">
+                Отменено
+            </span>
+
+            <div class="transaction-buttons">
+
+                <button onclick="viewTransaction('TX-2026-008')">
+                    👁 Открыть
+                </button>
+
+                <button onclick="openModule('../orders/index.html')">
+                    📦 Заказы
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- SUMMARY -->
+    <h2 class="section-title">
+        Финансовая сводка
+    </h2>
+
+    <div class="summary">
+
+        <div class="summary-row">
+            <span>Всего пополнений</span>
+            <span class="green">+850 AZN</span>
+        </div>
+
+        <div class="summary-row">
+            <span>Оплата подписок</span>
+            <span class="red">-135 AZN</span>
+        </div>
+
+        <div class="summary-row">
+            <span>Оплата рекламы</span>
+            <span class="red">-85 AZN</span>
+        </div>
+
+        <div class="summary-row">
+            <span>Покупка товаров</span>
+            <span class="red">-380 AZN</span>
+        </div>
+
+        <div class="summary-row">
+            <span>Возвраты</span>
+            <span class="orange">+50 AZN</span>
+        </div>
+
+        <div class="summary-row">
+            <strong>Демо-баланс</strong>
+            <strong class="green">250 AZN</strong>
+        </div>
+
+    </div>
+
+    <!-- NEW TRANSACTION -->
+    <h2 class="section-title">
+        Создать демо-транзакцию
+    </h2>
+
+    <div class="form-box">
+
+        <h3>➕ Новая операция</h3>
+
+        <label>Тип операции</label>
+
+        <select id="newType">
+            <option value="income">Пополнение</option>
+            <option value="expense">Оплата</option>
+            <option value="refund">Возврат</option>
+        </select>
+
+        <label>Описание</label>
+
+        <input
+            type="text"
+            id="newDescription"
+            placeholder="Например: Оплата оборудования"
+        >
+
+        <label>Сумма</label>
+
+        <input
+            type="number"
+            id="newAmount"
+            placeholder="Например: 100"
+            min="0"
+            step="0.01"
+        >
+
+        <label>Валюта</label>
+
+        <select id="newCurrency">
+            <option value="AZN">AZN</option>
+            <option value="USD">USD</option>
+            <option value="EUR">EUR</option>
+            <option value="TRY">TRY</option>
+        </select>
+
+        <label>Примечание</label>
+
+        <textarea
+            id="newNote"
+            placeholder="Дополнительная информация..."
+        ></textarea>
+
+        <button onclick="createTransaction()">
+            Создать демо-транзакцию
+        </button>
+
+    </div>
+
+    <!-- CONNECTION -->
+    <h2 class="section-title">
+        Связь финансовой системы
+    </h2>
+
+    <div class="info">
+
+        <strong>WORKER PRO Financial System</strong><br><br>
+
+        Pricing → Subscriptions → Payments → Wallet →
+        Invoices → Transactions → Orders → Transport
+
+        <br><br>
+
+        Transactions является центральной историей финансовых
+        операций пользователя и связывает платежи,
+        счета, кошелёк, подписки, рекламу и заказы.
+
+    </div>
+
+    <!-- WORKFLOW -->
+    <h2 class="section-title">
+        Как работает система
+    </h2>
+
+    <div class="workflow">
+
+        <div class="step">1. Заявка</div>
+        <div class="step">→</div>
+        <div class="step">2. Предложение</div>
+        <div class="step">→</div>
+        <div class="step">3. Счёт</div>
+        <div class="step">→</div>
+        <div class="step">4. Оплата</div>
+        <div class="step">→</div>
+        <div class="step">5. Транзакция</div>
+        <div class="step">→</div>
+        <div class="step">6. Заказ</div>
+        <div class="step">→</div>
+        <div class="step">7. Доставка</div>
+
+    </div>
+
+    <!-- FUTURE -->
+    <h2 class="section-title">
+        Будущие возможности
+    </h2>
+
+    <div class="future-grid">
+
+        <div class="future-card">
+            <h3>🔎 Расширенный поиск</h3>
+            <p>
+                Поиск по номеру операции, компании,
+                заказу, счёту и пользователю.
+            </p>
+        </div>
+
+        <div class="future-card">
+            <h3>📅 Фильтр по датам</h3>
+            <p>
+                Просмотр операций за день, месяц,
+                год или выбранный период.
+            </p>
+        </div>
+
+        <div class="future-card">
+            <h3>💱 Несколько валют</h3>
+            <p>
+                Поддержка международных валют
+                и автоматической конвертации.
+            </p>
+        </div>
+
+        <div class="future-card">
+            <h3>📄 PDF отчёты</h3>
+            <p>
+                Формирование финансовых отчётов
+                в формате PDF.
+            </p>
+        </div>
+
+        <div class="future-card">
+            <h3>📊 Excel</h3>
+            <p>
+                Экспорт истории транзакций
+                для бухгалтерии и бизнеса.
+            </p>
+        </div>
+
+        <div class="future-card">
+            <h3>🔔 Уведомления</h3>
+            <p>
+                Уведомления о каждой финансовой операции.
+            </p>
+        </div>
+
+        <div class="future-card">
+            <h3>🔐 Безопасность</h3>
+            <p>
+                Защита финансовых операций,
+                подтверждение и история входов.
+            </p>
+        </div>
+
+        <div class="future-card">
+            <h3>🤖 AI-анализ</h3>
+            <p>
+                Анализ расходов и финансовой активности
+                пользователя.
+            </p>
+        </div>
+
+    </div>
+
+    <!-- WARNING -->
+    <div class="warning">
+
+        <strong>⚠️ Демо-версия:</strong><br>
+
+        Все транзакции, суммы, компании и операции
+        на этой странице являются демонстрационными.
+
+        Реальная финансовая система, банковские карты,
+        переводы, вывод средств и подключение платёжных
+        провайдеров пока не активированы.
+
+    </div>
+
+</div>
+
+<footer>
+
+    <p>© 2026 WORKER PRO</p>
+
+    <p>
+        Международная промышленная платформа
+    </p>
+
+    <p>
+        <a href="../wallet/index.html">Wallet</a> |
+        <a href="../invoices/index.html">Счета</a> |
+        <a href="../payments/index.html">Платежи</a> |
+        <a href="../orders/index.html">Заказы</a> |
+        <a href="../dashboard/index.html">Dashboard</a>
+    </p>
+
+    <p>F.S</p>
+
+</footer>
+
+<script src="../language.js"></script>
+
+<script>
+
+function filterTransactions() {
+
+    const search =
+        document.getElementById("search")
+        .value
+        .toLowerCase();
+
+    const type =
+        document.getElementById("typeFilter").value;
+
+    const status =
+        document.getElementById("statusFilter").value;
+
+    const currency =
+        document.getElementById("currencyFilter").value;
+
+    const transactions =
+        document.querySelectorAll(".transaction");
+
+    transactions.forEach(function(item) {
+
+        const text =
+            item.dataset.search.toLowerCase();
+
+        const itemType =
+            item.dataset.type;
+
+        const itemStatus =
+            item.dataset.status;
+
+        const itemCurrency =
+            item.dataset.currency;
+
+        const searchMatch =
+            text.includes(search);
+
+        const typeMatch =
+            type === "all" ||
+            itemType === type;
+
+        const statusMatch =
+            status === "all" ||
+            itemStatus === status;
+
+        const currencyMatch =
+            currency === "all" ||
+            itemCurrency === currency;
+
+        if (
+            searchMatch &&
+            typeMatch &&
+            statusMatch &&
+            currencyMatch
+        ) {
+
+            item.style.display = "block";
+
+        } else {
+
+            item.style.display = "none";
+
+        }
+
+    });
+
+}
+
+function viewTransaction(id) {
+
+    alert(
+        "Демо-просмотр транзакции\n\n" +
+        "ID: " + id +
+        "\n\n" +
+        "В полной версии здесь будет открываться подробная информация об операции."
+    );
+
+}
+
+function receipt(id) {
+
+    alert(
+        "Квитанция для " +
+        id +
+        "\n\n" +
+        "В полной версии здесь будет доступен электронный чек."
+    );
+
+}
+
+function payTransaction(id) {
+
+    alert(
+        "Оплата транзакции " +
+        id +
+        "\n\n" +
+        "Демо-режим: реальная оплата пока не подключена."
+    );
+
+}
+
+function openModule(url) {
+
+    window.location.href = url;
+
+}
+
+function createTransaction() {
+
+    const type =
+        document.getElementById("newType").value;
+
+    const description =
+        document.getElementById("newDescription").value.trim();
+
+    const amount =
+        parseFloat(
+            document.getElementById("newAmount").value
+        );
+
+    const currency =
+        document.getElementById("newCurrency").value;
+
+    if (!description || !amount || amount <= 0) {
+
+        alert(
+            "Введите описание и корректную сумму."
+        );
+
+        return;
+    }
+
+    const id =
+        "TX-2026-" +
+        Math.floor(100 + Math.random() * 900);
+
+    let operation = "";
+
+    if (type === "income") {
+        operation = "Пополнение";
+    }
+
+    if (type === "expense") {
+        operation = "Оплата";
+    }
+
+    if (type === "refund") {
+        operation = "Возврат";
+    }
+
+    alert(
+        "Демо-транзакция создана!\n\n" +
+        "ID: " + id +
+        "\nТип: " + operation +
+        "\nОписание: " + description +
+        "\nСумма: " + amount.toFixed(2) +
+        " " + currency +
+        "\n\n" +
+        "В полной версии операция будет сохранена в базе данных."
+    );
+
+    document.getElementById("newDescription").value = "";
+    document.getElementById("newAmount").value = "";
+    document.getElementById("newNote").value = "";
+
+}
+
+</script>
+
+</body>
+</html>
