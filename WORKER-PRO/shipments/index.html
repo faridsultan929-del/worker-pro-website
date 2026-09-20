@@ -1,1 +1,903 @@
- 
+ <!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WORKER PRO — Shipments</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f7f5;
+    color: #123;
+}
+
+.top-languages {
+    background: #063d25;
+    padding: 10px;
+    text-align: center;
+}
+
+.top-languages button {
+    border: none;
+    background: #0b6b3d;
+    color: white;
+    padding: 9px 13px;
+    margin: 3px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.top-languages button:hover {
+    background: #b7ff35;
+    color: #063d25;
+}
+
+header {
+    background: linear-gradient(135deg, #063d25, #0b6b3d);
+    color: white;
+    text-align: center;
+    padding: 25px 15px;
+}
+
+header img {
+    max-width: 120px;
+    max-height: 90px;
+    object-fit: contain;
+}
+
+header h1 {
+    margin: 8px 0;
+    font-size: 32px;
+}
+
+header p {
+    margin: 5px;
+    font-size: 17px;
+}
+
+nav {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: #075b34;
+    text-align: center;
+    padding: 10px;
+}
+
+nav a {
+    display: inline-block;
+    color: white;
+    text-decoration: none;
+    padding: 8px 10px;
+    margin: 2px;
+    border-radius: 7px;
+    font-size: 14px;
+}
+
+nav a:hover {
+    background: #b7ff35;
+    color: #063d25;
+}
+
+.container {
+    max-width: 1150px;
+    margin: auto;
+    padding: 20px 15px 50px;
+}
+
+.hero {
+    background: white;
+    padding: 28px;
+    border-radius: 18px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,.08);
+}
+
+.hero h2 {
+    color: #063d25;
+}
+
+.search-box {
+    max-width: 800px;
+    margin: 20px auto;
+    display: flex;
+    gap: 10px;
+}
+
+.search-box input {
+    flex: 1;
+    padding: 15px;
+    border: 2px solid #0b6b3d;
+    border-radius: 12px;
+    font-size: 16px;
+}
+
+.search-box button,
+.main-btn {
+    background: #0b6b3d;
+    color: white;
+    border: none;
+    padding: 13px 20px;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.search-box button:hover,
+.main-btn:hover {
+    background: #063d25;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.stat {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 3px 12px rgba(0,0,0,.07);
+}
+
+.stat strong {
+    display: block;
+    color: #0b6b3d;
+    font-size: 28px;
+}
+
+.filters {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.filters button {
+    border: 1px solid #0b6b3d;
+    background: white;
+    color: #075b34;
+    padding: 9px 14px;
+    margin: 4px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.filters button.active,
+.filters button:hover {
+    background: #0b6b3d;
+    color: white;
+}
+
+.section-title {
+    color: #063d25;
+    margin-top: 30px;
+}
+
+.shipments {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+    gap: 16px;
+}
+
+.shipment {
+    background: white;
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 3px 12px rgba(0,0,0,.08);
+    border-left: 5px solid #0b6b3d;
+}
+
+.shipment h3 {
+    color: #063d25;
+    margin-top: 0;
+}
+
+.badge {
+    display: inline-block;
+    padding: 5px 9px;
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.in-transit {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.delivered {
+    background: #d4edda;
+    color: #155724;
+}
+
+.pending {
+    background: #e2e3e5;
+    color: #383d41;
+}
+
+.customs {
+    background: #cce5ff;
+    color: #004085;
+}
+
+.route {
+    background: #f4f7f5;
+    padding: 12px;
+    border-radius: 10px;
+    margin: 12px 0;
+    line-height: 1.6;
+}
+
+.shipment button {
+    background: #0b6b3d;
+    color: white;
+    border: none;
+    padding: 9px 13px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.shipment button:hover {
+    background: #063d25;
+}
+
+.form-box {
+    background: white;
+    padding: 25px;
+    border-radius: 18px;
+    margin-top: 25px;
+    box-shadow: 0 3px 12px rgba(0,0,0,.08);
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+}
+
+.form-box input,
+.form-box select,
+.form-box textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #bbb;
+    border-radius: 9px;
+    font-size: 15px;
+}
+
+.form-box textarea {
+    min-height: 100px;
+    resize: vertical;
+    margin-top: 12px;
+}
+
+.info {
+    background: #063d25;
+    color: white;
+    padding: 25px;
+    border-radius: 18px;
+    margin-top: 25px;
+    line-height: 1.6;
+}
+
+.quick-links {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.quick-links a {
+    background: white;
+    padding: 18px;
+    border-radius: 12px;
+    text-align: center;
+    text-decoration: none;
+    color: #075b34;
+    font-weight: bold;
+    box-shadow: 0 3px 10px rgba(0,0,0,.06);
+}
+
+footer {
+    background: #063d25;
+    color: white;
+    text-align: center;
+    padding: 25px;
+    margin-top: 30px;
+}
+
+@media(max-width:650px) {
+    .search-box {
+        flex-direction: column;
+    }
+
+    header h1 {
+        font-size: 27px;
+    }
+}
+</style>
+
+<script src="../language.js"></script>
+</head>
+
+<body>
+
+<div class="top-languages">
+    <button onclick="setLanguage('AZ')">🇦🇿 AZ</button>
+    <button onclick="setLanguage('RU')">🇷🇺 RU</button>
+    <button onclick="setLanguage('EN')">🇬🇧 EN</button>
+    <button onclick="setLanguage('TR')">🇹🇷 TR</button>
+    <button onclick="setLanguage('DE')">🇩🇪 DE</button>
+    <button onclick="setLanguage('AR')">🇸🇦 AR</button>
+    <button onclick="setLanguage('ES')">🇪🇸 ES</button>
+    <button onclick="setLanguage('FR')">🇫🇷 FR</button>
+    <button onclick="setLanguage('IT')">🇮🇹 IT</button>
+</div>
+
+<header>
+
+    <img src="../logo.png"
+         alt="WORKER PRO Logo"
+         onerror="this.style.display='none'">
+
+    <h1>WORKER PRO</h1>
+
+    <p>Международные промышленные отправления</p>
+
+</header>
+
+<nav>
+    <a href="../index.html">Главная</a>
+    <a href="../orders/index.html">Заказы</a>
+    <a href="../requests/index.html">Запросы</a>
+    <a href="../offers/index.html">Предложения</a>
+    <a href="../contracts/index.html">Контракты</a>
+    <a href="../transport-booking/index.html">Перевозка</a>
+    <a href="../tracking/index.html">Tracking</a>
+    <a href="../warehouses/index.html">Склады</a>
+    <a href="../delivery/index.html">Доставка</a>
+    <a href="../documents/index.html">Документы</a>
+</nav>
+
+<div class="container">
+
+<section class="hero">
+
+    <h2>🚚 Shipments — Отправления</h2>
+
+    <p>
+        Управление промышленными отправлениями
+        от поставщика до получателя.
+    </p>
+
+    <div class="search-box">
+
+        <input
+            id="searchInput"
+            type="text"
+            placeholder="Введите номер отправления, заказа или город..."
+            oninput="searchShipments()">
+
+        <button onclick="searchShipments()">
+            🔎 Найти
+        </button>
+
+    </div>
+
+</section>
+
+
+<div class="stats">
+
+    <div class="stat">
+        <strong>1,248</strong>
+        Отправлений
+    </div>
+
+    <div class="stat">
+        <strong>386</strong>
+        В пути
+    </div>
+
+    <div class="stat">
+        <strong>742</strong>
+        Доставлено
+    </div>
+
+    <div class="stat">
+        <strong>42</strong>
+        Страны
+    </div>
+
+</div>
+
+
+<div class="filters">
+
+    <button class="active"
+            onclick="filterShipments('all', this)">
+        Все
+    </button>
+
+    <button onclick="filterShipments('transit', this)">
+        🚚 В пути
+    </button>
+
+    <button onclick="filterShipments('customs', this)">
+        🛃 Таможня
+    </button>
+
+    <button onclick="filterShipments('pending', this)">
+        ⏳ Ожидает
+    </button>
+
+    <button onclick="filterShipments('delivered', this)">
+        ✅ Доставлено
+    </button>
+
+</div>
+
+
+<h2 class="section-title">
+    Последние отправления
+</h2>
+
+<div class="shipments" id="shipmentList">
+
+
+<div class="shipment"
+     data-status="transit"
+     data-search="SHP-2026-001 Azerbaijan Germany CNC spare parts Baku Munich">
+
+    <span class="badge in-transit">🚚 В ПУТИ</span>
+
+    <h3>SHP-2026-001</h3>
+
+    <div class="route">
+        🇦🇿 Baku, Azerbaijan<br>
+        ↓<br>
+        🇩🇪 Munich, Germany
+    </div>
+
+    <p><b>Груз:</b> CNC Spare Parts</p>
+    <p><b>Вес:</b> 850 kg</p>
+    <p><b>Транспорт:</b> 🚛 Road</p>
+    <p><b>ETA:</b> 25 Sep 2026</p>
+
+    <button onclick="showShipment('SHP-2026-001')">
+        Подробнее
+    </button>
+
+</div>
+
+
+<div class="shipment"
+     data-status="customs"
+     data-search="SHP-2026-002 Turkey Azerbaijan Istanbul Baku hydraulic pumps">
+
+    <span class="badge customs">🛃 ТАМОЖНЯ</span>
+
+    <h3>SHP-2026-002</h3>
+
+    <div class="route">
+        🇹🇷 Istanbul, Turkey<br>
+        ↓<br>
+        🇦🇿 Baku, Azerbaijan
+    </div>
+
+    <p><b>Груз:</b> Hydraulic Pumps</p>
+    <p><b>Вес:</b> 1,200 kg</p>
+    <p><b>Транспорт:</b> 🚢 Sea</p>
+    <p><b>ETA:</b> 23 Sep 2026</p>
+
+    <button onclick="showShipment('SHP-2026-002')">
+        Подробнее
+    </button>
+
+</div>
+
+
+<div class="shipment"
+     data-status="delivered"
+     data-search="SHP-2026-003 Italy Germany welding equipment Milan Berlin">
+
+    <span class="badge delivered">✅ ДОСТАВЛЕНО</span>
+
+    <h3>SHP-2026-003</h3>
+
+    <div class="route">
+        🇮🇹 Milan, Italy<br>
+        ↓<br>
+        🇩🇪 Berlin, Germany
+    </div>
+
+    <p><b>Груз:</b> Welding Equipment</p>
+    <p><b>Вес:</b> 640 kg</p>
+    <p><b>Транспорт:</b> 🚛 Road</p>
+    <p><b>Delivered:</b> 18 Sep 2026</p>
+
+    <button onclick="showShipment('SHP-2026-003')">
+        Подробнее
+    </button>
+
+</div>
+
+
+<div class="shipment"
+     data-status="pending"
+     data-search="SHP-2026-004 China Azerbaijan sensors Shanghai Baku">
+
+    <span class="badge pending">⏳ ОЖИДАЕТ</span>
+
+    <h3>SHP-2026-004</h3>
+
+    <div class="route">
+        🇨🇳 Shanghai, China<br>
+        ↓<br>
+        🇦🇿 Baku, Azerbaijan
+    </div>
+
+    <p><b>Груз:</b> Industrial Sensors</p>
+    <p><b>Вес:</b> 320 kg</p>
+    <p><b>Транспорт:</b> ✈️ Air</p>
+    <p><b>Pickup:</b> 24 Sep 2026</p>
+
+    <button onclick="showShipment('SHP-2026-004')">
+        Подробнее
+    </button>
+
+</div>
+
+
+<div class="shipment"
+     data-status="transit"
+     data-search="SHP-2026-005 USA Azerbaijan automation PLC Houston Baku">
+
+    <span class="badge in-transit">🚚 В ПУТИ</span>
+
+    <h3>SHP-2026-005</h3>
+
+    <div class="route">
+        🇺🇸 Houston, USA<br>
+        ↓<br>
+        🇦🇿 Baku, Azerbaijan
+    </div>
+
+    <p><b>Груз:</b> PLC Automation Equipment</p>
+    <p><b>Вес:</b> 480 kg</p>
+    <p><b>Транспорт:</b> ✈️ Air</p>
+    <p><b>ETA:</b> 28 Sep 2026</p>
+
+    <button onclick="showShipment('SHP-2026-005')">
+        Подробнее
+    </button>
+
+</div>
+
+
+<div class="shipment"
+     data-status="transit"
+     data-search="SHP-2026-006 Azerbaijan Turkey metal materials Sumqayit Ankara">
+
+    <span class="badge in-transit">🚚 В ПУТИ</span>
+
+    <h3>SHP-2026-006</h3>
+
+    <div class="route">
+        🇦🇿 Sumqayit, Azerbaijan<br>
+        ↓<br>
+        🇹🇷 Ankara, Turkey
+    </div>
+
+    <p><b>Груз:</b> Metal Materials</p>
+    <p><b>Вес:</b> 4,500 kg</p>
+    <p><b>Транспорт:</b> 🚛 Road</p>
+    <p><b>ETA:</b> 27 Sep 2026</p>
+
+    <button onclick="showShipment('SHP-2026-006')">
+        Подробнее
+    </button>
+
+</div>
+
+</div>
+
+
+<section class="form-box">
+
+    <h2 class="section-title">
+        ➕ Создать отправление
+    </h2>
+
+    <div class="form-grid">
+
+        <input id="sender"
+               placeholder="Отправитель">
+
+        <input id="receiver"
+               placeholder="Получатель">
+
+        <input id="cargo"
+               placeholder="Название груза">
+
+        <input id="weight"
+               placeholder="Вес, kg">
+
+        <input id="fromCity"
+               placeholder="Город отправления">
+
+        <input id="toCity"
+               placeholder="Город назначения">
+
+        <select id="transport">
+            <option value="">Вид транспорта</option>
+            <option>🚛 Road</option>
+            <option>🚢 Sea</option>
+            <option>✈️ Air</option>
+            <option>🚆 Rail</option>
+        </select>
+
+        <input id="date"
+               type="date">
+
+    </div>
+
+    <textarea
+        id="description"
+        placeholder="Дополнительная информация о грузе"></textarea>
+
+    <br>
+
+    <button class="main-btn"
+            onclick="createShipment()">
+        Создать отправление
+    </button>
+
+</section>
+
+
+<section class="info">
+
+    <h2>🌍 Как работает Shipments</h2>
+
+    <p>
+        1. Покупатель создаёт заказ или запрос.
+    </p>
+
+    <p>
+        2. Поставщик подтверждает товар и условия.
+    </p>
+
+    <p>
+        3. Создаётся отправление.
+    </p>
+
+    <p>
+        4. Выбирается перевозчик и транспорт.
+    </p>
+
+    <p>
+        5. Груз отправляется получателю.
+    </p>
+
+    <p>
+        6. Отправление можно отслеживать через Tracking.
+    </p>
+
+    <p>
+        7. После получения заказ закрывается.
+    </p>
+
+</section>
+
+
+<h2 class="section-title">
+    Быстрые разделы
+</h2>
+
+<div class="quick-links">
+
+    <a href="../tracking/index.html">
+        📍 Tracking
+    </a>
+
+    <a href="../transport-booking/index.html">
+        🚚 Transport Booking
+    </a>
+
+    <a href="../delivery/index.html">
+        📦 Delivery
+    </a>
+
+    <a href="../carriers/index.html">
+        🚛 Carriers
+    </a>
+
+    <a href="../warehouses/index.html">
+        🏭 Warehouses
+    </a>
+
+    <a href="../orders/index.html">
+        📋 Orders
+    </a>
+
+    <a href="../documents/index.html">
+        📄 Documents
+    </a>
+
+    <a href="../invoices/index.html">
+        💳 Invoices
+    </a>
+
+</div>
+
+</div>
+
+
+<footer>
+    <strong>WORKER PRO</strong><br><br>
+    Международная промышленная платформа<br>
+    Production • Trade • Logistics • Delivery<br><br>
+    F.S © 2026
+</footer>
+
+
+<script>
+
+let currentFilter = "all";
+
+
+function filterShipments(status, button) {
+
+    currentFilter = status;
+
+    document
+        .querySelectorAll(".filters button")
+        .forEach(btn => {
+            btn.classList.remove("active");
+        });
+
+    button.classList.add("active");
+
+    searchShipments();
+}
+
+
+function searchShipments() {
+
+    const query =
+        document
+        .getElementById("searchInput")
+        .value
+        .toLowerCase()
+        .trim();
+
+    const items =
+        document.querySelectorAll(".shipment");
+
+    let visible = 0;
+
+    items.forEach(item => {
+
+        const text =
+            item
+            .getAttribute("data-search")
+            .toLowerCase();
+
+        const status =
+            item
+            .getAttribute("data-status");
+
+        const textMatch =
+            query === "" || text.includes(query);
+
+        const statusMatch =
+            currentFilter === "all" ||
+            status === currentFilter;
+
+        if (textMatch && statusMatch) {
+
+            item.style.display = "block";
+            visible++;
+
+        } else {
+
+            item.style.display = "none";
+
+        }
+
+    });
+
+}
+
+
+function showShipment(id) {
+
+    alert(
+        "WORKER PRO\n\n" +
+        "Отправление: " + id + "\n\n" +
+        "Подробная информация о маршруте, " +
+        "перевозчике, документах, статусе и ETA " +
+        "будет подключена к реальной системе."
+    );
+
+}
+
+
+function createShipment() {
+
+    const sender =
+        document.getElementById("sender").value.trim();
+
+    const receiver =
+        document.getElementById("receiver").value.trim();
+
+    const cargo =
+        document.getElementById("cargo").value.trim();
+
+    const weight =
+        document.getElementById("weight").value.trim();
+
+    const fromCity =
+        document.getElementById("fromCity").value.trim();
+
+    const toCity =
+        document.getElementById("toCity").value.trim();
+
+    if (
+        !sender ||
+        !receiver ||
+        !cargo ||
+        !weight ||
+        !fromCity ||
+        !toCity
+    ) {
+
+        alert(
+            "Пожалуйста, заполните основные поля."
+        );
+
+        return;
+    }
+
+    const number =
+        "SHP-2026-" +
+        Math.floor(100 + Math.random() * 900);
+
+    alert(
+        "Отправление создано!\n\n" +
+        "Номер: " + number + "\n" +
+        "Груз: " + cargo + "\n" +
+        "Маршрут: " +
+        fromCity + " → " + toCity + "\n\n" +
+        "Это демонстрационная функция."
+    );
+
+    document.querySelector(".form-box form");
+
+    document.getElementById("sender").value = "";
+    document.getElementById("receiver").value = "";
+    document.getElementById("cargo").value = "";
+    document.getElementById("weight").value = "";
+    document.getElementById("fromCity").value = "";
+    document.getElementById("toCity").value = "";
+    document.getElementById("date").value = "";
+    document.getElementById("description").value = "";
+
+}
+
+</script>
+
+</body>
+</html>
