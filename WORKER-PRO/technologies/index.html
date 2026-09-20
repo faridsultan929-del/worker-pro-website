@@ -1,1 +1,938 @@
- 
+ <!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WORKER PRO — Technologies</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f7f5;
+    color: #123;
+}
+
+.top-languages {
+    background: #063d25;
+    padding: 10px;
+    text-align: center;
+}
+
+.top-languages button {
+    border: none;
+    background: #0b6b3d;
+    color: white;
+    padding: 9px 13px;
+    margin: 3px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.top-languages button:hover {
+    background: #b7ff35;
+    color: #063d25;
+}
+
+header {
+    background: linear-gradient(135deg, #063d25, #0b6b3d);
+    color: white;
+    text-align: center;
+    padding: 28px 15px;
+}
+
+header img {
+    max-width: 120px;
+    max-height: 90px;
+    object-fit: contain;
+}
+
+header h1 {
+    margin: 8px 0;
+    font-size: 32px;
+}
+
+header p {
+    margin: 5px 0;
+    font-size: 17px;
+}
+
+nav {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: #075b34;
+    text-align: center;
+    padding: 10px;
+}
+
+nav a {
+    display: inline-block;
+    color: white;
+    text-decoration: none;
+    padding: 8px 10px;
+    margin: 2px;
+    border-radius: 7px;
+    font-size: 14px;
+}
+
+nav a:hover {
+    background: #b7ff35;
+    color: #063d25;
+}
+
+.container {
+    max-width: 1150px;
+    margin: auto;
+    padding: 20px 15px 50px;
+}
+
+.hero {
+    background: white;
+    padding: 30px;
+    border-radius: 18px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,.08);
+}
+
+.hero h2 {
+    color: #063d25;
+    font-size: 28px;
+}
+
+.search-box {
+    max-width: 850px;
+    margin: 20px auto;
+    display: flex;
+    gap: 10px;
+}
+
+.search-box input {
+    flex: 1;
+    padding: 15px;
+    border: 2px solid #0b6b3d;
+    border-radius: 12px;
+    font-size: 16px;
+}
+
+.search-box button {
+    background: #0b6b3d;
+    color: white;
+    border: none;
+    padding: 0 25px;
+    border-radius: 12px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.search-box button:hover {
+    background: #063d25;
+}
+
+.filters {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.filters button {
+    border: 1px solid #0b6b3d;
+    background: white;
+    color: #075b34;
+    padding: 9px 14px;
+    margin: 4px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.filters button.active,
+.filters button:hover {
+    background: #0b6b3d;
+    color: white;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.stat {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 3px 12px rgba(0,0,0,.07);
+}
+
+.stat strong {
+    display: block;
+    color: #0b6b3d;
+    font-size: 28px;
+    margin-bottom: 5px;
+}
+
+.section-title {
+    color: #063d25;
+    margin-top: 30px;
+}
+
+.technologies {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    gap: 16px;
+}
+
+.tech-card {
+    background: white;
+    padding: 22px;
+    border-radius: 16px;
+    box-shadow: 0 3px 12px rgba(0,0,0,.08);
+    border-left: 5px solid #0b6b3d;
+}
+
+.tech-card h3 {
+    color: #063d25;
+    margin-top: 0;
+}
+
+.icon {
+    font-size: 38px;
+    margin-bottom: 8px;
+}
+
+.badge {
+    display: inline-block;
+    background: #e8f6ed;
+    color: #075b34;
+    padding: 5px 9px;
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.tech-card p {
+    line-height: 1.55;
+}
+
+.tech-card button {
+    background: #0b6b3d;
+    color: white;
+    border: none;
+    padding: 9px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.tech-card button:hover {
+    background: #063d25;
+}
+
+.workflow {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.step {
+    background: white;
+    padding: 18px;
+    border-radius: 14px;
+    text-align: center;
+    box-shadow: 0 3px 10px rgba(0,0,0,.06);
+}
+
+.step strong {
+    display: block;
+    color: #0b6b3d;
+    font-size: 22px;
+    margin-bottom: 8px;
+}
+
+.info {
+    background: #063d25;
+    color: white;
+    padding: 28px;
+    border-radius: 18px;
+    margin-top: 30px;
+    line-height: 1.65;
+}
+
+.quick-links {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.quick-links a {
+    background: white;
+    padding: 18px;
+    border-radius: 12px;
+    text-align: center;
+    text-decoration: none;
+    color: #075b34;
+    font-weight: bold;
+    box-shadow: 0 3px 10px rgba(0,0,0,.06);
+}
+
+.no-results {
+    display: none;
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    text-align: center;
+    margin-top: 15px;
+}
+
+footer {
+    background: #063d25;
+    color: white;
+    text-align: center;
+    padding: 25px;
+    margin-top: 30px;
+}
+
+@media(max-width:650px) {
+    .search-box {
+        flex-direction: column;
+    }
+
+    .search-box button {
+        padding: 13px;
+    }
+
+    header h1 {
+        font-size: 27px;
+    }
+}
+</style>
+
+<script src="../language.js"></script>
+</head>
+
+<body>
+
+<div class="top-languages">
+    <button onclick="setLanguage('AZ')">🇦🇿 AZ</button>
+    <button onclick="setLanguage('RU')">🇷🇺 RU</button>
+    <button onclick="setLanguage('EN')">🇬🇧 EN</button>
+    <button onclick="setLanguage('TR')">🇹🇷 TR</button>
+    <button onclick="setLanguage('DE')">🇩🇪 DE</button>
+    <button onclick="setLanguage('AR')">🇸🇦 AR</button>
+    <button onclick="setLanguage('ES')">🇪🇸 ES</button>
+    <button onclick="setLanguage('FR')">🇫🇷 FR</button>
+    <button onclick="setLanguage('IT')">🇮🇹 IT</button>
+</div>
+
+<header>
+
+    <img src="../logo.png"
+         alt="WORKER PRO Logo"
+         onerror="this.style.display='none'">
+
+    <h1>WORKER PRO</h1>
+
+    <p>Промышленные технологии и производственные процессы</p>
+
+</header>
+
+<nav>
+    <a href="../index.html">Главная</a>
+    <a href="../production/index.html">Производство</a>
+    <a href="../industries/index.html">Отрасли</a>
+    <a href="../equipment/index.html">Оборудование</a>
+    <a href="../products/index.html">Товары</a>
+    <a href="../manufacturers/index.html">Производители</a>
+    <a href="../companies/index.html">Компании</a>
+    <a href="../specialists/index.html">Специалисты</a>
+    <a href="../training/index.html">Обучение</a>
+    <a href="../articles/index.html">Статьи</a>
+</nav>
+
+<div class="container">
+
+<section class="hero">
+
+    <h2>⚙️ Industrial Technologies</h2>
+
+    <p>
+        Изучайте современные технологии производства,
+        оборудования, автоматизации и промышленной обработки.
+    </p>
+
+    <div class="search-box">
+
+        <input
+            id="searchInput"
+            type="text"
+            placeholder="Например: CNC, welding, hydraulics, automation..."
+            oninput="searchTechnologies()">
+
+        <button onclick="searchTechnologies()">
+            🔎 Найти
+        </button>
+
+    </div>
+
+    <div class="filters">
+
+        <button class="active"
+                onclick="filterTechnology('all', this)">
+            Все
+        </button>
+
+        <button onclick="filterTechnology('cnc', this)">
+            CNC
+        </button>
+
+        <button onclick="filterTechnology('metal', this)">
+            Металлообработка
+        </button>
+
+        <button onclick="filterTechnology('automation', this)">
+            Автоматизация
+        </button>
+
+        <button onclick="filterTechnology('welding', this)">
+            Сварка
+        </button>
+
+        <button onclick="filterTechnology('hydraulic', this)">
+            Гидравлика
+        </button>
+
+        <button onclick="filterTechnology('heating', this)">
+            Термообработка
+        </button>
+
+        <button onclick="filterTechnology('safety', this)">
+            Безопасность
+        </button>
+
+    </div>
+
+</section>
+
+
+<div class="stats">
+
+    <div class="stat">
+        <strong>120+</strong>
+        Технологий
+    </div>
+
+    <div class="stat">
+        <strong>28+</strong>
+        Отраслей
+    </div>
+
+    <div class="stat">
+        <strong>42</strong>
+        Страны
+    </div>
+
+    <div class="stat">
+        <strong>3,800+</strong>
+        Компаний
+    </div>
+
+</div>
+
+
+<h2 class="section-title">
+    Промышленные технологии
+</h2>
+
+<div class="technologies" id="technologyList">
+
+
+<div class="tech-card technology"
+     data-type="cnc"
+     data-search="cnc machining cnc станок обработка металл">
+
+    <div class="icon">🖥️</div>
+
+    <span class="badge">CNC</span>
+
+    <h3>CNC Machining</h3>
+
+    <p>
+        Обработка металлических деталей на станках
+        с числовым программным управлением.
+    </p>
+
+    <button onclick="showTechnology('CNC Machining')">
+        Подробнее
+    </button>
+
+</div>
+
+
+<div class="tech-card technology"
+     data-type="metal"
+     data-search="turning токарная обработка lathe">
+
+    <div class="icon">⚙️</div>
+
+    <span class="badge">МЕТАЛЛООБРАБОТКА</span>
+
+    <h3>Turning</h3>
+
+    <p>
+        Токарная обработка деталей с использованием
+        токарных станков и режущего инструмента.
+    </p>
+
+    <button onclick="showTechnology('Turning')">
+        Подробнее
+    </button>
+
+</div>
+
+
+<div class="tech-card technology"
+     data-type="metal"
+     data-search="milling фрезерование milling machine">
+
+    <div class="icon">🔩</div>
+
+    <span class="badge">МЕТАЛЛООБРАБОТКА</span>
+
+    <h3>Milling</h3>
+
+    <p>
+        Фрезерование поверхностей, пазов, отверстий
+        и сложных геометрических элементов.
+    </p>
+
+    <button onclick="showTechnology('Milling')">
+        Подробнее
+    </button>
+
+</div>
+
+
+<div class="tech-card technology"
+     data-type="welding"
+     data-search="welding сварка mig tig arc">
+
+    <div class="icon">🔥</div>
+
+    <span class="badge">СВАРКА</span>
+
+    <h3>Welding Technologies</h3>
+
+    <p>
+        MIG/MAG, TIG, дуговая и другие технологии
+        промышленной сварки.
+    </p>
+
+    <button onclick="showTechnology('Welding Technologies')">
+        Подробнее
+    </button>
+
+</div>
+
+
+<div class="tech-card technology"
+     data-type="hydraulic"
+     data-search="hydraulics гидравлика hydraulic pump valve">
+
+    <div class="icon">💧</div>
+
+    <span class="badge">ГИДРАВЛИКА</span>
+
+    <h3>Hydraulic Systems</h3>
+
+    <p>
+        Гидравлические насосы, клапаны, цилиндры,
+        гидростанции и системы управления.
+    </p>
+
+    <button onclick="showTechnology('Hydraulic Systems')">
+        Подробнее
+    </button>
+
+</div>
+
+
+<div class="tech-card technology"
+     data-type="automation"
+     data-search="automation автоматизация plc robot robotics">
+
+    <div class="icon">🤖</div>
+
+    <span class="badge">АВТОМАТИЗАЦИЯ</span>
+
+    <h3>Industrial Automation</h3>
+
+    <p>
+        PLC, промышленные роботы, контроллеры,
+        датчики и автоматизированные линии.
+    </p>
+
+    <button onclick="showTechnology('Industrial Automation')">
+        Подробнее
+    </button>
+
+</div>
+
+
+<div class="tech-card technology"
+     data-type="heating"
+     data-search="heat treatment термообработка furnace heating">
+
+    <div class="icon">🔥</div>
+
+    <span class="badge">ТЕРМООБРАБОТКА</span>
+
+    <h3>Heat Treatment</h3>
+
+    <p>
+        Закалка, отпуск, отжиг и другие процессы
+        изменения свойств металлических материалов.
+    </p>
+
+    <button onclick="showTechnology('Heat Treatment')">
+        Подробнее
+    </button>
+
+</div>
+
+
+<div class="tech-card technology"
+     data-type="metal"
+     data-search="stamping штамповка press metal">
+
+    <div class="icon">🏗️</div>
+
+    <span class="badge">ШТАМПОВКА</span>
+
+    <h3>Metal Stamping</h3>
+
+    <p>
+        Формирование металлических деталей с помощью
+        прессового оборудования и штампов.
+    </p>
+
+    <button onclick="showTechnology('Metal Stamping')">
+        Подробнее
+    </button>
+
+</div>
+
+
+<div class="tech-card technology"
+     data-type="automation"
+     data-search="sensors датчики measurement control">
+
+    <div class="icon">📡</div>
+
+    <span class="badge">АВТОМАТИЗАЦИЯ</span>
+
+    <h3>Industrial Sensors</h3>
+
+    <p>
+        Датчики температуры, давления, положения,
+        уровня, расхода и других параметров.
+    </p>
+
+    <button onclick="showTechnology('Industrial Sensors')">
+        Подробнее
+    </button>
+
+</div>
+
+
+<div class="tech-card technology"
+     data-type="safety"
+     data-search="industrial safety безопасность ppe machine">
+
+    <div class="icon">🦺</div>
+
+    <span class="badge">БЕЗОПАСНОСТЬ</span>
+
+    <h3>Industrial Safety</h3>
+
+    <p>
+        Безопасная эксплуатация оборудования,
+        PPE, защита работников и контроль рисков.
+    </p>
+
+    <button onclick="showTechnology('Industrial Safety')">
+        Подробнее
+    </button>
+
+</div>
+
+
+<div class="tech-card technology"
+     data-type="metal"
+     data-search="laser cutting лазерная резка cutting metal">
+
+    <div class="icon">🔴</div>
+
+    <span class="badge">МЕТАЛЛООБРАБОТКА</span>
+
+    <h3>Laser Cutting</h3>
+
+    <p>
+        Высокоточная лазерная резка металлических
+        листов и деталей.
+    </p>
+
+    <button onclick="showTechnology('Laser Cutting')">
+        Подробнее
+    </button>
+
+</div>
+
+
+<div class="tech-card technology"
+     data-type="metal"
+     data-search="plasma cutting плазменная резка metal">
+
+    <div class="icon">⚡</div>
+
+    <span class="badge">МЕТАЛЛООБРАБОТКА</span>
+
+    <h3>Plasma Cutting</h3>
+
+    <p>
+        Плазменная резка металла для производственных
+        и ремонтных работ.
+    </p>
+
+    <button onclick="showTechnology('Plasma Cutting')">
+        Подробнее
+    </button>
+
+</div>
+
+</div>
+
+<div id="noResults" class="no-results">
+    <h3>Ничего не найдено</h3>
+    <p>
+        Попробуйте изменить запрос или выбрать другую категорию.
+    </p>
+</div>
+
+
+<h2 class="section-title">
+    📚 Как изучать технологию
+</h2>
+
+<div class="workflow">
+
+    <div class="step">
+        <strong>01</strong>
+        Выберите технологию
+    </div>
+
+    <div class="step">
+        <strong>02</strong>
+        Изучите оборудование
+    </div>
+
+    <div class="step">
+        <strong>03</strong>
+        Изучите безопасность
+    </div>
+
+    <div class="step">
+        <strong>04</strong>
+        Пройдите обучение
+    </div>
+
+    <div class="step">
+        <strong>05</strong>
+        Получите сертификат
+    </div>
+
+</div>
+
+
+<section class="info">
+
+    <h2>🌍 Technologies в WORKER PRO</h2>
+
+    <p>
+        Раздел Technologies предназначен для объединения
+        производственных технологий, оборудования,
+        специалистов и обучения.
+    </p>
+
+    <p>
+        Здесь пользователь сможет изучить технологический
+        процесс, найти необходимое оборудование, посмотреть
+        производителей и поставщиков и затем запросить
+        предложение.
+    </p>
+
+    <p>
+        В будущем каждая технология может иметь отдельную
+        страницу с инструкциями, схемами, оборудованием,
+        материалами, запчастями, безопасностью и учебными
+        курсами.
+    </p>
+
+</section>
+
+
+<h2 class="section-title">
+    Быстрые разделы
+</h2>
+
+<div class="quick-links">
+
+    <a href="../production/index.html">
+        🏭 Производство
+    </a>
+
+    <a href="../industries/index.html">
+        🏗️ Отрасли
+    </a>
+
+    <a href="../equipment/index.html">
+        ⚙️ Оборудование
+    </a>
+
+    <a href="../products/index.html">
+        📦 Товары
+    </a>
+
+    <a href="../manufacturers/index.html">
+        🏭 Производители
+    </a>
+
+    <a href="../suppliers/index.html">
+        🚚 Поставщики
+    </a>
+
+    <a href="../training/index.html">
+        🎓 Обучение
+    </a>
+
+    <a href="../articles/index.html">
+        📚 Статьи
+    </a>
+
+</div>
+
+</div>
+
+
+<footer>
+    <strong>WORKER PRO</strong><br><br>
+    Глобальная промышленная платформа<br>
+    Production • Technologies • Training • Trade • Logistics<br><br>
+    F.S © 2026
+</footer>
+
+
+<script>
+
+let currentFilter = "all";
+
+
+function filterTechnology(type, button) {
+
+    currentFilter = type;
+
+    document
+        .querySelectorAll(".filters button")
+        .forEach(btn => {
+            btn.classList.remove("active");
+        });
+
+    button.classList.add("active");
+
+    searchTechnologies();
+}
+
+
+function searchTechnologies() {
+
+    const query =
+        document
+        .getElementById("searchInput")
+        .value
+        .toLowerCase()
+        .trim();
+
+    const items =
+        document.querySelectorAll(".technology");
+
+    let count = 0;
+
+    items.forEach(item => {
+
+        const text =
+            item
+            .getAttribute("data-search")
+            .toLowerCase();
+
+        const type =
+            item.getAttribute("data-type");
+
+        const textMatch =
+            query === "" || text.includes(query);
+
+        const typeMatch =
+            currentFilter === "all" ||
+            type === currentFilter;
+
+        if (textMatch && typeMatch) {
+
+            item.style.display = "block";
+            count++;
+
+        } else {
+
+            item.style.display = "none";
+
+        }
+
+    });
+
+    document.getElementById("noResults").style.display =
+        count === 0 ? "block" : "none";
+}
+
+
+function showTechnology(name) {
+
+    alert(
+        "WORKER PRO\n\n" +
+        name +
+        "\n\n" +
+        "Детальная страница технологии " +
+        "будет подключена к базе WORKER PRO.\n\n" +
+        "В будущем здесь будут:\n" +
+        "• оборудование\n" +
+        "• материалы\n" +
+        "• инструменты\n" +
+        "• безопасность\n" +
+        "• обучение\n" +
+        "• производители\n" +
+        "• поставщики\n" +
+        "• запчасти"
+    );
+
+}
+
+</script>
+
+</body>
+</html>
