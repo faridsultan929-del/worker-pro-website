@@ -1,1 +1,832 @@
- 
+ <!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WORKER PRO — Search</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f7f5;
+    color: #123;
+}
+
+.top-languages {
+    background: #063d25;
+    padding: 10px;
+    text-align: center;
+}
+
+.top-languages button {
+    border: none;
+    background: #0b6b3d;
+    color: white;
+    padding: 9px 13px;
+    margin: 3px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.top-languages button:hover {
+    background: #b7ff35;
+    color: #063d25;
+}
+
+header {
+    background: linear-gradient(135deg, #063d25, #0b6b3d);
+    color: white;
+    padding: 25px 15px;
+    text-align: center;
+}
+
+header img {
+    max-width: 120px;
+    max-height: 90px;
+    object-fit: contain;
+    margin-bottom: 10px;
+}
+
+header h1 {
+    margin: 5px 0;
+    font-size: 32px;
+}
+
+header p {
+    margin: 8px 0 0;
+    font-size: 17px;
+}
+
+nav {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: #075b34;
+    padding: 10px;
+    text-align: center;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+    padding: 8px 10px;
+    margin: 2px;
+    border-radius: 7px;
+    font-size: 14px;
+}
+
+nav a:hover {
+    background: #b7ff35;
+    color: #063d25;
+}
+
+.container {
+    max-width: 1150px;
+    margin: auto;
+    padding: 20px 15px 50px;
+}
+
+.hero {
+    background: white;
+    border-radius: 18px;
+    padding: 28px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    text-align: center;
+}
+
+.hero h2 {
+    color: #063d25;
+    margin-top: 0;
+}
+
+.search-main {
+    display: flex;
+    gap: 10px;
+    max-width: 900px;
+    margin: 20px auto 10px;
+}
+
+.search-main input {
+    flex: 1;
+    padding: 16px;
+    border: 2px solid #0b6b3d;
+    border-radius: 12px;
+    font-size: 17px;
+}
+
+.search-main button {
+    background: #0b6b3d;
+    color: white;
+    border: none;
+    padding: 0 25px;
+    border-radius: 12px;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.search-main button:hover {
+    background: #063d25;
+}
+
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin: 15px 0;
+}
+
+.filters button {
+    border: 1px solid #0b6b3d;
+    background: white;
+    color: #075b34;
+    padding: 9px 14px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.filters button.active,
+.filters button:hover {
+    background: #0b6b3d;
+    color: white;
+}
+
+.section-title {
+    color: #063d25;
+    margin: 28px 0 15px;
+}
+
+.results {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 15px;
+}
+
+.card {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+    border-left: 5px solid #0b6b3d;
+}
+
+.card h3 {
+    color: #063d25;
+    margin-top: 0;
+}
+
+.badge {
+    display: inline-block;
+    background: #e8f6ed;
+    color: #075b34;
+    padding: 5px 9px;
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.card p {
+    line-height: 1.5;
+}
+
+.card button {
+    background: #0b6b3d;
+    color: white;
+    border: none;
+    padding: 9px 13px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.card button:hover {
+    background: #063d25;
+}
+
+.no-results {
+    display: none;
+    background: white;
+    padding: 25px;
+    text-align: center;
+    border-radius: 15px;
+    color: #666;
+}
+
+.quick-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+}
+
+.quick {
+    background: white;
+    padding: 18px;
+    border-radius: 14px;
+    text-align: center;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.07);
+}
+
+.quick a {
+    color: #075b34;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.info {
+    background: #063d25;
+    color: white;
+    padding: 25px;
+    border-radius: 18px;
+    margin-top: 25px;
+    line-height: 1.6;
+}
+
+footer {
+    background: #063d25;
+    color: white;
+    text-align: center;
+    padding: 25px;
+    margin-top: 30px;
+}
+
+@media (max-width: 650px) {
+    .search-main {
+        flex-direction: column;
+    }
+
+    .search-main button {
+        padding: 13px;
+    }
+
+    header h1 {
+        font-size: 26px;
+    }
+
+    nav a {
+        font-size: 13px;
+    }
+}
+</style>
+
+<script src="../language.js"></script>
+</head>
+
+<body>
+
+<div class="top-languages">
+    <button onclick="setLanguage('AZ')">🇦🇿 AZ</button>
+    <button onclick="setLanguage('RU')">🇷🇺 RU</button>
+    <button onclick="setLanguage('EN')">🇬🇧 EN</button>
+    <button onclick="setLanguage('TR')">🇹🇷 TR</button>
+    <button onclick="setLanguage('DE')">🇩🇪 DE</button>
+    <button onclick="setLanguage('AR')">🇸🇦 AR</button>
+    <button onclick="setLanguage('ES')">🇪🇸 ES</button>
+    <button onclick="setLanguage('FR')">🇫🇷 FR</button>
+    <button onclick="setLanguage('IT')">🇮🇹 IT</button>
+</div>
+
+<header>
+
+    <img src="../logo.png" alt="WORKER PRO Logo"
+         onerror="this.style.display='none'">
+
+    <h1>WORKER PRO</h1>
+
+    <p>Глобальный промышленный поиск</p>
+
+</header>
+
+<nav>
+    <a href="../index.html">Главная</a>
+    <a href="../catalog/index.html">Каталог</a>
+    <a href="../categories/index.html">Категории</a>
+    <a href="../products/index.html">Товары</a>
+    <a href="../brands/index.html">Бренды</a>
+    <a href="../manufacturers/index.html">Производители</a>
+    <a href="../suppliers/index.html">Поставщики</a>
+    <a href="../companies/index.html">Компании</a>
+    <a href="../specialists/index.html">Специалисты</a>
+    <a href="../requests/index.html">Запросы</a>
+</nav>
+
+<div class="container">
+
+    <section class="hero">
+
+        <h2>🔎 Поиск WORKER PRO</h2>
+
+        <p>
+            Найдите промышленное оборудование, запчасти,
+            материалы, компании, производителей, поставщиков
+            и специалистов.
+        </p>
+
+        <div class="search-main">
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Например: насос, подшипник, CNC, Siemens..."
+                oninput="searchItems()"
+            >
+
+            <button onclick="searchItems()">
+                🔍 Найти
+            </button>
+
+        </div>
+
+        <div class="filters">
+
+            <button class="active"
+                    onclick="filterType('all', this)">
+                Все
+            </button>
+
+            <button onclick="filterType('product', this)">
+                📦 Товары
+            </button>
+
+            <button onclick="filterType('part', this)">
+                ⚙️ Запчасти
+            </button>
+
+            <button onclick="filterType('company', this)">
+                🏭 Компании
+            </button>
+
+            <button onclick="filterType('manufacturer', this)">
+                🏗 Производители
+            </button>
+
+            <button onclick="filterType('supplier', this)">
+                🚚 Поставщики
+            </button>
+
+            <button onclick="filterType('specialist', this)">
+                👷 Специалисты
+            </button>
+
+            <button onclick="filterType('category', this)">
+                🗂 Категории
+            </button>
+
+        </div>
+
+    </section>
+
+    <h2 class="section-title">Результаты поиска</h2>
+
+    <div id="results" class="results">
+
+        <div class="card search-item"
+             data-type="product"
+             data-search="industrial pump насос промышленный pump">
+
+            <span class="badge">📦 ТОВАР</span>
+
+            <h3>Industrial Pump</h3>
+
+            <p>
+                Промышленный насос для производственных
+                и технологических систем.
+            </p>
+
+            <button onclick="openItem('Industrial Pump')">
+                Подробнее
+            </button>
+
+        </div>
+
+
+        <div class="card search-item"
+             data-type="part"
+             data-search="bearing подшипник industrial bearing">
+
+            <span class="badge">⚙️ ЗАПЧАСТЬ</span>
+
+            <h3>Industrial Bearing</h3>
+
+            <p>
+                Промышленные подшипники для оборудования,
+                станков и производственных линий.
+            </p>
+
+            <button onclick="openItem('Industrial Bearing')">
+                Подробнее
+            </button>
+
+        </div>
+
+
+        <div class="card search-item"
+             data-type="product"
+             data-search="cnc machine станок cnc">
+
+            <span class="badge">📦 ТОВАР</span>
+
+            <h3>CNC Machine</h3>
+
+            <p>
+                CNC оборудование для обработки металла
+                и промышленного производства.
+            </p>
+
+            <button onclick="openItem('CNC Machine')">
+                Подробнее
+            </button>
+
+        </div>
+
+
+        <div class="card search-item"
+             data-type="product"
+             data-search="valve клапан industrial valve">
+
+            <span class="badge">📦 ТОВАР</span>
+
+            <h3>Industrial Valve</h3>
+
+            <p>
+                Промышленная арматура и клапаны
+                для различных технологических систем.
+            </p>
+
+            <button onclick="openItem('Industrial Valve')">
+                Подробнее
+            </button>
+
+        </div>
+
+
+        <div class="card search-item"
+             data-type="product"
+             data-search="sensor датчик automation sensor">
+
+            <span class="badge">📦 ТОВАР</span>
+
+            <h3>Industrial Sensor</h3>
+
+            <p>
+                Датчики для автоматизации, контроля
+                и производственного оборудования.
+            </p>
+
+            <button onclick="openItem('Industrial Sensor')">
+                Подробнее
+            </button>
+
+        </div>
+
+
+        <div class="card search-item"
+             data-type="manufacturer"
+             data-search="siemens germany cnc automation manufacturer">
+
+            <span class="badge">🏗 ПРОИЗВОДИТЕЛЬ</span>
+
+            <h3>Siemens Industrial</h3>
+
+            <p>
+                Германия · CNC · Automation · Electrical
+            </p>
+
+            <button onclick="openItem('Siemens Industrial')">
+                Подробнее
+            </button>
+
+        </div>
+
+
+        <div class="card search-item"
+             data-type="manufacturer"
+             data-search="fanuc japan cnc robotics">
+
+            <span class="badge">🏗 ПРОИЗВОДИТЕЛЬ</span>
+
+            <h3>FANUC</h3>
+
+            <p>
+                Япония · CNC · Robotics · Automation
+            </p>
+
+            <button onclick="openItem('FANUC')">
+                Подробнее
+            </button>
+
+        </div>
+
+
+        <div class="card search-item"
+             data-type="supplier"
+             data-search="supplier поставщик industrial supply">
+
+            <span class="badge">🚚 ПОСТАВЩИК</span>
+
+            <h3>Global Industrial Supply</h3>
+
+            <p>
+                Международный поставщик промышленного
+                оборудования и запчастей.
+            </p>
+
+            <button onclick="openItem('Global Industrial Supply')">
+                Подробнее
+            </button>
+
+        </div>
+
+
+        <div class="card search-item"
+             data-type="company"
+             data-search="caspian industrial works azerbaijan company">
+
+            <span class="badge">🏭 КОМПАНИЯ</span>
+
+            <h3>Caspian Industrial Works</h3>
+
+            <p>
+                Азербайджан · Производство · Machinery
+            </p>
+
+            <button onclick="openItem('Caspian Industrial Works')">
+                Подробнее
+            </button>
+
+        </div>
+
+
+        <div class="card search-item"
+             data-type="specialist"
+             data-search="cnc operator специалист оператор cnc">
+
+            <span class="badge">👷 СПЕЦИАЛИСТ</span>
+
+            <h3>CNC Operator</h3>
+
+            <p>
+                CNC оператор · Производство ·
+                Machine Operation
+            </p>
+
+            <button onclick="openItem('CNC Operator')">
+                Подробнее
+            </button>
+
+        </div>
+
+
+        <div class="card search-item"
+             data-type="category"
+             data-search="hydraulics гидравлика category">
+
+            <span class="badge">🗂 КАТЕГОРИЯ</span>
+
+            <h3>Hydraulics</h3>
+
+            <p>
+                Насосы, клапаны, гидроцилиндры,
+                гидростанции и комплектующие.
+            </p>
+
+            <button onclick="openItem('Hydraulics')">
+                Подробнее
+            </button>
+
+        </div>
+
+
+        <div class="card search-item"
+             data-type="category"
+             data-search="automation автоматизация category">
+
+            <span class="badge">🗂 КАТЕГОРИЯ</span>
+
+            <h3>Industrial Automation</h3>
+
+            <p>
+                PLC, sensors, controllers, robotics
+                и системы автоматизации.
+            </p>
+
+            <button onclick="openItem('Industrial Automation')">
+                Подробнее
+            </button>
+
+        </div>
+
+    </div>
+
+    <div id="noResults" class="no-results">
+        <h3>Ничего не найдено</h3>
+        <p>
+            Попробуйте изменить поисковый запрос
+            или выбрать другую категорию.
+        </p>
+    </div>
+
+
+    <h2 class="section-title">Быстрый поиск</h2>
+
+    <div class="quick-grid">
+
+        <div class="quick">
+            🔧<br><br>
+            <a href="../products/index.html">
+                Промышленные товары
+            </a>
+        </div>
+
+        <div class="quick">
+            ⚙️<br><br>
+            <a href="../spare - prts/index.html">
+                Запчасти
+            </a>
+        </div>
+
+        <div class="quick">
+            🏭<br><br>
+            <a href="../manufacturers/index.html">
+                Производители
+            </a>
+        </div>
+
+        <div class="quick">
+            🚚<br><br>
+            <a href="../suppliers/index.html">
+                Поставщики
+            </a>
+        </div>
+
+        <div class="quick">
+            🏢<br><br>
+            <a href="../companies/index.html">
+                Компании
+            </a>
+        </div>
+
+        <div class="quick">
+            👷<br><br>
+            <a href="../specialists/index.html">
+                Специалисты
+            </a>
+        </div>
+
+        <div class="quick">
+            🗂<br><br>
+            <a href="../categories/index.html">
+                Категории
+            </a>
+        </div>
+
+        <div class="quick">
+            📋<br><br>
+            <a href="../rfq/index.html">
+                RFQ / Запрос цены
+            </a>
+        </div>
+
+    </div>
+
+
+    <section class="info">
+
+        <h2>🌍 Как работает поиск WORKER PRO</h2>
+
+        <p>
+            Пользователь вводит название товара,
+            оборудования, запчасти, компании,
+            производителя или специалиста.
+        </p>
+
+        <p>
+            WORKER PRO показывает соответствующие
+            результаты и позволяет перейти к нужному
+            разделу платформы.
+        </p>
+
+        <p>
+            В будущем поиск можно подключить к общей
+            базе данных WORKER PRO, чтобы искать товары
+            и компании по странам, городам, категориям,
+            производителям, поставщикам и наличию.
+        </p>
+
+        <p>
+            Следующий этап — связать поиск с каталогом,
+            RFQ, запросами, предложениями, заказами,
+            доставкой и международной логистикой.
+        </p>
+
+    </section>
+
+</div>
+
+<footer>
+    <strong>WORKER PRO</strong><br>
+    Глобальная промышленная платформа<br><br>
+    Production • Technology • Products • Companies • Logistics<br><br>
+    F.S © 2026
+</footer>
+
+
+<script>
+
+let currentType = "all";
+
+
+function searchItems() {
+
+    const query =
+        document
+        .getElementById("searchInput")
+        .value
+        .toLowerCase()
+        .trim();
+
+    const items =
+        document.querySelectorAll(".search-item");
+
+    let count = 0;
+
+    items.forEach(item => {
+
+        const text =
+            item
+            .getAttribute("data-search")
+            .toLowerCase();
+
+        const type =
+            item
+            .getAttribute("data-type");
+
+        const textMatch =
+            query === "" || text.includes(query);
+
+        const typeMatch =
+            currentType === "all" ||
+            type === currentType;
+
+        if (textMatch && typeMatch) {
+
+            item.style.display = "block";
+            count++;
+
+        } else {
+
+            item.style.display = "none";
+
+        }
+
+    });
+
+    document.getElementById("noResults").style.display =
+        count === 0 ? "block" : "none";
+}
+
+
+function filterType(type, button) {
+
+    currentType = type;
+
+    document
+        .querySelectorAll(".filters button")
+        .forEach(btn => {
+            btn.classList.remove("active");
+        });
+
+    button.classList.add("active");
+
+    searchItems();
+}
+
+
+function openItem(name) {
+
+    alert(
+        "WORKER PRO\n\n" +
+        name +
+        "\n\n" +
+        "Это демонстрационный результат поиска.\n" +
+        "На следующем этапе он будет связан " +
+        "с реальной страницей товара, компании " +
+        "или поставщика."
+    );
+
+}
+
+</script>
+
+</body>
+</html>
