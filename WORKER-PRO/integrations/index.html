@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WORKER PRO — Integrations</title>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f4f7f5;
+    color:#123;
+}
+
+.top-languages{
+    background:#063d25;
+    padding:10px;
+    display:flex;
+    justify-content:center;
+    gap:8px;
+    flex-wrap:wrap;
+}
+
+.top-languages button{
+    border:none;
+    padding:8px 13px;
+    border-radius:20px;
+    background:white;
+    color:#063d25;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.top-languages button:hover{
+    background:#b7ff35;
+}
+
+header{
+    background:#0b6b3d;
+    color:white;
+    text-align:center;
+    padding:24px 15px;
+}
+
+header h1{
+    margin:0;
+    font-size:32px;
+}
+
+header p{
+    margin:8px 0 0;
+    font-size:17px;
+}
+
+nav{
+    position:sticky;
+    top:0;
+    z-index:10;
+    background:#075b34;
+    padding:10px;
+    display:flex;
+    justify-content:center;
+    gap:7px;
+    flex-wrap:wrap;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+    padding:8px 10px;
+    border-radius:8px;
+    font-size:14px;
+}
+
+nav a:hover{
+    background:#b7ff35;
+    color:#063d25;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+    padding:25px 15px;
+}
+
+.hero{
+    background:white;
+    border-radius:16px;
+    padding:25px;
+    box-shadow:0 3px 12px rgba(0,0,0,.08);
+    margin-bottom:25px;
+}
+
+.hero h2{
+    color:#075b34;
+    margin-top:0;
+}
+
+.hero p{
+    line-height:1.7;
+}
+
+.search{
+    width:100%;
+    padding:14px;
+    margin-top:12px;
+    border:2px solid #d9e3dd;
+    border-radius:10px;
+    font-size:16px;
+}
+
+.section-title{
+    color:#075b34;
+    margin-top:30px;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:18px;
+}
+
+.card{
+    background:white;
+    border-radius:15px;
+    padding:20px;
+    box-shadow:0 3px 12px rgba(0,0,0,.08);
+}
+
+.card h3{
+    margin-top:0;
+    color:#075b34;
+}
+
+.card p{
+    line-height:1.6;
+}
+
+.card ul{
+    padding-left:20px;
+    line-height:1.8;
+}
+
+.icon{
+    font-size:35px;
+    margin-bottom:8px;
+}
+
+.status{
+    display:inline-block;
+    padding:6px 12px;
+    border-radius:20px;
+    font-size:13px;
+    font-weight:bold;
+}
+
+.active{
+    background:#dff7e8;
+    color:#075b34;
+}
+
+.future{
+    background:#fff2cf;
+    color:#8a6200;
+}
+
+.demo{
+    background:#eef5ff;
+    color:#24558c;
+}
+
+.button{
+    border:none;
+    background:#0b6b3d;
+    color:white;
+    padding:11px 17px;
+    border-radius:9px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.button:hover{
+    background:#063d25;
+}
+
+.integration-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    padding:13px 0;
+    border-bottom:1px solid #e2e9e4;
+}
+
+.integration-row:last-child{
+    border-bottom:none;
+}
+
+.info{
+    background:#eef8f2;
+    border-left:5px solid #0b6b3d;
+    padding:17px;
+    border-radius:8px;
+    line-height:1.7;
+}
+
+.warning{
+    background:#fff6d9;
+    border-left:5px solid #e0a800;
+    padding:17px;
+    border-radius:8px;
+    line-height:1.7;
+}
+
+.flow{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:20px;
+}
+
+.flow-step{
+    background:white;
+    padding:15px 18px;
+    border-radius:12px;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+    text-align:center;
+    font-weight:bold;
+}
+
+.arrow{
+    font-size:24px;
+    color:#075b34;
+}
+
+footer{
+    margin-top:40px;
+    background:#063d25;
+    color:white;
+    text-align:center;
+    padding:25px 15px;
+}
+
+footer a{
+    color:#b7ff35;
+    text-decoration:none;
+}
+
+@media(max-width:600px){
+
+    header h1{
+        font-size:26px;
+    }
+
+    header p{
+        font-size:15px;
+    }
+
+    nav a{
+        font-size:12px;
+        padding:7px 8px;
+    }
+
+    .hero,
+    .card{
+        padding:17px;
+    }
+
+    .integration-row{
+        align-items:flex-start;
+        flex-direction:column;
+    }
+
+    .arrow{
+        transform:rotate(90deg);
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- LANGUAGES -->
+<div class="top-languages">
+    <button onclick="setLang('AZ')">AZ</button>
+    <button onclick="setLang('RU')">RU</button>
+    <button onclick="setLang('EN')">EN</button>
+    <button onclick="setLang('TR')">TR</button>
+    <button onclick="setLang('DE')">DE</button>
+    <button onclick="setLang('AR')">AR</button>
+    <button onclick="setLang('ES')">ES</button>
+    <button onclick="setLang('FR')">FR</button>
+    <button onclick="setLang('IT')">IT</button>
+</div>
+
+<header>
+    <h1>🔗 WORKER PRO</h1>
+    <p>API & Integrations / Интеграции</p>
+</header>
+
+<!-- NAVIGATION -->
+<nav>
+    <a href="../index.html">Home</a>
+    <a href="../companies/index.html">Companies</a>
+    <a href="../manufacturers/index.html">Manufacturers</a>
+    <a href="../suppliers/index.html">Suppliers</a>
+    <a href="../products/index.html">Products</a>
+    <a href="../equipment/index.html">Equipment</a>
+    <a href="../requests/index.html">Requests</a>
+    <a href="../offers/index.html">Offers</a>
+    <a href="../orders/index.html">Orders</a>
+    <a href="../transport/index.html">Transport</a>
+    <a href="../warehouse/index.html">Warehouse</a>
+    <a href="../analytics/index.html">Analytics</a>
+    <a href="../security/index.html">Security</a>
+    <a href="../privacy/index.html">Privacy</a>
+    <a href="../dashboard/index.html">Dashboard</a>
+</nav>
+
+<div class="container">
+
+    <!-- HERO -->
+    <section class="hero">
+
+        <h2>🌐 Интеграции WORKER PRO</h2>
+
+        <p>
+            WORKER PRO в будущем сможет соединять производителей,
+            поставщиков, покупателей, транспортные компании,
+            склады, платежные системы и другие промышленные сервисы
+            через API и интеграции.
+        </p>
+
+        <p>
+            Это позволит превратить WORKER PRO из обычного каталога
+            в единую международную промышленную платформу.
+        </p>
+
+        <input
+            class="search"
+            id="integrationSearch"
+            type="text"
+            placeholder="Поиск интеграции..."
+            onkeyup="searchIntegrations()"
+        >
+
+    </section>
+
+
+    <!-- MAIN INTEGRATIONS -->
+
+    <h2 class="section-title">🔌 Основные интеграции</h2>
+
+    <div class="grid" id="integrationGrid">
+
+        <div class="card integration-card">
+            <div class="icon">🚚</div>
+
+            <h3>Transport API</h3>
+
+            <p>
+                Подключение транспортных и логистических компаний
+                для расчёта доставки и отслеживания груза.
+            </p>
+
+            <span class="status future">Будущее</span>
+        </div>
+
+
+        <div class="card integration-card">
+            <div class="icon">💳</div>
+
+            <h3>Payment API</h3>
+
+            <p>
+                Онлайн-оплата товаров, услуг, заказов,
+                подписок и других операций.
+            </p>
+
+            <span class="status future">Будущее</span>
+        </div>
+
+
+        <div class="card integration-card">
+            <div class="icon">📦</div>
+
+            <h3>Warehouse API</h3>
+
+            <p>
+                Синхронизация складских остатков, резервирования,
+                упаковки и отправки товаров.
+            </p>
+
+            <span class="status future">Будущее</span>
+        </div>
+
+
+        <div class="card integration-card">
+            <div class="icon">🏭</div>
+
+            <h3>ERP Integration</h3>
+
+            <p>
+                Связь WORKER PRO с корпоративными системами
+                управления производством и запасами.
+            </p>
+
+            <span class="status future">Будущее</span>
+        </div>
+
+
+        <div class="card integration-card">
+            <div class="icon">📊</div>
+
+            <h3>Analytics API</h3>
+
+            <p>
+                Передача статистики и показателей в системы
+                аналитики и бизнес-отчётности.
+            </p>
+
+            <span class="status future">Будущее</span>
+        </div>
+
+
+        <div class="card integration-card">
+            <div class="icon">📧</div>
+
+            <h3>Email / SMS</h3>
+
+            <p>
+                Отправка уведомлений о заказах, предложениях,
+                сообщениях и доставке.
+            </p>
+
+            <span class="status future">Будущее</span>
+        </div>
+
+    </div>
+
+
+    <!-- AI -->
+
+    <h2 class="section-title">🤖 AI Integration</h2>
+
+    <div class="grid">
+
+        <div class="card">
+
+            <div class="icon">🤖</div>
+
+            <h3>AI Industrial Assistant</h3>
+
+            <p>
+                В будущем AI-помощник сможет помогать пользователю
+                искать оборудование, запчасти, технологии,
+                специалистов и промышленную информацию.
+            </p>
+
+            <ul>
+                <li>поиск продукции;</li>
+                <li>анализ технических данных;</li>
+                <li>помощь с заявками;</li>
+                <li>перевод технических терминов;</li>
+                <li>подготовка запросов поставщикам.</li>
+            </ul>
+
+            <span class="status future">Будущее</span>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="icon">🧠</div>
+
+            <h3>AI Technical Support</h3>
+
+            <p>
+                Пользователь сможет описать промышленную проблему,
+                а система поможет структурировать информацию
+                для специалиста.
+            </p>
+
+            <span class="status future">Будущее</span>
+
+        </div>
+
+    </div>
+
+
+    <!-- AUTH -->
+
+    <h2 class="section-title">🔑 Авторизация</h2>
+
+    <div class="card">
+
+        <div class="integration-row">
+
+            <div>
+                <strong>Google / Social Login</strong><br>
+                <small>Авторизация пользователя</small>
+            </div>
+
+            <span class="status future">Будущее</span>
+
+        </div>
+
+
+        <div class="integration-row">
+
+            <div>
+                <strong>Email Authentication</strong><br>
+                <small>Вход через Email</small>
+            </div>
+
+            <span class="status active">Подготовлено</span>
+
+        </div>
+
+
+        <div class="integration-row">
+
+            <div>
+                <strong>Phone Verification</strong><br>
+                <small>Подтверждение номера телефона</small>
+            </div>
+
+            <span class="status future">Будущее</span>
+
+        </div>
+
+    </div>
+
+
+    <!-- INDUSTRIAL SYSTEMS -->
+
+    <h2 class="section-title">🏭 Промышленные системы</h2>
+
+    <div class="grid">
+
+        <div class="card">
+            <div class="icon">⚙️</div>
+
+            <h3>ERP</h3>
+
+            <p>
+                Управление производством, закупками,
+                запасами и заказами.
+            </p>
+        </div>
+
+
+        <div class="card">
+            <div class="icon">🏗️</div>
+
+            <h3>MES</h3>
+
+            <p>
+                Связь с производственными процессами
+                и промышленным оборудованием.
+            </p>
+        </div>
+
+
+        <div class="card">
+            <div class="icon">📦</div>
+
+            <h3>WMS</h3>
+
+            <p>
+                Управление складскими операциями,
+                остатками и перемещением товаров.
+            </p>
+        </div>
+
+
+        <div class="card">
+            <div class="icon">🚛</div>
+
+            <h3>TMS</h3>
+
+            <p>
+                Управление транспортировкой,
+                маршрутами и доставкой.
+            </p>
+        </div>
+
+    </div>
+
+
+    <!-- API KEY -->
+
+    <h2 class="section-title">🔐 API Access</h2>
+
+    <div class="card">
+
+        <h3>API для партнёров</h3>
+
+        <p>
+            В будущем производители, поставщики и партнёры смогут
+            подключать собственные системы к WORKER PRO.
+        </p>
+
+        <div class="info">
+
+            Возможные API:
+
+            <ul>
+                <li>Products API</li>
+                <li>Companies API</li>
+                <li>Requests API</li>
+                <li>Offers API</li>
+                <li>Orders API</li>
+                <li>Warehouse API</li>
+                <li>Transport API</li>
+                <li>Messages API</li>
+                <li>Analytics API</li>
+            </ul>
+
+        </div>
+
+        <br>
+
+        <button class="button" onclick="requestApi()">
+            Запросить API Access
+        </button>
+
+    </div>
+
+
+    <!-- DATA FLOW -->
+
+    <h2 class="section-title">🔄 Как будет работать интеграция</h2>
+
+    <div class="flow">
+
+        <div class="flow-step">
+            👤 Пользователь
+        </div>
+
+        <div class="arrow">→</div>
+
+        <div class="flow-step">
+            🌐 WORKER PRO
+        </div>
+
+        <div class="arrow">→</div>
+
+        <div class="flow-step">
+            🔌 API
+        </div>
+
+        <div class="arrow">→</div>
+
+        <div class="flow-step">
+            🏭 Партнёрская система
+        </div>
+
+    </div>
+
+
+    <!-- COUNTRIES -->
+
+    <h2 class="section-title">🌍 Международные интеграции</h2>
+
+    <div class="grid">
+
+        <div class="card">
+            <h3>🇦🇿 Azerbaijan</h3>
+            <p>
+                Локальные поставщики, банки, транспорт,
+                склады и промышленные компании.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>🇹🇷 Turkey</h3>
+            <p>
+                Производители, поставщики, логистика
+                и промышленное оборудование.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>🇩🇪 Germany</h3>
+            <p>
+                Промышленное оборудование, автоматизация,
+                производство и технические сервисы.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>🇮🇹 Italy</h3>
+            <p>
+                Производители оборудования, автоматизации,
+                насосов и промышленной продукции.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>🇨🇳 China</h3>
+            <p>
+                Производители оборудования, комплектующих,
+                электроники и промышленных товаров.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>🇺🇸 USA</h3>
+            <p>
+                Технологические компании, оборудование,
+                промышленная автоматизация и сервисы.
+            </p>
+        </div>
+
+    </div>
+
+
+    <!-- PARTNER CONNECTION -->
+
+    <h2 class="section-title">🤝 Подключение партнёра</h2>
+
+    <div class="card">
+
+        <p>
+            Компания сможет подать заявку на подключение своей
+            системы к WORKER PRO.
+        </p>
+
+        <ul>
+            <li>название компании;</li>
+            <li>страна;</li>
+            <li>тип системы;</li>
+            <li>API документация;</li>
+            <li>контакт технического специалиста;</li>
+            <li>тестовый доступ.</li>
+        </ul>
+
+        <button class="button" onclick="partnerRequest()">
+            Подать заявку
+        </button>
+
+    </div>
+
+
+    <!-- FUTURE -->
+
+    <h2 class="section-title">🚀 Будущее WORKER PRO</h2>
+
+    <div class="info">
+
+        В перспективе интеграционная система может объединить:
+
+        <ul>
+            <li>производителей;</li>
+            <li>поставщиков;</li>
+            <li>покупателей;</li>
+            <li>склады;</li>
+            <li>транспортные компании;</li>
+            <li>платёжные системы;</li>
+            <li>ERP / MES / WMS / TMS;</li>
+            <li>AI-сервисы;</li>
+            <li>образовательные платформы;</li>
+            <li>сервисы технической поддержки.</li>
+        </ul>
+
+    </div>
+
+
+    <!-- WARNING -->
+
+    <h2 class="section-title">⚠️ Важно</h2>
+
+    <div class="warning">
+
+        Эта страница является демонстрационной частью концепции
+        WORKER PRO.
+
+        Реальные API, авторизация, платежи, транспортные,
+        складские и промышленные интеграции будут подключаться
+        после создания серверной части платформы.
+
+    </div>
+
+</div>
+
+
+<footer>
+
+    <strong>WORKER PRO</strong><br>
+
+    Global Industrial Platform<br><br>
+
+    <a href="../about/index.html">About</a> |
+    <a href="../privacy/index.html">Privacy</a> |
+    <a href="../security/index.html">Security</a> |
+    <a href="../help/index.html">Help</a> |
+    <a href="../dashboard/index.html">Dashboard</a>
+
+    <br><br>
+
+    © 2026 WORKER PRO — F.S
+
+</footer>
+
+
+<script src="../language.js"></script>
+
+<script>
+
+function searchIntegrations(){
+
+    const value =
+        document
+        .getElementById("integrationSearch")
+        .value
+        .toLowerCase();
+
+    const cards =
+        document.querySelectorAll(".integration-card");
+
+    cards.forEach(function(card){
+
+        const text =
+            card.innerText.toLowerCase();
+
+        if(text.includes(value)){
+            card.style.display = "";
+        }else{
+            card.style.display = "none";
+        }
+
+    });
+}
+
+
+function requestApi(){
+
+    alert(
+        "API Access\n\n" +
+        "В демонстрационной версии заявка не отправляется.\n\n" +
+        "В будущем здесь будет форма для получения API Access."
+    );
+
+}
+
+
+function partnerRequest(){
+
+    alert(
+        "Заявка на интеграцию\n\n" +
+        "В будущем партнёр сможет отправить техническую заявку."
+    );
+
+}
+
+</script>
+
+</body>
+</html>
