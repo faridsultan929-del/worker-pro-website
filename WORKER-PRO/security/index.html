@@ -1,1 +1,859 @@
- 
+ <!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WORKER PRO — Security</title>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f4f7f5;
+    color:#123;
+}
+
+.top-languages{
+    background:#063d25;
+    padding:10px;
+    text-align:center;
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+.top-languages a{
+    display:inline-block;
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+    margin:3px;
+    padding:8px 11px;
+    border-radius:7px;
+    background:#0b6b3d;
+}
+
+.top-languages a:hover{
+    background:#b7ff35;
+    color:#063d25;
+}
+
+header{
+    background:#0b6b3d;
+    color:white;
+    text-align:center;
+    padding:25px 15px;
+}
+
+header h1{
+    margin:0;
+    font-size:32px;
+}
+
+header p{
+    margin:8px 0 0;
+    font-size:17px;
+}
+
+nav{
+    background:#075b34;
+    padding:12px;
+    text-align:center;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    display:inline-block;
+    margin:4px;
+    padding:8px 10px;
+    border-radius:6px;
+    font-weight:bold;
+}
+
+nav a:hover{
+    background:#b7ff35;
+    color:#063d25;
+}
+
+.container{
+    max-width:1100px;
+    margin:auto;
+    padding:20px;
+}
+
+.hero{
+    background:white;
+    padding:25px;
+    border-radius:14px;
+    margin-bottom:20px;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+}
+
+.hero h2{
+    margin-top:0;
+    color:#075b34;
+}
+
+.status-box{
+    background:#eef8e9;
+    border-left:5px solid #0b6b3d;
+    padding:18px;
+    border-radius:10px;
+    margin-top:20px;
+}
+
+.status-good{
+    color:#075b34;
+    font-weight:bold;
+}
+
+.security-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(270px,1fr));
+    gap:18px;
+    margin-top:20px;
+}
+
+.security-card{
+    background:white;
+    padding:22px;
+    border-radius:14px;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+    border-top:5px solid #0b6b3d;
+}
+
+.security-card h3{
+    margin-top:0;
+    color:#075b34;
+}
+
+.security-card p{
+    line-height:1.6;
+    color:#556;
+}
+
+.icon{
+    font-size:32px;
+    margin-bottom:8px;
+}
+
+button{
+    border:0;
+    background:#0b6b3d;
+    color:white;
+    padding:11px 17px;
+    border-radius:8px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#075b34;
+}
+
+.danger{
+    background:#fff1f1;
+    border-left:5px solid #b33;
+}
+
+.danger button{
+    background:#9b2c2c;
+}
+
+.form-box{
+    background:white;
+    padding:22px;
+    border-radius:14px;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+    margin-top:20px;
+}
+
+.form-box label{
+    display:block;
+    font-weight:bold;
+    margin-top:14px;
+    margin-bottom:6px;
+}
+
+.form-box input{
+    width:100%;
+    padding:13px;
+    border:1px solid #ccd8d1;
+    border-radius:8px;
+    font-size:15px;
+}
+
+.device{
+    background:#f3f7f4;
+    padding:15px;
+    border-radius:10px;
+    margin:10px 0;
+    border-left:4px solid #0b6b3d;
+}
+
+.device strong{
+    color:#075b34;
+}
+
+.login-table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:15px;
+}
+
+.login-table th,
+.login-table td{
+    padding:12px;
+    border-bottom:1px solid #dde5df;
+    text-align:left;
+}
+
+.login-table th{
+    background:#063d25;
+    color:white;
+}
+
+.badge{
+    display:inline-block;
+    padding:5px 10px;
+    border-radius:15px;
+    background:#e4f3e8;
+    color:#075b34;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.warning{
+    background:#fff8df;
+    border:1px solid #ead78b;
+    padding:18px;
+    border-radius:10px;
+    margin-top:20px;
+}
+
+.future{
+    background:#eef8e9;
+    border-left:5px solid #b7ff35;
+    padding:20px;
+    border-radius:10px;
+    margin-top:25px;
+}
+
+.future li{
+    margin:9px 0;
+}
+
+.workflow{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+    gap:12px;
+    margin-top:20px;
+}
+
+.step{
+    background:#063d25;
+    color:white;
+    padding:18px 10px;
+    border-radius:10px;
+    text-align:center;
+    font-weight:bold;
+}
+
+.demo{
+    background:#fff8df;
+    border:1px solid #ead78b;
+    padding:16px;
+    border-radius:10px;
+    margin-top:20px;
+}
+
+footer{
+    margin-top:30px;
+    background:#063d25;
+    color:white;
+    text-align:center;
+    padding:25px;
+}
+
+@media(max-width:600px){
+
+    header h1{
+        font-size:26px;
+    }
+
+    .top-languages a{
+        padding:7px 8px;
+        font-size:13px;
+    }
+
+    nav a{
+        font-size:13px;
+        padding:7px;
+    }
+
+    .container{
+        padding:12px;
+    }
+
+    .login-table{
+        font-size:13px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="top-languages">
+    <a href="#" onclick="setLang('az')">AZ</a>
+    <a href="#" onclick="setLang('ru')">RU</a>
+    <a href="#" onclick="setLang('en')">EN</a>
+    <a href="#" onclick="setLang('tr')">TR</a>
+    <a href="#" onclick="setLang('de')">DE</a>
+    <a href="#" onclick="setLang('ar')">AR</a>
+    <a href="#" onclick="setLang('es')">ES</a>
+    <a href="#" onclick="setLang('fr')">FR</a>
+    <a href="#" onclick="setLang('it')">IT</a>
+</div>
+
+<header>
+    <h1>WORKER PRO</h1>
+    <p>Security — Безопасность аккаунта</p>
+</header>
+
+<nav>
+    <a href="../index.html">Главная</a>
+    <a href="../companies/index.html">Компании</a>
+    <a href="../manufacturers/index.html">Производители</a>
+    <a href="../suppliers/index.html">Поставщики</a>
+    <a href="../products/index.html">Продукты</a>
+    <a href="../requests/index.html">Заявки</a>
+    <a href="../offers/index.html">Предложения</a>
+    <a href="../orders/index.html">Заказы</a>
+    <a href="../transport/index.html">Транспорт</a>
+    <a href="../messages/index.html">Сообщения</a>
+    <a href="../notifications/index.html">Уведомления</a>
+    <a href="../alerts/index.html">Alerts</a>
+    <a href="../settings/index.html">Настройки</a>
+    <a href="../dashboard/index.html">Dashboard</a>
+</nav>
+
+<div class="container">
+
+<section class="hero">
+
+    <h2>🔐 Безопасность WORKER PRO</h2>
+
+    <p>
+        Раздел безопасности предназначен для защиты аккаунтов
+        специалистов, компаний, производителей и поставщиков.
+    </p>
+
+    <div class="status-box">
+
+        <strong>🛡️ Состояние безопасности:</strong>
+
+        <span class="status-good">
+            Хорошее
+        </span>
+
+        <br><br>
+
+        Рекомендуется использовать сложный пароль,
+        подтверждённый email и двухфакторную защиту.
+
+    </div>
+
+</section>
+
+
+<h2 style="color:#063d25;">
+    🛡️ Основные настройки
+</h2>
+
+
+<div class="security-grid">
+
+    <div class="security-card">
+
+        <div class="icon">🔑</div>
+
+        <h3>Пароль</h3>
+
+        <p>
+            Измените пароль аккаунта для повышения
+            безопасности.
+        </p>
+
+        <button onclick="changePassword()">
+            Изменить пароль
+        </button>
+
+    </div>
+
+
+    <div class="security-card">
+
+        <div class="icon">📧</div>
+
+        <h3>Email</h3>
+
+        <p>
+            Подтверждённый email помогает восстановить
+            доступ к аккаунту.
+        </p>
+
+        <span class="badge">
+            ✓ Подтверждён
+        </span>
+
+        <br><br>
+
+        <button onclick="verifyEmail()">
+            Проверить
+        </button>
+
+    </div>
+
+
+    <div class="security-card">
+
+        <div class="icon">📱</div>
+
+        <h3>Телефон</h3>
+
+        <p>
+            Телефон можно использовать для подтверждения
+            важных действий.
+        </p>
+
+        <span class="badge">
+            ✓ Подключён
+        </span>
+
+        <br><br>
+
+        <button onclick="verifyPhone()">
+            Проверить
+        </button>
+
+    </div>
+
+
+    <div class="security-card">
+
+        <div class="icon">🔒</div>
+
+        <h3>Двухфакторная защита</h3>
+
+        <p>
+            Дополнительный уровень защиты при входе
+            в аккаунт.
+        </p>
+
+        <button onclick="twoFactor()">
+            Настроить 2FA
+        </button>
+
+    </div>
+
+</div>
+
+
+<h2 style="color:#063d25;margin-top:35px;">
+    📱 Активные устройства
+</h2>
+
+
+<div class="form-box">
+
+    <div class="device">
+
+        <strong>📱 Android — текущий сеанс</strong>
+
+        <br>
+
+        WORKER PRO Mobile
+
+        <br>
+
+        Последняя активность: сейчас
+
+        <br>
+
+        <span class="badge">
+            Текущий
+        </span>
+
+    </div>
+
+
+    <div class="device">
+
+        <strong>💻 Web Browser</strong>
+
+        <br>
+
+        Рабочая сессия
+
+        <br>
+
+        Последняя активность: вчера
+
+        <br>
+
+        <span class="badge">
+            Активен
+        </span>
+
+    </div>
+
+
+    <button onclick="logoutOtherDevices()">
+        🚪 Выйти с других устройств
+    </button>
+
+</div>
+
+
+<h2 style="color:#063d25;margin-top:35px;">
+    🌍 История входов
+</h2>
+
+
+<div class="form-box">
+
+<table class="login-table">
+
+<thead>
+
+<tr>
+    <th>Дата</th>
+    <th>Устройство</th>
+    <th>Регион</th>
+    <th>Статус</th>
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+    <td>19.09.2026</td>
+    <td>Android</td>
+    <td>Azerbaijan</td>
+    <td>
+        <span class="badge">Текущий</span>
+    </td>
+</tr>
+
+<tr>
+    <td>18.09.2026</td>
+    <td>Web Browser</td>
+    <td>Azerbaijan</td>
+    <td>
+        <span class="badge">Успешно</span>
+    </td>
+</tr>
+
+<tr>
+    <td>16.09.2026</td>
+    <td>Android</td>
+    <td>Azerbaijan</td>
+    <td>
+        <span class="badge">Успешно</span>
+    </td>
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+
+<h2 style="color:#063d25;margin-top:35px;">
+    ⚠️ Защита от подозрительной активности
+</h2>
+
+
+<div class="security-grid">
+
+    <div class="security-card">
+
+        <div class="icon">🚨</div>
+
+        <h3>Неизвестный вход</h3>
+
+        <p>
+            Если вы обнаружили незнакомое устройство,
+            необходимо немедленно проверить аккаунт.
+        </p>
+
+        <button onclick="reportActivity()">
+            Сообщить
+        </button>
+
+    </div>
+
+
+    <div class="security-card">
+
+        <div class="icon">🔔</div>
+
+        <h3>Предупреждения</h3>
+
+        <p>
+            Получайте уведомления о новых входах
+            и важных изменениях аккаунта.
+        </p>
+
+        <button onclick="securityAlerts()">
+            Настроить
+        </button>
+
+    </div>
+
+
+    <div class="security-card danger">
+
+        <div class="icon">🚪</div>
+
+        <h3>Выйти везде</h3>
+
+        <p>
+            Завершить все активные сеансы аккаунта.
+        </p>
+
+        <button onclick="logoutAll()">
+            Выйти со всех устройств
+        </button>
+
+    </div>
+
+</div>
+
+
+<h2 style="color:#063d25;margin-top:35px;">
+    🔄 Как работает защита
+</h2>
+
+
+<div class="workflow">
+
+    <div class="step">
+        1<br>
+        Пароль
+    </div>
+
+    <div class="step">
+        2<br>
+        Email
+    </div>
+
+    <div class="step">
+        3<br>
+        Телефон
+    </div>
+
+    <div class="step">
+        4<br>
+        2FA
+    </div>
+
+    <div class="step">
+        5<br>
+        Проверка
+    </div>
+
+    <div class="step">
+        6<br>
+        Защита
+    </div>
+
+</div>
+
+
+<div class="warning">
+
+    <strong>⚠️ Важно:</strong>
+
+    Никому не сообщайте пароль, коды подтверждения
+    или коды двухфакторной аутентификации.
+    WORKER PRO не должен запрашивать ваш пароль
+    через сообщения или сторонние сайты.
+
+</div>
+
+
+<div class="future">
+
+    <h3>🚀 Будущие возможности</h3>
+
+    <ul>
+        <li>Полноценная двухфакторная аутентификация.</li>
+        <li>Подтверждение через SMS.</li>
+        <li>Подтверждение через приложение.</li>
+        <li>Безопасный вход по одноразовому коду.</li>
+        <li>История всех входов.</li>
+        <li>Управление всеми устройствами.</li>
+        <li>Автоматическое обнаружение подозрительной активности.</li>
+        <li>Защита компаний и поставщиков.</li>
+        <li>Безопасные коммерческие операции.</li>
+        <li>Защита документов и файлов.</li>
+        <li>Уведомления о важных изменениях аккаунта.</li>
+    </ul>
+
+</div>
+
+
+<div class="demo">
+
+    <strong>ℹ️ Важно:</strong>
+
+    Эта страница пока работает в демонстрационном режиме.
+    Реальная авторизация, пароли, 2FA и управление сессиями
+    будут подключены после создания серверной части WORKER PRO.
+
+</div>
+
+</div>
+
+
+<footer>
+
+<strong>WORKER PRO</strong><br>
+
+Международная промышленная платформа
+
+<br><br>
+
+Security • Account • Privacy • Verification
+
+<br><br>
+
+F.S
+
+</footer>
+
+
+<script src="../language.js"></script>
+
+<script>
+
+function setLang(lang){
+
+    localStorage.setItem(
+        "workerProLanguage",
+        lang
+    );
+
+    alert(
+        "Язык выбран: " +
+        lang.toUpperCase()
+    );
+
+}
+
+
+function changePassword(){
+
+    alert(
+        "Раздел смены пароля.\n\n" +
+        "В рабочей версии здесь будет " +
+        "форма для изменения пароля."
+    );
+
+}
+
+
+function verifyEmail(){
+
+    alert(
+        "Email уже подтверждён.\n\n" +
+        "В рабочей версии здесь будет " +
+        "повторная проверка email."
+    );
+
+}
+
+
+function verifyPhone(){
+
+    alert(
+        "Телефон подключён.\n\n" +
+        "В рабочей версии здесь будет " +
+        "подтверждение номера телефона."
+    );
+
+}
+
+
+function twoFactor(){
+
+    alert(
+        "Настройка двухфакторной защиты.\n\n" +
+        "В рабочей версии здесь будет полноценная 2FA."
+    );
+
+}
+
+
+function logoutOtherDevices(){
+
+    alert(
+        "Другие устройства будут отключены.\n\n" +
+        "Демонстрационный режим."
+    );
+
+}
+
+
+function reportActivity(){
+
+    alert(
+        "Сообщение о подозрительной активности принято.\n\n" +
+        "В рабочей версии будет создано обращение в службу поддержки."
+    );
+
+}
+
+
+function securityAlerts(){
+
+    alert(
+        "Настройки предупреждений.\n\n" +
+        "В рабочей версии здесь можно будет выбрать типы уведомлений."
+    );
+
+}
+
+
+function logoutAll(){
+
+    const confirmLogout =
+        confirm(
+            "Выйти со всех устройств?"
+        );
+
+    if(confirmLogout){
+
+        alert(
+            "Все сеансы будут завершены.\n\n" +
+            "Демонстрационный режим."
+        );
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>
